@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "66f6d765285571f28087c176"
+  },
+  "foodName": "Đậu nhồi thịt, Cá kho, Canh ngao chua, Rau xào theo mùa, Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66f6d842285571f28087c177"
+  },
+  "foodName": "Gà rang muối, Thịt rang cháy cạnh, Củ quả luộc, Canh cua cà, Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66f6d879285571f28087c178"
+  },
+  "foodName": "Trứng đúc thịt, Canh cải thịt, Rau xào theo mùa, Mực nhỏ hấp, Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66f6d8bc285571f28087c17a"
+  },
+  "foodName": "Đậu xốt cà, Canh tổng hợp, Bò xào rau muống, Tôm rim, Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66f6d915285571f28087c17b"
+  },
+  "foodName": "Gà luộc, Canh riêu cua, Rau xào theo mùa, Thịt kho trứng, Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66f6d949285571f28087c17c"
+  },
+  "foodName": "Thịt chân giò (lưỡi) luộc, Cá mòi kho, Rau luộc theo mùa, Canh hà chua, Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66f6d9b1285571f28087c17d"
+  },
+  "foodName": "Đậu nhồi thịt, Canh bầu tôm, Rau luộc theo, Cá chiên, Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66f6da01285571f28087c17e"
+  },
+  "foodName": "Thịt kho tàu, Canh cải cá, Rau xào theo mùa, Ngao hấp , Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66f6daa3285571f28087c17f"
+  },
+  "foodName": "Thịt rang cháy cạnh, Canh cua cà, Rau luộc theo mùa, Bò xào cần, Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66f6db10285571f28087c180"
+  },
+  "foodName": "Vịt quay, Tôm rang thịt, Canh mùng tơi nấu ngao, Rau luộc theo mùa, Cơm trắng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "100000"
+  }
+}]

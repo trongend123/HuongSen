@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "address": "16 Minh Khai, phường Minh Khai, Hồng Bàng, Hải Phòng",
+  "phone": "022-5374-5766",
+  "name": "Khách sạn Hương Sen",
+  "image": [
+    {
+      "caption": "https://example.com/image1.jpg",
+      "url": "Profile image of John Doe"
+    },
+    {
+      "caption": "https://example.com/image1.jpg",
+      "url": "Profile image of John Doe"
+    }
+  ],
+  "createdAt": "2024-09-27T08:30:00.000Z",
+  "updatedAt": "2024-09-27T08:30:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "address": "02 Lý Thánh Tông, phường Hải Sơn, Đồ Sơn, Hải Phòng",
+  "phone": "022-5386-6386",
+  "name": "Cơ sở khách sạn Hương Sen tại Đồ Sơn, Hải Phòng",
+  "image": [
+    {
+      "caption": "https://example.com/image1.jpg",
+      "url": "Profile image of John Doe"
+    },
+    {
+      "caption": "https://example.com/image1.jpg",
+      "url": "Profile image of John Doe"
+    }
+  ],
+  "createdAt": "2024-09-27T08:30:00.000Z",
+  "updatedAt": "2024-09-27T08:30:00.000Z"
+},
+{
+  "_id": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "address": "Đường Núi Ngọc, thị trấn Cát Bà, Cát Hải, Hải Phòng",
+  "phone": "022-5388-7381",
+  "name": "Cơ sở khách sạn Hương Sen tại Cát Bà, Hải Phòng",
+  "image": [
+    {
+      "caption": "https://example.com/image1.jpg",
+      "url": "Profile image of John Doe"
+    },
+    {
+      "caption": "https://example.com/image1.jpg",
+      "url": "Profile image of John Doe"
+    }
+  ],
+  "createdAt": "2024-09-27T08:30:00.000Z",
+  "updatedAt": "2024-09-27T08:30:00.000Z"
+}]
