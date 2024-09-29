@@ -3,7 +3,18 @@ import express, { json } from "express";
 import * as dotenv from "dotenv";
 import connectDB from "./database/database.js";
 import cors from "cors";
-import { ImageRouter, RoomRouter, TourRouter, OtherServiceRouter, MenuRouter, LocationRouter } from "./routes/index.js";
+import {
+  ImageRouter,
+  RoomRouter,
+  TourRouter,
+  OtherServiceRouter,
+  MenuRouter,
+  LocationRouter,
+  IdentityCategoryRouter,
+  IdentifycationRouter,
+  MenmberRouter,
+  FeedbackRouter
+} from "./routes/index.js";
 import { verifyAccessToken } from "./jwt_helper.js";
 // Thực thi cấu hình ứng dụng sử dụng file .env
 dotenv.config();
@@ -22,6 +33,10 @@ app.use("/tours", TourRouter);
 app.use("/otherservices", OtherServiceRouter);
 app.use("/menus", MenuRouter);
 app.use("/locations", LocationRouter);
+app.use("/identityCategory", IdentityCategoryRouter);
+app.use("/identifycation", IdentifycationRouter);
+app.use("/members", MenmberRouter);
+app.use("/feedbacks", FeedbackRouter);
 
 // Khai báo port cho ứng dụng web
 const port = process.env.PORT || 8080;
