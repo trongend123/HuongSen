@@ -4,7 +4,20 @@ import TourController from "./tour.js";
 import OtherServiceController from "./otherService.js";
 import MenuController from "./menu.js";
 import LocationController from "./location.js";
+import IdentityCategoryController from "./identityCategory.js";
+import IdentifycationController from "./identifycation.js";
+import MemberController from "./member.js";
+import FeedbackController from "./feedback.js";
 
 export {
-    ImageController, RoomController, TourController, OtherServiceController, MenuController, LocationController
+    ImageController,
+    RoomController,
+    TourController,
+    OtherServiceController,
+    MenuController,
+    LocationController,
+    IdentityCategoryController,
+    IdentifycationController,
+    MemberController,
+    FeedbackController,
 };

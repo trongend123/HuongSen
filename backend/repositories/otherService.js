@@ -8,9 +8,9 @@ const create = async ({
   try {
     // Create new otherService
     const newOtherService = await OtherService.create({
-        name,
-        price,
-        description,
+      name,
+      price,
+      description,
     });
     // Return newOtherService object
     return newOtherService._doc;
@@ -44,7 +44,7 @@ const edit = async (
   }
 ) => {
   try {
-    const updatedOtherService = await User.findByIdAndUpdate(
+    const updatedOtherService = await OtherService.findByIdAndUpdate(
       { _id: id },
       {
         name,
