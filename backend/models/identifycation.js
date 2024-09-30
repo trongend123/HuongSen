@@ -5,7 +5,7 @@ const identifycationSchema = new Schema(
 
         categoryId: {
             type: Schema.Types.ObjectId,
-            ref: "IdentityCategory",
+            ref: "identitycategories",
             required: true,
         },
         code: {
@@ -26,7 +26,7 @@ const identifycationSchema = new Schema(
         },
         memberId: {
             type: Schema.Types.ObjectId,
-            ref: "Member",
+            ref: "members",
             required: true,
         },
         cusAccId: {
@@ -40,6 +40,6 @@ const identifycationSchema = new Schema(
     }
 );
 
-const Identifycation = mongoose.model("Identifycation", identifycationSchema);
+const Identifycation = mongoose.model("identifycations", identifycationSchema);
 
 export default Identifycation;
