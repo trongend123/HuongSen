@@ -47,7 +47,7 @@ const edit = async (
   }
 ) => {
   try {
-    const updatedTour = await User.findByIdAndUpdate(
+    const updatedTour = await Tour.findByIdAndUpdate(
       { _id: id },
       {
         name,
