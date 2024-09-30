@@ -47,7 +47,7 @@ const edit = async (
   }
 ) => {
   try {
-    const updatedMenu = await User.findByIdAndUpdate(
+    const updatedMenu = await Menu.findByIdAndUpdate(
       { _id: id },
       {
         foodName,
