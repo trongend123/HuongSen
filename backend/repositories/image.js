@@ -41,7 +41,7 @@ const edit = async (
   }
 ) => {
   try {
-    const updatedImage = await User.findByIdAndUpdate(
+    const updatedImage = await Image.findByIdAndUpdate(
       { _id: id },
       {
         caption,
