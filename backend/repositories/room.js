@@ -2,7 +2,7 @@ import Room from "../models/room.js";
 // Create
 const create = async ({
   location,
-  code, 
+  code,
   name,
   numOfBed,
   numOfHuman,
@@ -13,14 +13,14 @@ const create = async ({
   try {
     // Create new room
     const newRoom = await Room.create({
-        location,
-        code, 
-        name,
-        numOfBed,
-        numOfHuman,
-        image,
-        price,
-        description
+      location,
+      code,
+      name,
+      numOfBed,
+      numOfHuman,
+      image,
+      price,
+      description
     });
     // Return newRoom object
     return newRoom._doc;
@@ -49,7 +49,7 @@ const edit = async (
   id,
   {
     location,
-    code, 
+    code,
     name,
     numOfBed,
     numOfHuman,
@@ -59,11 +59,11 @@ const edit = async (
   }
 ) => {
   try {
-    const updatedRoom = await User.findByIdAndUpdate(
+    const updatedRoom = await Room.findByIdAndUpdate(
       { _id: id },
       {
         location,
-        code, 
+        code,
         name,
         numOfBed,
         numOfHuman,

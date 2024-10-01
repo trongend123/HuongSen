@@ -1,18 +1,18 @@
 import Tour from "../models/tour.js";
 // Create
 const create = async ({
-    name,
-    description,
-    price,
-    image,
+  name,
+  description,
+  price,
+  image,
 }) => {
   try {
     // Create new tour
     const newTour = await Tour.create({
-        name,
-        description,
-        price,
-        image,
+      name,
+      description,
+      price,
+      image,
     });
     // Return newTour object
     return newTour._doc;
@@ -47,7 +47,7 @@ const edit = async (
   }
 ) => {
   try {
-    const updatedTour = await User.findByIdAndUpdate(
+    const updatedTour = await Tour.findByIdAndUpdate(
       { _id: id },
       {
         name,

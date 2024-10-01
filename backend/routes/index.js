@@ -9,7 +9,26 @@ import CustomerRouter from "./customer.js";
 import StaffRouter from "./staff.js";
 import VoucherRouter from "./voucher.js";
 import VoucherAccRouter from "./voucheracc.js";
+import IdentityCategoryRouter from "./identityCategory.js";
+import IdentifycationRouter from "./identifycation.js";
+import MenmberRouter from "./member.js";
+import FeedbackRouter from "./feedback.js";
 
-export  {
-    ImageRouter, RoomRouter, TourRouter, OtherServiceRouter, MenuRouter, LocationRouter, AvatarRouter, CustomerRouter, StaffRouter, VoucherRouter, VoucherAccRouter
+export {
+    ImageRouter,
+    RoomRouter,
+    TourRouter,
+    OtherServiceRouter,
+    MenuRouter,
+    LocationRouter,
+    IdentityCategoryRouter,
+    IdentifycationRouter,
+    MenmberRouter,
+    FeedbackRouter,
+    AvatarRouter,
+    CustomerRouter,
+    StaffRouter,
+    VoucherRouter,
+    VoucherAccRouter
 };
+

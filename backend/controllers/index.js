@@ -9,7 +9,26 @@ import CustomerController from "./customer.js";
 import StaffController from "./staff.js";
 import VoucherController from "./voucher.js";
 import VoucherAccController from "./voucheracc.js";
+import IdentityCategoryController from "./identityCategory.js";
+import IdentifycationController from "./identifycation.js";
+import MemberController from "./member.js";
+import FeedbackController from "./feedback.js";
 
 export {
-    ImageController, RoomController, TourController, OtherServiceController, MenuController, LocationController, AvatarController, CustomerController, StaffController, VoucherController, VoucherAccController
+    ImageController,
+    RoomController,
+    TourController,
+    OtherServiceController,
+    MenuController,
+    LocationController,
+    IdentityCategoryController,
+    IdentifycationController,
+    MemberController,
+    FeedbackController,
+    AvatarController,
+    CustomerController,
+    StaffController,
+    VoucherController,
+    VoucherAccController
 };
+

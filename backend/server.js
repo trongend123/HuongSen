@@ -3,7 +3,23 @@ import express, { json } from "express";
 import * as dotenv from "dotenv";
 import connectDB from "./database/database.js";
 import cors from "cors";
-import { ImageRouter, RoomRouter, TourRouter, OtherServiceRouter, MenuRouter, LocationRouter, AvatarRouter, CustomerRouter, StaffRouter, VoucherRouter, VoucherAccRouter } from "./routes/index.js";
+import {
+  ImageRouter,
+  RoomRouter,
+  TourRouter,
+  OtherServiceRouter,
+  MenuRouter,
+  LocationRouter,
+  IdentityCategoryRouter,
+  IdentifycationRouter,
+  MenmberRouter,
+  FeedbackRouter,
+  AvatarRouter,
+  CustomerRouter,
+  StaffRouter,
+  VoucherRouter,
+  VoucherAccRouter
+} from "./routes/index.js";
 import { verifyAccessToken } from "./jwt_helper.js";
 import Avatar from "./models/avatar.js";
 // Thực thi cấu hình ứng dụng sử dụng file .env
@@ -28,6 +44,10 @@ app.use("/customer", CustomerRouter);
 app.use("/staff", StaffRouter);
 app.use("/vouchers", VoucherRouter);
 app.use("/vouchersacc", VoucherAccRouter);
+app.use("/identityCategory", IdentityCategoryRouter);
+app.use("/identifycation", IdentifycationRouter);
+app.use("/members", MenmberRouter);
+app.use("/feedbacks", FeedbackRouter);
 
 // Khai báo port cho ứng dụng web
 const port = process.env.PORT || 8080;
