@@ -12,7 +12,7 @@ import {
   LocationRouter,
   IdentityCategoryRouter,
   IdentifycationRouter,
-  MenmberRouter,
+  MemberRouter,
   FeedbackRouter
 } from "./routes/index.js";
 import { verifyAccessToken } from "./jwt_helper.js";
@@ -35,7 +35,7 @@ app.use("/menus", MenuRouter);
 app.use("/locations", LocationRouter);
 app.use("/identityCategory", IdentityCategoryRouter);
 app.use("/identifycation", IdentifycationRouter);
-app.use("/members", MenmberRouter);
+app.use("/members", MemberRouter);
 app.use("/feedbacks", FeedbackRouter);
 
 // Khai báo port cho ứng dụng web

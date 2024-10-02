@@ -6,7 +6,7 @@ import MenuRouter from "./menu.js";
 import LocationRouter from "./location.js";
 import IdentityCategoryRouter from "./identityCategory.js";
 import IdentifycationRouter from "./identifycation.js";
-import MenmberRouter from "./member.js";
+import MemberRouter from "./member.js";
 import FeedbackRouter from "./feedback.js";
 
 export {
@@ -18,6 +18,6 @@ export {
     LocationRouter,
     IdentityCategoryRouter,
     IdentifycationRouter,
-    MenmberRouter,
+    MemberRouter,
     FeedbackRouter,
 };

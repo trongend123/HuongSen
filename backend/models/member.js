@@ -17,20 +17,21 @@ const memberSchema = new Schema(
         },
         dob: {
             type: Date,
-            required: false,
+            required: true,
         },
         gender: {
             type: String,
             enum: ["male", "female", "other"],
-            required: false,
+            required: true,
         },
         address: {
             type: String,
+            required: true
         },
         bookingId: {
             type: Schema.Types.ObjectId,
             ref: "Booking",
-            required: false,
+            required: true,
         },
     },
     {
