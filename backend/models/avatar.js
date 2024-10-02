@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 const avatarSchema = new Schema(
   {
@@ -12,10 +12,10 @@ const avatarSchema = new Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // Adds createdAt and updatedAt fields
   }
 );
 
-const Avatars = mongoose.model("Avatars", avatarSchema);
-
+const Avatar = mongoose.model('Avatars', avatarSchema); // Use singular form for the model name
 export default Avatar;
+
