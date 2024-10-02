@@ -13,9 +13,16 @@ import {
   IdentityCategoryRouter,
   IdentifycationRouter,
   MemberRouter,
-  FeedbackRouter
+  FeedbackRouter,
+  AvatarRouter,
+  CustomerRouter,
+  StaffRouter,
+  VoucherRouter,
+  VoucherAccRouter
+
 } from "./routes/index.js";
 import { verifyAccessToken } from "./jwt_helper.js";
+import Avatar from "./models/avatar.js";
 // Thực thi cấu hình ứng dụng sử dụng file .env
 dotenv.config();
 // Tạo đối tượng app để khởi tạo web container
@@ -33,6 +40,11 @@ app.use("/tours", TourRouter);
 app.use("/otherservices", OtherServiceRouter);
 app.use("/menus", MenuRouter);
 app.use("/locations", LocationRouter);
+app.use("/avatars", AvatarRouter);
+app.use("/customer", CustomerRouter);
+app.use("/staff", StaffRouter);
+app.use("/vouchers", VoucherRouter);
+app.use("/vouchersacc", VoucherAccRouter);
 app.use("/identityCategory", IdentityCategoryRouter);
 app.use("/identifycation", IdentifycationRouter);
 app.use("/members", MemberRouter);

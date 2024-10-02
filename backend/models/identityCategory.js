@@ -16,6 +16,7 @@ const identityCategorySchema = new Schema(
     }
 );
 
+
 const IdentityCategory = mongoose.model("identitycategories", identityCategorySchema);
 
-export default IdentityCategory; 
+export default IdentityCategorys; 

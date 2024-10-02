@@ -4,6 +4,11 @@ import TourRouter from "./tour.js";
 import OtherServiceRouter from "./otherService.js";
 import MenuRouter from "./menu.js";
 import LocationRouter from "./location.js";
+import AvatarRouter from "./avatar.js";
+import CustomerRouter from "./customer.js";
+import StaffRouter from "./staff.js";
+import VoucherRouter from "./voucher.js";
+import VoucherAccRouter from "./voucheracc.js";
 import IdentityCategoryRouter from "./identityCategory.js";
 import IdentifycationRouter from "./identifycation.js";
 import MemberRouter from "./member.js";
@@ -20,4 +25,10 @@ export {
     IdentifycationRouter,
     MemberRouter,
     FeedbackRouter,
+    AvatarRouter,
+    CustomerRouter,
+    StaffRouter,
+    VoucherRouter,
+    VoucherAccRouter
 };
+
