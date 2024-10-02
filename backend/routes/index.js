@@ -6,7 +6,7 @@ import MenuRouter from "./menu.js";
 import LocationRouter from "./location.js";
 import IdentityCategoryRouter from "./identityCategory.js";
 import IdentifycationRouter from "./identifycation.js";
-import MenmberRouter from "./member.js";
+//import MenmberRouter from "./member.js";
 import FeedbackRouter from "./feedback.js";
 import HistoryRoutes from './historyRoutes.js';
 import TaxRouter from "./taxRoutes.js";
@@ -23,7 +23,6 @@ export {
     LocationRouter,
     IdentityCategoryRouter,
     IdentifycationRouter,
-    MenmberRouter,
     FeedbackRouter,
     HistoryRoutes,
     TaxRouter,

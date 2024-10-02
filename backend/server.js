@@ -12,7 +12,6 @@ import {
   LocationRouter,
   IdentityCategoryRouter,
   IdentifycationRouter,
-  MenmberRouter,
   FeedbackRouter,
   HistoryRoutes,
   TaxRouter,
@@ -40,7 +39,6 @@ app.use("/menus", MenuRouter);
 app.use("/locations", LocationRouter);
 app.use("/identityCategory", IdentityCategoryRouter);
 app.use("/identifycation", IdentifycationRouter);
-app.use("/members", MenmberRouter);
 app.use("/feedbacks", FeedbackRouter);
 app.use("/histories", HistoryRoutes);
 app.use("/taxes", TaxRouter);
