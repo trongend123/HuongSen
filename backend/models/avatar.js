@@ -5,5 +5,5 @@ const avatarSchema = new mongoose.Schema({
     base64: { type: String, required: true }  // Dữ liệu hình ảnh được lưu dưới dạng chuỗi Base64
 });
 
-const Avatar = mongoose.model('Avatar', avatarSchema);
+const Avatar = mongoose.model('Avatars', avatarSchema);
 export default Avatar;

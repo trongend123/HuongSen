@@ -5,7 +5,7 @@ const staffSchema = new mongoose.Schema({
     password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     phone: { type: String },
-    avataid: { type: String }  // Assuming this is a reference to an avatar image or file
+    avataid: { type: mongoose.Schema.Types.ObjectId, ref: 'Avatar'}  // Assuming this is a reference to an avatar image or file
 });
 
 const Staff = mongoose.model('Staffs', staffSchema);
