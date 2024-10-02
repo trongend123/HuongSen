@@ -12,7 +12,12 @@ import {
   LocationRouter,
   IdentityCategoryRouter,
   IdentifycationRouter,
+  FeedbackRouter,
+  HistoryRoutes,
+  TaxRouter,
+  BookingRouter,
   MemberRouter,
+  StaffRouter,
   FeedbackRouter,
   AvatarRouter,
   CustomerRouter,
@@ -47,9 +52,13 @@ app.use("/vouchers", VoucherRouter);
 app.use("/vouchersacc", VoucherAccRouter);
 app.use("/identityCategory", IdentityCategoryRouter);
 app.use("/identifycation", IdentifycationRouter);
-app.use("/members", MemberRouter);
+app.use("/members", MenmberRouter);
 app.use("/feedbacks", FeedbackRouter);
-
+app.use("/histories", HistoryRoutes);
+app.use("/taxes", TaxRouter);
+app.use("/bookings", BookingRouter);
+app.use("/members", MemberRouter);
+app.use("/staffs", StaffRouter);
 // Khai báo port cho ứng dụng web
 const port = process.env.PORT || 8080;
 

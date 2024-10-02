@@ -11,8 +11,17 @@ import VoucherRouter from "./voucher.js";
 import VoucherAccRouter from "./voucheracc.js";
 import IdentityCategoryRouter from "./identityCategory.js";
 import IdentifycationRouter from "./identifycation.js";
+<<<<<<< HEAD
 import MemberRouter from "./member.js";
+=======
+//import MenmberRouter from "./member.js";
+>>>>>>> 359225af522741087765172aa06c881d55e64fbd
 import FeedbackRouter from "./feedback.js";
+import HistoryRoutes from './historyRoutes.js';
+import TaxRouter from "./taxRoutes.js";
+import BookingRouter from "./bookingRoutes.js";
+import MemberRouter from "./memberRoutes.js";
+import StaffRouter from "./staffRoutes.js";
 
 export {
     ImageRouter,
@@ -23,8 +32,16 @@ export {
     LocationRouter,
     IdentityCategoryRouter,
     IdentifycationRouter,
+<<<<<<< HEAD
     MemberRouter,
+=======
+>>>>>>> 359225af522741087765172aa06c881d55e64fbd
     FeedbackRouter,
+    HistoryRoutes,
+    TaxRouter,
+    BookingRouter,
+    MemberRouter,
+    StaffRouter,
     AvatarRouter,
     CustomerRouter,
     StaffRouter,
