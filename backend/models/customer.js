@@ -4,7 +4,7 @@ const customerSchema = new Schema(
   {
     avatarId: {
       type: Schema.Types.ObjectId,
-      ref: "Avatar",
+      ref: "Avatars",
     },
     username: {
       type: String,
@@ -14,12 +14,12 @@ const customerSchema = new Schema(
       type: String,
       required: true,
     },
-    facebook: {
-      type: String,
-    },
-    gmail: {
-      type: String,
-    },
+    // facebook: {
+    //   type: String,
+    // },
+    // gmail: {
+    //   type: String,
+    // },
     fullname: {
       type: String,
       required: true,
@@ -34,6 +34,7 @@ const customerSchema = new Schema(
     },
     dob: {
       type: Date,
+      required: true,
     },
     gender: {
       type: String,
@@ -41,6 +42,7 @@ const customerSchema = new Schema(
     },
     address: {
       type: String,
+      required: true,
     },
   },
   {
@@ -48,6 +50,6 @@ const customerSchema = new Schema(
   }
 );
 
-const Customer = mongoose.model("Customers", customerSchema);
+const Customers = mongoose.model("Customers", customerSchema);
 
-export default Customer;
+export default Customers;

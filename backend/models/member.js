@@ -17,7 +17,7 @@ const memberSchema = new Schema(
         },
         dob: {
             type: Date,
-            required: false,
+            required: true,
         },
         gender: {
             type: String,
@@ -29,7 +29,7 @@ const memberSchema = new Schema(
         },
         bookingId: {
             type: Schema.Types.ObjectId,
-            ref: "Booking",
+            ref: "Bookings",
             required: false,
         },
     },

@@ -20,7 +20,7 @@ const staffSchema = new Schema(
     },
     avatarId: {
       type: Schema.Types.ObjectId,
-      ref: "Avatar",
+      ref: "Avatars",
     },
   },
   {
@@ -28,6 +28,6 @@ const staffSchema = new Schema(
   }
 );
 
-const Staff = mongoose.model("Staffs", staffSchema);
+const Staffs = mongoose.model("Staffs", staffSchema);
 
-export default Staff;
+export default Staffs;

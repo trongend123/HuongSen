@@ -9,11 +9,15 @@ const feedbackSchema = new Schema(
         },
         customerId: {
             type: Schema.Types.ObjectId,
-            ref: "CustomerAccount",
+            ref: "CustomerAccounts",
             required: true,
         },
         content: {
             type: String,
+            required: true,
+        },
+        rate: {
+            type: Number,
             required: true,
         },
     },
@@ -22,6 +26,6 @@ const feedbackSchema = new Schema(
     }
 );
 
-const Feedback = mongoose.model("Feedback", feedbackSchema);
+const Feedbacks = mongoose.model("Feedbacks", feedbackSchema);
 
-export default Feedback;
+export default Feedbacks;
