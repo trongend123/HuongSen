@@ -4,12 +4,12 @@ const voucherAccSchema = new Schema(
   {
     voucherId: {
       type: Schema.Types.ObjectId,
-      ref: "Voucher",
+      ref: "Vouchers",
       required: true,
     },
     cusAccId: {
       type: Schema.Types.ObjectId,
-      ref: "CustomerAccount",
+      ref: "CustomerAccounts",
       required: true,
     },
   },
@@ -18,6 +18,6 @@ const voucherAccSchema = new Schema(
   }
 );
 
-const VoucherAcc = mongoose.model("VoucherAcc", voucherAccSchema);
+const VoucherAccs = mongoose.model("VoucherAccs", voucherAccSchema);
 
-export default VoucherAcc;
+export default VoucherAccs;
