@@ -13,7 +13,12 @@ import {
   IdentityCategoryRouter,
   IdentifycationRouter,
   MenmberRouter,
-  FeedbackRouter
+  FeedbackRouter,
+  HistoryRoutes,
+  TaxRouter,
+  BookingRouter,
+  MemberRouter,
+  StaffRouter
 } from "./routes/index.js";
 import { verifyAccessToken } from "./jwt_helper.js";
 // Thực thi cấu hình ứng dụng sử dụng file .env
@@ -37,7 +42,11 @@ app.use("/identityCategory", IdentityCategoryRouter);
 app.use("/identifycation", IdentifycationRouter);
 app.use("/members", MenmberRouter);
 app.use("/feedbacks", FeedbackRouter);
-
+app.use("/histories", HistoryRoutes);
+app.use("/taxes", TaxRouter);
+app.use("/bookings", BookingRouter);
+app.use("/members", MemberRouter);
+app.use("/staffs", StaffRouter);
 // Khai báo port cho ứng dụng web
 const port = process.env.PORT || 8080;
 

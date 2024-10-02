@@ -47,7 +47,7 @@ const memberSchema = new Schema(
     gender: {
       type: String,
       enum: ['Male', 'Female', 'Other'],
-      required: [true, 'Vui lòng chọn giới tính'],
+      required: [false, 'Vui lòng chọn giới tính'],
     },
     address: {
       type: String,
@@ -71,4 +71,4 @@ const memberSchema = new Schema(
 memberSchema.index({ email: 1 });
 memberSchema.index({ phone: 1 });
 
-export default model('Member', memberSchema);
+export default model('Members', memberSchema);

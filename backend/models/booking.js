@@ -11,5 +11,5 @@ const bookingSchema = new mongoose.Schema({
     checkout: { type: Date, required: true }
 });
 
-const Booking = mongoose.model('Booking', bookingSchema);
+const Booking = mongoose.model('Bookings', bookingSchema);
 export default Booking;

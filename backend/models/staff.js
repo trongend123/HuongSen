@@ -8,5 +8,5 @@ const staffSchema = new mongoose.Schema({
     avataid: { type: String }  // Assuming this is a reference to an avatar image or file
 });
 
-const Staff = mongoose.model('Staff', staffSchema);
+const Staff = mongoose.model('Staffs', staffSchema);
 export default Staff;

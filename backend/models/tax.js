@@ -7,5 +7,5 @@ const taxSchema = new mongoose.Schema({
     description: { type: String }
 });
 
-const Tax = mongoose.model('Tax', taxSchema);
+const Tax = mongoose.model('Taxes', taxSchema);
 export default Tax;

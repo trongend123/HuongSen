@@ -8,6 +8,11 @@ import IdentityCategoryRouter from "./identityCategory.js";
 import IdentifycationRouter from "./identifycation.js";
 import MenmberRouter from "./member.js";
 import FeedbackRouter from "./feedback.js";
+import HistoryRoutes from './historyRoutes.js';
+import TaxRouter from "./taxRoutes.js";
+import BookingRouter from "./bookingRoutes.js";
+import MemberRouter from "./memberRoutes.js";
+import StaffRouter from "./staffRoutes.js";
 
 export {
     ImageRouter,
@@ -20,4 +25,9 @@ export {
     IdentifycationRouter,
     MenmberRouter,
     FeedbackRouter,
+    HistoryRoutes,
+    TaxRouter,
+    BookingRouter,
+    MemberRouter,
+    StaffRouter
 };

@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
 const historySchema = new mongoose.Schema({
-    bookingid: { type: mongoose.Schema.Types.ObjectId, ref: 'Booking', required: true },
-    staffid: { type: mongoose.Schema.Types.ObjectId, ref: 'Staff', required: true },
+    bookingid: { type: mongoose.Schema.Types.ObjectId, ref: 'Bookings', required: true },
+    staffid: { type: mongoose.Schema.Types.ObjectId, ref: 'Staffs', required: true },
     old_info: { type: Object, required: true }
 });
 
-const History = mongoose.model('History', historySchema);
+const History = mongoose.model('Histories', historySchema);
 export default History;
