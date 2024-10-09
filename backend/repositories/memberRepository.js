@@ -1,6 +1,6 @@
 // repositories/memberRepository.js
 
-import Member from '../models/member.js';
+import Member from '../models/members.js';
 import Booking from '../models/booking.js';
 
 class MemberRepository {

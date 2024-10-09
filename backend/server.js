@@ -17,8 +17,6 @@ import {
   TaxRouter,
   BookingRouter,
   MemberRouter,
-  StaffRouter,
-  FeedbackRouter,
   AvatarRouter,
   CustomerRouter,
   StaffRouter,
@@ -52,7 +50,6 @@ app.use("/vouchers", VoucherRouter);
 app.use("/vouchersacc", VoucherAccRouter);
 app.use("/identityCategory", IdentityCategoryRouter);
 app.use("/identifycation", IdentifycationRouter);
-app.use("/members", MenmberRouter);
 app.use("/feedbacks", FeedbackRouter);
 app.use("/histories", HistoryRoutes);
 app.use("/taxes", TaxRouter);

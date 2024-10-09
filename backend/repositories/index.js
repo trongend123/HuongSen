@@ -6,7 +6,7 @@ import MenuRepo from "./menu.js";
 import LocationRepo from "./location.js";
 import IdentifycationRepo from "./identifycation.js";
 import IdentityCategoryRepo from "./identityCategory.js";
-import MemberRepo from "./member.js";
+import MemberRepo from "./memberRepository.js";
 import FeedbackRepo from "./feedback.js";
 
 export {

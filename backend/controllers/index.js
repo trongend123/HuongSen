@@ -11,7 +11,7 @@ import VoucherController from "./voucher.js";
 import VoucherAccController from "./voucheracc.js";
 import IdentityCategoryController from "./identityCategory.js";
 import IdentifycationController from "./identifycation.js";
-import MemberController from "./member.js";
+import MemberController from "./memberController.js";
 import FeedbackController from "./feedback.js";
 
 export {

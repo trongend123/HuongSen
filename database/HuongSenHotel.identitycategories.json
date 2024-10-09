@@ -1,0 +1,56 @@
+[{
+  "_id": {
+    "$oid": "66fa35b9464e453a7d2eccd9"
+  },
+  "name": "Citizen ID",
+  "description": "Important identification documents of Vietnamese citizens, issued by the Public Security Agency, with the function of identifying the identity and basic information of each citizen.",
+  "createdAt": {
+    "$date": "2024-09-30T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fa3c98e4332f20f9f09b4b"
+  },
+  "name": "Passport",
+  "description": "A government-issued identification document that allows a citizen to leave a foreign country and re-enter his or her home country.",
+  "createdAt": {
+    "$date": "2024-09-30T05:52:24.023Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T05:52:24.023Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fa3cede4332f20f9f09b4d"
+  },
+  "name": "Household register",
+  "description": "Legal document issued by the police to each household in Vietnam, recording information about the residence and members of the household.",
+  "createdAt": {
+    "$date": "2024-09-30T05:53:49.512Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T05:53:49.512Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66fa3d47e4332f20f9f09b4f"
+  },
+  "name": "Driving license",
+  "description": "Legal documents issued by competent authorities in Vietnam, allowing individuals to operate motor vehicles such as cars and motorbikes on public roads.",
+  "createdAt": {
+    "$date": "2024-09-30T05:55:19.729Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T05:55:19.729Z"
+  },
+  "__v": 0
+}]
