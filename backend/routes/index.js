@@ -6,7 +6,7 @@ import MenuRouter from "./menu.js";
 import LocationRouter from "./location.js";
 import AvatarRouter from "./avatar.js";
 import CustomerRouter from "./customer.js";
-import StaffRouter from "./staff.js";
+// import StaffRouter from "./staff.js";
 import VoucherRouter from "./voucher.js";
 import VoucherAccRouter from "./voucheracc.js";
 import IdentityCategoryRouter from "./identityCategory.js";
@@ -17,7 +17,7 @@ import HistoryRoutes from './historyRoutes.js';
 import TaxRouter from "./taxRoutes.js";
 import BookingRouter from "./bookingRoutes.js";
 import MemberRouter from "./memberRoutes.js";
-
+import StaffRouter from "./staffRoutes.js";
 
 export {
     ImageRouter,
@@ -35,8 +35,8 @@ export {
     MemberRouter,
     AvatarRouter,
     CustomerRouter,
-    StaffRouter,
     VoucherRouter,
-    VoucherAccRouter
+    VoucherAccRouter,
+    StaffRouter
 };
 
