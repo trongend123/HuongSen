@@ -2,12 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import ListRoom from './listRoom';
+import ListMenu from './listMenu';
+import ListStaff from './listStaff';
+import ListCustomer from './listCustomer';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './listRoom.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ListCustomer />
   </React.StrictMode>
 );
 

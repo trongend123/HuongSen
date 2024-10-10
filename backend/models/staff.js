@@ -24,6 +24,11 @@ const staffSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Avatars', // Assuming it references the Avatar model
     },
+    role: {
+      type: String,
+      enum: ['admin', 'staff_mk', 'staff_ds', 'staff_cb', 'chef'],
+      default: 'staff',
+    },
   },
   {
     timestamps: true, // Adds createdAt and updatedAt fields
