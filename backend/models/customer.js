@@ -44,6 +44,10 @@ const customerSchema = new Schema(
       type: String,
       required: true,
     },
+    deactive: {
+      type: Boolean,
+      default: false,
+    }
   },
   {
     timestamps: true,

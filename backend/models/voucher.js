@@ -19,6 +19,6 @@ const voucherSchema = new Schema(
   }
 );
 
-const Voucher = mongoose.model("Voucher", voucherSchema);
+const Vouchers = mongoose.model("Vouchers", voucherSchema);
 
-export default Voucher;
+export default Vouchers;

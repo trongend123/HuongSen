@@ -1,20 +1,20 @@
 import Location from "../models/location.js";
 // Create
 const create = async ({
-  address,
-  phone,
-  name,
-  image,
-  feedback,
+    address,
+    phone,
+    name,
+    image,
+    feedback,
 }) => {
   try {
     // Create new location
     const newLocation = await Location.create({
-      address,
-      phone,
-      name,
-      image,
-      feedback,
+        address,
+        phone,
+        name,
+        image,
+        feedback,
     });
     // Return newLocation object
     return newLocation._doc;

@@ -34,7 +34,8 @@ const createRoom = async (req, res) => {
         numOfHuman,
         image,
         price,
-        description
+        description,
+        status
     } = req.body;
     const newRoom = await RoomRepo.create({
         location,
@@ -44,7 +45,8 @@ const createRoom = async (req, res) => {
         numOfHuman,
         image,
         price,
-        description
+        description,
+        status
     });
     res.status(201).json(newRoom);
   } catch (error) {

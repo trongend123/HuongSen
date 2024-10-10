@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import CreateMenu from './component/CreateMenu';
+import CreateMenu from './components/CreateMenu';
 
 function App() {
   return (
     <div className="App">
-      <CreateMenu />
+      {/* <CreateMenu /> */}
     </div>
   );
 }

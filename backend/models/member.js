@@ -22,7 +22,7 @@ const memberSchema = new Schema(
         gender: {
             type: String,
             enum: ["male", "female", "other"],
-            required: false,
+            required: true,
         },
         address: {
             type: String,
@@ -30,7 +30,7 @@ const memberSchema = new Schema(
         bookingId: {
             type: Schema.Types.ObjectId,
             ref: "Bookings",
-            required: false,
+            required: true,
         },
     },
     {
