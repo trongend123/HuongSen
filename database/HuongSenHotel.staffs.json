@@ -1,0 +1,132 @@
+[{
+  "_id": {
+    "$oid": "67068ef07f84d57bd16fc238"
+  },
+  "username": "tuannq",
+  "password": "123123",
+  "email": "tuanph41@gmail.com",
+  "phone": "0939293888",
+  "avatarId": "",
+  "role": "admin"
+},
+{
+  "_id": {
+    "$oid": "670690f97f84d57bd16fc239"
+  },
+  "username": "anhdtl",
+  "password": "123123",
+  "email": "anhdtl@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "admin"
+},
+{
+  "_id": {
+    "$oid": "670691867f84d57bd16fc23a"
+  },
+  "username": "dungpn",
+  "password": "123123",
+  "email": "dungpn@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "admin"
+},
+{
+  "_id": {
+    "$oid": "6706928e7f84d57bd16fc23b"
+  },
+  "username": "chefmk",
+  "password": "123123",
+  "email": "chefmk@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "chef"
+},
+{
+  "_id": {
+    "$oid": "670692c57f84d57bd16fc23c"
+  },
+  "username": "chefds",
+  "password": "123123",
+  "email": "chefds@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "chef"
+},
+{
+  "_id": {
+    "$oid": "670692d07f84d57bd16fc23d"
+  },
+  "username": "chefcb",
+  "password": "123123",
+  "email": "chefcb@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "chef"
+},
+{
+  "_id": {
+    "$oid": "670693967f84d57bd16fc23f"
+  },
+  "username": "staffmk1",
+  "password": "123123",
+  "email": "staffmk1@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "staff_mk"
+},
+{
+  "_id": {
+    "$oid": "670693e77f84d57bd16fc240"
+  },
+  "username": "staffmk2",
+  "password": "123123",
+  "email": "staffmk2@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "staff_mk"
+},
+{
+  "_id": {
+    "$oid": "670693f27f84d57bd16fc241"
+  },
+  "username": "staffds1",
+  "password": "123123",
+  "email": "staffds1@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "staff_ds"
+},
+{
+  "_id": {
+    "$oid": "670694067f84d57bd16fc242"
+  },
+  "username": "staffds2",
+  "password": "123123",
+  "email": "staffds2@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "staff_ds"
+},
+{
+  "_id": {
+    "$oid": "670694187f84d57bd16fc243"
+  },
+  "username": "staffcb1",
+  "password": "123123",
+  "email": "staffcb1@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "staff_cb"
+},
+{
+  "_id": {
+    "$oid": "6706942a7f84d57bd16fc244"
+  },
+  "username": "staffcb2",
+  "password": "123123",
+  "email": "staffcb2@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "staff_cb"
+}]
