@@ -2,7 +2,6 @@
 import mongoose from 'mongoose';
 import RoomCategory from "./roomCategory.js";
 import Customers from "./customer.js";
-import Booking from "./booking.js";
 
 const { Schema, model } = mongoose;
 
@@ -20,7 +19,7 @@ const orderRoomSchema = new Schema(
     },
     bookingId: {
       type: Schema.Types.ObjectId,
-      ref: Booking,
+      ref: 'Bookings',
       required: [true, 'bookingId là bắt buộc']
     },
     quantity: {
@@ -36,5 +35,5 @@ const orderRoomSchema = new Schema(
 );
 
 // Tạo và xuất model OrderRoom
-const OrderRoom = model("OrderRoom", orderRoomSchema);
-export default OrderRoom;
+const OrderRooms = model("OrderRooms", orderRoomSchema);
+export default OrderRooms;

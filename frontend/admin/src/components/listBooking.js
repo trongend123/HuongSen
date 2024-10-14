@@ -9,7 +9,7 @@ const ListBooking = () => {
   useEffect(() => {
     // Fetch booking data
     axios
-      .get("http://localhost:9999/bookings")
+      .get("http://localhost:9999/orderRooms")
       .then((response) => setBookings(response.data))
       .catch((error) => console.error("Error fetching bookings:", error));
   }, []);
@@ -32,19 +32,21 @@ const ListBooking = () => {
             <th>Ngày Đặt</th>
             <th>Checkin</th>
             <th>Checkout</th>
+            <th>Thanh toán</th>
             <th>Trạng Thái</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking) => (
             <tr key={booking._id}>
-              <td>{booking._id}</td>
-              <td>{booking.customerName}</td>
-              <td>{booking.price}</td>
+              <td>{booking.bookingId._id}</td>
+              <td>{booking.customerId.fullname}</td>
+              <td>{(booking.quantity * booking.roomCateId.price)}</td>
               <td>{formatDate(booking.createdAt)}</td> {/* Format createdAt */}
-              <td>{formatDate(booking.checkin)}</td>   {/* Format checkin */}
-              <td>{formatDate(booking.checkout)}</td>  {/* Format checkout */}
-              <td>{booking.status}</td>
+              <td>{formatDate(booking.bookingId.checkin)}</td>   {/* Format checkin */}
+              <td>{formatDate(booking.bookingId.checkout)}</td>  {/* Format checkout */}
+              <td>{booking.bookingId.payment}</td>
+              <td>{booking.bookingId.status}</td>
             </tr>
           ))}
         </tbody>

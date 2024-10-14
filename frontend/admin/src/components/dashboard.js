@@ -3,206 +3,202 @@ import { Card, Container, Row, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
-// import './Dashboard.css';
 
 const Dashboard = () => {
   const [bookingData, setBookingData] = useState([]);
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(''); // Month filter (empty string for whole year)
+  const [orderData, setOrderData] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Months are 0-indexed
 
   useEffect(() => {
-    // Fetch booking data (replace with your actual API URL)
+    // Fetch booking data
     axios
       .get('http://localhost:9999/bookings')
       .then((response) => setBookingData(response.data))
-      .catch((error) => console.error('Error fetching booking data:', error));
+      .catch((error) => console.error('Lỗi khi lấy dữ liệu đặt phòng:', error));
   }, []);
 
-  // Function to filter data by year and month
-  const filterDataByYearAndMonth = (data, year, month) => {
-    return data.filter((booking) => {
-      const bookingDate = new Date(booking.date);
-      const bookingYear = bookingDate.getFullYear();
-      const bookingMonth = bookingDate.getMonth(); // 0 = Jan, 11 = Dec
+  useEffect(() => {
+    // Fetch order data
+    axios
+      .get('http://localhost:9999/orderRooms')
+      .then((response) => setOrderData(response.data))
+      .catch((error) => console.error('Lỗi khi lấy dữ liệu đơn hàng:', error));
+  }, []);
 
-      if (month === '') {
-        // If month is empty, filter only by year
-        return bookingYear === year;
-      } else {
-        // Filter by both year and month
-        return bookingYear === year && bookingMonth === parseInt(month);
+  const aggregateBookingByDate = (data, dateField) => {
+    const aggregated = {};
+    data.forEach((item) => {
+      const date = new Date(item[dateField]).toLocaleDateString();
+      if (!aggregated[date]) {
+        aggregated[date] = 0;
       }
+      aggregated[date] += 1; // Summing specific value field
     });
+    return aggregated;
   };
 
-  // Aggregation function by day if month is selected, else by month
-  const aggregateDataByDayOrMonth = (filteredData, metric, isMonthly) => {
-    const totalDaysOrMonths = isMonthly ? new Date(year, parseInt(month) + 1, 0).getDate() : 12;
-    const totals = Array(totalDaysOrMonths).fill(0); // Initialize array for 12 months or 31 days
-    filteredData.forEach((booking) => {
-      const bookingDate = new Date(booking.date);
-      const index = isMonthly ? bookingDate.getDate() - 1 : bookingDate.getMonth(); // Day or Month
-
-      if (metric === 'bookings') {
-        totals[index] += 1;
-      } else if (metric === 'guests') {
-        totals[index] += booking.guests;
-      } else if (metric === 'revenue') {
-        totals[index] += booking.revenue;
-      } else if (metric === 'rooms') {
-        totals[index] += booking.rooms;
+  const aggregateDataByDate = (data, dateField, valueField) => {
+    const aggregated = {};
+    data.forEach((item) => {
+      const date = new Date(item[dateField]).toLocaleDateString();
+      if (!aggregated[date]) {
+        aggregated[date] = 0;
       }
+      aggregated[date] += item[valueField]; // Summing specific value field
     });
-    return totals;
+    return aggregated;
   };
-
-  // Determine whether to aggregate by day or month based on the month filter
-  const isMonthlyView = month !== '';
 
   // Filter data based on selected year and month
-  const filteredData = filterDataByYearAndMonth(bookingData, year, month);
+  const filteredBookingData = bookingData.filter((item) => {
+    const date = new Date(item.createdAt);
+    return date.getFullYear() === selectedYear && date.getMonth() + 1 === selectedMonth;
+  });
 
-  // Aggregate data by day if a month is selected, otherwise by month
-  const dailyOrMonthlyBookings = aggregateDataByDayOrMonth(filteredData, 'bookings', isMonthlyView);
-  const dailyOrMonthlyGuests = aggregateDataByDayOrMonth(filteredData, 'guests', isMonthlyView);
-  const dailyOrMonthlyRevenue = aggregateDataByDayOrMonth(filteredData, 'revenue', isMonthlyView);
-  const dailyOrMonthlyRooms = aggregateDataByDayOrMonth(filteredData, 'rooms', isMonthlyView);
+  const filteredOrderData = orderData.filter((item) => {
+    const date = new Date(item.createdAt);
+    return date.getFullYear() === selectedYear && date.getMonth() + 1 === selectedMonth;
+  });
 
-  // Define labels for the x-axis
-  const labels = isMonthlyView
-    ? Array.from({ length: new Date(year, parseInt(month) + 1, 0).getDate() }, (_, i) => i + 1)
-    : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const aggregatedBookings = aggregateBookingByDate(filteredBookingData, 'createdAt');
+  const aggregatedOrders = aggregateDataByDate(filteredOrderData, 'createdAt', 'quantity');
 
-  // Combined chart data
-  const combinedChartData = {
+  // Create labels for the charts
+  const labels = [...new Set([...Object.keys(aggregatedBookings), ...Object.keys(aggregatedOrders)])].sort();
+
+  // Data for each chart
+  const bookingsData = labels.map(date => aggregatedBookings[date] || 0);
+  const revenueData = labels.map(date => filteredBookingData.filter(b => new Date(b.createdAt).toLocaleDateString() === date && b.status === 'Completed').reduce((sum, b) => sum + b.price, 0));
+  const ordersData = labels.map(date => aggregatedOrders[date] || 0);
+
+  // Chart data for bookings
+  const bookingsChartData = {
     labels: labels,
     datasets: [
       {
-        label: 'Total Bookings',
-        data: dailyOrMonthlyBookings,
+        label: 'Tổng số đặt phòng',
+        data: bookingsData,
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
       },
+    ],
+  };
+
+  // Chart data for revenue
+  const revenueChartData = {
+    labels: labels,
+    datasets: [
       {
-        label: 'Total Guests',
-        data: dailyOrMonthlyGuests,
-        fill: false,
-        borderColor: 'rgb(54, 162, 235)',
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      },
-      {
-        label: 'Total Revenue',
-        data: dailyOrMonthlyRevenue,
+        label: 'Tổng doanh thu',
+        data: revenueData,
         fill: false,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
       },
+    ],
+  };
+
+  // Chart data for orders
+  const ordersChartData = {
+    labels: labels,
+    datasets: [
       {
-        label: 'Total Rooms',
-        data: dailyOrMonthlyRooms,
+        label: 'Tổng số đơn hàng',
+        data: ordersData,
         fill: false,
-        borderColor: 'rgb(153, 102, 255)',
-        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+        borderColor: 'rgb(54, 162, 235)',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
       },
     ],
   };
 
   return (
     <Container>
-      <h2 className="text-center my-4">Dashboard</h2>
+      <h2 className="text-center my-4">Bảng điều khiển</h2>
 
       {/* Year and Month Selectors */}
-      <Form className="mb-4">
-        <Row>
-          <Col>
-            <Form.Group controlId="yearSelect">
-              <Form.Label>Năm:</Form.Label>
-              <Form.Control
-                as="select"
-                value={year}
-                onChange={(e) => setYear(Number(e.target.value))}
-              >
-                {[2024, 2023, 2022, 2021].map((yearOption) => (
-                  <option key={yearOption} value={yearOption}>
-                    {yearOption}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group controlId="monthSelect">
-              <Form.Label>Tháng:</Form.Label>
-              <Form.Control
-                as="select"
-                value={month}
-                onChange={(e) => setMonth(e.target.value)}
-              >
-                <option value="">Cả năm</option>
-                <option value="0">Tháng 1</option>
-                <option value="1">Tháng 2</option>
-                <option value="2">Tháng 3</option>
-                <option value="3">Tháng 4</option>
-                <option value="4">Tháng 5</option>
-                <option value="5">Tháng 6</option>
-                <option value="6">Tháng 7</option>
-                <option value="7">Tháng 8</option>
-                <option value="8">Tháng 9</option>
-                <option value="9">Tháng 10</option>
-                <option value="10">Tháng 11</option>
-                <option value="11">Tháng 12</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-        </Row>
-      </Form>
+      <Row className="mb-4">
+        <Col md={6}>
+          <Form.Group controlId="yearSelect">
+            <Form.Label>Chọn Năm</Form.Label>
+            <Form.Control
+              as="select"
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(Number(e.target.value))}
+            >
+              {Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - i).map(year => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+        </Col>
+        <Col md={6}>
+          <Form.Group controlId="monthSelect">
+            <Form.Label>Chọn Tháng</Form.Label>
+            <Form.Control
+              as="select"
+              value={selectedMonth}
+              onChange={(e) => setSelectedMonth(Number(e.target.value))}
+            >
+              {Array.from({ length: 12 }, (_, i) => i + 1).map(month => (
+                <option key={month} value={month}>{month}</option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+        </Col>
+      </Row>
 
       {/* Summary Cards */}
       <Row>
         <Col>
           <Card className="text-center">
             <Card.Body>
-              <Card.Title>Total Bookings</Card.Title>
-              <Card.Text>{filteredData.length}</Card.Text>
+              <Card.Title>Tổng số đặt phòng</Card.Title>
+              <Card.Text>{filteredBookingData.length}</Card.Text>
             </Card.Body>
           </Card>
         </Col>
         <Col>
           <Card className="text-center">
             <Card.Body>
-              <Card.Title>Total Guests</Card.Title>
-              <Card.Text>{dailyOrMonthlyGuests.reduce((a, b) => a + b, 0)}</Card.Text>
+              <Card.Title>Tổng doanh thu</Card.Title>
+              <Card.Text>
+                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
+                  filteredBookingData.filter(b => b.status === 'Completed').reduce((sum, b) => sum + b.price, 0)
+                )}
+              </Card.Text>
             </Card.Body>
           </Card>
         </Col>
         <Col>
           <Card className="text-center">
             <Card.Body>
-              <Card.Title>Total Revenue</Card.Title>
-              <Card.Text>${dailyOrMonthlyRevenue.reduce((a, b) => a + b, 0).toFixed(2)}</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card className="text-center">
-            <Card.Body>
-              <Card.Title>Total Rooms</Card.Title>
-              <Card.Text>{dailyOrMonthlyRooms.reduce((a, b) => a + b, 0)}</Card.Text>
+              <Card.Title>Tổng số phòng</Card.Title>
+              <Card.Text>{filteredOrderData.reduce((sum, order) => sum + order.quantity, 0)}</Card.Text>
             </Card.Body>
           </Card>
         </Col>
       </Row>
 
-      {/* Combined Line Chart */}
+      {/* Individual Line Charts */}
       <Row className="mt-4">
         <Col>
-          <h4 className="text-center">
-            {month === ''
-              ? `Yearly Metrics for ${year}`
-              : `Daily Metrics for ${Number(month) + 1}, ${year}`}
-          </h4>
-          <Line data={combinedChartData} />
+          <h4 className="text-center">Tổng số đặt phòng theo thời gian</h4>
+          <Line data={bookingsChartData} />
+        </Col>
+      </Row>
+      <Row className="mt-4">
+        <Col>
+          <h4 className="text-center">Tổng doanh thu theo thời gian</h4>
+          <Line data={revenueChartData} />
+        </Col>
+      </Row>
+      <Row className="mt-4">
+        <Col>
+          <h4 className="text-center">Tổng số đơn hàng theo thời gian</h4>
+          <Line data={ordersChartData} />
         </Col>
       </Row>
     </Container>
@@ -210,3 +206,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+a

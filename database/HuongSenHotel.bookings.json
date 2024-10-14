@@ -1,0 +1,84 @@
+[{
+  "_id": {
+    "$oid": "670d33f1b209ba33cfb0c54c"
+  },
+  "checkin": {
+    "$date": "2024-10-14T00:00:00.000Z"
+  },
+  "checkout": {
+    "$date": "2024-10-15T00:00:00.000Z"
+  },
+  "note": "khách ưu tiên",
+  "payment": "Đã Thanh Toán",
+  "price": "1200000",
+  "staffId": {
+    "$oid": "670693f27f84d57bd16fc241"
+  },
+  "status": "In Progess",
+  "taxId": {
+    "$oid": "670be7f3e91d9d4f21e97b9e"
+  },
+  "createdAt": {
+    "$date": "2024-09-29T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-29T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "checkin": {
+    "$date": "2024-10-14T00:00:00.000Z"
+  },
+  "checkout": {
+    "$date": "2024-10-15T00:00:00.000Z"
+  },
+  "note": "khách ưu tiên",
+  "payment": "Đã Hoàn Tiền",
+  "price": "2100000",
+  "staffId": {
+    "$oid": "670693f27f84d57bd16fc241"
+  },
+  "status": "Cancel",
+  "taxId": {
+    "$oid": "670be7f3e91d9d4f21e97b9e"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670d33f1b209ba33cfb0c54e"
+  },
+  "checkin": {
+    "$date": "2024-10-12T00:00:00.000Z"
+  },
+  "checkout": {
+    "$date": "2024-10-14T00:00:00.000Z"
+  },
+  "note": "khách ưu tiên",
+  "payment": "Đã Thanh Toán",
+  "price": "300000",
+  "staffId": {
+    "$oid": "670693f27f84d57bd16fc241"
+  },
+  "status": "Completed",
+  "taxId": {
+    "$oid": "670be7f3e91d9d4f21e97b9e"
+  },
+  "createdAt": {
+    "$date": "2024-09-28T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-28T14:28:43.831Z"
+  },
+  "__v": 0
+}]

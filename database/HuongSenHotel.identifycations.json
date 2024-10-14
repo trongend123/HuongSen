@@ -1,0 +1,120 @@
+[{
+  "_id": {
+    "$oid": "670be878e91d9d4f21e97ba6"
+  },
+  "name": "Căn cước công dân",
+  "code": "031204003386",
+  "dateStart": {
+    "$date": "2021-04-24T17:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2029-03-27T17:00:00.000Z"
+  },
+  "location": "An Lão, Hải Phòng",
+  "customerID": {
+    "$oid": "670735142250999dda285fe7"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670beabfe91d9d4f21e97bac"
+  },
+  "name": "Bằng lái xe máy",
+  "code": "310229019173",
+  "dateStart": {
+    "$date": "2022-08-08T17:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2200-08-28T17:00:00.000Z"
+  },
+  "location": "An Lão, Hải Phòng",
+  "customerID": {
+    "$oid": "670735142250999dda285fe7"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670beb3ee91d9d4f21e97bad"
+  },
+  "name": "Căn cước công dân",
+  "code": "031202000850",
+  "dateStart": {
+    "$date": "2021-06-24T17:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2029-09-20T17:00:00.000Z"
+  },
+  "location": "Hải An, Hải Phòng",
+  "customerID": {
+    "$oid": "670732b92250999dda285fe4"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670beb80e91d9d4f21e97bae"
+  },
+  "name": "Bằng lái xe máy",
+  "code": "3102000250728",
+  "dateStart": {
+    "$date": "2021-04-24T17:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2029-03-27T17:00:00.000Z"
+  },
+  "location": "Hải An, Hải Phòng",
+  "customerID": {
+    "$oid": "670732b92250999dda285fe4"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670bebd4e91d9d4f21e97bb5"
+  },
+  "name": "Căn cước công dân",
+  "code": "031201245867",
+  "dateStart": {
+    "$date": "2021-06-24T17:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2029-09-20T17:00:00.000Z"
+  },
+  "location": "Nghệ An",
+  "customerID": {
+    "$oid": "670735212250999dda285fe8"
+  },
+  "createdAt": {
+    "$date": "2024-09-30T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T14:28:43.831Z"
+  },
+  "__v": 0
+}]

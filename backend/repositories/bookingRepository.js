@@ -12,16 +12,16 @@ class BookingRepository {
     // Lấy tất cả bookings
     async getAllBookings() {
         return await Booking.find()
-            .populate('taxid')
-            .populate('staffid')
+            .populate('taxId')
+            .populate('staffId')
             .exec();
     }
 
     // Lấy booking theo ID
     async getBookingById(id) {
         return await Booking.findById(id)
-            .populate('taxid')
-            .populate('staffid')
+            .populate('taxId')
+            .populate('staffId')
             .exec();
     }
 

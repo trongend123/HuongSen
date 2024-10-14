@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "670d325cb209ba33cfb0c535"
+  },
+  "roomCateId": {
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "customerId": {
+    "$oid": "670732b92250999dda285fe4"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54c"
+  },
+  "quantity": 3,
+  "createdAt": {
+    "$date": "2024-09-29T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-29T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670d3306b209ba33cfb0c536"
+  },
+  "roomCateId": {
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "customerId": {
+    "$oid": "670735142250999dda285fe7"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "quantity": 2,
+  "createdAt": {
+    "$date": "2024-09-30T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670d330fb209ba33cfb0c537"
+  },
+  "roomCateId": {
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "customerId": {
+    "$oid": "670735142250999dda285fe7"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "quantity": 3,
+  "createdAt": {
+    "$date": "2024-09-30T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670d3314b209ba33cfb0c538"
+  },
+  "roomCateId": {
+    "$oid": "670bd4dfe91d9d4f21e97b63"
+  },
+  "customerId": {
+    "$oid": "670735212250999dda285fe8"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54e"
+  },
+  "quantity": 1,
+  "createdAt": {
+    "$date": "2024-09-28T05:23:05.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-28T14:28:43.831Z"
+  },
+  "__v": 0
+}]
