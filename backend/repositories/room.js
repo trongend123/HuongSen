@@ -48,7 +48,7 @@ const create = async (req, res) => {
 // Get all rooms
 const list = async () => {
   try {
-    return await Room.find({}).exec();
+    return await Room.find({}).populate("roomCategoryId").exec();
   } catch (error) {
     throw new Error(error.toString());
   }
