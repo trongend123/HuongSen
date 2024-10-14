@@ -52,7 +52,7 @@ const ListRoomCate = () => {
         };
 
         fetchData();
-    }, []);
+    }, [roomCategories]);
 
     // Validate input fields
     const validateInputs = () => {
@@ -153,10 +153,11 @@ const ListRoomCate = () => {
 
     // Filtered room categories based on filters
     const filteredRoomCategories = roomCategories.filter((roomCategory) => {
-        const matchesRoomName = roomCategory.name.toLowerCase().includes(filterName.toLowerCase());
-        const matchesLocation = roomCategory.locationId.name.toLowerCase().includes(filterLocation.toLowerCase());
+        const matchesRoomName = roomCategory.name?.toLowerCase().includes(filterName.toLowerCase());
+        const matchesLocation = roomCategory.locationId.name?.toLowerCase().includes(filterLocation.toLowerCase());
         return matchesRoomName && matchesLocation;
     });
+
 
     return (
         <Container>
