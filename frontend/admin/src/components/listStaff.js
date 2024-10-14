@@ -34,6 +34,7 @@ const ListStaffAccount = () => {
     phone: '',
     role: 'staff_cb', // Default role
   });
+  const [errors, setErrors] = useState({}); // Validation errors
 
   // Fetch staff data from API
   useEffect(() => {
@@ -42,6 +43,49 @@ const ListStaffAccount = () => {
       .then((response) => setStaffData(response.data))
       .catch((error) => console.error("Error fetching staff data:", error));
   }, []);
+
+  // Validate input fields
+  const validateInputs = () => {
+    const newErrors = {};
+
+    // Username validation (no spaces, no accents)
+    const usernameRegex = /^[a-zA-Z0-9]+$/;
+    if (!usernameRegex.test(newStaff.username)) {
+      newErrors.username = "Tên người dùng chỉ chứa ký tự không dấu và không có khoảng trống.";
+    }
+
+    // Password validation (minimum 6 characters)
+    if (newStaff.password.length < 6) {
+      newErrors.password = "Mật khẩu phải có ít nhất 6 ký tự.";
+    }
+
+    // Email validation (proper email format)
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(newStaff.email)) {
+      newErrors.email = "Email không hợp lệ.";
+    }
+
+    // Phone number validation (Vietnamese phone number format)
+    const phoneRegex = /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/;
+    if (!phoneRegex.test(newStaff.phone)) {
+      newErrors.phone = "Số điện thoại không hợp lệ.";
+    }
+
+    // Check for duplicate username
+    const usernameExists = staffData.some(staff => staff.username === newStaff.username && staff._id !== selectedStaff?._id);
+    if (usernameExists) {
+      newErrors.username = "Tên người dùng đã tồn tại.";
+    }
+
+    // Check for duplicate email
+    const emailExists = staffData.some(staff => staff.email === newStaff.email && staff._id !== selectedStaff?._id);
+    if (emailExists) {
+      newErrors.email = "Email đã tồn tại.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Returns true if no errors
+  };
 
   // Handle delete staff
   const handleDelete = (id) => {
@@ -61,6 +105,14 @@ const ListStaffAccount = () => {
     setShowModal(false);
     setIsEditMode(false); // Reset mode to create after closing modal
     setSelectedStaff(null); // Clear selected staff after closing modal
+    setNewStaff({
+      username: '',
+      password: '',
+      email: '',
+      phone: '',
+      role: 'staff_cb',
+    });
+    setErrors({}); // Clear errors after closing modal
   };
 
   // Handle change in input fields
@@ -74,13 +126,15 @@ const ListStaffAccount = () => {
 
   // Handle staff creation
   const handleCreateStaff = () => {
-    axios
-      .post('http://localhost:9999/staffs', newStaff)
-      .then((response) => {
-        setStaffData([...staffData, response.data]);
-        handleCloseModal();
-      })
-      .catch((error) => console.error("Error creating staff:", error));
+    if (validateInputs()) {
+      axios
+        .post('http://localhost:9999/staffs', newStaff)
+        .then((response) => {
+          setStaffData([...staffData, response.data]);
+          handleCloseModal();
+        })
+        .catch((error) => console.error("Error creating staff:", error));
+    }
   };
 
   // Handle staff editing
@@ -99,15 +153,17 @@ const ListStaffAccount = () => {
 
   // Handle staff update
   const handleUpdateStaff = () => {
-    axios
-      .put(`http://localhost:9999/staffs/${selectedStaff._id}`, newStaff)
-      .then((response) => {
-        setStaffData(
-          staffData.map(staff => staff._id === selectedStaff._id ? response.data : staff)
-        );
-        handleCloseModal(); // Close modal after update
-      })
-      .catch((error) => console.error("Error updating staff:", error));
+    if (validateInputs()) {
+      axios
+        .put(`http://localhost:9999/staffs/${selectedStaff._id}`, newStaff)
+        .then((response) => {
+          setStaffData(
+            staffData.map(staff => staff._id === selectedStaff._id ? response.data : staff)
+          );
+          handleCloseModal(); // Close modal after update
+        })
+        .catch((error) => console.error("Error updating staff:", error));
+    }
   };
 
   // Filter staff data by username and role
@@ -147,7 +203,7 @@ const ListStaffAccount = () => {
         </Col>
         <Col md={2} className='text-center'>
           <Button className="bg-success" onClick={() => { setIsEditMode(false); setNewStaff({ username: '', password: '', email: '', phone: '', role: 'staff_cb' }); handleShowModal(); }}>
-            Create staff
+            Tạo tài khoản
           </Button>
         </Col>
       </Row>
@@ -177,66 +233,77 @@ const ListStaffAccount = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3">
+            <Form.Group controlId="formUsername">
               <Form.Label>Tên người dùng</Form.Label>
               <Form.Control
                 type="text"
                 name="username"
                 value={newStaff.username}
                 onChange={handleChange}
-                placeholder="Nhập tên người dùng"
+                isInvalid={!!errors.username}
+                disabled={isEditMode} // Disable the field if in edit mode
               />
+              <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3">
+
+            <Form.Group controlId="formPassword">
               <Form.Label>Mật khẩu</Form.Label>
               <Form.Control
-                type="text"
+                type="password"
                 name="password"
                 value={newStaff.password}
                 onChange={handleChange}
-                placeholder="Nhập mật khẩu"
+                isInvalid={!!errors.password}
               />
+              <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3">
+
+            <Form.Group controlId="formEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
                 name="email"
                 value={newStaff.email}
                 onChange={handleChange}
-                placeholder="Nhập email"
+                isInvalid={!!errors.email}
               />
+              <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Số điện thoại</Form.Label>
+
+            <Form.Group controlId="formPhone">
+              <Form.Label>SĐT</Form.Label>
               <Form.Control
                 type="text"
                 name="phone"
                 value={newStaff.phone}
                 onChange={handleChange}
-                placeholder="Nhập số điện thoại"
+                isInvalid={!!errors.phone}
               />
+              <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3">
+
+            <Form.Group controlId="formRole">
               <Form.Label>Vai trò</Form.Label>
               <Form.Select
                 name="role"
                 value={newStaff.role}
                 onChange={handleChange}
               >
-                <option value="admin">Admin</option>
-                <option value="chef">Bếp</option>
-                <option value="staff_mk">Lễ tân Minh Khai</option>
-                <option value="staff_ds">Lễ tân Đồ Sơn</option>
                 <option value="staff_cb">Lễ tân Cát Bà</option>
+                <option value="staff_ds">Lễ tân Đồ Sơn</option>
+                <option value="staff_mk">Lễ tân Minh Khai</option>
+                <option value="chef">Bếp</option>
+                <option value="admin">Admin</option>
               </Form.Select>
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>Hủy</Button>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Đóng
+          </Button>
           <Button variant="primary" onClick={isEditMode ? handleUpdateStaff : handleCreateStaff}>
-            {isEditMode ? 'Cập nhật' : 'Tạo mới'}
+            {isEditMode ? 'Cập nhật' : 'Tạo tài khoản'}
           </Button>
         </Modal.Footer>
       </Modal>

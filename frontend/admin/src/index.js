@@ -4,6 +4,7 @@ import './index.css';
 import ListRoom from './components/listRoom';
 import ListStaff from './components/listStaff';
 import Dashboard from './components/dashboard';
+import ListRoomCate from './components/listRoomCate';
 import ListBooking from './components/listBooking';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,6 +24,7 @@ root.render(
             <Route path="/" element={<Dashboard />} />
             <Route path="/bookings" element={<ListBooking />} />
             <Route path="/staffs" element={<ListStaff />} />
+            <Route path="/roomCate" element={<ListRoomCate />} />
           </Routes>
         </Container>
       </div>

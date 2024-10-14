@@ -6,5 +6,5 @@ const historySchema = new mongoose.Schema({
     old_info: { type: Object, required: true }
 });
 
-const History = mongoose.model('Histories', historySchema);
-export default History;
+const Historys = mongoose.model('Histories', historySchema);
+export default Historys;

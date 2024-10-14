@@ -1,0 +1,9 @@
+[{
+  "_id": {
+    "$oid": "670be7f3e91d9d4f21e97b9e"
+  },
+  "code": "123456",
+  "name": "VAT",
+  "count": 10,
+  "description": "thuế giá trị gia tăng 10% cho khách đoàn"
+}]

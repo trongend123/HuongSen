@@ -35,6 +35,6 @@ const staffSchema = new Schema(
   }
 );
 
-const Staff = mongoose.model('Staffs', staffSchema); // Use singular form for the model name
-export default Staff;
+const Staffs = mongoose.model('Staffs', staffSchema); // Use singular form for the model name
+export default Staffs;
 

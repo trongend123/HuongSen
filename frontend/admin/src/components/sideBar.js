@@ -10,6 +10,7 @@ const Sidebar = () => (
     <Nav className="flex-column">
       <NavLink className="nav-link" to="/">Dashboard</NavLink>
       <NavLink className="nav-link" exact to="/rooms">Danh sách Phòng</NavLink>
+      <NavLink className="nav-link" to="/roomCate">Danh sách Loại phòng</NavLink>
       <NavLink className="nav-link" to="/bookings">Danh sách Đặt phòng</NavLink>
       <NavLink className="nav-link" to="/staffs">Danh sách Nhân viên</NavLink>
     </Nav>

@@ -21,7 +21,7 @@ const roomCategorySchema = new Schema(
     },
     locationId: {
       type: Schema.Types.ObjectId,
-      ref: Location, 
+      ref: Location,
       required: true,
     },
   },
@@ -30,6 +30,6 @@ const roomCategorySchema = new Schema(
   }
 );
 
-const RoomCategory = mongoose.model("RoomCategory", roomCategorySchema);
+const RoomCategories = mongoose.model("RoomCategories", roomCategorySchema);
 
-export default RoomCategory;
+export default RoomCategories;
