@@ -65,30 +65,19 @@ const getById = async (id) => {
 const edit = async (
   id,
   {
-    location,
+   
     code, 
-    name,
-    numOfBed,
-    numOfHuman,
-    image,
-    price,
-    description,
-    status
+    status,
+    roomCategoryId,
   }
 ) => {
   try {
     const updatedRoom = await Room.findByIdAndUpdate(
       { _id: id },
       {
-        location,
         code, 
-        name,
-        numOfBed,
-        numOfHuman,
-        image,
-        price,
-        description,
-        status
+        status,
+        roomCategoryId,
       },
       { new: true }
     );

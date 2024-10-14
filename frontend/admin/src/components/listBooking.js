@@ -14,6 +14,12 @@ const ListBooking = () => {
       .catch((error) => console.error("Error fetching bookings:", error));
   }, []);
 
+  // Helper function to format date
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <Container>
       <h2 className="text-center my-4">Danh sách Đặt phòng</h2>
@@ -22,18 +28,22 @@ const ListBooking = () => {
           <tr>
             <th>Mã Đặt phòng</th>
             <th>Tên Khách</th>
-            <th>Phòng</th>
+            <th>Tổng tiền</th>
             <th>Ngày Đặt</th>
+            <th>Checkin</th>
+            <th>Checkout</th>
             <th>Trạng Thái</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking) => (
-            <tr key={booking.id}>
-              <td>{booking.id}</td>
+            <tr key={booking._id}>
+              <td>{booking._id}</td>
               <td>{booking.customerName}</td>
-              <td>{booking.roomCode}</td>
-              <td>{booking.bookingDate}</td>
+              <td>{booking.price}</td>
+              <td>{formatDate(booking.createdAt)}</td> {/* Format createdAt */}
+              <td>{formatDate(booking.checkin)}</td>   {/* Format checkin */}
+              <td>{formatDate(booking.checkout)}</td>  {/* Format checkout */}
               <td>{booking.status}</td>
             </tr>
           ))}

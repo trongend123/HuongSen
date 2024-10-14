@@ -4,7 +4,7 @@ const bookingSchema = new mongoose.Schema({
     taxid: { type: mongoose.Schema.Types.ObjectId, ref: 'Tax', required: true },
     status: { type: String, required: true },
     payment: { type: String, required: true },
-    staffid: { type: mongoose.Schema.Types.ObjectId, ref: 'Staff', required: true },
+    staffid: { type: mongoose.Schema.Types.ObjectId, ref: 'Staff' },
     price: { type: Number, required: true },
     checkin: { type: Date, required: true },
     note: { type: String },

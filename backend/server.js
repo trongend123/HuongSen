@@ -6,27 +6,27 @@ import cors from "cors";
 import {
   ImageRouter,
   RoomRouter,
-  TourRouter,
+  // TourRouter,
   OtherServiceRouter,
   MenuRouter,
   LocationRouter,
-  IdentityCategoryRouter,
+  // IdentityCategoryRouter,
   IdentifycationRouter,
-  FeedbackRouter,
+  // FeedbackRouter,
   HistoryRoutes,
   TaxRouter,
   BookingRouter,
-  MemberRouter,
-  AvatarRouter,
+  // MemberRouter,
+  // AvatarRouter,
   CustomerRouter,
   StaffRouter,
-  VoucherRouter,
-  VoucherAccRouter, 
+  // VoucherRouter,
+  // VoucherAccRouter, 
   RoomCategoryRouter
 } from "./routes/index.js";
 //import { verifyAccessToken } from "./jwt_helper.js";
 import {loginUser, registerUser, verifyAccessToken} from "./authens/auth.js";
-import Avatar from "./models/avatar.js";
+// import Avatar from "./models/avatar.js";
 // Thực thi cấu hình ứng dụng sử dụng file .env
 dotenv.config();
 // Tạo đối tượng app để khởi tạo web container
@@ -40,22 +40,22 @@ app.get("/", (req, res) => {
 });
 app.use("/images", ImageRouter);
 app.use("/rooms", RoomRouter);
-app.use("/tours", TourRouter);
+// app.use("/tours", TourRouter);
 app.use("/otherservices", OtherServiceRouter);
 app.use("/menus", MenuRouter);
 app.use("/locations", LocationRouter);
-app.use("/avatars", AvatarRouter);
+// app.use("/avatars", AvatarRouter);
 app.use("/customers", CustomerRouter);
 app.use("/staffs", StaffRouter);
-app.use("/vouchers", VoucherRouter);
-app.use("/vouchersaccs", VoucherAccRouter);
-app.use("/identityCategorys", IdentityCategoryRouter);
+// app.use("/vouchers", VoucherRouter);
+// // app.use("/vouchersaccs", VoucherAccRouter);
+// app.use("/identityCategorys", IdentityCategoryRouter);
 app.use("/identifycations", IdentifycationRouter);
-app.use("/feedbacks", FeedbackRouter);
+// app.use("/feedbacks", FeedbackRouter);
 app.use("/histories", HistoryRoutes);
 app.use("/taxes", TaxRouter);
 app.use("/bookings", BookingRouter);
-app.use("/members", MemberRouter);
+// app.use("/members", MemberRouter);
 app.use("/staffs", StaffRouter);
 app.use("/roomCategories", RoomCategoryRouter);
 // Khai báo port cho ứng dụng web
