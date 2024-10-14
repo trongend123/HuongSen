@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "670732b92250999dda285fe4"
+  },
+  "fullname": "Nguyễn Trọng",
+  "email": "trong200920021@gmail.com",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2002-09-19T17:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hải Phòng",
+  "updatedAt": {
+    "$date": "2024-10-10T02:23:00.239Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670735142250999dda285fe7"
+  },
+  "fullname": "Nguyễn Ngọc Thế",
+  "email": "the3chp@gmail.com",
+  "phone": "0904091497",
+  "dob": {
+    "$date": "2002-09-19T17:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hải Phòng",
+  "updatedAt": {
+    "$date": "2024-10-10T07:51:46.798Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670735212250999dda285fe8"
+  },
+  "fullname": "Nguyễn Hiếu",
+  "email": "hieu20092002@gmail.com",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2002-09-19T17:00:00.000Z"
+  },
+  "gender": "Male",
+  "deactive": false
+}]

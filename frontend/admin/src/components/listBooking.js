@@ -9,10 +9,16 @@ const ListBooking = () => {
   useEffect(() => {
     // Fetch booking data
     axios
-      .get("http://localhost:9999/bookings")
+      .get("http://localhost:9999/orderRooms")
       .then((response) => setBookings(response.data))
       .catch((error) => console.error("Error fetching bookings:", error));
   }, []);
+
+  // Helper function to format date
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
   return (
     <Container>
@@ -22,19 +28,25 @@ const ListBooking = () => {
           <tr>
             <th>Mã Đặt phòng</th>
             <th>Tên Khách</th>
-            <th>Phòng</th>
+            <th>Tổng tiền</th>
             <th>Ngày Đặt</th>
+            <th>Checkin</th>
+            <th>Checkout</th>
+            <th>Thanh toán</th>
             <th>Trạng Thái</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking) => (
-            <tr key={booking.id}>
-              <td>{booking.id}</td>
-              <td>{booking.customerName}</td>
-              <td>{booking.roomCode}</td>
-              <td>{booking.bookingDate}</td>
-              <td>{booking.status}</td>
+            <tr key={booking._id}>
+              <td>{booking.bookingId._id}</td>
+              <td>{booking.customerId.fullname}</td>
+              <td>{(booking.quantity * booking.roomCateId.price)}</td>
+              <td>{formatDate(booking.createdAt)}</td> {/* Format createdAt */}
+              <td>{formatDate(booking.bookingId.checkin)}</td>   {/* Format checkin */}
+              <td>{formatDate(booking.bookingId.checkout)}</td>  {/* Format checkout */}
+              <td>{booking.bookingId.payment}</td>
+              <td>{booking.bookingId.status}</td>
             </tr>
           ))}
         </tbody>
