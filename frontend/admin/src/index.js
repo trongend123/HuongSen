@@ -1,28 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import ListRoom from './components/listRoom';
-import ListMenu from './components/listMenu';
 import ListStaff from './components/listStaff';
-import ListCustomer from './components/listCustomer';
-import CreateMenu from './components/CreateMenu'
+import Dashboard from './components/dashboard';
+import ListBooking from './components/listBooking';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './components/listRoom.css';
+import { Container } from 'react-bootstrap';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Sidebar from './components/sideBar'; // Import the Sidebar component
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <ListCustomer /> */}
-    <ListMenu />
-    {/* <ListStaff /> */}
-    {/* <ListRoom/> */}
-    {/* <CreateMenu /> */}
+    <Router>
+      <div className="main-layout">
+        <Sidebar /> {/* Use the Sidebar component here */}
+        <Container fluid className="content">
+          <Routes>
+            <Route path="/rooms" element={<ListRoom />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/bookings" element={<ListBooking />} />
+            <Route path="/staffs" element={<ListStaff />} />
+          </Routes>
+        </Container>
+      </div>
+    </Router>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

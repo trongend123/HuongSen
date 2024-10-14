@@ -1,39 +1,54 @@
 import Room from "../models/room.js";
 // Create
-const create = async ({
-  location,
-  code, 
-  name,
-  numOfBed,
-  numOfHuman,
-  image,
-  price,
-  description,
-  status
-}) => {
+// const create = async ({
+//   location,
+//   code, 
+//   name,
+//   numOfBed,
+//   numOfHuman,
+//   image,
+//   price,
+//   description,
+//   status
+// }) => {
+//   try {
+//     // Create new room
+//     const newRoom = await Room.create({
+//         location,
+//         code, 
+//         name,
+//         numOfBed,
+//         numOfHuman,
+//         image,
+//         price,
+//         description,
+//         status
+//     });
+//     // Return newRoom object
+//     return newRoom._doc;
+//   } catch (error) {
+//     throw new Error(error.toString());
+//   }
+// };
+// fix code create room
+const create = async (req, res) => {
   try {
-    // Create new room
-    const newRoom = await Room.create({
-        location,
-        code, 
-        name,
-        numOfBed,
-        numOfHuman,
-        image,
-        price,
-        description,
-        status
+    const roomData = req.body; // Extract room data from the request body
+    const newRoom = await Room.create(roomData); // Use the repository to create a room
+
+    res.status(201).json({
+      message: "Room created successfully",
+      room: newRoom,
     });
-    // Return newRoom object
-    return newRoom._doc;
   } catch (error) {
-    throw new Error(error.toString());
+    res.status(500).json({ message: error.toString() });
   }
 };
+
 // Get all rooms
 const list = async () => {
   try {
-    return await Room.find({}).exec();
+    return await Room.find({}).populate("roomCategoryId").exec();
   } catch (error) {
     throw new Error(error.toString());
   }

@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "numberOfBed": "2",
+  "numberOfHuman": "2",
+  "price": 400000,
+  "name": "phòng đôi",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  }
+},
+{
+  "_id": {
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "numberOfBed": "1",
+  "numberOfHuman": "2",
+  "price": 450000,
+  "name": "phòng VIP",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  }
+},
+{
+  "_id": {
+    "$oid": "670bd4dfe91d9d4f21e97b63"
+  },
+  "numberOfBed": "1",
+  "numberOfHuman": "1",
+  "price": 300000,
+  "name": "phòng đơn",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  }
+}]

@@ -21,9 +21,11 @@ import {
   CustomerRouter,
   StaffRouter,
   VoucherRouter,
-  VoucherAccRouter
+  VoucherAccRouter, 
+  RoomCategoryRouter
 } from "./routes/index.js";
-import { verifyAccessToken } from "./jwt_helper.js";
+//import { verifyAccessToken } from "./jwt_helper.js";
+import {loginUser, registerUser, verifyAccessToken} from "./authens/auth.js";
 import Avatar from "./models/avatar.js";
 // Thực thi cấu hình ứng dụng sử dụng file .env
 dotenv.config();
@@ -55,7 +57,20 @@ app.use("/taxes", TaxRouter);
 app.use("/bookings", BookingRouter);
 app.use("/members", MemberRouter);
 app.use("/staffs", StaffRouter);
+app.use("/roomCategories", RoomCategoryRouter);
 // Khai báo port cho ứng dụng web
+//authen
+// Register route
+app.post('/register', registerUser);
+
+// Login route
+app.post('/login', loginUser);
+
+// Protected route (requires a valid access token)
+app.get('/profile', verifyAccessToken, (req, res) => {
+  res.json({ message: `Hello, ${req.payload.aud}` });
+});
+
 const port = process.env.PORT || 8080;
 
 app.use(function (req, res, next) {
