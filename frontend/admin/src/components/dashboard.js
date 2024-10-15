@@ -3,6 +3,7 @@ import { Card, Container, Row, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
+import './dashboard.css';
 
 const Dashboard = () => {
   const [bookingData, setBookingData] = useState([]);
@@ -116,10 +117,10 @@ const Dashboard = () => {
 
   return (
     <Container>
-      <h2 className="text-center my-4">Bảng điều khiển</h2>
+      <h2 className="text-center my-4">Bảng thống kê</h2>
 
       {/* Year and Month Selectors */}
-      <Row className="mb-4">
+      <Row className="mb-4" style={{width:'500px'}}>
         <Col md={6}>
           <Form.Group controlId="yearSelect">
             <Form.Label>Chọn Năm</Form.Label>
@@ -149,7 +150,7 @@ const Dashboard = () => {
           </Form.Group>
         </Col>
       </Row>
-
+      <hr/>          
       {/* Summary Cards */}
       <Row>
         <Col>
@@ -181,29 +182,36 @@ const Dashboard = () => {
           </Card>
         </Col>
       </Row>
-
+      <hr/>                 
       {/* Individual Line Charts */}
       <Row className="mt-4">
-        <Col>
-          <h4 className="text-center">Tổng số đặt phòng theo thời gian</h4>
+        <Col lg={4}>
+        <Card className='chart'>
+          <h4 className="text-center">Tổng số đơn theo thời gian</h4>
           <Line data={bookingsChartData} />
+        </Card>
         </Col>
-      </Row>
-      <Row className="mt-4">
-        <Col>
+        <Col lg={4}>
+        <Card className='chart'>
           <h4 className="text-center">Tổng doanh thu theo thời gian</h4>
           <Line data={revenueChartData} />
+        </Card>
+        </Col>
+        <Col lg={4}>
+        <Card className='chart'>
+          <h4 className="text-center">Tổng số phòng theo thời gian</h4>
+          <Line data={ordersChartData} />
+        </Card>
         </Col>
       </Row>
       <Row className="mt-4">
-        <Col>
-          <h4 className="text-center">Tổng số đơn hàng theo thời gian</h4>
-          <Line data={ordersChartData} />
-        </Col>
+        
+      </Row>
+      <Row className="mt-4">
+        
       </Row>
     </Container>
   );
 };
 
 export default Dashboard;
-a
