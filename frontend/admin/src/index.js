@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/sideBar'; // Import the Sidebar component
+import CreateBookingByStaff from './components/createBookingByStaff';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,14 +19,18 @@ root.render(
     <Router>
       <div className="main-layout">
         <Sidebar /> {/* Use the Sidebar component here */}
-        <Container fluid className="content">
-          <Routes>
-            <Route path="/rooms" element={<ListRoom />} />
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/bookings" element={<ListBooking />} />
-            <Route path="/staffs" element={<ListStaff />} />
-            <Route path="/roomCate" element={<ListRoomCate />} />
-          </Routes>
+        <Container fluid className="content" style={{ padding: '0px' }}>
+          <div className="content-header"></div>
+          <div className="body">
+            <Routes>
+              <Route path="/rooms" element={<ListRoom />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/bookings" element={<ListBooking />} />
+              <Route path="/staffs" element={<ListStaff />} />
+              <Route path="/roomCate" element={<ListRoomCate />} />
+              <Route path="/createBooking" element={<CreateBookingByStaff />} />
+            </Routes>
+          </div>
         </Container>
       </div>
     </Router>

@@ -257,7 +257,7 @@ const ListRoomCate = () => {
                                 name="price"
                                 value={newRoomCategory.price}
                                 onChange={handleChange}
-                                min={0}
+                                min={1000}
                                 isInvalid={!!errors.price}
                             />
                             <Form.Control.Feedback type="invalid">{errors.price}</Form.Control.Feedback>

@@ -3,7 +3,7 @@ import RoomCategory from "../models/roomCategory.js";
 class RoomCategoryRepository {
   async findAll() {
     return await RoomCategory.find()
-      .populate('locationId') // Populate để lấy thông tin location
+      .populate('locationId', 'name') // Populate để lấy thông tin location
       .sort({ 'locationId': 1 }) // Sắp xếp theo tên location
       .exec();
   }
