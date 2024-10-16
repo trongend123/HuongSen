@@ -18,7 +18,7 @@ const CreateBookingByStaff = () => {
     });
 
     const [customerData, setCustomerData] = useState({
-        name: '',
+        fullname: '',
         email: '',
         phone: '',
         dob: '' // Add dob field here
@@ -35,10 +35,28 @@ const CreateBookingByStaff = () => {
     useEffect(() => {
         const fetchTaxesAndRoomCategories = async () => {
             try {
-                const taxResponse = await axios.get('http://localhost:9999/taxes/taxes');
+                const taxResponse = await axios.get('http://localhost:9999/taxes');
                 const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
+
+                const defaultTax = taxResponse.data.find(tax => tax.code === '000000');
+
+                if (defaultTax) {
+                    setBookingData(prevData => ({
+                        ...prevData,
+                        taxId: defaultTax._id
+                    }));
+                }
+
                 setTaxes(taxResponse.data);
                 setRoomCategories(roomCategoriesResponse.data);
+
+                // Set default quantity for each room category to 0
+                const initialQuantity = {};
+                roomCategoriesResponse.data.forEach(room => {
+                    initialQuantity[room._id] = 0; // Set default quantity to 0
+                });
+                setQuantity(initialQuantity); // Update the quantity state
+
             } catch (error) {
                 console.error('Error fetching taxes or room categories:', error);
             }
@@ -46,6 +64,7 @@ const CreateBookingByStaff = () => {
 
         fetchTaxesAndRoomCategories();
     }, []);
+
 
     const handleChange = (e) => {
         setBookingData({
@@ -72,38 +91,85 @@ const CreateBookingByStaff = () => {
         e.preventDefault();
         try {
             if (isUpdating && bookingId) {
-                const response = await axios.put(`http://localhost:9999/bookings/${bookingId}`, bookingData);
-                console.log('Booking updated:', response);
+                // Update booking and customer
+                const bookingResponse = await axios.put(`http://localhost:9999/bookings/${bookingId}`, bookingData);
+                const customerResponse = await axios.put(`http://localhost:9999/customers/${customerId}`, customerData);
+                console.log('Booking updated:', bookingResponse);
+                console.log('Customer updated:', customerResponse);
+
+                // Fetch and update room orders
+                const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
+
+                await handleRoomOrders(existingOrderRooms.data, customerId, bookingId);
             } else {
-                const response = await axios.post('http://localhost:9999/bookings', bookingData);
-                const responseC = await axios.post('http://localhost:9999/customers', customerData);
-                console.log('Customer created:', responseC);
-                console.log('Booking created:', response);
-                let bookingId = response.data._id;
-                let customerId = responseC.data._id;
-                setBookingId(bookingId);
-                setCustomerId(customerId);
+                // Create new customer and booking
+                const customerResponse = await axios.post('http://localhost:9999/customers', customerData);
+                const bookingResponse = await axios.post('http://localhost:9999/bookings', bookingData);
+
+                const newBookingId = bookingResponse.data._id;
+                const newCustomerId = customerResponse.data._id;
+
+                setBookingId(newBookingId);
+
+                setCustomerId(newCustomerId);
+
                 setIsUpdating(true);
                 setShowRoomCategories(true);
+                // Create room orders
+                await handleRoomOrders([], newCustomerId, newBookingId);
+                console.log('Room orders created successfully');
             }
         } catch (error) {
-            console.error('Error processing booking:', error);
+            console.error('Error processing booking or room orders:', error);
         }
     };
 
+    const handleRoomOrders = async (existingOrderRooms, cusId, bookId) => {
+
+        const orderRoomPromises = Object.entries(quantity).map(async ([roomCateId, qty]) => {
+            if (qty > 0) {
+                // Check if the room order exists, update or create accordingly
+                const existingOrderRoom = existingOrderRooms.find(orderRoom => orderRoom.roomCateId._id === roomCateId);
+                console.log(existingOrderRoom)
+
+                if (existingOrderRoom) {
+                    return axios.put(`http://localhost:9999/orderRooms/${existingOrderRoom._id}`, { quantity: qty });
+                } else {
+
+                    return axios.post('http://localhost:9999/orderRooms', {
+                        roomCateId,
+                        customerId: cusId,
+                        bookingId: bookId,
+                        quantity: qty
+                    });
+                }
+            } else if (qty == 0) {
+                // If quantity is 0, delete the order room if it exists
+                const existingOrderRoom = existingOrderRooms.find(orderRoom => orderRoom.roomCateId._id === roomCateId);
+                console.log(existingOrderRoom)
+                if (existingOrderRoom) {
+                    return axios.delete(`http://localhost:9999/orderRooms/${existingOrderRoom._id}`);
+                }
+            }
+            return null;
+        });
+
+        await Promise.all(orderRoomPromises);
+    };
+
     return (
-        <Container>
+        <Container className='mb-3'>
             <h2 className="my-4">{isUpdating ? 'Update Booking' : 'Create Booking by Staff'}</h2>
             <Form onSubmit={handleSubmit}>
                 {/* Customer Creation Form */}
                 <Row className="mb-3">
                     <Col>
-                        <Form.Group controlId="name">
-                            <Form.Label>Name</Form.Label>
+                        <Form.Group controlId="fullname">
+                            <Form.Label>Full Name</Form.Label>
                             <Form.Control
                                 type="text"
-                                name="name"
-                                value={customerData.name}
+                                name="fullname"
+                                value={customerData.fullname}
                                 onChange={handleCustomerChange}
                                 required
                             />
@@ -176,25 +242,6 @@ const CreateBookingByStaff = () => {
                             />
                         </Form.Group>
                     </Col>
-
-                    <Col>
-                        <Form.Group controlId="taxId">
-                            <Form.Label>Tax ID</Form.Label>
-                            <Form.Control
-                                as="select"
-                                name="taxId"
-                                value={bookingData.taxId || ''}
-                                onChange={handleChange}
-                            >
-                                <option value="">Chọn thuế</option>
-                                {taxes.map((tax) => (
-                                    <option key={tax._id} value={tax._id}>
-                                        {tax.name} ({tax.rate}%)
-                                    </option>
-                                ))}
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
                 </Row>
 
                 <Form.Group className="mb-3" controlId="note">
@@ -208,31 +255,30 @@ const CreateBookingByStaff = () => {
                     />
                 </Form.Group>
 
+
+                <Row className="mt-4">
+                    <h4>Room Categories</h4>
+                    {roomCategories.map((room) => (
+                        <Row key={room._id} className="mb-2">
+                            <Col xs={6}>{room.name} - {room.price} VND - {room.locationId.name}</Col>
+                            <Col xs={6}>
+                                <Form.Control
+                                    type="number"
+                                    placeholder="Số lượng"
+                                    value={quantity[room._id] || 0} // Set default value to 0
+                                    onChange={(e) => handleQuantityChange(e, room._id)}
+                                />
+                            </Col>
+                        </Row>
+                    ))}
+                </Row>
+
+
+
                 <Button variant="primary" type="submit">
                     {isUpdating ? 'Cập nhật dữ liệu' : 'Tạo mới dữ liệu'}
                 </Button>
             </Form>
-
-            {showRoomCategories && (
-                <Form>
-                    <div className="mt-4">
-                        <h4>Room Categories</h4>
-                        {roomCategories.map((room) => (
-                            <Row key={room._id} className="mb-2">
-                                <Col xs={6}>{room.name} - {room.price} VND - {room.locationId.name}</Col>
-                                <Col xs={6}>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Số lượng"
-                                        value={quantity[room._id] || ''}
-                                        onChange={(e) => handleQuantityChange(e, room._id)}
-                                    />
-                                </Col>
-                            </Row>
-                        ))}
-                    </div>
-                </Form>
-            )}
         </Container>
     );
 };

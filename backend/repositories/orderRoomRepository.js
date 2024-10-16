@@ -22,6 +22,14 @@ const OrderRoomRepository = {
       .populate('bookingId');
   },
 
+  // Lấy OrderRooms theo bookingId
+  findByBookingId: async (bookingId) => {
+    return await OrderRoom.find({ bookingId })
+      .populate('roomCateId')
+      .populate('customerId')
+      .populate('bookingId');
+  },
+
   // Cập nhật OrderRoom
   update: async (id, data) => {
     return await OrderRoom.findByIdAndUpdate(id, data, { new: true, runValidators: true })
