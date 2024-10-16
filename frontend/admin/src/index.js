@@ -20,7 +20,11 @@ root.render(
       <div className="main-layout">
         <Sidebar /> {/* Use the Sidebar component here */}
         <Container fluid className="content" style={{padding: '0px'}}> 
-        <div className="content-header"></div>
+        <div className="content-header">
+    <button className="change-password-button" onClick={() => window.location.href = "/change-password"}>
+        Change Password
+    </button>
+</div>
         <div className="body"><Routes>
             
             <Route path="/login" element={<Login />} />

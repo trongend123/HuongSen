@@ -25,9 +25,11 @@ export async function loginUser(req, res, next) {
     const user = await users.findOne({ username });
     if (!user) return next(createError.Unauthorized("User not found"));
 
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) return next(createError.Unauthorized("Invalid credentials"));
-
+    // Check the password without hashing
+    if (password !== user.password) {
+      return next(createError.Unauthorized("Invalid credentials"));
+    }
+    
     const accessToken = await signAccessToken(username);
     const refreshToken = await signRefreshToken(username);
     
@@ -38,24 +40,26 @@ export async function loginUser(req, res, next) {
 }
 
 // Function to change user password
-export async function changePassword(req, res, next) {
-  const { currentPassword, newPassword } = req.body;
-  const username = req.payload.username; // Get the username from the token payload
+// export async function changePassword(req, res, next) {
+//   const { currentPassword, newPassword } = req.body;
+//   const _id = req.params; // Get username from token payload
 
-  try {
-    const user = await users.findOne({ username });
-    if (!user) return next(createError.Unauthorized("User not found"));
+//   try {
+//     const user = await users.findOne({ _id });
+//     if (!user) return next(createError.Unauthorized("User not found"));
+//     console.log('user', user);
+//     // Check if the current password matches
+//     if (currentPassword !== user.password) {
+//       return next(createError.Unauthorized("Current password is incorrect"));
+//     }
 
-    const isValidPassword = await bcrypt.compare(currentPassword, user.password);
-    if (!isValidPassword) return next(createError.Unauthorized("Current password is incorrect"));
-
-    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedNewPassword; // Update the password
-    res.json({ message: 'Password changed successfully' });
-  } catch (error) {
-    next(createError.InternalServerError(error.message));
-  }
-}
+//     // Change password without hashing the new one
+//     user.password = newPassword; // Update the password
+//     res.json({ message: 'Password changed successfully' });
+//   } catch (error) {
+//     next(createError.InternalServerError(error.message));
+//   }
+// }
 
 // Sign access token function
 async function signAccessToken(userId) {
