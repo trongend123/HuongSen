@@ -11,6 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/sideBar'; // Import the Sidebar component
+import Login from './screens/Login/login';
+import ChangePassword from './screens/Change Password/changepass';
 import CreateBookingByStaff from './components/createBookingByStaff';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -23,6 +25,9 @@ root.render(
           <div className="content-header"></div>
           <div className="body">
             <Routes>
+
+              <Route path="/login" element={<Login />} />
+              <Route path='/change-password' element={<ChangePassword />} />
               <Route path="/rooms" element={<ListRoom />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/bookings" element={<ListBooking />} />

@@ -26,7 +26,7 @@ import {
   OrderRoomRouter
 } from "./routes/index.js";
 //import { verifyAccessToken } from "./jwt_helper.js";
-import { loginUser, registerUser, verifyAccessToken } from "./authens/auth.js";
+import { changePassword, loginUser, registerUser, verifyAccessToken } from "./authens/auth.js";
 // import Avatar from "./models/avatar.js";
 // Thực thi cấu hình ứng dụng sử dụng file .env
 dotenv.config();
@@ -67,7 +67,7 @@ app.post('/register', registerUser);
 
 // Login route
 app.post('/login', loginUser);
-
+app.put('/change-password', changePassword);
 // Protected route (requires a valid access token)
 app.get('/profile', verifyAccessToken, (req, res) => {
   res.json({ message: `Hello, ${req.payload.aud}` });
