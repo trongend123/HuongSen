@@ -79,7 +79,7 @@ const customerSchema = new Schema(
     },
     address: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   {

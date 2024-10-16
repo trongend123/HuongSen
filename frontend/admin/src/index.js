@@ -4,6 +4,7 @@ import './index.css';
 import ListRoom from './components/listRoom';
 import ListStaff from './components/listStaff';
 import Dashboard from './components/dashboard';
+import ListRoomCate from './components/listRoomCate';
 import ListBooking from './components/listBooking';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,6 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/sideBar'; // Import the Sidebar component
 import Login from './screens/Login/login';
 import ChangePassword from './screens/Change Password/changepass';
+import CreateBookingByStaff from './components/createBookingByStaff';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,17 +21,21 @@ root.render(
     <Router>
       <div className="main-layout">
         <Sidebar /> {/* Use the Sidebar component here */}
-        <Container fluid className="content" style={{padding: '0px'}}> 
-        <div className="content-header"></div>
-        <div className="body"><Routes>
-            
-            <Route path="/login" element={<Login />} />
-            <Route path='/change-password' element={<ChangePassword />} />
-            <Route path="/rooms" element={<ListRoom />} />
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/bookings" element={<ListBooking />} />
-            <Route path="/staffs" element={<ListStaff />} />
-          </Routes></div>
+        <Container fluid className="content" style={{ padding: '0px' }}>
+          <div className="content-header"></div>
+          <div className="body">
+            <Routes>
+
+              <Route path="/login" element={<Login />} />
+              <Route path='/change-password' element={<ChangePassword />} />
+              <Route path="/rooms" element={<ListRoom />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/bookings" element={<ListBooking />} />
+              <Route path="/staffs" element={<ListStaff />} />
+              <Route path="/roomCate" element={<ListRoomCate />} />
+              <Route path="/createBooking" element={<CreateBookingByStaff />} />
+            </Routes>
+          </div>
         </Container>
       </div>
     </Router>
