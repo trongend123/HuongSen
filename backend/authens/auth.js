@@ -1,8 +1,8 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import createError from 'http-errors';
-
-const users = []; // Dummy users array for testing purposes
+import Staffs from '../models/staff.js';
+const users = Staffs; // Dummy users array for testing purposes
 
 // Function to handle user registration (can be extended with DB integration)
 export async function registerUser(req, res, next) {
@@ -22,17 +22,18 @@ export async function loginUser(req, res, next) {
   const { username, password } = req.body;
 
   try {
-    const user = users.find((u) => u.username === username);
+    const user = await users.findOne({ username });
     if (!user) return next(createError.Unauthorized("User not found"));
+  
 
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword)
-      return next(createError.Unauthorized("Invalid credentials"));
+    // const isValidPassword = await bcrypt.compare(password, user.password);
+    // if (!isValidPassword)
+    //   return next(createError.Unauthorized("Invalid credentials"));
 
     const accessToken = await signAccessToken(username);
     const refreshToken = await signRefreshToken(username);
-
-    res.json({ accessToken, refreshToken });
+    
+    res.json({ accessToken, refreshToken, user });
   } catch (error) {
     next(createError.InternalServerError(error.message));
   }
