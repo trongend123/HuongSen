@@ -1,126 +1,188 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Form } from 'react-bootstrap';
+import { Container, Form, Modal, Button, Row, Col, Card } from 'react-bootstrap';
 import './listRoom.css';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { DoSonRooms, CatBaRooms } from './rooms'; // Import child components
 
-// Component Room để hiển thị thông tin mỗi phòng
-const Room = ({ room }) => {
-  // Tạo một biến để xác định màu nền dựa vào isAvailable
-  const roomCardStyle = {
-    backgroundColor: 
-      room.status === 'Trống' ? '#d3d3d3' :
-      room.status === 'Đã book' ? 'yellow' :
-      room.status === 'Đang sử dụng' ? 'red' : 'white',
-    
-    color: room.status === 'Đang sử dụng' ? 'white' : 'black',
-  };
-
-  return (
-    <Card style={roomCardStyle} className="room-card">
-      <p>{room.code}</p>
-      <p>{room.roomCategoryId.name}</p>
-    </Card>
-  );
-};
-
-// App component sử dụng RoomList
-const ListRoom = () => {  
+const ListRoom = () => {
   const [roomData, setRoomData] = useState([]);
   const [locations, setLocation] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(''); // To store selected category
+  const [categories, setCategories] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [selectedRoom, setSelectedRoom] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [updatedCategory, setUpdatedCategory] = useState('');
+  const [updatedStatus, setUpdatedStatus] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch room data
     axios
-      .get("http://localhost:9999/rooms")
+      .get('http://localhost:9999/rooms')
       .then((response) => setRoomData(response.data))
-      .catch((error) => console.error("Error fetching room data:", error));
+      .catch((error) => console.error('Error fetching room data:', error));
 
-    // Fetch room categories (assuming you have an API to get this data)
     axios
-      .get("http://localhost:9999/locations")
+      .get('http://localhost:9999/locations')
       .then((response) => setLocation(response.data))
-      .catch((error) => console.error("Error fetching room categories:", error));
+      .catch((error) => console.error('Error fetching locations:', error));
+
+    axios
+      .get('http://localhost:9999/roomCategories')
+      .then((response) => setCategories(response.data))
+      .catch((error) => console.error('Error fetching room categories:', error));
   }, []);
 
-  // Filter room data based on selected category
   const filteredRooms = selectedLocation
     ? roomData.filter((room) => room.roomCategoryId.locationId === selectedLocation)
     : roomData;
 
   // Count rooms by status
-  const statusCount = filteredRooms.reduce(
-    (acc, room) => {
-      if (room.status === 'Trống') acc.available += 1;
-      if (room.status === 'Đã book') acc.booked += 1;
-      if (room.status === 'Đang sử dụng') acc.inUse += 1;
-      return acc;
-    },
-    { available: 0, booked: 0, inUse: 0 } // Initialize counts to 0
-  );
+  const countRoomsByStatus = (rooms) => {
+    const counts = { available: 0, booked: 0, inUse: 0 };
 
-  // Chia filteredRooms thành các hàng, mỗi hàng có số phòng cố định
-  const floor5 = filteredRooms.slice(0, 15);
-  const floor4 = filteredRooms.slice(15, 29);
-  const floor3 = filteredRooms.slice(29, 41);
-  const floor2 = filteredRooms.slice(41, 51);
-  const floor1 = filteredRooms.slice(51, 67);
+    rooms.forEach((room) => {
+      if (room.status === 'Trống') counts.available++;
+      if (room.status === 'Đã book') counts.booked++;
+      if (room.status === 'Đang sử dụng') counts.inUse++;
+    });
+
+    return counts;
+  };
+
+  const roomCounts = countRoomsByStatus(filteredRooms);
+
+  const handleRoomClick = (room) => {
+    setSelectedRoom(room);
+    setUpdatedCategory(room.roomCategoryId._id);
+    setUpdatedStatus(room.status);
+    setShowModal(true);
+  };
+
+  const handleUpdate = () => {
+    const updatedRoom = {
+      ...selectedRoom,
+      roomCategoryId: updatedCategory,
+      status: updatedStatus,
+    };
+
+    axios
+      .put(`http://localhost:9999/rooms/${selectedRoom._id}`, updatedRoom)
+      .then((response) => {
+        axios
+          .get('http://localhost:9999/rooms')
+          .then((res) => setRoomData(res.data))
+          .catch((error) => console.error('Error fetching updated room data:', error));
+
+        setShowModal(false);
+      })
+      .catch((error) => console.error('Error updating room:', error));
+  };
+
+  const handleClose = () => setShowModal(false);
 
   return (
     <Container>
-      <h2 className="text-center my-4">Sơ đồ phòng</h2>
+      <h2 className="text-center my-4">Sơ đồ phòng và tình trạng phòng</h2>
 
-      {/* Dropdown for filtering by room category */}
-      <Form.Group controlId="categorySelect" className="my-4">
+      <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
         <Form.Label>Chọn cơ sở:</Form.Label>
-        <Form.Control 
-          as="select" 
-          value={selectedLocation} 
+        <Form.Control
+          as="select"
+          value={selectedLocation}
           onChange={(e) => setSelectedLocation(e.target.value)}
         >
           <option value="">Chọn cơ sở</option>
-          {locations.map((location) => (
-            <option key={location._id} value={location._id}>
-              {location.name}
-            </option>
-          ))}
+          <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
+          <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
+          <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
         </Form.Control>
       </Form.Group>
 
-      {/* Display room counts by status */}
-      <div className="room-status-counts mb-4">
-        <p><strong>Trống:</strong> {statusCount.available}</p>
-        <p><strong>Đã book:</strong> {statusCount.booked}</p>
-        <p><strong>Đang sử dụng:</strong> {statusCount.inUse}</p>
-      </div>
+      {/* Display Room Status Counts */}
+      
+      <Row>
+        <Col>
+          <Card className="text-center">
+            <Card.Body>
+              <Card.Title>Tổng số phòng trống</Card.Title>
+              <Card.Text>{roomCounts.available}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col>
+          <Card className="text-center">
+            <Card.Body>
+              <Card.Title>Tổng số phòng được đặt</Card.Title>
+              <Card.Text>
+              {roomCounts.booked}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col>
+          <Card className="text-center">
+            <Card.Body>
+              <Card.Title>Tổng số phòng đang sử dụng</Card.Title>
+              <Card.Text>{roomCounts.inUse}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      {/* Conditionally Render Room Components Based on Selected Location */}
+      {selectedLocation === '66f6c536285571f28087c16b' && (
+        <DoSonRooms rooms={filteredRooms} onClick={handleRoomClick} />
+      )}
+      {selectedLocation === '66f6c59f285571f28087c16d' && (
+        <CatBaRooms rooms={filteredRooms} onClick={handleRoomClick} />
+      )}
 
-      <div className="room-layout">      
-        <div className="room-row" style={{ marginLeft: '240px' }}>
-          {floor1.map((room) => (
-            <Room key={room.id} room={room} />
-          ))}
-        </div>
-        <div className="room-row" style={{ marginLeft: '80px' }}>
-          {floor2.map((room) => (
-            <Room key={room.id} room={room} />
-          ))}
-        </div>
-        <div className="room-row">
-          {floor3.map((room) => (
-            <Room key={room.id} room={room} />
-          ))}
-        </div>
-        <div className="room-row">
-          {floor4.map((room) => (
-            <Room key={room.id} room={room} />
-          ))}
-        </div>
-        <div className="room-row">
-          {floor5.map((room) => (
-            <Room key={room.id} room={room} />
-          ))}
-        </div>
-      </div>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Cập nhật thông tin phòng</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedRoom && (
+            <>
+              <Form.Group controlId="categorySelect">
+                <Form.Label>Loại phòng:</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={updatedCategory}
+                  onChange={(e) => setUpdatedCategory(e.target.value)}
+                >
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+
+              <Form.Group controlId="statusSelect" className="mt-3">
+                <Form.Label>Trạng thái phòng:</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={updatedStatus}
+                  onChange={(e) => setUpdatedStatus(e.target.value)}
+                >
+                  <option value="Trống">Trống</option>
+                  <option value="Đã book">Đã book</option>
+                  <option value="Đang sử dụng">Đang sử dụng</option>
+                </Form.Control>
+              </Form.Group>
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Đóng
+          </Button>
+          <Button variant="primary" onClick={handleUpdate}>
+            Cập nhật
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

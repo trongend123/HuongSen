@@ -13,7 +13,7 @@ const StaffAccount = ({ staff, onDelete }) => {
       <td>{staff.role}</td>
       <td>
         <Button variant="warning" size="sm" className="mx-1">Chỉnh sửa</Button>
-        <Button variant="danger" size="sm" onClick={() => onDelete(staff.id)}>Xóa</Button>
+        <Button variant="danger" size="sm" onClick={() => onDelete(staff._id)}>Xóa</Button>
       </td>
     </tr>
   );
@@ -39,7 +39,7 @@ const ListStaffAccount = () => {
       .delete(`http://localhost:9999/staffs/${id}`)
       .then(() => {
         // Cập nhật lại danh sách sau khi xóa
-        setStaffData(staffData.filter(staff => staff.id !== id));
+        setStaffData(staffData.filter(staff => staff._id !== id));
       })
       .catch((error) => console.error("Error deleting staff:", error));
   };
@@ -94,7 +94,7 @@ const ListStaffAccount = () => {
         </thead>
         <tbody>
           {filteredStaffData.map((staff) => (
-            <StaffAccount key={staff.id} staff={staff} onDelete={handleDelete} />
+            <StaffAccount key={staff._id} staff={staff} onDelete={handleDelete} />
           ))}
         </tbody>
       </Table>

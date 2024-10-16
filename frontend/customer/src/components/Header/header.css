@@ -1,0 +1,13 @@
+.header-container {
+    background-color: #0b2727;
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  .header-container p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: bold;
+  }
+  
