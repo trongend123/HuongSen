@@ -4,7 +4,7 @@ import createError from 'http-errors';
 import Staffs from '../models/staff.js';
 const users = Staffs; // Dummy users array for testing purposes
 
-// Function to handle user registration (can be extended with DB integration)
+
 export async function registerUser(req, res, next) {
   const { username, password } = req.body;
 
@@ -26,14 +26,38 @@ export async function loginUser(req, res, next) {
     if (!user) return next(createError.Unauthorized("User not found"));
   
 
+
     // const isValidPassword = await bcrypt.compare(password, user.password);
     // if (!isValidPassword)
     //   return next(createError.Unauthorized("Invalid credentials"));
-
+    if (password !== user.password) {
+      return next(createError.Unauthorized("Invalid credentials"));
+    }
     const accessToken = await signAccessToken(username);
     const refreshToken = await signRefreshToken(username);
     
     res.json({ accessToken, refreshToken, user });
+
+  } catch (error) {
+    next(createError.InternalServerError(error.message));
+  }
+}
+
+// Function to change user password
+export async function changePassword(req, res, next) {
+  const { currentPassword, newPassword } = req.body;
+  const username = req.payload.username; // Get the username from the token payload
+
+  try {
+    const user = await users.findOne({ username });
+    if (!user) return next(createError.Unauthorized("User not found"));
+
+    const isValidPassword = await bcrypt.compare(currentPassword, user.password);
+    if (!isValidPassword) return next(createError.Unauthorized("Current password is incorrect"));
+
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedNewPassword; // Update the password
+    res.json({ message: 'Password changed successfully' });
   } catch (error) {
     next(createError.InternalServerError(error.message));
   }
@@ -42,7 +66,7 @@ export async function loginUser(req, res, next) {
 // Sign access token function
 async function signAccessToken(userId) {
   return new Promise((resolve, reject) => {
-    const payload = {};
+    const payload = { username: userId }; // Include username in the payload
     const secret = process.env.ACCESS_TOKEN_SECRET;
     const options = {
       expiresIn: '3h',
@@ -91,11 +115,10 @@ export function verifyAccessToken(req, res, next) {
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
     if (err) {
-      const message =
-        err.name === 'JsonWebTokenError' ? 'Unauthorized' : err.message;
+      const message = err.name === 'JsonWebTokenError' ? 'Unauthorized' : err.message;
       return next(createError.Unauthorized(message));
     }
-    req.payload = payload;
+    req.payload = payload; // Attach the payload to the request
     next();
   });
 }

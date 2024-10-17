@@ -50,7 +50,7 @@ const ListBooking = () => {
     };
 
     axios
-      .put(`http://localhost:9999/orderRooms/${selectedBooking._id}`, updatedBooking)
+      .put(`http://localhost:9999/bookings/${selectedBooking.bookingId._id}`, updatedBooking.bookingId)
       .then((response) => {
         setBookings((prevBookings) =>
           prevBookings.map((booking) =>
@@ -63,13 +63,14 @@ const ListBooking = () => {
   };
 
   // Handle cancel booking (set status to "Cancelled")
-  const handleCancelClick = (bookingId) => {
+  const handleCancelClick = (booking) => {
+    booking.status = "Cancelled";
+
+    const bookingId = booking._id;
     axios
-      .put(`http://localhost:9999/orderRooms/${bookingId}`, {
-        bookingId: {
-          status: 'Cancelled'
-        }
-      })
+      .put(`http://localhost:9999/bookings/${bookingId}`, 
+       booking
+      )
       .then((response) => {
         setBookings((prevBookings) =>
           prevBookings.map((booking) =>
@@ -79,6 +80,7 @@ const ListBooking = () => {
       })
       .catch((error) => console.error("Error cancelling booking:", error));
   };
+ 
 
   // Filter bookings based on search query
   const filteredBookings = bookings.filter((booking) => {
@@ -141,7 +143,7 @@ const ListBooking = () => {
                     </Button>
                     <Button
                       variant="danger"
-                      onClick={() => handleCancelClick(booking._id)}
+                      onClick={() => handleCancelClick(booking.bookingId)}
                     >
                       Hủy
                     </Button>

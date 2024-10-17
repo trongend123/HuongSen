@@ -28,9 +28,10 @@ class BookingRepository {
     // Cập nhật booking theo ID
     async updateBooking(id, data) {
         return await Booking.findByIdAndUpdate(id, data, { new: true, runValidators: true })
-            .populate('taxid')
-            .populate('staffid')
+            .populate('taxId')
+            .populate('staffId')
             .exec();
+            
     }
 
     // Xóa booking theo ID
