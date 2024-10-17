@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
 
 const CreateBookingByStaff = () => {
+    const navigate = useNavigate(); // Initialize navigate
     const today = new Date().toISOString().split('T')[0];
     const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0];
 
@@ -28,9 +30,6 @@ const CreateBookingByStaff = () => {
     const [taxes, setTaxes] = useState([]);
     const [roomCategories, setRoomCategories] = useState([]);
     const [quantity, setQuantity] = useState({});
-    const [bookingId, setBookingId] = useState(null);
-    const [customerId, setCustomerId] = useState(null);
-    const [isUpdating, setIsUpdating] = useState(false);
     const [totalAmount, setTotalAmount] = useState(0);
 
     useEffect(() => {
@@ -187,83 +186,38 @@ const CreateBookingByStaff = () => {
                 price: totalPrice,
             }));
 
-            if (isUpdating && bookingId) {
-                await axios.put(`http://localhost:9999/bookings/${bookingId}`, { ...bookingData, price: totalPrice });
-                await axios.put(`http://localhost:9999/customers/${customerId}`, customerData);
+            const customerResponse = await axios.post('http://localhost:9999/customers', customerData);
+            const bookingResponse = await axios.post('http://localhost:9999/bookings', { ...bookingData, price: totalPrice });
 
-                const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
-                await handleRoomOrders(existingOrderRooms.data, customerId, bookingId);
-            } else {
-                const customerResponse = await axios.post('http://localhost:9999/customers', customerData);
-                const bookingResponse = await axios.post('http://localhost:9999/bookings', { ...bookingData, price: totalPrice });
+            const newBookingId = bookingResponse.data._id;
+            const newCustomerId = customerResponse.data._id;
 
-                const newBookingId = bookingResponse.data._id;
-                const newCustomerId = customerResponse.data._id;
+            const orderRoomPromises = Object.entries(quantity).map(async ([roomCateId, qty]) => {
+                if (qty > 0) {
+                    return axios.post('http://localhost:9999/orderRooms', {
+                        roomCateId,
+                        customerId: newCustomerId,
+                        bookingId: newBookingId,
+                        quantity: qty
+                    });
+                }
+            });
 
-                setBookingId(newBookingId);
-                setCustomerId(newCustomerId);
+            await Promise.all(orderRoomPromises);
 
-                setIsUpdating(true);
+            console.log('Booking and room orders created successfully');
 
-                await handleRoomOrders([], newCustomerId, newBookingId);
-            }
+            // Redirect to bookings list page
+            navigate('/bookings');
+
         } catch (error) {
             console.error('Error processing booking or room orders:', error);
         }
     };
 
-    const handleRoomOrders = async (existingOrderRooms, cusId, bookId) => {
-        const orderRoomPromises = Object.entries(quantity).map(async ([roomCateId, qty]) => {
-            if (qty > 0) {
-                const existingOrderRoom = existingOrderRooms.find(orderRoom => orderRoom.roomCateId._id === roomCateId);
-                if (existingOrderRoom) {
-                    return axios.put(`http://localhost:9999/orderRooms/${existingOrderRoom._id}`, { quantity: qty });
-                } else {
-                    return axios.post('http://localhost:9999/orderRooms', {
-                        roomCateId,
-                        customerId: cusId,
-                        bookingId: bookId,
-                        quantity: qty
-                    });
-                }
-            } else if (qty == 0) {
-                const existingOrderRoom = existingOrderRooms.find(orderRoom => orderRoom.roomCateId._id === roomCateId);
-                if (existingOrderRoom) {
-                    return axios.delete(`http://localhost:9999/orderRooms/${existingOrderRoom._id}`);
-                }
-            }
-            return null;
-        });
-
-        await Promise.all(orderRoomPromises);
-    };
-
-    const handleDeleteAll = async () => {
-        try {
-            if (bookingId) {
-                const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
-                const deleteOrderRoomPromises = existingOrderRooms.data.map(orderRoom => {
-                    return axios.delete(`http://localhost:9999/orderRooms/${orderRoom._id}`);
-                });
-                await Promise.all(deleteOrderRoomPromises);
-
-                await axios.delete(`http://localhost:9999/bookings/${bookingId}`);
-                await axios.delete(`http://localhost:9999/customers/${customerId}`);
-
-                setBookingId(null);
-                setCustomerId(null);
-                setIsUpdating(false);
-
-                console.log('Booking, customer, and related order rooms deleted successfully');
-            }
-        } catch (error) {
-            console.error('Error deleting booking, customer, or order rooms:', error);
-        }
-    };
-
     return (
         <Container className='mb-3'>
-            <h2 className="my-4">{isUpdating ? 'Update Booking' : 'Create Booking by Staff'}</h2>
+            <h2 className="my-4">Create Booking by Staff</h2>
             <Form onSubmit={handleSubmit}>
                 {/* Customer Creation Form */}
                 <Row className="mb-3">
@@ -327,12 +281,17 @@ const CreateBookingByStaff = () => {
                                 value={customerData.dob}
                                 onChange={handleCustomerChange}
                                 isInvalid={!!errors.dob}
+                                required
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.dob}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Col>
+                </Row>
+
+                {/* Booking Information Form */}
+                <Row className="mb-3">
                     <Col>
                         <Form.Group controlId="checkin">
                             <Form.Label>Check-in Date</Form.Label>
@@ -342,6 +301,7 @@ const CreateBookingByStaff = () => {
                                 value={bookingData.checkin}
                                 onChange={handleChange}
                                 isInvalid={!!errors.checkin}
+                                required
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.checkin}
@@ -357,6 +317,7 @@ const CreateBookingByStaff = () => {
                                 value={bookingData.checkout}
                                 onChange={handleChange}
                                 isInvalid={!!errors.checkout}
+                                required
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.checkout}
@@ -365,14 +326,14 @@ const CreateBookingByStaff = () => {
                     </Col>
                 </Row>
 
-                {/* Room Selection Form */}
+                {/* Room Category and Quantity Form */}
                 <h4>Room Selection</h4>
-                {roomCategories.map((room) => (
+                {roomCategories.map(room => (
                     <Row key={room._id} className="mb-3">
-                        <Col className='col-6'>
-                            <Form.Label>{room.name} - {room.price} VND - {room.locationId.name}</Form.Label>
+                        <Col>
+                            <Form.Label>{room.name} (Price: {room.price} VND) - {room.locationId.name}</Form.Label>
                         </Col>
-                        <Col className='col-2'>
+                        <Col>
                             <Form.Control
                                 type="number"
                                 min="0"
@@ -382,41 +343,17 @@ const CreateBookingByStaff = () => {
                         </Col>
                     </Row>
                 ))}
-                {/* Display room selection error */}
-                {errors.roomSelection && (
-                    <div className="text-danger mb-3">{errors.roomSelection}</div>
-                )}
+                {errors.roomSelection && <p className="text-danger">{errors.roomSelection}</p>}
 
-                {/* Other Booking Info */}
+                {/* Total Price */}
                 <Row className="mb-3">
                     <Col>
-                        <Form.Group controlId="note">
-                            <Form.Label>Note</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                name="note"
-                                value={bookingData.note}
-                                onChange={handleChange}
-                                rows={3}
-                            />
-                        </Form.Group>
+                        <h5>Total Amount: {totalAmount}</h5>
                     </Col>
-
                 </Row>
 
-                {/* Display Total Amount */}
-                <h4>Total Amount: {totalAmount.toLocaleString()} VND</h4>
-
-                <Button variant="primary" type="submit">
-                    {isUpdating ? 'Update Booking' : 'Create Booking'}
-                </Button>
-                {
-                    isUpdating && (
-                        <Button variant="danger" className="ml-3" onClick={handleDeleteAll}>
-                            Delete Booking
-                        </Button>
-                    )
-                }
+                {/* Submit Button */}
+                <Button type="submit" variant="primary">Create Booking</Button>
             </Form>
         </Container>
     );
