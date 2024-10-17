@@ -30,7 +30,7 @@ const ListRoomCate = () => {
         name: '',
         numberOfBed: 1,
         numberOfHuman: 1,
-        price: 0,
+        price: 1000,
         locationId: '', // Location ID will be selected
     });
     const [errors, setErrors] = useState({});
@@ -67,8 +67,8 @@ const ListRoomCate = () => {
         if (newRoomCategory.numberOfHuman < 1) {
             newErrors.numberOfHuman = "Số người phải lớn hơn 0.";
         }
-        if (newRoomCategory.price < 0) {
-            newErrors.price = "Giá không thể âm.";
+        if (newRoomCategory.price < 1000) {
+            newErrors.price = "Giá không thể dưới 1.000 VND.";
         }
         if (!newRoomCategory.locationId) {
             newErrors.locationId = "Vui lòng chọn chi nhánh.";
