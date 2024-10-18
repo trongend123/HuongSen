@@ -32,21 +32,47 @@ const CreateBookingByStaff = () => {
     const [quantity, setQuantity] = useState({});
     const [totalAmount, setTotalAmount] = useState(0);
 
+    const [totalRoomsByCategory, setTotalRoomsByCategory] = useState([]);
+    const [remainingRooms, setRemainingRooms] = useState({}); // Khởi tạo state để lưu số phòng còn lại
+
+    useEffect(() => {
+        const fetchRoomData = async () => {
+            try {
+                // Gọi hàm để lấy tổng số phòng theo từng loại
+                const totalRoomsResponse = await axios.get('http://localhost:9999/rooms/category/totals');
+                setTotalRoomsByCategory(totalRoomsResponse.data.categoryTotals); // Sử dụng categoryTotals
+
+                // Gọi hàm để lấy số phòng đã đặt
+                const bookedRoomsResponse = await axios.get(`http://localhost:9999/orderRooms/totalbycategory/?checkInDate=${bookingData.checkin}&checkOutDate=${bookingData.checkout}`);
+                const bookedRoomsMap = {};
+
+                // Chuyển đổi dữ liệu thành dạng object để dễ truy cập
+                bookedRoomsResponse.data.forEach(item => {
+                    bookedRoomsMap[item.roomCateId] = item.totalRooms;
+                });
+
+                const initialRemainingRooms = {};
+                totalRoomsResponse.data.categoryTotals.forEach(room => { // Đảm bảo sử dụng đúng cấu trúc dữ liệu
+                    const totalRooms = room.totalRooms; // Lấy tổng số phòng ban đầu
+                    const bookedRooms = bookedRoomsMap[room.roomCateId] || 0; // Lấy số phòng đã đặt
+                    initialRemainingRooms[room.roomCateId] = totalRooms - bookedRooms; // Tính số phòng còn lại
+                });
+
+                setRemainingRooms(initialRemainingRooms); // Cập nhật state với số phòng còn lại
+            } catch (error) {
+                console.error('Error fetching room data:', error);
+            }
+        };
+
+        fetchRoomData();
+    }, [bookingData.checkin, bookingData.checkout]);
+
+
     useEffect(() => {
         const fetchTaxesAndRoomCategories = async () => {
             try {
                 const taxResponse = await axios.get('http://localhost:9999/taxes');
                 const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
-
-                const defaultTax = taxResponse.data.find(tax => tax.code === '000000');
-
-                if (defaultTax) {
-                    setBookingData(prevData => ({
-                        ...prevData,
-                        taxId: defaultTax._id
-                    }));
-                }
-
                 setTaxes(taxResponse.data);
                 setRoomCategories(roomCategoriesResponse.data);
 
@@ -72,9 +98,10 @@ const CreateBookingByStaff = () => {
     };
 
     const handleQuantityChange = (e, roomId) => {
+        const value = Math.max(0, Math.min(e.target.value, remainingRooms[roomId] || 0)); // Ensure the value is between 0 and remainingRooms
         setQuantity({
             ...quantity,
-            [roomId]: e.target.value
+            [roomId]: value
         });
     };
 
@@ -155,6 +182,7 @@ const CreateBookingByStaff = () => {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+
 
 
     const handleSubmit = async (e) => {
@@ -328,21 +356,29 @@ const CreateBookingByStaff = () => {
 
                 {/* Room Category and Quantity Form */}
                 <h4>Room Selection</h4>
-                {roomCategories.map(room => (
-                    <Row key={room._id} className="mb-3">
-                        <Col>
-                            <Form.Label>{room.name} (Price: {room.price} VND) - {room.locationId.name}</Form.Label>
-                        </Col>
-                        <Col>
-                            <Form.Control
-                                type="number"
-                                min="0"
-                                value={quantity[room._id] || 0}
-                                onChange={(e) => handleQuantityChange(e, room._id)}
-                            />
-                        </Col>
-                    </Row>
-                ))}
+                {roomCategories.map(room => {
+                    const totalRoomData = totalRoomsByCategory.find(r => r.roomCateId === room._id); // Find total room information
+                    const remainingRoomCount = remainingRooms[room._id] || 0; // Get remaining room count
+
+                    return (
+                        <Row key={room._id} className="mb-3">
+                            <Col className='col-5'>
+                                <Form.Label>{room.name} (Price: {room.price} VND) - {room.locationId.name}</Form.Label>
+                                <p><strong>Số phòng còn lại:</strong> {remainingRoomCount} / {totalRoomData ? totalRoomData.totalRooms : 0}</p> {/* Display remaining rooms */}
+                            </Col>
+                            <Col className='col-2'>
+                                <Form.Control
+                                    type="number"
+                                    min="0"
+                                    max={remainingRoomCount} // Limit input to max remaining rooms
+                                    value={quantity[room._id] || 0}
+                                    onChange={(e) => handleQuantityChange(e, room._id)}
+                                    required
+                                />
+                            </Col>
+                        </Row>
+                    );
+                })}
                 {errors.roomSelection && <p className="text-danger">{errors.roomSelection}</p>}
 
                 {/* Total Price */}

@@ -8,6 +8,10 @@ roomRouter.get("/", RoomController.getRooms);
 
 // GET: /rooms/:id -> Get room by Id
 roomRouter.get("/:id", RoomController.getRoomById);
+roomRouter.get("/category/totals", RoomController.getTotalRoomsByCategory);
+
+// GET: /rooms/category/:roomCategoryId
+roomRouter.get("/category/:roomCategoryId", RoomController.getRoomsInCategory);
 
 // POST: /rooms -> Create a new room
 roomRouter.post("/", RoomController.createRoom);
