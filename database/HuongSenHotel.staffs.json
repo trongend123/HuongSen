@@ -7,7 +7,8 @@
   "email": "tuanph41@gmail.com",
   "phone": "0939293888",
   "avatarId": "",
-  "role": "admin"
+  "role": "admin",
+  "fullname": "Nguyễn Quang Tuấn"
 },
 {
   "_id": {
@@ -18,7 +19,8 @@
   "email": "anhdtl@gmail.com",
   "phone": "0123456789",
   "avatarId": "",
-  "role": "admin"
+  "role": "admin",
+  "fullname": "Đoàn Thị Lan Anh"
 },
 {
   "_id": {
@@ -29,40 +31,8 @@
   "email": "dungpn@gmail.com",
   "phone": "0123456789",
   "avatarId": "",
-  "role": "admin"
-},
-{
-  "_id": {
-    "$oid": "6706928e7f84d57bd16fc23b"
-  },
-  "username": "chefmk",
-  "password": "123123",
-  "email": "chefmk@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "chef"
-},
-{
-  "_id": {
-    "$oid": "670692c57f84d57bd16fc23c"
-  },
-  "username": "chefds",
-  "password": "123123",
-  "email": "chefds@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "chef"
-},
-{
-  "_id": {
-    "$oid": "670692d07f84d57bd16fc23d"
-  },
-  "username": "chefcb",
-  "password": "123123",
-  "email": "chefcb@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "chef"
+  "role": "admin",
+  "fullname": "Phạm Ngọc Dũng"
 },
 {
   "_id": {
@@ -73,7 +43,8 @@
   "email": "staffmk1@gmail.com",
   "phone": "0123456789",
   "avatarId": "",
-  "role": "staff_mk"
+  "role": "staff_mk",
+  "fullname": "Nguyễn Quang Hiếu"
 },
 {
   "_id": {
@@ -84,7 +55,8 @@
   "email": "staffmk2@gmail.com",
   "phone": "0123456789",
   "avatarId": "",
-  "role": "staff_mk"
+  "role": "staff_mk",
+  "fullname": "Nguyễn Văn Vui"
 },
 {
   "_id": {
@@ -95,7 +67,8 @@
   "email": "staffds1@gmail.com",
   "phone": "0123456789",
   "avatarId": "",
-  "role": "staff_ds"
+  "role": "staff_ds",
+  "fullname": "Lê Văn Quang"
 },
 {
   "_id": {
@@ -106,7 +79,8 @@
   "email": "staffds2@gmail.com",
   "phone": "0123456789",
   "avatarId": "",
-  "role": "staff_ds"
+  "role": "staff_ds",
+  "fullname": "Phan Công Hiếu"
 },
 {
   "_id": {
@@ -117,7 +91,8 @@
   "email": "staffcb1@gmail.com",
   "phone": "0123456789",
   "avatarId": "",
-  "role": "staff_cb"
+  "role": "staff_cb",
+  "fullname": "Nguyễn Văn A"
 },
 {
   "_id": {
@@ -128,5 +103,6 @@
   "email": "staffcb2@gmail.com",
   "phone": "0123456789",
   "avatarId": "",
-  "role": "staff_cb"
+  "role": "staff_cb",
+  "fullname": "Trần Thị B"
 }]

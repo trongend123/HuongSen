@@ -9,35 +9,62 @@ import ListBooking from './components/listBooking';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, NavLink } from 'react-router-dom';
 import Sidebar from './components/sideBar'; // Import the Sidebar component
 import Login from './screens/Login/login';
 import ChangePassword from './screens/Change Password/changepass';
 import CreateBookingByStaff from './components/createBookingByStaff';
+import { RxAvatar } from "react-icons/rx";
+
+// Layout wrapper to conditionally render sidebar and layout based on route
+const Layout = ({ children }) => {
+  const location = useLocation();
+
+  // Check if the current path is "/login"
+  const isLoginRoute = location.pathname === '/login';
+
+  // If on the login route, render only the login content
+  if (isLoginRoute) {
+    return <>{children}</>;
+  }
+
+  // Otherwise, render the full layout with sidebar and content
+  return (
+    <div className="main-layout">
+      <Sidebar /> {/* Sidebar is rendered only if not on the login route */}
+      <Container fluid className="content" style={{ padding: '0px' }}>
+        <div className="content-header"><RxAvatar/><NavLink className={"nav-link"} to="/change-password">Thay đổi mật khẩu</NavLink></div>
+        <div className="body">
+          {children}
+        </div>
+      </Container>
+    </div>
+  );
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
-      <div className="main-layout">
-        <Sidebar /> {/* Use the Sidebar component here */}
-        <Container fluid className="content" style={{ padding: '0px' }}>
-          <div className="content-header"></div>
-          <div className="body">
-            <Routes>
-
-              <Route path="/login" element={<Login />} />
-              <Route path='/change-password' element={<ChangePassword />} />
-              <Route path="/rooms" element={<ListRoom />} />
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/bookings" element={<ListBooking />} />
-              <Route path="/staffs" element={<ListStaff />} />
-              <Route path="/roomCate" element={<ListRoomCate />} />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path='/change-password' element={<ChangePassword />} />
+        <Route
+          path="*"
+          element={(
+            <Layout>
+              <Routes>
+                <Route path="/rooms" element={<ListRoom />} />
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/bookings" element={<ListBooking />} />
+                <Route path="/staffs" element={<ListStaff />} />
+                <Route path="/roomCate" element={<ListRoomCate />} />
               <Route path="/createBooking" element={<CreateBookingByStaff />} />
-            </Routes>
-          </div>
-        </Container>
-      </div>
+              </Routes>
+            </Layout>
+          )}
+        />
+      </Routes>
     </Router>
   </React.StrictMode>
 );

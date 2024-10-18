@@ -36,15 +36,18 @@ const ListRoom = () => {
   const filteredRooms = selectedLocation
     ? roomData.filter((room) => room.roomCategoryId.locationId === selectedLocation)
     : roomData;
-
+  const filteredCategories = selectedLocation
+    ? categories.filter((category) => category.locationId._id === selectedLocation)
+    : categories;
   // Count rooms by status
   const countRoomsByStatus = (rooms) => {
-    const counts = { available: 0, booked: 0, inUse: 0 };
+    const counts = { available: 0, booked: 0, inUse: 0 , inFix: 0};
 
     rooms.forEach((room) => {
       if (room.status === 'Trống') counts.available++;
       if (room.status === 'Đã book') counts.booked++;
       if (room.status === 'Đang sử dụng') counts.inUse++;
+      if (room.status === 'Đang sửa chữa') counts.inFix++;
     });
 
     return counts;
@@ -151,7 +154,7 @@ const ListRoom = () => {
                   value={updatedCategory}
                   onChange={(e) => setUpdatedCategory(e.target.value)}
                 >
-                  {categories.map((category) => (
+                  {filteredCategories.map((category) => (
                     <option key={category._id} value={category._id}>
                       {category.name}
                     </option>
@@ -169,6 +172,7 @@ const ListRoom = () => {
                   <option value="Trống">Trống</option>
                   <option value="Đã book">Đã book</option>
                   <option value="Đang sử dụng">Đang sử dụng</option>
+                  <option value="Đang sửa chữa">Đang sửa chữa</option>
                 </Form.Control>
               </Form.Group>
             </>

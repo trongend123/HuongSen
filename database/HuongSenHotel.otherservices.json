@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "67127d16cc979020534afd10"
+  },
+  "name": "Thuê xe máy",
+  "price": 120000,
+  "description": "Thuê 1 xe máy 1 ngày"
+},
+{
+  "_id": {
+    "$oid": "67127d5ccc979020534afd11"
+  },
+  "name": "Đưa đón tại sân bay Cát Bi",
+  "price": 150000,
+  "description": "Một xe đưa đón tại sân bay Cát Bi"
+},
+{
+  "_id": {
+    "$oid": "67127e6dcc979020534afd13"
+  },
+  "name": "Đặt đồ ăn xuất 100k",
+  "price": 100000,
+  "description": "Xuất ăn 100k cho 1 người"
+},
+{
+  "_id": {
+    "$oid": "67127eb2cc979020534afd14"
+  },
+  "name": "Đặt đồ ăn xuất 150k",
+  "price": 150000,
+  "description": "Xuất ăn 150k cho 1 người"
+},
+{
+  "_id": {
+    "$oid": "67127ec7cc979020534afd15"
+  },
+  "name": "Đặt đồ ăn xuất 200k",
+  "price": 200000,
+  "description": "Xuất ăn 200k cho 1 người"
+},
+{
+  "_id": {
+    "$oid": "67127ed5cc979020534afd16"
+  },
+  "name": "Đặt đồ ăn xuất 300k",
+  "price": 300000,
+  "description": "Xuất ăn 300k cho 1 người"
+},
+{
+  "_id": {
+    "$oid": "67127ee0cc979020534afd17"
+  },
+  "name": "Đặt đồ ăn xuất 400k",
+  "price": 400000,
+  "description": "Xuất ăn 400k cho 1 người"
+},
+{
+  "_id": {
+    "$oid": "67127eeecc979020534afd18"
+  },
+  "name": "Đặt đồ ăn xuất 500k",
+  "price": 500000,
+  "description": "Xuất ăn 500k cho 1 người"
+},
+{
+  "_id": {
+    "$oid": "67127faccc979020534afd1d"
+  },
+  "name": "Giặt đồ",
+  "price": 20000,
+  "description": "Giặt đồ tính theo kilogram, nhận đồ tại phòng"
+}]

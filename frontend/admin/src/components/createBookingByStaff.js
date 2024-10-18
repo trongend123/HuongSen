@@ -187,13 +187,13 @@ const CreateBookingByStaff = () => {
                 price: totalPrice,
             }));
 
-            if (isUpdating && bookingId) {
-                await axios.put(`http://localhost:9999/bookings/${bookingId}`, { ...bookingData, price: totalPrice });
-                await axios.put(`http://localhost:9999/customers/${customerId}`, customerData);
+            // if (isUpdating && bookingId) {
+            //     await axios.put(`http://localhost:9999/bookings/${bookingId}`, { ...bookingData, price: totalPrice });
+            //     await axios.put(`http://localhost:9999/customers/${customerId}`, customerData);
 
-                const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
-                await handleRoomOrders(existingOrderRooms.data, customerId, bookingId);
-            } else {
+            //     const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
+            //     await handleRoomOrders(existingOrderRooms.data, customerId, bookingId);
+            // } else {
                 const customerResponse = await axios.post('http://localhost:9999/customers', customerData);
                 const bookingResponse = await axios.post('http://localhost:9999/bookings', { ...bookingData, price: totalPrice });
 
@@ -206,7 +206,7 @@ const CreateBookingByStaff = () => {
                 setIsUpdating(true);
 
                 await handleRoomOrders([], newCustomerId, newBookingId);
-            }
+            navigator.push("/listBooking");
         } catch (error) {
             console.error('Error processing booking or room orders:', error);
         }
@@ -238,38 +238,38 @@ const CreateBookingByStaff = () => {
         await Promise.all(orderRoomPromises);
     };
 
-    const handleDeleteAll = async () => {
-        try {
-            if (bookingId) {
-                const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
-                const deleteOrderRoomPromises = existingOrderRooms.data.map(orderRoom => {
-                    return axios.delete(`http://localhost:9999/orderRooms/${orderRoom._id}`);
-                });
-                await Promise.all(deleteOrderRoomPromises);
+    // const handleDeleteAll = async () => {
+    //     try {
+    //         if (bookingId) {
+    //             const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
+    //             const deleteOrderRoomPromises = existingOrderRooms.data.map(orderRoom => {
+    //                 return axios.delete(`http://localhost:9999/orderRooms/${orderRoom._id}`);
+    //             });
+    //             await Promise.all(deleteOrderRoomPromises);
 
-                await axios.delete(`http://localhost:9999/bookings/${bookingId}`);
-                await axios.delete(`http://localhost:9999/customers/${customerId}`);
+    //             await axios.delete(`http://localhost:9999/bookings/${bookingId}`);
+    //             await axios.delete(`http://localhost:9999/customers/${customerId}`);
 
-                setBookingId(null);
-                setCustomerId(null);
-                setIsUpdating(false);
+    //             setBookingId(null);
+    //             setCustomerId(null);
+    //             setIsUpdating(false);
 
-                console.log('Booking, customer, and related order rooms deleted successfully');
-            }
-        } catch (error) {
-            console.error('Error deleting booking, customer, or order rooms:', error);
-        }
-    };
+    //             console.log('Booking, customer, and related order rooms deleted successfully');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error deleting booking, customer, or order rooms:', error);
+    //     }
+    // };
 
     return (
         <Container className='mb-3'>
-            <h2 className="my-4">{isUpdating ? 'Update Booking' : 'Create Booking by Staff'}</h2>
+            <h2 className="my-4">Tạo đơn đặt phòng mới</h2>
             <Form onSubmit={handleSubmit}>
                 {/* Customer Creation Form */}
                 <Row className="mb-3">
                     <Col>
                         <Form.Group controlId="fullname">
-                            <Form.Label>Full Name</Form.Label>
+                            <Form.Label>Họ và tên:</Form.Label>
                             <Form.Control
                                 type="text"
                                 name="fullname"
@@ -285,7 +285,7 @@ const CreateBookingByStaff = () => {
                     </Col>
                     <Col>
                         <Form.Group controlId="email">
-                            <Form.Label>Email</Form.Label>
+                            <Form.Label>Email:</Form.Label>
                             <Form.Control
                                 type="email"
                                 name="email"
@@ -301,7 +301,7 @@ const CreateBookingByStaff = () => {
                     </Col>
                     <Col>
                         <Form.Group controlId="phone">
-                            <Form.Label>Phone</Form.Label>
+                            <Form.Label>Số điện thoại:</Form.Label>
                             <Form.Control
                                 type="text"
                                 name="phone"
@@ -320,7 +320,7 @@ const CreateBookingByStaff = () => {
                 <Row className="mb-3">
                     <Col>
                         <Form.Group controlId="dob">
-                            <Form.Label>Date of Birth</Form.Label>
+                            <Form.Label>Ngày sinh:</Form.Label>
                             <Form.Control
                                 type="date"
                                 name="dob"
@@ -335,7 +335,7 @@ const CreateBookingByStaff = () => {
                     </Col>
                     <Col>
                         <Form.Group controlId="checkin">
-                            <Form.Label>Check-in Date</Form.Label>
+                            <Form.Label>Ngày check-in:</Form.Label>
                             <Form.Control
                                 type="date"
                                 name="checkin"
@@ -350,7 +350,7 @@ const CreateBookingByStaff = () => {
                     </Col>
                     <Col>
                         <Form.Group controlId="checkout">
-                            <Form.Label>Check-out Date</Form.Label>
+                            <Form.Label>Ngày check-out:</Form.Label>
                             <Form.Control
                                 type="date"
                                 name="checkout"
@@ -366,7 +366,7 @@ const CreateBookingByStaff = () => {
                 </Row>
 
                 {/* Room Selection Form */}
-                <h4>Room Selection</h4>
+                <h4>Chọn loại phòng</h4>
                 {roomCategories.map((room) => (
                     <Row key={room._id} className="mb-3">
                         <Col className='col-6'>
@@ -391,7 +391,7 @@ const CreateBookingByStaff = () => {
                 <Row className="mb-3">
                     <Col>
                         <Form.Group controlId="note">
-                            <Form.Label>Note</Form.Label>
+                            <Form.Label>Ghi chú thêm: </Form.Label>
                             <Form.Control
                                 as="textarea"
                                 name="note"
@@ -408,15 +408,8 @@ const CreateBookingByStaff = () => {
                 <h4>Total Amount: {totalAmount.toLocaleString()} VND</h4>
 
                 <Button variant="primary" type="submit">
-                    {isUpdating ? 'Update Booking' : 'Create Booking'}
+                    Đặt phòng
                 </Button>
-                {
-                    isUpdating && (
-                        <Button variant="danger" className="ml-3" onClick={handleDeleteAll}>
-                            Delete Booking
-                        </Button>
-                    )
-                }
             </Form>
         </Container>
     );
