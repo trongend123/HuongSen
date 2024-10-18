@@ -5,8 +5,8 @@
   "code": "ĐS_301",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
@@ -15,19 +15,18 @@
   "code": "ĐS_302",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053bf4fabda7bfc6ba02fe"
   },
-  
   "code": "ĐS_303",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
@@ -36,589 +35,1573 @@
   "code": "ĐS_304",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053c12fabda7bfc6ba0300"
   },
-  
   "code": "ĐS_305",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053c24fabda7bfc6ba0301"
   },
-  
   "code": "ĐS_306",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  }
 },
 {
   "_id": {
     "$oid": "67053c69fabda7bfc6ba0302"
   },
-  
   "code": "ĐS_308",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  }
 },
 {
   "_id": {
     "$oid": "67053c94fabda7bfc6ba0303"
   },
-  
   "code": "ĐS_309",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053c9efabda7bfc6ba0304"
   },
-  
   "code": "ĐS_310",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053caafabda7bfc6ba0305"
   },
-  
   "code": "ĐS_311",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053ce6fabda7bfc6ba0306"
   },
-  
   "code": "ĐS_312",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053cf4fabda7bfc6ba0307"
   },
-  
   "code": "ĐS_313",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053d02fabda7bfc6ba0308"
   },
-  
   "code": "ĐS_314",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4dfe91d9d4f21e97b63"
+  }
 },
 {
   "_id": {
     "$oid": "67053d24fabda7bfc6ba0309"
   },
-  
   "code": "ĐS_315",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4dfe91d9d4f21e97b63"
+  }
 },
 {
   "_id": {
     "$oid": "67053d66fabda7bfc6ba030a"
   },
-  
   "code": "ĐS_316",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4dfe91d9d4f21e97b63"
+  }
 },
 {
   "_id": {
     "$oid": "67053d87fabda7bfc6ba030b"
   },
-  
   "code": "ĐS_401",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053da9fabda7bfc6ba030c"
   },
-  
   "code": "ĐS_402",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053dbffabda7bfc6ba030d"
   },
-  
   "code": "ĐS_403",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053dd2fabda7bfc6ba030e"
   },
-  
   "code": "ĐS_404",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053ddcfabda7bfc6ba030f"
   },
-  
   "code": "ĐS_405",
-  "status": "Trống",
+  "status": "Đã book",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-10-14T14:11:26.246Z"
+  }
 },
 {
   "_id": {
     "$oid": "67053e08fabda7bfc6ba0310"
   },
-  
   "code": "ĐS_406",
- "status": "Trống",
+  "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  }
 },
 {
   "_id": {
     "$oid": "67053e37fabda7bfc6ba0311"
   },
-  
   "code": "ĐS_408",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  }
 },
 {
   "_id": {
     "$oid": "67053f07fabda7bfc6ba0312"
   },
-  
   "code": "ĐS_409",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053f17fabda7bfc6ba0313"
   },
-  
   "code": "ĐS_410",
-  "status": "Trống",
+  "status": "Đã book",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-10-14T14:11:23.689Z"
+  }
 },
 {
   "_id": {
     "$oid": "67053f27fabda7bfc6ba0314"
   },
-  
   "code": "ĐS_411",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053f34fabda7bfc6ba0315"
   },
-  
   "code": "ĐS_412",
- "status": "Trống",
+  "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053f50fabda7bfc6ba0316"
   },
-  
   "code": "ĐS_413",
- "status": "Trống",
+  "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67053f5cfabda7bfc6ba0317"
   },
-  
   "code": "ĐS_414",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4dfe91d9d4f21e97b63"
+  }
 },
 {
   "_id": {
     "$oid": "67053f7dfabda7bfc6ba0318"
   },
-  
   "code": "ĐS_415",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4dfe91d9d4f21e97b63"
+  }
 },
 {
   "_id": {
     "$oid": "67053fabfabda7bfc6ba0319"
   },
-  
   "code": "ĐS_501",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67054006fabda7bfc6ba031a"
   },
-  
   "code": "ĐS_502",
- "status": "Trống",
+  "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67054013fabda7bfc6ba031b"
   },
-  
   "code": "ĐS_503",
- "status": "Trống",
+  "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67054027fabda7bfc6ba031c"
   },
-  
   "code": "ĐS_504",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67054036fabda7bfc6ba031d"
   },
-  
   "code": "ĐS_505",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67054041fabda7bfc6ba031e"
   },
-  
   "code": "ĐS_506",
- "status": "Trống",
+  "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  }
 },
 {
   "_id": {
     "$oid": "67054066fabda7bfc6ba031f"
   },
-  
   "code": "ĐS_508",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  }
 },
 {
   "_id": {
     "$oid": "67054092fabda7bfc6ba0320"
   },
-  
   "code": "ĐS_509",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "670540a6fabda7bfc6ba0321"
   },
-  
   "code": "ĐS_510",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "670540b7fabda7bfc6ba0322"
   },
-  
   "code": "ĐS_511",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "670540c1fabda7bfc6ba0323"
   },
-  
   "code": "ĐS_512",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "670540cbfabda7bfc6ba0324"
   },
-  
   "code": "ĐS_513",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "670540d8fabda7bfc6ba0325"
   },
-  
   "code": "ĐS_602",
- "status": "Trống",
+  "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "670540e0fabda7bfc6ba0326"
   },
-  
   "code": "ĐS_603",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-10-14T14:11:20.128Z"
+  }
 },
 {
   "_id": {
     "$oid": "670540edfabda7bfc6ba0327"
   },
-  
   "code": "ĐS_604",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "670540f7fabda7bfc6ba0328"
   },
-  
   "code": "ĐS_605",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67054104fabda7bfc6ba0329"
   },
-  
   "code": "ĐS_606",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "updatedAt": {
+    "$date": "2024-10-14T15:36:54.320Z"
+  }
 },
 {
   "_id": {
     "$oid": "67054122fabda7bfc6ba032a"
   },
-  
   "code": "ĐS_608",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "updatedAt": {
+    "$date": "2024-10-14T14:11:16.938Z"
+  }
 },
 {
   "_id": {
     "$oid": "6705413dfabda7bfc6ba032b"
   },
-  
   "code": "ĐS_609",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "6705414cfabda7bfc6ba032c"
   },
-  
   "code": "ĐS_610",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67054157fabda7bfc6ba032d"
   },
-  
   "code": "ĐS_611",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "6705417cfabda7bfc6ba032f"
   },
-  
   "code": "ĐS_612",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "67054195fabda7bfc6ba0330"
   },
-  
   "code": "ĐS_702",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-10-14T13:55:02.114Z"
+  }
 },
 {
   "_id": {
     "$oid": "670541a1fabda7bfc6ba0331"
   },
-  
   "code": "ĐS_704",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-10-14T13:55:05.786Z"
+  }
 },
 {
   "_id": {
     "$oid": "670541abfabda7bfc6ba0332"
   },
-  
   "code": "ĐS_706",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "updatedAt": {
+    "$date": "2024-10-14T15:43:58.088Z"
+  }
 },
 {
   "_id": {
     "$oid": "670541ccfabda7bfc6ba0333"
   },
-  
   "code": "ĐS_708",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "updatedAt": {
+    "$date": "2024-10-17T07:53:13.446Z"
+  }
 },
 {
   "_id": {
     "$oid": "670541effabda7bfc6ba0334"
   },
-  
   "code": "ĐS_710",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
 },
 {
   "_id": {
     "$oid": "670541fdfabda7bfc6ba0335"
   },
-  
   "code": "ĐS_712",
   "status": "Trống",
   "roomCategoryId": {
-      "$oid": "670b9896e91d9d4f21e97b5a"
-    }
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dbe8f5c9f636934a39e64"
+  },
+  "code": "CB_201",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dbf285c9f636934a39e67"
+  },
+  "code": "CB_202",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dbf475c9f636934a39e68"
+  },
+  "code": "CB_203",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc0205c9f636934a39e69"
+  },
+  "code": "CB_204",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc0c85c9f636934a39e6a"
+  },
+  "code": "CB_205",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc0d05c9f636934a39e6b"
+  },
+  "code": "CB_206",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc0d85c9f636934a39e6c"
+  },
+  "code": "CB_207",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc0eb5c9f636934a39e6d"
+  },
+  "code": "CB_301",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc0fa5c9f636934a39e6e"
+  },
+  "code": "CB_302",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc1025c9f636934a39e6f"
+  },
+  "code": "CB_303",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc10d5c9f636934a39e70"
+  },
+  "code": "CB_304",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc1165c9f636934a39e71"
+  },
+  "code": "CB_305",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc11e5c9f636934a39e72"
+  },
+  "code": "CB_306",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc1275c9f636934a39e73"
+  },
+  "code": "CB_307",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc1f55c9f636934a39e74"
+  },
+  "code": "CB_401",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc1fe5c9f636934a39e75"
+  },
+  "code": "CB_402",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2075c9f636934a39e76"
+  },
+  "code": "CB_403",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2115c9f636934a39e77"
+  },
+  "code": "CB_410",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe2c5c9f636934a39e5d"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc21a5c9f636934a39e78"
+  },
+  "code": "CB_406",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2235c9f636934a39e79"
+  },
+  "code": "CB_407",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc22d5c9f636934a39e7a"
+  },
+  "code": "CB_501",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2365c9f636934a39e7b"
+  },
+  "code": "CB_502",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2b35c9f636934a39e7c"
+  },
+  "code": "CB_503",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2be5c9f636934a39e7d"
+  },
+  "code": "CB_510",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe2c5c9f636934a39e5d"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2c65c9f636934a39e7e"
+  },
+  "code": "CB_506",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2cf5c9f636934a39e7f"
+  },
+  "code": "CB_507",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2db5c9f636934a39e80"
+  },
+  "code": "CB_601",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc2f55c9f636934a39e82"
+  },
+  "code": "CB_602",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc31e5c9f636934a39e84"
+  },
+  "code": "CB_603",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc3265c9f636934a39e85"
+  },
+  "code": "CB_604",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc3405c9f636934a39e87"
+  },
+  "code": "CB_605",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc3485c9f636934a39e88"
+  },
+  "code": "CB_606",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc34e5c9f636934a39e89"
+  },
+  "code": "CB_607",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc3555c9f636934a39e8a"
+  },
+  "code": "CB_701",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc35e5c9f636934a39e8b"
+  },
+  "code": "CB_702",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc5e65c9f636934a39e8d"
+  },
+  "code": "CB_703",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc5f65c9f636934a39e8e"
+  },
+  "code": "CB_704",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc6065c9f636934a39e8f"
+  },
+  "code": "CB_705",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc60f5c9f636934a39e90"
+  },
+  "code": "CB_706",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dc61a5c9f636934a39e91"
+  },
+  "code": "CB_707",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  }
+},
+{
+  "_id": {
+    "$oid": "6712787ecc979020534afcb2"
+  },
+  "code": "MK_201",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671278e2cc979020534afcb6"
+  },
+  "code": "MK_202",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127909cc979020534afcb7"
+  },
+  "code": "MK_203",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "6712791acc979020534afcb8"
+  },
+  "code": "MK_204",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127967cc979020534afcba"
+  },
+  "code": "MK_205",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "6712796ecc979020534afcbb"
+  },
+  "code": "MK_206",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127974cc979020534afcbc"
+  },
+  "code": "MK_207",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671279a1cc979020534afcbd"
+  },
+  "code": "MK_208",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671279adcc979020534afcbe"
+  },
+  "code": "MK_209",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671279c3cc979020534afcc0"
+  },
+  "code": "MK_210",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671279cfcc979020534afcc1"
+  },
+  "code": "MK_211",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671279ddcc979020534afcc2"
+  },
+  "code": "MK_301",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671279e4cc979020534afcc3"
+  },
+  "code": "MK_302",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671279edcc979020534afcc4"
+  },
+  "code": "MK_303",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671279f5cc979020534afcc5"
+  },
+  "code": "MK_304",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "671279fdcc979020534afcc6"
+  },
+  "code": "MK_305",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a05cc979020534afcc7"
+  },
+  "code": "MK_307",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a0dcc979020534afcc8"
+  },
+  "code": "MK_308",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a16cc979020534afcc9"
+  },
+  "code": "MK_309",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a1dcc979020534afcca"
+  },
+  "code": "MK_310",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a26cc979020534afccb"
+  },
+  "code": "MK_311",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a2fcc979020534afccc"
+  },
+  "code": "MK_401",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a37cc979020534afccd"
+  },
+  "code": "MK_402",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a3fcc979020534afcce"
+  },
+  "code": "MK_403",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a46cc979020534afccf"
+  },
+  "code": "MK_404",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a4fcc979020534afcd0"
+  },
+  "code": "MK_405",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a57cc979020534afcd1"
+  },
+  "code": "MK_406",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a5fcc979020534afcd2"
+  },
+  "code": "MK_407",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a67cc979020534afcd3"
+  },
+  "code": "MK_409",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a70cc979020534afcd4"
+  },
+  "code": "MK_410",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a7acc979020534afcd5"
+  },
+  "code": "MK_411",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a90cc979020534afcd6"
+  },
+  "code": "MK_501",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127a99cc979020534afcd7"
+  },
+  "code": "MK_502",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127aa3cc979020534afcd8"
+  },
+  "code": "MK_503",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127aaccc979020534afcd9"
+  },
+  "code": "MK_504",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127abbcc979020534afcda"
+  },
+  "code": "MK_505",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127acacc979020534afcdb"
+  },
+  "code": "MK_506",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ad5cc979020534afcdc"
+  },
+  "code": "MK_507",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127adecc979020534afcdd"
+  },
+  "code": "MK_508",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127aeccc979020534afcde"
+  },
+  "code": "MK_55/1",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127af3cc979020534afcdf"
+  },
+  "code": "MK_55/2",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127b4ecc979020534afce0"
+  },
+  "code": "MK_601",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127b5fcc979020534afce1"
+  },
+  "code": "MK_602",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127b67cc979020534afce2"
+  },
+  "code": "MK_603",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127b6fcc979020534afce3"
+  },
+  "code": "MK_604",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127b77cc979020534afce4"
+  },
+  "code": "MK_605",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127b7dcc979020534afce5"
+  },
+  "code": "MK_606",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127b98cc979020534afce7"
+  },
+  "code": "MK_607",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ba0cc979020534afce8"
+  },
+  "code": "MK_608",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127babcc979020534afce9"
+  },
+  "code": "MK_66/1",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127bb3cc979020534afcea"
+  },
+  "code": "MK_66/2",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127bbccc979020534afceb"
+  },
+  "code": "MK_701",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127bc6cc979020534afcec"
+  },
+  "code": "MK_702",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127bd1cc979020534afced"
+  },
+  "code": "MK_703",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127bd9cc979020534afcee"
+  },
+  "code": "MK_704",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127be2cc979020534afcef"
+  },
+  "code": "MK_705",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127bebcc979020534afcf0"
+  },
+  "code": "MK_706",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127c04cc979020534afcf1"
+  },
+  "code": "MK_707",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127c10cc979020534afcf2"
+  },
+  "code": "MK_708",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127c17cc979020534afcf3"
+  },
+  "code": "MK_77/1",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127c23cc979020534afcf4"
+  },
+  "code": "MK_77/2",
+  "status": "Trống",
+  "roomCategoryId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
 }]

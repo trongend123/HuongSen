@@ -3,13 +3,15 @@ import { Card, Container, Row, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import './dashboard.css';
 
 const Dashboard = () => {
   const [bookingData, setBookingData] = useState([]);
   const [orderData, setOrderData] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Months are 0-indexed
+  const [startDate, setStartDate] = useState(new Date(new Date().getFullYear(), 0, 1)); // Default: Start of current year
+  const [endDate, setEndDate] = useState(new Date()); // Default: Today
 
   useEffect(() => {
     // Fetch booking data
@@ -51,15 +53,15 @@ const Dashboard = () => {
     return aggregated;
   };
 
-  // Filter data based on selected year and month
+  // Filter data based on the selected date range
   const filteredBookingData = bookingData.filter((item) => {
     const date = new Date(item.createdAt);
-    return date.getFullYear() === selectedYear && date.getMonth() + 1 === selectedMonth;
+    return date >= startDate && date <= endDate;
   });
 
   const filteredOrderData = orderData.filter((item) => {
     const date = new Date(item.createdAt);
-    return date.getFullYear() === selectedYear && date.getMonth() + 1 === selectedMonth;
+    return date >= startDate && date <= endDate;
   });
 
   const aggregatedBookings = aggregateBookingByDate(filteredBookingData, 'createdAt');
@@ -119,38 +121,32 @@ const Dashboard = () => {
     <Container>
       <h2 className="text-center my-4">Bảng thống kê</h2>
 
-      {/* Year and Month Selectors */}
-      <Row className="mb-4" style={{width:'500px'}}>
+      {/* Date range selectors */}
+      <Row className="mb-4">
         <Col md={6}>
-          <Form.Group controlId="yearSelect">
-            <Form.Label>Chọn Năm</Form.Label>
-            <Form.Control
-              as="select"
-              value={selectedYear}
-              onChange={(e) => setSelectedYear(Number(e.target.value))}
-            >
-              {Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - i).map(year => (
-                <option key={year} value={year}>{year}</option>
-              ))}
-            </Form.Control>
+          <Form.Group controlId="startDate">
+            <Form.Label>Chọn ngày bắt đầu: </Form.Label>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              dateFormat="dd/MM/yyyy"
+              className="form-control"
+            />
           </Form.Group>
         </Col>
         <Col md={6}>
-          <Form.Group controlId="monthSelect">
-            <Form.Label>Chọn Tháng</Form.Label>
-            <Form.Control
-              as="select"
-              value={selectedMonth}
-              onChange={(e) => setSelectedMonth(Number(e.target.value))}
-            >
-              {Array.from({ length: 12 }, (_, i) => i + 1).map(month => (
-                <option key={month} value={month}>{month}</option>
-              ))}
-            </Form.Control>
+          <Form.Group controlId="endDate">
+            <Form.Label>Chọn ngày kết thúc: </Form.Label>
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              dateFormat="dd/MM/yyyy"
+              className="form-control"
+            />
           </Form.Group>
         </Col>
       </Row>
-      <hr/>          
+      <hr />
       {/* Summary Cards */}
       <Row>
         <Col>
@@ -182,33 +178,27 @@ const Dashboard = () => {
           </Card>
         </Col>
       </Row>
-      <hr/>                 
+      <hr />
       {/* Individual Line Charts */}
       <Row className="mt-4">
         <Col lg={4}>
-        <Card className='chart'>
-          <h4 className="text-center">Tổng số đơn theo thời gian</h4>
-          <Line data={bookingsChartData} />
-        </Card>
+          <Card className='chart'>
+            <h4 className="text-center">Tổng số đơn theo thời gian</h4>
+            <Line data={bookingsChartData} />
+          </Card>
         </Col>
         <Col lg={4}>
-        <Card className='chart'>
-          <h4 className="text-center">Tổng doanh thu theo thời gian</h4>
-          <Line data={revenueChartData} />
-        </Card>
+          <Card className='chart'>
+            <h4 className="text-center">Tổng doanh thu theo thời gian</h4>
+            <Line data={revenueChartData} />
+          </Card>
         </Col>
         <Col lg={4}>
-        <Card className='chart'>
-          <h4 className="text-center">Tổng số phòng theo thời gian</h4>
-          <Line data={ordersChartData} />
-        </Card>
+          <Card className='chart'>
+            <h4 className="text-center">Tổng số phòng theo thời gian</h4>
+            <Line data={ordersChartData} />
+          </Card>
         </Col>
-      </Row>
-      <Row className="mt-4">
-        
-      </Row>
-      <Row className="mt-4">
-        
       </Row>
     </Container>
   );

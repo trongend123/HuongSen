@@ -1,4 +1,3 @@
-// controllers/orderRoomController.js
 import OrderRoomRepository from '../repositories/orderRoomRepository.js';
 import RoomCategory from '../models/roomCategory.js';
 import Customers from '../models/customer.js';
@@ -64,6 +63,21 @@ export const getOrderRoomById = async (req, res) => {
     res.status(200).json(orderRoom);
   } catch (error) {
     console.error('Lỗi khi lấy OrderRoom:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+// Hàm lấy OrderRooms theo bookingId
+export const getOrderRoomsByBookingId = async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+    const orderRooms = await OrderRoomRepository.findByBookingId(bookingId);
+    if (!orderRooms.length) {
+      return res.status(404).json({ message: 'Không có OrderRoom nào cho BookingId này' });
+    }
+    res.status(200).json(orderRooms);
+  } catch (error) {
+    console.error('Lỗi khi lấy OrderRoom theo BookingId:', error);
     res.status(500).json({ message: 'Server Error' });
   }
 };

@@ -26,7 +26,7 @@ import {
   OrderRoomRouter
 } from "./routes/index.js";
 //import { verifyAccessToken } from "./jwt_helper.js";
-import {changePassword, loginUser, registerUser, verifyAccessToken} from "./authens/auth.js";
+import { changePassword, loginUser, registerUser, verifyAccessToken } from "./authens/auth.js";
 // import Avatar from "./models/avatar.js";
 // Thực thi cấu hình ứng dụng sử dụng file .env
 dotenv.config();

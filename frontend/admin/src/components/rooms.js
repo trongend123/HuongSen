@@ -8,10 +8,11 @@ const Room = ({ room, onClick }) => {
     backgroundColor: 
       room.status === 'Trống' ? '#d3d3d3' :
       room.status === 'Đã book' ? 'yellow' :
-      room.status === 'Đang sử dụng' ? 'red' : 'white',
+      room.status === 'Đang sửa chữa' ? 'red' :
+      room.status === 'Đang sử dụng' ? 'lightgreen' : 'black',
       width:
       room.roomCategoryId._id === '670dbe2c5c9f636934a39e5d' ? '150px' : '70px',
-    color: room.status === 'Đang sử dụng' ? 'white' : 'black',
+    color: room.status === 'Đang sửa chữa' ? 'white' : 'black',
   };
 
   return (

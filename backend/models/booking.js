@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
 import Tax from './tax.js';
 import Staff from './staff.js';
-
 const bookingSchema = new mongoose.Schema({
-    taxId: { type: mongoose.Schema.Types.ObjectId, ref: Tax, required: true },
+    taxId: { type: mongoose.Schema.Types.ObjectId, ref: Tax, },
     status: { type: String, required: true },
     payment: { type: String, required: true },
     staffId: { type: mongoose.Schema.Types.ObjectId, ref: Staff },

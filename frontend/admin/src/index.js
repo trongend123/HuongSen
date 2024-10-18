@@ -4,14 +4,17 @@ import './index.css';
 import ListRoom from './components/listRoom';
 import ListStaff from './components/listStaff';
 import Dashboard from './components/dashboard';
+import ListRoomCate from './components/listRoomCate';
 import ListBooking from './components/listBooking';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, NavLink } from 'react-router-dom';
 import Sidebar from './components/sideBar'; // Import the Sidebar component
 import Login from './screens/Login/login';
 import ChangePassword from './screens/Change Password/changepass';
+import CreateBookingByStaff from './components/createBookingByStaff';
+import { RxAvatar } from "react-icons/rx";
 
 // Layout wrapper to conditionally render sidebar and layout based on route
 const Layout = ({ children }) => {
@@ -30,7 +33,7 @@ const Layout = ({ children }) => {
     <div className="main-layout">
       <Sidebar /> {/* Sidebar is rendered only if not on the login route */}
       <Container fluid className="content" style={{ padding: '0px' }}>
-        <div className="content-header"></div>
+        <div className="content-header"><RxAvatar/><NavLink className={"nav-link"} to="/change-password">Thay đổi mật khẩu</NavLink></div>
         <div className="body">
           {children}
         </div>
@@ -55,6 +58,8 @@ root.render(
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/bookings" element={<ListBooking />} />
                 <Route path="/staffs" element={<ListStaff />} />
+                <Route path="/roomCate" element={<ListRoomCate />} />
+              <Route path="/createBooking" element={<CreateBookingByStaff />} />
               </Routes>
             </Layout>
           )}
