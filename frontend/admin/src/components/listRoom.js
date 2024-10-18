@@ -3,7 +3,7 @@ import { Container, Form, Modal, Button, Row, Col, Card } from 'react-bootstrap'
 import './listRoom.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { DoSonRooms, CatBaRooms } from './rooms'; // Import child components
+import { DoSonRooms, CatBaRooms, MinhKhaiRooms } from './rooms'; // Import child components
 
 const ListRoom = () => {
   const [roomData, setRoomData] = useState([]);
@@ -138,6 +138,9 @@ const ListRoom = () => {
       )}
       {selectedLocation === '66f6c59f285571f28087c16d' && (
         <CatBaRooms rooms={filteredRooms} onClick={handleRoomClick} />
+      )}
+      {selectedLocation === '66f6c42f285571f28087c16a' && (
+        <MinhKhaiRooms rooms={filteredRooms} onClick={handleRoomClick} />
       )}
 
       <Modal show={showModal} onHide={handleClose}>
