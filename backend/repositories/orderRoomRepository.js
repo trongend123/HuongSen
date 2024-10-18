@@ -64,7 +64,8 @@ const OrderRoomRepository = {
           // Lọc các booking trong khoảng thời gian từ check-in đến check-out
           $match: {
             'bookingDetails.checkin': { $gte: new Date(checkInDate) }, // Kiểm tra ngày check-in
-            'bookingDetails.checkout': { $lte: new Date(checkOutDate) } // Kiểm tra ngày check-out
+            'bookingDetails.checkout': { $lte: new Date(checkOutDate) }, // Kiểm tra ngày check-out
+            'bookingDetails.status': 'In Progress' // Thêm điều kiện status
           }
         },
         {
