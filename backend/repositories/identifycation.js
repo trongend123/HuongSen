@@ -1,28 +1,19 @@
 import Identifycation from "../models/identifycation.js";
 
 // Create a new identification
-const create = async ({
-    categoryId,
-    code,
-    dateStart,
-    dateEnd,
-    location,
-    memberId,
-    cusAccId,
-}) => {
+const create = async ({ name, code, dateStart, dateEnd, location, customerID }) => {
     try {
         const newIdentifycation = await Identifycation.create({
-            categoryId,
+            name,
             code,
             dateStart,
             dateEnd,
             location,
-            memberId,
-            cusAccId,
+            customerID,
         });
-        return newIdentifycation._doc;
+        return newIdentifycation; // No need to return _doc since Mongoose returns the document directly
     } catch (error) {
-        throw new Error(error.toString());
+        throw new Error(`Error creating identification: ${error.message}`);
     }
 };
 
@@ -30,52 +21,46 @@ const create = async ({
 const list = async () => {
     try {
         return await Identifycation.find({})
-            .populate("categoryId")
-            .populate("memberId")
-            .populate("cusAccId")
+            // Uncomment if you need to populate these fields
+            // .populate("categoryId")
+            // .populate("memberId")
+            .populate("customerID")
             .exec();
     } catch (error) {
-        throw new Error(error.toString());
+        throw new Error(`Error fetching identifications: ${error.message}`);
     }
 };
 
 // Get an identification by ID
 const getById = async (id) => {
     try {
-        return await Identifycation.findOne({ _id: id })
-            .populate("categoryId")
-            .populate("memberId")
-            .populate("cusAccId")
+        const identification = await Identifycation.findById(id)
+            // .populate("categoryId")
+            // .populate("memberId")
+            .populate("customerID")
             .exec();
+
+        if (!identification) {
+            throw new Error("Identification not found");
+        }
+        return identification;
     } catch (error) {
-        throw new Error(error.toString());
+        throw new Error(`Error fetching identification by ID: ${error.message}`);
     }
 };
 
 // Update an identification by ID
-const edit = async (
-    id,
-    {
-        categoryId,
-        code,
-        dateStart,
-        dateEnd,
-        location,
-        memberId,
-        cusAccId,
-    }
-) => {
+const edit = async (id, { name, code, dateStart, dateEnd, location, customerID }) => {
     try {
         const updatedIdentifycation = await Identifycation.findByIdAndUpdate(
-            { _id: id },
+            id,
             {
-                categoryId,
+                name,
                 code,
                 dateStart,
                 dateEnd,
                 location,
-                memberId,
-                cusAccId,
+                customerID,
             },
             { new: true }
         );
@@ -86,19 +71,24 @@ const edit = async (
 
         return updatedIdentifycation;
     } catch (error) {
-        throw new Error(error.toString());
+        throw new Error(`Error updating identification: ${error.message}`);
     }
 };
 
 // Delete an identification by ID
 const deleteIdentifycation = async (id) => {
     try {
-        return await Identifycation.findByIdAndDelete({ _id: id });
+        const deletedIdentification = await Identifycation.findByIdAndDelete(id);
+
+        if (!deletedIdentification) {
+            throw new Error("Identification not found");
+        }
+
+        return deletedIdentification;
     } catch (error) {
-        throw new Error(error.toString());
+        throw new Error(`Error deleting identification: ${error.message}`);
     }
 };
-
 
 export default {
     create,
