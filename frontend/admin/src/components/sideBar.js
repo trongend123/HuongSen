@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import './sideBar.css';
 import { MdDashboard, MdBedroomParent, MdPeople, MdLogout } from "react-icons/md";
 import { RiBillFill } from "react-icons/ri";
-
+import { BiSolidCategoryAlt } from "react-icons/bi";
 
 const Sidebar = () => (
   <div className="sidebar">
@@ -13,11 +13,11 @@ const Sidebar = () => (
     <Nav className="flex-column">
       <NavLink className="nav-link" to="/"><MdDashboard /> Thống kê</NavLink>
       <NavLink className="nav-link" exact to="/rooms"><MdBedroomParent /> Danh sách Phòng</NavLink>
-      <NavLink className="nav-link" to="/roomCate">Danh sách Loại phòng</NavLink>
+      <NavLink className="nav-link" to="/roomCate"><BiSolidCategoryAlt /> Danh sách Loại phòng</NavLink>
       <NavLink className="nav-link" to="/bookings"><RiBillFill /> Danh sách Đặt phòng</NavLink>
       <NavLink className="nav-link" to="/createBooking"><RiBillFill /> Đặt phòng</NavLink>
       <NavLink className="nav-link" to="/staffs"><MdPeople></MdPeople> Danh sách Nhân viên</NavLink>
-      <NavLink className="nav-link" to="/login"><MdLogout /> Logout</NavLink>
+      <NavLink className="nav-link" to="/login"><MdLogout /> Đăng xuất</NavLink>
     </Nav>
   </div>
 );

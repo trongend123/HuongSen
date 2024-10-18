@@ -10,11 +10,11 @@
   },
   "note": "khách ưu tiên",
   "payment": "Đã Thanh Toán",
-  "price": "1200000",
+  "price": 1200000,
   "staffId": {
     "$oid": "670693f27f84d57bd16fc241"
   },
-  "status": "In Progess",
+  "status": "Completed",
   "taxId": {
     "$oid": "670be7f3e91d9d4f21e97b9e"
   },
@@ -31,18 +31,18 @@
     "$oid": "670d33f1b209ba33cfb0c54d"
   },
   "checkin": {
-    "$date": "2024-10-14T00:00:00.000Z"
+    "$date": "2024-10-29T00:00:00.000Z"
   },
   "checkout": {
-    "$date": "2024-10-15T00:00:00.000Z"
+    "$date": "2024-11-01T00:00:00.000Z"
   },
   "note": "khách ưu tiên",
   "payment": "Đã Hoàn Tiền",
-  "price": "2100000",
+  "price": 2100000,
   "staffId": {
     "$oid": "670693f27f84d57bd16fc241"
   },
-  "status": "Cancel",
+  "status": "In Progress\n",
   "taxId": {
     "$oid": "670be7f3e91d9d4f21e97b9e"
   },
@@ -65,8 +65,8 @@
     "$date": "2024-10-14T00:00:00.000Z"
   },
   "note": "khách ưu tiên",
-  "payment": "Đã Thanh Toán",
-  "price": "300000",
+  "payment": "Đã thanh toán",
+  "price": 300000,
   "staffId": {
     "$oid": "670693f27f84d57bd16fc241"
   },
@@ -79,6 +79,60 @@
   },
   "updatedAt": {
     "$date": "2024-09-28T14:28:43.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67108625547e7b2d94f31999"
+  },
+  "taxId": null,
+  "status": "Cancelled",
+  "payment": "Chưa Thanh Toán",
+  "staffId": null,
+  "price": 850000,
+  "checkin": {
+    "$date": "2024-10-17T00:00:00.000Z"
+  },
+  "note": "",
+  "checkout": {
+    "$date": "2024-10-18T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6710c379547e7b2d94f46d58"
+  },
+  "taxId": null,
+  "status": "In Progress",
+  "payment": "Chưa Thanh Toán",
+  "staffId": null,
+  "price": 1100000,
+  "checkin": {
+    "$date": "2024-10-17T00:00:00.000Z"
+  },
+  "note": "",
+  "checkout": {
+    "$date": "2024-10-18T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6711b60ecd19e7c511a421a5"
+  },
+  "taxId": null,
+  "status": "In Progress",
+  "payment": "Chưa Thanh Toán",
+  "staffId": null,
+  "price": 300000,
+  "checkin": {
+    "$date": "2024-10-18T00:00:00.000Z"
+  },
+  "note": "",
+  "checkout": {
+    "$date": "2024-10-19T00:00:00.000Z"
   },
   "__v": 0
 }]

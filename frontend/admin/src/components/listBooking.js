@@ -5,28 +5,33 @@ import axios from 'axios';
 const ListBooking = () => {
   const [bookings, setBookings] = useState([]);
   const [searchQuery, setSearchQuery] = useState(''); // State for search query
+  const [locationQuery, setLocationQuery] = useState(''); // New state for location filtering
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [updatedPayment, setUpdatedPayment] = useState('');
   const [updatedStatus, setUpdatedStatus] = useState('');
   const [updatedCheckin, setUpdatedCheckin] = useState('');
   const [updatedCheckout, setUpdatedCheckout] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [locations, setLocation] = useState([]);
 
   useEffect(() => {
-    // Fetch booking data
     axios
       .get("http://localhost:9999/orderRooms")
       .then((response) => setBookings(response.data))
       .catch((error) => console.error("Error fetching bookings:", error));
+
+      axios
+      .get('http://localhost:9999/locations')
+      .then((response) => setLocation(response.data))
+      .catch((error) => console.error('Error fetching locations:', error));
   }, []);
 
-  // Helper function to format date
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  // Open modal for editing
   const handleEditClick = (booking) => {
     setSelectedBooking(booking);
     setUpdatedPayment(booking.bookingId.payment);
@@ -36,7 +41,6 @@ const ListBooking = () => {
     setShowModal(true);
   };
 
-  // Handle updating the booking
   const handleUpdateBooking = () => {
     const updatedBooking = {
       ...selectedBooking,
@@ -50,7 +54,7 @@ const ListBooking = () => {
     };
 
     axios
-      .put(`http://localhost:9999/orderRooms/${selectedBooking._id}`, updatedBooking)
+      .put(`http://localhost:9999/bookings/${selectedBooking.bookingId._id}`, updatedBooking.bookingId)
       .then((response) => {
         setBookings((prevBookings) =>
           prevBookings.map((booking) =>
@@ -62,14 +66,11 @@ const ListBooking = () => {
       .catch((error) => console.error("Error updating booking:", error));
   };
 
-  // Handle cancel booking (set status to "Cancelled")
-  const handleCancelClick = (bookingId) => {
+  const handleCancelClick = (booking) => {
+    booking.status = "Cancelled";
+    const bookingId = booking._id;
     axios
-      .put(`http://localhost:9999/orderRooms/${bookingId}`, {
-        bookingId: {
-          status: 'Cancelled'
-        }
-      })
+      .put(`http://localhost:9999/bookings/${bookingId}`, booking)
       .then((response) => {
         setBookings((prevBookings) =>
           prevBookings.map((booking) =>
@@ -80,13 +81,18 @@ const ListBooking = () => {
       .catch((error) => console.error("Error cancelling booking:", error));
   };
 
-  // Filter bookings based on search query
-  const filteredBookings = bookings.filter((booking) => {
+  // Sort bookings by checkin date
+  const sortedBookings = bookings.sort((a, b) => new Date(b.bookingId.checkin) - new Date(a.bookingId.checkin));
+
+  const filteredBookings = sortedBookings.filter((booking) => {
     const bookingId = booking.bookingId._id.toLowerCase();
     const customerName = booking.customerId.fullname.toLowerCase();
+    const isMatchingLocation = selectedLocation ? booking.roomCateId.locationId === selectedLocation : true;
+
     return (
-      bookingId.includes(searchQuery.toLowerCase()) ||
-      customerName.includes(searchQuery.toLowerCase())
+      isMatchingLocation &&
+      (bookingId.includes(searchQuery.toLowerCase()) ||
+        customerName.includes(searchQuery.toLowerCase()))
     );
   });
 
@@ -94,7 +100,7 @@ const ListBooking = () => {
     <Container>
       <h2 className="text-center my-4">Danh sách Đặt phòng</h2>
 
-      {/* Search Input */}
+      {/* Search Inputs */}
       <InputGroup className="mb-3">
         <FormControl
           placeholder="Tìm kiếm theo Mã Đặt phòng hoặc Tên Khách hàng"
@@ -103,18 +109,34 @@ const ListBooking = () => {
         />
       </InputGroup>
 
+      {/* Location Filter Input */}
+      <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
+        <Form.Label>Chọn cơ sở:</Form.Label>
+        <Form.Control
+          as="select"
+          value={selectedLocation}
+          onChange={(e) => setSelectedLocation(e.target.value)}
+        >
+          <option value="">Chọn cơ sở</option>
+          <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
+          <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
+          <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
+        </Form.Control>
+      </Form.Group>
+
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>Mã Đặt phòng</th>
             <th>Tên Khách</th>
+            <th>Tên phòng</th>
+            <th>Số lượng</th>
             <th>Tổng tiền</th>
-            <th>Ngày Đặt</th>
             <th>Checkin</th>
             <th>Checkout</th>
             <th>Thanh toán</th>
             <th>Trạng Thái</th>
-            <th>Hành động</th> {/* Added column for actions */}
+            <th>Hành động</th>
           </tr>
         </thead>
         <tbody>
@@ -122,27 +144,20 @@ const ListBooking = () => {
             <tr key={booking._id}>
               <td>{booking.bookingId._id}</td>
               <td>{booking.customerId.fullname}</td>
+              <td>{booking.roomCateId.name}</td>
+              <td>{booking.quantity}</td>
               <td>{(booking.quantity * booking.roomCateId.price)}</td>
-              <td>{formatDate(booking.createdAt)}</td> {/* Format createdAt */}
-              <td>{formatDate(booking.bookingId.checkin)}</td>   {/* Format checkin */}
-              <td>{formatDate(booking.bookingId.checkout)}</td>  {/* Format checkout */}
+              <td>{formatDate(booking.bookingId.checkin)}</td>
+              <td>{formatDate(booking.bookingId.checkout)}</td>
               <td>{booking.bookingId.payment}</td>
               <td>{booking.bookingId.status}</td>
               <td>
-                {/* Show Edit and Cancel buttons only if status is not "Cancelled" */}
-                {booking.bookingId.status !== 'Cancelled' && (
+                {booking.bookingId.status !== 'Cancelled' && booking.bookingId.status !== 'Completed' && (
                   <>
-                    <Button
-                      variant="warning"
-                      className="me-2"
-                      onClick={() => handleEditClick(booking)}
-                    >
+                    <Button variant="warning" className="me-2" onClick={() => handleEditClick(booking)}>
                       Chỉnh sửa
                     </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => handleCancelClick(booking._id)}
-                    >
+                    <Button variant="danger" onClick={() => handleCancelClick(booking.bookingId)}>
                       Hủy
                     </Button>
                   </>
@@ -153,7 +168,6 @@ const ListBooking = () => {
         </tbody>
       </Table>
 
-      {/* Modal for Editing Booking */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Chỉnh sửa Đặt phòng</Modal.Title>
@@ -161,13 +175,17 @@ const ListBooking = () => {
         <Modal.Body>
           {selectedBooking && (
             <>
-              <Form.Group controlId="payment">
+             <Form.Group controlId="status" className="mt-3">
                 <Form.Label>Thanh toán</Form.Label>
                 <Form.Control
-                  type="text"
-                  value={updatedPayment}
-                  onChange={(e) => setUpdatedPayment(e.target.value)}
-                />
+                  as="select"
+                  value={updatedStatus}
+                  onChange={(e) => setUpdatedStatus(e.target.value)}
+                >
+                  <option value="Chưa thanh toán">Chưa thanh toán</option>
+                  <option value="Đã thanh toán">Đã thanh toán</option>
+                  <option value="Yêu cầu hoàn tiền">Yêu cầu hoàn tiền</option>
+                </Form.Control>
               </Form.Group>
               <Form.Group controlId="status" className="mt-3">
                 <Form.Label>Trạng thái</Form.Label>
@@ -176,18 +194,10 @@ const ListBooking = () => {
                   value={updatedStatus}
                   onChange={(e) => setUpdatedStatus(e.target.value)}
                 >
-                  <option value="Chưa thanh toán">Chưa thanh toán</option>
-                  <option value="Đã thanh toán">Đã thanh toán</option>
+                  <option value="In Progress">Đang thực hiện</option>
+                  <option value="Completed">Đã hoàn thành</option>
                   <option value="Cancelled">Đã hủy</option>
                 </Form.Control>
-              </Form.Group>
-              <Form.Group controlId="checkin" className="mt-3">
-                <Form.Label>Checkin</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={updatedCheckin}
-                  onChange={(e) => setUpdatedCheckin(e.target.value)}
-                />
               </Form.Group>
               <Form.Group controlId="checkout" className="mt-3">
                 <Form.Label>Checkout</Form.Label>
@@ -214,4 +224,3 @@ const ListBooking = () => {
 };
 
 export default ListBooking;
-

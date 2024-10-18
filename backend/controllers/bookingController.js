@@ -49,6 +49,7 @@ class BookingController {
         try {
             const { id } = req.params;
             const data = req.body;
+            console.log(data);
             const updatedBooking = await bookingRepository.updateBooking(id, data);
             if (!updatedBooking) {
                 return res.status(404).json({ message: 'Booking not found' });

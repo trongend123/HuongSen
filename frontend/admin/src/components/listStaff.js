@@ -1,24 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Form, Row, Col, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 // Component StaffAccount to display individual staff information
 const StaffAccount = ({ staff, onDelete, onEdit }) => {
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <tr>
       <td>{staff.username}</td>
-      <td>{staff.password}</td>
+      <td>{staff.fullname}</td>
+      <td>
+        {showPassword ? staff.password : '********'}
+        <Button
+          variant="link"
+          size="sm"
+          className="mx-1"
+          onClick={togglePasswordVisibility}
+          style={{ padding: 0 }}
+        >
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </Button>
+      </td>
       <td>{staff.email}</td>
       <td>{staff.phone}</td>
       <td>{staff.role}</td>
       <td>
-        <Button variant="warning" size="sm" className="mx-1" onClick={() => onEdit(staff)}>Chỉnh sửa</Button>
-        <Button variant="danger" size="sm" onClick={() => onDelete(staff._id)}>Xóa</Button>
+        <Button variant="warning" size="sm" className="mx-1" onClick={() => onEdit(staff)}>
+          Chỉnh sửa
+        </Button>
+        <Button variant="danger" size="sm" onClick={() => onDelete(staff._id)}>
+          Xóa
+        </Button>
       </td>
     </tr>
   );
 };
-
 // Component ListStaffAccount to manage staff accounts
 const ListStaffAccount = () => {
   const [staffData, setStaffData] = useState([]);
@@ -48,28 +71,35 @@ const ListStaffAccount = () => {
   const validateInputs = () => {
     const newErrors = {};
 
-    // Username validation (no spaces, no accents)
-    const usernameRegex = /^[a-zA-Z0-9]+$/;
-    if (!usernameRegex.test(newStaff.username)) {
-      newErrors.username = "Tên người dùng chỉ chứa ký tự không dấu và không có khoảng trống.";
-    }
+// Fullname validation (letters and spaces only, accents are allowed)
+const fullnameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưƯỰỬỮỰỮỪỬáýỷỹỵÝỶỸ0-9 ]+$/;
+if (!fullnameRegex.test(newStaff.fullname)) {
+  newErrors.fullname = "Họ và tên chỉ chứa chữ cái và khoảng trống.";
+}
 
-    // Password validation (minimum 6 characters)
-    if (newStaff.password.length < 6) {
-      newErrors.password = "Mật khẩu phải có ít nhất 6 ký tự.";
-    }
+// Username validation (no spaces, no accents)
+const usernameRegex = /^[a-zA-Z0-9]+$/;
+if (!usernameRegex.test(newStaff.username)) {
+  newErrors.username = "Tên người dùng chỉ chứa ký tự không dấu và không có khoảng trống.";
+}
 
-    // Email validation (proper email format)
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(newStaff.email)) {
-      newErrors.email = "Email không hợp lệ.";
-    }
+// Password validation (minimum 6 characters)
+if (newStaff.password.length < 6) {
+  newErrors.password = "Mật khẩu phải có ít nhất 6 ký tự.";
+}
 
-    // Phone number validation (Vietnamese phone number format)
-    const phoneRegex = /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/;
-    if (!phoneRegex.test(newStaff.phone)) {
-      newErrors.phone = "Số điện thoại không hợp lệ.";
-    }
+// Email validation (proper email format)
+const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+if (!emailRegex.test(newStaff.email)) {
+  newErrors.email = "Email không hợp lệ.";
+}
+
+// Phone number validation (Vietnamese phone number format)
+const phoneRegex = /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/;
+if (!phoneRegex.test(newStaff.phone)) {
+  newErrors.phone = "Số điện thoại không hợp lệ.";
+}
+
 
     // Check for duplicate username
     const usernameExists = staffData.some(staff => staff.username === newStaff.username && staff._id !== selectedStaff?._id);
@@ -212,6 +242,7 @@ const ListStaffAccount = () => {
         <thead>
           <tr>
             <th>Tên người dùng</th>
+            <th>Họ và tên</th>
             <th>Mật khẩu</th>
             <th>Email</th>
             <th>SĐT</th>
@@ -244,6 +275,18 @@ const ListStaffAccount = () => {
                 disabled={isEditMode} // Disable the field if in edit mode
               />
               <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group controlId="formPassword">
+              <Form.Label>Họ và tên:</Form.Label>
+              <Form.Control
+                type="text"
+                name="fullname"
+                value={newStaff.fullname}
+                onChange={handleChange}
+                isInvalid={!!errors.fullname}
+              />
+              <Form.Control.Feedback type="invalid">{errors.fullname}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formPassword">

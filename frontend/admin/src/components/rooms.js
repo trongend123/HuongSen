@@ -8,10 +8,11 @@ const Room = ({ room, onClick }) => {
     backgroundColor: 
       room.status === 'Trống' ? '#d3d3d3' :
       room.status === 'Đã book' ? 'yellow' :
-      room.status === 'Đang sử dụng' ? 'red' : 'white',
+      room.status === 'Đang sửa chữa' ? 'red' :
+      room.status === 'Đang sử dụng' ? 'lightgreen' : 'black',
       width:
       room.roomCategoryId._id === '670dbe2c5c9f636934a39e5d' ? '150px' : '70px',
-    color: room.status === 'Đang sử dụng' ? 'white' : 'black',
+    color: room.status === 'Đang sửa chữa' ? 'white' : 'black',
   };
 
   return (
@@ -112,4 +113,49 @@ const CatBaRooms = ({ rooms, onClick }) => {
   );
 };
 
-export { DoSonRooms, CatBaRooms };
+const MinhKhaiRooms = ({ rooms, onClick }) => {
+  const floor7cb = rooms.slice(0, 11);
+  const floor6cb = rooms.slice(11,22);
+  const floor5cb = rooms.slice(22, 33);
+  const floor4cb = rooms.slice(33, 43);
+  const floor3cb = rooms.slice(43, 53);
+  const floor2cb = rooms.slice(53, 63);
+
+  return (
+    <div className="room-layout">
+      <h4>Cơ sở 16 Minh Khai:</h4>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor2cb.map((room) => (
+          <Room key={room._id} room={room} onClick={onClick} />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor3cb.map((room) => (
+          <Room key={room._id} room={room} onClick={onClick} />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor4cb.map((room) => (
+          <Room key={room._id} room={room} onClick={onClick} />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor5cb.map((room) => (
+          <Room key={room._id} room={room} onClick={onClick} />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor6cb.map((room) => (
+          <Room key={room._id} room={room} onClick={onClick} />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor7cb.map((room) => (
+          <Room key={room._id} room={room} onClick={onClick} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export { DoSonRooms, CatBaRooms, MinhKhaiRooms };

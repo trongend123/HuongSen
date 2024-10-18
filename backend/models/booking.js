@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-import taxSchema from './tax.js';
-import staffSchema from './staff.js';
+import Tax from './tax.js';
+import Staff from './staff.js';
 const bookingSchema = new mongoose.Schema({
     taxId: { type: mongoose.Schema.Types.ObjectId, ref: 'Taxes' },
     status: { type: String, required: true },
     payment: { type: String, required: true },
-    staffId: { type: mongoose.Schema.Types.ObjectId, ref: 'Staffs' },
+    staffId: { type: mongoose.Schema.Types.ObjectId, ref: Staff },
     price: { type: Number, required: true },
     checkin: { type: Date, required: true },
     note: { type: String },

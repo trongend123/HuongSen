@@ -33,4 +33,116 @@
   "locationId": {
     "$oid": "66f6c536285571f28087c16b"
   }
+},
+{
+  "_id": {
+    "$oid": "670dbe1c5c9f636934a39e5c"
+  },
+  "numberOfBed": "2",
+  "numberOfHuman": "2",
+  "price": 400000,
+  "name": "phòng đôi",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dbe2c5c9f636934a39e5d"
+  },
+  "numberOfBed": "1",
+  "numberOfHuman": "2",
+  "price": 450000,
+  "name": "phòng VIP",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  }
+},
+{
+  "_id": {
+    "$oid": "6711b8083ec99c24fb9ea0b1"
+  },
+  "numberOfBed": "3",
+  "numberOfHuman": "3",
+  "price": 500000,
+  "name": "phòng 3 giường",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  }
+},
+{
+  "_id": {
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "numberOfBed": 2,
+  "numberOfHuman": 2,
+  "price": 500000,
+  "name": "phòng đôi",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-10-18T01:24:12.982Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T01:24:12.982Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "numberOfBed": 2,
+  "numberOfHuman": 3,
+  "price": 500000,
+  "name": "phòng gia đình",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-10-18T01:26:08.126Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T01:26:08.126Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6711b9537210b684ed056cad"
+  },
+  "numberOfBed": 1,
+  "numberOfHuman": 2,
+  "price": 600000,
+  "name": "phòng VIP",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-10-18T01:26:43.747Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T01:26:43.747Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "numberOfBed": 1,
+  "numberOfHuman": 1,
+  "price": 450000,
+  "name": "phòng đơn",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-10-18T01:27:29.442Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T01:27:29.442Z"
+  },
+  "__v": 0
 }]

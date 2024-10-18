@@ -42,4 +42,112 @@
   },
   "gender": "Male",
   "deactive": false
+},
+{
+  "_id": {
+    "$oid": "67108281e104635266f0f33d"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2002-10-15T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-10-17T03:20:33.255Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-17T03:20:33.255Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671082833fcb2077b1ac01f8"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2002-10-15T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-10-17T03:20:35.551Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-17T03:20:35.551Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671082863fcb2077b1ac01fb"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2002-10-15T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-10-17T03:20:38.107Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-17T03:20:38.107Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67108625547e7b2d94f31997"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2002-07-25T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-10-17T03:36:05.800Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-17T03:36:05.800Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6710c379547e7b2d94f46d56"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2002-07-11T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-10-17T07:57:45.659Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-17T07:57:45.659Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6711b60ecd19e7c511a421a3"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2002-07-18T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-10-18T01:12:46.977Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T01:12:46.977Z"
+  },
+  "__v": 0
 }]
