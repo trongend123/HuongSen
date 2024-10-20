@@ -80,11 +80,24 @@ const deleteIdentifycation = async (req, res) => {
         return res.status(500).json({ message: `Error deleting identification: ${error.message}` });
     }
 };
-
+// GET: /identifycations/customer/:customerID
+const getIdentifycationsByCustomerId = async (req, res) => {
+    try {
+        const { customerID } = req.params;
+        const identifications = await IdentifycationRepo.listByCustomerId(customerID);
+        if (!identifications || identifications.length === 0) {
+            return res.status(404).json({ message: "No identifications found for this customer" });
+        }
+        return res.status(200).json(identifications);
+    } catch (error) {
+        return res.status(500).json({ message: `Error fetching identifications by customer ID: ${error.message}` });
+    }
+};
 export default {
     getIdentifycations,
     getIdentifycationById,
     createIdentifycation,
     editIdentifycation,
     deleteIdentifycation,
+    getIdentifycationsByCustomerId
 };

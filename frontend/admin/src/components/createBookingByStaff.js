@@ -3,14 +3,27 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
 
+
 const CreateBookingByStaff = () => {
     const navigate = useNavigate(); // Initialize navigate
+
+    const [user, setUser] = useState(null);
     const today = new Date().toISOString().split('T')[0];
     const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0];
 
+    useEffect(() => {
+        // Lấy thông tin người dùng từ localStorage
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const userResponse = JSON.parse(storedUser);
+            setUser(userResponse);  // Cập nhật giá trị cho user
+        }
+    }, []);
+
+    // Đợi đến khi user đã được khởi tạo rồi mới khởi tạo bookingData
     const [bookingData, setBookingData] = useState({
         taxId: null,
-        staffId: null,
+        staffId: null,  // Khởi tạo staffId là null cho đến khi user có giá trị
         status: 'In Progress',
         payment: 'Chưa Thanh Toán',
         price: 0,
@@ -18,6 +31,17 @@ const CreateBookingByStaff = () => {
         checkout: tomorrow,
         note: ''
     });
+
+    // Sử dụng useEffect để cập nhật bookingData khi user có giá trị
+    useEffect(() => {
+        if (user) {
+            setBookingData((prevBookingData) => ({
+                ...prevBookingData,
+                staffId: user._id  // Cập nhật staffId từ user khi user đã có giá trị
+            }));
+        }
+    }, [user]);
+
 
     const [customerData, setCustomerData] = useState({
         fullname: '',
@@ -42,6 +66,52 @@ const CreateBookingByStaff = () => {
     const [totalAmount, setTotalAmount] = useState(0);
     const [totalRoomsByCategory, setTotalRoomsByCategory] = useState([]);
     const [remainingRooms, setRemainingRooms] = useState({}); // Khởi tạo state để lưu số phòng còn lại
+
+
+
+    useEffect(() => {
+        const fetchRoomCategoriesLocations = async () => {
+            try {
+
+
+                const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
+                let filteredRoomCategories = roomCategoriesResponse.data;
+
+                // Kiểm tra vai trò người dùng và lọc roomCategories dựa trên locationId
+                if (user && user.role === 'staff_mk') {
+                    filteredRoomCategories = filteredRoomCategories.filter(
+                        (room) => room.locationId._id === '66f6c42f285571f28087c16a'
+                    );
+                } else if (user && user.role === 'staff_ds') {
+                    filteredRoomCategories = filteredRoomCategories.filter(
+                        (room) => room.locationId._id === '66f6c536285571f28087c16b'
+                    );
+                } else if (user && user.role === 'staff_cb') {
+                    filteredRoomCategories = filteredRoomCategories.filter(
+                        (room) => room.locationId._id === '66f6c59f285571f28087c16d'
+                    );
+                }
+                // Nếu là admin thì không lọc gì cả, lấy tất cả roomCategories
+                // Nếu không phải admin hoặc các role trên, filteredRoomCategories sẽ chứa tất cả các phòng
+
+                setRoomCategories(filteredRoomCategories);
+
+                // Khởi tạo giá trị cho số lượng phòng
+                const initialQuantity = {};
+                filteredRoomCategories.forEach(room => {
+                    initialQuantity[room._id] = 0;
+                });
+                setQuantity(initialQuantity);
+            } catch (error) {
+                console.error('Error fetching taxes or room categories:', error);
+            }
+        };
+
+        // Gọi hàm fetch khi component được mount hoặc user được cập nhật
+        if (user) {
+            fetchRoomCategoriesLocations();
+        }
+    }, [user]);
 
     useEffect(() => {
         const fetchRoomData = async () => {
@@ -72,24 +142,7 @@ const CreateBookingByStaff = () => {
         fetchRoomData();
     }, [bookingData.checkin, bookingData.checkout]);
 
-    useEffect(() => {
-        const fetchRoomCategories = async () => {
-            try {
-                const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
-                setRoomCategories(roomCategoriesResponse.data);
 
-                const initialQuantity = {};
-                roomCategoriesResponse.data.forEach(room => {
-                    initialQuantity[room._id] = 0;
-                });
-                setQuantity(initialQuantity);
-            } catch (error) {
-                console.error('Error fetching taxes or room categories:', error);
-            }
-        };
-
-        fetchRoomCategories();
-    }, []);
 
     const handleChange = (e) => {
         setBookingData({
@@ -143,10 +196,11 @@ const CreateBookingByStaff = () => {
 
     const validateForm = () => {
         const newErrors = {};
+        const namePattern = /^[A-Za-zÀ-ÿ\s]+$/; // Bao gồm chữ cái và khoảng trắng
 
-        // Validate for customer data (existing logic)
-        if (!customerData.fullname.trim()) {
-            newErrors.fullname = "Full name is required";
+        // Kiểm tra fullname chỉ chứa chữ cái
+        if (!customerData.fullname.trim() || !namePattern.test(customerData.fullname)) {
+            newErrors.fullname = "Full name is required and must contain only letters";
         }
 
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -182,12 +236,16 @@ const CreateBookingByStaff = () => {
         }
 
         // Validate for Identifycation data (new logic)
-        if (!identifycationData.name.trim()) {
-            newErrors.name = "Identifycation name is required";
+        if (!identifycationData.name.trim() || !namePattern.test(identifycationData.name)) {
+            newErrors.name = "Identifycation name is required and must contain only letters";
         }
 
+
+        const codePattern = /^[0-9]+$/; // Chỉ cho phép ký tự số
         if (!identifycationData.code.trim()) {
             newErrors.code = "Identifycation code is required";
+        } else if (!codePattern.test(identifycationData.code)) {
+            newErrors.code = "Identifycation code must contain only numbers";
         }
 
         const identifycationStartDate = new Date(identifycationData.dateStart);
@@ -203,8 +261,9 @@ const CreateBookingByStaff = () => {
             newErrors.dateEnd = "End date must be after start date";
         }
 
-        if (!identifycationData.location.trim()) {
-            newErrors.location = "Location is required";
+        const locationPattern = /^[A-Za-zÀ-ÿ0-9\s,.-]+$/; // Cho phép chữ cái, số, dấu phẩy, dấu chấm, và dấu gạch
+        if (!identifycationData.location.trim() || !locationPattern.test(identifycationData.location)) {
+            newErrors.location = "Location is required and must contain only letters, numbers, and some special characters like ',', '.', and '-'.";
         }
 
         setErrors(newErrors);

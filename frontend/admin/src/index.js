@@ -15,6 +15,7 @@ import Login from './screens/Login/login';
 import ChangePassword from './screens/Change Password/changepass';
 import CreateBookingByStaff from './components/createBookingByStaff';
 import { RxAvatar } from "react-icons/rx";
+import UpdateBookingInfo from './components/updateBookingInfo';
 
 // Layout wrapper to conditionally render sidebar and layout based on route
 const Layout = ({ children }) => {
@@ -33,7 +34,7 @@ const Layout = ({ children }) => {
     <div className="main-layout">
       <Sidebar /> {/* Sidebar is rendered only if not on the login route */}
       <Container fluid className="content" style={{ padding: '0px' }}>
-        <div className="content-header"><RxAvatar/><NavLink className={"nav-link"} to="/change-password">Thay đổi mật khẩu</NavLink></div>
+        <div className="content-header"><RxAvatar /><NavLink className={"nav-link"} to="/change-password">Thay đổi mật khẩu</NavLink></div>
         <div className="body">
           {children}
         </div>
@@ -59,7 +60,8 @@ root.render(
                 <Route path="/bookings" element={<ListBooking />} />
                 <Route path="/staffs" element={<ListStaff />} />
                 <Route path="/roomCate" element={<ListRoomCate />} />
-              <Route path="/createBooking" element={<CreateBookingByStaff />} />
+                <Route path="/createBooking" element={<CreateBookingByStaff />} />
+                <Route path="/updateBookingInfo" element={<UpdateBookingInfo />} />
               </Routes>
             </Layout>
           )}
