@@ -4,6 +4,7 @@ import './index.css';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './screens/Home/home';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
