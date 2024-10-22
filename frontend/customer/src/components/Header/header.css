@@ -1,5 +1,5 @@
 .header {
-  background-color: #0160b9; /* Dark blue background */
+  background-color: #8f191c; /* Dark blue background */
   color: rgb(197, 181, 108); /* White text color */
 }
 
@@ -30,4 +30,8 @@
   .social-icons {
     margin-top: 10px;
   }
+}
+
+.py-3 {
+  padding: 0px !important;
 }

@@ -4,7 +4,7 @@ import Footer from '../../components/Footer/footer';
 import Header from '../../components/Header/header';
 import NavigationBar from '../../components/Navbar/navbar';
 import './home.css';
-import main from '../../assets/main.jpg';
+import main from '../../assets/main.png';
 import cs1 from '../../assets/cs1.jpg';
 import cs2 from '../../assets/cs2.jpg';
 import cs3 from '../../assets/cs3.jpg';
@@ -18,17 +18,15 @@ import newsImg3 from '../../assets/ngu3.jpg';
 
 const HomePage = () => {
   return (
-    <Container fluid>
-      <Header />
-      <NavigationBar />
+    <>
       
-      {/* Section with an image */}
+     
       <div>
         <img src={main} alt="Banner" className="banner-image" />
       </div>
 
       {/* Giới thiệu Section */}
-      <section id="about" className="py-5 text-center bg-light">
+      <section id="about" className="py-5 text-center ">
         <Container>
           <h2>Giới thiệu</h2>
           <p>
@@ -41,14 +39,14 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
       {/* Hệ thống nhà khách Section */}
       <section id="branches" className="py-5">
         <Container>
-          <h2 className="text-center">Hệ thống nhà khách</h2>
+          <h2 className="text-center">Hệ thống nhà khách</h2> 
           <Row className="mt-4">
             <Col md={4}>
               <Card>
                 <Card.Img variant="top" src={cs1} />
                 <Card.Body>
-                  <Card.Title>Chi nhánh 1 - 16 Minh Khai, Hải Phòng</Card.Title>
-                  <Card.Text>Địa chỉ: 123 Đường ABC, Quận XYZ, Hà Nội.</Card.Text>
+                  <Card.Title>Nhà khách Hương Sen cơ sở Minh Khai</Card.Title>
+                  <Card.Text>Địa chỉ: 16 Minh Khai, Hồng Bàng, TP Hải Phòng.</Card.Text>
                   <Button variant="primary">Chi tiết</Button>
                 </Card.Body>
               </Card>
@@ -57,8 +55,8 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
               <Card>
                 <Card.Img variant="top" src={cs2} />
                 <Card.Body>
-                  <Card.Title>Chi nhánh 2 - Đồ Sơn</Card.Title>
-                  <Card.Text>Địa chỉ: 456 Đường DEF, Quận UVW, Đà Nẵng.</Card.Text>
+                  <Card.Title>Trung tâm bồi dưỡng nghiệp vụ Hải Hà</Card.Title>
+                  <Card.Text>Địa chỉ: 02 Lý Thánh Tông, phường Hải Sơn, Đồ Sơn, Hải Phòng</Card.Text>
                   <Button variant="primary">Chi tiết</Button>
                 </Card.Body>
               </Card>
@@ -67,8 +65,8 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
               <Card>
                 <Card.Img variant="top" src={cs3} />
                 <Card.Body>
-                  <Card.Title>Chi nhánh 3 - Cát Bà</Card.Title>
-                  <Card.Text>Địa chỉ: 789 Đường GHI, Quận LMN, TP. Hồ Chí Minh.</Card.Text>
+                  <Card.Title>Nhà khách Hương Sen cơ sở Cát Bà</Card.Title>
+                  <Card.Text>Địa chỉ: đường Núi Ngọc, thị trấn Cát Bà, Cát Hải, Hải Phòng</Card.Text>
                   <Button variant="primary">Chi tiết</Button>
                 </Card.Body>
               </Card>
@@ -143,7 +141,7 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
       </section>
 
       {/* Tin tức Section */}
-      <section id="news" className="py-5">
+      {/* <section id="news" className="py-5">
         <Container>
           <h2 className="text-center">Tin tức</h2>
           <Row className="mt-4">
@@ -179,10 +177,9 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
             </Col>
           </Row>
         </Container>
-      </section>
+      </section> */}
 
-      <Footer />
-    </Container>
+    </>
   );
 }
 

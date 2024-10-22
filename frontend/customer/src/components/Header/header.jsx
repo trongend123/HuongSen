@@ -5,11 +5,11 @@ import './header.css';
 
 const Header = () => {
   return (
-    <header className="header py-3">
+    <header className="header">
       <Container>
         <Row>
           <Col md={6} className="contact-info">
-            <h5>16 Minh Khai | Đồ Sơn | Cát Bà | 024 3736 8933</h5>
+            <b>16 Minh Khai | Đồ Sơn | Cát Bà | 024 3736 8933</b>
           </Col>
           <Col md={6} className="text-md-end">
             <a href="https://facebook.com/your-facebook" target="_blank" rel="noopener noreferrer" className="social-icon">

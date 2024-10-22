@@ -1,12 +1,12 @@
 /* Ensure the navbar looks polished and aligned */
 .navbar {
-  background-color: #498ac7;
+  background-color: #8f191c;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
   
 }
 
 .navbar-custom .logo {
-  width: 150px;
+  width: 120px;
   height: auto;
   transition: transform 0.3s ease-in-out;
 }
@@ -19,7 +19,7 @@
 .navbar-custom .nav-link {
   font-size: 18px;
   margin-right: 20px;
-  color: #333;
+  color: #ffffff;
   font-weight: 500;
   transition: color 0.3s ease;
   position: relative;

@@ -9,7 +9,7 @@ const Footer = () => {
         <Row>
           {/* Contact Information */}
           <Col md={4} className="mb-4">
-            <h5>Nha khách Hương Sen</h5>
+            <h5>Nhà khách Hương Sen</h5>
             <p>Address: Số 16 Minh Khai, Hồng bàng - TP Hải Phòng</p>
             <p>Mr Tuấn: 0904 665 538</p>
             <p>Mr Trọng - con bố Tuấn: 09161 27 446</p>
