@@ -4,11 +4,9 @@ import { IdentifycationRepo } from "../repositories/index.js";
 const getIdentifycations = async (req, res) => {
     try {
         const identifications = await IdentifycationRepo.list();
-        res.status(200).json(identifications);
+        return res.status(200).json(identifications);
     } catch (error) {
-        res.status(500).json({
-            message: error.toString(),
-        });
+        return res.status(500).json({ message: `Error fetching identifications: ${error.message}` });
     }
 };
 
@@ -19,85 +17,87 @@ const getIdentifycationById = async (req, res) => {
         if (!identification) {
             return res.status(404).json({ message: "Identification not found" });
         }
-        res.status(200).json(identification);
+        return res.status(200).json(identification);
     } catch (error) {
-        res.status(500).json({
-            message: error.toString(),
-        });
+        return res.status(500).json({ message: `Error fetching identification: ${error.message}` });
     }
 };
 
 // POST: /identifycations
 const createIdentifycation = async (req, res) => {
     try {
-        const {
-            categoryId,
-            code,
-            dateStart,
-            dateEnd,
-            location,
-            memberId,
-            cusAccId,
-        } = req.body;
+        const { name, code, dateStart, dateEnd, location, customerID } = req.body;
 
-        // Tạo identification mới
+        // Validate required fields
+        if (!name || !code || !dateStart || !dateEnd || !location || !customerID) {
+            return res.status(400).json({ message: "All fields are required." });
+        }
+
+        // Create new identification
         const newIdentification = await IdentifycationRepo.create({
-            categoryId,
+            name,
             code,
             dateStart,
             dateEnd,
             location,
-            memberId,
-            cusAccId,
+            customerID,
         });
 
-        res.status(201).json(newIdentification);
+        return res.status(201).json(newIdentification);
     } catch (error) {
-        res.status(500).json({
-            message: error.toString(),
-        });
+        return res.status(500).json({ message: `Error creating identification: ${error.message}` });
     }
 };
 
 // PUT: /identifycations/:id
 const editIdentifycation = async (req, res) => {
     try {
-        const updatedIdentification = await IdentifycationRepo.edit(
-            req.params.id,
-            req.body
-        );
+        const { id } = req.params;
+        const updatedIdentification = await IdentifycationRepo.edit(id, req.body);
+
         if (!updatedIdentification) {
             return res.status(404).json({ message: "Identification not found" });
         }
-        res.status(200).json(updatedIdentification);
+
+        return res.status(200).json(updatedIdentification);
     } catch (error) {
-        res.status(500).json({
-            message: error.toString(),
-        });
+        return res.status(500).json({ message: `Error updating identification: ${error.message}` });
     }
 };
 
 // DELETE: /identifycations/:id
 const deleteIdentifycation = async (req, res) => {
     try {
-        const deletedIdentification = await IdentifycationRepo.deleteIdentifycation(
-            req.params.id
-        );
+        const { id } = req.params;
+        const deletedIdentification = await IdentifycationRepo.deleteIdentifycation(id);
+
         if (!deletedIdentification) {
             return res.status(404).json({ message: "Identification not found" });
         }
-        res.status(200).json(deletedIdentification);
+
+        return res.status(200).json({ message: "Identification deleted successfully" });
     } catch (error) {
-        res.status(500).json({
-            message: error.toString(),
-        });
+        return res.status(500).json({ message: `Error deleting identification: ${error.message}` });
     }
 };
-
+// GET: /identifycations/customer/:customerID
+const getIdentifycationsByCustomerId = async (req, res) => {
+    try {
+        const { customerID } = req.params;
+        const identifications = await IdentifycationRepo.listByCustomerId(customerID);
+        if (!identifications || identifications.length === 0) {
+            return res.status(404).json({ message: "No identifications found for this customer" });
+        }
+        return res.status(200).json(identifications);
+    } catch (error) {
+        return res.status(500).json({ message: `Error fetching identifications by customer ID: ${error.message}` });
+    }
+};
 export default {
     getIdentifycations,
     getIdentifycationById,
     createIdentifycation,
     editIdentifycation,
     deleteIdentifycation,
+    getIdentifycationsByCustomerId
 };

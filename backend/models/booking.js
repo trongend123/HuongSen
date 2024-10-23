@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import Tax from './tax.js';
 import Staff from './staff.js';
 const bookingSchema = new mongoose.Schema({
-    taxId: { type: mongoose.Schema.Types.ObjectId, ref: Tax, },
+    taxId: { type: mongoose.Schema.Types.ObjectId, ref: 'Taxes' },
     status: { type: String, required: true },
     payment: { type: String, required: true },
     staffId: { type: mongoose.Schema.Types.ObjectId, ref: Staff },
@@ -10,8 +10,8 @@ const bookingSchema = new mongoose.Schema({
     checkin: { type: Date, required: true },
     note: { type: String },
     checkout: { type: Date, required: true },
-    contractId: { type: String },
-    humans: { type: Number, required: true },
+    contract: { type: String },
+    humans: { type: Number }
 });
 
 const Bookings = mongoose.model('Bookings', bookingSchema);

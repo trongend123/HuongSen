@@ -42,37 +42,37 @@ import mongoose, { Schema } from "mongoose";
 // fix code models
 
 const identifycationSchema = new Schema(
-    {
-      name: {
-        type: String,
-        required: true,
-      },
-      code: {
-        type: String,
-        required: true,
-      },
-      dateStart: {
-        type: Date,
-        required: true,
-      },
-      dateEnd: {
-        type: Date,
-        required: true,
-      },
-      location: {
-        type: String,
-        required: true,
-      },
-      customerID: {
-        type: Schema.Types.ObjectId,
-        ref: "Customer", // Tham chiếu đến bảng Customer
-        required: true,
-      },
+  {
+    name: {
+      type: String,
+      required: true,
     },
-    {
-      timestamps: true,
-    }
-  );
+    code: {
+      type: String,
+      required: true,
+    },
+    dateStart: {
+      type: Date,
+      required: true,
+    },
+    dateEnd: {
+      type: Date,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+    customerID: {
+      type: Schema.Types.ObjectId,
+      ref: "Customers", // Tham chiếu đến bảng Customer
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const Identifycations = mongoose.model("Identifycations", identifycationSchema);
 

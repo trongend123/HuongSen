@@ -107,10 +107,48 @@ const deleteRoom = async (req, res) => {
   }
 };
 
+// GET: /rooms/category/:roomCategoryId
+const getRoomsInCategory = async (req, res) => {
+  try {
+    const { roomCategoryId } = req.params;
+
+    // Fetch rooms in the given category and calculate total
+    const { rooms, totalRooms } = await RoomRepo.getRoomsByCategory(roomCategoryId);
+
+    res.status(200).json({
+      message: `Found ${totalRooms} rooms in the category`,
+      rooms,
+      totalRooms,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.toString(),
+    });
+  }
+};
+
+// GET: /rooms/category/totals
+const getTotalRoomsByCategory = async (req, res) => {
+  try {
+    const categoryTotals = await RoomRepo.getTotalRoomsByCategory();
+
+    res.status(200).json({
+      message: "Total rooms by category",
+      categoryTotals,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.toString(),
+    });
+  }
+};
+
 export default {
   getRooms,
   getRoomById,
   createRoom,
   editRoom,
   deleteRoom,
+  getRoomsInCategory,
+  getTotalRoomsByCategory
 };
