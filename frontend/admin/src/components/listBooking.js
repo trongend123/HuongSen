@@ -202,7 +202,7 @@ const ListBooking = () => {
                       variant="danger"
                       onClick={(e) => {
                         e.stopPropagation(); // Ngăn sự kiện onClick của hàng
-                        handleCancelClick(booking);
+                        handleCancelClick(booking.bookingId);
                       }}
                     >
                       Hủy
