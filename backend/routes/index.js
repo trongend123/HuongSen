@@ -20,6 +20,7 @@ import BookingRouter from "./bookingRoutes.js";
 import StaffRouter from "./staff.js";
 import RoomCategoryRouter from "./roomCategoryRouter.js";
 import OrderRoomRouter from "./orderRoomRoutes.js";
+import OrderServiceRouter from "./orderServiceRoute.js";
 
 export {
     ImageRouter,
@@ -41,6 +42,7 @@ export {
     // VoucherRouter,
     // VoucherAccRouter,
     RoomCategoryRouter,
-    OrderRoomRouter
+    OrderRoomRouter,
+    OrderServiceRouter
 }
 

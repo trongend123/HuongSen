@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Container, Button, Modal, Form, InputGroup, FormControl } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'; // Nhập useNavigate từ react-router-dom
 import axios from 'axios';
 
 const ListBooking = () => {
   const [bookings, setBookings] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(''); // State for search query
-  const [locationQuery, setLocationQuery] = useState(''); // New state for location filtering
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [updatedPayment, setUpdatedPayment] = useState('');
@@ -14,6 +14,9 @@ const ListBooking = () => {
   const [updatedCheckout, setUpdatedCheckout] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
   const [locations, setLocation] = useState([]);
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [selectedBookingDetails, setSelectedBookingDetails] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -21,7 +24,7 @@ const ListBooking = () => {
       .then((response) => setBookings(response.data))
       .catch((error) => console.error("Error fetching bookings:", error));
 
-      axios
+    axios
       .get('http://localhost:9999/locations')
       .then((response) => setLocation(response.data))
       .catch((error) => console.error('Error fetching locations:', error));
@@ -40,6 +43,37 @@ const ListBooking = () => {
     setUpdatedCheckout(booking.bookingId.checkout);
     setShowModal(true);
   };
+
+
+
+  const handleRowClick = async (booking) => {
+    try {
+      // Lấy danh sách xác thực cho khách hàng
+      const response = await axios.get(`http://localhost:9999/identifycations/customer/${booking.customerId._id}`);
+      const identifications = response.data;
+
+      // Kiểm tra nếu có xác thực nào
+      if (identifications.length > 0) {
+        const { name, code } = identifications[0]; // Lấy thông tin từ xác thực đầu tiên
+
+        // Cập nhật chi tiết booking bao gồm cả tên và mã xác thực
+        setSelectedBookingDetails({
+          ...booking,
+          identifyName: name,   // Lưu tên của giấy tờ xác thực
+          identifyCode: code,   // Lưu mã của giấy tờ xác thực
+        });
+      } else {
+        // Nếu không có xác thực
+        setSelectedBookingDetails(booking); // Không có thông tin identifycation
+      }
+
+      setShowDetailModal(true); // Hiển thị modal chi tiết
+    } catch (error) {
+      console.error("Error fetching booking details:", error);
+      // Xử lý lỗi có thể thêm thông báo cho người dùng ở đây
+    }
+  };
+
 
   const handleUpdateBooking = () => {
     const updatedBooking = {
@@ -141,12 +175,12 @@ const ListBooking = () => {
         </thead>
         <tbody>
           {filteredBookings.map((booking) => (
-            <tr key={booking._id}>
+            <tr key={booking._id} onClick={() => handleRowClick(booking)} style={{ cursor: 'pointer' }}>
               <td>{booking.bookingId._id}</td>
               <td>{booking.customerId.fullname}</td>
               <td>{booking.roomCateId.name}</td>
               <td>{booking.quantity}</td>
-              <td>{(booking.quantity * booking.roomCateId.price)}</td>
+              <td>{booking.quantity * booking.roomCateId.price}</td>
               <td>{formatDate(booking.bookingId.checkin)}</td>
               <td>{formatDate(booking.bookingId.checkout)}</td>
               <td>{booking.bookingId.payment}</td>
@@ -154,10 +188,23 @@ const ListBooking = () => {
               <td>
                 {booking.bookingId.status !== 'Cancelled' && booking.bookingId.status !== 'Completed' && (
                   <>
-                    <Button variant="warning" className="me-2" onClick={() => handleEditClick(booking)}>
+                    <Button
+                      variant="warning"
+                      className="me-2"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Ngăn sự kiện onClick của hàng
+                        handleEditClick(booking);
+                      }}
+                    >
                       Chỉnh sửa
                     </Button>
-                    <Button variant="danger" onClick={() => handleCancelClick(booking.bookingId)}>
+                    <Button
+                      variant="danger"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Ngăn sự kiện onClick của hàng
+                        handleCancelClick(booking.bookingId);
+                      }}
+                    >
                       Hủy
                     </Button>
                   </>
@@ -168,6 +215,7 @@ const ListBooking = () => {
         </tbody>
       </Table>
 
+
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Chỉnh sửa Đặt phòng</Modal.Title>
@@ -175,7 +223,7 @@ const ListBooking = () => {
         <Modal.Body>
           {selectedBooking && (
             <>
-             <Form.Group controlId="status" className="mt-3">
+              <Form.Group controlId="status" className="mt-3">
                 <Form.Label>Thanh toán</Form.Label>
                 <Form.Control
                   as="select"
@@ -216,6 +264,47 @@ const ListBooking = () => {
           </Button>
           <Button variant="primary" onClick={handleUpdateBooking}>
             Cập nhật
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Modal for booking details */}
+      <Modal show={showDetailModal} onHide={() => setShowDetailModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Chi tiết Đặt phòng</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedBookingDetails ? (
+            <>
+              <p><strong>Tên Khách:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.fullname : 'Không có'}</p>
+              <p><strong>Điện thoại:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.phone : 'Không có'}</p>
+              <p><strong>Email:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.email : 'Không có'}</p>
+              <p><strong>Ngày sinh:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.dob : 'Không có'}</p>
+              <p><strong>Xác thực:</strong></p>
+              <p>- Giấy tờ: {selectedBookingDetails.identifyName ? selectedBookingDetails.identifyName : 'Không có'}</p>
+              <p>- Mã: {selectedBookingDetails.identifyCode ? selectedBookingDetails.identifyCode : 'Không có'}</p>
+              <p><strong>Tên phòng:</strong> {selectedBookingDetails.roomCateId ? selectedBookingDetails.roomCateId.name : 'Không có'}</p>
+              <p><strong>Số lượng:</strong> {selectedBookingDetails.quantity}</p>
+              <p><strong>Tổng giá:</strong> {(selectedBookingDetails.quantity * (selectedBookingDetails.roomCateId ? selectedBookingDetails.roomCateId.price : 0)).toFixed(2)}</p>
+              <p><strong>Checkin:</strong> {formatDate(selectedBookingDetails.bookingId.checkin)}</p>
+              <p><strong>Checkout:</strong> {formatDate(selectedBookingDetails.bookingId.checkout)}</p>
+            </>
+          ) : (
+            <p>Không có thông tin chi tiết.</p>
+          )}
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDetailModal(false)}>
+            Đóng
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              navigate('/updateBookingInfo', { state: { selectedBookingDetails } });
+            }}
+          >
+            Chỉnh sửa thông tin
           </Button>
         </Modal.Footer>
       </Modal>

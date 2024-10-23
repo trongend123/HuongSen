@@ -65,8 +65,8 @@ const getById = async (id) => {
 const edit = async (
   id,
   {
-   
-    code, 
+
+    code,
     status,
     roomCategoryId,
   }
@@ -75,7 +75,7 @@ const edit = async (
     const updatedRoom = await Room.findByIdAndUpdate(
       { _id: id },
       {
-        code, 
+        code,
         status,
         roomCategoryId,
       },
@@ -99,10 +99,41 @@ const deleteRoom = async (id) => {
     throw new Error(error.toString());
   }
 };
+
+// Get all rooms by roomCategoryId and count total
+const getRoomsByCategory = async (roomCategoryId) => {
+  try {
+    // Find rooms by roomCategoryId
+    const rooms = await Room.find({ roomCategoryId }).populate("roomCategoryId").exec();
+
+    // Calculate the total number of rooms in this category
+    const totalRooms = rooms.length;
+
+    return {
+      rooms,
+      totalRooms
+    };
+  } catch (error) {
+    throw new Error(error.toString());
+  }
+};
+// Get total number of rooms by each roomCategoryId
+const getTotalRoomsByCategory = async () => {
+  const categoryTotals = await Room.aggregate([
+    { $group: { _id: "$roomCategoryId", totalRooms: { $sum: 1 } } },
+    { $lookup: { from: "roomcategories", localField: "_id", foreignField: "_id", as: "category" } },
+    { $unwind: "$category" },
+    { $project: { _id: 0, category: "$category.name", roomCateId: "$category._id", totalRooms: 1 } }
+  ]);
+  return categoryTotals;
+}
+
 export default {
   create,
   list,
   getById,
   edit,
   deleteRoom,
+  getRoomsByCategory,
+  getTotalRoomsByCategory
 };
