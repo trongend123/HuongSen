@@ -23,7 +23,8 @@ import {
   // VoucherRouter,
   // VoucherAccRouter,  
   RoomCategoryRouter,
-  OrderRoomRouter
+  OrderRoomRouter,
+  OrderServiceRouter
 } from "./routes/index.js";
 //import { verifyAccessToken } from "./jwt_helper.js";
 import { changePassword, loginUser, registerUser, verifyAccessToken } from "./authens/auth.js";
@@ -60,6 +61,7 @@ app.use("/bookings", BookingRouter);
 app.use("/staffs", StaffRouter);
 app.use("/roomCategories", RoomCategoryRouter);
 app.use("/orderRooms", OrderRoomRouter);
+app.use("/orderServices", OrderServiceRouter);
 // Khai báo port cho ứng dụng web
 //authen
 // Register route

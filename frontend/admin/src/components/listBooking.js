@@ -281,7 +281,7 @@ const ListBooking = () => {
               <p><strong>Email:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.email : 'Không có'}</p>
               <p><strong>Ngày sinh:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.dob : 'Không có'}</p>
               <p><strong>Xác thực:</strong></p>
-              <p>- Tên: {selectedBookingDetails.identifyName ? selectedBookingDetails.identifyName : 'Không có'}</p>
+              <p>- Giấy tờ: {selectedBookingDetails.identifyName ? selectedBookingDetails.identifyName : 'Không có'}</p>
               <p>- Mã: {selectedBookingDetails.identifyCode ? selectedBookingDetails.identifyCode : 'Không có'}</p>
               <p><strong>Tên phòng:</strong> {selectedBookingDetails.roomCateId ? selectedBookingDetails.roomCateId.name : 'Không có'}</p>
               <p><strong>Số lượng:</strong> {selectedBookingDetails.quantity}</p>

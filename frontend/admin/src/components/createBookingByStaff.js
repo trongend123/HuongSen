@@ -1,47 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
 const CreateBookingByStaff = () => {
-    const navigate = useNavigate(); // Initialize navigate
-
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const today = new Date().toISOString().split('T')[0];
     const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0];
 
     useEffect(() => {
-        // Lấy thông tin người dùng từ localStorage
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
             const userResponse = JSON.parse(storedUser);
-            setUser(userResponse);  // Cập nhật giá trị cho user
+            setUser(userResponse);
         }
     }, []);
 
-    // Đợi đến khi user đã được khởi tạo rồi mới khởi tạo bookingData
     const [bookingData, setBookingData] = useState({
         taxId: null,
-        staffId: null,  // Khởi tạo staffId là null cho đến khi user có giá trị
+        staffId: null,
         status: 'In Progress',
         payment: 'Chưa Thanh Toán',
         price: 0,
         checkin: today,
         checkout: tomorrow,
-        note: ''
+        note: '',
+        humans: 1,
+        contract: ''
     });
 
-    // Sử dụng useEffect để cập nhật bookingData khi user có giá trị
     useEffect(() => {
         if (user) {
             setBookingData((prevBookingData) => ({
                 ...prevBookingData,
-                staffId: user._id  // Cập nhật staffId từ user khi user đã có giá trị
+                staffId: user._id
             }));
         }
     }, [user]);
-
 
     const [customerData, setCustomerData] = useState({
         fullname: '',
@@ -53,31 +49,38 @@ const CreateBookingByStaff = () => {
     const [identifycationData, setIdentifycationData] = useState({
         name: '',
         code: '',
-        dateStart: today,
-        dateEnd: tomorrow,
+        dateStart: '',
+        dateEnd: '',
         location: '',
-        customerID: null // This will be set after customer is created
+        customerID: null
     });
 
     const [errors, setErrors] = useState({});
-
     const [roomCategories, setRoomCategories] = useState([]);
     const [quantity, setQuantity] = useState({});
     const [totalAmount, setTotalAmount] = useState(0);
     const [totalRoomsByCategory, setTotalRoomsByCategory] = useState([]);
-    const [remainingRooms, setRemainingRooms] = useState({}); // Khởi tạo state để lưu số phòng còn lại
-
-
+    const [remainingRooms, setRemainingRooms] = useState({});
+    const [otherServices, setOtherServices] = useState([]);
+    const [orderServicesData, setOrderServicesData] = useState([]);
+    const [selectedService, setSelectedService] = useState("");
+    const [serviceQuantity, setServiceQuantity] = useState(1);
+    const [staffName, setStaffName] = useState('');
 
     useEffect(() => {
-        const fetchRoomCategoriesLocations = async () => {
+        const fetchRoomCategoriesLocationsOtherService = async () => {
             try {
-
-
                 const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
                 let filteredRoomCategories = roomCategoriesResponse.data;
+                const response = await axios.get('http://localhost:9999/otherServices');
+                const services = response.data.map(service => ({
+                    otherServiceId: service._id,
+                    name: service.name,
+                    price: service.price,
+                    serviceQuantity: 0
+                }));
+                setOtherServices(services);
 
-                // Kiểm tra vai trò người dùng và lọc roomCategories dựa trên locationId
                 if (user && user.role === 'staff_mk') {
                     filteredRoomCategories = filteredRoomCategories.filter(
                         (room) => room.locationId._id === '66f6c42f285571f28087c16a'
@@ -91,12 +94,9 @@ const CreateBookingByStaff = () => {
                         (room) => room.locationId._id === '66f6c59f285571f28087c16d'
                     );
                 }
-                // Nếu là admin thì không lọc gì cả, lấy tất cả roomCategories
-                // Nếu không phải admin hoặc các role trên, filteredRoomCategories sẽ chứa tất cả các phòng
-
+                setStaffName(user.fullname);
                 setRoomCategories(filteredRoomCategories);
 
-                // Khởi tạo giá trị cho số lượng phòng
                 const initialQuantity = {};
                 filteredRoomCategories.forEach(room => {
                     initialQuantity[room._id] = 0;
@@ -107,9 +107,8 @@ const CreateBookingByStaff = () => {
             }
         };
 
-        // Gọi hàm fetch khi component được mount hoặc user được cập nhật
         if (user) {
-            fetchRoomCategoriesLocations();
+            fetchRoomCategoriesLocationsOtherService();
         }
     }, [user]);
 
@@ -117,7 +116,7 @@ const CreateBookingByStaff = () => {
         const fetchRoomData = async () => {
             try {
                 const totalRoomsResponse = await axios.get('http://localhost:9999/rooms/category/totals');
-                setTotalRoomsByCategory(totalRoomsResponse.data.categoryTotals); // Sử dụng categoryTotals
+                setTotalRoomsByCategory(totalRoomsResponse.data.categoryTotals);
 
                 const bookedRoomsResponse = await axios.get(`http://localhost:9999/orderRooms/totalbycategory/?checkInDate=${bookingData.checkin}&checkOutDate=${bookingData.checkout}`);
                 const bookedRoomsMap = {};
@@ -142,8 +141,6 @@ const CreateBookingByStaff = () => {
         fetchRoomData();
     }, [bookingData.checkin, bookingData.checkout]);
 
-
-
     const handleChange = (e) => {
         setBookingData({
             ...bookingData,
@@ -166,6 +163,38 @@ const CreateBookingByStaff = () => {
         });
     };
 
+    const handleAddService = () => {
+        const existingService = orderServicesData.find(service => service.otherServiceId === selectedService);
+
+        if (existingService) {
+            setOrderServicesData(prevData =>
+                prevData.map(service =>
+                    service.otherServiceId === selectedService
+                        ? { ...service, serviceQuantity: service.serviceQuantity + parseInt(serviceQuantity) }
+                        : service
+                )
+            );
+        } else {
+            setOrderServicesData(prevData => [
+                ...prevData,
+                { otherServiceId: selectedService, serviceQuantity: parseInt(serviceQuantity) }
+            ]);
+        }
+
+        setSelectedService("");
+        setServiceQuantity(1);
+
+        // Tính lại tổng tiền sau khi thêm dịch vụ
+        calculateTotalAmount();
+    };
+
+    const handleRemoveService = (index) => {
+        setOrderServicesData(prevData => prevData.filter((_, i) => i !== index));
+
+        // Tính lại tổng tiền sau khi xóa dịch vụ
+        calculateTotalAmount();
+    };
+
     const handleCustomerChange = (e) => {
         setCustomerData({
             ...customerData,
@@ -173,13 +202,30 @@ const CreateBookingByStaff = () => {
         });
     };
 
+    // const calculateTotalAmount = () => {
+    //     let total = 0;
+
+    //     const checkinDate = new Date(bookingData.checkin);
+    //     const checkoutDate = new Date(bookingData.checkout);
+    //     const nights = (checkoutDate - checkinDate) / (1000 * 60 * 60 * 24);
+
+    //     roomCategories.forEach((room) => {
+    //         const qty = quantity[room._id] || 0;
+    //         if (qty > 0) {
+    //             total += room.price * qty * nights;
+    //         }
+    //     });
+
+    //     setTotalAmount(total);
+    // };
     const calculateTotalAmount = () => {
         let total = 0;
 
         const checkinDate = new Date(bookingData.checkin);
         const checkoutDate = new Date(bookingData.checkout);
-        const nights = (checkoutDate - checkinDate) / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+        const nights = (checkoutDate - checkinDate) / (1000 * 60 * 60 * 24);
 
+        // Tính tổng tiền cho các loại phòng
         roomCategories.forEach((room) => {
             const qty = quantity[room._id] || 0;
             if (qty > 0) {
@@ -187,122 +233,125 @@ const CreateBookingByStaff = () => {
             }
         });
 
+        // Tính tổng tiền cho các dịch vụ đã chọn
+        orderServicesData.forEach(service => {
+            const serviceDetails = otherServices.find(s => s.otherServiceId === service.otherServiceId);
+            if (serviceDetails) {
+                total += serviceDetails.price * service.serviceQuantity;
+            }
+        });
+
         setTotalAmount(total);
     };
 
+
     useEffect(() => {
         calculateTotalAmount();
-    }, [bookingData.checkin, bookingData.checkout, quantity]);
+    }, [orderServicesData, quantity, bookingData.checkin, bookingData.checkout]);
 
     const validateForm = () => {
         const newErrors = {};
-        const namePattern = /^[A-Za-zÀ-ÿ\s]+$/; // Bao gồm chữ cái và khoảng trắng
+        const namePattern = /^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶèéêẽếềệỉĩìíòóôõơợụùúỷỹýỵ\s]+$/;
+        const today = new Date();
 
-        // Kiểm tra fullname chỉ chứa chữ cái
         if (!customerData.fullname.trim() || !namePattern.test(customerData.fullname)) {
-            newErrors.fullname = "Full name is required and must contain only letters";
+            newErrors.fullname = "Họ và tên chỉ được chứa chữ cái";
         }
 
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(customerData.email)) {
-            newErrors.email = "Please enter a valid email address";
+            newErrors.email = "Vui lòng nhập email hợp lệ";
         }
 
         const phonePattern = /^(03|05|07|08|09)\d{8,9}$/;
         if (!phonePattern.test(customerData.phone)) {
-            newErrors.phone = "Please enter a valid Vietnamese phone number (10 or 11 digits)";
+            newErrors.phone = "Vui lòng nhập số điện thoại hợp lệ";
         }
 
-        const today = new Date();
         const dob = new Date(customerData.dob);
         const age = today.getFullYear() - dob.getFullYear();
         if (age < 18 || (age === 18 && today < new Date(dob.setFullYear(today.getFullYear() - 18)))) {
-            newErrors.dob = "Customer must be at least 18 years old";
+            newErrors.dob = "Khách hàng phải từ 18 tuổi trở lên";
         }
 
         const checkinDate = new Date(bookingData.checkin);
         if (checkinDate < today.setHours(0, 0, 0, 0)) {
-            newErrors.checkin = "Check-in date cannot be in the past";
+            newErrors.checkin = "Ngày check-in không thể là ngày trong quá khứ";
         }
 
         const checkoutDate = new Date(bookingData.checkout);
         if (checkoutDate <= checkinDate) {
-            newErrors.checkout = "Check-out date must be at least 1 day after check-in";
+            newErrors.checkout = "Ngày check-out phải sau ngày check-in ít nhất 1 ngày";
         }
 
         const selectedRooms = Object.values(quantity).some(qty => qty > 0);
         if (!selectedRooms) {
-            newErrors.roomSelection = "Please select at least one room with a quantity greater than 0";
+            newErrors.roomSelection = "Vui lòng chọn ít nhất một phòng với số lượng lớn hơn 0";
         }
 
-        // Validate for Identifycation data (new logic)
-        if (!identifycationData.name.trim() || !namePattern.test(identifycationData.name)) {
-            newErrors.name = "Identifycation name is required and must contain only letters";
+        if (!identifycationData.name) {
+            newErrors.name = "Loại giấy tờ định danh là bắt buộc";
         }
 
-
-        const codePattern = /^[0-9]+$/; // Chỉ cho phép ký tự số
-        if (!identifycationData.code.trim()) {
-            newErrors.code = "Identifycation code is required";
-        } else if (!codePattern.test(identifycationData.code)) {
-            newErrors.code = "Identifycation code must contain only numbers";
+        const codePattern = /^[A-Za-z0-9]+$/;
+        if (!identifycationData.code.trim() || !codePattern.test(identifycationData.code)) {
+            newErrors.code = "Mã định danh chỉ được chứa chữ cái và số";
         }
 
         const identifycationStartDate = new Date(identifycationData.dateStart);
         const identifycationEndDate = new Date(identifycationData.dateEnd);
-
         if (!identifycationData.dateStart) {
-            newErrors.dateStart = "Start date is required";
+            newErrors.dateStart = "Ngày cấp là bắt buộc";
+        } else if (identifycationStartDate > today) {
+            newErrors.dateStart = "Ngày cấp không thể sau ngày hôm nay";
         }
 
         if (!identifycationData.dateEnd) {
-            newErrors.dateEnd = "End date is required";
-        } else if (identifycationEndDate <= identifycationStartDate) {
-            newErrors.dateEnd = "End date must be after start date";
+            newErrors.dateEnd = "Ngày hết hạn là bắt buộc";
+        } else {
+            const fiveYearsLater = new Date(identifycationStartDate);
+            fiveYearsLater.setFullYear(fiveYearsLater.getFullYear() + 5);
+            if (identifycationEndDate <= identifycationStartDate) {
+                newErrors.dateEnd = "Ngày hết hạn phải sau ngày cấp";
+            } else if (identifycationEndDate < fiveYearsLater) {
+                newErrors.dateEnd = "Ngày hết hạn phải cách ngày cấp ít nhất 5 năm";
+            }
         }
 
-        const locationPattern = /^[A-Za-zÀ-ÿ0-9\s,.-]+$/; // Cho phép chữ cái, số, dấu phẩy, dấu chấm, và dấu gạch
+        const locationPattern = /^[A-Za-zÀ-ÿ0-9\s,.-]+$/;
         if (!identifycationData.location.trim() || !locationPattern.test(identifycationData.location)) {
-            newErrors.location = "Location is required and must contain only letters, numbers, and some special characters like ',', '.', and '-'.";
+            newErrors.location = "Địa chỉ chỉ được chứa chữ cái, số và các ký tự như ',', '.', và '-'";
         }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!validateForm()) {
-            console.log("Form has errors, fix them first.");
+            console.log("Form có lỗi, vui lòng sửa chúng trước.");
             return;
         }
 
         try {
-            let totalPrice = 0;
-            const checkinDate = new Date(bookingData.checkin);
-            const checkoutDate = new Date(bookingData.checkout);
-            const nights = (checkoutDate - checkinDate) / (1000 * 60 * 60 * 24);
-
-            roomCategories.forEach((room) => {
-                const qty = quantity[room._id] || 0;
-                if (qty > 0) {
-                    totalPrice += room.price * qty * nights;
-                }
-            });
-
-            setBookingData((prevData) => ({
-                ...prevData,
-                price: totalPrice,
-            }));
-
+            // Sử dụng totalAmount làm giá trị price
+            const finalPrice = totalAmount;
+            console.log(totalAmount)
+            // Gửi dữ liệu khách hàng trước khi tạo booking
             const customerResponse = await axios.post('http://localhost:9999/customers', customerData);
-            const bookingResponse = await axios.post('http://localhost:9999/bookings', { ...bookingData, price: totalPrice });
-
-            const newBookingId = bookingResponse.data._id;
             const newCustomerId = customerResponse.data._id;
 
+            // Tạo booking và lưu vào cơ sở dữ liệu
+            const bookingResponse = await axios.post('http://localhost:9999/bookings', {
+                ...bookingData,
+                price: finalPrice // Lưu totalAmount làm price
+            });
+
+            const newBookingId = bookingResponse.data._id;
+
+            // Gửi dữ liệu order rooms lên server
             const orderRoomPromises = Object.entries(quantity).map(async ([roomCateId, qty]) => {
                 if (qty > 0) {
                     return axios.post('http://localhost:9999/orderRooms', {
@@ -314,16 +363,27 @@ const CreateBookingByStaff = () => {
                 }
             });
 
+            // Gửi dữ liệu order services lên server
+            for (const service of orderServicesData) {
+                if (service.serviceQuantity > 0) {
+                    await axios.post('http://localhost:9999/orderServices', {
+                        otherServiceId: service.otherServiceId,
+                        bookingId: newBookingId,
+                        quantity: service.serviceQuantity,
+                        note: 'Some optional note'
+                    });
+                }
+            }
+
             await Promise.all(orderRoomPromises);
 
-            // Submit Identifycation data with customer ID
+            // Gửi dữ liệu giấy tờ định danh (identifycation) lên server
             await axios.post('http://localhost:9999/identifycations', {
                 ...identifycationData,
                 customerID: newCustomerId
             });
 
-            console.log('Booking, room orders, and identifycation created successfully');
-
+            console.log('Booking, room orders, and services created successfully');
             navigate('/bookings');
 
         } catch (error) {
@@ -331,17 +391,19 @@ const CreateBookingByStaff = () => {
         }
     };
 
+
+
     return (
         <Container className='mb-3'>
-            <h2 className="my-4">Create Booking by Staff</h2>
+            <h6 className="my-4 px-2 text-bg-success d-inline ">Đặt Phòng Từ Nhân Viên: {staffName}</h6>
             <Form onSubmit={handleSubmit}>
                 <Row>
+                    <h3 className='my-4'>Nhập Thông Tin Khách Hàng</h3>
                     <Col>
-                        {/* Customer Creation Form */}
                         <Row className="mb-3">
                             <Col>
                                 <Form.Group controlId="fullname">
-                                    <Form.Label>Full Name</Form.Label>
+                                    <Form.Label><strong>Họ và tên</strong></Form.Label>
                                     <Form.Control
                                         type="text"
                                         name="fullname"
@@ -357,7 +419,7 @@ const CreateBookingByStaff = () => {
                             </Col>
                             <Col>
                                 <Form.Group controlId="email">
-                                    <Form.Label>Email</Form.Label>
+                                    <Form.Label><strong>Email</strong></Form.Label>
                                     <Form.Control
                                         type="email"
                                         name="email"
@@ -370,15 +432,13 @@ const CreateBookingByStaff = () => {
                                         {errors.email}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-
                             </Col>
-
                         </Row>
 
                         <Row className="mb-3">
                             <Col>
                                 <Form.Group controlId="phone">
-                                    <Form.Label>Phone</Form.Label>
+                                    <Form.Label><strong>Số điện thoại</strong></Form.Label>
                                     <Form.Control
                                         type="text"
                                         name="phone"
@@ -394,7 +454,7 @@ const CreateBookingByStaff = () => {
                             </Col>
                             <Col>
                                 <Form.Group controlId="dob">
-                                    <Form.Label>Date of Birth</Form.Label>
+                                    <Form.Label><strong>Ngày tháng năm sinh</strong></Form.Label>
                                     <Form.Control
                                         type="date"
                                         name="dob"
@@ -408,24 +468,26 @@ const CreateBookingByStaff = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Col>
-
-
                         </Row>
                     </Col>
+
                     <Col>
-                        {/* Identifycation Fields */}
                         <Row>
                             <Col md={6}>
                                 <Form.Group className='mb-3'>
-                                    <Form.Label>Identifycation Name</Form.Label>
-                                    <Form.Control
-                                        type='text'
-                                        placeholder='Enter identifycation name'
+                                    <Form.Label><strong>Loại giấy tờ định danh</strong></Form.Label>
+                                    <Form.Select
                                         name='name'
                                         value={identifycationData.name}
                                         onChange={handleIdentifycationChange}
-                                        isInvalid={!!errors.name}  // Hiển thị lỗi nếu có
-                                    />
+                                        isInvalid={!!errors.name}
+                                    >
+                                        <option value="">Chọn loại giấy tờ</option>
+                                        <option value="Căn Cước Công Dân">Căn Cước Công Dân</option>
+                                        <option value="Hộ Chiếu">Hộ Chiếu</option>
+                                        <option value="Bằng Lái Xe">Bằng Lái Xe</option>
+                                        <option value="Hộ khẩu">Hộ khẩu</option>
+                                    </Form.Select>
                                     <Form.Control.Feedback type='invalid'>
                                         {errors.name}
                                     </Form.Control.Feedback>
@@ -433,14 +495,14 @@ const CreateBookingByStaff = () => {
                             </Col>
                             <Col md={6}>
                                 <Form.Group className='mb-3'>
-                                    <Form.Label>Identifycation Code</Form.Label>
+                                    <Form.Label><strong>Mã định danh</strong></Form.Label>
                                     <Form.Control
                                         type='text'
                                         placeholder='Enter identifycation code'
                                         name='code'
                                         value={identifycationData.code}
                                         onChange={handleIdentifycationChange}
-                                        isInvalid={!!errors.code}  // Hiển thị lỗi nếu có
+                                        isInvalid={!!errors.code}
                                     />
                                     <Form.Control.Feedback type='invalid'>
                                         {errors.code}
@@ -451,13 +513,13 @@ const CreateBookingByStaff = () => {
                         <Row>
                             <Col md={4}>
                                 <Form.Group className='mb-3'>
-                                    <Form.Label>Identifycation Start Date</Form.Label>
+                                    <Form.Label><strong>Ngày cấp</strong></Form.Label>
                                     <Form.Control
                                         type='date'
                                         name='dateStart'
                                         value={identifycationData.dateStart}
                                         onChange={handleIdentifycationChange}
-                                        isInvalid={!!errors.dateStart}  // Hiển thị lỗi nếu có
+                                        isInvalid={!!errors.dateStart}
                                     />
                                     <Form.Control.Feedback type='invalid'>
                                         {errors.dateStart}
@@ -466,13 +528,13 @@ const CreateBookingByStaff = () => {
                             </Col>
                             <Col md={4}>
                                 <Form.Group className='mb-3'>
-                                    <Form.Label>Identifycation End Date</Form.Label>
+                                    <Form.Label><strong>Hết hạn ngày</strong></Form.Label>
                                     <Form.Control
                                         type='date'
                                         name='dateEnd'
                                         value={identifycationData.dateEnd}
                                         onChange={handleIdentifycationChange}
-                                        isInvalid={!!errors.dateEnd}  // Hiển thị lỗi nếu có
+                                        isInvalid={!!errors.dateEnd}
                                     />
                                     <Form.Control.Feedback type='invalid'>
                                         {errors.dateEnd}
@@ -481,14 +543,14 @@ const CreateBookingByStaff = () => {
                             </Col>
                             <Col md={4}>
                                 <Form.Group className='mb-3'>
-                                    <Form.Label>Identifycation Location</Form.Label>
+                                    <Form.Label><strong>Địa chỉ</strong></Form.Label>
                                     <Form.Control
                                         type='text'
                                         placeholder='Enter location'
                                         name='location'
                                         value={identifycationData.location}
                                         onChange={handleIdentifycationChange}
-                                        isInvalid={!!errors.location}  // Hiển thị lỗi nếu có
+                                        isInvalid={!!errors.location}
                                     />
                                     <Form.Control.Feedback type='invalid'>
                                         {errors.location}
@@ -497,89 +559,154 @@ const CreateBookingByStaff = () => {
                             </Col>
                         </Row>
                     </Col>
-
                 </Row>
 
+                <Row>
+                    <Col style={{ marginLeft: "10px" }} className='col-7'>
+                        <h3 className='mt-4 mb-4'>Chọn Loại Phòng & Số Lượng</h3>
 
-                <h2>Room Selection</h2>
-                {/* Booking Information Form */}
-                <Row className="mb-3" md={9}>
-                    <Col md={4}>
-                        <Form.Group controlId="checkin">
-                            <Form.Label className='mx-2'>
-                                <strong>Check-in Date: </strong>
-                            </Form.Label>
-                            <Form.Control
-                                className='w-50 mx-2'
-                                type="date"
-                                name="checkin"
-                                value={bookingData.checkin}
-                                onChange={handleChange}
-                                isInvalid={!!errors.checkin}  // Hiển thị lỗi nếu có
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.checkin}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                    <Col md={4}>
-                        <Form.Group controlId="checkout">
-                            <Form.Label className='mx-2' >
-                                <strong>Check-out Date:</strong>
-                            </Form.Label>
-                            <Form.Control
-                                className='w-50 mx-2'
-                                type="date"
-                                name="checkout"
-                                value={bookingData.checkout}
-                                onChange={handleChange}
-                                isInvalid={!!errors.checkout}  // Hiển thị lỗi nếu có
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.checkout}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Row>
-
-
-                {/* Room Category and Quantity Form */}
-
-                {roomCategories.map(room => {
-                    const totalRoomData = totalRoomsByCategory.find(r => r.roomCateId === room._id); // Find total room information
-                    const remainingRoomCount = remainingRooms[room._id] || 0; // Get remaining room count
-
-                    return (
-                        <Row key={room._id} className="mb-3">
-                            <Col className='col-5'>
-                                <Form.Label>{room.name} (Price: {room.price} VND) - {room.locationId.name}</Form.Label>
-                                <p><strong>Số phòng còn lại:</strong> {remainingRoomCount} / {totalRoomData ? totalRoomData.totalRooms : 0}</p> {/* Display remaining rooms */}
+                        <Row className="mb-3">
+                            <Col md={3}>
+                                <Form.Group controlId="checkin">
+                                    <Form.Label className='mx-2'>
+                                        <strong>Check-in Ngày: </strong>
+                                    </Form.Label>
+                                    <Form.Control
+                                        className=' mx-2'
+                                        type="date"
+                                        name="checkin"
+                                        value={bookingData.checkin}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.checkin}
+                                        required
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.checkin}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
                             </Col>
-                            <Col className='col-2'>
-                                <Form.Control
-                                    type="number"
-                                    min="0"
-                                    max={remainingRoomCount} // Limit input to max remaining rooms
-                                    value={quantity[room._id] || 0}
-                                    onChange={(e) => handleQuantityChange(e, room._id)}
-                                    required
-                                />
+                            <Col md={3}>
+                                <Form.Group controlId="checkout">
+                                    <Form.Label className='mx-2' >
+                                        <strong>Check-out Ngày:</strong>
+                                    </Form.Label>
+                                    <Form.Control
+                                        className='mx-2'
+                                        type="date"
+                                        name="checkout"
+                                        value={bookingData.checkout}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.checkout}
+                                        required
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.checkout}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
+                            <Col md={3}>
+                                <Form.Group className='mb-3'>
+                                    <Form.Label><strong>Số lượng người</strong></Form.Label>
+                                    <Form.Control
+                                        type='number'
+                                        placeholder='Enter number of people'
+                                        name='humans'
+                                        value={bookingData.humans}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.humans}
+                                        min={1}
+                                    />
+                                    <Form.Control.Feedback type='invalid'>
+                                        {errors.humans}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
                             </Col>
                         </Row>
-                    );
-                })}
-                {errors.roomSelection && <p className="text-danger">{errors.roomSelection}</p>}
 
-                {/* Total Price */}
+                        {roomCategories.map(room => {
+                            const totalRoomData = totalRoomsByCategory.find(r => r.roomCateId === room._id);
+                            const remainingRoomCount = remainingRooms[room._id] || 0;
+
+                            return (
+                                <Row key={room._id} className="mb-3">
+                                    <Col className='col-7'>
+                                        <Form.Label><strong>{room.name}</strong> - (Price: {room.price} VND)</Form.Label>
+                                        <p>{room.locationId.name} <br /> <strong>Số phòng còn lại:</strong> {remainingRoomCount} / {totalRoomData ? totalRoomData.totalRooms : 0}</p>
+                                    </Col>
+                                    <Col className='col-2 d-flex align-items-center'>
+                                        <Form.Control
+                                            type="number"
+                                            min="0"
+                                            max={remainingRoomCount}
+                                            value={quantity[room._id] || 0}
+                                            onChange={(e) => handleQuantityChange(e, room._id)}
+                                            required
+                                        />
+                                    </Col>
+                                </Row>
+                            );
+                        })}
+                        {errors.roomSelection && <p className="text-danger">{errors.roomSelection}</p>}
+                    </Col>
+
+                    {/* Dịch vụ */}
+                    <Col>
+                        <h3 className='mt-4 mb-4'>Dịch Vụ & Số lần Sử Dụng</h3>
+                        <Form.Group>
+                            <Form.Label>Chọn dịch vụ</Form.Label>
+                            <Form.Select
+                                value={selectedService}
+                                onChange={(e) => setSelectedService(e.target.value)}
+                            >
+                                <option value="">Chọn dịch vụ</option>
+                                {otherServices.map((service) => (
+                                    <option key={service.otherServiceId} value={service.otherServiceId}>
+                                        {service.name}
+                                    </option>
+                                ))}
+                            </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group className='mt-3'>
+                            <Form.Label>Nhập số lượng</Form.Label>
+                            <Form.Control
+                                type='number'
+                                min='1'
+                                value={serviceQuantity}
+                                onChange={(e) => setServiceQuantity(e.target.value)}
+                            />
+                        </Form.Group>
+
+                        <Button className='mt-3' onClick={handleAddService} disabled={!selectedService || serviceQuantity <= 0}>
+                            Thêm dịch vụ
+                        </Button>
+
+                        {/* Hiển thị danh sách các dịch vụ đã chọn */}
+                        {orderServicesData.length > 0 && (
+                            <div className="mt-3">
+                                <h4>Dịch vụ đã chọn:</h4>
+                                {orderServicesData.map((service, index) => {
+                                    const serviceDetails = otherServices.find(s => s.otherServiceId === service.otherServiceId);
+                                    return (
+                                        <Row key={service.otherServiceId} className='mb-2'>
+                                            <Col md={6}>{serviceDetails?.name} - Số lượng: {service.serviceQuantity}</Col>
+                                            <Col md={3}>
+                                                <Button variant="danger" onClick={() => handleRemoveService(index)}>Xóa</Button>
+                                            </Col>
+                                        </Row>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </Col>
+                </Row>
+
                 <Row className="mb-3">
                     <Col>
                         <h5>Total Amount: {totalAmount}</h5>
                     </Col>
                 </Row>
 
-                {/* Submit Button */}
                 <Button type="submit" variant="primary">Create Booking</Button>
             </Form>
         </Container>
