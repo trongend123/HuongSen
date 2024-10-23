@@ -9,7 +9,9 @@ const bookingSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     checkin: { type: Date, required: true },
     note: { type: String },
-    checkout: { type: Date, required: true }
+    checkout: { type: Date, required: true },
+    contractId: { type: String },
+    humans: { type: Number, required: true },
 });
 
 const Bookings = mongoose.model('Bookings', bookingSchema);

@@ -4,6 +4,7 @@ import './listRoom.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { DoSonRooms, CatBaRooms, MinhKhaiRooms } from './rooms'; // Import child components
+import { Colors } from 'chart.js';
 
 const ListRoom = () => {
   const [roomData, setRoomData] = useState([]);
@@ -142,6 +143,13 @@ const ListRoom = () => {
       {selectedLocation === '66f6c42f285571f28087c16a' && (
         <MinhKhaiRooms rooms={filteredRooms} onClick={handleRoomClick} />
       )}
+
+      <div className="note">
+        <p>Màu đỏ: Đang sửa chữa</p>
+        <p>Màu xám: Trống</p>
+        <p>Màu vàng: Đã book</p>
+        <p>Màu xanh: Đang sử dụng</p>
+      </div>
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>

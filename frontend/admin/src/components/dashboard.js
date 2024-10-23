@@ -8,18 +8,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './dashboard.css';
 
 const Dashboard = () => {
+  const [location, setLocation] = useState('');
   const [bookingData, setBookingData] = useState([]);
   const [orderData, setOrderData] = useState([]);
   const [startDate, setStartDate] = useState(new Date(new Date().getFullYear(), 0, 1)); // Default: Start of current year
   const [endDate, setEndDate] = useState(new Date()); // Default: Today
 
-  useEffect(() => {
-    // Fetch booking data
-    axios
-      .get('http://localhost:9999/bookings')
-      .then((response) => setBookingData(response.data))
-      .catch((error) => console.error('Lỗi khi lấy dữ liệu đặt phòng:', error));
-  }, []);
+ 
 
   useEffect(() => {
     // Fetch order data
@@ -28,7 +23,7 @@ const Dashboard = () => {
       .then((response) => setOrderData(response.data))
       .catch((error) => console.error('Lỗi khi lấy dữ liệu đơn hàng:', error));
   }, []);
-
+  
   const aggregateBookingByDate = (data, dateField) => {
     const aggregated = {};
     data.forEach((item) => {
@@ -54,27 +49,29 @@ const Dashboard = () => {
   };
 
   // Filter data based on the selected date range
-  const filteredBookingData = bookingData.filter((item) => {
-    const date = new Date(item.createdAt);
-    return date >= startDate && date <= endDate;
+  const filteredBookingData = orderData.filter((item) => {
+    const date = new Date(item.bookingId.createdAt);
+    const isWithinDateRange = date >= startDate && date <= endDate;
+    const isLocationMatch = location ? item.roomCateId.locationId.includes(location) : true; // Filter by location
+    return isWithinDateRange && isLocationMatch;
   });
 
   const filteredOrderData = orderData.filter((item) => {
     const date = new Date(item.createdAt);
-    return date >= startDate && date <= endDate;
+    const isWithinDateRange = date >= startDate && date <= endDate;
+    const isLocationMatch = location ? item.roomCateId.locationId.includes(location) : true; // Filter by location
+    return isWithinDateRange && isLocationMatch;
   });
 
   const aggregatedBookings = aggregateBookingByDate(filteredBookingData, 'createdAt');
-  const aggregatedOrders = aggregateDataByDate(filteredOrderData, 'createdAt', 'quantity');
-
+  const aggregatedOrders = aggregateBookingByDate(filteredOrderData, 'createdAt');
   // Create labels for the charts
   const labels = [...new Set([...Object.keys(aggregatedBookings), ...Object.keys(aggregatedOrders)])].sort();
 
   // Data for each chart
-  const bookingsData = labels.map(date => aggregatedBookings[date] || 0);
-  const revenueData = labels.map(date => filteredBookingData.filter(b => new Date(b.createdAt).toLocaleDateString() === date && b.status === 'Completed').reduce((sum, b) => sum + b.price, 0));
-  const ordersData = labels.map(date => aggregatedOrders[date] || 0);
-
+  const bookingsData = labels.map(date => aggregatedOrders[date] || 0);
+  const revenueData = labels.map(date => filteredBookingData.filter(b => new Date(b.bookingId.createdAt).toLocaleDateString() === date && b.bookingId.status === 'Completed').reduce((sum, b) => sum + b.bookingId.price, 0));
+  const ordersData = labels.map(date => filteredOrderData.filter(b => new Date(b.bookingId.createdAt).toLocaleDateString() === date && b.bookingId.status === 'Completed').reduce((sum, b) => sum + b.quantity, 0));
   // Chart data for bookings
   const bookingsChartData = {
     labels: labels,
@@ -146,6 +143,24 @@ const Dashboard = () => {
           </Form.Group>
         </Col>
       </Row>
+      <Row className="mb-4">
+  <Col md={6}>
+    <Form.Group controlId="location">
+      <Form.Label>Chọn địa điểm:</Form.Label>
+      <Form.Control
+        as="select"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+      >
+        <option value="">Tất cả</option>
+          <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
+          <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
+          <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
+        {/* Add more options as needed */}
+      </Form.Control>
+    </Form.Group>
+  </Col>
+</Row>
       <hr />
       {/* Summary Cards */}
       <Row>
@@ -153,7 +168,7 @@ const Dashboard = () => {
           <Card className="text-center">
             <Card.Body>
               <Card.Title>Tổng số đặt phòng</Card.Title>
-              <Card.Text>{filteredBookingData.length}</Card.Text>
+              <Card.Text>{filteredOrderData.length}</Card.Text>
             </Card.Body>
           </Card>
         </Col>
@@ -163,7 +178,7 @@ const Dashboard = () => {
               <Card.Title>Tổng doanh thu</Card.Title>
               <Card.Text>
                 {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
-                  filteredBookingData.filter(b => b.status === 'Completed').reduce((sum, b) => sum + b.price, 0)
+                  filteredBookingData.filter(b => b.bookingId.status === 'Completed').reduce((sum, b) => sum + b.bookingId.price, 0)
                 )}
               </Card.Text>
             </Card.Body>
@@ -173,7 +188,7 @@ const Dashboard = () => {
           <Card className="text-center">
             <Card.Body>
               <Card.Title>Tổng số phòng</Card.Title>
-              <Card.Text>{filteredOrderData.reduce((sum, order) => sum + order.quantity, 0)}</Card.Text>
+              <Card.Text>{filteredOrderData.filter(b => b.bookingId.status === 'Completed').reduce((sum, b) => sum + b.quantity, 0)}</Card.Text>
             </Card.Body>
           </Card>
         </Col>
