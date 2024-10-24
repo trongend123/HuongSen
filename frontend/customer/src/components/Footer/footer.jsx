@@ -11,7 +11,6 @@ const Footer = () => {
           <Col md={4} className="mb-4">
             <h5>Nhà khách Hương Sen</h5>
             <p>Address: Số 16 Minh Khai, Hồng bàng - TP Hải Phòng</p>
-            <p>Mr Tuấn: 0904 665 538</p>
             <p>Lễ tân cơ sở Minh Khai: 022 5374 5766</p>
             <p>Lễ tân cơ sở Đồ Sơn: 022 5386 6386</p>
             <p>Lễ tân cơ sở Cát Bà: 022 5388 7381</p>
