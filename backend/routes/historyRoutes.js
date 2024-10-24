@@ -14,6 +14,9 @@ router.get('/', historyController.getAllHistories);
 // Lấy lịch sử theo ID
 router.get('/:id', historyController.getHistoryById);
 
+// Lấy lịch sử theo bookingId
+router.get('/booking/:bookingId', historyController.getHistoriesByBookingId);  // New route
+
 // Cập nhật lịch sử theo ID
 router.put('/:id', historyController.updateHistory);
 

@@ -225,7 +225,7 @@ const CreateBookingByStaff = () => {
         const checkoutDate = new Date(bookingData.checkout);
         const nights = (checkoutDate - checkinDate) / (1000 * 60 * 60 * 24);
 
-        // Tính tổng tiền cho các loại phòng
+        // Calculate the total amount for room categories
         roomCategories.forEach((room) => {
             const qty = quantity[room._id] || 0;
             if (qty > 0) {
@@ -233,7 +233,7 @@ const CreateBookingByStaff = () => {
             }
         });
 
-        // Tính tổng tiền cho các dịch vụ đã chọn
+        // Calculate the total amount for selected services
         orderServicesData.forEach(service => {
             const serviceDetails = otherServices.find(s => s.otherServiceId === service.otherServiceId);
             if (serviceDetails) {
@@ -241,8 +241,16 @@ const CreateBookingByStaff = () => {
             }
         });
 
+        // Set the total amount
         setTotalAmount(total);
+
+        // Update bookingData with the calculated total as price
+        setBookingData(prevBookingData => ({
+            ...prevBookingData,
+            price: total // Store total amount as price in bookingData
+        }));
     };
+
 
 
     useEffect(() => {
@@ -331,27 +339,32 @@ const CreateBookingByStaff = () => {
         e.preventDefault();
 
         if (!validateForm()) {
-            console.log("Form có lỗi, vui lòng sửa chúng trước.");
+            console.log("Form has errors, please fix them before submitting.");
             return;
         }
 
         try {
-            // Sử dụng totalAmount làm giá trị price
             const finalPrice = totalAmount;
-            console.log(totalAmount)
-            // Gửi dữ liệu khách hàng trước khi tạo booking
+
+            // First, update bookingData with the final price (totalAmount)
+            setBookingData(prevBookingData => ({
+                ...prevBookingData,
+                price: finalPrice // Store totalAmount as price in bookingData
+            }));
+            console.log(bookingData)
+            // Now send customer data to the server
             const customerResponse = await axios.post('http://localhost:9999/customers', customerData);
             const newCustomerId = customerResponse.data._id;
 
-            // Tạo booking và lưu vào cơ sở dữ liệu
+            // Create the updated booking after setting the price
             const bookingResponse = await axios.post('http://localhost:9999/bookings', {
                 ...bookingData,
-                price: finalPrice // Lưu totalAmount làm price
+                price: finalPrice // Ensure the price is sent as part of the booking
             });
 
             const newBookingId = bookingResponse.data._id;
 
-            // Gửi dữ liệu order rooms lên server
+            // Send order rooms data to the server
             const orderRoomPromises = Object.entries(quantity).map(async ([roomCateId, qty]) => {
                 if (qty > 0) {
                     return axios.post('http://localhost:9999/orderRooms', {
@@ -363,33 +376,60 @@ const CreateBookingByStaff = () => {
                 }
             });
 
-            // Gửi dữ liệu order services lên server
-            for (const service of orderServicesData) {
+            // Send order services data to the server
+            const orderServicePromises = orderServicesData.map(service => {
                 if (service.serviceQuantity > 0) {
-                    await axios.post('http://localhost:9999/orderServices', {
+                    return axios.post('http://localhost:9999/orderServices', {
                         otherServiceId: service.otherServiceId,
                         bookingId: newBookingId,
                         quantity: service.serviceQuantity,
                         note: 'Some optional note'
                     });
                 }
-            }
+            });
 
-            await Promise.all(orderRoomPromises);
-
-            // Gửi dữ liệu giấy tờ định danh (identifycation) lên server
+            // Send identification data to the server
             await axios.post('http://localhost:9999/identifycations', {
                 ...identifycationData,
                 customerID: newCustomerId
             });
 
-            console.log('Booking, room orders, and services created successfully');
+            await Promise.all([...orderRoomPromises, ...orderServicePromises]);
+
+            // Prepare oldInfo object for history
+            const orderRooms = Object.entries(quantity).map(([roomCateId, qty]) => {
+                const room = roomCategories.find(r => r._id === roomCateId);
+                return {
+                    roomCateId,
+                    roomName: room ? room.name : 'Unknown room',
+                    quantity: qty
+                };
+            });
+
+            const oldInfo = {
+                customer: customerData,
+                orderRooms: orderRooms, // Including both room type and quantity
+                booking: bookingData, // Booking data already includes the final price
+                orderServices: orderServicesData,
+                identifycation: identifycationData
+            };
+
+            // Create a history entry
+            await axios.post('http://localhost:9999/histories', {
+                bookingId: newBookingId,
+                staffId: bookingData.staffId, // Assuming staffId is available in bookingData
+                old_info: oldInfo,
+                note: `${user.role} ${staffName} đã tạo đặt phòng`
+            });
+
+            console.log('Booking, room orders, services, and history entry created successfully');
             navigate('/bookings');
 
         } catch (error) {
             console.error('Error processing booking or room orders:', error);
         }
     };
+
 
 
 

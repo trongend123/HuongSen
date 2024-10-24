@@ -306,8 +306,17 @@ const ListBooking = () => {
           >
             Chỉnh sửa thông tin
           </Button>
+          <Button
+            variant="info"
+            onClick={() => {
+              navigate('/historyBookingChange', { state: { bookingId: selectedBookingDetails.bookingId._id } }); // Chuyển hướng với bookingId
+            }}
+          >
+            Xem lịch sử thay đổi
+          </Button>
         </Modal.Footer>
       </Modal>
+
     </Container>
   );
 };

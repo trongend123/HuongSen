@@ -12,30 +12,38 @@ class HistoryRepository {
     // Lấy tất cả lịch sử
     async getAllHistories() {
         return await History.find()
-            .populate('bookingid')
-            .populate('staffid')
+            .populate('bookingId')
+            .populate('staffId')
             .exec();
     }
 
     // Lấy lịch sử theo ID
-    async getHistoryById(id) {
-        return await History.findById(id)
-            .populate('bookingid')
-            .populate('staffid')
+    async getHistoryById(Id) {
+        return await History.findById(Id)
+            .populate('bookingId')
+            .populate('staffId')
             .exec();
     }
 
     // Cập nhật lịch sử theo ID
-    async updateHistory(id, data) {
-        return await History.findByIdAndUpdate(id, data, { new: true })
-            .populate('bookingid')
-            .populate('staffid')
+    async updateHistory(Id, data) {
+        return await History.findByIdAndUpdate(Id, data, { new: true })
+            .populate('bookingId')
+            .populate('staffId')
             .exec();
     }
 
     // Xóa lịch sử theo ID
-    async deleteHistory(id) {
-        return await History.findByIdAndDelete(id);
+    async deleteHistory(Id) {
+        return await History.findByIdAndDelete(Id);
+    }
+
+    // Lấy lịch sử theo bookingId
+    async getHistoriesByBookingId(bookingId) {
+        return await History.find({ bookingId: bookingId })
+            .populate('bookingId')
+            .populate('staffId')
+            .exec();
     }
 }
 
