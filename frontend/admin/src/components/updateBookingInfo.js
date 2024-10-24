@@ -128,7 +128,7 @@ const UpdateBookingInfo = () => {
                     note: 'Some optional note'
                 });
             }
-            console.log('ok')
+
             // After successful update, navigate to SaveHistory route with bookingId
             navigate(`/saveHistory`, {
                 state: {

@@ -72,7 +72,7 @@ const HistoryBookingChange = () => {
                                                     backgroundColor: '#f9f9f9', // Màu nền để dễ nhìn
                                                 }}
                                             >
-                                                <h5>Thông tin cũ:</h5>
+                                                <h5>Thông tin:</h5>
                                                 <pre>{JSON.stringify(change.old_info, null, 2)}</pre>
                                             </div>
                                         </td>

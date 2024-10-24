@@ -406,24 +406,31 @@ const CreateBookingByStaff = () => {
                 };
             });
 
-            const oldInfo = {
-                customer: customerData,
-                orderRooms: orderRooms, // Including both room type and quantity
-                booking: bookingData, // Booking data already includes the final price
-                orderServices: orderServicesData,
-                identifycation: identifycationData
-            };
+            // const oldInfo = {
+            //     customer: customerData,
+            //     orderRooms: orderRooms, // Including both room type and quantity
+            //     booking: bookingData, // Booking data already includes the final price
+            //     orderServices: orderServicesData,
+            //     identifycation: identifycationData
+            // };
 
-            // Create a history entry
-            await axios.post('http://localhost:9999/histories', {
-                bookingId: newBookingId,
-                staffId: bookingData.staffId, // Assuming staffId is available in bookingData
-                old_info: oldInfo,
-                note: `${user.role} ${staffName} đã tạo đặt phòng`
+            // // Create a history entry
+            // await axios.post('http://localhost:9999/histories', {
+            //     bookingId: newBookingId,
+            //     staffId: bookingData.staffId, // Assuming staffId is available in bookingData
+            //     old_info: oldInfo,
+            //     note: `${user.role} ${staffName} đã tạo đặt phòng`
+            // });
+            navigate(`/saveHistory`, {
+                state: {
+                    bookingId: newBookingId,
+                    note: `${user.role} ${staffName} đã tạo đặt phòng`,
+                    user: user // Pass user object as well
+                }
             });
 
             console.log('Booking, room orders, services, and history entry created successfully');
-            navigate('/bookings');
+            // navigate('/bookings');
 
         } catch (error) {
             console.error('Error processing booking or room orders:', error);
