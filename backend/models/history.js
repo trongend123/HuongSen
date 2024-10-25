@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 
 const historySchema = new mongoose.Schema({
-    bookingid: { type: mongoose.Schema.Types.ObjectId, ref: 'Bookings', required: true },
-    staffid: { type: mongoose.Schema.Types.ObjectId, ref: 'Staffs', required: true },
-    old_info: { type: Object, required: true }
+    bookingId: { type: mongoose.Schema.Types.ObjectId, ref: 'Bookings', required: true },
+    staffId: { type: mongoose.Schema.Types.ObjectId, ref: 'Staffs' },
+    old_info: { type: Object, required: true },
+    note: { type: String }
 },
     {
         timestamps: true,

@@ -1,5 +1,3 @@
-// controllers/historyController.js
-
 import historyRepository from '../repositories/historyRepository.js';
 
 class HistoryController {
@@ -37,6 +35,21 @@ class HistoryController {
             res.status(200).json(history);
         } catch (error) {
             console.error('Error fetching history:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+
+    // Lấy lịch sử theo bookingId
+    async getHistoriesByBookingId(req, res) {
+        try {
+            const { bookingId } = req.params;
+            const histories = await historyRepository.getHistoriesByBookingId(bookingId);
+            if (!histories || histories.length === 0) {
+                return res.status(404).json({ message: 'No histories found for this booking' });
+            }
+            res.status(200).json(histories);
+        } catch (error) {
+            console.error('Error fetching histories by bookingId:', error);
             res.status(500).json({ message: 'Internal Server Error' });
         }
     }
