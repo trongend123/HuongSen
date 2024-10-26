@@ -26,7 +26,7 @@ const Login = () => {
       setLoading(false);
       setError(null);
       // Redirect to dashboard or home page after successful login
-      window.location.href = '/';
+      window.location.href = '/dashboard';
     } catch (err) {
       setLoading(false);
       setError(err.response ? err.response.data.message : 'Login failed');

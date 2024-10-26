@@ -4,6 +4,7 @@ import './listRoom.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { DoSonRooms, CatBaRooms, MinhKhaiRooms } from './rooms'; // Import child components
+import { Colors } from 'chart.js';
 
 const ListRoom = () => {
   const [roomData, setRoomData] = useState([]);
@@ -143,6 +144,22 @@ const ListRoom = () => {
         <MinhKhaiRooms rooms={filteredRooms} onClick={handleRoomClick} />
       )}
 
+<div className="note">
+  <button style={{ backgroundColor: "red", color: "white", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px" }}>
+    Đang sửa chữa
+  </button>
+  <button style={{ backgroundColor: "#d3d3d3", color: "black", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px"  }}>
+    Trống
+  </button>
+  <button style={{ backgroundColor: "yellow", color: "black", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px" }}>
+    Đã book
+  </button>
+  <button style={{ backgroundColor: "lightgreen", color: "black", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px" }}>
+    Đang sử dụng
+  </button>
+</div>
+
+
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Cập nhật thông tin phòng</Modal.Title>
@@ -182,11 +199,12 @@ const ListRoom = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
+          
+          <Button variant="primary" onClick={handleUpdate} style={{ marginRight: '10px' }}>
+            Cập nhật
+          </Button>
           <Button variant="secondary" onClick={handleClose}>
             Đóng
-          </Button>
-          <Button variant="primary" onClick={handleUpdate}>
-            Cập nhật
           </Button>
         </Modal.Footer>
       </Modal>
