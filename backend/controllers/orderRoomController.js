@@ -139,3 +139,23 @@ export const deleteOrderRoom = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
+// Hàm lấy tổng số phòng theo loại phòng trong khoảng thời gian
+export const getTotalRoomsByCategoryInDateRange = async (req, res) => {
+  try {
+    const { checkInDate, checkOutDate } = req.query;
+
+    // Kiểm tra nếu thiếu dữ liệu ngày
+    if (!checkInDate || !checkOutDate) {
+      return res.status(400).json({ message: 'Cần cung cấp checkInDate và checkOutDate' });
+    }
+
+    // Gọi đến repository để lấy tổng số phòng theo loại trong khoảng thời gian
+    const totalRoomsByCategory = await OrderRoomRepository.getTotalByCategoryInDateRange(checkInDate, checkOutDate);
+
+    res.status(200).json(totalRoomsByCategory);
+  } catch (error) {
+    console.error('Lỗi khi lấy tổng số phòng theo loại phòng:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};

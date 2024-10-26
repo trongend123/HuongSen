@@ -25,7 +25,8 @@ import {
   RoomCategoryRouter,
   OrderRoomRouter,
   AgencyRouter,
-  ContractRouter
+  ContractRouter,
+  OrderServiceRouter
 } from "./routes/index.js";
 //import { verifyAccessToken } from "./jwt_helper.js";
 import { changePassword, loginUser, registerUser, verifyAccessToken } from "./authens/auth.js";
@@ -65,6 +66,7 @@ app.use("/orderRooms", OrderRoomRouter);
 // add route for agency and contract
 app.use("/agencies", AgencyRouter);
 app.use("/contracts", ContractRouter);
+app.use("/orderServices", OrderServiceRouter);
 // Khai báo port cho ứng dụng web
 //authen
 // Register route
