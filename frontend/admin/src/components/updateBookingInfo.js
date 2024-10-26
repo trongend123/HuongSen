@@ -22,8 +22,16 @@ const UpdateBookingInfo = () => {
     const [orderServicesData, setOrderServicesData] = useState([]);
     const [cancelledServices, setCancelledServices] = useState([]); // Mảng lưu dịch vụ bị hủy
     const [user, setUser] = useState(null);
-
+    const [bookings, setBookings] = useState([]);
     // Fetch user từ localStorage
+    useEffect(() => {
+        axios
+      .get("http://localhost:9999/orderRooms")
+      .then((response) => setBookings(response.data))
+      .catch((error) => console.error("Error fetching bookings:", error));
+    }, []);
+    
+    const filteredBookings = bookings.filter((booking) => booking.bookingId._id === selectedBookingDetails?.bookingId?._id);
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -45,6 +53,7 @@ const UpdateBookingInfo = () => {
                 .catch((error) => console.error('Error fetching added services:', error));
         }
     }, [selectedBookingDetails]);
+
 
     // Cập nhật bookingDetails khi selectedBookingDetails thay đổi
     useEffect(() => {
@@ -179,9 +188,13 @@ const UpdateBookingInfo = () => {
 
                     <h5>Thông tin đặt phòng</h5>
                     <ListGroup className="mb-4">
-                        <ListGroup.Item><strong>Tên phòng:</strong> {selectedBookingDetails.roomCateId?.name || 'Không có'}</ListGroup.Item>
-                        <ListGroup.Item><strong>Số lượng phòng:</strong> {bookingDetails.quantity}</ListGroup.Item>
-                        <ListGroup.Item><strong>Giá phòng:</strong> {selectedBookingDetails.roomCateId.price * selectedBookingDetails.quantity}</ListGroup.Item>
+                        {filteredBookings.map((booking) => (
+                            <ListGroup.Item key={booking._id}>
+                                <strong>Tên phòng:</strong> {booking.roomCateId.name}
+                                <br />
+                                <strong>Số lượng:</strong> {booking.quantity}
+                            </ListGroup.Item>
+                        ))}
                         <ListGroup.Item><strong>Check-in:</strong> {new Date(bookingDetails.checkin).toLocaleDateString()}</ListGroup.Item>
                         <ListGroup.Item><strong>Check-out:</strong> {new Date(bookingDetails.checkout).toLocaleDateString()}</ListGroup.Item>
                     </ListGroup>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Container, Button, Modal, Form, InputGroup, FormControl } from 'react-bootstrap';
+import { Table, Container, Button, Modal, Form, InputGroup, FormControl, Pagination } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'; // Nhập useNavigate từ react-router-dom
 import axios from 'axios';
 
@@ -16,8 +16,11 @@ const ListBooking = () => {
   const [locations, setLocation] = useState([]);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedBookingDetails, setSelectedBookingDetails] = useState(null);
+  const [checkinFilter, setCheckinFilter] = useState('');  // New state for check-in filter
+  const [checkoutFilter, setCheckoutFilter] = useState(''); // New state for check-out filter
   const navigate = useNavigate();
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 7;
   useEffect(() => {
     axios
       .get("http://localhost:9999/orderRooms")
@@ -44,36 +47,27 @@ const ListBooking = () => {
     setShowModal(true);
   };
 
-
-
   const handleRowClick = async (booking) => {
     try {
-      // Lấy danh sách xác thực cho khách hàng
       const response = await axios.get(`http://localhost:9999/identifycations/customer/${booking.customerId._id}`);
       const identifications = response.data;
 
-      // Kiểm tra nếu có xác thực nào
       if (identifications.length > 0) {
-        const { name, code } = identifications[0]; // Lấy thông tin từ xác thực đầu tiên
-
-        // Cập nhật chi tiết booking bao gồm cả tên và mã xác thực
+        const { name, code } = identifications[0];
         setSelectedBookingDetails({
           ...booking,
-          identifyName: name,   // Lưu tên của giấy tờ xác thực
-          identifyCode: code,   // Lưu mã của giấy tờ xác thực
+          identifyName: name,
+          identifyCode: code,
         });
       } else {
-        // Nếu không có xác thực
-        setSelectedBookingDetails(booking); // Không có thông tin identifycation
+        setSelectedBookingDetails(booking);
       }
 
-      setShowDetailModal(true); // Hiển thị modal chi tiết
+      setShowDetailModal(true);
     } catch (error) {
       console.error("Error fetching booking details:", error);
-      // Xử lý lỗi có thể thêm thông báo cho người dùng ở đây
     }
   };
-
 
   const handleUpdateBooking = () => {
     const updatedBooking = {
@@ -115,20 +109,40 @@ const ListBooking = () => {
       .catch((error) => console.error("Error cancelling booking:", error));
   };
 
-  // Sort bookings by checkin date
-  const sortedBookings = bookings.sort((a, b) => new Date(b.bookingId.checkin) - new Date(a.bookingId.checkin));
+  const isDateInRange = (date, start, end) => {
+    const targetDate = new Date(date);
+    const startDate = new Date(start);
+    const endDate = new Date(end);
 
-  const filteredBookings = sortedBookings.filter((booking) => {
+    if (start && end) {
+      return targetDate >= startDate && targetDate <= endDate;
+    } else if (start) {
+      return targetDate >= startDate;
+    } else if (end) {
+      return targetDate <= endDate;
+    }
+    return true;
+  };
+
+  const filteredBookings = bookings.filter((booking) => {
     const bookingId = booking.bookingId._id.toLowerCase();
     const customerName = booking.customerId.fullname.toLowerCase();
     const isMatchingLocation = selectedLocation ? booking.roomCateId.locationId === selectedLocation : true;
+    const isMatchingCheckin = isDateInRange(booking.bookingId.checkin, checkinFilter, checkoutFilter);
 
     return (
       isMatchingLocation &&
-      (bookingId.includes(searchQuery.toLowerCase()) ||
-        customerName.includes(searchQuery.toLowerCase()))
+      isMatchingCheckin &&
+      (bookingId.includes(searchQuery.toLowerCase()) || customerName.includes(searchQuery.toLowerCase()))
     );
   });
+
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentBookings = filteredBookings.slice(indexOfFirstRow, indexOfLastRow);
+  const totalPages = Math.ceil(filteredBookings.length / rowsPerPage);
+
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <Container>
@@ -140,6 +154,24 @@ const ListBooking = () => {
           placeholder="Tìm kiếm theo Mã Đặt phòng hoặc Tên Khách hàng"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </InputGroup>
+
+      {/* Date Filters */}
+      <InputGroup className="mb-3">
+      Ngày checkin:
+        <FormControl
+          type="date"
+          placeholder="Tìm kiếm theo ngày Check-in"
+          value={checkinFilter}
+          onChange={(e) => setCheckinFilter(e.target.value)}
+        />
+      Ngày checkout:
+        <FormControl
+          type="date"
+          placeholder="Tìm kiếm theo ngày Check-out"
+          value={checkoutFilter}
+          onChange={(e) => setCheckoutFilter(e.target.value)}
         />
       </InputGroup>
 
@@ -174,7 +206,7 @@ const ListBooking = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredBookings.map((booking) => (
+          {currentBookings.map((booking) => (
             <tr key={booking._id} onClick={() => handleRowClick(booking)} style={{ cursor: 'pointer' }}>
               <td>{booking.bookingId._id}</td>
               <td>{booking.customerId.fullname}</td>
@@ -202,7 +234,7 @@ const ListBooking = () => {
                       variant="danger"
                       onClick={(e) => {
                         e.stopPropagation(); // Ngăn sự kiện onClick của hàng
-                        handleCancelClick(booking.bookingId);
+                        handleCancelClick(booking);
                       }}
                     >
                       Hủy
@@ -214,90 +246,100 @@ const ListBooking = () => {
           ))}
         </tbody>
       </Table>
+      {/* Pagination Controls */}
+      <Pagination>
+        {[...Array(totalPages)].map((_, index) => (
+          <Pagination.Item
+            key={index + 1}
+            active={index + 1 === currentPage}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+      </Pagination>
 
-
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Chỉnh sửa Đặt phòng</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedBooking && (
-            <>
-              <Form.Group controlId="status" className="mt-3">
-                <Form.Label>Thanh toán</Form.Label>
+      {/* Edit Modal */}
+      {selectedBooking && (
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Chỉnh sửa Đặt phòng</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              {/* Payment Input */}
+              <Form.Group controlId="formPayment">
+                <Form.Label>Thanh toán:</Form.Label>
                 <Form.Control
-                  as="select"
+                  type="text"
+                  value={updatedPayment}
+                  onChange={(e) => setUpdatedPayment(e.target.value)}
+                />
+              </Form.Group>
+
+              {/* Status Input */}
+              <Form.Group controlId="formStatus">
+                <Form.Label>Trạng thái:</Form.Label>
+                <Form.Control
+                  type="text"
                   value={updatedStatus}
                   onChange={(e) => setUpdatedStatus(e.target.value)}
-                >
-                  <option value="Chưa thanh toán">Chưa thanh toán</option>
-                  <option value="Đã thanh toán">Đã thanh toán</option>
-                  <option value="Yêu cầu hoàn tiền">Yêu cầu hoàn tiền</option>
-                </Form.Control>
+                />
               </Form.Group>
-              <Form.Group controlId="status" className="mt-3">
-                <Form.Label>Trạng thái</Form.Label>
+
+              {/* Checkin Input */}
+              <Form.Group controlId="formCheckin">
+                <Form.Label>Checkin:</Form.Label>
                 <Form.Control
-                  as="select"
-                  value={updatedStatus}
-                  onChange={(e) => setUpdatedStatus(e.target.value)}
-                >
-                  <option value="In Progress">Đang thực hiện</option>
-                  <option value="Completed">Đã hoàn thành</option>
-                  <option value="Cancelled">Đã hủy</option>
-                </Form.Control>
+                  type="date"
+                  value={updatedCheckin}
+                  onChange={(e) => setUpdatedCheckin(e.target.value)}
+                />
               </Form.Group>
-              <Form.Group controlId="checkout" className="mt-3">
-                <Form.Label>Checkout</Form.Label>
+
+              {/* Checkout Input */}
+              <Form.Group controlId="formCheckout">
+                <Form.Label>Checkout:</Form.Label>
                 <Form.Control
                   type="date"
                   value={updatedCheckout}
                   onChange={(e) => setUpdatedCheckout(e.target.value)}
                 />
               </Form.Group>
-            </>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Đóng
-          </Button>
-          <Button variant="primary" onClick={handleUpdateBooking}>
-            Cập nhật
-          </Button>
-        </Modal.Footer>
-      </Modal>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowModal(false)}>
+              Hủy
+            </Button>
+            <Button variant="primary" onClick={handleUpdateBooking}>
+              Cập nhật
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
 
-      {/* Modal for booking details */}
-      <Modal show={showDetailModal} onHide={() => setShowDetailModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Chi tiết Đặt phòng</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedBookingDetails ? (
-            <>
-              <p><strong>Tên Khách:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.fullname : 'Không có'}</p>
-              <p><strong>Điện thoại:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.phone : 'Không có'}</p>
-              <p><strong>Email:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.email : 'Không có'}</p>
-              <p><strong>Ngày sinh:</strong> {selectedBookingDetails.customerId ? selectedBookingDetails.customerId.dob : 'Không có'}</p>
-              <p><strong>Xác thực:</strong></p>
-              <p>- Giấy tờ: {selectedBookingDetails.identifyName ? selectedBookingDetails.identifyName : 'Không có'}</p>
-              <p>- Mã: {selectedBookingDetails.identifyCode ? selectedBookingDetails.identifyCode : 'Không có'}</p>
-              <p><strong>Tên phòng:</strong> {selectedBookingDetails.roomCateId ? selectedBookingDetails.roomCateId.name : 'Không có'}</p>
-              <p><strong>Số lượng:</strong> {selectedBookingDetails.quantity}</p>
-              <p><strong>Tổng giá:</strong> {(selectedBookingDetails.quantity * (selectedBookingDetails.roomCateId ? selectedBookingDetails.roomCateId.price : 0)).toFixed(2)}</p>
-              <p><strong>Checkin:</strong> {formatDate(selectedBookingDetails.bookingId.checkin)}</p>
-              <p><strong>Checkout:</strong> {formatDate(selectedBookingDetails.bookingId.checkout)}</p>
-            </>
-          ) : (
-            <p>Không có thông tin chi tiết.</p>
-          )}
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDetailModal(false)}>
-            Đóng
-          </Button>
+      {/* Detail Modal */}
+      {selectedBookingDetails && (
+        <Modal show={showDetailModal} onHide={() => setShowDetailModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Thông tin Đặt phòng</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Mã Đặt phòng: {selectedBookingDetails.bookingId._id}</p>
+            <p>Tên khách: {selectedBookingDetails.customerId.fullname}</p>
+            <p>Phòng: {selectedBookingDetails.roomCateId.name}</p>
+            <p>Số lượng: {selectedBookingDetails.quantity}</p>
+            <p>Tổng tiền: {selectedBookingDetails.quantity * selectedBookingDetails.roomCateId.price}</p>
+            <p>Checkin: {formatDate(selectedBookingDetails.bookingId.checkin)}</p>
+            <p>Checkout: {formatDate(selectedBookingDetails.bookingId.checkout)}</p>
+            <p>Thanh toán: {selectedBookingDetails.bookingId.payment}</p>
+            <p>Trạng thái: {selectedBookingDetails.bookingId.status}</p>
+            <p>Tên giấy tờ: {selectedBookingDetails.identifyName || 'Chưa có thông tin'}</p>
+            <p>Mã giấy tờ: {selectedBookingDetails.identifyCode || 'Chưa có thông tin'}</p>
+          </Modal.Body>
+          
+          <Modal.Footer>
           <Button
             variant="primary"
             onClick={() => {
@@ -306,8 +348,13 @@ const ListBooking = () => {
           >
             Chỉnh sửa thông tin
           </Button>
-        </Modal.Footer>
-      </Modal>
+            <Button variant="secondary" onClick={() => setShowDetailModal(false)}>
+              Đóng
+            </Button>
+
+          </Modal.Footer>
+        </Modal>
+      )}
     </Container>
   );
 };

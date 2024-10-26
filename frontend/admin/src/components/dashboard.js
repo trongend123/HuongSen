@@ -72,6 +72,7 @@ const Dashboard = () => {
   const bookingsData = labels.map(date => aggregatedOrders[date] || 0);
   const revenueData = labels.map(date => filteredBookingData.filter(b => new Date(b.bookingId.createdAt).toLocaleDateString() === date && b.bookingId.status === 'Completed').reduce((sum, b) => sum + b.bookingId.price, 0));
   const ordersData = labels.map(date => filteredOrderData.filter(b => new Date(b.bookingId.createdAt).toLocaleDateString() === date && b.bookingId.status === 'Completed').reduce((sum, b) => sum + b.quantity, 0));
+  const humansData = labels.map(date => filteredOrderData.filter(b => new Date(b.createdAt).toLocaleDateString() === date && b.bookingId.status === 'Completed').reduce((sum, b) => sum + b.bookingId.humans, 0));
   // Chart data for bookings
   const bookingsChartData = {
     labels: labels,
@@ -107,6 +108,19 @@ const Dashboard = () => {
       {
         label: 'Tổng số đơn hàng',
         data: ordersData,
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      },
+    ],
+  };
+
+  const humansChartData = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Tổng số khách hàng',
+        data: humansData,
         fill: false,
         borderColor: 'rgb(54, 162, 235)',
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -192,26 +206,42 @@ const Dashboard = () => {
             </Card.Body>
           </Card>
         </Col>
+        <Col>
+          <Card className="text-center">
+            <Card.Body>
+              <Card.Title>Tổng số người</Card.Title>
+              <Card.Text>{filteredOrderData.filter(b => b.bookingId.status === 'Completed').reduce((sum, b) => sum + b.bookingId.humans, 0)}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
       <hr />
       {/* Individual Line Charts */}
       <Row className="mt-4">
-        <Col lg={4}>
+        <Col lg={6}>
           <Card className='chart'>
             <h4 className="text-center">Tổng số đơn theo thời gian</h4>
             <Line data={bookingsChartData} />
           </Card>
         </Col>
-        <Col lg={4}>
+        <Col lg={6}>
           <Card className='chart'>
             <h4 className="text-center">Tổng doanh thu theo thời gian</h4>
             <Line data={revenueChartData} />
           </Card>
         </Col>
-        <Col lg={4}>
+      </Row>
+      <Row className="mt-4">
+        <Col lg={6}>
           <Card className='chart'>
             <h4 className="text-center">Tổng số phòng theo thời gian</h4>
             <Line data={ordersChartData} />
+          </Card>
+        </Col>
+        <Col lg={6}>
+          <Card className='chart'>
+            <h4 className="text-center">Tổng số khách hàng theo thời gian</h4>
+            <Line data={humansChartData} />
           </Card>
         </Col>
       </Row>
