@@ -144,12 +144,21 @@ const ListRoom = () => {
         <MinhKhaiRooms rooms={filteredRooms} onClick={handleRoomClick} />
       )}
 
-      <div className="note">
-        <p>Màu đỏ: Đang sửa chữa</p>
-        <p>Màu xám: Trống</p>
-        <p>Màu vàng: Đã book</p>
-        <p>Màu xanh: Đang sử dụng</p>
-      </div>
+<div className="note">
+  <button style={{ backgroundColor: "red", color: "white", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px" }}>
+    Đang sửa chữa
+  </button>
+  <button style={{ backgroundColor: "#d3d3d3", color: "black", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px"  }}>
+    Trống
+  </button>
+  <button style={{ backgroundColor: "yellow", color: "black", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px" }}>
+    Đã book
+  </button>
+  <button style={{ backgroundColor: "lightgreen", color: "black", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px" }}>
+    Đang sử dụng
+  </button>
+</div>
+
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -190,11 +199,12 @@ const ListRoom = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
+          
+          <Button variant="primary" onClick={handleUpdate} style={{ marginRight: '10px' }}>
+            Cập nhật
+          </Button>
           <Button variant="secondary" onClick={handleClose}>
             Đóng
-          </Button>
-          <Button variant="primary" onClick={handleUpdate}>
-            Cập nhật
           </Button>
         </Modal.Footer>
       </Modal>

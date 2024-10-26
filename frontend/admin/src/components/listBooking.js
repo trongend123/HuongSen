@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Container, Button, Modal, Form, InputGroup, FormControl, Pagination } from 'react-bootstrap';
+import { Table, Container, Button, Modal, Form, InputGroup, FormControl, Pagination, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'; // Nhập useNavigate từ react-router-dom
 import axios from 'axios';
+import "./listBooking.css";
 
 const ListBooking = () => {
   const [bookings, setBookings] = useState([]);
@@ -147,36 +148,9 @@ const ListBooking = () => {
   return (
     <Container>
       <h2 className="text-center my-4">Danh sách Đặt phòng</h2>
-
-      {/* Search Inputs */}
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Tìm kiếm theo Mã Đặt phòng hoặc Tên Khách hàng"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </InputGroup>
-
-      {/* Date Filters */}
-      <InputGroup className="mb-3">
-      Ngày checkin:
-        <FormControl
-          type="date"
-          placeholder="Tìm kiếm theo ngày Check-in"
-          value={checkinFilter}
-          onChange={(e) => setCheckinFilter(e.target.value)}
-        />
-      Ngày checkout:
-        <FormControl
-          type="date"
-          placeholder="Tìm kiếm theo ngày Check-out"
-          value={checkoutFilter}
-          onChange={(e) => setCheckoutFilter(e.target.value)}
-        />
-      </InputGroup>
-
-      {/* Location Filter Input */}
-      <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
+      <Row>
+        <Col md={6}>
+        <Form.Group controlId="categorySelect" className="my-4" >
         <Form.Label>Chọn cơ sở:</Form.Label>
         <Form.Control
           as="select"
@@ -189,6 +163,48 @@ const ListBooking = () => {
           <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
         </Form.Control>
       </Form.Group>
+        </Col>
+        <Col md={3}>
+        <Form.Group controlId="categorySelect" className="my-4" >
+        <Form.Label>Ngày check-in:</Form.Label>
+        <FormControl
+          type="date"
+          style={{ margin: '0 10px' }}  
+          placeholder="Tìm kiếm theo ngày Check-in"
+          value={checkinFilter}
+          onChange={(e) => setCheckinFilter(e.target.value)}
+        />
+        </Form.Group>
+        </Col>
+
+        <Col md={3}>
+        <Form.Group controlId="categorySelect" className="my-4" >
+        <Form.Label>Ngày check-out:</Form.Label>
+        <FormControl
+          type="date"
+          style={{ margin: '0 10px' }}
+          placeholder="Tìm kiếm theo ngày Check-out"
+          value={checkoutFilter}
+          onChange={(e) => setCheckoutFilter(e.target.value)}
+        />
+        </Form.Group>
+        </Col>
+        </Row>
+      
+      {/* Search Inputs */}
+      <InputGroup className="mb-3">
+        <FormControl
+          placeholder="Tìm kiếm theo Mã Đặt phòng hoặc Tên Khách hàng"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </InputGroup>
+
+      {/* Date Filters */}
+     
+
+      {/* Location Filter Input */}
+      
 
       <Table striped bordered hover>
         <thead>
@@ -200,7 +216,6 @@ const ListBooking = () => {
             <th>Tổng tiền</th>
             <th>Checkin</th>
             <th>Checkout</th>
-            <th>Thanh toán</th>
             <th>Trạng Thái</th>
             <th>Hành động</th>
           </tr>
@@ -211,11 +226,10 @@ const ListBooking = () => {
               <td>{booking.bookingId._id}</td>
               <td>{booking.customerId.fullname}</td>
               <td>{booking.roomCateId.name}</td>
-              <td>{booking.quantity}</td>
+              <td className="text-center">{booking.quantity}</td>
               <td>{booking.quantity * booking.roomCateId.price}</td>
               <td>{formatDate(booking.bookingId.checkin)}</td>
               <td>{formatDate(booking.bookingId.checkout)}</td>
-              <td>{booking.bookingId.payment}</td>
               <td>{booking.bookingId.status}</td>
               <td>
                 {booking.bookingId.status !== 'Cancelled' && booking.bookingId.status !== 'Completed' && (
@@ -228,7 +242,7 @@ const ListBooking = () => {
                         handleEditClick(booking);
                       }}
                     >
-                      Chỉnh sửa
+                      Sửa
                     </Button>
                     <Button
                       variant="danger"
@@ -346,7 +360,16 @@ const ListBooking = () => {
               navigate('/updateBookingInfo', { state: { selectedBookingDetails } });
             }}
           >
-            Chỉnh sửa thông tin
+            Chỉnh sửa
+          </Button>
+          <Button
+            variant="info"
+            style={{ margin: ' 0px 10px' }}
+            onClick={() => {
+              navigate('/historyBookingChange', { state: { bookingId: selectedBookingDetails.bookingId._id } }); // Chuyển hướng với bookingId
+            }}
+          >
+            Lịch sử
           </Button>
             <Button variant="secondary" onClick={() => setShowDetailModal(false)}>
               Đóng
@@ -355,6 +378,7 @@ const ListBooking = () => {
           </Modal.Footer>
         </Modal>
       )}
+          
     </Container>
   );
 };

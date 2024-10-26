@@ -4,16 +4,20 @@ import axios from 'axios';
 
 // Component to display individual room category information
 const RoomCategoryItem = ({ roomCategory, onDelete, onEdit }) => {
+    const formattedPrice = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    }).format(roomCategory.price);
+
     return (
         <tr>
             <td>{roomCategory.locationId.name}</td>
             <td>{roomCategory.name}</td>
-            <td>{roomCategory.numberOfBed}</td>
-            <td>{roomCategory.numberOfHuman}</td>
-            <td>{roomCategory.price}</td>
+            <td className="text-center">{roomCategory.numberOfBed}</td>
+            <td className="text-center">{roomCategory.numberOfHuman}</td>
+            <td>{formattedPrice}</td>
             <td>
                 <Button variant="warning" size="sm" className="mx-1" onClick={() => onEdit(roomCategory)}>Chỉnh sửa</Button>
-                <Button variant="danger" size="sm" onClick={() => onDelete(roomCategory._id)}>Xóa</Button>
             </td>
         </tr>
     );
@@ -22,7 +26,7 @@ const RoomCategoryItem = ({ roomCategory, onDelete, onEdit }) => {
 // Main component to manage room categories
 const ListRoomCate = () => {
     const [roomCategories, setRoomCategories] = useState([]);
-    const [locations, setLocations] = useState([]); // State for locations
+    const [locations, setLocations] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedRoomCategory, setSelectedRoomCategory] = useState(null);
@@ -31,11 +35,11 @@ const ListRoomCate = () => {
         numberOfBed: 1,
         numberOfHuman: 1,
         price: 1000,
-        locationId: '', // Location ID will be selected
+        locationId: '',
     });
     const [errors, setErrors] = useState({});
-    const [filterName, setFilterName] = useState(''); // State for filtering by room name
-    const [filterLocation, setFilterLocation] = useState(''); // State for filtering by location
+    const [filterName, setFilterName] = useState('');
+    const [filterLocation, setFilterLocation] = useState('');
 
     // Fetch room categories and locations from API
     useEffect(() => {
@@ -44,7 +48,7 @@ const ListRoomCate = () => {
                 const roomCategoryResponse = await axios.get('http://localhost:9999/roomCategories');
                 setRoomCategories(roomCategoryResponse.data);
 
-                const locationResponse = await axios.get('http://localhost:9999/locations'); // Fetch locations
+                const locationResponse = await axios.get('http://localhost:9999/locations');
                 setLocations(locationResponse.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -131,7 +135,7 @@ const ListRoomCate = () => {
             numberOfBed: roomCategory.numberOfBed,
             numberOfHuman: roomCategory.numberOfHuman,
             price: roomCategory.price,
-            locationId: roomCategory.locationId._id, // Get the locationId directly
+            locationId: roomCategory.locationId._id,
         });
         handleShowModal();
     };
@@ -154,10 +158,9 @@ const ListRoomCate = () => {
     // Filtered room categories based on filters
     const filteredRoomCategories = roomCategories.filter((roomCategory) => {
         const matchesRoomName = roomCategory.name?.toLowerCase().includes(filterName.toLowerCase());
-        const matchesLocation = roomCategory.locationId.name?.toLowerCase().includes(filterLocation.toLowerCase());
+        const matchesLocation = roomCategory.locationId._id.includes(filterLocation);
         return matchesRoomName && matchesLocation;
     });
-
 
     return (
         <Container>
@@ -179,7 +182,7 @@ const ListRoomCate = () => {
                     >
                         <option value="">Tất cả chi nhánh</option>
                         {locations.map((location) => (
-                            <option key={location._id} value={location.name}>{location.name}</option>
+                            <option key={location._id} value={location._id}>{location.name}</option>
                         ))}
                     </Form.Select>
                 </Col>
@@ -195,8 +198,8 @@ const ListRoomCate = () => {
                     <tr>
                         <th>Tên chi nhánh</th>
                         <th>Tên loại phòng</th>
-                        <th>Số giường</th>
-                        <th>Số người</th>
+                        <th >Số giường</th>
+                        <th >Số người</th>
                         <th>Giá</th>
                         <th>Hành động</th>
                     </tr>
@@ -208,7 +211,6 @@ const ListRoomCate = () => {
                 </tbody>
             </Table>
 
-            {/* Modal for creating or editing room category */}
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>{isEditMode ? 'Chỉnh sửa loại phòng' : 'Tạo loại phòng'}</Modal.Title>
@@ -251,7 +253,7 @@ const ListRoomCate = () => {
                             <Form.Control.Feedback type="invalid">{errors.numberOfHuman}</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Giá</Form.Label>
+                            <Form.Label>Giá (VND)</Form.Label>
                             <Form.Control
                                 type="number"
                                 name="price"
@@ -280,12 +282,14 @@ const ListRoomCate = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
-                        Đóng
+                   
+                    <Button
+                        variant="primary"
+                        onClick={isEditMode ? handleUpdateRoomCategory : handleCreateRoomCategory}
+                    >
+                        {isEditMode ? 'Cập nhật' : 'Tạo mới'}
                     </Button>
-                    <Button variant="primary" onClick={isEditMode ? handleUpdateRoomCategory : handleCreateRoomCategory}>
-                        {isEditMode ? 'Cập nhật' : 'Tạo'}
-                    </Button>
+                    <Button variant="secondary" onClick={handleCloseModal}>Đóng</Button>
                 </Modal.Footer>
             </Modal>
         </Container>

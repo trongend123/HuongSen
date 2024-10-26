@@ -16,6 +16,8 @@ import ChangePassword from './screens/Change Password/changepass';
 import CreateBookingByStaff from './components/createBookingByStaff';
 import { RxAvatar } from "react-icons/rx";
 import UpdateBookingInfo from './components/updateBookingInfo';
+import HistoryBookingChange from './components/historyBookingChange';
+import SaveHistory from './components/SaveHistory';
 
 // Layout wrapper to conditionally render sidebar and layout based on route
 const Layout = ({ children }) => {
@@ -48,7 +50,7 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path='/change-password' element={<ChangePassword />} />
         <Route
           path="*"
@@ -56,12 +58,16 @@ root.render(
             <Layout>
               <Routes>
                 <Route path="/rooms" element={<ListRoom />} />
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/bookings" element={<ListBooking />} />
                 <Route path="/staffs" element={<ListStaff />} />
                 <Route path="/roomCate" element={<ListRoomCate />} />
                 <Route path="/createBooking" element={<CreateBookingByStaff />} />
                 <Route path="/updateBookingInfo" element={<UpdateBookingInfo />} />
+                <Route path="/historyBookingChange" element={<HistoryBookingChange />} />
+                <Route path="/saveHistory" element={<SaveHistory />} />
+
+
               </Routes>
             </Layout>
           )}

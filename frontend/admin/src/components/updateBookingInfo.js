@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Container, Form, Row, Col, Card, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
+import SaveHistory from './SaveHistory';
 
 const UpdateBookingInfo = () => {
     const location = useLocation();
@@ -16,22 +17,15 @@ const UpdateBookingInfo = () => {
         checkin: selectedBookingDetails?.bookingId?.checkin || '',
     });
 
+    const [orderRoomDetails, setOrderRoomDetails] = useState([]); // Mảng các orderRoom
     const [otherServices, setOtherServices] = useState([]);
     const [selectedService, setSelectedService] = useState('');
     const [serviceQuantity, setServiceQuantity] = useState(1);
-    const [orderServicesData, setOrderServicesData] = useState([]);
-    const [cancelledServices, setCancelledServices] = useState([]); // Mảng lưu dịch vụ bị hủy
+    const [orderServicesData, setOrderServicesData] = useState([]); // Dịch vụ đã đặt trước đó
+    const [addedServices, setAddedServices] = useState([]); // Dịch vụ mới được thêm
     const [user, setUser] = useState(null);
-    const [bookings, setBookings] = useState([]);
-    // Fetch user từ localStorage
-    useEffect(() => {
-        axios
-      .get("http://localhost:9999/orderRooms")
-      .then((response) => setBookings(response.data))
-      .catch((error) => console.error("Error fetching bookings:", error));
-    }, []);
-    
-    const filteredBookings = bookings.filter((booking) => booking.bookingId._id === selectedBookingDetails?.bookingId?._id);
+
+    // Lấy user từ localStorage
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -40,7 +34,7 @@ const UpdateBookingInfo = () => {
         }
     }, []);
 
-    // Fetch danh sách dịch vụ và dịch vụ đã thêm trước đó
+    // Fetch danh sách dịch vụ và các thông tin khác
     useEffect(() => {
         axios.get('http://localhost:9999/otherServices')
             .then((response) => setOtherServices(response.data))
@@ -51,9 +45,13 @@ const UpdateBookingInfo = () => {
             axios.get(`http://localhost:9999/orderServices/booking/${selectedBookingDetails.bookingId._id}`)
                 .then((response) => setOrderServicesData(response.data))
                 .catch((error) => console.error('Error fetching added services:', error));
+
+            // Lấy thông tin từ orderRoom theo bookingId
+            axios.get(`http://localhost:9999/orderRooms/booking/${selectedBookingDetails.bookingId._id}`)
+                .then((response) => setOrderRoomDetails(response.data)) // Lưu mảng orderRoom vào state
+                .catch((error) => console.error('Error fetching order room details:', error));
         }
     }, [selectedBookingDetails]);
-
 
     // Cập nhật bookingDetails khi selectedBookingDetails thay đổi
     useEffect(() => {
@@ -68,37 +66,16 @@ const UpdateBookingInfo = () => {
         }
     }, [selectedBookingDetails]);
 
-    // Xử lý thay đổi thông tin booking (chỉ với admin)
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setBookingDetails((prevDetails) => ({
-            ...prevDetails,
-            [name]: value,
-        }));
-    };
-
     // Xử lý thêm dịch vụ khác
     const handleAddService = () => {
-        const existingService = orderServicesData.find(service => service.otherServiceId === selectedService);
-
-        if (existingService) {
-            setOrderServicesData(prevData =>
-                prevData.map(service =>
-                    service.otherServiceId === selectedService
-                        ? { ...service, serviceQuantity: service.serviceQuantity + parseInt(serviceQuantity) }
-                        : service
-                )
-            );
-        } else {
-            setOrderServicesData(prevData => [
-                ...prevData,
-                { otherServiceId: selectedService, serviceQuantity: parseInt(serviceQuantity) }
-            ]);
-        }
-
-        // Cập nhật giá
         const serviceDetails = otherServices.find(s => s._id === selectedService);
         if (serviceDetails) {
+            // Thêm dịch vụ mới vào mảng addedServices
+            setAddedServices(prev => [
+                ...prev,
+                { otherServiceId: serviceDetails, quantity: parseInt(serviceQuantity) }
+            ]);
+            // Cập nhật giá tổng cộng (totalAmount)
             setBookingDetails(prevDetails => ({
                 ...prevDetails,
                 price: prevDetails.price + serviceDetails.price * parseInt(serviceQuantity),
@@ -109,26 +86,18 @@ const UpdateBookingInfo = () => {
         setServiceQuantity(1);
     };
 
-    // Xử lý hủy dịch vụ (trừ price và lưu dịch vụ bị hủy)
-    const handleRemoveService = (serviceId) => {
-        const serviceToRemove = orderServicesData.find(service => service.otherServiceId === serviceId);
+    // Hủy dịch vụ mới được thêm
+    const handleRemoveAddedService = (index) => {
+        const serviceToRemove = addedServices[index];
 
-        if (serviceToRemove) {
-            // Cập nhật giá sau khi hủy dịch vụ
-            const serviceDetails = otherServices.find(s => s._id === serviceId);
-            if (serviceDetails) {
-                setBookingDetails(prevDetails => ({
-                    ...prevDetails,
-                    price: prevDetails.price - serviceDetails.price * serviceToRemove.serviceQuantity,
-                }));
-            }
+        // Trừ giá trị dịch vụ khỏi tổng giá
+        setBookingDetails(prevDetails => ({
+            ...prevDetails,
+            price: prevDetails.price - serviceToRemove.otherServiceId.price * serviceToRemove.quantity,
+        }));
 
-            // Thêm vào mảng dịch vụ bị hủy
-            setCancelledServices((prev) => [...prev, serviceToRemove]);
-
-            // Xóa dịch vụ khỏi orderServicesData
-            setOrderServicesData(prevData => prevData.filter(service => service.otherServiceId !== serviceId));
-        }
+        // Xóa dịch vụ khỏi mảng addedServices
+        setAddedServices(prev => prev.filter((_, i) => i !== index));
     };
 
     // Xử lý submit thông tin đã cập nhật
@@ -136,6 +105,7 @@ const UpdateBookingInfo = () => {
         e.preventDefault();
 
         try {
+            // Prepare the updated booking data
             const updatedBooking = {
                 ...selectedBookingDetails,
                 bookingId: {
@@ -146,35 +116,41 @@ const UpdateBookingInfo = () => {
                 },
             };
 
-            // Gửi yêu cầu cập nhật booking
+            // Update booking details
             await axios.put(`http://localhost:9999/bookings/${selectedBookingDetails.bookingId._id}`, updatedBooking.bookingId);
 
-            // Thêm và cập nhật các dịch vụ khác nếu có
-            for (const service of orderServicesData) {
-                if (service.serviceQuantity > 0) {
-                    await axios.post('http://localhost:9999/orderServices', {
-                        otherServiceId: service.otherServiceId,
-                        bookingId: selectedBookingDetails.bookingId._id,
-                        quantity: service.serviceQuantity,
-                        note: 'Some optional note'
-                    });
+            // Add new services if any
+            for (const service of addedServices) {
+                await axios.post('http://localhost:9999/orderServices', {
+                    otherServiceId: service.otherServiceId._id,
+                    bookingId: selectedBookingDetails.bookingId._id,
+                    quantity: service.quantity,
+                    note: 'Some optional note'
+                });
+            }
+
+            // After successful update, navigate to SaveHistory route with bookingId
+            navigate(`/saveHistory`, {
+                state: {
+                    bookingId: selectedBookingDetails.bookingId._id,
+                    note: `${user.role} ${user.fullname} đã update dữ liệu Booking`,
+                    user: user // Pass user object as well
                 }
-            }
+            });
 
-            // Xóa dịch vụ bị hủy trong MongoDB
-            for (const cancelledService of cancelledServices) {
-                await axios.delete(`http://localhost:9999/orderServices/${cancelledService._id}`);
-            }
 
-            console.log("Updated booking, added services, and removed cancelled services successfully");
-            navigate(-1); // Quay lại trang trước đó
+            console.log("Updated booking, logged history, and added services successfully");
         } catch (error) {
             console.error('Error updating booking:', error);
         }
     };
 
+
+
+
     return (
         <Container>
+            {/* <SaveHistory bookingId={selectedBookingDetails.bookingId._id} note={""} /> */}
             <h2 className="my-4">Cập nhật thông tin đặt phòng</h2>
             {selectedBookingDetails ? (
                 <Form onSubmit={handleSubmit}>
@@ -184,52 +160,89 @@ const UpdateBookingInfo = () => {
                         <ListGroup.Item><strong>Điện thoại:</strong> {selectedBookingDetails.customerId?.phone || 'Không có'}</ListGroup.Item>
                         <ListGroup.Item><strong>Email:</strong> {selectedBookingDetails.customerId?.email || 'Không có'}</ListGroup.Item>
                         <ListGroup.Item><strong>Ngày sinh:</strong> {selectedBookingDetails.customerId?.dob || 'Không có'}</ListGroup.Item>
+                        <ListGroup.Item><strong>Số người:</strong> {selectedBookingDetails.bookingId?.humans || 'Không có'}</ListGroup.Item>
+                    </ListGroup>
+
+                    <h5>Thông tin định danh</h5>
+                    <ListGroup className="mb-4">
+                        <ListGroup.Item><strong>Tên định danh:</strong> {selectedBookingDetails.identifyName || 'Không có'}</ListGroup.Item>
+                        <ListGroup.Item><strong>Mã định danh:</strong> {selectedBookingDetails.identifyCode || 'Không có'}</ListGroup.Item>
                     </ListGroup>
 
                     <h5>Thông tin đặt phòng</h5>
-                    <ListGroup className="mb-4">
-                        {filteredBookings.map((booking) => (
-                            <ListGroup.Item key={booking._id}>
-                                <strong>Tên phòng:</strong> {booking.roomCateId.name}
-                                <br />
-                                <strong>Số lượng:</strong> {booking.quantity}
-                            </ListGroup.Item>
-                        ))}
-                        <ListGroup.Item><strong>Check-in:</strong> {new Date(bookingDetails.checkin).toLocaleDateString()}</ListGroup.Item>
-                        <ListGroup.Item><strong>Check-out:</strong> {new Date(bookingDetails.checkout).toLocaleDateString()}</ListGroup.Item>
-                    </ListGroup>
-
-                    {/* Nếu user.role === 'admin' thì cho phép chỉnh sửa price và contract */}
-                    {user && (
-                        <Row>
-                            <Col md={6}>
-                                <Form.Group controlId="price" className="mb-3">
-                                    <Form.Label>Tổng Giá</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        name="price"
-                                        value={bookingDetails.price}
-                                        onChange={handleChange}
-                                        required
-                                        readOnly={user.role !== 'admin'}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                                <Form.Group controlId="contract" className="mb-3">
-                                    <Form.Label>Hợp đồng</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="contract"
-                                        value={bookingDetails.contract}
-                                        onChange={handleChange}
-                                        // required
-                                        readOnly={user.role !== 'admin'}
-                                    />
-                                </Form.Group>
-                            </Col>
-                        </Row>
+                    {/* Lặp qua mảng orderRoomDetails để hiển thị từng phòng */}
+                    {orderRoomDetails.length > 0 ? (
+                        <Card className="mb-4">
+                            <Card.Header>Thông tin các phòng đã đặt:</Card.Header>
+                            <ListGroup variant="flush">
+                                {orderRoomDetails.map((room, index) => (
+                                    <ListGroup.Item key={index}>
+                                        <Row>
+                                            <Col><strong>Tên phòng:</strong> {room.roomCateId?.name || 'Không có'}</Col>
+                                            <Col><strong>Số lượng phòng:</strong> {room.quantity}</Col>
+                                            <Col><strong>Chi nhánh</strong> {room.roomCateId?.locationId || 0}</Col>
+                                        </Row>
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                        </Card>
+                    ) : (
+                        <p>Không có thông tin phòng.</p>
                     )}
+
+
+
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group controlId="checkin" className="mb-3">
+                                <Form.Label>Check-in</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="checkin"
+                                    value={new Date(bookingDetails.checkin).toLocaleDateString()}
+                                    readOnly
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group controlId="checkout" className="mb-3">
+                                <Form.Label>Check-out</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="checkout"
+                                    value={new Date(bookingDetails.checkout).toLocaleDateString()}
+                                    readOnly
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group controlId="price" className="mb-3">
+                                <Form.Label>Tổng Giá</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    name="price"
+                                    value={bookingDetails.price}
+                                    onChange={(e) => setBookingDetails({ ...bookingDetails, price: e.target.value })}
+                                    readOnly={user?.role !== 'admin'}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group controlId="contract" className="mb-3">
+                                <Form.Label>Hợp đồng</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="contract"
+                                    value={bookingDetails.contract}
+                                    onChange={(e) => setBookingDetails({ ...bookingDetails, contract: e.target.value })}
+                                    readOnly={user?.role !== 'admin'}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
 
                     <h5>Thêm Dịch Vụ Khác</h5>
                     <Row className="mt-3">
@@ -270,25 +283,36 @@ const UpdateBookingInfo = () => {
                     {/* Hiển thị danh sách dịch vụ đã thêm */}
                     {orderServicesData.length > 0 && (
                         <Card className="mt-4">
-                            <Card.Header>Dịch vụ đã chọn:</Card.Header>
+                            <Card.Header>Dịch vụ đã đặt:</Card.Header>
                             <ListGroup variant="flush">
-                                {orderServicesData.map((service) => {
-                                    const serviceDetails = otherServices.find(s => s._id === service.otherServiceId._id || s._id === service.otherServiceId);
-                                    return (
-                                        <ListGroup.Item key={service.otherServiceId}>
-                                            <Row>
-                                                <Col md={6}>
-                                                    {serviceDetails?.name} - Số lượng: {service?.serviceQuantity || service.quantity}
-                                                </Col>
-                                                <Col md={3}>
-                                                    <Button variant="danger" onClick={() => handleRemoveService(service.otherServiceId)}>
-                                                        Hủy
-                                                    </Button>
-                                                </Col>
-                                            </Row>
-                                        </ListGroup.Item>
-                                    );
-                                })}
+                                {orderServicesData.map((service) => (
+                                    <ListGroup.Item key={service._id}>
+                                        <Row>
+                                            <Col>{service.otherServiceId.name} - Số lượng: {service.quantity}</Col>
+                                        </Row>
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                        </Card>
+                    )}
+
+                    {/* Hiển thị dịch vụ mới được thêm */}
+                    {addedServices.length > 0 && (
+                        <Card className="mt-4">
+                            <Card.Header>Dịch vụ mới thêm:</Card.Header>
+                            <ListGroup variant="flush">
+                                {addedServices.map((service, index) => (
+                                    <ListGroup.Item key={index}>
+                                        <Row>
+                                            <Col>{service.otherServiceId.name} - Số lượng: {service.quantity}</Col>
+                                            <Col md={3}>
+                                                <Button variant="danger" onClick={() => handleRemoveAddedService(index)}>
+                                                    Hủy
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </ListGroup.Item>
+                                ))}
                             </ListGroup>
                         </Card>
                     )}
