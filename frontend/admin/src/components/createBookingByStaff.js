@@ -437,9 +437,6 @@ const CreateBookingByStaff = () => {
         }
     };
 
-
-
-
     return (
         <Container className='mb-3'>
             <h6 className="my-4 px-2 text-bg-success d-inline ">Đặt Phòng Từ Nhân Viên: {staffName}</h6>

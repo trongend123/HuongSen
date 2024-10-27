@@ -17,6 +17,16 @@ const ListBooking = () => {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedBookingDetails, setSelectedBookingDetails] = useState(null);
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  // Lấy user từ localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const userResponse = JSON.parse(storedUser);
+      setUser(userResponse);
+    }
+  }, []);
 
   useEffect(() => {
     axios
@@ -98,6 +108,14 @@ const ListBooking = () => {
         setShowModal(false);
       })
       .catch((error) => console.error("Error updating booking:", error));
+
+    navigate(`/saveHistory`, {
+      state: {
+        bookingId: selectedBooking.bookingId._id,
+        note: `${user.role} ${user.fullname} đã cập nhật status dữ liệu Booking`,
+        user: user // Pass user object as well
+      }
+    });
   };
 
   const handleCancelClick = (booking) => {
@@ -113,6 +131,14 @@ const ListBooking = () => {
         );
       })
       .catch((error) => console.error("Error cancelling booking:", error));
+
+    navigate(`/saveHistory`, {
+      state: {
+        bookingId: bookingId,
+        note: `${user.role} ${user.fullname} đã hủy dữ liệu Booking`,
+        user: user // Pass user object as well
+      }
+    });
   };
 
   // Sort bookings by checkin date
@@ -165,7 +191,6 @@ const ListBooking = () => {
             <th>Tên Khách</th>
             <th>Tên phòng</th>
             <th>Số lượng</th>
-            <th>Tổng tiền</th>
             <th>Checkin</th>
             <th>Checkout</th>
             <th>Thanh toán</th>
@@ -180,12 +205,11 @@ const ListBooking = () => {
               <td>{booking.customerId.fullname}</td>
               <td>{booking.roomCateId.name}</td>
               <td>{booking.quantity}</td>
-              <td>{booking.quantity * booking.roomCateId.price}</td>
               <td>{formatDate(booking.bookingId.checkin)}</td>
               <td>{formatDate(booking.bookingId.checkout)}</td>
               <td>{booking.bookingId.payment}</td>
               <td>{booking.bookingId.status}</td>
-              <td>
+              <td style={{ width: "200px" }}>
                 {booking.bookingId.status !== 'Cancelled' && booking.bookingId.status !== 'Completed' && (
                   <>
                     <Button

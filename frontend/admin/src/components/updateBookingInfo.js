@@ -180,7 +180,7 @@ const UpdateBookingInfo = () => {
                                         <Row>
                                             <Col><strong>Tên phòng:</strong> {room.roomCateId?.name || 'Không có'}</Col>
                                             <Col><strong>Số lượng phòng:</strong> {room.quantity}</Col>
-                                            <Col><strong>Chi nhánh</strong> {room.roomCateId?.locationId || 0}</Col>
+                                            <Col><strong>Giá Phòng</strong> {room.roomCateId?.price || 0}</Col>
                                         </Row>
                                     </ListGroup.Item>
                                 ))}
