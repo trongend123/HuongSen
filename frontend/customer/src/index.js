@@ -16,8 +16,8 @@ root.render(
         <Container fluid className="content" style={{ padding: '0px' }}>
           <div className="content-header"></div>
           <div className="body"><Routes>
-            <Route path="/" element={<BookingPage />} />
-            {/* <Route path="/" element={<HomePage/>} /> */}
+            <Route path="/bookingPage" element={<BookingPage />} />
+            <Route path="/" element={<HomePage />} />
           </Routes></div>
         </Container>
       </div>

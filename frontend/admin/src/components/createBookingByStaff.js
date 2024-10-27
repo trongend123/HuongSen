@@ -542,7 +542,7 @@ const CreateBookingByStaff = () => {
                                     <Form.Label><strong>Mã định danh</strong></Form.Label>
                                     <Form.Control
                                         type='text'
-                                        placeholder='Enter identifycation code'
+                                        placeholder='Nhập mã số của khách hàng'
                                         name='code'
                                         value={identifycationData.code}
                                         onChange={handleIdentifycationChange}
@@ -590,7 +590,7 @@ const CreateBookingByStaff = () => {
                                     <Form.Label><strong>Địa chỉ</strong></Form.Label>
                                     <Form.Control
                                         type='text'
-                                        placeholder='Enter location'
+                                        placeholder='Nhập địa chỉ cấp'
                                         name='location'
                                         value={identifycationData.location}
                                         onChange={handleIdentifycationChange}
@@ -747,11 +747,11 @@ const CreateBookingByStaff = () => {
 
                 <Row className="mb-3">
                     <Col>
-                        <h5>Total Amount: {totalAmount}</h5>
+                        <h5>Tổng tiền: {totalAmount}</h5>
                     </Col>
                 </Row>
 
-                <Button type="submit" variant="primary">Create Booking</Button>
+                <Button type="submit" variant="primary">Tạo đơn </Button>
             </Form>
         </Container>
     );

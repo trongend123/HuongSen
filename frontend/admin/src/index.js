@@ -50,7 +50,7 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path='/change-password' element={<ChangePassword />} />
         <Route
           path="*"
@@ -58,7 +58,7 @@ root.render(
             <Layout>
               <Routes>
                 <Route path="/rooms" element={<ListRoom />} />
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/bookings" element={<ListBooking />} />
                 <Route path="/staffs" element={<ListStaff />} />
                 <Route path="/roomCate" element={<ListRoomCate />} />
