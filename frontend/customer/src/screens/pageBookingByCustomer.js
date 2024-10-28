@@ -5,7 +5,7 @@ import { Col, Row, Button } from 'react-bootstrap';
 import AddBookingForm from '../components/bookingRoom/addBookingForm';
 import AddServiceForm from '../components/bookingRoom/addServiceForm';
 
-const BookingPage = () => {
+const BookingPage = ({ locationId }) => {
     const [userId, setUserId] = useState(null); // To store the created user ID
     const [bookingId, setBookingId] = useState(null); // To store the created booking ID
     const userFormRef = useRef(null);           // Reference to the user form
@@ -28,7 +28,6 @@ const BookingPage = () => {
                 setUserId(createdUserId); // Lưu ID người dùng
                 console.log("User created with ID:", createdUserId);
 
-
                 // 3. Tạo booking
                 const createdBookingId = await bookingFormRef.current.createBooking();
                 if (createdBookingId) {
@@ -41,9 +40,6 @@ const BookingPage = () => {
                 } else {
                     console.log('Booking and services not create');
                 }
-
-
-
             } else {
                 console.log('User creation failed.');
             }
@@ -55,7 +51,7 @@ const BookingPage = () => {
 
     return (
         <div>
-            <h1>Booking Page</h1>
+            <h3>Đặt phòng ngay</h3>
             <Row>
                 <Col md="6">
                     {/* User Form */}
@@ -75,14 +71,18 @@ const BookingPage = () => {
 
                 <Col>
                     {/* Booking Form */}
-                    <AddBookingForm ref={bookingFormRef} onBookingCreated={setBookingId} customerID={userId} serviceAmount={serviceTotal} />
-                    <Button onClick={handleCreateBoth} className="mt-3">
-                        Create Booking
+                    <AddBookingForm
+                        ref={bookingFormRef}
+                        onBookingCreated={setBookingId}
+                        customerID={userId}
+                        serviceAmount={serviceTotal}
+                        locationId={locationId} // Pass locationId here
+                    />
+                    <Button className='text-bg-success fs-3 ' onClick={handleCreateBoth} >
+                        Đặt Phòng Ngay
                     </Button>
                 </Col>
             </Row>
-
-
         </div>
     );
 };

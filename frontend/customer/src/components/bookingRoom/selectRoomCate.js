@@ -2,7 +2,7 @@ import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'rea
 import axios from 'axios';
 import { Form, Row, Col, Card, Container } from 'react-bootstrap';
 
-const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuantityChange, onTotalRoomsRemaining }, ref) => {
+const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuantityChange, onTotalRoomsRemaining, locationId }, ref) => {
     const [roomCategories, setRoomCategories] = useState([]);
     const [quantity, setQuantity] = useState({});
     const [remainingRooms, setRemainingRooms] = useState({});
@@ -23,7 +23,9 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         const fetchRoomData = async () => {
             try {
                 const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
-                setRoomCategories(roomCategoriesResponse.data);
+                // Filter room categories by the locationId received as a prop
+                const filteredRoomCategories = roomCategoriesResponse.data.filter(room => room.locationId._id === locationId);
+                setRoomCategories(filteredRoomCategories);
 
                 const bookedRoomsResponse = await axios.get(`http://localhost:9999/orderRooms/totalbycategory/?checkInDate=${checkin}&checkOutDate=${checkout}`);
                 const bookedRoomsMap = {};
@@ -47,7 +49,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         };
 
         fetchRoomData();
-    }, [checkin, checkout, onTotalRoomsRemaining]);
+    }, [checkin, checkout, onTotalRoomsRemaining, locationId]);
 
     // Handle room quantity change
     const handleQuantityChange = (e, roomId) => {
@@ -123,7 +125,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         <div>
             {/* <h4>Select Room Categories</h4> */}
             {Object.keys(groupedRooms).map(location => (
-                <Card key={location} className="mb-4">
+                <Card key={location} className="mb-2">
                     <Card.Header>
                         <h5>{location}</h5>
                     </Card.Header>
@@ -135,10 +137,9 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
 
                             return (
                                 <Row key={room._id} className="mb-3">
-                                    <Col className="col-7">
-                                        <Form.Label><strong>{room.name}</strong> - (Price per night: {room.price} VND)</Form.Label>
-                                        <p><strong>Remaining Rooms:</strong> {remainingRoomCount}</p>
-                                        <p><strong>Total Price for {qty} room(s): {totalRoomPrice} VND</strong></p>
+                                    <Col className="col-8">
+                                        <Form.Label><strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)</Form.Label>
+                                        <h6 className='text-secondary'>Phòng còn trống: {remainingRoomCount} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
                                     </Col>
                                     <Col className="col-2 d-flex align-items-center">
                                         <Form.Control

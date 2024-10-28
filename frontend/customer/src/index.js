@@ -2,10 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Container } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './screens/Home/home';
-import BookingPage from './screens/pageBookingByCustomer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import CS1 from './screens/locations/CS1/cs1';
+import Header from './components/Header/header';
+import Footer from './components/Footer/footer';
+import NavigationBar from './components/Navbar/navbar';
+import CS2 from './screens/locations/CS2/cs2';
+import CS3 from './screens/locations/CS3/cs3';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,13 +18,20 @@ root.render(
   <React.StrictMode>
     <Router>
       <div className="main-layout">
-        <Container fluid className="content" style={{ padding: '0px' }}>
-          <div className="content-header"></div>
-          <div className="body"><Routes>
-            <Route path="/bookingPage" element={<BookingPage />} />
-            <Route path="/" element={<HomePage />} />
+        <Header/>
+          <NavigationBar/>
+        <Container fluid className="content" style={{padding: '0px'}}> 
+        <div className="content-header"></div>
+        <div className="body"><Routes>
+          
+            <Route path="/" element={<HomePage/>} />
+            <Route path="/cs1" element={<CS1/>} />
+            <Route path="/cs2" element={<CS2/>} />
+            <Route path="/cs3" element={<CS3/>} />
+          
           </Routes></div>
         </Container>
+        <Footer/>
       </div>
     </Router>
   </React.StrictMode>

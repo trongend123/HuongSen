@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Form, Row, Col, Button, Card, Alert } from 'react-bootstrap'; // Import Alert
 import SelectRoomCategories from './selectRoomCate';  // Import SelectRoomCategories component
 
-const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount }, ref) => {
+const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId }, ref) => {
     const roomCategoriesRef = useRef(null);  // Ref for SelectRoomCategories
 
     const [errors, setErrors] = useState({});
@@ -131,7 +131,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     }));
 
     return (
-        <Card className="mb-4">
+        <Card className="mb-2">
             <Card.Header as="h5" className="bg-primary text-white">Chọn Loại Phòng & Số Lượng</Card.Header>
             <Card.Body>
 
@@ -189,17 +189,18 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                     onQuantityChange={handleRoomQuantityChange}
                     onTotalRoomsRemaining={handleTotalRoomsRemaining}
                     customerID={customerID}
+                    locationId={locationId}
                 />
 
                 {/* Hiển thị thông báo lỗi nếu không có phòng nào được chọn */}
-                {errorMessage && <Alert variant="danger" className="mt-3">{errorMessage}</Alert>}
+                {errorMessage && <Alert variant="danger" className="mt-2">{errorMessage}</Alert>}
 
-                <Row className="mb-3">
-                    <Row>
-                        <h5>Total Rooms Remaining: {totalRoomsRemaining}</h5>
-                        <p><strong>Total Amount</strong> = Service Amount + Room Amount: {totalAmount} VND</p>
-                    </Row>
+
+                <Row>
+                    <h5>Tổng phòng còn trống: {totalRoomsRemaining}</h5>
+                    <p><strong>Tổng Chi phí</strong> = Phí dịch vụ + Phí đặt phòng = {totalAmount} VND</p>
                 </Row>
+
 
             </Card.Body>
         </Card>
