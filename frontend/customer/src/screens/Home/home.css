@@ -1,287 +1,163 @@
-/* General Styles */
-body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
 
-h2 {
-    font-size: 2.5rem;
-    color: #0b2727;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-}
 
-p {
-    font-size: 1rem;
-    color: #6e7074;
-}
-
-a {
-    text-decoration: none;
-}
-
-button, .btn-primary {
-    background-color: #ff7e01;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    color: white;
-    transition: background-color 0.3s ease;
-}
-
-button:hover, .btn-primary:hover {
-    background-color: #faa935;
-}
-
-section {
-    padding: 60px 0;
-}
-
-.container-fluid {
-    padding: 0;
-}
-
-/* Navbar */
-.navbar {
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.navbar-brand {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #0b2727;
-}
-
-.navbar-nav .nav-link {
-    font-size: 1.1rem;
-    color: #333;
-    margin-left: 20px;
-}
-
-.navbar-nav .nav-link:hover {
-    color: #ff7e01;
-}
-
-/* Hero Section */
-#hero .carousel-item {
-    height: 80vh;
-    min-height: 400px;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-#hero .carousel-item img {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-}
-
-#hero .carousel-caption {
-    bottom: 20%;
-    text-align: left;
-}
-
-#hero h3 {
-    font-size: 3rem;
-    color: #fff;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-#hero p {
-    font-size: 1.5rem;
-    color: #f9f9f9;
-    margin-bottom: 1rem;
-}
-
-/* About Section */
-#about {
-    text-align: center;
-}
-
-#about p {
-    max-width: 800px;
-    margin: 0 auto;
-    font-size: 1.15rem;
-}
-
-/* Rooms Section */
-#rooms {
-    text-align: center;
-}
-
-#rooms .card {
-    border: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    margin-bottom: 30px;
-}
-
-#rooms .card:hover {
-    transform: translateY(-10px);
-}
-
-#rooms .card-img-top {
-    height: 200px;
-    object-fit: cover;
-}
-
-#rooms .card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #0b2727;
-}
-
-#rooms .card-text {
-    font-size: 1rem;
-    color: #6e7074;
-}
-
-/* Services Section */
-#services .text-center img {
-    width: 60px;
-    margin-bottom: 20px;
-}
-
-#services .text-center h4 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-#services .text-center p {
-    font-size: 1rem;
-    color: #6e7074;
-}
-
-/* Gallery Section */
-#gallery img {
+  /* Banner image */
+  .banner-image {
     width: 100%;
     height: auto;
+    
     object-fit: cover;
-    margin-bottom: 15px;
+    margin-bottom: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+   
+  
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  
+  /* Section titles */
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0b2727; /* Dark green primary color */
+    margin-bottom: 20px;
+  }
+  /* styles.css or your specific CSS file */
+img {
+  width: 200px;  /* Set the desired width */
+  height: 300px; /* Set the desired height */
+  object-fit: cover; /* Ensures the images maintain aspect ratio */
 }
-
-/* Contact Section */
-#contact h4 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-#contact ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#contact ul li {
+  p {
     font-size: 1.1rem;
-    color: #6e7074;
-    margin-bottom: 10px;
-}
-
-#contact ul li strong {
-    color: #0b2727;
-}
-
-/* Footer */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-}
-
-footer p {
-    margin: 0;
+    color: #6e7074; /* Neutral gray text color */
+    margin-bottom: 30px;
+  }
+  
+  /* Introduction section */
+  #about {
+    padding: 50px 0;
+    background-color: #f4f5f7; /* Light gray background */
+  }
+  
+  #about p {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  /* Branches (Hệ thống nhà khách) section */
+  #branches {
+    padding: 50px 0;
+  }
+  
+  #branches .card {
+    border: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05); /* Light shadow */
+  }
+  
+  #branches .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+  }
+  
+  #branches .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  #branches .card-text {
     font-size: 1rem;
-}
-
-/* Responsive Design */
-@media (max-width: 1200px) {
-    h2 {
-        font-size: 2rem;
-    }
-
-    #hero h3 {
-        font-size: 2.5rem;
-    }
-
-    #hero p {
-        font-size: 1.25rem;
-    }
-
-    button, .btn-primary {
-        font-size: 0.9rem;
-    }
-
-    #services .text-center h4 {
-        font-size: 1.25rem;
-    }
-}
-
-@media (max-width: 992px) {
-    #hero .carousel-caption {
-        bottom: 15%;
-    }
-
-    #rooms .card-img-top {
-        height: 180px;
-    }
-
-    #contact ul li {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    #hero .carousel-caption {
-        bottom: 10%;
-    }
-
-    #hero h3 {
-        font-size: 2rem;
-    }
-
-    #hero p {
-        font-size: 1rem;
-    }
-
-    #about p, #rooms .card-text {
-        font-size: 1rem;
-    }
-
-    #services .text-center h4 {
-        font-size: 1.15rem;
-    }
-
-    #gallery img {
-        margin-bottom: 10px;
-    }
-}
-
-@media (max-width: 576px) {
-    #hero h3 {
-        font-size: 1.5rem;
-    }
-
-    #hero p {
-        font-size: 0.9rem;
-    }
-
-    #about p {
-        font-size: 0.9rem;
-    }
-
-    #rooms .card-title {
-        font-size: 1rem;
-    }
-
-    #services .text-center h4 {
-        font-size: 1rem;
-    }
-
-    footer p {
-        font-size: 0.85rem;
-    }
-}
+    color: #6e7074;
+  }
+  
+  #branches .btn-primary {
+    background-color: #ff7e01;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  #branches .btn-primary:hover {
+    background-color: #e56d01;
+  }
+  
+  /* Services section */
+  #services {
+    padding: 50px 0;
+    background-color: #f4f5f7; /* Alternate background color */
+  }
+  
+  #services img {
+    
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  #services h4 {
+    font-size: 1.5rem;
+    color: #0b2727;
+    margin-bottom: 15px;
+  }
+  
+  #services p {
+    font-size: 1rem;
+    color: #000000;
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  
+  /* News section */
+  #news {
+    padding: 50px 0;
+  }
+  
+  #news .card {
+    border: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  #news .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  #news .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  #news .card-text {
+    font-size: 1rem;
+    color: #6e7074;
+  }
+  
+  #news .btn-primary {
+    background-color: #ff7e01;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  #news .btn-primary:hover {
+    background-color: #e56d01;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #0b2727;
+    color: #fff;
+    padding: 30px 0;
+  }
+  
+  footer a {
+    color: #faa935;
+    transition: color 0.3s ease;
+  }
+  
+  footer a:hover {
+    color: #fff;
+  }
+  
