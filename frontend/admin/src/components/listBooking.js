@@ -150,47 +150,47 @@ const ListBooking = () => {
       <h2 className="text-center my-4">Danh sách Đặt phòng</h2>
       <Row>
         <Col md={6}>
-        <Form.Group controlId="categorySelect" className="my-4" >
-        <Form.Label>Chọn cơ sở:</Form.Label>
-        <Form.Control
-          as="select"
-          value={selectedLocation}
-          onChange={(e) => setSelectedLocation(e.target.value)}
-        >
-          <option value="">Chọn cơ sở</option>
-          <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
-          <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
-          <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
-        </Form.Control>
-      </Form.Group>
+          <Form.Group controlId="categorySelect" className="my-4" >
+            <Form.Label>Chọn cơ sở:</Form.Label>
+            <Form.Control
+              as="select"
+              value={selectedLocation}
+              onChange={(e) => setSelectedLocation(e.target.value)}
+            >
+              <option value="">Chọn cơ sở</option>
+              <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
+              <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
+              <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
+            </Form.Control>
+          </Form.Group>
         </Col>
         <Col md={3}>
-        <Form.Group controlId="categorySelect" className="my-4" >
-        <Form.Label>Ngày check-in:</Form.Label>
-        <FormControl
-          type="date"
-          style={{ margin: '0 10px' }}  
-          placeholder="Tìm kiếm theo ngày Check-in"
-          value={checkinFilter}
-          onChange={(e) => setCheckinFilter(e.target.value)}
-        />
-        </Form.Group>
+          <Form.Group controlId="categorySelect" className="my-4" >
+            <Form.Label>Ngày check-in:</Form.Label>
+            <FormControl
+              type="date"
+              style={{ margin: '0 10px' }}
+              placeholder="Tìm kiếm theo ngày Check-in"
+              value={checkinFilter}
+              onChange={(e) => setCheckinFilter(e.target.value)}
+            />
+          </Form.Group>
         </Col>
 
         <Col md={3}>
-        <Form.Group controlId="categorySelect" className="my-4" >
-        <Form.Label>Ngày check-out:</Form.Label>
-        <FormControl
-          type="date"
-          style={{ margin: '0 10px' }}
-          placeholder="Tìm kiếm theo ngày Check-out"
-          value={checkoutFilter}
-          onChange={(e) => setCheckoutFilter(e.target.value)}
-        />
-        </Form.Group>
+          <Form.Group controlId="categorySelect" className="my-4" >
+            <Form.Label>Ngày check-out:</Form.Label>
+            <FormControl
+              type="date"
+              style={{ margin: '0 10px' }}
+              placeholder="Tìm kiếm theo ngày Check-out"
+              value={checkoutFilter}
+              onChange={(e) => setCheckoutFilter(e.target.value)}
+            />
+          </Form.Group>
         </Col>
-        </Row>
-      
+      </Row>
+
       {/* Search Inputs */}
       <InputGroup className="mb-3">
         <FormControl
@@ -201,10 +201,10 @@ const ListBooking = () => {
       </InputGroup>
 
       {/* Date Filters */}
-     
+
 
       {/* Location Filter Input */}
-      
+
 
       <Table striped bordered hover>
         <thead>
@@ -352,25 +352,25 @@ const ListBooking = () => {
             <p>Tên giấy tờ: {selectedBookingDetails.identifyName || 'Chưa có thông tin'}</p>
             <p>Mã giấy tờ: {selectedBookingDetails.identifyCode || 'Chưa có thông tin'}</p>
           </Modal.Body>
-          
+
           <Modal.Footer>
-          <Button
-            variant="primary"
-            onClick={() => {
-              navigate('/updateBookingInfo', { state: { selectedBookingDetails } });
-            }}
-          >
-            Chỉnh sửa
-          </Button>
-          <Button
-            variant="info"
-            style={{ margin: ' 0px 10px' }}
-            onClick={() => {
-              navigate('/historyBookingChange', { state: { bookingId: selectedBookingDetails.bookingId._id } }); // Chuyển hướng với bookingId
-            }}
-          >
-            Lịch sử
-          </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                navigate('/updateBookingInfo', { state: { selectedBookingDetails } });
+              }}
+            >
+              Chỉnh sửa
+            </Button>
+            <Button
+              variant="info"
+              style={{ margin: ' 0px 10px' }}
+              onClick={() => {
+                navigate('/historyBookingChange', { state: { bookingId: selectedBookingDetails.bookingId._id } }); // Chuyển hướng với bookingId
+              }}
+            >
+              Lịch sử
+            </Button>
             <Button variant="secondary" onClick={() => setShowDetailModal(false)}>
               Đóng
             </Button>
@@ -378,7 +378,7 @@ const ListBooking = () => {
           </Modal.Footer>
         </Modal>
       )}
-          
+
     </Container>
   );
 };

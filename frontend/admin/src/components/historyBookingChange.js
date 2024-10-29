@@ -42,7 +42,7 @@ const HistoryBookingChange = () => {
 
     return (
         <div>
-            <h1>Lịch sử thay đổi đặt phòng cho ID: {bookingId}</h1>
+            <h6 className="my-4 px-2 text-bg-success d-inline ">Lịch sử thay đổi đặt phòng cho ID: {bookingId}</h6>
             {history.length > 0 ? (
                 <Table striped bordered hover>
                     <thead>
