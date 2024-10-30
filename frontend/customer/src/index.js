@@ -11,6 +11,8 @@ import Footer from './components/Footer/footer';
 import NavigationBar from './components/Navbar/navbar';
 import CS2 from './screens/locations/CS2/cs2';
 import CS3 from './screens/locations/CS3/cs3';
+import PaymentSuccess from './components/Payment/Success';
+import PaymentCancel from './components/Payment/Cancel';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -28,7 +30,8 @@ root.render(
             <Route path="/cs1" element={<CS1/>} />
             <Route path="/cs2" element={<CS2/>} />
             <Route path="/cs3" element={<CS3/>} />
-          
+            <Route path="/success" component={PaymentSuccess} />
+            <Route path="/cancel" component={PaymentCancel} />
           </Routes></div>
         </Container>
         <Footer/>

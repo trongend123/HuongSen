@@ -1,0 +1,108 @@
+<!-- emailTemplate.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .content ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .content ul li strong {
+            display: inline-block;
+            width: 150px;
+        }
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- <img src="logo.png" classNam alt="Logo"> -->
+            <h1>Booking Confirmation</h1>
+        </div>
+        <div class="content">
+            <p>Dear <span>{{fullName}}</span>,</p>
+            <p>Thank you for choosing our services! We are excited to confirm your booking for the tour "<strong>{{tourName}}</strong>". Below are your booking details:</p>
+            <ul>
+                <li><strong>Tour Code:</strong> {{tourId}}</li>
+                <li><strong>Full Name:</strong> <span>{{fullName}}</span></li>
+                <li><strong>Number of Adults:</strong> {{adult}}</li>
+                <li><strong>Number of Children:</strong> {{children}}</li>
+                <li><strong>Number of Babies:</strong> {{baby}}</li>
+                <li><strong>Tour Date:</strong> {{bookAt}}</li>
+                <li><strong>Total Price:</strong><b>${{price}}</b> </li>
+                
+            </ul>
+            <p>If you have any questions or need further assistance, feel free to contact us.</p>
+            <p>We look forward to providing you with an amazing experience!</p>
+            <p>Best regards,</p>
+            <p>Touristic</p>
+           
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Touristic. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
