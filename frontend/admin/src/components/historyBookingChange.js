@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Booking from "./bookingInfor.js";
 
 const HistoryBookingChange = () => {
     const location = useLocation();
@@ -42,7 +43,7 @@ const HistoryBookingChange = () => {
 
     return (
         <div>
-            <h6 className="my-4 px-2 text-bg-success d-inline ">Lịch sử thay đổi đặt phòng cho ID: {bookingId}</h6>
+            <h1 className="text-center">Lịch sử thay đổi thông tin đặt phòng</h1>
             {history.length > 0 ? (
                 <Table striped bordered hover>
                     <thead>
@@ -73,7 +74,7 @@ const HistoryBookingChange = () => {
                                                 }}
                                             >
                                                 <h5>Thông tin:</h5>
-                                                <pre>{JSON.stringify(change.old_info, null, 2)}</pre>
+                                                <Booking booking={change.old_info.booking} />
                                             </div>
                                         </td>
                                     </tr>

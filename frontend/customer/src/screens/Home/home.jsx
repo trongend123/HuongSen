@@ -3,6 +3,7 @@ import { Container, Carousel, Card, Button, Row, Col } from 'react-bootstrap';
 import Footer from '../../components/Footer/footer';
 import Header from '../../components/Header/header';
 import NavigationBar from '../../components/Navbar/navbar';
+import { useNavigate } from 'react-router-dom';
 import './home.css';
 import main from '../../assets/main.png';
 import cs1 from '../../assets/cs1.jpg';
@@ -15,8 +16,24 @@ import serviceImg4 from '../../assets/tiec.jpg';
 import newsImg1 from '../../assets/ngu1.jpg'; 
 import newsImg2 from '../../assets/ngu2.jpg';
 import newsImg3 from '../../assets/ngu3.jpg';
+import haiphong1 from '../../assets/haiphong1.jpg';
+import haiphong2 from '../../assets/haiphong2.jpg';
+import haiphong3 from '../../assets/haiphong3.jpg';
+import catba1 from '../../assets/catba1.jpg';
+import catba2 from '../../assets/catba2.jpg';
+import catba3 from '../../assets/catba3.jpg';
+import doson1 from '../../assets/doson1.jpg';
+import doson2 from '../../assets/doson2.jpg';
+import doson3 from '../../assets/doson3.jpg';
+import doson4 from '../../assets/doson4.jpg';
+import doson5 from '../../assets/doson5.jpg';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleCarouselClick = () => {
+    navigate('/tours');
+  };
   return (
     <>
       
@@ -37,9 +54,9 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
       </section>
 
       {/* Hệ thống nhà khách Section */}
-      <section id="branches" className="py-5">
+      <section id="branches" className="py-5 text-center">
         <Container>
-          <h2 className="text-center">Hệ thống nhà khách</h2> 
+          <h3>Hệ thống nhà khách</h3> 
           <Row className="mt-4">
             <Col md={4}>
               <Card>
@@ -76,9 +93,9 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
       </section>
 
       {/* Dịch vụ cung cấp Section */}
-      <section id="services" className="py-5 bg-light">
+      <section id="services" className="py-5 bg-light text-center">
         <Container>
-          <h2 className="text-center">Dịch vụ cung cấp</h2>
+          <h3 >Dịch vụ cung cấp</h3>
           <Row className="mt-4">
             <Col md={6} className="text-center">
               <h4>Phòng ngủ</h4>
@@ -117,23 +134,54 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
               <p>Tổ chức tiệc cưới, hội nghị, sự kiện với dịch vụ chuyên nghiệp.</p>
             </Col>
           </Row>
+          </Container>
+      </section>
+
+      {/* Tour Section */}
+      <section id="tour" className="py-5">
+        <Container>
           <Row className="mt-4">
             <Col md={12} className="text-center">
               <h4>Kết nối tour tham quan</h4>
               <Carousel>
-                <Carousel.Item>
-                  <img className="d-block w-100" src={serviceImg1} alt="Tour tham quan hấp dẫn" />
-                  <Carousel.Caption>
-                    <h5>Tour tham quan hấp dẫn</h5>
-                  </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                  <img className="d-block w-100" src={serviceImg2} alt="Khám phá văn hóa địa phương" />
-                  <Carousel.Caption>
-                    <h5>Khám phá văn hóa địa phương</h5>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              </Carousel>
+      <Carousel.Item onClick={handleCarouselClick} style={{ cursor: 'pointer' }}>
+        <img className="d-block w-100" src={catba1} alt="Khám phá văn hóa địa phương" />
+        <Carousel.Caption>
+          <h5>Khám phá văn hóa địa phương</h5>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item onClick={handleCarouselClick} style={{ cursor: 'pointer' }}>
+        <img className="d-block w-100" src={haiphong1} alt="Khám phá văn hóa địa phương" />
+        <Carousel.Caption>
+          <h5>Khám phá văn hóa địa phương</h5>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item onClick={handleCarouselClick} style={{ cursor: 'pointer' }}>
+        <img className="d-block w-100" src={haiphong2} alt="Khám phá văn hóa địa phương" />
+        <Carousel.Caption>
+          <h5>Khám phá văn hóa địa phương</h5>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item onClick={handleCarouselClick} style={{ cursor: 'pointer' }}>
+        <img className="d-block w-100" src={doson4} alt="Khám phá văn hóa địa phương" />
+        <Carousel.Caption>
+          <h5>Khám phá văn hóa địa phương</h5>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item onClick={handleCarouselClick} style={{ cursor: 'pointer' }}>
+        <img className="d-block w-100" src={haiphong3} alt="Khám phá văn hóa địa phương" />
+        <Carousel.Caption>
+          <h5>Khám phá văn hóa địa phương</h5>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item onClick={handleCarouselClick} style={{ cursor: 'pointer' }}>
+        <img className="d-block w-100" src={catba2} alt="Khám phá văn hóa địa phương" />
+        <Carousel.Caption>
+          <h5>Khám phá văn hóa địa phương</h5>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
+              <br/>
               <p>Chúng tôi cung cấp dịch vụ kết nối tour tham quan để khám phá vẻ đẹp địa phương.</p>
             </Col>
           </Row>

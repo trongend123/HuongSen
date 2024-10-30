@@ -18,7 +18,7 @@ import { RxAvatar } from "react-icons/rx";
 import UpdateBookingInfo from './components/updateBookingInfo';
 import HistoryBookingChange from './components/historyBookingChange';
 import SaveHistory from './components/SaveHistory';
-
+import App from './router';
 // Layout wrapper to conditionally render sidebar and layout based on route
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -51,24 +51,11 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path='/change-password' element={<ChangePassword />} />
         <Route
           path="*"
           element={(
             <Layout>
-              <Routes>
-                <Route path="/rooms" element={<ListRoom />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/bookings" element={<ListBooking />} />
-                <Route path="/staffs" element={<ListStaff />} />
-                <Route path="/roomCate" element={<ListRoomCate />} />
-                <Route path="/createBooking" element={<CreateBookingByStaff />} />
-                <Route path="/updateBookingInfo" element={<UpdateBookingInfo />} />
-                <Route path="/historyBookingChange" element={<HistoryBookingChange />} />
-                <Route path="/saveHistory" element={<SaveHistory />} />
-
-
-              </Routes>
+              <App />
             </Layout>
           )}
         />

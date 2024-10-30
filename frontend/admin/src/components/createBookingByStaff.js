@@ -353,6 +353,11 @@ const CreateBookingByStaff = () => {
             }));
             console.log(bookingData)
             // Now send customer data to the server
+            const formattedValue = customerData.fullname
+            .trim()
+            .replace(/\s+/g, ' ')
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+            customerData.fullname = formattedValue;
             const customerResponse = await axios.post('http://localhost:9999/customers', customerData);
             const newCustomerId = customerResponse.data._id;
 
