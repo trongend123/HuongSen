@@ -14,8 +14,22 @@ const Dashboard = () => {
   const [startDate, setStartDate] = useState(new Date(new Date().getFullYear(), 0, 1));
   const [endDate, setEndDate] = useState(new Date());
   const [filterType, setFilterType] = useState('daily'); // New state for filter type
+  const [userRole, setUserRole] = useState('');
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser && storedUser.role) {
+      setUserRole(storedUser.role);
+
+      // If user is 'staffds', set a default location and hide location dropdown
+      if (storedUser.role === 'staff_ds') {
+        setLocation('66f6c536285571f28087c16b');
+      }else if (storedUser.role === 'staff_cb') {
+        setLocation('66f6c59f285571f28087c16d');
+      }else if (storedUser.role === 'staff_mk') {
+        setLocation('66f6c5c9285571f28087c16a');
+      }
+    }
     axios
       .get('http://localhost:9999/orderRooms')
       .then((response) => setOrderData(response.data))
@@ -145,15 +159,21 @@ const Dashboard = () => {
           </Form.Group>
         </Col>
         <Col md={6}>
-          <Form.Group controlId="location">
-            <Form.Label>Chọn địa điểm:</Form.Label>
-            <Form.Control as="select" value={location} onChange={(e) => setLocation(e.target.value)}>
-              <option value="">Tất cả</option>
-              <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
-              <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
-              <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
-            </Form.Control>
-          </Form.Group>
+        {userRole === "admin" && (
+          <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
+          <Form.Label>Chọn cơ sở:</Form.Label>
+          <Form.Control
+            as="select"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          >
+            <option value="">Chọn cơ sở</option>
+            <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
+            <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
+            <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
+          </Form.Control>
+        </Form.Group>
+        )}
         </Col>
       </Row>
       

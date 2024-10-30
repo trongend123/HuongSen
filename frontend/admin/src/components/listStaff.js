@@ -198,8 +198,12 @@ if (!phoneRegex.test(newStaff.phone)) {
 
   // Filter staff data by username and role
   const filteredStaffData = staffData.filter(staff => {
+    const formattedValue = searchUsername
+        .trim()
+        .replace(/\s+/g, ' ')
     return (
-      staff.username.toLowerCase().includes(searchUsername.toLowerCase()) &&
+      
+      staff.username.toLowerCase().includes(formattedValue.toLowerCase()) &&
       (searchRole === '' || staff.role === searchRole)
     );
   });
