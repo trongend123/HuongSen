@@ -2,7 +2,7 @@ import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'rea
 import axios from 'axios';
 import { Form, Row, Col, Card, Container } from 'react-bootstrap';
 
-const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuantityChange, onTotalRoomsRemaining, locationId, canInput }, ref) => {
+const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuantityChange, onTotalRoomsRemaining, locationId }, ref) => {
     const [roomCategories, setRoomCategories] = useState([]);
     const [quantity, setQuantity] = useState({});
     const [remainingRooms, setRemainingRooms] = useState({});
@@ -23,6 +23,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         const fetchRoomData = async () => {
             try {
                 const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
+                // Filter room categories by the locationId received as a prop
                 const filteredRoomCategories = roomCategoriesResponse.data.filter(room => room.locationId._id === locationId);
                 setRoomCategories(filteredRoomCategories);
 
@@ -122,6 +123,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
 
     return (
         <div>
+            {/* <h4>Select Room Categories</h4> */}
             {Object.keys(groupedRooms).map(location => (
                 <Card key={location} className="mb-2">
                     <Card.Header>
@@ -140,16 +142,14 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                                         <h6 className='text-secondary'>Phòng còn trống: {remainingRoomCount} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
                                     </Col>
                                     <Col className="col-2 d-flex align-items-center">
-                                        {canInput && (
-                                            <Form.Control
-                                                type="number"
-                                                min="0"
-                                                max={remainingRoomCount}
-                                                value={qty}
-                                                onChange={(e) => handleQuantityChange(e, room._id)}
-                                                required
-                                            />
-                                        )}
+                                        <Form.Control
+                                            type="number"
+                                            min="0"
+                                            max={remainingRoomCount}
+                                            value={qty}
+                                            onChange={(e) => handleQuantityChange(e, room._id)}
+                                            required
+                                        />
                                     </Col>
                                 </Row>
                             );

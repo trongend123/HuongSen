@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import axios from 'axios';
-import { Form, Row, Col, Button, Card, Alert } from 'react-bootstrap';
-import SelectRoomCategories from './selectRoomCate';
+import { Form, Row, Col, Button, Card, Alert } from 'react-bootstrap'; // Import Alert
+import SelectRoomCategories from './selectRoomCate';  // Import SelectRoomCategories component
 
-const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId, canInput }, ref) => {
-    const roomCategoriesRef = useRef(null);
+const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId }, ref) => {
+    const roomCategoriesRef = useRef(null);  // Ref for SelectRoomCategories
 
     const [errors, setErrors] = useState({});
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');  // State to store error message
     const today = new Date().toISOString().split('T')[0];
     const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0];
     const [totalAmount, setTotalAmount] = useState(0);
-    const [roomPrices, setRoomPrices] = useState({});
-    const [totalRoomsRemaining, setTotalRoomsRemaining] = useState(0);
+    const [roomPrices, setRoomPrices] = useState({});  // Store room prices per category
+    const [totalRoomsRemaining, setTotalRoomsRemaining] = useState(0);  // Store total remaining rooms
 
     const [bookingData, setBookingData] = useState({
         taxId: null,
@@ -35,11 +35,15 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     };
 
     const calculateTotalAmount = () => {
+        // Tính tổng tiền phòng trước
         let totalRoomAmount = Object.values(roomPrices).reduce((sum, price) => sum + price, 0);
+
+        // Cộng thêm serviceAmount vào tổng tiền
         let total = totalRoomAmount + serviceAmount;
 
         setTotalAmount(total);
 
+        // Cập nhật giá tổng tiền trong bookingData
         setBookingData(prevBookingData => ({
             ...prevBookingData,
             price: total
@@ -47,6 +51,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     };
 
     useEffect(() => {
+        // Cập nhật lại tổng tiền khi thay đổi giá phòng, ngày, hoặc dịch vụ
         calculateTotalAmount();
     }, [roomPrices, bookingData.checkin, bookingData.checkout, serviceAmount]);
 
@@ -58,7 +63,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     };
 
     const handleTotalRoomsRemaining = (totalRoomsRemaining) => {
-        setTotalRoomsRemaining(totalRoomsRemaining);
+        setTotalRoomsRemaining(totalRoomsRemaining);  // Update total remaining rooms
     };
 
     const validateForm = () => {
@@ -78,9 +83,9 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
         const selectedRooms = Object.values(roomPrices).some(price => price > 0);
         if (!selectedRooms) {
             newErrors.roomSelection = "Vui lòng chọn ít nhất một phòng với số lượng lớn hơn 0";
-            setErrorMessage(newErrors.roomSelection);
+            setErrorMessage(newErrors.roomSelection);  // Set error message
         } else {
-            setErrorMessage('');
+            setErrorMessage('');  // Clear error message if there are selected rooms
         }
 
         setErrors(newErrors);
@@ -93,6 +98,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             return;
         }
         try {
+            // Cập nhật bookingData với tổng giá trị cuối cùng (bao gồm cả dịch vụ)
             const finalPrice = totalAmount;
 
             setBookingData(prevBookingData => ({
@@ -100,15 +106,18 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                 price: finalPrice
             }));
 
+            // Gửi yêu cầu tạo booking
             const response = await axios.post('http://localhost:9999/bookings', {
                 ...bookingData,
                 price: finalPrice
             });
 
-            const bookingId = response.data._id;
+            const bookingId = response.data._id; // Lấy bookingId từ phản hồi
 
+            // Gọi hàm tạo orderRoom
             await roomCategoriesRef.current.createOrderRoom(bookingId);
 
+            // Gọi callback để thông báo đã tạo booking
             onBookingCreated(bookingId);
             return response.data._id;
         } catch (error) {
@@ -172,6 +181,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                     </Col>
                 </Row>
 
+                {/* SelectRoomCategories Component */}
                 <SelectRoomCategories
                     ref={roomCategoriesRef}
                     checkin={bookingData.checkin}
@@ -180,16 +190,17 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                     onTotalRoomsRemaining={handleTotalRoomsRemaining}
                     customerID={customerID}
                     locationId={locationId}
-                    canInput={canInput}
                 />
 
+                {/* Hiển thị thông báo lỗi nếu không có phòng nào được chọn */}
                 {errorMessage && <Alert variant="danger" className="mt-2">{errorMessage}</Alert>}
 
-                {canInput && (
-                    <Row>
-                        <p><strong>Tổng Chi phí</strong> = Phí dịch vụ + Phí đặt phòng = {totalAmount} VND</p>
-                    </Row>
-                )}
+
+                <Row>
+                    <p><strong>Tổng Chi phí</strong> = Phí dịch vụ + Phí đặt phòng = {totalAmount} VND</p>
+                </Row>
+
+
             </Card.Body>
         </Card>
     );
