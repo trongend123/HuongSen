@@ -15,7 +15,7 @@ const Footer = () => {
             <p>Lễ tân cơ sở Đồ Sơn: 022 5386 6386</p>
             <p>Lễ tân cơ sở Cát Bà: 022 5388 7381</p>
             <p>Email: <a href="mailto:huongsen.16minhkhai.hp@gmail.com">huongsen.16minhkhai.hp@gmail.com</a></p>
-            <p>
+            <p>Fanpage:
               <a href="https://www.facebook.com/huongsen.nhakhach" target="_blank" rel="noopener noreferrer">
                 https://www.facebook.com/huongsen.nhakhach
               </a>
