@@ -5,6 +5,8 @@ import { Col, Row, Button } from 'react-bootstrap';
 import AddBookingForm from '../components/bookingRoom/addBookingForm';
 import AddServiceForm from '../components/bookingRoom/addServiceForm';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { BASE_URL } from '../utils/config';
 
 
 const CustomerBookingPage = () => {
@@ -44,6 +46,8 @@ const CustomerBookingPage = () => {
                     await addServiceRef.current.addService(createdBookingId);
                     console.log('Booking and services created successfully!');
 
+                    handlePayment(createdBookingId);
+
                     navigate(`/saveHistory`, {
                         state: {
                             bookingId: createdBookingId,
@@ -62,7 +66,31 @@ const CustomerBookingPage = () => {
             alert('An error occurred during creation.');
         }
     };
+    const handlePayment = async (bookingId) => {
+        try {
+            // Assuming you have a method to get the booking details
+            const bookingResponse = await axios.get(`${BASE_URL}bookings/${bookingId}`, { withCredentials: true });
+            const booking = bookingResponse.data;
 
+            const response = await axios.post(
+                `${BASE_URL}/payment/create-payment-link`,
+                {
+                    amount: booking.price,
+                    bookingId: booking._id,
+                },
+                { withCredentials: true }
+            );
+
+            if (response.status === 200) {
+                const { checkoutUrl } = response.data;
+                window.open(checkoutUrl, '_blank', 'noopener,noreferrer');
+            } else {
+                console.error('Failed to create payment link');
+            }
+        } catch (error) {
+            console.error('Error creating payment link:', error);
+        }
+    };
     return (
         <div>
             <h3>Đặt phòng ngay</h3>

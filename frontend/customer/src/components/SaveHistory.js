@@ -48,7 +48,7 @@ const SaveHistory = () => {
             await axios.post('http://localhost:9999/histories', historyData);
 
             // On success, navigate back to bookings list
-            navigate('/');
+            // navigate('/');
         } catch (error) {
             console.error('Error saving history:', error);
             setError(error.message || 'Error saving history. Please try again.');
