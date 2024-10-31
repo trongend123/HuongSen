@@ -197,7 +197,6 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
 
                 <Row>
-                    <h5>Tổng phòng còn trống: {totalRoomsRemaining}</h5>
                     <p><strong>Tổng Chi phí</strong> = Phí dịch vụ + Phí đặt phòng = {totalAmount} VND</p>
                 </Row>
 
