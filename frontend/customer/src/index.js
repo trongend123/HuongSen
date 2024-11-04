@@ -11,7 +11,7 @@ import Footer from './components/Footer/footer';
 import NavigationBar from './components/Navbar/navbar';
 import CS2 from './screens/locations/CS2/cs2';
 import CS3 from './screens/locations/CS3/cs3';
-
+import TourIntro from './screens/Tour/tour';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,7 +28,7 @@ root.render(
             <Route path="/cs1" element={<CS1/>} />
             <Route path="/cs2" element={<CS2/>} />
             <Route path="/cs3" element={<CS3/>} />
-          
+            <Route path="/tours" element={<TourIntro/>} />
           </Routes></div>
         </Container>
         <Footer/>

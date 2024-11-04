@@ -22,7 +22,23 @@ const ListBooking = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 7;
+  const [userRole, setUserRole] = useState('');
+ 
+
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser && storedUser.role) {
+      setUserRole(storedUser.role);
+
+      // If user is 'staffds', set a default location and hide location dropdown
+      if (storedUser.role === 'staff_ds') {
+        setSelectedLocation('66f6c536285571f28087c16b');
+      }else if (storedUser.role === 'staff_cb') {
+        setSelectedLocation('66f6c59f285571f28087c16d');
+      }else if (storedUser.role === 'staff_mk') {
+        setSelectedLocation('66f6c5c9285571f28087c16a');
+      }
+    }
     axios
       .get("http://localhost:9999/orderRooms")
       .then((response) => setBookings(response.data))
@@ -126,6 +142,10 @@ const ListBooking = () => {
   };
 
   const filteredBookings = bookings.filter((booking) => {
+
+    const formattedValue = searchQuery
+        .trim()
+        .replace(/\s+/g, ' ')
     const bookingId = booking.bookingId._id.toLowerCase();
     const customerName = booking.customerId.fullname.toLowerCase();
     const isMatchingLocation = selectedLocation ? booking.roomCateId.locationId === selectedLocation : true;
@@ -134,7 +154,7 @@ const ListBooking = () => {
     return (
       isMatchingLocation &&
       isMatchingCheckin &&
-      (bookingId.includes(searchQuery.toLowerCase()) || customerName.includes(searchQuery.toLowerCase()))
+      (bookingId.includes(formattedValue.toLowerCase()) || customerName.includes(formattedValue.toLowerCase()))
     );
   });
 
@@ -149,21 +169,23 @@ const ListBooking = () => {
     <Container>
       <h2 className="text-center my-4">Danh sách Đặt phòng</h2>
       <Row>
-        <Col md={6}>
-          <Form.Group controlId="categorySelect" className="my-4" >
-            <Form.Label>Chọn cơ sở:</Form.Label>
-            <Form.Control
-              as="select"
-              value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-            >
-              <option value="">Chọn cơ sở</option>
-              <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
-              <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
-              <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
-            </Form.Control>
-          </Form.Group>
-        </Col>
+      {userRole === "admin" && (
+          <Col md={6}>
+            <Form.Group controlId="categorySelect" className="my-4">
+              <Form.Label>Chọn cơ sở:</Form.Label>
+              <Form.Control
+                as="select"
+                value={selectedLocation}
+                onChange={(e) => setSelectedLocation(e.target.value)}
+              >
+                <option value="">Chọn cơ sở</option>
+                <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
+                <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
+                <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+        )}
         <Col md={3}>
           <Form.Group controlId="categorySelect" className="my-4" >
             <Form.Label>Ngày check-in:</Form.Label>

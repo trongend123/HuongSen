@@ -16,8 +16,22 @@ const ListRoom = () => {
   const [updatedCategory, setUpdatedCategory] = useState('');
   const [updatedStatus, setUpdatedStatus] = useState('');
   const navigate = useNavigate();
+  const [userRole, setUserRole] = useState('');
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser && storedUser.role) {
+      setUserRole(storedUser.role);
+
+      // If user is 'staffds', set a default location and hide location dropdown
+      if (storedUser.role === 'staff_ds') {
+        setSelectedLocation('66f6c536285571f28087c16b');
+      }else if (storedUser.role === 'staff_cb') {
+        setSelectedLocation('66f6c59f285571f28087c16d');
+      }else if (storedUser.role === 'staff_mk') {
+        setSelectedLocation('66f6c5c9285571f28087c16a');
+      }
+    }
     axios
       .get('http://localhost:9999/rooms')
       .then((response) => setRoomData(response.data))
@@ -89,19 +103,22 @@ const ListRoom = () => {
     <Container>
       <h2 className="text-center my-4">Sơ đồ phòng và tình trạng phòng</h2>
 
-      <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
-        <Form.Label>Chọn cơ sở:</Form.Label>
-        <Form.Control
-          as="select"
-          value={selectedLocation}
-          onChange={(e) => setSelectedLocation(e.target.value)}
-        >
-          <option value="">Chọn cơ sở</option>
-          <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
-          <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
-          <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
-        </Form.Control>
-      </Form.Group>
+      
+      {userRole === "admin" && (
+          <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
+          <Form.Label>Chọn cơ sở:</Form.Label>
+          <Form.Control
+            as="select"
+            value={selectedLocation}
+            onChange={(e) => setSelectedLocation(e.target.value)}
+          >
+            <option value="">Chọn cơ sở</option>
+            <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
+            <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
+            <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
+          </Form.Control>
+        </Form.Group>
+        )}
 
       {/* Display Room Status Counts */}
       

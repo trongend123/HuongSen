@@ -14,12 +14,12 @@ roomRouter.get("/category/totals", RoomController.getTotalRoomsByCategory);
 roomRouter.get("/category/:roomCategoryId", RoomController.getRoomsInCategory);
 
 // POST: /rooms -> Create a new room
-roomRouter.post("/", RoomController.createRoom);
+// roomRouter.post("/", RoomController.createRoom);
 
 // PUT: /rooms/:id
 roomRouter.put("/:id", RoomController.editRoom);
 
 // DELETE: /rooms/:id
-roomRouter.delete("/:id", RoomController.deleteRoom);
+// roomRouter.delete("/:id", RoomController.deleteRoom);
 
 export default roomRouter;
