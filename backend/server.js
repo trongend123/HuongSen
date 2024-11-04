@@ -115,6 +115,14 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+//thêm api notify
+app.post('/notify', (req, res) => {
+  const { message, type } = req.body;
+
+  // Broadcast the notification to all clients
+  io.emit('receiveNotification', { message, type });
+  res.status(200).send({ status: 'Notification sent to all clients.' });
+});
 
 app.listen(port, async () => {
   connectDB();
@@ -125,10 +133,19 @@ app.listen(port, async () => {
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
+  // Listen for a notification from any client
+  socket.on('sendNotification', (data) => {
+    console.log('Notification received:', data);
+
+    // Broadcast the notification to all connected clients
+    io.emit('receiveNotification', data);
+  });
+
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
   });
 });
+
 
 
 export { server, io };
