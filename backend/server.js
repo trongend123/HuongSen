@@ -3,6 +3,8 @@ import express, { json } from "express";
 import * as dotenv from "dotenv";
 import connectDB from "./database/database.js";
 import cors from "cors";
+import http from 'http';
+import { Server } from 'socket.io';
 import {
   ImageRouter,
   RoomRouter,
@@ -26,7 +28,8 @@ import {
   OrderRoomRouter,
   AgencyRouter,
   ContractRouter,
-  OrderServiceRouter
+  OrderServiceRouter,
+  ChatRouter
 } from "./routes/index.js";
 //import { verifyAccessToken } from "./jwt_helper.js";
 import { changePassword, loginUser, registerUser, verifyAccessToken } from "./authens/auth.js";
@@ -36,6 +39,11 @@ dotenv.config();
 // Tạo đối tượng app để khởi tạo web container
 const app = express();
 app.use(json());
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: { origin: "http://localhost:9999", methods: ["GET", "POST"] },
+});
 
 app.use(cors());
 // Cấu hình hoạt động routing (định tuyến) các request gửi tới web server
@@ -75,6 +83,8 @@ app.post('/register', registerUser);
 // Login route
 app.post('/login', loginUser);
 app.put('/change-password', changePassword);
+// Chat route
+app.use('/chats', ChatRouter);
 // Protected route (requires a valid access token)
 app.get('/profile', verifyAccessToken, (req, res) => {
   res.json({ message: `Hello, ${req.payload.aud}` });
@@ -83,6 +93,7 @@ app.get('/profile', verifyAccessToken, (req, res) => {
 const port = process.env.PORT || 8080;
 
 app.use(function (req, res, next) {
+  req.io = io;
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", process.env.REACT_URL);
 
@@ -109,3 +120,15 @@ app.listen(port, async () => {
   connectDB();
   console.log(`Server is running on: http://localhost:${port}`);
 });
+
+//Thêm io cho web server
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.id);
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
+  });
+});
+
+
+export { server, io };
