@@ -98,7 +98,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                 alert('No rooms selected.');
                 return;
             }
-            console.log(selectedRooms, customerID, bookingId);
+
             const orderRoomPromises = selectedRooms.map(room => {
                 return axios.post('http://localhost:9999/orderRooms', {
                     roomCateId: room.roomCateId,

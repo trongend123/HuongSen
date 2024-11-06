@@ -12,6 +12,7 @@ import { BASE_URL } from '../utils/config';
 const CustomerBookingPage = () => {
     const [userId, setUserId] = useState(null); // To store the created user ID
     const [bookingId, setBookingId] = useState(null); // To store the created booking ID
+    const [bookingPay, setBookingPpay] = useState(null);
     const userFormRef = useRef(null);           // Reference to the user form
     const identifyFormRef = useRef(null);       // Reference to the identification form
     const bookingFormRef = useRef(null);        // Reference to the booking form (optional for future use)
@@ -34,7 +35,7 @@ const CustomerBookingPage = () => {
             const createdUserId = await userFormRef.current.createUser();
             if (createdUserId) {
                 setUserId(createdUserId); // Lưu ID người dùng
-                console.log("User created with ID:", createdUserId);
+                console.log("User created with ID:");
 
                 // 3. Tạo booking
                 const createdBookingId = await bookingFormRef.current.createBooking();
@@ -46,15 +47,17 @@ const CustomerBookingPage = () => {
                     await addServiceRef.current.addService(createdBookingId);
                     console.log('Booking and services created successfully!');
 
+
+
                     handlePayment(createdBookingId);
 
-                    navigate(`/saveHistory`, {
-                        state: {
-                            bookingId: createdBookingId,
-                            note: `${createdUserId} đã tạo đặt phòng`,
+                    // navigate(`/saveHistory`, {
+                    //     state: {
+                    //         bookingId: createdBookingId,
+                    //         note: `${createdUserId} đã tạo đặt phòng`,
 
-                        }
-                    });
+                    //     }
+                    // });
                 } else {
                     console.log('Booking and services not create');
                 }
@@ -66,19 +69,18 @@ const CustomerBookingPage = () => {
             alert('An error occurred during creation.');
         }
     };
-    const handlePayment = async (bookingId) => {
+    const handlePayment = async (createdBookingId) => {
         try {
             // Assuming you have a method to get the booking details
-            const bookingResponse = await axios.get(`${BASE_URL}bookings/${bookingId}`, { withCredentials: true });
+            const bookingResponse = await axios.get(`${BASE_URL}bookings/${createdBookingId}`);
             const booking = bookingResponse.data;
 
             const response = await axios.post(
-                `${BASE_URL}/payment/create-payment-link`,
+                `${BASE_URL}payment/create-payment-link`,
                 {
                     amount: booking.price,
                     bookingId: booking._id,
-                },
-                { withCredentials: true }
+                }
             );
 
             if (response.status === 200) {
