@@ -14,6 +14,8 @@ import CS3 from './screens/locations/CS3/cs3';
 import TourIntro from './screens/Tour/tour';
 import CustomerBookingPage from './screens/pageCusInfoBooking';
 import SaveHistory from './components/SaveHistory';
+import PaymentSuccess from './screens/Success/success';
+import PaymentCancel from './screens/CancelBooking/cancel';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -33,6 +35,9 @@ root.render(
             <Route path="/tours" element={<TourIntro />} />
             <Route path="/saveHistory" element={<SaveHistory />} />
             <Route path="/customerBooking/:locationId" element={<CustomerBookingPage />} />
+
+            <Route path="/success" component={PaymentSuccess} />
+            <Route path="/cancel" component={PaymentCancel} />
 
           </Routes></div>
         </Container>

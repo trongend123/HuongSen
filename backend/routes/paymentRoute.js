@@ -3,15 +3,14 @@ import PayOS from '@payos/node';
 import dotenv from 'dotenv';
 import Payment from '../models/Payment.js'; // Adjust the path according to your directory structure
 import Booking from '../models/booking.js';
+import sendConfirmationEmail from '../utils/sendEmail.js'; // Import the email function
 dotenv.config();
 
 const router = express.Router();
-
 const payos = new PayOS(
     "bf5f0eaf-610c-44c0-b622-f77ccd209389",
     "48038d7f-c9ec-44f5-9133-453065493a6a",
-    "668615efa053dfcafba201e6710972b9c98adf34776b52d25461eb67c6de352d"
-);
+    "668615efa053dfcafba201e6710972b9c98adf34776b52d25461eb67c6de352d");
 
 router.post('/create-payment-link', async (req, res) => {
     const { amount, bookingId } = req.body;
@@ -19,8 +18,8 @@ router.post('/create-payment-link', async (req, res) => {
 
     try {
         const order = {
-            amount: amount * 10 - 50000,
-            description: bookingId, // Example description
+            amount: amount - 490000,
+            description: bookingId,
             orderCode: Math.floor(10000000 + Math.random() * 90000000),
             returnUrl: `${YOUR_DOMAIN}/success`,
             cancelUrl: `${YOUR_DOMAIN}/cancel`,
@@ -56,11 +55,12 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Route to handle payment success
+// Route to handle payment success and send confirmation email
 router.get('/payment-success/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
+        // Update booking status to confirmed
         const updatedBooking = await Booking.findByIdAndUpdate(
             id,
             { $set: { status: 'confirmed' } },
@@ -71,10 +71,13 @@ router.get('/payment-success/:id', async (req, res) => {
             return res.status(404).send('<h1>Booking not found</h1>');
         }
 
-        res.send('<h1>Payment successful!</h1><p>Your booking has been confirmed.</p>');
+        // Send confirmation email
+        await sendConfirmationEmail(updatedBooking);
+
+        res.send('<h1>Payment successful!</h1><p>Your booking has been confirmed, and a confirmation email has been sent.</p>');
     } catch (error) {
-        console.error("Error confirming booking:", error.message);
-        res.status(500).send('<h1>An error occurred while confirming your booking</h1>');
+        console.error("Error confirming booking and sending email:", error.message);
+        res.status(500).send('<h1>An error occurred while confirming your booking and sending the confirmation email</h1>');
     }
 });
 

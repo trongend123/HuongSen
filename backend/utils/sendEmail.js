@@ -1,43 +1,41 @@
-import express from 'express';
 import nodemailer from 'nodemailer';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const sendConfirmationEmail = async (booking) => {
+    // Configure your transporter
     const transporter = nodemailer.createTransport({
-        service: 'Gmail',
+        service: 'gmail', // You can use other services like Outlook, Yahoo, etc.
         auth: {
             user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
+            pass: process.env.EMAIL_PASS
+        }
     });
 
-    const templatePath = path.join(__dirname, 'emailTemplate.html');
-    let html = fs.readFileSync(templatePath, 'utf-8');
-
-    html = html.replace('{{fullName}}', booking.fullName)
-               .replace('{{tourName}}', booking.tourName)
-               .replace('{{tourId}}', booking._id)
-               .replace('{{adult}}', booking.adult)
-               .replace('{{children}}', booking.children)
-               .replace('{{baby}}', booking.baby)
-               .replace('{{bookAt}}', booking.bookAt)
-               .replace('{{price}}', booking.price);
-
+    // Email details
     const mailOptions = {
         from: process.env.EMAIL_USER,
-        to: booking.userEmail,
-        subject: 'Booking Confirmation',
-        html: html,
+        to: `quanghieunguyen7a1@gmail.com   `, // assuming booking has customer's email
+        subject: 'Booking Confirmation - Your Booking is Confirmed!',
+        html: `
+            <h2>Dear ${booking.customerName},</h2>
+            <p>Thank you for your booking with us! We are excited to confirm your booking.</p>
+            <h3>Booking Details:</h3>
+            <ul>
+                <li><strong>Booking ID:</strong> ${booking._id}</li>
+                <li><strong>Date:</strong> ${booking.date}</li>
+                <li><strong>Amount Paid:</strong> $${booking.amount}</li>
+            </ul>
+            <p>If you have any questions or need further assistance, feel free to contact us at ${process.env.CONTACT_EMAIL}.</p>
+            <p>We look forward to providing you with an amazing experience!</p>
+            <br>
+            <p>Best regards,</p>
+            <p>Your Company Name</p>
+        `
     };
 
+    // Send email
     await transporter.sendMail(mailOptions);
 };
 

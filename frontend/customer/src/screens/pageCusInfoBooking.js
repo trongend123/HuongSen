@@ -72,11 +72,11 @@ const CustomerBookingPage = () => {
     const handlePayment = async (createdBookingId) => {
         try {
             // Assuming you have a method to get the booking details
-            const bookingResponse = await axios.get(`${BASE_URL}bookings/${createdBookingId}`);
+            const bookingResponse = await axios.get(`${BASE_URL}/bookings/${createdBookingId}`);
             const booking = bookingResponse.data;
 
             const response = await axios.post(
-                `${BASE_URL}payment/create-payment-link`,
+                `${BASE_URL}/payment/create-payment-link`,
                 {
                     amount: booking.price,
                     bookingId: booking._id,
