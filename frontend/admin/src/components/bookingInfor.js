@@ -38,23 +38,23 @@ const BookingInfo = ({ booking }) => {
                 <ListGroup.Item><strong>Trạng thái:</strong> {status}</ListGroup.Item>
                 <ListGroup.Item><strong>Hợp đồng:</strong> {contract}</ListGroup.Item>
                 <ListGroup.Item><strong>Ngày tạo:</strong> {new Date(createdAt).toLocaleString()}</ListGroup.Item>
-            <ListGroup.Item><strong>Ngày cập nhật:</strong> {new Date(updatedAt).toLocaleString()}</ListGroup.Item>
+                <ListGroup.Item><strong>Ngày cập nhật:</strong> {new Date(updatedAt).toLocaleString()}</ListGroup.Item>
               </ListGroup>
             </Col>
 
             <Col md={6}>
               <Card.Title>Thông Tin Nhân Viên</Card.Title>
               <ListGroup>
-                <ListGroup.Item><strong>Họ và tên:</strong> {staffId.fullname}</ListGroup.Item>
-                <ListGroup.Item><strong>Tên đăng nhập:</strong> {staffId.username}</ListGroup.Item>
-                
+                <ListGroup.Item><strong>Họ và tên:</strong> {staffId?.fullname || "Customer create"}</ListGroup.Item>
+                <ListGroup.Item><strong>Tên đăng nhập:</strong> {staffId?.username || "Customer create"}</ListGroup.Item>
+
               </ListGroup>
             </Col>
           </Row>
         </Card.Body>
       </Card>
 
-      
+
 
     </Container>
   );

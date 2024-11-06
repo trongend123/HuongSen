@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@payos/node": "^1.0.10",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -21,6 +22,8 @@
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.0",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "mongoose": "^8.1.0",
+    "nodemailer": "^6.9.16"
   }
 }

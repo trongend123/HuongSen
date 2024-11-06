@@ -29,7 +29,9 @@ import {
   AgencyRouter,
   ContractRouter,
   OrderServiceRouter,
-  ChatRouter
+  ChatRouter,
+  paymentRoute,
+  emailRoute
 } from "./routes/index.js";
 //import { verifyAccessToken } from "./jwt_helper.js";
 import { changePassword, loginUser, registerUser, verifyAccessToken } from "./authens/auth.js";
@@ -79,12 +81,15 @@ app.use("/orderServices", OrderServiceRouter);
 //authen
 // Register route
 app.post('/register', registerUser);
+//payment
+app.use("/payment", paymentRoute);
+//email
+app.use("/booking", emailRoute)
+
 
 // Login route
 app.post('/login', loginUser);
 app.put('/change-password', changePassword);
-// Chat route
-app.use('/chats', ChatRouter);
 // Protected route (requires a valid access token)
 app.get('/profile', verifyAccessToken, (req, res) => {
   res.json({ message: `Hello, ${req.payload.aud}` });

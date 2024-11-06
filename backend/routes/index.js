@@ -23,6 +23,9 @@ import OrderRoomRouter from "./orderRoomRoutes.js";
 import AgencyRouter from "./agency.js";
 import ContractRouter from "./contract.js";
 import OrderServiceRouter from "./orderServiceRoute.js";
+import paymentRoute from "./paymentRoute.js";
+import emailRoute from "./email.js";
+
 import ChatRouter from "./chatRoutes.js";
 
 export {
@@ -49,6 +52,8 @@ export {
     AgencyRouter,
     ContractRouter,
     OrderServiceRouter,
+    paymentRoute,
+    emailRoute,
     ChatRouter
 }
 

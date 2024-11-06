@@ -12,26 +12,31 @@ import NavigationBar from './components/Navbar/navbar';
 import CS2 from './screens/locations/CS2/cs2';
 import CS3 from './screens/locations/CS3/cs3';
 import TourIntro from './screens/Tour/tour';
+import CustomerBookingPage from './screens/pageCusInfoBooking';
+import SaveHistory from './components/SaveHistory';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <div className="main-layout">
-        <Header/>
-          <NavigationBar/>
-        <Container fluid className="content" style={{padding: '0px'}}> 
-        <div className="content-header"></div>
-        <div className="body"><Routes>
-          
-            <Route path="/" element={<HomePage/>} />
-            <Route path="/cs1" element={<CS1/>} />
-            <Route path="/cs2" element={<CS2/>} />
-            <Route path="/cs3" element={<CS3/>} />
-            <Route path="/tours" element={<TourIntro/>} />
+        <Header />
+        <NavigationBar />
+        <Container fluid className="content" style={{ padding: '0px' }}>
+          <div className="content-header"></div>
+          <div className="body"><Routes>
+
+            <Route path="/" element={<HomePage />} />
+            <Route path="/cs1" element={<CS1 />} />
+            <Route path="/cs2" element={<CS2 />} />
+            <Route path="/cs3" element={<CS3 />} />
+            <Route path="/tours" element={<TourIntro />} />
+            <Route path="/saveHistory" element={<SaveHistory />} />
+            <Route path="/customerBooking/:locationId" element={<CustomerBookingPage />} />
+
           </Routes></div>
         </Container>
-        <Footer/>
+        <Footer />
       </div>
     </Router>
   </React.StrictMode>
