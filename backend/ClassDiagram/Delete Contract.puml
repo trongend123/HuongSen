@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "ContractsController" as Controller
+participant "ContractsRepository" as Repository
+participant "ContractsModel" as Model
+participant "Database" as DB
+
+User -> UI: Open contracts list page
+UI -> User: Display list of contracts
+
+User -> UI: Select contract to delete
+UI -> Router: DELETE /contracts/{id}
+Router -> Controller: deleteContract(id)
+Controller -> Repository: deleteContract(id)
+Repository -> Model: deleteById(id)
+Model -> DB: remove contract
+DB --> Model: contract deleted
+Model --> Repository: contract deleted
+Repository --> Controller: contract deleted
+Controller --> Router: 204 No Content
+Router --> UI: 204 No Content
+UI --> User: Display deletion success message
+@enduml

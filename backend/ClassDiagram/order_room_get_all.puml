@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "OrderRoomRouter" as Router
+participant "OrderRoomController" as Controller
+participant "OrderRoomRepository" as Repository
+participant "OrderRoom Model" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: GET /order-rooms
+Router -> Controller: getAllOrderRooms()
+Controller -> Repository: findAllOrderRooms()
+Repository -> Model: find()
+Model -> DB: find()
+DB --> Model: List<OrderRoom>
+Model --> Repository: List<OrderRoom>
+Repository --> Controller: List<OrderRoom>
+Controller --> Router: 200 OK (List<OrderRoom>)
+Router --> UI: 200 OK (List<OrderRoom>)
+@enduml

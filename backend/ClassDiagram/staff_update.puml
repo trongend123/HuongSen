@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "StaffRouter" as Router
+participant "StaffController" as Controller
+participant "StaffRepository" as Repository
+participant "Staff Model" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: PUT /staff/{id} (data)
+Router -> Controller: updateStaff(id, data)
+Controller -> Repository: updateStaff(id, data)
+Repository -> Model: findByIdAndUpdate(id, data)
+Model -> DB: update()
+DB --> Model: updated Staff
+Model --> Repository: updated Staff
+Repository --> Controller: updated Staff
+Controller --> Router: 200 OK (updated Staff)
+Router --> UI: 200 OK (updated Staff)
+@enduml

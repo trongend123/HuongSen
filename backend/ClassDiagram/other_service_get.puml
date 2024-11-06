@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "OtherServiceRouter" as Router
+participant "OtherServiceController" as Controller
+participant "OtherServiceRepository" as Repository
+participant "OtherService Model" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: GET /other-services/{id}
+Router -> Controller: getOtherServiceById(id)
+Controller -> Repository: findOtherServiceById(id)
+Repository -> Model: findById(id)
+Model -> DB: find()
+DB --> Model: OtherService
+Model --> Repository: OtherService
+Repository --> Controller: OtherService
+Controller --> Router: 200 OK (OtherService)
+Router --> UI: 200 OK (OtherService)
+@enduml

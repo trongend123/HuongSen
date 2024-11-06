@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "CustomerRouter" as Router
+participant "CustomerController" as Controller
+participant "CustomerRepository" as Repository
+participant "Customer" as Model
+participant "Database" as DB
+
+User -> UI: Open customer creation page
+UI -> User: Display customer form
+
+User -> UI: Submit customer form (data)
+UI -> Router: POST /customers (data)
+Router -> Controller: createCustomer(data)
+Controller -> Repository: createCustomer(data)
+Repository -> Model: new Customer(data)
+Model -> DB: save()
+DB --> Model: saved Customer
+Model --> Repository: saved Customer
+Repository --> Controller: saved Customer
+Controller --> Router: 201 Created (saved Customer)
+Router --> UI: 201 Created (saved Customer)
+UI --> User: Display success message
+@enduml

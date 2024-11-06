@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "UI/Interface" as UI
+participant "Router" as Router
+participant "LocationsController" as Controller
+participant "LocationsRepository" as Repository
+participant "LocationsModel" as Model
+participant "Database" as DB
+
+User -> UI: Request location details
+UI -> Router: GET /locations/{id}
+Router -> Controller: getLocation(id)
+Controller -> Repository: findById(id)
+Repository -> Model: findById(id)
+Model -> DB: fetch location
+DB --> Model: location data
+Model --> Repository: location data
+Repository --> Controller: location data
+Controller --> Router: 200 OK (location data)
+Router --> UI: 200 OK (location data)
+UI --> User: Display location data
+@enduml

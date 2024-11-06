@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "LocationsController" as Controller
+participant "LocationsRepository" as Repository
+participant "LocationsModel" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: PUT /locations/{id} (data)
+Router -> Controller: updateLocation(id, data)
+Controller -> Repository: updateLocation(id, data)
+Repository -> Model: updateById(id, data)
+Model -> DB: update location
+DB --> Model: updated location
+Model --> Repository: updated location
+Repository --> Controller: updated location
+Controller --> Router: 200 OK (updated location)
+Router --> UI: 200 OK (updated location)
+@enduml

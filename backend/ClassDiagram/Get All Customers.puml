@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "CustomersController" as Controller
+participant "CustomersRepository" as Repository
+participant "CustomersModel" as Model
+participant "Database" as DB
+
+User -> UI: Open customers list page
+UI -> User: Display loading message
+
+User -> UI: Request all customers
+UI -> Router: GET /customers
+Router -> Controller: getAllCustomers()
+Controller -> Repository: findAll()
+Repository -> Model: find()
+Model -> DB: fetch all
+DB --> Model: all customers
+Model --> Repository: all customers
+Repository --> Controller: all customers
+Controller --> Router: 200 OK (all customers)
+Router --> UI: 200 OK (all customers)
+UI --> User: Display list of customers
+@enduml
