@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "UI/Interface" as UI
+participant "Router" as Router
+participant "LocationsController" as Controller
+participant "LocationsRepository" as Repository
+participant "LocationsModel" as Model
+participant "Database" as DB
+
+User -> UI: Request to view all locations
+UI -> Router: GET /locations
+Router -> Controller: getAllLocations()
+Controller -> Repository: findAll()
+Repository -> Model: find()
+Model -> DB: fetch all
+DB --> Model: all locations
+Model --> Repository: all locations
+Repository --> Controller: all locations
+Controller --> Router: 200 OK (all locations)
+Router --> UI: 200 OK (all locations)
+UI --> User: Display all locations
+@enduml

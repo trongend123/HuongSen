@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "RoomCategoriesController" as Controller
+participant "RoomCategoriesRepository" as Repository
+participant "RoomCategoriesModel" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: PUT /room-categories/{id} (data)
+Router -> Controller: updateRoomCategory(id, data)
+Controller -> Repository: updateRoomCategory(id, data)
+Repository -> Model: updateById(id, data)
+Model -> DB: update room category
+DB --> Model: updated room category
+Model --> Repository: updated room category
+Repository --> Controller: updated room category
+Controller --> Router: 200 OK (updated room category)
+Router --> UI: 200 OK (updated room category)
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "AgenciesController" as Controller
+participant "AgenciesRepository" as Repository
+participant "AgenciesModel" as Model
+participant "Database" as DB
+
+User -> UI: Open agency details page
+UI -> User: Display loading message
+
+User -> UI: Request agency details
+UI -> Router: GET /agencies/{id}
+Router -> Controller: getAgency(id)
+Controller -> Repository: findById(id)
+Repository -> Model: findById(id)
+Model -> DB: fetch agency
+DB --> Model: agency data
+Model --> Repository: agency data
+Repository --> Controller: agency data
+Controller --> Router: 200 OK (agency data)
+Router --> UI: 200 OK (agency data)
+UI --> User: Display agency details
+@enduml

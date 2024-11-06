@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "StaffRouter" as Router
+participant "StaffController" as Controller
+participant "StaffRepository" as Repository
+participant "Staff Model" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: GET /staff/{id}
+Router -> Controller: getStaffById(id)
+Controller -> Repository: findStaffById(id)
+Repository -> Model: findById(id)
+Model -> DB: find()
+DB --> Model: Staff
+Model --> Repository: Staff
+Repository --> Controller: Staff
+Controller --> Router: 200 OK (Staff)
+Router --> UI: 200 OK (Staff)
+@enduml

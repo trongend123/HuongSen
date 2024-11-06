@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "BookingsController" as Controller
+participant "BookingsRepository" as Repository
+participant "BookingsModel" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: PUT /bookings/{id} (data)
+Router -> Controller: updateBooking(id, data)
+Controller -> Repository: updateBooking(id, data)
+Repository -> Model: updateById(id, data)
+Model -> DB: update booking
+DB --> Model: updated booking
+Model --> Repository: updated booking
+Repository --> Controller: updated booking
+Controller --> Router: 200 OK (updated booking)
+Router --> UI: 200 OK (updated booking)
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "OtherServiceRouter" as Router
+participant "OtherServiceController" as Controller
+participant "OtherServiceRepository" as Repository
+participant "OtherService Model" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: DELETE /other-services/{id}
+Router -> Controller: deleteOtherService(id)
+Controller -> Repository: deleteOtherService(id)
+Repository -> Model: deleteById(id)
+Model -> DB: remove()
+DB --> Model: deleted
+Model --> Repository: deleted
+Repository --> Controller: deleted
+Controller --> Router: 204 No Content
+Router --> UI: 204 No Content
+@enduml

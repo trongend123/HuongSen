@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "IdentificationController" as Controller
+participant "IdentificationRepository" as Repository
+participant "IdentificationModel" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: PUT /identifications/{id} (data)
+Router -> Controller: updateIdentification(id, data)
+Controller -> Repository: updateIdentification(id, data)
+Repository -> Model: updateById(id, data)
+Model -> DB: update identification
+DB --> Model: updated identification
+Model --> Repository: updated identification
+Repository --> Controller: updated identification
+Controller --> Router: 200 OK (updated identification)
+Router --> UI: 200 OK (updated identification)
+@enduml

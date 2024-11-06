@@ -1,0 +1,20 @@
+@startuml
+actor User
+participant "AgencyRouter" as Router
+participant "AgencyController" as Controller
+participant "AgencyRepository" as Repository
+participant "Agency" as Model
+participant "Database" as DB
+
+User -> Router: POST /agencies (data)
+Router -> Controller: createAgency(data)
+Controller -> Repository: createAgency(data)
+Repository -> Model: new Agency(data)
+Model -> DB: save()
+DB --> Model: saved Agency
+Model --> Repository: saved Agency
+Repository --> Controller: saved Agency
+Controller --> Router: 201 Created (saved Agency)
+Router --> User: 201 Created (saved Agency)
+@enduml
+
