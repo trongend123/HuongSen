@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "RoomsController" as Controller
+participant "RoomsRepository" as Repository
+participant "RoomsModel" as Model
+participant "Database" as DB
+
+User -> UI: Open rooms list page
+UI -> User: Display list of rooms
+
+User -> UI: Select room to delete
+UI -> Router: DELETE /rooms/{id}
+Router -> Controller: deleteRoom(id)
+Controller -> Repository: deleteRoom(id)
+Repository -> Model: deleteById(id)
+Model -> DB: remove room
+DB --> Model: room deleted
+Model --> Repository: room deleted
+Repository --> Controller: room deleted
+Controller --> Router: 204 No Content
+Router --> UI: 204 No Content
+UI --> User: Display deletion success message
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+actor User
+participant "Router" as Router
+participant "RoomsController" as Controller
+participant "RoomsRepository" as Repository
+participant "RoomsModel" as Model
+participant "Database" as DB
+
+User -> Router: GET /rooms
+Router -> Controller: getAllRooms()
+Controller -> Repository: findAll()
+Repository -> Model: find()
+Model -> DB: fetch all
+DB --> Model: all rooms
+Model --> Repository: all rooms
+Repository --> Controller: all rooms
+Controller --> Router: 200 OK (all rooms)
+Router --> User: 200 OK (all rooms)
+@enduml

@@ -3,6 +3,8 @@ import express, { json } from "express";
 import * as dotenv from "dotenv";
 import connectDB from "./database/database.js";
 import cors from "cors";
+import http from 'http';
+import { Server } from 'socket.io';
 import {
   ImageRouter,
   RoomRouter,
@@ -27,6 +29,7 @@ import {
   AgencyRouter,
   ContractRouter,
   OrderServiceRouter,
+  ChatRouter,
   paymentRoute,
   emailRoute
 } from "./routes/index.js";
@@ -38,6 +41,11 @@ dotenv.config();
 // Tạo đối tượng app để khởi tạo web container
 const app = express();
 app.use(json());
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: { origin: "http://localhost:9999", methods: ["GET", "POST"] },
+});
 
 app.use(cors());
 // Cấu hình hoạt động routing (định tuyến) các request gửi tới web server
@@ -73,14 +81,15 @@ app.use("/orderServices", OrderServiceRouter);
 //authen
 // Register route
 app.post('/register', registerUser);
-
-// Login route
-app.post('/login', loginUser);
-app.put('/change-password', changePassword);
 //payment
 app.use("/payment", paymentRoute);
 //email
 app.use("/booking", emailRoute)
+
+
+// Login route
+app.post('/login', loginUser);
+app.put('/change-password', changePassword);
 // Protected route (requires a valid access token)
 app.get('/profile', verifyAccessToken, (req, res) => {
   res.json({ message: `Hello, ${req.payload.aud}` });
@@ -89,6 +98,7 @@ app.get('/profile', verifyAccessToken, (req, res) => {
 const port = process.env.PORT || 8080;
 
 app.use(function (req, res, next) {
+  req.io = io;
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", process.env.REACT_URL);
 
@@ -110,8 +120,37 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+//thêm api notify
+app.post('/notify', (req, res) => {
+  const { message, type } = req.body;
+
+  // Broadcast the notification to all clients
+  io.emit('receiveNotification', { message, type });
+  res.status(200).send({ status: 'Notification sent to all clients.' });
+});
 
 app.listen(port, async () => {
   connectDB();
   console.log(`Server is running on: http://localhost:${port}`);
 });
+
+//Thêm io cho web server
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.id);
+
+  // Listen for a notification from any client
+  socket.on('sendNotification', (data) => {
+    console.log('Notification received:', data);
+
+    // Broadcast the notification to all connected clients
+    io.emit('receiveNotification', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
+  });
+});
+
+
+
+export { server, io };

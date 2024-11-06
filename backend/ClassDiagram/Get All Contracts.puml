@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "ContractsController" as Controller
+participant "ContractsRepository" as Repository
+participant "ContractsModel" as Model
+participant "Database" as DB
+
+User -> UI: Open contracts list page
+UI -> User: Display loading message
+
+User -> UI: Request all contracts
+UI -> Router: GET /contracts
+Router -> Controller: getAllContracts()
+Controller -> Repository: findAll()
+Repository -> Model: find()
+Model -> DB: fetch all
+DB --> Model: all contracts
+Model --> Repository: all contracts
+Repository --> Controller: all contracts
+Controller --> Router: 200 OK (all contracts)
+Router --> UI: 200 OK (all contracts)
+UI --> User: Display list of contracts
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "FeedbackRouter" as Router
+participant "FeedbackController" as Controller
+participant "FeedbackRepository" as Repository
+participant "Feedback Model" as Model
+participant "Database" as DB
+
+User -> UI: Open feedback edit form
+UI -> User: Display feedback form
+
+User -> UI: Submit updated feedback (data)
+UI -> Router: PUT /feedbacks/{id} (data)
+Router -> Controller: updateFeedback(id, data)
+Controller -> Repository: updateFeedback(id, data)
+Repository -> Model: findByIdAndUpdate(id, data)
+Model -> DB: update()
+DB --> Model: updated Feedback
+Model --> Repository: updated Feedback
+Repository --> Controller: updated Feedback
+Controller --> Router: 200 OK (updated Feedback)
+Router --> UI: 200 OK (updated Feedback)
+UI --> User: Display success message for feedback update
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "HistoriesController" as Controller
+participant "HistoriesRepository" as Repository
+participant "HistoriesModel" as Model
+participant "Database" as DB
+
+User -> UI: Open histories list page
+UI -> User: Display list of histories
+
+User -> UI: Select history to delete
+UI -> Router: DELETE /histories/{id}
+Router -> Controller: deleteHistory(id)
+Controller -> Repository: deleteHistory(id)
+Repository -> Model: deleteById(id)
+Model -> DB: remove history
+DB --> Model: history deleted
+Model --> Repository: history deleted
+Repository --> Controller: history deleted
+Controller --> Router: 204 No Content
+Router --> UI: 204 No Content
+UI --> User: Display deletion success message
+@enduml

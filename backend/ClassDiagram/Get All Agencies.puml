@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "AgenciesController" as Controller
+participant "AgenciesRepository" as Repository
+participant "AgenciesModel" as Model
+participant "Database" as DB
+
+User -> UI: Open agencies list page
+UI -> User: Display loading message
+
+User -> UI: Request all agencies
+UI -> Router: GET /agencies
+Router -> Controller: getAllAgencies()
+Controller -> Repository: findAll()
+Repository -> Model: find()
+Model -> DB: fetch all
+DB --> Model: all agencies
+Model --> Repository: all agencies
+Repository --> Controller: all agencies
+Controller --> Router: 200 OK (all agencies)
+Router --> UI: 200 OK (all agencies)
+UI --> User: Display list of agencies
+@enduml

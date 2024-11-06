@@ -26,6 +26,7 @@ import OrderServiceRouter from "./orderServiceRoute.js";
 import paymentRoute from "./paymentRoute.js";
 import emailRoute from "./email.js";
 
+import ChatRouter from "./chatRoutes.js";
 
 export {
     ImageRouter,
@@ -52,6 +53,7 @@ export {
     ContractRouter,
     OrderServiceRouter,
     paymentRoute,
-    emailRoute
+    emailRoute,
+    ChatRouter
 }
 

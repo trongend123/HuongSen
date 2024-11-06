@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "UI/Interface" as UI
+participant "OrderServiceRouter" as Router
+participant "OrderServiceController" as Controller
+participant "OrderServiceRepository" as Repository
+participant "OrderService" as Model
+participant "Database" as DB
+
+User -> UI: Submit new order service data
+UI -> Router: POST /orderServices (data)
+Router -> Controller: createOrderService(data)
+Controller -> Repository: createOrderService(data)
+Repository -> Model: new OrderService(data)
+Model -> DB: save()
+DB --> Model: saved OrderService
+Model --> Repository: saved OrderService
+Repository --> Controller: saved OrderService
+Controller --> Router: 201 Created (saved OrderService)
+Router --> UI: 201 Created (saved OrderService)
+UI --> User: Display success message
+@enduml

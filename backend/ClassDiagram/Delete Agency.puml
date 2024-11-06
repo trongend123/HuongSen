@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "AgenciesController" as Controller
+participant "AgenciesRepository" as Repository
+participant "AgenciesModel" as Model
+participant "Database" as DB
+
+User -> UI: Open agency list page
+UI -> User: Display list of agencies
+
+User -> UI: Select agency to delete
+UI -> Router: DELETE /agencies/{id}
+Router -> Controller: deleteAgency(id)
+Controller -> Repository: deleteAgency(id)
+Repository -> Model: deleteById(id)
+Model -> DB: remove agency
+DB --> Model: agency deleted
+Model --> Repository: agency deleted
+Repository --> Controller: agency deleted
+Controller --> Router: 204 No Content
+Router --> UI: 204 No Content
+UI --> User: Display deletion success message
+@enduml

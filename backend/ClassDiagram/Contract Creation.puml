@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant ContractRouter as Router
+participant ContractController as Controller
+participant ContractRepository as Repository
+participant Contract as Model
+participant Database as DB
+
+User -> UI: Open contract creation page
+UI -> User: Display contract form
+
+User -> UI: Submit contract form (data)
+UI -> Router: POST /contracts (data)
+Router -> Controller: createContract(data)
+Controller -> Repository: createContract(data)
+Repository -> Model: new Contract(data)
+Model -> DB: save()
+DB --> Model: saved Contract
+Model --> Repository: saved Contract
+Repository --> Controller: saved Contract
+Controller --> Router: 201 Created (saved Contract)
+Router --> UI: 201 Created (saved Contract)
+UI --> User: Display success message
+@enduml

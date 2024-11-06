@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "IdentificationController" as Controller
+participant "IdentificationRepository" as Repository
+participant "IdentificationModel" as Model
+participant "Database" as DB
+
+User -> UI: Open Identifications List
+UI -> Router: GET /identifications
+Router -> Controller: getAllIdentifications()
+Controller -> Repository: findAll()
+Repository -> Model: find()
+Model -> DB: fetch all
+DB --> Model: all identifications
+Model --> Repository: all identifications
+Repository --> Controller: all identifications
+Controller --> Router: 200 OK (all identifications)
+Router --> UI: 200 OK (all identifications)
+UI --> User: Display all identifications
+@enduml

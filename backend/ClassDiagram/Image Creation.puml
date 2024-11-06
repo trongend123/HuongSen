@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "UI/Interface" as UI
+participant "ImageRouter" as Router
+participant "ImageController" as Controller
+participant "ImageRepository" as Repository
+participant "Image" as Model
+participant "Database" as DB
+
+User -> UI: Submit new image data
+UI -> Router: POST /images (data)
+Router -> Controller: createImage(data)
+Controller -> Repository: createImage(data)
+Repository -> Model: new Image(data)
+Model -> DB: save()
+DB --> Model: saved Image
+Model --> Repository: saved Image
+Repository --> Controller: saved Image
+Controller --> Router: 201 Created (saved Image)
+Router --> UI: 201 Created (saved Image)
+UI --> User: Display success message
+@enduml
