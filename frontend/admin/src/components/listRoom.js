@@ -17,9 +17,10 @@ const ListRoom = () => {
   const [updatedStatus, setUpdatedStatus] = useState('');
   const navigate = useNavigate();
   const [userRole, setUserRole] = useState('');
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = user
     if (storedUser && storedUser.role) {
       setUserRole(storedUser.role);
 
@@ -184,6 +185,7 @@ const ListRoom = () => {
         <Modal.Body>
           {selectedRoom && (
             <>
+             {user?.role === "admin" && (
               <Form.Group controlId="categorySelect">
                 <Form.Label>Loại phòng:</Form.Label>
                 <Form.Control
@@ -198,7 +200,7 @@ const ListRoom = () => {
                   ))}
                 </Form.Control>
               </Form.Group>
-
+             )}
               <Form.Group controlId="statusSelect" className="mt-3">
                 <Form.Label>Trạng thái phòng:</Form.Label>
                 <Form.Control

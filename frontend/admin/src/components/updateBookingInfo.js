@@ -243,9 +243,11 @@ const UpdateBookingInfo = () => {
                             </Form.Group>
                         </Col>
                     </Row>
-
-                    <h5>Thêm Dịch Vụ Khác</h5>
-                    <Row className="mt-3">
+                    
+                    
+                    {user?.role !== "admin" && (
+                    <Row className="mt-3" >
+                        <h5>Thêm Dịch Vụ Khác</h5>
                         <Col md={6}>
                             <Form.Group controlId="otherService">
                                 <Form.Label>Chọn dịch vụ</Form.Label>
@@ -279,7 +281,7 @@ const UpdateBookingInfo = () => {
                             </Button>
                         </Col>
                     </Row>
-
+                    )}
                     {/* Hiển thị danh sách dịch vụ đã thêm */}
                     {orderServicesData.length > 0 && (
                         <Card className="mt-4">

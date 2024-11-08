@@ -1,82 +1,121 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Form, Button, Container, Alert } from 'react-bootstrap';
 import './changepass.css';
 
 const ChangePassword = () => {
-  const [currentPassword, setCurrentPassword] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError('');
+    setMessage('');
+
+    if (oldPassword.length <= 6) {
+      setError('Mật khẩu cũ phải trên 6 ký tự');
+      return;
+    }
+    if (newPassword.length <= 6) {
+      setError('Mật khẩu mới phải trên 6 ký tự');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setError('Nhập lại mật khẩu mới không khớp, vui lòng nhập lại');
+      return;
+    }
+
+    const password = JSON.parse(localStorage.getItem('user')).password;
+    if (oldPassword !== password) {
+      setError('Mật khẩu không đúng, vui lòng nhập lại');
+      return;
+    }
 
     try {
-      const accessToken = localStorage.getItem('accessToken');
+      const userId = JSON.parse(localStorage.getItem('user'))._id;
+      await axios.put(
+        `http://localhost:9999/staffs/${userId}`,
+        { password: newPassword },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
+      );
 
-      const response = await axios.post('http://localhost:9999/change-password', {
-        currentPassword,
-        newPassword,
-      }, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      setLoading(false);
-      setSuccess('Password changed successfully!');
-      // Clear the fields
-      setCurrentPassword('');
-      setNewPassword('');
-    } catch (err) {
-      setLoading(false);
-      setError(err.response ? err.response.data.message : 'Password change failed');
+      setMessage('Password changed successfully');
+      navigate('/login');
+    } catch (error) {
+      setError('Error changing password. Please try again.');
     }
   };
 
   return (
-    <Container className="change-password-container">
-      <h2 className="text-center mb-4">Change Password</h2>
-      {error && <Alert variant="danger">{error}</Alert>}
-      {success && <Alert variant="success">{success}</Alert>}
-      <Form onSubmit={handleSubmit} className="change-password-form">
-        <Form.Group controlId="currentPassword">
-          <Form.Label>Current Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter your current password"
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
+    <section>
+      <Container>
+        <Row className="justify-content-center">
+          <Col lg="6">
+            <div className="change-password__form">
+              <h2>Đổi mật khẩu</h2>
 
-        <Form.Group controlId="newPassword">
-          <Form.Label>New Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter your new password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="oldPassword">
+                  <Form.Label>Mật khẩu cũ:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Old Password"
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                    required
+                  />
+                </Form.Group>
 
-        <Button
-          variant="primary"
-          type="submit"
-          className="w-100 mt-3"
-          disabled={loading}
-        >
-          {loading ? 'Changing...' : 'Change Password'}
-        </Button>
-      </Form>
-    </Container>
+                <Form.Group controlId="newPassword">
+                  <Form.Label>Mật khẩu mới:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="New Password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="confirmPassword">
+                  <Form.Label>Nhập lại mật khẩu:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Confirm New Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+
+                {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
+                {message && <p className="success-message">{message}</p>}
+                <br />
+                <Button className="btn primary_btn" type="submit">
+                  Đổi mật khẩu
+                </Button>
+              </Form>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 };
 
