@@ -3,6 +3,7 @@ import PayOS from '@payos/node';
 import dotenv from 'dotenv';
 import Payment from '../models/Payment.js'; // Adjust the path according to your directory structure
 import Booking from '../models/booking.js';
+import OrderRooms from '../models/orderRoom.js';
 import sendConfirmationEmail from '../utils/sendEmail.js'; // Import the email function
 dotenv.config();
 
@@ -18,7 +19,7 @@ router.post('/create-payment-link', async (req, res) => {
 
     try {
         const order = {
-            amount: amount - 490000,
+            amount: amount - 499000,
             description: bookingId,
             orderCode: Math.floor(10000000 + Math.random() * 90000000),
             returnUrl: `${YOUR_DOMAIN}/success`,
@@ -55,24 +56,20 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Route to handle payment success and send confirmation email
 router.get('/payment-success/:id', async (req, res) => {
     const { id } = req.params;
-
+    
     try {
-        // Update booking status to confirmed
-        const updatedBooking = await Booking.findByIdAndUpdate(
-            id,
-            { $set: { status: 'confirmed' } },
-            { new: true }
-        );
+        // Fetch the booking and populate customer details
+        const orderRoom = await OrderRooms.findById(id)
+            .populate('customerId', 'email fullname'); // Retrieve customer's email and fullname
 
-        if (!updatedBooking) {
+        if (!orderRoom) {
             return res.status(404).send('<h1>Booking not found</h1>');
         }
 
-        // Send confirmation email
-        await sendConfirmationEmail(updatedBooking);
+        // Send confirmation email with booking details
+        await sendConfirmationEmail(orderRoom);
 
         res.send('<h1>Payment successful!</h1><p>Your booking has been confirmed, and a confirmation email has been sent.</p>');
     } catch (error) {
