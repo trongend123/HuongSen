@@ -1,0 +1,37 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "RoomCategoryRouter" as Router
+participant "RoomCategoryController" as Controller
+participant "RoomCategoryRepository" as Repository
+participant "RoomCategoryModel" as RoomCategoryModel
+participant "Database" as DB
+
+Admin -> UI: Request to add a new room category
+UI -> Router: GET /admin/room-categories/add
+Router -> Controller: showAddRoomCategoryForm()
+Controller -> Repository: getRoomCategoryFormData()
+
+Repository -> RoomCategoryModel: fetchRoomCategoryFormData()
+RoomCategoryModel -> DB: query existing room categories
+DB --> RoomCategoryModel: existing room categories
+RoomCategoryModel --> Repository: existing room categories
+Repository --> Controller: existing room categories
+Controller --> Router: Display add room category form
+Router --> UI: Display add room category form
+
+Admin -> UI: Submit new room category data
+UI -> Router: POST /admin/room-categories/add
+Router -> Controller: addRoomCategory(newCategoryData)
+Controller -> Repository: saveRoomCategory(newCategoryData)
+
+Repository -> RoomCategoryModel: createRoomCategory(newCategoryData)
+RoomCategoryModel -> DB: insert new room category data
+DB --> RoomCategoryModel: room category created
+RoomCategoryModel --> Repository: room category created
+Repository --> Controller: room category created successfully
+
+Controller --> Router: 200 OK (room category added)
+Router --> UI: 200 OK (room category added)
+UI -> Admin: Display success message (room category added)
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+actor Receptionist
+participant "User/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "ServiceModel" as ServiceModel
+participant "Database" as DB
+
+Receptionist -> UI: Request to add service to booking
+UI -> Router: GET /booking/{bookingId}/add-service
+Router -> Controller: showAddServiceForm(bookingId)
+Controller -> UI: Display add service form
+
+Receptionist -> UI: Select service to add (e.g., breakfast, spa, etc.)
+UI -> Router: POST /booking/{bookingId}/add-service
+Router -> Controller: addServiceToBooking(bookingId, serviceId)
+Controller -> Repository: addServiceToBooking(bookingId, serviceId)
+
+Repository -> BookingModel: fetchBookingById(bookingId)
+BookingModel -> DB: query booking by ID
+DB --> BookingModel: booking data
+BookingModel --> Repository: booking data
+Repository --> Controller: booking data
+
+Controller -> ServiceModel: fetchServiceById(serviceId)
+ServiceModel -> DB: query service by ID
+DB --> ServiceModel: service data
+ServiceModel --> Controller: service data
+
+Controller -> Repository: saveUpdatedBookingServices(bookingId, serviceId)
+Repository -> BookingModel: updateBookingWithService(bookingId, serviceId)
+BookingModel -> DB: update booking with new service
+DB --> BookingModel: booking updated with service
+BookingModel --> Repository: update success
+Repository --> Controller: update success
+Controller -> Router: 200 OK (service added)
+Router --> UI: 200 OK (service added)
+UI -> Receptionist: Display success message (service added to booking)
+@enduml

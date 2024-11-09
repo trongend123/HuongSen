@@ -1,0 +1,36 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "ReceptionistRouter" as Router
+participant "ReceptionistController" as Controller
+participant "ReceptionistRepository" as Repository
+participant "ReceptionistModel" as ReceptionistModel
+participant "Database" as DB
+
+Admin -> UI: Request to update receptionist information
+UI -> Router: GET /admin/receptionists/update/{receptionistId}
+Router -> Controller: showUpdateReceptionistForm(receptionistId)
+Controller -> Repository: getReceptionistById(receptionistId)
+Repository -> ReceptionistModel: findReceptionistById(receptionistId)
+ReceptionistModel -> DB: query receptionist by receptionistId
+DB --> ReceptionistModel: receptionist data
+ReceptionistModel --> Repository: receptionist data
+Repository --> Controller: receptionist data
+Controller --> Router: Display update form with current data
+Router --> UI: Display update form with current data
+
+Admin -> UI: Fill in updated receptionist details and submit
+UI -> Router: POST /admin/receptionists/update/{receptionistId}
+Router -> Controller: updateReceptionist(receptionistId, updatedData)
+Controller -> Repository: saveUpdatedReceptionist(receptionistId, updatedData)
+
+Repository -> ReceptionistModel: updateReceptionist(receptionistId, updatedData)
+ReceptionistModel -> DB: update receptionist data
+DB --> ReceptionistModel: updated receptionist data
+ReceptionistModel --> Repository: updated receptionist data
+Repository --> Controller: receptionist updated successfully
+
+Controller --> Router: 200 OK (receptionist updated)
+Router --> UI: 200 OK (receptionist updated)
+UI -> Admin: Display success message (receptionist updated)
+@enduml
