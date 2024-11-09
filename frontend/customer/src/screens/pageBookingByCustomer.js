@@ -20,7 +20,6 @@ const CustomerPage = ({ locationId }) => {
 
     return (
         <div>
-            <h3>Đặt phòng ngay</h3>
             <Row>
                 <Col>
                     {/* Booking Form */}

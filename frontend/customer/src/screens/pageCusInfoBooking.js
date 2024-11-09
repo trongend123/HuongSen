@@ -95,7 +95,6 @@ const CustomerBookingPage = () => {
     };
     return (
         <div>
-            <h3>Đặt phòng ngay</h3>
             <Row>
                 <Col md="6">
                     {/* User Form */}

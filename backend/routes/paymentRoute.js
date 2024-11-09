@@ -60,15 +60,26 @@ router.get('/payment-success/:id', async (req, res) => {
     const { id } = req.params;
     
     try {
-        // Fetch the booking and populate customer details
+        // Fetch the booking and populate necessary details
         const orderRoom = await OrderRooms.findById(id)
-            .populate('customerId', 'email fullname'); // Retrieve customer's email and fullname
-
-        if (!orderRoom) {
-            return res.status(404).send('<h1>Booking not found</h1>');
+            .populate('customerId', 'email fullname phone')
+            .populate({
+                path: 'roomCateId',
+                select: 'name numberOfBed numberOfHuman price locationId',
+                populate: {
+                    path: 'locationId',
+                    select: 'name address phone'
+                }
+            })
+            .populate('bookingId', 'status payment checkin checkout note price humans');
+        
+        // Check if all necessary data is present
+        if (!orderRoom || !orderRoom.customerId || !orderRoom.roomCateId || !orderRoom.roomCateId.locationId) {
+            console.error("Order room or necessary fields missing:", orderRoom);
+            return res.status(500).send('<h1>Required booking details are missing.</h1>');
         }
 
-        // Send confirmation email with booking details
+        // Send confirmation email
         await sendConfirmationEmail(orderRoom);
 
         res.send('<h1>Payment successful!</h1><p>Your booking has been confirmed, and a confirmation email has been sent.</p>');
@@ -77,6 +88,7 @@ router.get('/payment-success/:id', async (req, res) => {
         res.status(500).send('<h1>An error occurred while confirming your booking and sending the confirmation email</h1>');
     }
 });
+
 
 // Route to handle payment cancellation
 router.get('/payment-cancel/:id', (req, res) => {
