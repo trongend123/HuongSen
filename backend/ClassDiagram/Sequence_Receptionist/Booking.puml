@@ -1,0 +1,39 @@
+@startuml
+actor Receptionist
+participant "User/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "RoomModel" as RoomModel
+participant "Database" as DB
+
+Receptionist -> UI: Request to create booking
+UI -> Router: GET /booking/create
+Router -> Controller: showCreateBookingForm()
+Controller -> UI: Display booking form
+
+Receptionist -> UI: Fill booking details (customer, room, dates, etc.)
+UI -> Router: POST /booking/create
+Router -> Controller: createBooking(bookingData)
+Controller -> Repository: createBooking(bookingData)
+
+Repository -> RoomModel: checkRoomAvailability(roomId, startDate, endDate)
+RoomModel -> DB: query room availability
+DB --> RoomModel: room availability status
+RoomModel --> Repository: availability status
+
+alt If room is available
+    Repository -> BookingModel: createNewBooking(bookingData)
+    BookingModel -> DB: insert new booking
+    DB --> BookingModel: booking created
+    BookingModel --> Repository: booking creation success
+    Repository --> Controller: booking creation success
+    Controller -> Router: 200 OK (booking created)
+    Router --> UI: 200 OK (booking created)
+    UI -> Receptionist: Display booking success message
+else If room is not available
+    Controller -> UI: 400 Bad Request (room not available)
+    UI -> Receptionist: Display error message (room not available)
+end
+@enduml

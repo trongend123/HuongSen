@@ -1,0 +1,36 @@
+@startuml
+actor Customer
+participant "User/Interface" as UI
+participant "RefundRouter" as Router
+participant "RefundController" as Controller
+participant "RefundRepository" as Repository
+participant "Refund Model" as RefundModel
+participant "CustomerRepository" as CustomerRepo
+participant "Database" as DB
+participant "AdminNotificationService" as AdminService
+
+User -> UI: Open refund request page
+UI -> User: Display refund request form
+
+User -> UI: Submit refund request (customerId, orderId, reason, amount)
+UI -> Router: POST /refunds (customerId, orderId, reason, amount)
+Router -> Controller: createRefundRequest(customerId, orderId, reason, amount)
+
+Controller -> CustomerRepo: findCustomerById(customerId)
+CustomerRepo -> DB: fetch customer
+DB --> CustomerRepo: customer details
+CustomerRepo --> Controller: customer details
+
+Controller -> RefundModel: new Refund(customerId, orderId, reason, amount, status: pending)
+RefundModel -> DB: save refund request
+DB --> RefundModel: saved refund request
+RefundModel --> Repository: saved refund request
+Repository --> Controller: saved refund request
+
+Controller -> AdminService: notifyAdminOfRefundRequest(refundId, customerId, orderId, reason, amount)
+AdminService --> Controller: admin notified
+
+Controller --> Router: 201 Created (refund request submitted)
+Router --> UI: 201 Created (refund request submitted)
+UI --> User: Display success message
+@enduml

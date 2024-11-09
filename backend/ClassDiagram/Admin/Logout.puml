@@ -1,0 +1,20 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "AuthRouter" as Router
+participant "AuthController" as Controller
+participant "AuthRepository" as Repository
+participant "SessionManager" as SessionManager
+
+Admin -> UI: Request to log out
+UI -> Router: POST /logout
+Router -> Controller: logout()
+Controller -> SessionManager: terminateSession()
+
+SessionManager -> Repository: invalidateSession(adminId)
+Repository -> SessionManager: session invalidated
+SessionManager --> Controller: session terminated
+Controller -> Router: 200 OK (logged out)
+Router --> UI: 200 OK (logged out)
+UI -> Admin: Redirect to login page
+@enduml

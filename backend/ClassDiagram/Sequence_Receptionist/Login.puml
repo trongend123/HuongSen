@@ -1,0 +1,37 @@
+@startuml
+actor Receptionist
+participant "User/Interface" as UI
+participant "AuthRouter" as Router
+participant "AuthController" as Controller
+participant "AuthRepository" as Repository
+participant "UserModel" as UserModel
+participant "Database" as DB
+
+Receptionist -> UI: Enter login credentials (username, password)
+UI -> Router: POST /login
+Router -> Controller: login()
+Controller -> Repository: validateCredentials()
+
+Repository -> UserModel: fetchUserByUsername()
+UserModel -> DB: query user by username
+DB --> UserModel: user data
+UserModel --> Repository: user data
+Repository -> Controller: user data
+Controller -> Controller: check if password matches
+Controller -> UI: 200 OK (login success) or 401 Unauthorized (invalid credentials)
+UI -> Receptionist: Display login result
+
+alt If login successful
+    UI -> Router: GET /dashboard
+    Router -> Controller: getDashboard()
+    Controller -> Repository: fetchDashboardData()
+    Repository -> DB: query dashboard data
+    DB --> Repository: dashboard data
+    Repository --> Controller: dashboard data
+    Controller --> Router: 200 OK (dashboard data)
+    Router --> UI: 200 OK (dashboard data)
+    UI -> Receptionist: Display dashboard
+else If login failed
+    UI -> Receptionist: Display error message
+end
+@enduml

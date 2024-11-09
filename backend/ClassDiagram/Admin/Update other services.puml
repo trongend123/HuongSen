@@ -1,0 +1,37 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "OtherServiceRouter" as Router
+participant "OtherServiceController" as Controller
+participant "OtherServiceRepository" as Repository
+participant "OtherServiceModel" as OtherServiceModel
+participant "Database" as DB
+
+Admin -> UI: Request to update an existing other service
+UI -> Router: GET /admin/other-services/update/{serviceId}
+Router -> Controller: showUpdateOtherServiceForm(serviceId)
+Controller -> Repository: getServiceDetails(serviceId)
+
+Repository -> OtherServiceModel: fetchServiceById(serviceId)
+OtherServiceModel -> DB: query service by ID
+DB --> OtherServiceModel: service data
+OtherServiceModel --> Repository: service data
+Repository --> Controller: service data
+
+Controller -> UI: Display service details form for update
+
+Admin -> UI: Submit updated service data
+UI -> Router: POST /admin/other-services/update/{serviceId} (updated service details)
+Router -> Controller: updateOtherService(serviceId, updatedServiceData)
+Controller -> Repository: saveUpdatedService(serviceId, updatedServiceData)
+
+Repository -> OtherServiceModel: updateService(serviceId, updatedServiceData)
+OtherServiceModel -> DB: update service in database
+DB --> OtherServiceModel: service updated
+OtherServiceModel --> Repository: service updated
+Repository --> Controller: service updated successfully
+
+Controller -> Router: 200 OK (service updated)
+Router --> UI: 200 OK (service updated)
+UI -> Admin: Display success message (service updated)
+@enduml

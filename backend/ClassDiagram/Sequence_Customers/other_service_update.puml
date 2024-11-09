@@ -1,0 +1,36 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "OtherServiceRepository" as OtherServiceRepo
+participant "Booking Model" as BookingModel
+participant "OtherService Model" as OtherServiceModel
+participant "Database" as DB
+
+User -> UI: Open booking details page
+UI -> Router: POST /bookings/{bookingId}/other-services (otherServiceId, data)
+Router -> Controller: addOtherServiceToBooking(bookingId, otherServiceId, data)
+Controller -> Repository: addOtherServiceToBooking(bookingId, otherServiceId, data)
+
+Repository -> BookingModel: findById(bookingId)
+BookingModel -> DB: fetch booking
+DB --> BookingModel: booking details
+BookingModel --> Repository: booking details
+
+Repository -> OtherServiceRepo: findById(otherServiceId)
+OtherServiceRepo -> DB: fetch other service
+DB --> OtherServiceRepo: other service details
+OtherServiceRepo --> Repository: other service details
+
+Repository -> BookingModel: addOtherService(otherServiceId, data)
+BookingModel -> DB: save updated booking with other service
+DB --> BookingModel: updated booking
+
+BookingModel --> Repository: updated booking with other service
+Repository --> Controller: updated booking with other service
+Controller --> Router: 200 OK (updated booking with other service)
+Router --> UI: 200 OK (updated booking with other service)
+UI --> User: Display confirmation of added service
+@enduml
