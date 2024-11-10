@@ -1,0 +1,24 @@
+@startuml
+actor Receptionist
+participant "User/Interface" as UI
+participant "DashboardRouter" as Router
+participant "DashboardController" as Controller
+participant "DashboardRepository" as Repository
+participant "DashboardModel" as DashboardModel
+participant "Database" as DB
+
+Receptionist -> UI: Request to view dashboard
+UI -> Router: GET /dashboard
+Router -> Controller: getDashboardData()
+Controller -> Repository: retrieveDashboardData()
+
+Repository -> DashboardModel: fetchDashboardData()
+DashboardModel -> DB: query dashboard data (bookings, rooms, services, etc.)
+DB --> DashboardModel: dashboard data
+DashboardModel --> Repository: dashboard data
+Repository --> Controller: dashboard data
+
+Controller -> Router: 200 OK (dashboard data)
+Router --> UI: 200 OK (dashboard data)
+UI -> Receptionist: Display dashboard data
+@enduml

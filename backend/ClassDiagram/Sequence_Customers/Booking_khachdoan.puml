@@ -1,0 +1,54 @@
+@startuml
+actor Customer
+participant "User/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "RoomModel" as RoomModel
+participant "PaymentGateway" as PaymentGateway
+participant "Database" as DB
+
+Customer -> UI: Request to book rooms for a group
+UI -> Router: POST /group-booking
+Router -> Controller: createGroupBooking()
+Controller -> Repository: saveGroupBooking()
+
+Repository -> RoomModel: check room availability for group
+RoomModel -> DB: query available rooms for group size
+DB --> RoomModel: list of available rooms
+RoomModel --> Repository: available rooms for group
+Repository --> Controller: available rooms for group
+Controller -> UI: 200 OK (available rooms for group)
+UI -> Customer: Display list of available rooms for group
+
+Customer -> UI: Choose rooms and provide guest details
+UI -> Router: POST /confirm-group-booking
+Router -> Controller: confirmGroupBooking()
+Controller -> Repository: confirmGroupBookingDetails()
+
+Repository -> BookingModel: createGroupBooking()
+BookingModel -> DB: insert group booking data
+DB --> BookingModel: group booking created
+BookingModel --> Repository: group booking details
+Repository --> Controller: group booking details
+Controller -> UI: 200 OK (group booking confirmation)
+UI -> Customer: Display group booking confirmation
+
+Customer -> UI: Request to pay deposit for group
+UI -> Router: POST /group-payment
+Router -> Controller: processGroupDeposit()
+Controller -> PaymentGateway: initiateGroupPayment()
+
+PaymentGateway -> PaymentGateway: process payment for group
+PaymentGateway --> Controller: group payment result (Success/Fail)
+Controller -> Repository: update group booking status
+Repository -> BookingModel: update deposit status for group
+BookingModel -> DB: update group booking data
+DB --> BookingModel: group booking updated
+BookingModel --> Repository: updated group booking data
+Repository --> Controller: updated group booking status
+Controller --> Router: 200 OK (group payment status)
+Router --> UI: 200 OK (group payment result)
+UI -> Customer: Display group payment result
+@enduml

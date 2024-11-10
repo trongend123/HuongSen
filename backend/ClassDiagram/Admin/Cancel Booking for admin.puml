@@ -1,0 +1,37 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "Database" as DB
+
+Admin -> UI: Request to cancel a booking
+UI -> Router: GET /admin/bookings/cancel/{bookingId}
+Router -> Controller: showCancelBookingForm(bookingId)
+Controller -> Repository: getBookingDetails(bookingId)
+
+Repository -> BookingModel: fetchBookingById(bookingId)
+BookingModel -> DB: query booking by ID
+DB --> BookingModel: booking data
+BookingModel --> Repository: booking data
+Repository --> Controller: booking data
+
+Controller -> UI: Display cancel booking form
+
+Admin -> UI: Confirm cancel booking
+UI -> Router: POST /admin/bookings/cancel/{bookingId}
+Router -> Controller: cancelBooking(bookingId)
+Controller -> Repository: cancelBooking(bookingId)
+
+Repository -> BookingModel: cancelBooking(bookingId)
+BookingModel -> DB: update booking status to 'Cancelled'
+DB --> BookingModel: booking cancelled
+BookingModel --> Repository: booking cancelled
+Repository --> Controller: booking cancelled successfully
+
+Controller -> Router: 200 OK (booking cancelled)
+Router --> UI: 200 OK (booking cancelled)
+UI -> Admin: Display success message (booking cancelled)
+@enduml

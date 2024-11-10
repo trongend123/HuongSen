@@ -1,0 +1,25 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "AuthRouter" as Router
+participant "AuthController" as Controller
+participant "AuthRepository" as Repository
+participant "AdminModel" as AdminModel
+participant "Database" as DB
+
+Admin -> UI: Request to log in
+UI -> Router: POST /login
+Router -> Controller: login(username, password)
+Controller -> Repository: validateCredentials(username, password)
+
+Repository -> AdminModel: fetchAdminByUsername(username)
+AdminModel -> DB: query admin by username
+DB --> AdminModel: admin data
+AdminModel --> Repository: admin data
+
+Repository -> Controller: validation result (valid/invalid)
+Controller -> Router: 200 OK (success) / 401 Unauthorized (invalid credentials)
+Router --> UI: 200 OK (success) / 401 Unauthorized (invalid credentials)
+
+UI -> Admin: Display dashboard (success) / Show error message (invalid credentials)
+@enduml

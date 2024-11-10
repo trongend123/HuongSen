@@ -1,0 +1,36 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "ReceptionistRouter" as Router
+participant "ReceptionistController" as Controller
+participant "ReceptionistRepository" as Repository
+participant "ReceptionistModel" as ReceptionistModel
+participant "Database" as DB
+
+Admin -> UI: Request to delete receptionist
+UI -> Router: GET /admin/receptionists/delete/{receptionistId}
+Router -> Controller: showDeleteConfirmationForm(receptionistId)
+Controller -> Repository: getReceptionistById(receptionistId)
+Repository -> ReceptionistModel: findReceptionistById(receptionistId)
+ReceptionistModel -> DB: query receptionist by receptionistId
+DB --> ReceptionistModel: receptionist data
+ReceptionistModel --> Repository: receptionist data
+Repository --> Controller: receptionist data
+Controller --> Router: Display delete confirmation form
+Router --> UI: Display delete confirmation form
+
+Admin -> UI: Confirm deletion of receptionist
+UI -> Router: POST /admin/receptionists/delete/{receptionistId}
+Router -> Controller: deleteReceptionist(receptionistId)
+Controller -> Repository: deleteReceptionistById(receptionistId)
+
+Repository -> ReceptionistModel: deleteReceptionist(receptionistId)
+ReceptionistModel -> DB: delete receptionist from database
+DB --> ReceptionistModel: receptionist deleted
+ReceptionistModel --> Repository: receptionist deleted
+Repository --> Controller: receptionist deleted successfully
+
+Controller --> Router: 200 OK (receptionist deleted)
+Router --> UI: 200 OK (receptionist deleted)
+UI -> Admin: Display success message (receptionist deleted)
+@enduml

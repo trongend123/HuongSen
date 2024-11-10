@@ -1,0 +1,36 @@
+@startuml
+actor Receptionist
+participant "User/Interface" as UI
+participant "RoomRouter" as Router
+participant "RoomController" as Controller
+participant "RoomRepository" as Repository
+participant "RoomModel" as RoomModel
+participant "Database" as DB
+
+Receptionist -> UI: Request to update room status
+UI -> Router: GET /room/{roomId}/update-status
+Router -> Controller: updateRoomStatus(roomId, status)
+Controller -> Repository: updateRoomStatus(roomId, status)
+
+Repository -> RoomModel: fetchRoomById(roomId)
+RoomModel -> DB: query room by ID
+DB --> RoomModel: room data
+RoomModel --> Repository: room data
+Repository -> Controller: room data
+
+Controller -> Controller: validate status change
+alt If status change is valid
+    Controller -> Repository: saveUpdatedRoomStatus()
+    Repository -> RoomModel: update room status
+    RoomModel -> DB: update room status
+    DB --> RoomModel: room status updated
+    RoomModel --> Repository: update success
+    Repository --> Controller: update success
+    Controller -> Router: 200 OK (room status updated)
+    Router --> UI: 200 OK (room status updated)
+    UI -> Receptionist: Display success message
+else If status change is invalid
+    Controller -> UI: 400 Bad Request (invalid status)
+    UI -> Receptionist: Display error message (invalid status)
+end
+@enduml
