@@ -13,6 +13,11 @@ const otherServiceSchema = new Schema(
       type: String,
       required: true,
     },
+    
+    isDeleted: {
+      type: Boolean,
+      default: false, // Mặc định chưa xóa
+    },
   },
   {
     timestamps: true,
