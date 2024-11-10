@@ -11,7 +11,7 @@ const bookingSchema = new mongoose.Schema({
     note: { type: String },
     checkout: { type: Date, required: true },
     contract: { type: String },
-    humans: { type: Number }
+    humans: { type: Number, required: true },
 });
 
 const Bookings = mongoose.model('Bookings', bookingSchema);

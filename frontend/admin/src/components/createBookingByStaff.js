@@ -664,6 +664,7 @@ const CreateBookingByStaff = () => {
                                         onChange={handleChange}
                                         isInvalid={!!errors.humans}
                                         min={1}
+                                        required
                                     />
                                     <Form.Control.Feedback type='invalid'>
                                         {errors.humans}
@@ -723,6 +724,7 @@ const CreateBookingByStaff = () => {
                                 min='1'
                                 value={serviceQuantity}
                                 onChange={(e) => setServiceQuantity(e.target.value)}
+                                required
                             />
                         </Form.Group>
 
