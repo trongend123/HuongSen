@@ -36,7 +36,7 @@ const ListOtherServices = () => {
     // Filter services by name and price
     useEffect(() => {
         const filtered = services.filter(service =>
-            service.name.toLowerCase().includes(searchName.toLowerCase()) &&
+            service.name.toLowerCase().includes(searchName.toLowerCase().trim().replace(/\s+/g, ' ')) &&
             (searchPrice === "" || service.price <= parseFloat(searchPrice))
         );
         setFilteredServices(filtered);
