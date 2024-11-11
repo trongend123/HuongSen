@@ -1,0 +1,23 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "RoomRouter" as Router
+participant "RoomController" as Controller
+participant "RoomRepository" as Repository
+participant "RoomModel" as RoomModel
+participant "Database" as DB
+
+Admin -> UI: Request to view room map
+UI -> Router: GET /admin/rooms/map
+Router -> Controller: showRoomMap()
+Controller -> Repository: getRoomMapData()
+
+Repository -> RoomModel: fetchRoomMapData()
+RoomModel -> DB: query room map data
+DB --> RoomModel: room map data
+RoomModel --> Repository: room map data
+Repository --> Controller: room map data
+Controller --> Router: 200 OK (room map data)
+Router --> UI: 200 OK (room map data)
+UI -> Admin: Display room map
+@enduml

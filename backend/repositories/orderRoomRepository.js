@@ -6,9 +6,11 @@ const OrderRoomRepository = {
     return await OrderRoom.create(data);
   },
 
-  // Lấy tất cả OrderRooms
-  findAll: async () => {
+  // Lấy tất cả OrderRooms với phân trang
+  findAll: async (skip, limit) => {
     return await OrderRoom.find()
+      .skip(skip)  // Bắt đầu từ vị trí skip
+      .limit(limit)  // Giới hạn số bản ghi trên mỗi trang
       .populate('roomCateId')
       .populate('customerId')
       .populate('bookingId');
@@ -41,6 +43,26 @@ const OrderRoomRepository = {
   // Xóa OrderRoom
   remove: async (id) => {
     return await OrderRoom.findByIdAndDelete(id);
+  },
+
+  // Hàm lấy tổng số OrderRooms
+  getTotalOrderRooms: async () => {
+    try {
+      // Sử dụng aggregate để tính tổng số OrderRooms
+      const totalOrderRooms = await OrderRoom.aggregate([
+        {
+          $group: {
+            _id: null, // Không nhóm theo trường nào, chỉ tính tổng
+            total: { $sum: 1 } // Tổng số bản ghi
+          }
+        }
+      ]);
+
+      // Trả về tổng số OrderRooms
+      return totalOrderRooms[0] ? totalOrderRooms[0].total : 0;
+    } catch (error) {
+      throw new Error(error.toString());
+    }
   },
 
   // Lấy tổng số roomCateId trong khoảng từ check-in đến check-out trong bảng OrderRoom

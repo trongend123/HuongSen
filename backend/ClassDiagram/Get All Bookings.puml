@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "BookingsController" as Controller
+participant "BookingsRepository" as Repository
+participant "BookingsModel" as Model
+participant "Database" as DB
+
+User -> UI: Open bookings list page
+UI -> User: Display loading message
+
+User -> UI: Request all bookings
+UI -> Router: GET /bookings
+Router -> Controller: getAllBookings()
+Controller -> Repository: findAll()
+Repository -> Model: find()
+Model -> DB: fetch all
+DB --> Model: all bookings
+Model --> Repository: all bookings
+Repository --> Controller: all bookings
+Controller --> Router: 200 OK (all bookings)
+Router --> UI: 200 OK (all bookings)
+UI --> User: Display list of bookings
+@enduml

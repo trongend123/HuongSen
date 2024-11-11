@@ -1,0 +1,36 @@
+@startuml
+actor Receptionist
+participant "User/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "Database" as DB
+
+Receptionist -> UI: Request to update booking status
+UI -> Router: GET /booking/{bookingId}/update-status
+Router -> Controller: updateBookingStatus(bookingId, status)
+Controller -> Repository: updateBookingStatus(bookingId, status)
+
+Repository -> BookingModel: fetchBookingById(bookingId)
+BookingModel -> DB: query booking by ID
+DB --> BookingModel: booking data
+BookingModel --> Repository: booking data
+Repository --> Controller: booking data
+
+Controller -> Controller: validate status change
+alt If status change is valid
+    Controller -> Repository: saveUpdatedBookingStatus()
+    Repository -> BookingModel: update booking status
+    BookingModel -> DB: update booking status
+    DB --> BookingModel: booking status updated
+    BookingModel --> Repository: update success
+    Repository --> Controller: update success
+    Controller -> Router: 200 OK (booking status updated)
+    Router --> UI: 200 OK (booking status updated)
+    UI -> Receptionist: Display success message
+else If status change is invalid
+    Controller -> UI: 400 Bad Request (invalid status)
+    UI -> Receptionist: Display error message (invalid status)
+end
+@enduml

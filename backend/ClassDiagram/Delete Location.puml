@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "LocationsController" as Controller
+participant "LocationsRepository" as Repository
+participant "LocationsModel" as Model
+participant "Database" as DB
+
+User -> UI: Open locations list page
+UI -> User: Display list of locations
+
+User -> UI: Select location to delete
+UI -> Router: DELETE /locations/{id}
+Router -> Controller: deleteLocation(id)
+Controller -> Repository: deleteLocation(id)
+Repository -> Model: deleteById(id)
+Model -> DB: remove location
+DB --> Model: location deleted
+Model --> Repository: location deleted
+Repository --> Controller: location deleted
+Controller --> Router: 204 No Content
+Router --> UI: 204 No Content
+UI --> User: Display deletion success message
+@enduml

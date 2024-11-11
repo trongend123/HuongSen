@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "ContractsController" as Controller
+participant "ContractsRepository" as Repository
+participant "ContractsModel" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: PUT /contracts/{id} (data)
+Router -> Controller: updateContract(id, data)
+Controller -> Repository: updateContract(id, data)
+Repository -> Model: updateById(id, data)
+Model -> DB: update contract
+DB --> Model: updated contract
+Model --> Repository: updated contract
+Repository --> Controller: updated contract
+Controller --> Router: 200 OK (updated contract)
+Router --> UI: 200 OK (updated contract)
+@enduml

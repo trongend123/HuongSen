@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "UI/Interface" as UI
+participant "Router" as Router
+participant "IdentificationController" as Controller
+participant "IdentificationRepository" as Repository
+participant "IdentificationModel" as Model
+participant "Database" as DB
+
+User -> UI: Request identification details
+UI -> Router: GET /identifications/{id}
+Router -> Controller: getIdentification(id)
+Controller -> Repository: findById(id)
+Repository -> Model: findById(id)
+Model -> DB: fetch identification
+DB --> Model: identification data
+Model --> Repository: identification data
+Repository --> Controller: identification data
+Controller --> Router: 200 OK (identification data)
+Router --> UI: 200 OK (identification data)
+UI --> User: Display identification data
+@enduml

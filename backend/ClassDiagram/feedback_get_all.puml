@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "FeedbackRouter" as Router
+participant "FeedbackController" as Controller
+participant "FeedbackRepository" as Repository
+participant "Feedback Model" as Model
+participant "Database" as DB
+
+User -> UI: Open feedback list page
+UI -> User: Display loading message
+
+User -> UI: Request all feedbacks
+UI -> Router: GET /feedbacks
+Router -> Controller: getAllFeedbacks()
+Controller -> Repository: findAllFeedbacks()
+Repository -> Model: find()
+Model -> DB: find()
+DB --> Model: List<Feedback>
+Model --> Repository: List<Feedback>
+Repository --> Controller: List<Feedback>
+Controller --> Router: 200 OK (List<Feedback>)
+Router --> UI: 200 OK (List<Feedback>)
+UI --> User: Display list of feedbacks
+@enduml

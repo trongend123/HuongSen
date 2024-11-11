@@ -1,0 +1,168 @@
+@startuml
+
+class Agency {
+    - id : ObjectId
+    - name : String
+    - phone : String
+    - address : String
+    - stk : String
+    - code : String
+}
+
+class Booking {
+    - id : ObjectId
+    - taxId : ObjectId
+    - status : String
+    - payment : String
+    - staffId : ObjectId
+    - price : Number
+    - checkin : Date
+    - note : String
+    - checkout : Date
+    - contract : String
+    - humans : Number
+}
+
+class Contract {
+    - id : ObjectId
+    - customerId : ObjectId
+    - agencyId : ObjectId
+    - bookingId : ObjectId
+    - deposit : Number
+    - note : String
+}
+
+class Customer {
+    - id : ObjectId
+    - fullname : String
+    - email : String
+    - phone : String
+    - dob : Date
+    - gender : String
+    - address : String
+}
+
+class Identification {
+    - id : ObjectId
+    - name : String
+    - code : String
+    - dateStart : Date
+    - dateEnd : Date
+    - location : String
+    - customerID : ObjectId
+}
+
+class Image {
+    - id : ObjectId
+    - caption : String
+    - url : String
+}
+
+class Location {
+    - id : ObjectId
+    - address : String
+    - phone : String
+    - name : String
+    - image : [Image]
+}
+
+class Message {
+    - id : ObjectId
+    - sender : ObjectId
+    - senderModel : String
+    - receiver : ObjectId
+    - receiverModel : String
+    - message : String
+}
+
+class OrderRoom {
+    - id : ObjectId
+    - roomCateId : ObjectId
+    - customerId : ObjectId
+    - bookingId : ObjectId
+    - quantity : Number
+}
+
+class OrderService {
+    - id : ObjectId
+    - otherServiceId : ObjectId
+    - bookingId : ObjectId
+    - quantity : Number
+    - note : String
+}
+
+class OtherService {
+    - id : ObjectId
+    - name : String
+    - price : Number
+    - description : String
+}
+
+class Room {
+    - id : ObjectId
+    - code : String
+    - status : String
+    - roomCategoryId : ObjectId
+}
+
+class RoomCategory {
+    - id : ObjectId
+    - numberOfBed : Number
+    - numberOfHuman : Number
+    - price : Number
+    - name : String
+    - locationId : ObjectId
+}
+
+class Staff {
+    - id : ObjectId
+    - username : String
+    - fullname : String
+    - password : String
+    - email : String
+    - phone : String
+    - avatarId : ObjectId
+    - role : String
+}
+
+class Tax {
+    - id : ObjectId
+    - code : String
+    - name : String
+    - count : Number
+    - description : String
+}
+
+class History {
+    - id : ObjectId
+    - bookingId : ObjectId
+    - staffId : ObjectId
+    - old_info : Object
+    - note : String
+}
+
+Booking --> Tax : references
+Booking --> Staff : handled_by
+Booking --> Contract : associated_with
+Booking --> Customer : belongs_to
+Booking --> Location : in
+Booking --> History : has_change
+Contract --> Agency : handled_by
+Contract --> Booking : refers_to
+Customer --> Identification : identified_by
+Identification --> Customer : belongs_to
+Image --> Location : associated_with
+Location --> Image : has_images
+Message --> Customer : sender_or_receiver
+Message --> Staff : sender_or_receiver
+OrderRoom --> RoomCategory : ordered_in
+OrderRoom --> Customer : ordered_by
+OrderRoom --> Booking : related_to
+OrderService --> OtherService : references
+OrderService --> Booking : related_to
+Room --> RoomCategory : belongs_to
+RoomCategory --> Location : located_in
+Staff --> Location : works_in
+Tax --> Booking : associated_with
+
+@enduml

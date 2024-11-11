@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "UI/Interface" as UI
+participant "HistoryRouter" as Router
+participant "HistoryController" as Controller
+participant "HistoryRepository" as Repository
+participant "History" as Model
+participant "Database" as DB
+
+User -> UI: Submit new history data
+UI -> Router: POST /histories (data)
+Router -> Controller: createHistory(data)
+Controller -> Repository: createHistory(data)
+Repository -> Model: new History(data)
+Model -> DB: save()
+DB --> Model: saved History
+Model --> Repository: saved History
+Repository --> Controller: saved History
+Controller --> Router: 201 Created (saved History)
+Router --> UI: 201 Created (saved History)
+UI --> User: Display success message
+@enduml

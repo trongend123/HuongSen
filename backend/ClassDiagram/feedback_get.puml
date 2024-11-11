@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "FeedbackRouter" as Router
+participant "FeedbackController" as Controller
+participant "FeedbackRepository" as Repository
+participant "Feedback Model" as Model
+participant "Database" as DB
+
+User -> UI: Open feedback list page
+UI -> User: Display list of feedbacks
+
+User -> UI: Select feedback to view
+UI -> Router: GET /feedbacks/{id}
+Router -> Controller: getFeedbackById(id)
+Controller -> Repository: findFeedbackById(id)
+Repository -> Model: findById(id)
+Model -> DB: find()
+DB --> Model: Feedback
+Model --> Repository: Feedback
+Repository --> Controller: Feedback
+Controller --> Router: 200 OK (Feedback)
+Router --> UI: 200 OK (Feedback)
+UI --> User: Display feedback details
+@enduml

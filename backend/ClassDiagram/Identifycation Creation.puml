@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "UI/Interface" as UI
+participant "IdentifycationRouter" as Router
+participant "IdentifycationController" as Controller
+participant "IdentifycationRepository" as Repository
+participant "Identifycation" as Model
+participant "Database" as DB
+
+User -> UI: Submit new identification data
+UI -> Router: POST /identifycations (data)
+Router -> Controller: createIdentifycation(data)
+Controller -> Repository: createIdentifycation(data)
+Repository -> Model: new Identifycation(data)
+Model -> DB: save()
+DB --> Model: saved Identifycation
+Model --> Repository: saved Identifycation
+Repository --> Controller: saved Identifycation
+Controller --> Router: 201 Created (saved Identifycation)
+Router --> UI: 201 Created (saved Identifycation)
+UI --> User: Display success message
+@enduml

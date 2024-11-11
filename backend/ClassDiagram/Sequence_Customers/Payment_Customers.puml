@@ -1,0 +1,52 @@
+@startuml
+actor Customer
+participant "User/Interface" as UI
+participant "PaymentRouter" as Router
+participant "PaymentController" as Controller
+participant "PaymentRepository" as Repository
+participant "Payment Model" as PaymentModel
+participant "CustomerRepository" as CustomerRepo
+participant "Database" as DB
+participant "External Payment Service" as PaymentService
+
+User -> UI: Open payment page
+UI -> User: Display payment form
+
+User -> UI: Submit payment (customerId, amount, paymentDetails)
+UI -> Router: POST /payments (customerId, amount, paymentDetails)
+Router -> Controller: makePayment(customerId, amount, paymentDetails)
+Controller -> CustomerRepo: findCustomerById(customerId)
+CustomerRepo -> DB: fetch customer
+DB --> CustomerRepo: customer details
+CustomerRepo --> Controller: customer details
+
+Controller -> PaymentModel: new Payment(customerId, amount, paymentDetails)
+PaymentModel -> DB: save payment record (status: pending)
+DB --> PaymentModel: saved payment record
+PaymentModel --> Repository: saved payment record
+
+Controller -> PaymentService: initiatePayment(amount, paymentDetails)
+PaymentService --> Controller: payment confirmation (success/failure)
+
+alt if payment is successful
+    Controller -> Repository: updatePaymentStatus(paymentId, "completed")
+    Repository -> PaymentModel: update status to "completed"
+    PaymentModel -> DB: save updated status
+    DB --> PaymentModel: updated status
+    PaymentModel --> Repository: updated payment record
+    Repository --> Controller: updated payment record
+    Controller --> Router: 200 OK (Payment successful)
+    Router --> UI: 200 OK (Payment successful)
+    UI --> User: Display success message
+else if payment fails
+    Controller -> Repository: updatePaymentStatus(paymentId, "failed")
+    Repository -> PaymentModel: update status to "failed"
+    PaymentModel -> DB: save updated status
+    DB --> PaymentModel: updated status
+    PaymentModel --> Repository: updated payment record
+    Repository --> Controller: updated payment record
+    Controller --> Router: 400 Bad Request (Payment failed)
+    Router --> UI: 400 Bad Request (Payment failed)
+    UI --> User: Display error message
+end
+@enduml

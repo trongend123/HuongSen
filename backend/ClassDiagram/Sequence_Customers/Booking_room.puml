@@ -1,0 +1,54 @@
+@startuml
+actor Customer
+participant "User/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "RoomModel" as RoomModel
+participant "PaymentGateway" as PaymentGateway
+participant "Database" as DB
+
+Customer -> UI: Request to book a room
+UI -> Router: POST /booking
+Router -> Controller: createBooking()
+Controller -> Repository: saveBooking()
+
+Repository -> RoomModel: check room availability
+RoomModel -> DB: query available rooms
+DB --> RoomModel: list of available rooms
+RoomModel --> Repository: available rooms
+Repository --> Controller: available rooms
+Controller -> UI: 200 OK (available rooms)
+UI -> Customer: Display list of available rooms
+
+Customer -> UI: Choose a room and provide details
+UI -> Router: POST /confirm-booking
+Router -> Controller: confirmBooking()
+Controller -> Repository: confirmBookingDetails()
+
+Repository -> BookingModel: createBooking()
+BookingModel -> DB: insert booking data
+DB --> BookingModel: booking created
+BookingModel --> Repository: booking data
+Repository --> Controller: booking details
+Controller -> UI: 200 OK (booking confirmation)
+UI -> Customer: Display booking confirmation
+
+Customer -> UI: Request to pay deposit
+UI -> Router: POST /payment
+Router -> Controller: processDeposit()
+Controller -> PaymentGateway: initiatePayment()
+
+PaymentGateway -> PaymentGateway: process payment
+PaymentGateway --> Controller: payment result (Success/Fail)
+Controller -> Repository: update booking status
+Repository -> BookingModel: update deposit status
+BookingModel -> DB: update booking data
+DB --> BookingModel: booking updated
+BookingModel --> Repository: updated booking data
+Repository --> Controller: updated booking status
+Controller --> Router: 200 OK (payment status)
+Router --> UI: 200 OK (payment result)
+UI -> Customer: Display payment result
+@enduml

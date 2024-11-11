@@ -1,0 +1,41 @@
+@startuml
+actor Customer
+participant "User/Interface" as UI
+participant "ChatRouter" as Router
+participant "ChatController" as Controller
+participant "ChatService" as Service
+participant "ChatModel" as ChatModel
+participant "Database" as DB
+participant "CustomerSupportAgent" as Agent
+
+Customer -> UI: Open chat interface
+UI -> Customer: Display chat interface
+
+Customer -> UI: Send message (text)
+UI -> Router: POST /chats (text)
+Router -> Controller: initiateChat(text, customerId)
+Controller -> Service: initiateChatSession(customerId)
+
+Service -> ChatModel: new ChatMessage(text, customerId, timestamp)
+ChatModel -> DB: save message
+DB --> ChatModel: message saved
+ChatModel --> Service: message saved
+Service --> Controller: message sent
+
+Controller -> Router: 200 OK (message sent)
+Router -> UI: 200 OK (message sent)
+UI -> Customer: Display sent message
+
+Agent -> Service: Receive message notification
+Agent -> Service: Respond to chat (text)
+
+Service -> ChatModel: new ChatMessage(text, agentId, timestamp)
+ChatModel -> DB: save message
+DB --> ChatModel: message saved
+ChatModel --> Service: message saved
+
+Service -> Controller: forwardMessageToCustomer(message)
+Controller -> Router: 200 OK (agent response)
+Router -> UI: 200 OK (agent response)
+UI -> Customer: Display agent response
+@enduml

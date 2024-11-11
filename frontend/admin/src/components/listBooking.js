@@ -23,6 +23,7 @@ const ListBooking = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 7;
   const [userRole, setUserRole] = useState('');
+  const [statusFilter, setStatusFilter] = useState(''); // New state for status filter
  
 
   useEffect(() => {
@@ -142,18 +143,17 @@ const ListBooking = () => {
   };
 
   const filteredBookings = bookings.filter((booking) => {
-
-    const formattedValue = searchQuery
-        .trim()
-        .replace(/\s+/g, ' ')
+    const formattedValue = searchQuery.trim().replace(/\s+/g, ' ');
     const bookingId = booking.bookingId._id.toLowerCase();
     const customerName = booking.customerId.fullname.toLowerCase();
     const isMatchingLocation = selectedLocation ? booking.roomCateId.locationId === selectedLocation : true;
     const isMatchingCheckin = isDateInRange(booking.bookingId.checkin, checkinFilter, checkoutFilter);
+    const isMatchingStatus = statusFilter ? booking.bookingId.status === statusFilter : true;
 
     return (
       isMatchingLocation &&
       isMatchingCheckin &&
+      isMatchingStatus &&
       (bookingId.includes(formattedValue.toLowerCase()) || customerName.includes(formattedValue.toLowerCase()))
     );
   });
@@ -214,19 +214,33 @@ const ListBooking = () => {
       </Row>
 
       {/* Search Inputs */}
-      <InputGroup className="mb-3">
+      <Row>
+        <Col md={8}>
+        <InputGroup className="mb-3">
         <FormControl
           placeholder="Tìm kiếm theo Mã Đặt phòng hoặc Tên Khách hàng"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </InputGroup>
+        </Col>
+        <Col md={4}>
+            <Form.Control
+              as="select"
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+              <option value="">Tất cả</option>
+              <option value="In Progress">Đang thực hiện</option>
+              <option value="Request refund">Yêu cầu hoàn tiền</option>
+              <option value="Cancelled">Đã Hủy</option>
+              <option value="Completed">Đã hoàn thành</option>
+            </Form.Control>
+        </Col>
+      </Row>
+      
 
-      {/* Date Filters */}
-
-
-      {/* Location Filter Input */}
-
+      
 
       <Table striped bordered hover>
         <thead>
@@ -266,6 +280,7 @@ const ListBooking = () => {
                     >
                       Sửa
                     </Button>
+                    {userRole === "admin" && (
                     <Button
                       variant="danger"
                       onClick={(e) => {
@@ -275,6 +290,7 @@ const ListBooking = () => {
                     >
                       Hủy
                     </Button>
+                  )}
                   </>
                 )}
               </td>
@@ -304,53 +320,35 @@ const ListBooking = () => {
           <Modal.Body>
             <Form>
               {/* Payment Input */}
-              <Form.Group controlId="formPayment">
-                <Form.Label>Thanh toán:</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={updatedPayment}
-                  onChange={(e) => setUpdatedPayment(e.target.value)}
-                />
-              </Form.Group>
+              
 
               {/* Status Input */}
               <Form.Group controlId="formStatus">
                 <Form.Label>Trạng thái:</Form.Label>
                 <Form.Control
-                  type="text"
-                  value={updatedStatus}
-                  onChange={(e) => setUpdatedStatus(e.target.value)}
-                />
+              as="select"
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+                <option value="In Progress">Đang thực hiện</option>
+              <option value="Request refund">Yêu cầu hoàn tiền</option>
+              <option value="Completed">Đã hoàn thành</option>
+            </Form.Control>
               </Form.Group>
 
-              {/* Checkin Input */}
-              <Form.Group controlId="formCheckin">
-                <Form.Label>Checkin:</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={updatedCheckin}
-                  onChange={(e) => setUpdatedCheckin(e.target.value)}
-                />
-              </Form.Group>
-
-              {/* Checkout Input */}
-              <Form.Group controlId="formCheckout">
-                <Form.Label>Checkout:</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={updatedCheckout}
-                  onChange={(e) => setUpdatedCheckout(e.target.value)}
-                />
-              </Form.Group>
+              
             </Form>
           </Modal.Body>
           <Modal.Footer>
+            
+            <Button variant="primary" onClick={handleUpdateBooking} style={{ marginRight: '10px' }}>
+              Cập nhật
+            </Button>
+            
             <Button variant="secondary" onClick={() => setShowModal(false)}>
               Hủy
             </Button>
-            <Button variant="primary" onClick={handleUpdateBooking}>
-              Cập nhật
-            </Button>
+          
           </Modal.Footer>
         </Modal>
       )}
@@ -384,6 +382,7 @@ const ListBooking = () => {
             >
               Chỉnh sửa
             </Button>
+            {userRole === "admin" && (
             <Button
               variant="info"
               style={{ margin: ' 0px 10px' }}
@@ -393,6 +392,7 @@ const ListBooking = () => {
             >
               Lịch sử
             </Button>
+            )}
             <Button variant="secondary" onClick={() => setShowDetailModal(false)}>
               Đóng
             </Button>

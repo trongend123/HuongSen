@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "HistoriesController" as Controller
+participant "HistoriesRepository" as Repository
+participant "HistoriesModel" as Model
+participant "Database" as DB
+
+User -> UI: Open histories list page
+UI -> User: Display loading message
+
+User -> UI: Request all histories
+UI -> Router: GET /histories
+Router -> Controller: getAllHistories()
+Controller -> Repository: findAll()
+Repository -> Model: find()
+Model -> DB: fetch all
+DB --> Model: all histories
+Model --> Repository: all histories
+Repository --> Controller: all histories
+Controller --> Router: 200 OK (all histories)
+Router --> UI: 200 OK (all histories)
+UI --> User: Display list of histories
+@enduml

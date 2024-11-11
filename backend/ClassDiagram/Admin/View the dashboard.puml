@@ -1,0 +1,24 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "DashboardRouter" as Router
+participant "DashboardController" as Controller
+participant "DashboardRepository" as Repository
+participant "DashboardModel" as DashboardModel
+participant "Database" as DB
+
+Admin -> UI: Request to view dashboard
+UI -> Router: GET /admin/dashboard
+Router -> Controller: getDashboardData()
+Controller -> Repository: retrieveDashboardData()
+
+Repository -> DashboardModel: fetchDashboardData()
+DashboardModel -> DB: query dashboard data (users, services, statistics, etc.)
+DB --> DashboardModel: dashboard data
+DashboardModel --> Repository: dashboard data
+Repository --> Controller: dashboard data
+
+Controller -> Router: 200 OK (dashboard data)
+Router --> UI: 200 OK (dashboard data)
+UI -> Admin: Display dashboard data
+@enduml

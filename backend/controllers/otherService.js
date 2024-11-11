@@ -64,10 +64,25 @@ const deleteOtherService = async (req, res) => {
   }
 };
 
+const softDeleteOtherService = async (req, res) => {
+  try {
+    const updatedService = await OtherServiceRepo.softDelete(req.params.id);
+    if (!updatedService) {
+      return res.status(404).json({ message: 'Service not found' });
+    }
+    res.status(200).json(updatedService);
+  } catch (error) {
+    res.status(500).json({
+      error: error.toString(),
+    });
+  }
+};
+
 export default {
   getOtherServices,
   getOtherServiceById,
   createOtherService,
   editOtherService,
   deleteOtherService,
+  softDeleteOtherService
 };

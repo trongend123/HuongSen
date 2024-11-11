@@ -1,0 +1,24 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "ReceptionistRouter" as Router
+participant "ReceptionistController" as Controller
+participant "ReceptionistRepository" as Repository
+participant "ReceptionistModel" as ReceptionistModel
+participant "Database" as DB
+
+Admin -> UI: Request to view list of receptionists
+UI -> Router: GET /admin/receptionists
+Router -> Controller: getReceptionistList()
+Controller -> Repository: retrieveReceptionistList()
+
+Repository -> ReceptionistModel: fetchAllReceptionists()
+ReceptionistModel -> DB: query all receptionists
+DB --> ReceptionistModel: list of receptionists
+ReceptionistModel --> Repository: list of receptionists
+Repository --> Controller: list of receptionists
+
+Controller --> Router: 200 OK (list of receptionists)
+Router --> UI: 200 OK (list of receptionists)
+UI -> Admin: Display list of receptionists
+@enduml

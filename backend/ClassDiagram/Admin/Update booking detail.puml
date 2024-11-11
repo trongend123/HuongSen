@@ -1,0 +1,37 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "Database" as DB
+
+Admin -> UI: Request to update booking details
+UI -> Router: GET /admin/bookings/update/{bookingId}
+Router -> Controller: showUpdateBookingForm(bookingId)
+Controller -> Repository: getBookingDetails(bookingId)
+
+Repository -> BookingModel: fetchBookingById(bookingId)
+BookingModel -> DB: query booking by ID
+DB --> BookingModel: booking data
+BookingModel --> Repository: booking data
+Repository --> Controller: booking data
+
+Controller -> UI: Display update booking form
+
+Admin -> UI: Edit booking details and confirm update
+UI -> Router: POST /admin/bookings/update/{bookingId}
+Router -> Controller: updateBookingDetails(bookingId, updatedDetails)
+Controller -> Repository: updateBookingDetails(bookingId, updatedDetails)
+
+Repository -> BookingModel: updateBooking(bookingId, updatedDetails)
+BookingModel -> DB: update booking details in database
+DB --> BookingModel: booking details updated
+BookingModel --> Repository: booking details updated
+Repository --> Controller: booking details updated successfully
+
+Controller -> Router: 200 OK (booking details updated)
+Router --> UI: 200 OK (booking details updated)
+UI -> Admin: Display success message (booking details updated)
+@enduml

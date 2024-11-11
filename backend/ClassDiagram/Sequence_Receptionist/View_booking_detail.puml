@@ -1,0 +1,24 @@
+@startuml
+actor Receptionist
+participant "User/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "Database" as DB
+
+Receptionist -> UI: Request to view booking details
+UI -> Router: GET /booking/{bookingId}/details
+Router -> Controller: getBookingDetails(bookingId)
+Controller -> Repository: retrieveBookingDetails(bookingId)
+
+Repository -> BookingModel: fetchBookingById(bookingId)
+BookingModel -> DB: query booking by ID
+DB --> BookingModel: booking data
+BookingModel --> Repository: booking data
+Repository --> Controller: booking data
+
+Controller --> Router: 200 OK (booking details)
+Router --> UI: 200 OK (booking details)
+UI -> Receptionist: Display booking details
+@enduml

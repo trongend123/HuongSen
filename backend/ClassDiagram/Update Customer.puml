@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "CustomersController" as Controller
+participant "CustomersRepository" as Repository
+participant "CustomersModel" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: PUT /customers/{id} (data)
+Router -> Controller: updateCustomer(id, data)
+Controller -> Repository: updateCustomer(id, data)
+Repository -> Model: updateById(id, data)
+Model -> DB: update customer
+DB --> Model: updated customer
+Model --> Repository: updated customer
+Repository --> Controller: updated customer
+Controller --> Router: 200 OK (updated customer)
+Router --> UI: 200 OK (updated customer)
+@enduml

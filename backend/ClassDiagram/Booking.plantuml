@@ -1,0 +1,19 @@
+@startuml
+actor User
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "Booking Model" as Model
+participant "Database" as DB
+
+User -> Router: POST /bookings (data)
+Router -> Controller: createBooking(data)
+Controller -> Repository: createBooking(data)
+Repository -> Model: new Booking(data)
+Model -> DB: save()
+DB --> Model: saved Booking
+Model --> Repository: saved Booking
+Repository --> Controller: saved Booking
+Controller --> Router: 201 Created (saved Booking)
+Router --> User: 201 Created (saved Booking)
+@enduml
