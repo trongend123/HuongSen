@@ -1,0 +1,25 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "BookingsController" as Controller
+participant "BookingsRepository" as Repository
+participant "BookingsModel" as Model
+participant "Database" as DB
+
+User -> UI: Open bookings list page
+UI -> User: Display list of bookings
+
+User -> UI: Select booking to delete
+UI -> Router: DELETE /bookings/{id}
+Router -> Controller: deleteBooking(id)
+Controller -> Repository: deleteBooking(id)
+Repository -> Model: deleteById(id)
+Model -> DB: remove booking
+DB --> Model: booking deleted
+Model --> Repository: booking deleted
+Repository --> Controller: booking deleted
+Controller --> Router: 204 No Content
+Router --> UI: 204 No Content
+UI --> User: Display deletion success message
+@enduml

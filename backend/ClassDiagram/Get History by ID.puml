@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "UI/Interface" as UI
+participant "Router" as Router
+participant "HistoriesController" as Controller
+participant "HistoriesRepository" as Repository
+participant "HistoriesModel" as Model
+participant "Database" as DB
+
+User -> UI: Request history details
+UI -> Router: GET /histories/{id}
+Router -> Controller: getHistory(id)
+Controller -> Repository: findById(id)
+Repository -> Model: findById(id)
+Model -> DB: fetch history
+DB --> Model: history data
+Model --> Repository: history data
+Repository --> Controller: history data
+Controller --> Router: 200 OK (history data)
+Router --> UI: 200 OK (history data)
+UI --> User: Display history data
+@enduml

@@ -23,6 +23,7 @@ import OrderRoomRouter from "./orderRoomRoutes.js";
 import AgencyRouter from "./agency.js";
 import ContractRouter from "./contract.js";
 import OrderServiceRouter from "./orderServiceRoute.js";
+import paymentRoute from "./paymentRoute.js";
 
 
 export {
@@ -48,6 +49,6 @@ export {
     OrderRoomRouter,
     AgencyRouter,
     ContractRouter,
-    OrderServiceRouter
+    OrderServiceRouter,
+    paymentRoute
 }
-

@@ -1,0 +1,23 @@
+@startuml
+actor Customer
+participant "User/Interface" as UI
+participant "TourRouter" as Router
+participant "TourController" as Controller
+participant "TourRepository" as Repository
+participant "TourModel" as TourModel
+participant "Database" as DB
+
+Customer -> UI: Request to view tours
+UI -> Router: GET /tours
+Router -> Controller: getTours()
+Controller -> Repository: retrieveTours()
+
+Repository -> TourModel: fetchAllTours()
+TourModel -> DB: query all tours
+DB --> TourModel: list of tours
+TourModel --> Repository: list of tours
+Repository --> Controller: list of tours
+Controller --> Router: 200 OK (list of tours)
+Router --> UI: 200 OK (list of tours)
+UI -> Customer: Display list of tours
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "OtherServiceRouter" as Router
+participant "OtherServiceController" as Controller
+participant "OtherServiceRepository" as Repository
+participant "OtherServiceModel" as OtherServiceModel
+participant "Database" as DB
+
+Admin -> UI: Request to delete an existing other service
+UI -> Router: GET /admin/other-services/delete/{serviceId}
+Router -> Controller: showDeleteConfirmation(serviceId)
+Controller -> Repository: getServiceDetails(serviceId)
+
+Repository -> OtherServiceModel: fetchServiceById(serviceId)
+OtherServiceModel -> DB: query service by ID
+DB --> OtherServiceModel: service data
+OtherServiceModel --> Repository: service data
+Repository --> Controller: service data
+
+Controller -> UI: Display delete confirmation form
+
+Admin -> UI: Confirm delete request
+UI -> Router: POST /admin/other-services/delete/{serviceId}
+Router -> Controller: deleteOtherService(serviceId)
+Controller -> Repository: deleteService(serviceId)
+
+Repository -> OtherServiceModel: deleteService(serviceId)
+OtherServiceModel -> DB: delete service from database
+DB --> OtherServiceModel: service deleted
+OtherServiceModel --> Repository: service deleted
+Repository --> Controller: service deleted successfully
+
+Controller -> Router: 200 OK (service deleted)
+Router --> UI: 200 OK (service deleted)
+UI -> Admin: Display success message (service deleted)
+@enduml

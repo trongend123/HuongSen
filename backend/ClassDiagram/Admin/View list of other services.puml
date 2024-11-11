@@ -1,0 +1,24 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "OtherServiceRouter" as Router
+participant "OtherServiceController" as Controller
+participant "OtherServiceRepository" as Repository
+participant "OtherServiceModel" as OtherServiceModel
+participant "Database" as DB
+
+Admin -> UI: Request to view list of other services
+UI -> Router: GET /admin/other-services
+Router -> Controller: getOtherServices()
+Controller -> Repository: retrieveOtherServices()
+
+Repository -> OtherServiceModel: fetchOtherServices()
+OtherServiceModel -> DB: query other services
+DB --> OtherServiceModel: list of other services
+OtherServiceModel --> Repository: list of other services
+Repository --> Controller: list of other services
+
+Controller -> Router: 200 OK (other services data)
+Router --> UI: 200 OK (other services data)
+UI -> Admin: Display list of other services
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+actor Customer
+participant "User/Interface" as UI
+participant "FeedbackRouter" as Router
+participant "FeedbackController" as Controller
+participant "FeedbackService" as Service
+participant "FeedbackModel" as FeedbackModel
+participant "Database" as DB
+participant "AdminInterface" as AdminUI
+
+Customer -> UI: Open feedback form
+UI -> Customer: Display feedback form
+
+Customer -> UI: Submit feedback (details)
+UI -> Router: POST /feedbacks (feedback details)
+Router -> Controller: submitFeedback(details)
+Controller -> Service: processFeedback(details)
+
+Service -> FeedbackModel: new Feedback(details)
+FeedbackModel -> DB: save feedback
+DB --> FeedbackModel: feedback saved
+FeedbackModel --> Service: feedback saved
+Service --> Controller: feedback processed
+
+Controller -> Router: 201 Created (feedback submitted)
+Router -> UI: 201 Created (feedback submitted)
+UI -> Customer: Display success message
+
+AdminUI -> DB: Query all feedback
+DB --> AdminUI: List of feedback
+AdminUI -> Admin: Display feedback for review
+@enduml

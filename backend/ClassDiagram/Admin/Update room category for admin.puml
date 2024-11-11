@@ -1,0 +1,37 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "RoomCategoryRouter" as Router
+participant "RoomCategoryController" as Controller
+participant "RoomCategoryRepository" as Repository
+participant "RoomCategoryModel" as RoomCategoryModel
+participant "Database" as DB
+
+Admin -> UI: Request to update a room category
+UI -> Router: GET /admin/room-categories/{categoryId}/edit
+Router -> Controller: showEditRoomCategoryForm(categoryId)
+Controller -> Repository: getRoomCategoryData(categoryId)
+
+Repository -> RoomCategoryModel: fetchRoomCategoryById(categoryId)
+RoomCategoryModel -> DB: query room category by categoryId
+DB --> RoomCategoryModel: room category data
+RoomCategoryModel --> Repository: room category data
+Repository --> Controller: room category data
+Controller --> Router: Display edit room category form
+Router --> UI: Display edit room category form
+
+Admin -> UI: Submit updated room category data
+UI -> Router: PUT /admin/room-categories/{categoryId}/edit
+Router -> Controller: updateRoomCategory(categoryId, updatedCategoryData)
+Controller -> Repository: saveUpdatedRoomCategory(categoryId, updatedCategoryData)
+
+Repository -> RoomCategoryModel: updateRoomCategory(categoryId, updatedCategoryData)
+RoomCategoryModel -> DB: update room category data
+DB --> RoomCategoryModel: room category updated
+RoomCategoryModel --> Repository: room category updated
+Repository --> Controller: room category updated successfully
+
+Controller --> Router: 200 OK (room category updated)
+Router --> UI: 200 OK (room category updated)
+UI -> Admin: Display success message (room category updated)
+@enduml

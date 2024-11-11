@@ -1,0 +1,29 @@
+@startuml
+actor Admin
+participant "User/Interface" as UI
+participant "ReceptionistRouter" as Router
+participant "ReceptionistController" as Controller
+participant "ReceptionistRepository" as Repository
+participant "ReceptionistModel" as ReceptionistModel
+participant "Database" as DB
+
+Admin -> UI: Request to create new receptionist
+UI -> Router: GET /admin/receptionists/create
+Router -> Controller: showCreateReceptionistForm()
+Controller -> UI: Display create receptionist form
+
+Admin -> UI: Fill in new receptionist details and submit
+UI -> Router: POST /admin/receptionists/create
+Router -> Controller: createReceptionist(newReceptionistData)
+Controller -> Repository: saveNewReceptionist(newReceptionistData)
+
+Repository -> ReceptionistModel: createReceptionist(newReceptionistData)
+ReceptionistModel -> DB: insert new receptionist data
+DB --> ReceptionistModel: new receptionist data inserted
+ReceptionistModel --> Repository: new receptionist created
+Repository --> Controller: new receptionist created successfully
+
+Controller --> Router: 200 OK (new receptionist created)
+Router --> UI: 200 OK (new receptionist created)
+UI -> Admin: Display success message (new receptionist created)
+@enduml

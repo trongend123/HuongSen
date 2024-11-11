@@ -1,0 +1,22 @@
+@startuml
+actor Customers
+participant "UI/Interface" as UI
+participant "Router" as Router
+participant "RoomsController" as Controller
+participant "RoomsRepository" as Repository
+participant "RoomsModel" as Model
+participant "Database" as DB
+
+Customers -> UI: Open rooms list page
+UI -> Router: GET /rooms
+Router -> Controller: getAllRooms()
+Controller -> Repository: findAll()
+Repository -> Model: find()
+Model -> DB: fetch all
+DB --> Model: all rooms
+Model --> Repository: all rooms
+Repository --> Controller: all rooms
+Controller --> Router: 200 OK (all rooms)
+Router --> UI: 200 OK (all rooms)
+UI --> Customers: Display all rooms
+@enduml

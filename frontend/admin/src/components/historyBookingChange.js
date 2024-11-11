@@ -57,7 +57,7 @@ const HistoryBookingChange = () => {
                         {history.map((change, index) => (
                             <React.Fragment key={index}>
                                 <tr onClick={() => handleRowClick(index)}>
-                                    <td>{change.staffId?.fullname || null}</td>
+                                    <td>{change.staffId?.fullname || "Customer create"}</td>
                                     <td>{new Date(change.createdAt).toLocaleString()}</td>
                                     <td>{change.note}</td>
                                 </tr>

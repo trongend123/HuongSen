@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "StaffRouter" as Router
+participant "StaffController" as Controller
+participant "StaffRepository" as Repository
+participant "Staff" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: POST /staffs (data)
+Router -> Controller: createStaff(data)
+Controller -> Repository: createStaff(data)
+Repository -> Model: new Staff(data)
+Model -> DB: save()
+DB --> Model: saved Staff
+Model --> Repository: saved Staff
+Repository --> Controller: saved Staff
+Controller --> Router: 201 Created (saved Staff)
+Router --> UI: 201 Created (saved Staff)
+@enduml

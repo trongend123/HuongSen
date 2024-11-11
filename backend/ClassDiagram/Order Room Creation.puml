@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "UI/Interface" as UI
+participant "OrderRoomRouter" as Router
+participant "OrderRoomController" as Controller
+participant "OrderRoomRepository" as Repository
+participant "OrderRoom" as Model
+participant "Database" as DB
+
+User -> UI: Submit new order room data
+UI -> Router: POST /orderRooms (data)
+Router -> Controller: createOrderRoom(data)
+Controller -> Repository: createOrderRoom(data)
+Repository -> Model: new OrderRoom(data)
+Model -> DB: save()
+DB --> Model: saved OrderRoom
+Model --> Repository: saved OrderRoom
+Repository --> Controller: saved OrderRoom
+Controller --> Router: 201 Created (saved OrderRoom)
+Router --> UI: 201 Created (saved OrderRoom)
+UI --> User: Display success message
+@enduml

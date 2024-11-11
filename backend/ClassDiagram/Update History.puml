@@ -1,0 +1,21 @@
+@startuml
+actor User
+participant "User/Interface" as UI
+participant "Router" as Router
+participant "HistoriesController" as Controller
+participant "HistoriesRepository" as Repository
+participant "HistoriesModel" as Model
+participant "Database" as DB
+
+User -> UI: Interact with the interface
+UI -> Router: PUT /histories/{id} (data)
+Router -> Controller: updateHistory(id, data)
+Controller -> Repository: updateHistory(id, data)
+Repository -> Model: updateById(id, data)
+Model -> DB: update history
+DB --> Model: updated history
+Model --> Repository: updated history
+Repository --> Controller: updated history
+Controller --> Router: 200 OK (updated history)
+Router --> UI: 200 OK (updated history)
+@enduml
