@@ -231,7 +231,7 @@ const ListOtherServices = () => {
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label>Name</Form.Label>
+                            <Form.Label>Tên dịch vụ:</Form.Label>
                             <Form.Control
                                 type="text"
                                 name="name"
@@ -243,7 +243,7 @@ const ListOtherServices = () => {
                             {errors.name && <Form.Text className="text-danger">{errors.name}</Form.Text>}
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Price</Form.Label>
+                            <Form.Label>Giá:</Form.Label>
                             <Form.Control
                                 type="number"
                                 name="price"
@@ -255,7 +255,7 @@ const ListOtherServices = () => {
                             {errors.price && <Form.Text className="text-danger">{errors.price}</Form.Text>}
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Description</Form.Label>
+                            <Form.Label>Mô tả</Form.Label>
                             <Form.Control
                                 as="textarea"
                                 rows={3}
