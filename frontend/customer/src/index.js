@@ -15,8 +15,14 @@ import CS3 from './screens/locations/CS3/cs3';
 import TourIntro from './screens/Tour/tour';
 import CustomerBookingPage from './screens/pageCusInfoBooking';
 import SaveHistory from './components/SaveHistory';
+import About from './screens/About/about';
+import Refund from './screens/Refund/refund';
+import Policy from './screens/Policy/policy';
+import Contact from './screens/Contact/contact';
+import Services from './screens/Services/services';
 import PaymentSuccess from './screens/Success/success';
 import PaymentCancel from './screens/CancelBooking/cancel';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -36,6 +42,12 @@ root.render(
             <Route path="/tours" element={<TourIntro />} />
             <Route path="/saveHistory" element={<SaveHistory />} />
             <Route path="/customerBooking/:locationId" element={<CustomerBookingPage />} />
+            <Route path="*" element={<h1>Not Found</h1>} />
+            <Route path='/about' element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/refund" element= {<Refund />} />
+            <Route path="/policy" element={<Policy />} />
+            <Route path='/services' element={<Services />} />
 
             <Route path="/success" component={PaymentSuccess} />
             <Route path="/cancel" component={PaymentCancel} />
