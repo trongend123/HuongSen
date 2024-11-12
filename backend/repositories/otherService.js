@@ -71,10 +71,44 @@ const deleteOtherService = async (id) => {
     throw new Error(error.toString());
   }
 };
+
+const softDelete = async (id) => {
+  try {
+    // Cập nhật trường isDeleted thành true thay vì xóa dịch vụ
+    const updatedService = await OtherService.findByIdAndUpdate(
+      id,
+      { isDeleted: true },  // Đánh dấu dịch vụ là đã xóa mềm
+      { new: true, runValidators: true }  // Trả về tài liệu đã cập nhật
+    );
+
+    // Kiểm tra xem dịch vụ có tồn tại không
+    if (!updatedService) {
+      throw new Error("Service not found");
+    }
+
+    return updatedService;
+  } catch (error) {
+    throw new Error(error.toString());
+  }
+};
+
+// const OtherServiceRepo = {
+//   // Thêm phương thức xóa mềm
+//   softDelete: async (id) => {
+//     return await OtherServices.findByIdAndUpdate(
+//       id,
+//       { isDeleted: true },  // Đánh dấu là đã xóa mềm
+//       { new: true, runValidators: true }
+//     );
+//   },
+
+// };
+
 export default {
   create,
   list,
   getById,
   edit,
   deleteOtherService,
+  softDelete
 };

@@ -9,13 +9,20 @@ class BookingRepository {
         return await booking.save();
     }
 
-    // Lấy tất cả bookings
-    async getAllBookings() {
+  // Lấy tất cả bookings với phân trang
+    async getAllBookings(skip, limit) {
         return await Booking.find()
+            .skip(skip) // Bắt đầu từ vị trí 'skip'
+            .limit(limit) // Giới hạn số lượng bản ghi
             .populate('taxId')
             .populate('staffId')
             .exec();
     }
+
+// Lấy tổng số bookings (để tính tổng số trang)
+    async getTotalBookings() {
+        return await Booking.countDocuments();
+    }   
 
     // Lấy booking theo ID
     async getBookingById(id) {

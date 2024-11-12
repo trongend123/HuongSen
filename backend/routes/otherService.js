@@ -16,6 +16,8 @@ otherServiceRouter.post("/", OtherServiceController.createOtherService);
 otherServiceRouter.put("/:id", OtherServiceController.editOtherService);
 
 // DELETE: /otherServices/:id
-otherServiceRouter.delete("/:id", OtherServiceController.deleteOtherService);
+//otherServiceRouter.delete("/:id", OtherServiceController.deleteOtherService);
+
+otherServiceRouter.delete("/:id", OtherServiceController.softDeleteOtherService);
 
 export default otherServiceRouter;
