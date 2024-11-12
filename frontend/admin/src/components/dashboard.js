@@ -24,9 +24,9 @@ const Dashboard = () => {
       // If user is 'staffds', set a default location and hide location dropdown
       if (storedUser.role === 'staff_ds') {
         setLocation('66f6c536285571f28087c16b');
-      }else if (storedUser.role === 'staff_cb') {
+      } else if (storedUser.role === 'staff_cb') {
         setLocation('66f6c59f285571f28087c16d');
-      }else if (storedUser.role === 'staff_mk') {
+      } else if (storedUser.role === 'staff_mk') {
         setLocation('66f6c5c9285571f28087c16a');
       }
     }
@@ -91,17 +91,17 @@ const Dashboard = () => {
   const labels = [...new Set([...Object.keys(aggregatedBookings), ...Object.keys(aggregatedOrders)])].sort();
 
   const bookingsData = labels.map(date => aggregatedOrders[date] || 0);
-  const revenueData = labels.map(date => 
+  const revenueData = labels.map(date =>
     filteredBookingData
       .filter(b => formatDate(new Date(b.bookingId.createdAt)) === date && b.bookingId.status === 'Completed')
       .reduce((sum, b) => sum + b.bookingId.price, 0)
   );
-  const ordersData = labels.map(date => 
+  const ordersData = labels.map(date =>
     filteredOrderData
       .filter(b => formatDate(new Date(b.bookingId.createdAt)) === date && b.bookingId.status === 'Completed')
       .reduce((sum, b) => sum + b.quantity, 0)
   );
-  const humansData = labels.map(date => 
+  const humansData = labels.map(date =>
     filteredOrderData
       .filter(b => formatDate(new Date(b.createdAt)) === date && b.bookingId.status === 'Completed')
       .reduce((sum, b) => sum + b.bookingId.humans, 0)
@@ -159,24 +159,24 @@ const Dashboard = () => {
           </Form.Group>
         </Col>
         <Col md={6}>
-        {userRole === "admin" && (
-          <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
-          <Form.Label>Chọn cơ sở:</Form.Label>
-          <Form.Control
-            as="select"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          >
-            <option value="">Chọn cơ sở</option>
-            <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
-            <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
-            <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
-          </Form.Control>
-        </Form.Group>
-        )}
+          {userRole === "admin" && (
+            <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
+              <Form.Label>Chọn cơ sở:</Form.Label>
+              <Form.Control
+                as="select"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              >
+                <option value="">Chọn cơ sở</option>
+                <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
+                <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
+                <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
+              </Form.Control>
+            </Form.Group>
+          )}
         </Col>
       </Row>
-      
+
       <Row className="mt-4">
         <Col lg={6}><Card className='chart'><h4 className="text-center">Tổng số đơn theo thời gian</h4><Line data={bookingsChartData} /></Card></Col>
         <Col lg={6}><Card className='chart'><h4 className="text-center">Tổng doanh thu theo thời gian</h4><Line data={revenueChartData} /></Card></Col>

@@ -50,6 +50,8 @@ const ListRoomCate = () => {
 
                 const locationResponse = await axios.get('http://localhost:9999/locations');
                 setLocations(locationResponse.data);
+
+
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -58,6 +60,13 @@ const ListRoomCate = () => {
         fetchData();
     }, [roomCategories]);
 
+    // Filtered room categories based on filters
+    const filteredRoomCategories = roomCategories.filter((roomCategory) => {
+        const formattedValue = filterName.trim().replace(/\s+/g, ' ');
+        const matchesRoomName = roomCategory.name?.toLowerCase().includes(formattedValue.toLowerCase());
+        const matchesLocation = roomCategory.locationId?._id?.includes(filterLocation); // Added optional chaining
+        return matchesRoomName && matchesLocation;
+    });
     // Validate input fields
     const validateInputs = () => {
         const newErrors = {};
@@ -107,19 +116,19 @@ const ListRoomCate = () => {
     // Handle change in input fields
     const handleChange = (e) => {
         const { name, value } = e.target;
-    
+
         // Chuẩn hóa tên loại phòng nếu trường đang thay đổi là `name`
-        const formattedValue = 
-            name === 'name' 
-            ? value.trim().replace(/\s+/g, ' ').replace(/\b\w/g, (c) => c.toLowerCase()) 
-            : value;
-    
+        const formattedValue =
+            name === 'name'
+                ? value.trim().replace(/\s+/g, ' ').replace(/\b\w/g, (c) => c.toLowerCase())
+                : value;
+
         setNewRoomCategory((prevState) => ({
             ...prevState,
             [name]: formattedValue,
         }));
     };
-    
+
 
     // Handle room category creation
     const handleCreateRoomCategory = () => {
@@ -163,15 +172,6 @@ const ListRoomCate = () => {
         }
     };
 
-    // Filtered room categories based on filters
-    const filteredRoomCategories = roomCategories.filter((roomCategory) => {
-        const formattedValue = filterName
-        .trim()
-        .replace(/\s+/g, ' ')
-        const matchesRoomName = roomCategory.name?.toLowerCase().includes(formattedValue.toLowerCase());
-        const matchesLocation = roomCategory.locationId._id.includes(filterLocation);
-        return matchesRoomName && matchesLocation;
-    });
 
     return (
         <Container>
@@ -179,12 +179,12 @@ const ListRoomCate = () => {
 
             <Row className="mb-3">
                 <Col md={5}>
-                <Form.Control
-    type="text"
-    placeholder="Tìm theo tên loại phòng"
-    value={filterName}
-    onChange={(e) => setFilterName(e.target.value)} // Cập nhật filterName trực tiếp khi người dùng nhập
-/>
+                    <Form.Control
+                        type="text"
+                        placeholder="Tìm theo tên loại phòng"
+                        value={filterName}
+                        onChange={(e) => setFilterName(e.target.value)} // Cập nhật filterName trực tiếp khi người dùng nhập
+                    />
 
                 </Col>
                 <Col md={5}>
@@ -294,7 +294,7 @@ const ListRoomCate = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                   
+
                     <Button
                         variant="primary"
                         onClick={isEditMode ? handleUpdateRoomCategory : handleCreateRoomCategory}

@@ -5,13 +5,13 @@ import logo from "../../assets/logo.png";
 
 const NavigationBar = () => {
   return (
-    <Navbar  expand="lg" className="navbar-custom">
+    <Navbar expand="lg" className="navbar-custom">
       <Container>
-       
+
         <Navbar.Brand href="/">
           <img src={logo} alt="Logo" className="logo" />
         </Navbar.Brand>
-       
+
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link href="/about">Về chúng tôi</Nav.Link>
@@ -19,6 +19,7 @@ const NavigationBar = () => {
             <Nav.Link href="/cs2">Cơ sở Đồ Sơn</Nav.Link>
             <Nav.Link href="/cs3">Cơ sở Cát Bà</Nav.Link>
             <Nav.Link href="/services">Dịch vụ</Nav.Link>
+            <Nav.Link href="/addsevices">Tra cứu đơn</Nav.Link>
             <Nav.Link href="/news">Tin tức</Nav.Link>
             <Nav.Link href="/careers">Tuyển dụng</Nav.Link>
           </Nav>
