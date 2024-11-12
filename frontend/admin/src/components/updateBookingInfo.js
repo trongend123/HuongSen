@@ -319,8 +319,11 @@ const UpdateBookingInfo = () => {
                         </Card>
                     )}
 
-                    <Button variant="primary" type="submit" className="mt-4">
+                    <Button variant="primary" type="submit" className="mt-4" style={{ marginRight: '10px' }}>
                         Cập nhật thông tin
+                    </Button>
+                    <Button variant="primary" type="submit" className="mt-4">
+                        Yêu cầu hoàn tiền
                     </Button>
                 </Form>
             ) : (

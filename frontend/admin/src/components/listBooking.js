@@ -327,10 +327,10 @@ const ListBooking = () => {
                 <Form.Label>Trạng thái:</Form.Label>
                 <Form.Control
               as="select"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              value={updatedStatus}
+              onChange={(e) => setUpdatedStatus(e.target.value)}
             >
-                <option value="In Progress">Đang thực hiện</option>
+              <option value="In Progress">Đang thực hiện</option>
               <option value="Request refund">Yêu cầu hoàn tiền</option>
               <option value="Completed">Đã hoàn thành</option>
             </Form.Control>

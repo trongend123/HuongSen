@@ -136,6 +136,7 @@ const ListRoomCate = () => {
 
     // Handle room category editing
     const handleEditRoomCategory = (roomCategory) => {
+        console.log(roomCategory);
         setIsEditMode(true);
         setSelectedRoomCategory(roomCategory);
         setNewRoomCategory({
@@ -164,13 +165,15 @@ const ListRoomCate = () => {
     };
 
     // Filtered room categories based on filters
+    
     const filteredRoomCategories = roomCategories.filter((roomCategory) => {
         const formattedValue = filterName
         .trim()
         .replace(/\s+/g, ' ')
         const matchesRoomName = roomCategory.name?.toLowerCase().includes(formattedValue.toLowerCase());
-        const matchesLocation = roomCategory.locationId._id.includes(filterLocation);
+        const matchesLocation = roomCategory.locationId._id?.includes(filterLocation);
         return matchesRoomName && matchesLocation;
+        
     });
 
     return (

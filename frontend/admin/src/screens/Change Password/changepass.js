@@ -24,11 +24,11 @@ const ChangePassword = () => {
     setError('');
     setMessage('');
 
-    if (oldPassword.length <= 6) {
+    if (oldPassword.length < 6) {
       setError('Mật khẩu cũ phải trên 6 ký tự');
       return;
     }
-    if (newPassword.length <= 6) {
+    if (newPassword.length < 6) {
       setError('Mật khẩu mới phải trên 6 ký tự');
       return;
     }

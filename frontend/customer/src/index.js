@@ -17,6 +17,7 @@ import CustomerBookingPage from './screens/pageCusInfoBooking';
 import SaveHistory from './components/SaveHistory';
 import PaymentSuccess from './screens/Success/success';
 import PaymentCancel from './screens/CancelBooking/cancel';
+import Feedback from "./screens/Feedback/feedback";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -36,10 +37,9 @@ root.render(
             <Route path="/tours" element={<TourIntro />} />
             <Route path="/saveHistory" element={<SaveHistory />} />
             <Route path="/customerBooking/:locationId" element={<CustomerBookingPage />} />
-
             <Route path="/success" component={PaymentSuccess} />
             <Route path="/cancel" component={PaymentCancel} />
-
+            <Route path="/feedback" element={<Feedback />} />
           </Routes></div>
         </Container>
         <Footer />
