@@ -41,29 +41,42 @@ export const createOrderRoom = async (req, res) => {
   }
 };
 
-// Hàm lấy tất cả OrderRooms với phân trang
+// // Hàm lấy tất cả OrderRooms với phân trang
+// export const getAllOrderRooms = async (req, res) => {
+//   try {
+//     const page = parseInt(req.query.page) || 1;  // Trang mặc định là 1
+//     const limit = parseInt(req.query.limit) || 7; // Số bản ghi mỗi trang mặc định là 7
+//     const skip = (page - 1) * limit;  // Tính vị trí bắt đầu
+
+//     // Lấy dữ liệu OrderRooms với phân trang
+//     const orderRooms = await OrderRoomRepository.findAll(skip, limit);
+
+//     // Lấy tổng số OrderRooms để tính tổng số trang
+//     const totalOrderRooms = await OrderRoomRepository.getTotalOrderRooms();
+//     const totalPages = Math.ceil(totalOrderRooms / limit); // Tính tổng số trang
+
+//     res.status(200).json(
+//       {
+//         orderRooms,
+//         pagination: {
+//           page,
+//           limit,
+//           totalPages,
+//           totalOrderRooms,
+//         },
+//       }
+//     );
+//   } catch (error) {
+//     console.error('Lỗi khi lấy OrderRooms:', error);
+//     res.status(500).json({ message: 'Server Error' });
+//   }
+// };
+
+// Hàm lấy tất cả OrderRooms
 export const getAllOrderRooms = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;  // Trang mặc định là 1
-    const limit = parseInt(req.query.limit) || 7; // Số bản ghi mỗi trang mặc định là 7
-    const skip = (page - 1) * limit;  // Tính vị trí bắt đầu
-
-    // Lấy dữ liệu OrderRooms với phân trang
-    const orderRooms = await OrderRoomRepository.findAll(skip, limit);
-
-    // Lấy tổng số OrderRooms để tính tổng số trang
-    const totalOrderRooms = await OrderRoomRepository.getTotalOrderRooms();
-    const totalPages = Math.ceil(totalOrderRooms / limit); // Tính tổng số trang
-
-    res.status(200).json({
-      orderRooms,
-      pagination: {
-        page,
-        limit,
-        totalPages,
-        totalOrderRooms,
-      },
-    });
+    const orderRooms = await OrderRoomRepository.findAll();
+    res.status(200).json(orderRooms);
   } catch (error) {
     console.error('Lỗi khi lấy OrderRooms:', error);
     res.status(500).json({ message: 'Server Error' });

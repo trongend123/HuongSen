@@ -10,7 +10,7 @@ const Header = () => {
         <Row>
           <Col md={6} className="contact-info">
           {/* thêm href sang 3 cơ sở */}
-            <b>16 Minh Khai | Đồ Sơn | Cát Bà | 022 5374 5766</b>
+            <h6>16 Minh Khai | Đồ Sơn | Cát Bà | 022 5374 5766</h6>
           </Col>
           <Col md={6} className="text-md-end">
             <a href="https://facebook.com/your-facebook" target="_blank" rel="noopener noreferrer" className="social-icon">

@@ -9,6 +9,7 @@ import { TbDisabled } from "react-icons/tb";
 import Review from "../../../components/Reviews/review";
 import axios from 'axios';
 import BookingPage from "../../pageBookingByCustomer";
+import { Navigate } from "react-router-dom";
 const CS1 = () => {
     const locationId = "66f6c42f285571f28087c16a";
     const today = new Date().toISOString().split('T')[0];
@@ -93,7 +94,9 @@ const CS1 = () => {
             [e.target.name]: e.target.value
         });
     };
-
+    const handleFeedback = () => {
+        Navigate('/feedback');
+    }
     const calculateTotalAmount = () => {
         let total = 0;
 
@@ -453,6 +456,7 @@ const CS1 = () => {
             {/* /===============booking phòng======================== */}
             <BookingPage locationId={locationId} />
             <Review />
+            <button onClick={handleFeedback}>Leave Feedback</button>
         </div>
     );
 };
