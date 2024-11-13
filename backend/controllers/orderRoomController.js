@@ -42,7 +42,7 @@ export const createOrderRoom = async (req, res) => {
 };
 
 // Hàm lấy tất cả OrderRooms với phân trang
-export const getAllOrderRooms = async (req, res) => {
+export const getAllOrderRoomsbyPage = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;  // Trang mặc định là 1
     const limit = parseInt(req.query.limit) || 7; // Số bản ghi mỗi trang mặc định là 7
@@ -69,7 +69,19 @@ export const getAllOrderRooms = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
-
+//lấy hết
+export const getAllOrderRooms = async (req, res) => {
+  try {
+    const orderRoom = await OrderRoomRepository.findAll();
+    if (!orderRoom) {
+      return res.status(404).json({ message: 'OrderRoom không tồn tại' });
+    }
+    res.status(200).json(orderRoom);
+  } catch (error) {
+    console.error('Lỗi khi lấy OrderRoom:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
 // Hàm lấy OrderRoom theo ID
 export const getOrderRoomById = async (req, res) => {
   try {

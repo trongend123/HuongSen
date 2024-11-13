@@ -67,6 +67,10 @@ const roomSchema = new Schema(
       ref: RoomCategory, // Referencing RoomCategory model
       required: true,
     },
+    bookingId: {
+      type: Schema.Types.ObjectId,
+      ref: "Bookings",
+    },
   },
   {
     timestamps: true,

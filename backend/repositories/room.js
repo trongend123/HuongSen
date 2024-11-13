@@ -48,7 +48,7 @@ const create = async (req, res) => {
 // Get all rooms
 const list = async () => {
   try {
-    return await Room.find({}).populate("roomCategoryId").exec();
+    return await Room.find({}).populate("roomCategoryId").populate("bookingId").exec();
   } catch (error) {
     throw new Error(error.toString());
   }
@@ -56,7 +56,7 @@ const list = async () => {
 
 const getById = async (id) => {
   try {
-    return await Room.findOne({ _id: id }).exec();
+    return await Room.findOne({ _id: id }).populate("roomCategoryId").populate("bookingId").exec();
   } catch (error) {
     throw new Error(error.toString());
   }
@@ -69,6 +69,7 @@ const edit = async (
     code,
     status,
     roomCategoryId,
+    bookingId
   }
 ) => {
   try {
@@ -78,6 +79,7 @@ const edit = async (
         code,
         status,
         roomCategoryId,
+        bookingId
       },
       { new: true }
     );
