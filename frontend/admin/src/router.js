@@ -12,6 +12,8 @@ import ListBooking from './components/listBooking';
 import reportWebVitals from './reportWebVitals';
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import ListOtherServices from './components/listOtherServices';
+import BookingDetails from './components/bookingDetails';
+import BookingPage from './page/pageBookingByStaff';
 
 function router() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -30,6 +32,7 @@ function router() {
         <Route path="/saveHistory" element={<SaveHistory />} />
         <Route path='/change-password' element={<ChangePassword />} />
         <Route path='/services' element={<ListOtherServices />} />
+        <Route path="/bookings/:bookingId" element={<BookingDetails />} />
       </Routes>
     );
   } else {
@@ -39,10 +42,12 @@ function router() {
           <Route path="/rooms" element={<ListRoom />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/bookings" element={<ListBooking />} />
-          <Route path="/createBooking" element={<CreateBookingByStaff />} />
+          {/* <Route path="/createBooking" element={<CreateBookingByStaff />} /> */}
+          <Route path="/bookingPage" element={<BookingPage />} />
           <Route path="/updateBookingInfo" element={<UpdateBookingInfo />} />
           <Route path="/saveHistory" element={<SaveHistory />} />
           <Route path='/change-password' element={<ChangePassword />} />
+          <Route path="/bookings/:bookingId" element={<BookingDetails />} />
         </Routes>
       );
     } else {

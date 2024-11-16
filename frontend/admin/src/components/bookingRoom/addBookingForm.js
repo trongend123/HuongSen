@@ -3,9 +3,8 @@ import axios from 'axios';
 import { Form, Row, Col, Button, Card, Alert } from 'react-bootstrap'; // Import Alert
 import SelectRoomCategories from './selectRoomCate';  // Import SelectRoomCategories component
 
-const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId }, ref) => {
+const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId, staff }, ref) => {
     const roomCategoriesRef = useRef(null);  // Ref for SelectRoomCategories
-
     const [errors, setErrors] = useState({});
     const [errorMessage, setErrorMessage] = useState('');  // State to store error message
     const today = new Date().toISOString().split('T')[0];
@@ -26,6 +25,15 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
         humans: 1,
         contract: ''
     });
+
+    useEffect(() => {
+        if (staff) {
+            setBookingData((prevBookingData) => ({
+                ...prevBookingData,
+                staffId: staff._id
+            }));
+        }
+    }, [staff]);
 
     const handleChange = (e) => {
         setBookingData({

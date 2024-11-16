@@ -17,7 +17,8 @@ const Sidebar = () => {
           <NavLink className="nav-link" to="/dashboard"><MdDashboard /> Thống kê</NavLink>
           <NavLink className="nav-link" exact to="/rooms"><MdBedroomParent /> Danh sách Phòng</NavLink>
           <NavLink className="nav-link" to="/bookings"><RiBillFill /> Danh sách Đặt phòng</NavLink>
-          <NavLink className="nav-link" to="/createBooking"><RiBillFill /> Đặt phòng</NavLink>
+          {/* <NavLink className="nav-link" to="/createBooking"><RiBillFill /> Đặt phòng</NavLink> */}
+          <NavLink className="nav-link" to="/bookingPage"><RiBillFill /> Đặt phòng</NavLink>
           <NavLink className="nav-link" to="/"><MdLogout /> Đăng xuất</NavLink>
         </Nav>
       </div>

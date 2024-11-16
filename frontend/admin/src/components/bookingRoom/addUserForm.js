@@ -1,5 +1,5 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
-import { Form, Row, Col, Card, Button } from 'react-bootstrap';
+import { Form, Row, Col, Card, Button, Alert } from 'react-bootstrap';
 
 const AddUserForm = forwardRef(({ }, ref) => {
     const [customerData, setCustomerData] = useState({
@@ -12,10 +12,25 @@ const AddUserForm = forwardRef(({ }, ref) => {
     });
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
+    const [bookingType, setBookingType] = useState(''); // To track if it's "khách lẻ" or "khách đoàn"
+    const [agencyData, setAgencyData] = useState({
+        name: '',
+        phone: '',
+        address: '',
+        stk: '',
+        code: ''
+    });
 
     const handleCustomerChange = (e) => {
         setCustomerData({
             ...customerData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleAgencyChange = (e) => {
+        setAgencyData({
+            ...agencyData,
             [e.target.name]: e.target.value
         });
     };
@@ -25,24 +40,20 @@ const AddUserForm = forwardRef(({ }, ref) => {
         const namePattern = /^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶèéêẽếềệỉĩìíòóôõơợụùúỷỹýỵ\s]+$/;
         const today = new Date();
 
-        // Validate fullname
         if (!customerData.fullname.trim() || !namePattern.test(customerData.fullname)) {
             newErrors.fullname = "Họ và tên chỉ được chứa chữ cái";
         }
 
-        // Validate email
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(customerData.email)) {
             newErrors.email = "Vui lòng nhập email hợp lệ";
         }
 
-        // Validate phone
         const phonePattern = /^(03|05|07|08|09)\d{8,9}$/;
         if (!phonePattern.test(customerData.phone)) {
             newErrors.phone = "Vui lòng nhập số điện thoại hợp lệ";
         }
 
-        // Validate date of birth
         if (!customerData.dob) {
             newErrors.dob = "Ngày tháng năm sinh là bắt buộc";
         } else {
@@ -53,12 +64,10 @@ const AddUserForm = forwardRef(({ }, ref) => {
             }
         }
 
-        // Validate gender
         if (!customerData.gender) {
             newErrors.gender = "Vui lòng chọn giới tính";
         }
 
-        // Validate address
         if (!customerData.address.trim()) {
             newErrors.address = "Vui lòng nhập địa chỉ";
         }
@@ -70,7 +79,7 @@ const AddUserForm = forwardRef(({ }, ref) => {
     const createUser = async () => {
         if (!validateForm()) {
             console.log("Form has errors, please fix them before submitting.");
-            return null; // Return null if there are errors
+            return null;
         }
         setLoading(true);
 
@@ -88,10 +97,10 @@ const AddUserForm = forwardRef(({ }, ref) => {
             }
 
             const responseData = await response.json();
-            return responseData._id; // Return the ID of the created user
+            return responseData._id;
         } catch (error) {
             console.error('Error creating user:', error);
-            return null; // Return null if there is an error
+            return null;
         } finally {
             setLoading(false);
         }
@@ -106,6 +115,7 @@ const AddUserForm = forwardRef(({ }, ref) => {
             <Card.Header as="h5" className="bg-primary text-white">Thông tin khách hàng</Card.Header>
             <Card.Body>
                 <Form>
+                    {/* Existing customer details form */}
                     <Row className="mb-3">
                         <Col md={6}>
                             <Form.Group controlId="fullname">
@@ -218,8 +228,95 @@ const AddUserForm = forwardRef(({ }, ref) => {
                             </Form.Group>
                         </Col>
                     </Row>
-                </Form>
 
+
+                    {/* <Button
+                        variant="outline-primary"
+                        className="mt-3"
+                        onClick={() => setBookingType(bookingType === 'Group' ? '' : 'Group')}
+                    >
+                        {bookingType === 'Group' ? 'Khách đoàn' : 'Khách lẻ'}
+                    </Button> */}
+
+                    {bookingType === 'Group' && (
+                        <>
+                            <Alert variant="info" className="mt-3">
+                                Khách đoàn cần lập hợp đồng tạm thời và cọc trước 20% giá trị tiền phòng.
+                            </Alert>
+                            <Row className="mb-3 mt-3">
+                                <Col md={6}>
+                                    <Form.Group controlId="agencyName">
+                                        <Form.Label><strong>Tên đơn vị</strong></Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="name"
+                                            value={agencyData.name}
+                                            onChange={handleAgencyChange}
+                                            placeholder="Nhập tên đơn vị"
+                                            required
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col md={6}>
+                                    <Form.Group controlId="agencyPhone">
+                                        <Form.Label><strong>Số điện thoại</strong></Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="phone"
+                                            value={agencyData.phone}
+                                            onChange={handleAgencyChange}
+                                            placeholder="Nhập số điện thoại"
+                                            required
+                                        />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row className="mb-3">
+                                <Col md={6}>
+                                    <Form.Group controlId="agencyAddress">
+                                        <Form.Label><strong>Địa chỉ</strong></Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="address"
+                                            value={agencyData.address}
+                                            onChange={handleAgencyChange}
+                                            placeholder="Nhập địa chỉ"
+                                            required
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col md={6}>
+                                    <Form.Group controlId="agencyStk">
+                                        <Form.Label><strong>Ngân hàng + Số tài khoản (STK)</strong></Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="stk"
+                                            value={agencyData.stk}
+                                            onChange={handleAgencyChange}
+                                            placeholder="Nhập ngân hàng + STK"
+                                            required
+                                        />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row className="mb-3">
+                                <Col md={6}>
+                                    <Form.Group controlId="agencyCode">
+                                        <Form.Label><strong>Mã đơn vị</strong></Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="code"
+                                            value={agencyData.code}
+                                            onChange={handleAgencyChange}
+                                            placeholder="Nhập mã đơn vị"
+                                            required
+                                        />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                        </>
+                    )}
+                </Form>
             </Card.Body>
         </Card>
     );

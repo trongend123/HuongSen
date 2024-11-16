@@ -27,7 +27,8 @@ import {
   AgencyRouter,
   ContractRouter,
   OrderServiceRouter,
-  paymentRoute
+  paymentRoute,
+  Email
 } from "./routes/index.js";
 //import { verifyAccessToken } from "./jwt_helper.js";
 import { changePassword, loginUser, registerUser, verifyAccessToken } from "./authens/auth.js";
@@ -78,6 +79,7 @@ app.post('/login', loginUser);
 app.put('/change-password', changePassword);
 //payment
 app.use("/payment", paymentRoute);
+app.use("/email", Email);
 // Protected route (requires a valid access token)
 app.get('/profile', verifyAccessToken, (req, res) => {
   res.json({ message: `Hello, ${req.payload.aud}` });

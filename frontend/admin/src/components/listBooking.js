@@ -24,7 +24,7 @@ const ListBooking = () => {
   const rowsPerPage = 7;
   const [userRole, setUserRole] = useState('');
   const [statusFilter, setStatusFilter] = useState(''); // New state for status filter
- 
+
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -34,9 +34,9 @@ const ListBooking = () => {
       // If user is 'staffds', set a default location and hide location dropdown
       if (storedUser.role === 'staff_ds') {
         setSelectedLocation('66f6c536285571f28087c16b');
-      }else if (storedUser.role === 'staff_cb') {
+      } else if (storedUser.role === 'staff_cb') {
         setSelectedLocation('66f6c59f285571f28087c16d');
-      }else if (storedUser.role === 'staff_mk') {
+      } else if (storedUser.role === 'staff_mk') {
         setSelectedLocation('66f6c5c9285571f28087c16a');
       }
     }
@@ -67,21 +67,22 @@ const ListBooking = () => {
 
   const handleRowClick = async (booking) => {
     try {
-      const response = await axios.get(`http://localhost:9999/identifycations/customer/${booking.customerId._id}`);
-      const identifications = response.data;
+      // const response = await axios.get(`http://localhost:9999/identifycations/customer/${booking.customerId._id}`);
+      // const identifications = response.data;
 
-      if (identifications.length > 0) {
-        const { name, code } = identifications[0];
-        setSelectedBookingDetails({
-          ...booking,
-          identifyName: name,
-          identifyCode: code,
-        });
-      } else {
-        setSelectedBookingDetails(booking);
-      }
+      // if (identifications.length > 0) {
+      //   const { name, code } = identifications[0];
+      //   setSelectedBookingDetails({
+      //     ...booking,
+      //     identifyName: name,
+      //     identifyCode: code,
+      //   });
+      // } else {
+      //   setSelectedBookingDetails(booking);
+      // }
 
-      setShowDetailModal(true);
+      // setShowDetailModal(true);
+      navigate(`/bookings/${booking.bookingId._id}`)
     } catch (error) {
       console.error("Error fetching booking details:", error);
     }
@@ -169,7 +170,7 @@ const ListBooking = () => {
     <Container>
       <h2 className="text-center my-4">Danh sách Đặt phòng</h2>
       <Row>
-      {userRole === "admin" && (
+        {userRole === "admin" && (
           <Col md={6}>
             <Form.Group controlId="categorySelect" className="my-4">
               <Form.Label>Chọn cơ sở:</Form.Label>
@@ -216,31 +217,31 @@ const ListBooking = () => {
       {/* Search Inputs */}
       <Row>
         <Col md={8}>
-        <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Tìm kiếm theo Mã Đặt phòng hoặc Tên Khách hàng"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </InputGroup>
+          <InputGroup className="mb-3">
+            <FormControl
+              placeholder="Tìm kiếm theo Mã Đặt phòng hoặc Tên Khách hàng"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </InputGroup>
         </Col>
         <Col md={4}>
-            <Form.Control
-              as="select"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-            >
-              <option value="">Tất cả</option>
-              <option value="In Progress">Đang thực hiện</option>
-              <option value="Request refund">Yêu cầu hoàn tiền</option>
-              <option value="Cancelled">Đã Hủy</option>
-              <option value="Completed">Đã hoàn thành</option>
-            </Form.Control>
+          <Form.Control
+            as="select"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="">Tất cả</option>
+            <option value="In Progress">Đang thực hiện</option>
+            <option value="Request refund">Yêu cầu hoàn tiền</option>
+            <option value="Cancelled">Đã Hủy</option>
+            <option value="Completed">Đã hoàn thành</option>
+          </Form.Control>
         </Col>
       </Row>
-      
 
-      
+
+
 
       <Table striped bordered hover>
         <thead>
@@ -281,16 +282,16 @@ const ListBooking = () => {
                       Sửa
                     </Button>
                     {userRole === "admin" && (
-                    <Button
-                      variant="danger"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Ngăn sự kiện onClick của hàng
-                        handleCancelClick(booking);
-                      }}
-                    >
-                      Hủy
-                    </Button>
-                  )}
+                      <Button
+                        variant="danger"
+                        onClick={(e) => {
+                          e.stopPropagation(); // Ngăn sự kiện onClick của hàng
+                          handleCancelClick(booking);
+                        }}
+                      >
+                        Hủy
+                      </Button>
+                    )}
                   </>
                 )}
               </td>
@@ -320,35 +321,35 @@ const ListBooking = () => {
           <Modal.Body>
             <Form>
               {/* Payment Input */}
-              
+
 
               {/* Status Input */}
               <Form.Group controlId="formStatus">
                 <Form.Label>Trạng thái:</Form.Label>
                 <Form.Control
-              as="select"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-            >
-                <option value="In Progress">Đang thực hiện</option>
-              <option value="Request refund">Yêu cầu hoàn tiền</option>
-              <option value="Completed">Đã hoàn thành</option>
-            </Form.Control>
+                  as="select"
+                  value={updatedStatus}
+                  onChange={(e) => setUpdatedStatus(e.target.value)}
+                >
+                  <option value="In Progress">Đang thực hiện</option>
+                  <option value="Request refund">Yêu cầu hoàn tiền</option>
+                  <option value="Completed">Đã hoàn thành</option>
+                </Form.Control>
               </Form.Group>
 
-              
+
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            
+
             <Button variant="primary" onClick={handleUpdateBooking} style={{ marginRight: '10px' }}>
               Cập nhật
             </Button>
-            
+
             <Button variant="secondary" onClick={() => setShowModal(false)}>
               Hủy
             </Button>
-          
+
           </Modal.Footer>
         </Modal>
       )}
@@ -383,15 +384,15 @@ const ListBooking = () => {
               Chỉnh sửa
             </Button>
             {userRole === "admin" && (
-            <Button
-              variant="info"
-              style={{ margin: ' 0px 10px' }}
-              onClick={() => {
-                navigate('/historyBookingChange', { state: { bookingId: selectedBookingDetails.bookingId._id } }); // Chuyển hướng với bookingId
-              }}
-            >
-              Lịch sử
-            </Button>
+              <Button
+                variant="info"
+                style={{ margin: ' 0px 10px' }}
+                onClick={() => {
+                  navigate('/historyBookingChange', { state: { bookingId: selectedBookingDetails.bookingId._id } }); // Chuyển hướng với bookingId
+                }}
+              >
+                Lịch sử
+              </Button>
             )}
             <Button variant="secondary" onClick={() => setShowDetailModal(false)}>
               Đóng
