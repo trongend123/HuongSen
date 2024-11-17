@@ -66,26 +66,7 @@ const ListBooking = () => {
   };
 
   const handleRowClick = async (booking) => {
-    try {
-      // const response = await axios.get(`http://localhost:9999/identifycations/customer/${booking.customerId._id}`);
-      // const identifications = response.data;
-
-      // if (identifications.length > 0) {
-      //   const { name, code } = identifications[0];
-      //   setSelectedBookingDetails({
-      //     ...booking,
-      //     identifyName: name,
-      //     identifyCode: code,
-      //   });
-      // } else {
-      //   setSelectedBookingDetails(booking);
-      // }
-
-      // setShowDetailModal(true);
-      navigate(`/bookings/${booking.bookingId._id}`)
-    } catch (error) {
-      console.error("Error fetching booking details:", error);
-    }
+    navigate(`/bookings/${booking.bookingId._id}`);
   };
 
   const handleUpdateBooking = () => {

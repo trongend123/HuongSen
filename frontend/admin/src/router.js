@@ -13,6 +13,7 @@ import reportWebVitals from './reportWebVitals';
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import ListOtherServices from './components/listOtherServices';
 import BookingDetails from './components/bookingDetails';
+
 import BookingPage from './page/pageBookingByStaff';
 
 function router() {

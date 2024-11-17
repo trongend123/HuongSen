@@ -61,7 +61,7 @@ const createRoom = async (req, res) => {
       return res.status(400).json({ message: "Request body is required." });
     }
 
-    const { code, status, roomCategoryId } = req.body; // Extract necessary fields
+    const { code, status, roomCategoryId,bookingId } = req.body; // Extract necessary fields
 
     // Validate that required fields are provided
     if (!code || !status || !roomCategoryId) {
@@ -72,7 +72,8 @@ const createRoom = async (req, res) => {
     const newRoom = await RoomRepo.create({
       code,
       status,
-      roomCategoryId, // Use roomCategoryId
+      roomCategoryId,
+      bookingId // Use roomCategoryId
     });
 
     // Return the newly created room

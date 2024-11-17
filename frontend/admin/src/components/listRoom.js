@@ -18,6 +18,7 @@ const ListRoom = () => {
   const navigate = useNavigate();
   const [userRole, setUserRole] = useState('');
   const user = JSON.parse(localStorage.getItem('user'));
+  const [bookingId, setBookingId] = useState('');
 
   useEffect(() => {
     const storedUser = user
@@ -82,6 +83,7 @@ const ListRoom = () => {
     const updatedRoom = {
       ...selectedRoom,
       roomCategoryId: updatedCategory,
+      bookingId: bookingId,
       status: updatedStatus,
     };
 
@@ -178,47 +180,64 @@ const ListRoom = () => {
 </div>
 
 
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Cập nhật thông tin phòng</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedRoom && (
-            <>
-             {user?.role === "admin" && (
-              <Form.Group controlId="categorySelect">
-                <Form.Label>Loại phòng:</Form.Label>
-                <Form.Control
-                  as="select"
-                  value={updatedCategory}
-                  onChange={(e) => setUpdatedCategory(e.target.value)}
-                >
-                  {filteredCategories.map((category) => (
-                    <option key={category._id} value={category._id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </Form.Control>
-              </Form.Group>
-             )}
-              <Form.Group controlId="statusSelect" className="mt-3">
-                <Form.Label>Trạng thái phòng:</Form.Label>
-                <Form.Control
-                  as="select"
-                  value={updatedStatus}
-                  onChange={(e) => setUpdatedStatus(e.target.value)}
-                >
-                  <option value="Trống">Trống</option>
-                  <option value="Đã book">Đã book</option>
-                  <option value="Đang sử dụng">Đang sử dụng</option>
-                  <option value="Đang sửa chữa">Đang sửa chữa</option>
-                </Form.Control>
-              </Form.Group>
-            </>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          
+<Modal show={showModal} onHide={handleClose}>
+  <Modal.Header closeButton>
+    <Modal.Title>Cập nhật thông tin phòng</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    {selectedRoom && (
+      <>
+        {user?.role === "admin" && (
+          <Form.Group controlId="categorySelect">
+            <Form.Label>Loại phòng:</Form.Label>
+            <Form.Control
+              as="select"
+              value={updatedCategory}
+              onChange={(e) => setUpdatedCategory(e.target.value)}
+            >
+              {filteredCategories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+        )}
+        <Form.Group controlId="statusSelect" className="mt-3">
+          <Form.Label>Trạng thái phòng:</Form.Label>
+          <Form.Control
+            as="select"
+            value={updatedStatus}
+            onChange={(e) => {
+              setUpdatedStatus(e.target.value);
+              if (e.target.value !== "Đang sử dụng") {
+                setBookingId(""); // Clear bookingId if status is not "Đang sử dụng"
+              }
+            }}
+          >
+            <option value="Trống">Trống</option>
+            <option value="Đã book">Đã book</option>
+            <option value="Đang sử dụng">Đang sử dụng</option>
+            <option value="Đang sửa chữa">Đang sửa chữa</option>
+          </Form.Control>
+        </Form.Group>
+
+        {updatedStatus === "Đang sử dụng" && (
+          <Form.Group controlId="bookingIdInput" className="mt-3">
+            <Form.Label>Booking ID:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Nhập Booking ID"
+              value={bookingId}
+              onChange={(e) => setBookingId(e.target.value)}
+              required
+            />
+          </Form.Group>
+        )}
+      </>
+    )}
+  </Modal.Body>
+  <Modal.Footer>         
           <Button variant="primary" onClick={handleUpdate} style={{ marginRight: '10px' }}>
             Cập nhật
           </Button>

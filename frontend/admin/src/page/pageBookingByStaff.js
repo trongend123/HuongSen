@@ -48,7 +48,7 @@ const BookingPage = () => {
             const createdUserId = await userFormRef.current.createUser();
             if (createdUserId) {
                 setUserId(createdUserId); // Store user ID
-                console.log("User created with ID:", createdUserId);
+                console.log("User created with ID");
 
                 // 3. Create booking
                 const createdBookingId = await bookingFormRef.current.createBooking();
