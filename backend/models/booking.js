@@ -12,7 +12,11 @@ const bookingSchema = new mongoose.Schema({
     checkout: { type: Date, required: true },
     contract: { type: String },
     humans: { type: Number, required: true },
-});
+}
+,
+    {
+        timestamps: true,
+    });
 
 const Bookings = mongoose.model('Bookings', bookingSchema);
 export default Bookings;

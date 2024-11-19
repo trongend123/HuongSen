@@ -76,6 +76,7 @@ const ListRoom = () => {
     setSelectedRoom(room);
     setUpdatedCategory(room.roomCategoryId._id);
     setUpdatedStatus(room.status);
+    setBookingId(room.bookingId?._id);
     setShowModal(true);
   };
 
@@ -83,7 +84,6 @@ const ListRoom = () => {
     const updatedRoom = {
       ...selectedRoom,
       roomCategoryId: updatedCategory,
-      bookingId: bookingId,
       status: updatedStatus,
     };
 
@@ -217,17 +217,15 @@ const ListRoom = () => {
           >
             <option value="Trống">Trống</option>
             <option value="Đã book">Đã book</option>
-            <option value="Đang sử dụng">Đang sử dụng</option>
             <option value="Đang sửa chữa">Đang sửa chữa</option>
           </Form.Control>
         </Form.Group>
 
-        {updatedStatus === "Đang sử dụng" && (
+        {updatedStatus === "Đang sử dụng" || updatedStatus === "Đã book" && (
           <Form.Group controlId="bookingIdInput" className="mt-3">
             <Form.Label>Booking ID:</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Nhập Booking ID"
               value={bookingId}
               onChange={(e) => setBookingId(e.target.value)}
               required
