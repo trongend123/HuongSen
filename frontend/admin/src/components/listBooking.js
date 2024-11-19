@@ -24,7 +24,6 @@ const ListBooking = () => {
   const rowsPerPage = 7;
   const [userRole, setUserRole] = useState('');
   const [statusFilter, setStatusFilter] = useState(''); // New state for status filter
- 
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -275,10 +274,10 @@ const ListBooking = () => {
                       className="me-2"
                       onClick={(e) => {
                         e.stopPropagation(); // Ngăn sự kiện onClick của hàng
-                        handleEditClick(booking);
+                        navigate(`/checkin/${booking.bookingId._id}`); 
                       }}
                     >
-                      Sửa
+                      Check-in
                     </Button>
                     {userRole === "admin" && (
                     <Button
@@ -311,48 +310,7 @@ const ListBooking = () => {
         ))}
       </Pagination>
 
-      {/* Edit Modal */}
-      {selectedBooking && (
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Chỉnh sửa Đặt phòng</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              {/* Payment Input */}
-              
-
-              {/* Status Input */}
-              <Form.Group controlId="formStatus">
-                <Form.Label>Trạng thái:</Form.Label>
-                <Form.Control
-              as="select"
-              value={updatedStatus}
-              onChange={(e) => setUpdatedStatus(e.target.value)}
-            >
-              <option value="In Progress">Đang thực hiện</option>
-              <option value="Request refund">Yêu cầu hoàn tiền</option>
-              <option value="Completed">Đã hoàn thành</option>
-            </Form.Control>
-              </Form.Group>
-
-              
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            
-            <Button variant="primary" onClick={handleUpdateBooking} style={{ marginRight: '10px' }}>
-              Cập nhật
-            </Button>
-            
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
-              Hủy
-            </Button>
-          
-          </Modal.Footer>
-        </Modal>
-      )}
-
+      
       {/* Detail Modal */}
       {selectedBookingDetails && (
         <Modal show={showDetailModal} onHide={() => setShowDetailModal(false)}>

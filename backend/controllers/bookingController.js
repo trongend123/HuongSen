@@ -21,30 +21,11 @@ class BookingController {
 // Lấy tất cả bookings với phân trang
     async getAllBookings(req, res) {
         try {
-            // Lấy thông tin phân trang từ query params
-            const page = parseInt(req.query.page) || 1; // Mặc định là trang 1
-            const limit = parseInt(req.query.limit) || 7; // Mặc định là 7 bản ghi mỗi trang
-
-            // Tính toán vị trí bắt đầu
-            const skip = (page - 1) * limit;
-
-            // Lấy dữ liệu từ repository với phân trang
-            const bookings = await bookingRepository.getAllBookings(skip, limit);
-
-            // Lấy tổng số bản ghi để tính tổng số trang
-            const totalBookings = await bookingRepository.getTotalBookings();
-            const totalPages = Math.ceil(totalBookings / limit);
-
-            // Trả về dữ liệu với thông tin phân trang
-            res.status(200).json({
-                bookings,
-                pagination: {
-                    page,
-                    limit,
-                    totalPages,
-                    totalBookings,
-                },
-            });
+            const booking = await bookingRepository.getAllBookings();
+            if (!booking) {
+                return res.status(404).json({ message: 'Booking not found' });
+            }
+            res.status(200).json(booking);
         } catch (error) {
             console.error('Error fetching bookings:', error);
             res.status(500).json({ message: 'Internal Server Error' });
