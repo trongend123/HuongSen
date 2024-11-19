@@ -13,6 +13,7 @@ import reportWebVitals from './reportWebVitals';
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import ListOtherServices from './components/listOtherServices';
 import Checkin from './components/checkin';
+import BookingDetails from './components/bookingDetails';
 
 function router() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -31,6 +32,7 @@ function router() {
         <Route path="/saveHistory" element={<SaveHistory />} />
         <Route path='/change-password' element={<ChangePassword />} />
         <Route path='/services' element={<ListOtherServices />} />
+        <Route path="/bookings/:bookingId" element={<BookingDetails />} />
       </Routes>
     );
   } else {
@@ -45,6 +47,7 @@ function router() {
           <Route path="/saveHistory" element={<SaveHistory />} />
           <Route path='/change-password' element={<ChangePassword />} />
           <Route path='/checkin/:id' element={<Checkin />} />
+          <Route path="/bookings/:bookingId" element={<BookingDetails />} />
         </Routes>
       );
     } else {
