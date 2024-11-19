@@ -97,7 +97,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
         }
 
         // Add validation for note field
-        if (bookingData.note.length > 200) {
+        if (bookingData.note.length > 700) {
             newErrors.note = "Ghi chú không được vượt quá 200 ký tự";
         }
 
@@ -146,7 +146,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
     return (
         <Card className="mb-2">
-            <Card.Header as="h5" className="bg-primary text-white">Chọn Loại Phòng & Số Lượng</Card.Header>
+            <Card.Header className="text-bg-info"><h5>Chọn Loại Phòng & Số Lượng</h5></Card.Header>
             <Card.Body>
                 <Row className="mb-3">
                     <Col md={4}>

@@ -4,6 +4,7 @@ import AddIdentifyForm from '../components/bookingRoom/addIdentifyForm';
 import { Col, Row, Button, Container } from 'react-bootstrap';
 import AddBookingForm from '../components/bookingRoom/addBookingForm';
 import AddServiceForm from '../components/bookingRoom/addServiceForm';
+import { useNavigate } from 'react-router-dom';
 
 const BookingPage = () => {
     const [userId, setUserId] = useState(null); // To store the created user ID
@@ -15,6 +16,7 @@ const BookingPage = () => {
     const [staff, setStaff] = useState(null);
     const [locationId, setLocationId] = useState(null);
     const [serviceTotal, setServiceTotal] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -50,19 +52,35 @@ const BookingPage = () => {
                 setUserId(createdUserId); // Store user ID
                 console.log("User created with ID");
 
+                // 2. Create identity after user is created
+                const identifyCreated = await identifyFormRef.current.createIdentify(createdUserId);
+                if (!identifyCreated) {
+                    console.log('Identity creation failed.');
+                    alert('An error occurred while creating identity. Please try again.');
+                    return; // Stop further execution if identity creation fails
+                }
+
                 // 3. Create booking
                 const createdBookingId = await bookingFormRef.current.createBooking();
                 if (createdBookingId) {
                     setBookingId(createdBookingId); // Store booking ID
-                    // 2. Create identity after user is created
-                    await identifyFormRef.current.createIdentify(createdUserId);
+
                     // 4. Add selected services to orderService after booking is created
                     await addServiceRef.current.addService(createdBookingId);
                     console.log('Booking and services created successfully!');
+                    navigate(`/saveHistory`, {
+                        state: {
+                            bookingId: createdBookingId,
+                            note: `${staff.role} ${staff.fullname} đã tạo đặt phòng`,
+                            user: staff // Pass user object as well
+                        }
+                    });
                 } else {
-                    console.log('Booking and services not created');
+                    alert('An error occurred while creating booking or services. Please try again.');
+                    console.log('Booking and services not created.');
                 }
             } else {
+                alert('An error occurred while creating Customer. Please try again.');
                 console.log('User creation failed.');
             }
         } catch (error) {
@@ -70,6 +88,7 @@ const BookingPage = () => {
             alert('An error occurred during creation.');
         }
     };
+
 
     return (
         <Container>
@@ -79,8 +98,6 @@ const BookingPage = () => {
                     {/* User Form */}
                     <AddUserForm ref={userFormRef} />
 
-                    {/* Identification Form */}
-                    <AddIdentifyForm ref={identifyFormRef} />
 
                     {/* Service Form */}
                     <AddServiceForm
@@ -91,6 +108,8 @@ const BookingPage = () => {
                 </Col>
 
                 <Col>
+                    {/* Identification Form */}
+                    <AddIdentifyForm ref={identifyFormRef} />
                     {/* Booking Form */}
                     <AddBookingForm
                         ref={bookingFormRef}

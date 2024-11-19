@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import AddUserForm from '../components/bookingRoom/addUserForm';
 import AddIdentifyForm from '../components/bookingRoom/addIdentifyForm';
-import { Col, Row, Button } from 'react-bootstrap';
+import { Col, Row, Button, Container } from 'react-bootstrap';
 import AddBookingForm from '../components/bookingRoom/addBookingForm';
 import AddServiceForm from '../components/bookingRoom/addServiceForm';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -31,37 +31,37 @@ const CustomerBookingPage = () => {
 
     const handleCreateBoth = async () => {
         try {
-            // 1. Tạo người dùng
+            // 1. Create user
             const createdUserId = await userFormRef.current.createUser();
             if (createdUserId) {
-                setUserId(createdUserId); // Lưu ID người dùng
-                console.log("User created with ID:");
+                setUserId(createdUserId); // Store user ID
+                console.log("User created with ID");
 
-                // 3. Tạo booking
+                // 2. Create identity after user is created
+                const identifyCreated = await identifyFormRef.current.createIdentify(createdUserId);
+                if (!identifyCreated) {
+                    console.log('Identity creation failed.');
+                    alert('An error occurred while creating identity. Please try again.');
+                    return; // Stop further execution if identity creation fails
+                }
+
+                // 3. Create booking
                 const createdBookingId = await bookingFormRef.current.createBooking();
                 if (createdBookingId) {
-                    setBookingId(createdBookingId); // Lưu ID booking
-                    // 2. Tạo căn cước sau khi người dùng đã được tạo
-                    await identifyFormRef.current.createIdentify(createdUserId);
-                    // 4. Thêm các dịch vụ đã chọn vào orderService sau khi tạo booking thành công
+                    setBookingId(createdBookingId); // Store booking ID
+
+                    // 4. Add selected services to orderService after booking is created
                     await addServiceRef.current.addService(createdBookingId);
                     console.log('Booking and services created successfully!');
 
-
-
+                    //5. Xử ký payment
                     handlePayment(createdBookingId);
-
-                    // navigate(`/saveHistory`, {
-                    //     state: {
-                    //         bookingId: createdBookingId,
-                    //         note: `${createdUserId} đã tạo đặt phòng`,
-
-                    //     }
-                    // });
                 } else {
-                    console.log('Booking and services not create');
+                    alert('An error occurred while creating booking or services. Please try again.');
+                    console.log('Booking and services not created.');
                 }
             } else {
+                alert('An error occurred while creating Customer. Please try again.');
                 console.log('User creation failed.');
             }
         } catch (error) {
@@ -69,6 +69,8 @@ const CustomerBookingPage = () => {
             alert('An error occurred during creation.');
         }
     };
+
+
     const handlePayment = async (createdBookingId) => {
         try {
             // Assuming you have a method to get the booking details
@@ -100,19 +102,18 @@ const CustomerBookingPage = () => {
                     {/* User Form */}
                     <AddUserForm ref={userFormRef} />
 
-                    {/* Identification Form */}
-                    <AddIdentifyForm ref={identifyFormRef} />
 
                     {/* Service Form */}
                     <AddServiceForm
                         ref={addServiceRef}
-                        bookingId={bookingId} // Truyền ID booking sau khi được tạo
-                        onServiceTotalChange={handleServiceTotalChange}  // Truyền callback xử lý tổng dịch vụ
+                        bookingId={bookingId} // Pass booking ID after it's created
+                        onServiceTotalChange={handleServiceTotalChange} // Callback for service total
                     />
-
                 </Col>
 
                 <Col>
+                    {/* Identification Form */}
+                    <AddIdentifyForm ref={identifyFormRef} />
                     {/* Booking Form */}
                     <AddBookingForm
                         ref={bookingFormRef}

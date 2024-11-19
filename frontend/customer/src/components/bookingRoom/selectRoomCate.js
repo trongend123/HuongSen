@@ -124,7 +124,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         <div>
             {Object.keys(groupedRooms).map(location => (
                 <Card key={location} className="mb-2">
-                    <Card.Header>
+                    <Card.Header className='text-center'>
                         <h5>{location}</h5>
                     </Card.Header>
                     <Card.Body>
@@ -132,15 +132,15 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                             const remainingRoomCount = remainingRooms[room._id] || 0;
                             const qty = quantity[room._id] || 0;
                             const totalRoomPrice = room.price * qty * nights;
+                            if (canInput) {
+                                return (
+                                    <Row key={room._id} className="mb-3">
+                                        <Col className="col-8">
+                                            <Form.Label><strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)</Form.Label>
+                                            <h6 className='text-secondary'>Phòng còn trống: {remainingRoomCount} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
+                                        </Col>
+                                        <Col className="col-2 d-flex align-items-center">
 
-                            return (
-                                <Row key={room._id} className="mb-3">
-                                    <Col className="col-8">
-                                        <Form.Label><strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)</Form.Label>
-                                        <h6 className='text-secondary'>Phòng còn trống: {remainingRoomCount} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
-                                    </Col>
-                                    <Col className="col-2 d-flex align-items-center">
-                                        {canInput && (
                                             <Form.Control
                                                 type="number"
                                                 min="0"
@@ -149,7 +149,22 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                                                 onChange={(e) => handleQuantityChange(e, room._id)}
                                                 required
                                             />
-                                        )}
+
+                                        </Col>
+                                    </Row>
+                                );
+                            }
+                            // Form for when `canInput` is false (static display)
+                            return (
+                                <Row key={room._id} className="mb-3 text-center">
+                                    <Col>
+                                        <h6>
+                                            <strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)
+                                        </h6>
+                                        <p className="text-secondary mb-0">
+                                            Phòng còn trống: {remainingRoomCount}
+                                        </p>
+
                                     </Col>
                                 </Row>
                             );

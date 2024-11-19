@@ -111,7 +111,7 @@ const AddUserForm = forwardRef(({ }, ref) => {
     }));
 
     return (
-        <Card className="shadow-sm">
+        <Card className="shadow-sm mb-3">
             <Card.Header as="h5" className="bg-primary text-white">Thông tin khách hàng</Card.Header>
             <Card.Body>
                 <Form>

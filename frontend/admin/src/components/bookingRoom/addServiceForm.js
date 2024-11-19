@@ -8,10 +8,12 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
     const [selectedService, setSelectedService] = useState("");
     const [serviceQuantity, setServiceQuantity] = useState(1);
     const [selectedServiceDescription, setSelectedServiceDescription] = useState("");
-    const [serviceNote, setServiceNote] = useState(""); // Ghi chú chung
+    const [serviceNote, setServiceNote] = useState(""); // Ghi chú cho dịch vụ đang chọn
     const [serviceDate, setServiceDate] = useState("");
     const [serviceTimeSlot, setServiceTimeSlot] = useState("");
     const [totalAmount, setTotalAmount] = useState(0);
+    const [formError, setFormError] = useState("");
+    const [expandedNotes, setExpandedNotes] = useState([]);
 
     useEffect(() => {
         const fetchOtherService = async () => {
@@ -54,13 +56,20 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
         const serviceDetails = otherServices.find(service => service.otherServiceId === serviceId);
         setSelectedServiceDescription(serviceDetails?.description || "");
     };
+    const toggleNoteExpansion = (index) => {
+        setExpandedNotes((prev) =>
+            prev.includes(index)
+                ? prev.filter((i) => i !== index) // Remove index if already expanded
+                : [...prev, index] // Add index if not expanded
+        );
+    };
 
     const handleAddService = () => {
         if (!serviceDate || !serviceTimeSlot) {
-            alert("Vui lòng chọn cả ngày và thời gian cho dịch vụ.");
+            setFormError("Vui lòng chọn cả ngày và thời gian cho dịch vụ.");
             return;
         }
-
+        setFormError(""); // Clear error if validation passes
         const [hours, minutes] = serviceTimeSlot.split(':').map(Number);
         const combinedDateTime = new Date(serviceDate);
         combinedDateTime.setHours(hours, minutes, 0, 0);
@@ -74,6 +83,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                         ? {
                             ...service,
                             serviceQuantity: service.serviceQuantity + parseInt(serviceQuantity),
+                            note: serviceNote, // Cập nhật ghi chú
                             time: combinedDateTime,
                         }
                         : service
@@ -85,6 +95,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                 {
                     otherServiceId: selectedService,
                     serviceQuantity: parseInt(serviceQuantity),
+                    note: serviceNote, // Ghi chú mới
                     time: combinedDateTime,
                 },
             ]);
@@ -93,6 +104,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
         setSelectedService("");
         setServiceQuantity(1);
         setSelectedServiceDescription("");
+        setServiceNote(""); // Reset ghi chú
     };
 
     const handleRemoveService = (index) => {
@@ -102,15 +114,20 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
 
     const addService = async (bookingId) => {
         try {
-            const promises = orderServicesData.map(service =>
-                axios.post('http://localhost:9999/orderServices', {
+            const promises = orderServicesData.map(service => {
+                // Adjust time to UTC+7
+                const localTime = new Date(service.time); // Local time of the service
+                const vietnamTime = new Date(localTime.getTime() - localTime.getTimezoneOffset() * 60000); // Adjust by local offset
+                const formattedTime = vietnamTime.toISOString(); // Convert to ISO 8601
+
+                return axios.post('http://localhost:9999/orderServices', {
                     otherServiceId: service.otherServiceId,
                     bookingId,
-                    note: serviceNote, // Áp dụng ghi chú chung
+                    note: service.note, // Ghi chú
                     quantity: service.serviceQuantity,
-                    time: service.time,
-                })
-            );
+                    time: formattedTime, // Post time in Vietnam timezone (UTC+7)
+                });
+            });
 
             await Promise.all(promises);
             console.log("Thêm dịch vụ và ghi chú thành công!");
@@ -125,8 +142,8 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
 
     return (
         <Card className="mb-4">
-            <Card.Header>
-                <h5 className="mt-2 mb-2">Dịch Vụ & Số lần Sử Dụng</h5>
+            <Card.Header className='text-bg-info'>
+                <h5 >Dịch Vụ & Số lần Sử Dụng</h5>
             </Card.Header>
             <Card.Body>
                 <Row className="mt-3 align-items-end">
@@ -171,6 +188,20 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                     </Col>
                 </Row>
                 <Row className="mt-3">
+                    <Col>
+                        <Form.Group>
+                            <Form.Label>Ghi chú dịch vụ</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows={2}
+                                placeholder="Ghi chú cho dịch vụ đang chọn"
+                                value={serviceNote}
+                                onChange={(e) => setServiceNote(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mt-3">
                     <Col md={6}>
                         <Form.Group>
                             <Form.Label>Ngày sử dụng</Form.Label>
@@ -197,6 +228,14 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                         </Form.Group>
                     </Col>
                 </Row>
+                {/* Display error message */}
+                {formError && (
+                    <Row className="mt-2">
+                        <Col>
+                            <div style={{ color: 'red', fontSize: '14px' }}>{formError}</div>
+                        </Col>
+                    </Row>
+                )}
                 <Button
                     className="mt-3"
                     onClick={handleAddService}
@@ -204,22 +243,8 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                 >
                     Thêm dịch vụ
                 </Button>
-                <Row className="mt-4">
-                    <Col>
-                        <Form.Group>
-                            <Form.Label>Ghi chú chung</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows={3}
-                                placeholder="Ghi chú chung cho tất cả các dịch vụ"
-                                value={serviceNote}
-                                onChange={(e) => setServiceNote(e.target.value)}
-                            />
-                        </Form.Group>
-                    </Col>
-                </Row>
                 {orderServicesData.length > 0 && (
-                    <div className="mt-3">
+                    <div className="mt-4">
                         <table className="table table-striped text-center">
                             <thead>
                                 <tr>
@@ -233,22 +258,88 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                                 {orderServicesData.map((service, index) => {
                                     const serviceDetails = otherServices.find(s => s.otherServiceId === service.otherServiceId);
                                     return (
-                                        <tr key={service.otherServiceId}>
-                                            <td>{serviceDetails?.name}</td>
-                                            <td>{service.serviceQuantity}</td>
-                                            <td>{new Date(service.time).toLocaleString()}</td>
-                                            <td>
-                                                <Button
-                                                    variant="danger"
-                                                    onClick={() => handleRemoveService(index)}
-                                                >
-                                                    Xóa
-                                                </Button>
-                                            </td>
-                                        </tr>
+                                        <React.Fragment key={service.otherServiceId}>
+                                            {/* Main Row */}
+                                            <tr>
+                                                <td>{serviceDetails?.name}</td>
+                                                <td>{service.serviceQuantity}</td>
+                                                <td>
+                                                    {new Intl.DateTimeFormat('vi-VN', {
+                                                        timeZone: 'Asia/Ho_Chi_Minh',
+                                                        dateStyle: 'short',
+                                                        timeStyle: 'short'
+                                                    }).format(new Date(service.time))}
+                                                </td>
+                                                <td>
+                                                    <Button
+                                                        variant="danger"
+                                                        onClick={() => handleRemoveService(index)}
+                                                    >
+                                                        Xóa
+                                                    </Button>
+                                                </td>
+                                            </tr>
+
+                                            {/* Note Row */}
+                                            <tr>
+                                                <td colSpan="4">
+                                                    <div
+                                                        style={{
+                                                            padding: '5px',
+                                                            border: '1px solid #ccc',
+                                                            borderRadius: '4px',
+                                                            textAlign: 'left',
+                                                            position: 'relative',
+                                                        }}
+                                                    >
+                                                        {/* Display truncated or full note */}
+                                                        <div
+                                                            style={{
+                                                                maxHeight: expandedNotes.includes(index) ? 'none' : '35px', // Toggle height
+                                                                overflowY: expandedNotes.includes(index) ? 'visible' : 'hidden', // Hide overflow unless expanded
+                                                                textOverflow: 'ellipsis', // Add ellipsis when collapsed
+                                                                display: expandedNotes.includes(index) ? 'block' : 'inline', // Adjust layout
+                                                            }}
+                                                        >
+                                                            {expandedNotes.includes(index)
+                                                                ? service.note || "Không có ghi chú"
+                                                                : (service.note || "Không có ghi chú").slice(0, 50) + (service.note && service.note.length > 100 ? "..." : "")}
+                                                        </div>
+
+                                                        {/* Button position based on state */}
+                                                        {service.note && service.note.length > 100 && (
+                                                            <div
+                                                                style={{
+                                                                    marginTop: expandedNotes.includes(index) ? '5px' : '0', // Add space for "See Less"
+                                                                    textAlign: expandedNotes.includes(index) ? 'right' : 'left', // Align for consistency
+                                                                    display: expandedNotes.includes(index) ? 'block' : 'inline', // Change line position
+                                                                }}
+                                                            >
+                                                                <button
+                                                                    onClick={() => toggleNoteExpansion(index)}
+                                                                    style={{
+                                                                        backgroundColor: 'transparent',
+                                                                        border: 'none',
+                                                                        color: '#007bff',
+                                                                        cursor: 'pointer',
+                                                                    }}
+                                                                >
+                                                                    {expandedNotes.includes(index) ? 'Thu gọn' : 'Xem thêm'}
+                                                                </button>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+
+                                        </React.Fragment>
                                     );
                                 })}
                             </tbody>
+
+
                         </table>
                     </div>
                 )}

@@ -5,7 +5,6 @@ import SelectRoomCategories from './selectRoomCate';
 
 const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId, canInput }, ref) => {
     const roomCategoriesRef = useRef(null);
-
     const [errors, setErrors] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
     const today = new Date().toISOString().split('T')[0];
@@ -60,7 +59,6 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     const handleTotalRoomsRemaining = (totalRoomsRemaining) => {
         setTotalRoomsRemaining(totalRoomsRemaining);
     };
-
     const validateForm = () => {
         const newErrors = {};
         const today = new Date();
@@ -78,9 +76,14 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
         const selectedRooms = Object.values(roomPrices).some(price => price > 0);
         if (!selectedRooms) {
             newErrors.roomSelection = "Vui lòng chọn ít nhất một phòng với số lượng lớn hơn 0";
-            setErrorMessage(newErrors.roomSelection);
+            setErrorMessage(newErrors.roomSelection);  // Set error message
         } else {
-            setErrorMessage('');
+            setErrorMessage('');  // Clear error message if there are selected rooms
+        }
+
+        // Add validation for note field
+        if (bookingData.note.length > 700) {
+            newErrors.note = "Ghi chú không được vượt quá 200 ký tự";
         }
 
         setErrors(newErrors);
@@ -120,10 +123,77 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     useImperativeHandle(ref, () => ({
         createBooking
     }));
+    if (!canInput) {
+        return (
+            <Row style={{ width: "65%" }}>
+                <Card>
+                    <Card.Header className="text-bg-info">
+                        <h5 className="text-center">Chọn Loại Phòng & Số Lượng</h5>
+                    </Card.Header>
+                    <Card.Body>
+                        <Row className="mb-3">
+                            <Col md={6} className="mx-auto">
+                                <Form.Group controlId="checkin">
+                                    <Form.Label className="d-block text-center">
+                                        <strong>Check-in Ngày:</strong>
+                                    </Form.Label>
+                                    <Form.Control
+                                        type="date"
+                                        name="checkin"
+                                        value={bookingData.checkin}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.checkin}
+                                        required
+                                    />
+                                    <Form.Control.Feedback type="invalid" className="text-center">
+                                        {errors.checkin}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
 
+                            <Col md={6} className="mx-auto">
+                                <Form.Group controlId="checkout">
+                                    <Form.Label className="d-block text-center">
+                                        <strong>Check-out Ngày:</strong>
+                                    </Form.Label>
+                                    <Form.Control
+                                        type="date"
+                                        name="checkout"
+                                        value={bookingData.checkout}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.checkout}
+                                        required
+                                    />
+                                    <Form.Control.Feedback type="invalid" className="text-center">
+                                        {errors.checkout}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="mb-3">
+                            <Col md={12}>
+                                <SelectRoomCategories
+                                    ref={roomCategoriesRef}
+                                    checkin={bookingData.checkin}
+                                    checkout={bookingData.checkout}
+                                    onQuantityChange={handleRoomQuantityChange}
+                                    onTotalRoomsRemaining={handleTotalRoomsRemaining}
+                                    customerID={customerID}
+                                    locationId={locationId}
+                                    canInput={canInput}
+                                />
+                            </Col>
+                        </Row>
+
+                    </Card.Body>
+                </Card>
+            </Row>
+
+        );
+    }
     return (
         <Card className="mb-2">
-            <Card.Header as="h5" className="bg-primary text-white">Chọn Loại Phòng & Số Lượng</Card.Header>
+            <Card.Header className="text-bg-info"><h5>Chọn Loại Phòng & Số Lượng</h5></Card.Header>
             <Card.Body>
 
                 <Row className="mb-3">
@@ -155,7 +225,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                             <Form.Control.Feedback type="invalid">{errors.checkout}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
-                    <Col md={3}>
+                    {canInput && (<Col md={3}>
                         <Form.Group>
                             <Form.Label><strong>Số lượng người</strong></Form.Label>
                             <Form.Control
@@ -169,7 +239,8 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                             />
                             <Form.Control.Feedback type='invalid'>{errors.humans}</Form.Control.Feedback>
                         </Form.Group>
-                    </Col>
+                    </Col>)}
+
                 </Row>
 
                 <SelectRoomCategories
@@ -187,7 +258,27 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
                 {canInput && (
                     <Row>
-                        <p><strong>Tổng Chi phí</strong> = Phí dịch vụ + Phí đặt phòng = {totalAmount} VND</p>
+                        {/* Note Input Field */}
+                        <Row className="mb-3">
+                            <Col >
+                                <Form.Group controlId="note">
+                                    <Form.Label><strong>Ghi chú đặt phòng</strong></Form.Label>
+                                    <Form.Control
+                                        as="textarea"
+                                        rows={3}
+                                        placeholder="Nhập ghi chú (nếu có)"
+                                        name="note"
+                                        value={bookingData.note}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.note}
+                                    />
+                                    <Form.Control.Feedback type="invalid">{errors.note}</Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <p><strong>Tổng Chi phí</strong> = Phí dịch vụ + Phí đặt phòng = {totalAmount} VND</p>
+                        </Row>
                     </Row>
                 )}
             </Card.Body>
