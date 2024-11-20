@@ -17,6 +17,7 @@ const orderServiceSchema = new Schema(
             required: [true, 'bookingId là bắt buộc']
         },
         quantity: { type: Number },
+        status: { type: String, required: true },
         note: { type: String }
     },
     {
