@@ -76,6 +76,37 @@ const deleteCustomer = async (req, res) => {
     res.status(500).json({ message: error.toString() });
   }
 };
+// GET: /customer-accounts/:bookingId
+const getCustomerByBookingId = async (req, res) => {
+  try {
+    // Step 1: Find the order room(s) by bookingId
+    const orderRooms = await OrderRoom.find({ bookingId: req.params.bookingId });
+
+    // If no order rooms are found
+    if (!orderRooms.length) {
+      return res.status(404).json({ message: "No OrderRoom found for this bookingId" });
+    }
+
+    // Step 2: Get the customerId from the first order room (assuming one customer per booking)
+    const customerId = orderRooms[0].customerId;
+    
+    // Step 3: Find the customer by customerId
+    const customerAccount = await Customer.findById(customerId);
+    
+    // If no customer is found
+    if (!customerAccount) {
+      return res.status(404).json({ message: "Customer not found" });
+    }
+
+    // Step 4: Send the customer data as a response
+    res.status(200).json(customerAccount);
+  } catch (error) {
+    console.error('Error fetching customer by bookingId:', error);
+    res.status(500).json({ message: error.toString() });
+  }
+};
+
+
 
 export default {
   getCustomers,
@@ -83,4 +114,5 @@ export default {
   createCustomer,
   editCustomer,
   deleteCustomer,
+  getCustomerByBookingId
 };
