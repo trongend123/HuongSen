@@ -25,6 +25,7 @@ import ContractRouter from "./contract.js";
 import OrderServiceRouter from "./orderServiceRoute.js";
 import paymentRoute from "./paymentRoute.js";
 import ServiceBookingRouter from "./servicebooking.js";
+import Email from "./email.js";
 
 
 export {
@@ -52,6 +53,5 @@ export {
     ContractRouter,
     OrderServiceRouter,
     paymentRoute,
-    ServiceBookingRouter
-    
-}
+    ServiceBookingRouter,
+};

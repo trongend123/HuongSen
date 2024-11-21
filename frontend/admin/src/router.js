@@ -16,6 +16,8 @@ import Checkin from './components/checkin';
 import BookingDetails from './components/bookingDetails';
 import ServiceBookingList from './components/servicebooking';
 
+import BookingPage from './screens/pageBookingByStaff';
+
 function router() {
   const user = JSON.parse(localStorage.getItem("user"));
   const role = user.role;
@@ -44,7 +46,8 @@ function router() {
           <Route path="/rooms" element={<ListRoom />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/bookings" element={<ListBooking />} />
-          <Route path="/createBooking" element={<CreateBookingByStaff />} />
+          {/* <Route path="/createBooking" element={<CreateBookingByStaff />} /> */}
+          <Route path="/bookingPage" element={<BookingPage />} />
           <Route path="/updateBookingInfo" element={<UpdateBookingInfo />} />
           <Route path="/saveHistory" element={<SaveHistory />} />
           <Route path='/change-password' element={<ChangePassword />} />

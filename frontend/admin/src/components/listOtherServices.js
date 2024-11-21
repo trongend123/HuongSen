@@ -81,10 +81,24 @@ const ListOtherServices = () => {
         let valid = true;
         const newErrors = { name: "", price: "" };
 
+        // Check for empty name field
         if (!newService.name) {
             newErrors.name = "Tên dịch vụ là bắt buộc!";
             valid = false;
         }
+
+        // Check if name is unique
+        const isDuplicateName = services.some(
+            (service) =>
+                service.name.toLowerCase() === newService.name.toLowerCase().trim() &&
+                (!editingService || service._id !== editingService._id) // Ignore if editing the same service
+        );
+        if (isDuplicateName) {
+            newErrors.name = "Tên dịch vụ đã tồn tại!";
+            valid = false;
+        }
+
+        // Check for price field validation
         if (!newService.price || parseFloat(newService.price) < 10000) {
             newErrors.price = "Giá phải lớn hơn 10,000!";
             valid = false;
@@ -231,7 +245,7 @@ const ListOtherServices = () => {
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label>Tên dịch vụ:</Form.Label>
+                            <Form.Label>Tên dịch vụ</Form.Label>
                             <Form.Control
                                 type="text"
                                 name="name"
@@ -243,7 +257,7 @@ const ListOtherServices = () => {
                             {errors.name && <Form.Text className="text-danger">{errors.name}</Form.Text>}
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Giá:</Form.Label>
+                            <Form.Label>Giá (VND)</Form.Label>
                             <Form.Control
                                 type="number"
                                 name="price"
@@ -255,6 +269,7 @@ const ListOtherServices = () => {
                             {errors.price && <Form.Text className="text-danger">{errors.price}</Form.Text>}
                         </Form.Group>
                         <Form.Group>
+                            <Form.Label>Mô tả</Form.Label>
                             <Form.Label>Mô tả</Form.Label>
                             <Form.Control
                                 as="textarea"
