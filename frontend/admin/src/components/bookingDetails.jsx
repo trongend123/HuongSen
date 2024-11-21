@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./bookingDetails.css";
+import { Col, Container, Row } from 'react-bootstrap';
 const BookingDetails = () => {
     const { bookingId } = useParams();
     const [orderRooms, setOrderRooms] = useState([]);
@@ -49,27 +50,36 @@ const BookingDetails = () => {
     return (
         <div className="booking-details">
             <h2>Thông tin Đặt phòng</h2>
-            <h3>Mã Đặt phòng: {orderRooms[0].bookingId?._id || 'N/A'}</h3>
+            <h3>Mã Đặt phòng: {orderRooms[0].bookingId?._id || 'N/A'} - Mã hợp đồng: {orderRooms[0].bookingId?.contract || 'N/A'}</h3>
 
             <section className="customer-info">
-                <h4>Thông tin Khách hàng</h4>
+            <h4>Thông tin Khách hàng</h4>
+                <Row>
+                <Col md={3}>
                 <p><strong>Họ và tên:</strong> {orderRooms[0].customerId?.fullname || 'N/A'}</p>
-                <p><strong>Email:</strong> {orderRooms[0].customerId?.email || 'N/A'}</p>
-                <p><strong>Số điện thoại:</strong> {orderRooms[0].customerId?.phone || 'N/A'}</p>
-                <p><strong>Ngày sinh:</strong> {formatDate(orderRooms[0].customerId?.dob)}</p>
-                <p><strong>Giới tính:</strong> {orderRooms[0].customerId?.gender || 'N/A'}</p>
-                <p><strong>Địa chỉ:</strong> {orderRooms[0].customerId?.address || 'N/A'}</p>
-            </section>
 
-            <section className="booking-info">
-                <h4>Thông tin Đặt phòng</h4>
-                <p><strong>Trạng thái:</strong> {orderRooms[0].bookingId?.status || 'N/A'}</p>
-                <p><strong>Thanh toán:</strong> {orderRooms[0].bookingId?.payment || 'N/A'}</p>
-                <p><strong>Giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p>
-                <p><strong>Check-in:</strong> {formatDate(orderRooms[0].bookingId?.checkin)}</p>
-                <p><strong>Check-out:</strong> {formatDate(orderRooms[0].bookingId?.checkout)}</p>
-                <p><strong>Ghi chú:</strong> {orderRooms[0].bookingId?.note || 'N/A'}</p>
-                <p><strong>Hợp đồng:</strong> {orderRooms[0].bookingId?.contract || 'N/A'}</p>
+                </Col>
+                <Col md={3}>
+                <p><strong>Ngày sinh:</strong> {formatDate(orderRooms[0].customerId?.dob)}</p>
+                </Col>
+                <Col md={3}>
+                <p><strong>Số điện thoại:</strong> {orderRooms[0].customerId?.phone || 'N/A'}</p>
+                </Col>
+                <Col md={3}>
+                <p><strong>Giới tính:</strong> {orderRooms[0].customerId?.gender || 'N/A'}</p>
+                </Col>
+                </Row>
+                <Row>
+                    <Col md={4}>
+                    <p><strong>Email:</strong> {orderRooms[0].customerId?.email || 'N/A'}</p>
+                    </Col>
+                    <Col md={4}>
+                    Số định danh:
+                    </Col>
+                    <Col md={4}>
+                    <p><strong>Địa chỉ:</strong> {orderRooms[0].customerId?.address || 'N/A'}</p>
+                    </Col>
+                </Row>
             </section>
 
             {orderRooms.map((orderRoom) => (
@@ -88,6 +98,18 @@ const BookingDetails = () => {
                     </section>
                 </div>
             ))}
+
+            <section className="booking-info">
+                <h4>Thông tin Đặt phòng</h4>
+                <p><strong>Trạng thái:</strong> {orderRooms[0].bookingId?.status || 'N/A'}</p>
+                <p><strong>Thanh toán:</strong> {orderRooms[0].bookingId?.payment || 'N/A'}</p>
+                <p><strong>Giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p>
+                <p><strong>Check-in:</strong> {formatDate(orderRooms[0].bookingId?.checkin)}</p>
+                <p><strong>Check-out:</strong> {formatDate(orderRooms[0].bookingId?.checkout)}</p>
+                <p><strong>Ghi chú:</strong> {orderRooms[0].bookingId?.note || 'N/A'}</p>
+            </section>
+
+            
         </div>
     );
 };
