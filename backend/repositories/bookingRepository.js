@@ -10,10 +10,8 @@ class BookingRepository {
     }
 
   // Lấy tất cả bookings với phân trang
-    async getAllBookings(skip, limit) {
+    async getAllBookings() {
         return await Booking.find()
-            .skip(skip) // Bắt đầu từ vị trí 'skip'
-            .limit(limit) // Giới hạn số lượng bản ghi
             .populate('taxId')
             .populate('staffId')
             .exec();

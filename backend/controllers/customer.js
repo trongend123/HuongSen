@@ -29,7 +29,7 @@ const createCustomer = async (req, res) => {
     const newCustomer = await Customer.create(req.body);
     res.status(201).json(newCustomer);
 
-    // Đặt timeout để kiểm tra sau 10 giây
+    // Đặt timeout để kiểm tra sau 5 giây
     setTimeout(async () => {
       try {
         // Kiểm tra xem có đơn hàng nào với customerId vừa tạo không
@@ -45,7 +45,7 @@ const createCustomer = async (req, res) => {
       } catch (error) {
         console.error(`Error checking orders or deleting customer: ${error}`);
       }
-    }, 5000); // 10 giây
+    }, 5000); // 5 giây
   } catch (error) {
     res.status(500).json({ message: error.toString() });
   }

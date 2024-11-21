@@ -28,9 +28,9 @@ const ListRoom = () => {
       // If user is 'staffds', set a default location and hide location dropdown
       if (storedUser.role === 'staff_ds') {
         setSelectedLocation('66f6c536285571f28087c16b');
-      }else if (storedUser.role === 'staff_cb') {
+      } else if (storedUser.role === 'staff_cb') {
         setSelectedLocation('66f6c59f285571f28087c16d');
-      }else if (storedUser.role === 'staff_mk') {
+      } else if (storedUser.role === 'staff_mk') {
         setSelectedLocation('66f6c5c9285571f28087c16a');
       }
     }
@@ -58,7 +58,7 @@ const ListRoom = () => {
     : categories;
   // Count rooms by status
   const countRoomsByStatus = (rooms) => {
-    const counts = { available: 0, booked: 0, inUse: 0 , inFix: 0};
+    const counts = { available: 0, booked: 0, inUse: 0, inFix: 0 };
 
     rooms.forEach((room) => {
       if (room.status === 'Trống') counts.available++;
@@ -76,6 +76,7 @@ const ListRoom = () => {
     setSelectedRoom(room);
     setUpdatedCategory(room.roomCategoryId._id);
     setUpdatedStatus(room.status);
+    setBookingId(room.bookingId?._id);
     setShowModal(true);
   };
 
@@ -83,7 +84,6 @@ const ListRoom = () => {
     const updatedRoom = {
       ...selectedRoom,
       roomCategoryId: updatedCategory,
-      bookingId: bookingId,
       status: updatedStatus,
     };
 
@@ -106,9 +106,9 @@ const ListRoom = () => {
     <Container>
       <h2 className="text-center my-4">Sơ đồ phòng và tình trạng phòng</h2>
 
-      
+
       {userRole === "admin" && (
-          <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
+        <Form.Group controlId="categorySelect" className="my-4" style={{ width: '50%' }}>
           <Form.Label>Chọn cơ sở:</Form.Label>
           <Form.Control
             as="select"
@@ -121,10 +121,10 @@ const ListRoom = () => {
             <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
           </Form.Control>
         </Form.Group>
-        )}
+      )}
 
       {/* Display Room Status Counts */}
-      
+
       <Row>
         <Col>
           <Card className="text-center">
@@ -139,7 +139,7 @@ const ListRoom = () => {
             <Card.Body>
               <Card.Title>Tổng số phòng được đặt</Card.Title>
               <Card.Text>
-              {roomCounts.booked}
+                {roomCounts.booked}
               </Card.Text>
             </Card.Body>
           </Card>
@@ -164,80 +164,78 @@ const ListRoom = () => {
         <MinhKhaiRooms rooms={filteredRooms} onClick={handleRoomClick} />
       )}
 
-<div className="note">
-  <button style={{ backgroundColor: "red", color: "white", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px" }}>
-    Đang sửa chữa
-  </button>
-  <button style={{ backgroundColor: "#d3d3d3", color: "black", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px"  }}>
-    Trống
-  </button>
-  <button style={{ backgroundColor: "yellow", color: "black", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px" }}>
-    Đã book
-  </button>
-  <button style={{ backgroundColor: "lightgreen", color: "black", padding: "10px", borderRadius: "5px",width: "150px", border: "none", margin: "5px" }}>
-    Đang sử dụng
-  </button>
-</div>
+      <div className="note">
+        <button style={{ backgroundColor: "red", color: "white", padding: "10px", borderRadius: "5px", width: "150px", border: "none", margin: "5px" }}>
+          Đang sửa chữa
+        </button>
+        <button style={{ backgroundColor: "#d3d3d3", color: "black", padding: "10px", borderRadius: "5px", width: "150px", border: "none", margin: "5px" }}>
+          Trống
+        </button>
+        <button style={{ backgroundColor: "yellow", color: "black", padding: "10px", borderRadius: "5px", width: "150px", border: "none", margin: "5px" }}>
+          Đã book
+        </button>
+        <button style={{ backgroundColor: "lightgreen", color: "black", padding: "10px", borderRadius: "5px", width: "150px", border: "none", margin: "5px" }}>
+          Đang sử dụng
+        </button>
+      </div>
 
 
-<Modal show={showModal} onHide={handleClose}>
-  <Modal.Header closeButton>
-    <Modal.Title>Cập nhật thông tin phòng</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    {selectedRoom && (
-      <>
-        {user?.role === "admin" && (
-          <Form.Group controlId="categorySelect">
-            <Form.Label>Loại phòng:</Form.Label>
-            <Form.Control
-              as="select"
-              value={updatedCategory}
-              onChange={(e) => setUpdatedCategory(e.target.value)}
-            >
-              {filteredCategories.map((category) => (
-                <option key={category._id} value={category._id}>
-                  {category.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-        )}
-        <Form.Group controlId="statusSelect" className="mt-3">
-          <Form.Label>Trạng thái phòng:</Form.Label>
-          <Form.Control
-            as="select"
-            value={updatedStatus}
-            onChange={(e) => {
-              setUpdatedStatus(e.target.value);
-              if (e.target.value !== "Đang sử dụng") {
-                setBookingId(""); // Clear bookingId if status is not "Đang sử dụng"
-              }
-            }}
-          >
-            <option value="Trống">Trống</option>
-            <option value="Đã book">Đã book</option>
-            <option value="Đang sử dụng">Đang sử dụng</option>
-            <option value="Đang sửa chữa">Đang sửa chữa</option>
-          </Form.Control>
-        </Form.Group>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Cập nhật thông tin phòng</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedRoom && (
+            <>
+              {user?.role === "admin" && (
+                <Form.Group controlId="categorySelect">
+                  <Form.Label>Loại phòng:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={updatedCategory}
+                    onChange={(e) => setUpdatedCategory(e.target.value)}
+                  >
+                    {filteredCategories.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+              )}
+              <Form.Group controlId="statusSelect" className="mt-3">
+                <Form.Label>Trạng thái phòng:</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={updatedStatus}
+                  onChange={(e) => {
+                    setUpdatedStatus(e.target.value);
+                    if (e.target.value !== "Đang sử dụng") {
+                      setBookingId(""); // Clear bookingId if status is not "Đang sử dụng"
+                    }
+                  }}
+                >
+                  <option value="Trống">Trống</option>
+                  <option value="Đã book">Đã book</option>
+                  <option value="Đang sửa chữa">Đang sửa chữa</option>
+                </Form.Control>
+              </Form.Group>
 
-        {updatedStatus === "Đang sử dụng" && (
-          <Form.Group controlId="bookingIdInput" className="mt-3">
-            <Form.Label>Booking ID:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Nhập Booking ID"
-              value={bookingId}
-              onChange={(e) => setBookingId(e.target.value)}
-              required
-            />
-          </Form.Group>
-        )}
-      </>
-    )}
-  </Modal.Body>
-  <Modal.Footer>         
+              {updatedStatus === "Đang sử dụng" || updatedStatus === "Đã book" && (
+                <Form.Group controlId="bookingIdInput" className="mt-3">
+                  <Form.Label>Booking ID:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={bookingId}
+                    onChange={(e) => setBookingId(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              )}
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
           <Button variant="primary" onClick={handleUpdate} style={{ marginRight: '10px' }}>
             Cập nhật
           </Button>

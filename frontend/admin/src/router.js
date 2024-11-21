@@ -12,6 +12,7 @@ import ListBooking from './components/listBooking';
 import reportWebVitals from './reportWebVitals';
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import ListOtherServices from './components/listOtherServices';
+import Checkin from './components/checkin';
 import BookingDetails from './components/bookingDetails';
 
 import BookingPage from './screens/pageBookingByStaff';
@@ -48,6 +49,7 @@ function router() {
           <Route path="/updateBookingInfo" element={<UpdateBookingInfo />} />
           <Route path="/saveHistory" element={<SaveHistory />} />
           <Route path='/change-password' element={<ChangePassword />} />
+          <Route path='/checkin/:id' element={<Checkin />} />
           <Route path="/bookings/:bookingId" element={<BookingDetails />} />
         </Routes>
       );

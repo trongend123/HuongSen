@@ -96,6 +96,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             return;
         }
         try {
+            // Calculate the final price, including services
             const finalPrice = totalAmount;
 
             setBookingData(prevBookingData => ({
@@ -103,17 +104,31 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                 price: finalPrice
             }));
 
+            // Create the booking
             const response = await axios.post('http://localhost:9999/bookings', {
                 ...bookingData,
                 price: finalPrice
             });
 
-            const bookingId = response.data._id;
+            const bookingId = response.data._id; // Get the bookingId from the response
 
-            await roomCategoriesRef.current.createOrderRoom(bookingId);
+            // Call the function to create order rooms
+            const result = await roomCategoriesRef.current.createOrderRoom(bookingId);
 
+            if (result === undefined || result === false) {
+                // If result is falsy, indicate insufficient rooms
+                setErrorMessage('Không đủ số lượng phòng');
+
+                // Optionally delete the booking if rooms couldn't be reserved
+                await axios.delete(`http://localhost:9999/bookings/${bookingId}`);
+                console.log(`Booking with ID ${bookingId} has been deleted due to insufficient room selection.`);
+
+                return; // Exit the function
+            }
+
+            // Trigger callback to notify booking creation
             onBookingCreated(bookingId);
-            return response.data._id;
+            return bookingId;
         } catch (error) {
             console.error('Error creating booking:', error);
             alert('Error creating booking');

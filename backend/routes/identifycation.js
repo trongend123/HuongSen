@@ -9,7 +9,7 @@ identifycationRouter.get("/", IdentifycationController.getIdentifycations);
 // GET: /identifycations/:id -> Get identification by Id
 identifycationRouter.get("/:id", IdentifycationController.getIdentifycationById);
 // Route to get identifications by customer ID
-identifycationRouter.get('/customer/:customerID', IdentifycationController.getIdentifycationsByCustomerId);
+identifycationRouter.get('/customer/:customerID', IdentifycationController.getIdentificationByCustomerId);
 
 // POST: /identifycations -> Create a new identification
 identifycationRouter.post("/", IdentifycationController.createIdentifycation);

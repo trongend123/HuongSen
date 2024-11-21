@@ -29,44 +29,44 @@ const CustomerBookingPage = () => {
         setServiceTotal(total);
     };
 
+
     const handleCreateBoth = async () => {
         try {
-            // 1. Create user
+            // 1. Tạo khách hàng
             const createdUserId = await userFormRef.current.createUser();
             if (createdUserId) {
-                setUserId(createdUserId); // Store user ID
-                console.log("User created with ID");
+                setUserId(createdUserId); // Lưu ID khách hàng
+                console.log("Khách hàng đã được tạo với ID");
 
-                // 2. Create identity after user is created
-                const identifyCreated = await identifyFormRef.current.createIdentify(createdUserId);
-                if (!identifyCreated) {
-                    console.log('Identity creation failed.');
-                    alert('An error occurred while creating identity. Please try again.');
-                    return; // Stop further execution if identity creation fails
-                }
-
-                // 3. Create booking
+                // 3. Tạo đặt phòng
                 const createdBookingId = await bookingFormRef.current.createBooking();
                 if (createdBookingId) {
-                    setBookingId(createdBookingId); // Store booking ID
+                    setBookingId(createdBookingId); // Lưu ID đặt phòng
 
-                    // 4. Add selected services to orderService after booking is created
+                    // 2. Tạo giấy tờ tùy thân sau khi khách hàng được tạo
+                    const identifyCreated = await identifyFormRef.current.createIdentify(createdUserId);
+                    if (!identifyCreated) {
+                        console.log('Tạo giấy tờ tùy thân thất bại.');
+                        alert('Có lỗi xảy ra khi tạo giấy tờ tùy thân. Vui lòng thử lại.');
+                        return; // Dừng thực thi nếu tạo giấy tờ tùy thân thất bại
+                    }
+
+                    // 4. Thêm dịch vụ đã chọn vào orderService sau khi đặt phòng được tạo
                     await addServiceRef.current.addService(createdBookingId);
-                    console.log('Booking and services created successfully!');
-
+                    console.log('Đặt phòng và dịch vụ đã được tạo thành công!');
                     //5. Xử ký payment
                     handlePayment(createdBookingId);
                 } else {
-                    alert('An error occurred while creating booking or services. Please try again.');
-                    console.log('Booking and services not created.');
+                    alert('Có lỗi xảy ra khi tạo đặt phòng hoặc dịch vụ. Vui lòng thử lại.');
+                    console.log('Đặt phòng và dịch vụ chưa được tạo.');
                 }
             } else {
-                alert('An error occurred while creating Customer. Please try again.');
-                console.log('User creation failed.');
+                alert('Có lỗi xảy ra khi tạo khách hàng. Vui lòng thử lại.');
+                console.log('Tạo khách hàng thất bại.');
             }
         } catch (error) {
-            console.error('Error creating user, identification, or booking:', error);
-            alert('An error occurred during creation.');
+            console.error('Lỗi khi tạo khách hàng, giấy tờ tùy thân, hoặc đặt phòng:', error);
+            alert('Có lỗi xảy ra trong quá trình tạo. Vui lòng thử lại.');
         }
     };
 

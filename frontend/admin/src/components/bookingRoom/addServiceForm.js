@@ -130,7 +130,11 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
             });
 
             await Promise.all(promises);
+            // Sau khi thêm dịch vụ thành công, clear orderServicesData
+            setOrderServicesData([]);
             console.log("Thêm dịch vụ và ghi chú thành công!");
+            // Tính lại tổng giá dịch vụ sau khi clear
+            calculateTotalAmount();
         } catch (error) {
             console.error('Lỗi khi thêm dịch vụ:', error);
         }
