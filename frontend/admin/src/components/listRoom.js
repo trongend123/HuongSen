@@ -210,18 +210,19 @@ const ListRoom = () => {
                   value={updatedStatus}
                   onChange={(e) => {
                     setUpdatedStatus(e.target.value);
-                    if (e.target.value !== "Đang sử dụng") {
+                    if (e.target.value !== "Đang sử dụng" && e.target.value !== "Đã book") {
                       setBookingId(""); // Clear bookingId if status is not "Đang sử dụng"
                     }
                   }}
                 >
                   <option value="Trống">Trống</option>
                   <option value="Đã book">Đã book</option>
+                  <option value="Đang sử dụng">Đang sử dụng</option>
                   <option value="Đang sửa chữa">Đang sửa chữa</option>
                 </Form.Control>
               </Form.Group>
 
-              {updatedStatus === "Đang sử dụng" || updatedStatus === "Đã book" && (
+              {updatedStatus === "Đã book" && (
                 <Form.Group controlId="bookingIdInput" className="mt-3">
                   <Form.Label>Booking ID:</Form.Label>
                   <Form.Control
@@ -234,6 +235,18 @@ const ListRoom = () => {
               )}
             </>
           )}
+          {updatedStatus === "Đang sử dụng" && (
+            <Form.Group controlId="bookingIdInput" className="mt-3">
+              <Form.Label>Booking ID:</Form.Label>
+              <Form.Control
+                type="text"
+                value={bookingId}
+                onChange={(e) => setBookingId(e.target.value)}
+                required
+              />
+            </Form.Group>
+          )}
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleUpdate} style={{ marginRight: '10px' }}>

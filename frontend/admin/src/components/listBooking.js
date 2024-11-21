@@ -251,6 +251,7 @@ const ListBooking = () => {
               <td>
                 {booking.bookingId.status !== 'Cancelled' && booking.bookingId.status !== 'Completed' && (
                   <>
+                  {userRole !== "admin" && (
                     <Button
                       variant="warning"
                       className="me-2"
@@ -261,6 +262,7 @@ const ListBooking = () => {
                     >
                       Check-in
                     </Button>
+                  )}
                     {userRole === "admin" && (
                       <Button
                         variant="danger"

@@ -37,7 +37,7 @@ const Dashboard = () => {
   }, []);
   const filteredOrderData = orderData.filter((order) => {
     const matchesLocation = selectedLocation ? order.roomCateId.locationId === selectedLocation : true;
-    const matchesStatus = order.bookingId.status === 'Completed';
+    const matchesStatus = order.bookingId.status ? order.bookingId.status === 'Completed' : true;
     return matchesLocation && matchesStatus;
   });
 
