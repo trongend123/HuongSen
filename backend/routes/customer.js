@@ -18,4 +18,6 @@ customerRouter.put("/:id", CustomerController.editCustomer);
 // DELETE: /customer-accounts/:id -> Delete customer account by Id
 customerRouter.delete("/:id", CustomerController.deleteCustomer);
 
+// GET: /customer-accounts/:bookingId -> Get customer account by bookingId
+customerRouter.get("/customer-accounts/:bookingId", CustomerController.getCustomerByBookingId);
 export default customerRouter;
