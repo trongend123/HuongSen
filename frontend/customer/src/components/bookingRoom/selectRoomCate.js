@@ -9,7 +9,6 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
     const [nights, setNights] = useState(1);
     const [selectedRooms, setSelectedRooms] = useState([]);
 
-    // Calculate the number of nights between checkin and checkout
     useEffect(() => {
         const checkinDate = new Date(checkin);
         const checkoutDate = new Date(checkout);
@@ -18,39 +17,41 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         setNights(calculatedNights > 0 ? calculatedNights : 1);
     }, [checkin, checkout]);
 
-    // Fetch room categories and remaining room data based on checkin and checkout dates
+    const fetchRoomData = async () => {
+        try {
+            const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
+            const filteredRoomCategories = roomCategoriesResponse.data.filter(room => room.locationId._id === locationId);
+            setRoomCategories(filteredRoomCategories);
+
+            const bookedRoomsResponse = await axios.get(`http://localhost:9999/orderRooms/totalbycategory/?checkInDate=${checkin}&checkOutDate=${checkout}`);
+            const bookedRoomsMap = {};
+            bookedRoomsResponse.data.forEach(item => {
+                bookedRoomsMap[item.roomCateId] = item.totalRooms;
+            });
+
+            const totalRoomsResponse = await axios.get('http://localhost:9999/rooms/category/totals');
+            const initialRemainingRooms = {};
+            totalRoomsResponse.data.categoryTotals.forEach(room => {
+                const totalRooms = room.totalRooms;
+                const bookedRooms = bookedRoomsMap[room.roomCateId] || 0;
+                initialRemainingRooms[room.roomCateId] = totalRooms - bookedRooms;
+            });
+
+            setRemainingRooms(initialRemainingRooms);
+            const totalRoomsRemaining = Object.values(initialRemainingRooms).reduce((sum, rooms) => sum + rooms, 0);
+            onTotalRoomsRemaining(totalRoomsRemaining);
+
+            return initialRemainingRooms; // Return the updated remaining rooms
+        } catch (error) {
+            console.error('Error fetching room data:', error);
+            throw error;
+        }
+    };
+
     useEffect(() => {
-        const fetchRoomData = async () => {
-            try {
-                const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
-                const filteredRoomCategories = roomCategoriesResponse.data.filter(room => room.locationId._id === locationId);
-                setRoomCategories(filteredRoomCategories);
-
-                const bookedRoomsResponse = await axios.get(`http://localhost:9999/orderRooms/totalbycategory/?checkInDate=${checkin}&checkOutDate=${checkout}`);
-                const bookedRoomsMap = {};
-                bookedRoomsResponse.data.forEach(item => {
-                    bookedRoomsMap[item.roomCateId] = item.totalRooms;
-                });
-
-                const totalRoomsResponse = await axios.get('http://localhost:9999/rooms/category/totals');
-                const initialRemainingRooms = {};
-                totalRoomsResponse.data.categoryTotals.forEach(room => {
-                    const totalRooms = room.totalRooms;
-                    const bookedRooms = bookedRoomsMap[room.roomCateId] || 0;
-                    initialRemainingRooms[room.roomCateId] = totalRooms - bookedRooms;
-                });
-                setRemainingRooms(initialRemainingRooms);
-                const totalRoomsRemaining = Object.values(initialRemainingRooms).reduce((sum, rooms) => sum + rooms, 0);
-                onTotalRoomsRemaining(totalRoomsRemaining);
-            } catch (error) {
-                console.error('Error fetching room data:', error);
-            }
-        };
-
         fetchRoomData();
     }, [checkin, checkout, onTotalRoomsRemaining, locationId]);
 
-    // Handle room quantity change
     const handleQuantityChange = (e, roomId) => {
         const value = Math.max(0, Math.min(e.target.value, remainingRooms[roomId] || 0));
         setQuantity({
@@ -81,7 +82,6 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         onQuantityChange(roomId, value, price);
     };
 
-    // Group rooms by locationId
     const groupedRooms = roomCategories.reduce((groups, room) => {
         const location = room.locationId?.name || 'Unknown Location';
         if (!groups[location]) {
@@ -91,14 +91,28 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         return groups;
     }, {});
 
-    // Expose createOrderRoom method to the parent component using ref
     const createOrderRoom = async (bookingId) => {
         try {
-            if (!selectedRooms.length) {
-                alert('No rooms selected.');
-                return;
+            const updatedRemainingRooms = await fetchRoomData(); // Fetch the latest data
+
+            // Check for invalid room selections
+            const invalidSelections = selectedRooms.filter(room => {
+                const available = updatedRemainingRooms[room.roomCateId] || 0;
+                return room.quantity > available;
+            });
+
+            if (invalidSelections.length > 0) {
+                // alert('Some room selections exceed the available number of rooms. Please adjust your selections.');
+                return false; // Return false to indicate failure
             }
 
+            // Check if no rooms were selected
+            if (!selectedRooms.length) {
+                alert('No rooms selected.');
+                return false; // Return false to indicate failure
+            }
+
+            // Create room orders
             const orderRoomPromises = selectedRooms.map(room => {
                 return axios.post('http://localhost:9999/orderRooms', {
                     roomCateId: room.roomCateId,
@@ -110,21 +124,25 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
 
             await Promise.all(orderRoomPromises);
             console.log('Order rooms created successfully.');
+            return true; // Return true to indicate success
         } catch (error) {
             console.error('Error creating order rooms:', error);
-            console.log('Error creating order rooms.');
+            alert('An error occurred while creating room orders. Please try again.');
+            // return false; // Return false to indicate failure
         }
     };
+
 
     useImperativeHandle(ref, () => ({
         createOrderRoom,
     }));
 
+
     return (
         <div>
             {Object.keys(groupedRooms).map(location => (
                 <Card key={location} className="mb-2">
-                    <Card.Header>
+                    <Card.Header className='text-center'>
                         <h5>{location}</h5>
                     </Card.Header>
                     <Card.Body>
@@ -132,15 +150,15 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                             const remainingRoomCount = remainingRooms[room._id] || 0;
                             const qty = quantity[room._id] || 0;
                             const totalRoomPrice = room.price * qty * nights;
+                            if (canInput) {
+                                return (
+                                    <Row key={room._id} className="mb-3">
+                                        <Col className="col-8">
+                                            <Form.Label><strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)</Form.Label>
+                                            <h6 className='text-secondary'>Phòng còn trống: {remainingRoomCount} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
+                                        </Col>
+                                        <Col className="col-2 d-flex align-items-center">
 
-                            return (
-                                <Row key={room._id} className="mb-3">
-                                    <Col className="col-8">
-                                        <Form.Label><strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)</Form.Label>
-                                        <h6 className='text-secondary'>Phòng còn trống: {remainingRoomCount} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
-                                    </Col>
-                                    <Col className="col-2 d-flex align-items-center">
-                                        {canInput && (
                                             <Form.Control
                                                 type="number"
                                                 min="0"
@@ -149,7 +167,22 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                                                 onChange={(e) => handleQuantityChange(e, room._id)}
                                                 required
                                             />
-                                        )}
+
+                                        </Col>
+                                    </Row>
+                                );
+                            }
+                            // Form for when `canInput` is false (static display)
+                            return (
+                                <Row key={room._id} className="mb-3 text-center">
+                                    <Col>
+                                        <h6>
+                                            <strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)
+                                        </h6>
+                                        <p className="text-secondary mb-0">
+                                            Phòng còn trống: {remainingRoomCount}
+                                        </p>
+
                                     </Col>
                                 </Row>
                             );

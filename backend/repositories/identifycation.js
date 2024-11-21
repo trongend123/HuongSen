@@ -90,22 +90,23 @@ const deleteIdentifycation = async (id) => {
     }
 };
 
-// Get identifications by customerID
-const listByCustomerId = async (customerID) => {
+// Get identification by customerID
+const getByCustomerId = async (customerID) => {
     try {
-        const identifications = await Identifycation.find({ customerID })
+        const identification = await Identifycation.findOne({ customerID })
             .populate('customerID')
             .exec();
-        return identifications;
+        return identification;
     } catch (error) {
-        throw new Error(`Error fetching identifications by customer ID: ${error.message}`);
+        throw new Error(`Error fetching identification by customer ID: ${error.message}`);
     }
 };
+
 export default {
     create,
     list,
     getById,
     edit,
     deleteIdentifycation,
-    listByCustomerId
+    getByCustomerId
 };

@@ -33,9 +33,9 @@ const ListBooking = () => {
       // If user is 'staffds', set a default location and hide location dropdown
       if (storedUser.role === 'staff_ds') {
         setSelectedLocation('66f6c536285571f28087c16b');
-      }else if (storedUser.role === 'staff_cb') {
+      } else if (storedUser.role === 'staff_cb') {
         setSelectedLocation('66f6c59f285571f28087c16d');
-      }else if (storedUser.role === 'staff_mk') {
+      } else if (storedUser.role === 'staff_mk') {
         setSelectedLocation('66f6c5c9285571f28087c16a');
       }
     }
@@ -150,7 +150,7 @@ const ListBooking = () => {
     <Container>
       <h2 className="text-center my-4">Danh sách Đặt phòng</h2>
       <Row>
-      {userRole === "admin" && (
+        {userRole === "admin" && (
           <Col md={6}>
             <Form.Group controlId="categorySelect" className="my-4">
               <Form.Label>Chọn cơ sở:</Form.Label>
@@ -197,31 +197,31 @@ const ListBooking = () => {
       {/* Search Inputs */}
       <Row>
         <Col md={8}>
-        <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Tìm kiếm theo Mã Đặt phòng hoặc Tên Khách hàng"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </InputGroup>
+          <InputGroup className="mb-3">
+            <FormControl
+              placeholder="Tìm kiếm theo Mã Đặt phòng hoặc Tên Khách hàng"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </InputGroup>
         </Col>
         <Col md={4}>
-            <Form.Control
-              as="select"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-            >
-              <option value="">Tất cả</option>
-              <option value="In Progress">Đang thực hiện</option>
-              <option value="Request refund">Yêu cầu hoàn tiền</option>
-              <option value="Cancelled">Đã Hủy</option>
-              <option value="Completed">Đã hoàn thành</option>
-            </Form.Control>
+          <Form.Control
+            as="select"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="">Tất cả</option>
+            <option value="In Progress">Đang thực hiện</option>
+            <option value="Request refund">Yêu cầu hoàn tiền</option>
+            <option value="Cancelled">Đã Hủy</option>
+            <option value="Completed">Đã hoàn thành</option>
+          </Form.Control>
         </Col>
       </Row>
-      
 
-      
+
+
 
       <Table striped bordered hover>
         <thead>
@@ -257,23 +257,23 @@ const ListBooking = () => {
                       className="me-2"
                       onClick={(e) => {
                         e.stopPropagation(); // Ngăn sự kiện onClick của hàng
-                        navigate(`/checkin/${booking.bookingId._id}`); 
+                        navigate(`/checkin/${booking.bookingId._id}`);
                       }}
                     >
                       Check-in
                     </Button>
                   )}
                     {userRole === "admin" && (
-                    <Button
-                      variant="danger"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Ngăn sự kiện onClick của hàng
-                        handleCancelClick(booking);
-                      }}
-                    >
-                      Hủy
-                    </Button>
-                  )}
+                      <Button
+                        variant="danger"
+                        onClick={(e) => {
+                          e.stopPropagation(); // Ngăn sự kiện onClick của hàng
+                          handleCancelClick(booking);
+                        }}
+                      >
+                        Hủy
+                      </Button>
+                    )}
                   </>
                 )}
               </td>
@@ -294,7 +294,7 @@ const ListBooking = () => {
         ))}
       </Pagination>
 
-      
+
       {/* Detail Modal */}
       {selectedBookingDetails && (
         <Modal show={showDetailModal} onHide={() => setShowDetailModal(false)}>
@@ -325,15 +325,15 @@ const ListBooking = () => {
               Chỉnh sửa
             </Button>
             {userRole === "admin" && (
-            <Button
-              variant="info"
-              style={{ margin: ' 0px 10px' }}
-              onClick={() => {
-                navigate('/historyBookingChange', { state: { bookingId: selectedBookingDetails.bookingId._id } }); // Chuyển hướng với bookingId
-              }}
-            >
-              Lịch sử
-            </Button>
+              <Button
+                variant="info"
+                style={{ margin: ' 0px 10px' }}
+                onClick={() => {
+                  navigate('/historyBookingChange', { state: { bookingId: selectedBookingDetails.bookingId._id } }); // Chuyển hướng với bookingId
+                }}
+              >
+                Lịch sử
+              </Button>
             )}
             <Button variant="secondary" onClick={() => setShowDetailModal(false)}>
               Đóng

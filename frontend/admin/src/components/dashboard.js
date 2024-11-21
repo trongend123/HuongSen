@@ -21,31 +21,31 @@ const Dashboard = () => {
       // If user is 'staffds', set a default location and hide location dropdown
       if (storedUser.role === 'staff_ds') {
         setSelectedLocation('66f6c536285571f28087c16b');
-      }else if (storedUser.role === 'staff_cb') {
+      } else if (storedUser.role === 'staff_cb') {
         setSelectedLocation('66f6c59f285571f28087c16d');
-      }else if (storedUser.role === 'staff_mk') {
+      } else if (storedUser.role === 'staff_mk') {
         setSelectedLocation('66f6c5c9285571f28087c16a');
       }
     }
     axios
-    .get('http://localhost:9999/orderRooms')
-    .then((response) => setOrderData(response.data))
-    .catch((error) => console.error('Error fetching order data:', error));
-   
-    
-    
+      .get('http://localhost:9999/orderRooms')
+      .then((response) => setOrderData(response.data))
+      .catch((error) => console.error('Error fetching order data:', error));
+
+
+
   }, []);
   const filteredOrderData = orderData.filter((order) => {
     const matchesLocation = selectedLocation ? order.roomCateId.locationId === selectedLocation : true;
     const matchesStatus = order.bookingId.status ? order.bookingId.status === 'Completed' : true;
     return matchesLocation && matchesStatus;
   });
-  
 
-  const bookings = filteredOrderData.map((order) => order.bookingId); 
+
+  const bookings = filteredOrderData.map((order) => order.bookingId);
   const uniqueBookings = Array.from(new Set(bookings.map(booking => JSON.stringify(booking))))
     .map(item => JSON.parse(item));
-    
+
   // Grouping and aggregating data
   const isValidDate = (date) => {
     const parsedDate = new Date(date);
@@ -86,7 +86,7 @@ const Dashboard = () => {
   // Aggregated data for the charts
   const aggregatedOrderData = aggregateData(filteredOrderData);
   const aggregatedBookings = aggregateData(uniqueBookings);
-  
+
   const labels = aggregatedOrderData.map((item) => item.date);
   const bookingsData = aggregatedOrderData.map((item) => item.quantity);
   const revenueData = aggregatedBookings.map((item) => item.price);
@@ -145,20 +145,20 @@ const Dashboard = () => {
     <Container>
       <h2 className="text-center my-4">Bảng thống kê</h2>
       {userRole !== 'staff_ds' && userRole !== 'staff_cb' && userRole !== 'staff_mk' && (
-  <Form.Group controlId="locationSelect">
-    <Form.Label>Chọn địa điểm</Form.Label>
-    <Form.Control
-      as="select"
-      value={selectedLocation}
-      onChange={(e) => setSelectedLocation(e.target.value)}
-    >
-      <option value="">Tất cả địa điểm</option>
-      <option value="66f6c5c9285571f28087c16a">Cơ sở Minh Khai</option>
-      <option value="66f6c536285571f28087c16b">Cơ sở Đồ Sơn</option>
-      <option value="66f6c59f285571f28087c16d">Cơ sở Cát Bà</option>
-    </Form.Control>
-  </Form.Group>
-)}
+        <Form.Group controlId="locationSelect">
+          <Form.Label>Chọn địa điểm</Form.Label>
+          <Form.Control
+            as="select"
+            value={selectedLocation}
+            onChange={(e) => setSelectedLocation(e.target.value)}
+          >
+            <option value="">Tất cả địa điểm</option>
+            <option value="66f6c5c9285571f28087c16a">Cơ sở Minh Khai</option>
+            <option value="66f6c536285571f28087c16b">Cơ sở Đồ Sơn</option>
+            <option value="66f6c59f285571f28087c16d">Cơ sở Cát Bà</option>
+          </Form.Control>
+        </Form.Group>
+      )}
       <Row className="mt-4">
         <Col lg={6}>
           <Card className="chart">

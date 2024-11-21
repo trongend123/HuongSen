@@ -81,16 +81,16 @@ const deleteIdentifycation = async (req, res) => {
     }
 };
 // GET: /identifycations/customer/:customerID
-const getIdentifycationsByCustomerId = async (req, res) => {
+const getIdentificationByCustomerId = async (req, res) => {
     try {
         const { customerID } = req.params;
-        const identifications = await IdentifycationRepo.listByCustomerId(customerID);
-        if (!identifications || identifications.length === 0) {
-            return res.status(404).json({ message: "No identifications found for this customer" });
+        const identification = await IdentifycationRepo.getByCustomerId(customerID); // Assuming this method fetches a single record
+        if (!identification) {
+            return res.status(404).json({ message: "No identification found for this customer" });
         }
-        return res.status(200).json(identifications);
+        return res.status(200).json(identification);
     } catch (error) {
-        return res.status(500).json({ message: `Error fetching identifications by customer ID: ${error.message}` });
+        return res.status(500).json({ message: `Error fetching identification by customer ID: ${error.message}` });
     }
 };
 export default {
@@ -99,5 +99,5 @@ export default {
     createIdentifycation,
     editIdentifycation,
     deleteIdentifycation,
-    getIdentifycationsByCustomerId
+    getIdentificationByCustomerId
 };

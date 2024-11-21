@@ -1,6 +1,6 @@
 import logo from './src/assets/logo.png';
 import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
