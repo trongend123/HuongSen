@@ -1,34 +1,48 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import AddUserForm from '../components/bookingRoom/addUserForm';
 import AddIdentifyForm from '../components/bookingRoom/addIdentifyForm';
 import { Col, Row, Button, Container } from 'react-bootstrap';
 import AddBookingForm from '../components/bookingRoom/addBookingForm';
 import AddServiceForm from '../components/bookingRoom/addServiceForm';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { BASE_URL } from '../utils/config';
+import { useNavigate } from 'react-router-dom';
 
-
-const CustomerBookingPage = () => {
+const BookingPage = () => {
     const [userId, setUserId] = useState(null); // To store the created user ID
     const [bookingId, setBookingId] = useState(null); // To store the created booking ID
-    const [bookingPay, setBookingPpay] = useState(null);
     const userFormRef = useRef(null);           // Reference to the user form
     const identifyFormRef = useRef(null);       // Reference to the identification form
     const bookingFormRef = useRef(null);        // Reference to the booking form (optional for future use)
     const addServiceRef = useRef(null);         // Reference to the AddServiceForm
+    const [staff, setStaff] = useState(null);
+    const [locationId, setLocationId] = useState(null);
+    const [serviceTotal, setServiceTotal] = useState(0);
     const navigate = useNavigate();
 
-    const { locationId } = useParams();
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const userResponse = JSON.parse(storedUser);
+            setStaff(userResponse);
+        }
+    }, []);
 
+    useEffect(() => {
+        if (staff) {
+            if (staff.role === 'staff_mk') {
+                setLocationId('66f6c42f285571f28087c16a');
+            } else if (staff.role === 'staff_ds') {
+                setLocationId('66f6c536285571f28087c16b');
+            } else if (staff.role === 'staff_cb') {
+                setLocationId('66f6c59f285571f28087c16d');
+            }
+        }
 
-    const [serviceTotal, setServiceTotal] = useState(0);
+    }, [staff]); // Only update locationId when staff changes
 
-    // Hàm xử lý khi tổng dịch vụ thay đổi
+    // Handler for service total changes
     const handleServiceTotalChange = (total) => {
         setServiceTotal(total);
     };
-
 
     const handleCreateBoth = async () => {
         try {
@@ -54,8 +68,13 @@ const CustomerBookingPage = () => {
                     // 4. Thêm dịch vụ đã chọn vào orderService sau khi đặt phòng được tạo
                     await addServiceRef.current.addService(createdBookingId);
                     console.log('Đặt phòng và dịch vụ đã được tạo thành công!');
-                    //5. Xử ký payment
-                    handlePayment(createdBookingId);
+                    navigate(`/saveHistory`, {
+                        state: {
+                            bookingId: createdBookingId,
+                            note: `${staff.role} ${staff.fullname} đã tạo đặt phòng`,
+                            user: staff // Truyền cả đối tượng người dùng
+                        }
+                    });
                 } else {
                     alert('Có lỗi xảy ra khi tạo đặt phòng hoặc dịch vụ. Vui lòng thử lại.');
                     console.log('Đặt phòng và dịch vụ chưa được tạo.');
@@ -71,32 +90,10 @@ const CustomerBookingPage = () => {
     };
 
 
-    const handlePayment = async (createdBookingId) => {
-        try {
-            // Assuming you have a method to get the booking details
-            const bookingResponse = await axios.get(`${BASE_URL}/bookings/${createdBookingId}`);
-            const booking = bookingResponse.data;
 
-            const response = await axios.post(
-                `${BASE_URL}/payment/create-payment-link`,
-                {
-                    amount: booking.price,
-                    bookingId: booking._id,
-                }
-            );
-
-            if (response.status === 200) {
-                const { checkoutUrl } = response.data;
-                window.open(checkoutUrl, '_blank', 'noopener,noreferrer');
-            } else {
-                console.error('Failed to create payment link');
-            }
-        } catch (error) {
-            console.error('Error creating payment link:', error);
-        }
-    };
     return (
-        <div>
+        <Container>
+            <h6 className="my-4 px-2 text-bg-success d-inline ">Đặt Phòng Từ Nhân Viên: {staff?.fullname || "chưa Login"}</h6>
             <Row>
                 <Col md="6">
                     {/* User Form */}
@@ -120,16 +117,16 @@ const CustomerBookingPage = () => {
                         onBookingCreated={setBookingId}
                         customerID={userId}
                         serviceAmount={serviceTotal}
-                        locationId={locationId} // Pass locationId here
-                        canInput={true}
+                        locationId={locationId}
+                        staff={staff} // Pass locationId here
                     />
-                    <Button className='text-bg-success fs-3 ' onClick={handleCreateBoth} >
+                    <Button className='text-bg-success fs-3' onClick={handleCreateBoth}>
                         Đặt Phòng Ngay
                     </Button>
                 </Col>
             </Row>
-        </div>
+        </Container>
     );
 };
 
-export default CustomerBookingPage;
+export default BookingPage;

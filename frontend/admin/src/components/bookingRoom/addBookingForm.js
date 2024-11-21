@@ -3,9 +3,8 @@ import axios from 'axios';
 import { Form, Row, Col, Button, Card, Alert } from 'react-bootstrap'; // Import Alert
 import SelectRoomCategories from './selectRoomCate';  // Import SelectRoomCategories component
 
-const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId }, ref) => {
+const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId, staff }, ref) => {
     const roomCategoriesRef = useRef(null);  // Ref for SelectRoomCategories
-
     const [errors, setErrors] = useState({});
     const [errorMessage, setErrorMessage] = useState('');  // State to store error message
     const today = new Date().toISOString().split('T')[0];
@@ -26,6 +25,15 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
         humans: 1,
         contract: ''
     });
+
+    useEffect(() => {
+        if (staff) {
+            setBookingData((prevBookingData) => ({
+                ...prevBookingData,
+                staffId: staff._id
+            }));
+        }
+    }, [staff]);
 
     const handleChange = (e) => {
         setBookingData({
@@ -88,9 +96,15 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             setErrorMessage('');  // Clear error message if there are selected rooms
         }
 
+        // Add validation for note field
+        if (bookingData.note.length > 700) {
+            newErrors.note = "Ghi chú không được vượt quá 200 ký tự";
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+
 
     const createBooking = async () => {
         if (!validateForm()) {
@@ -98,7 +112,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             return;
         }
         try {
-            // Cập nhật bookingData với tổng giá trị cuối cùng (bao gồm cả dịch vụ)
+            // Calculate the final price, including services
             const finalPrice = totalAmount;
 
             setBookingData(prevBookingData => ({
@@ -106,25 +120,37 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                 price: finalPrice
             }));
 
-            // Gửi yêu cầu tạo booking
+            // Create the booking
             const response = await axios.post('http://localhost:9999/bookings', {
                 ...bookingData,
                 price: finalPrice
             });
 
-            const bookingId = response.data._id; // Lấy bookingId từ phản hồi
+            const bookingId = response.data._id; // Get the bookingId from the response
 
-            // Gọi hàm tạo orderRoom
-            await roomCategoriesRef.current.createOrderRoom(bookingId);
+            // Call the function to create order rooms
+            const result = await roomCategoriesRef.current.createOrderRoom(bookingId);
 
-            // Gọi callback để thông báo đã tạo booking
+            if (result === undefined || result === false) {
+                // If result is falsy, indicate insufficient rooms
+                setErrorMessage('Không đủ số lượng phòng');
+
+                // Optionally delete the booking if rooms couldn't be reserved
+                await axios.delete(`http://localhost:9999/bookings/${bookingId}`);
+                console.log(`Booking with ID ${bookingId} has been deleted due to insufficient room selection.`);
+
+                return; // Exit the function
+            }
+
+            // Trigger callback to notify booking creation
             onBookingCreated(bookingId);
-            return response.data._id;
+            return bookingId;
         } catch (error) {
             console.error('Error creating booking:', error);
             alert('Error creating booking');
         }
     };
+
 
     useImperativeHandle(ref, () => ({
         createBooking
@@ -132,11 +158,10 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
     return (
         <Card className="mb-2">
-            <Card.Header as="h5" className="bg-primary text-white">Chọn Loại Phòng & Số Lượng</Card.Header>
+            <Card.Header className="text-bg-info"><h5>Chọn Loại Phòng & Số Lượng</h5></Card.Header>
             <Card.Body>
-
                 <Row className="mb-3">
-                    <Col md={3}>
+                    <Col md={4}>
                         <Form.Group controlId="checkin">
                             <Form.Label><strong>Check-in Ngày: </strong></Form.Label>
                             <Form.Control
@@ -150,7 +175,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                             <Form.Control.Feedback type="invalid">{errors.checkin}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
-                    <Col md={3}>
+                    <Col md={4}>
                         <Form.Group controlId="checkout">
                             <Form.Label><strong>Check-out Ngày:</strong></Form.Label>
                             <Form.Control
@@ -168,18 +193,20 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                         <Form.Group>
                             <Form.Label><strong>Số lượng người</strong></Form.Label>
                             <Form.Control
-                                type='number'
-                                placeholder='Enter number of people'
-                                name='humans'
+                                type="number"
+                                placeholder="Enter number of people"
+                                name="humans"
                                 value={bookingData.humans}
                                 onChange={handleChange}
                                 isInvalid={!!errors.humans}
                                 min={1}
                             />
-                            <Form.Control.Feedback type='invalid'>{errors.humans}</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">{errors.humans}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                 </Row>
+
+
 
                 {/* SelectRoomCategories Component */}
                 <SelectRoomCategories
@@ -192,16 +219,31 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                     locationId={locationId}
                 />
 
-                {/* Hiển thị thông báo lỗi nếu không có phòng nào được chọn */}
+                {/* Error Message for Room Selection */}
                 {errorMessage && <Alert variant="danger" className="mt-2">{errorMessage}</Alert>}
-
-
+                {/* Note Input Field */}
+                <Row className="mb-3">
+                    <Col >
+                        <Form.Group controlId="note">
+                            <Form.Label><strong>Ghi chú đặt phòng</strong></Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                placeholder="Nhập ghi chú (nếu có)"
+                                name="note"
+                                value={bookingData.note}
+                                onChange={handleChange}
+                                isInvalid={!!errors.note}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.note}</Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+                </Row>
                 <Row>
                     <p><strong>Tổng Chi phí</strong> = Phí dịch vụ + Phí đặt phòng = {totalAmount} VND</p>
                 </Row>
-
-
             </Card.Body>
+
         </Card>
     );
 });

@@ -65,35 +65,46 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
     const createIdentify = async (customerID) => {
         if (!validateForm()) {
             console.log("Form has errors, please fix them before submitting.");
-            return;
+            return null; // Return null to indicate failure
         }
         try {
-            // Gửi dữ liệu lên server với `customerID` được truyền từ tham số
-            await fetch('http://localhost:9999/identifycations', {
+            // Send data to the server with the provided `customerID`
+            const response = await fetch('http://localhost:9999/identifycations', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    ...identifycationData,  // Thông tin khác trong form
-                    customerID: customerID  // Truyền giá trị customerID nhận được từ tham số
+                    ...identifycationData, // Other form data
+                    customerID: customerID, // Add customer ID
                 }),
             });
 
-            // Xử lý nếu thành công
+            // Check if the response is successful
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+
+            // Parse the response
+            const responseData = await response.json();
             console.log("Identifycation created successfully!");
+
+            // Return the created identifycation ID
+            return responseData._id;
         } catch (error) {
             console.error('Error creating identifycation:', error);
+            return null; // Return null to indicate failure
         }
     };
+
 
     useImperativeHandle(ref, () => ({
         createIdentify
     }));
 
     return (
-        <Card className="shadow-sm">
-            <Card.Header className="bg-primary text-white"><strong>Thêm Giấy Tờ Định Danh</strong></Card.Header>
+        <Card className="shadow-sm mb-3">
+            <Card.Header className="bg-primary text-white"><h5>Thêm Giấy Tờ Định Danh</h5></Card.Header>
             <Card.Body>
                 <Form>
                     <Row>
