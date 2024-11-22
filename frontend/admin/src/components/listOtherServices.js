@@ -99,8 +99,8 @@ const ListOtherServices = () => {
         }
 
         // Check for price field validation
-        if (!newService.price || parseFloat(newService.price) < 10000) {
-            newErrors.price = "Giá phải lớn hơn 10,000!";
+        if (!newService.price || parseFloat(newService.price) < 1000) {
+            newErrors.price = "Giá phải lớn hơn 1,000!";
             valid = false;
         }
 

@@ -279,17 +279,21 @@ const BookingDetails = () => {
                     <h3 className='text-success'>Khách hàng chưa đặt dịch vụ nào.</h3>
                 )}
             </section>
+
             {/* Service Form */}
-            <AddServiceForm
-                ref={addServiceRef}
-                bookingId={bookingId} // Pass booking ID after it's created
-                onServiceTotalChange={handleServiceTotalChange} // Callback for service total
-            />
+            {orderRooms[0].bookingId?.status !== 'Confirmed' && orderRooms[0].bookingId?.status !== 'Cancelled' && (
+                <AddServiceForm
+                    ref={addServiceRef}
+                    bookingId={bookingId} // Pass booking ID after it's created
+                    onServiceTotalChange={handleServiceTotalChange} // Callback for service total
+                />
+            )}
+
             <h3>Tổng giá tiền thay đổi thành: {newBookingPrice}</h3>
             <div className="checkout-button">
                 {/* Button để cập nhật thông tin booking */}
                 <button onClick={handleUpdateBooking}
-                    disabled={isUpdating || orderRooms[0].bookingId?.status === 'Confirmed'}
+                    disabled={isUpdating || orderRooms[0].bookingId?.status === 'Confirmed' || orderRooms[0].bookingId?.status === 'Cancelled'}
 
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Cập nhật Dịch vụ và Giá'}

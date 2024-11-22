@@ -3,7 +3,7 @@ import HistoryBookingChange from './components/historyBookingChange';
 import SaveHistory from './components/SaveHistory';
 import Login from './screens/Login/login';
 import ChangePassword from './screens/Change Password/changepass';
-import CreateBookingByStaff from './components/createBookingByStaff';
+import CreateBookingByStaff from './page/createBookingByStaff';
 import ListRoom from './components/listRoom';
 import ListStaff from './components/listStaff';
 import Dashboard from './components/dashboard';
