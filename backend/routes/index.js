@@ -24,6 +24,7 @@ import AgencyRouter from "./agency.js";
 import ContractRouter from "./contract.js";
 import OrderServiceRouter from "./orderServiceRoute.js";
 import paymentRoute from "./paymentRoute.js";
+import ServiceBookingRouter from "./servicebooking.js";
 import Email from "./email.js";
 
 
@@ -52,5 +53,6 @@ export {
     ContractRouter,
     OrderServiceRouter,
     paymentRoute,
-    Email
-}
+    ServiceBookingRouter,
+    Email,
+};

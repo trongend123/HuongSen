@@ -103,10 +103,21 @@ const DoSonRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
   );
 };
 
+const CatBaRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
+  const handleRoomClick = (room) => {
+    setSelectedRooms((prevSelectedRooms) => {
+      // Check if room is already selected
+      if (prevSelectedRooms.includes(room._id)) {
+        // If selected, remove it
+        return prevSelectedRooms.filter((id) => id !== room._id);
+      } else {
+        // If not selected, add it
+        return [...prevSelectedRooms, room._id];
+      }
+    });
+    onClick(room); // Trigger the parent component to update `selectedRooms`
+  };
 
-
-// Component for "Cơ sở Cát Bà" rooms
-const CatBaRooms = ({ rooms, onClick }) => {
   const floor7cb = rooms.slice(0, 7);
   const floor6cb = rooms.slice(7, 14);
   const floor5cb = rooms.slice(14, 20);
@@ -114,44 +125,89 @@ const CatBaRooms = ({ rooms, onClick }) => {
   const floor3cb = rooms.slice(26, 33);
   const floor2cb = rooms.slice(44, 40);
 
+
   return (
     <div className="room-layout">
-      <h4>Cơ sở Cát Bà:</h4>
-      <div className="room-row" style={{ marginLeft: '240px' }}>
-        {floor2cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
-        ))}
-      </div>
-      <div className="room-row" style={{ marginLeft: '240px' }}>
-        {floor3cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
-        ))}
-      </div>
-      <div className="room-row" style={{ marginLeft: '240px' }}>
-        {floor4cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
-        ))}
-      </div>
-      <div className="room-row" style={{ marginLeft: '240px' }}>
-        {floor5cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
-        ))}
-      </div>
-      <div className="room-row" style={{ marginLeft: '240px' }}>
-        {floor6cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
-        ))}
-      </div>
-      <div className="room-row" style={{ marginLeft: '240px' }}>
-        {floor7cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
-        ))}
-      </div>
+    <h4>Cơ sở Cát Bà:</h4>
+    <div className="room-row" style={{ marginLeft: '240px' }}>
+      {floor2cb.map((room) => (
+        <Room
+        key={room._id}
+        room={room}
+        onClick={handleRoomClick}
+        isSelected={selectedRooms.includes(room._id)}
+      />
+      ))}
     </div>
-  );
+    <div className="room-row" style={{ marginLeft: '240px' }}>
+      {floor3cb.map((room) => (
+        <Room
+        key={room._id}
+        room={room}
+        onClick={handleRoomClick}
+        isSelected={selectedRooms.includes(room._id)}
+      />
+      ))}
+    </div>
+    <div className="room-row" style={{ marginLeft: '240px' }}>
+      {floor4cb.map((room) => (
+        <Room
+        key={room._id}
+        room={room}
+        onClick={handleRoomClick}
+        isSelected={selectedRooms.includes(room._id)}
+      />
+      ))}
+    </div>
+    <div className="room-row" style={{ marginLeft: '240px' }}>
+      {floor5cb.map((room) => (
+        <Room
+        key={room._id}
+        room={room}
+        onClick={handleRoomClick}
+        isSelected={selectedRooms.includes(room._id)}
+      />
+      ))}
+    </div>
+    <div className="room-row" style={{ marginLeft: '240px' }}>
+      {floor6cb.map((room) => (
+        <Room
+        key={room._id}
+        room={room}
+        onClick={handleRoomClick}
+        isSelected={selectedRooms.includes(room._id)}
+      />
+      ))}
+    </div>
+    <div className="room-row" style={{ marginLeft: '240px' }}>
+      {floor7cb.map((room) => (
+        <Room
+        key={room._id}
+        room={room}
+        onClick={handleRoomClick}
+        isSelected={selectedRooms.includes(room._id)}
+      />
+      ))}
+    </div>
+  </div>
+);
 };
 
-const MinhKhaiRooms = ({ rooms, onClick }) => {
+const MinhKhaiRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
+  const handleRoomClick = (room) => {
+    setSelectedRooms((prevSelectedRooms) => {
+      // Check if room is already selected
+      if (prevSelectedRooms.includes(room._id)) {
+        // If selected, remove it
+        return prevSelectedRooms.filter((id) => id !== room._id);
+      } else {
+        // If not selected, add it
+        return [...prevSelectedRooms, room._id];
+      }
+    });
+    onClick(room); // Trigger the parent component to update `selectedRooms`
+  };
+
   const floor7cb = rooms.slice(0, 11);
   const floor6cb = rooms.slice(11,22);
   const floor5cb = rooms.slice(22, 33);
@@ -164,32 +220,62 @@ const MinhKhaiRooms = ({ rooms, onClick }) => {
       <h4>Cơ sở 16 Minh Khai:</h4>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor2cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
+          <Room
+        key={room._id}
+        room={room}
+        onClick={handleRoomClick}
+        isSelected={selectedRooms.includes(room._id)}
+      />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor3cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
+          <Room
+          key={room._id}
+          room={room}
+          onClick={handleRoomClick}
+          isSelected={selectedRooms.includes(room._id)}
+        />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor4cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
+          <Room
+          key={room._id}
+          room={room}
+          onClick={handleRoomClick}
+          isSelected={selectedRooms.includes(room._id)}
+        />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor5cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
+          <Room
+          key={room._id}
+          room={room}
+          onClick={handleRoomClick}
+          isSelected={selectedRooms.includes(room._id)}
+        />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor6cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
+          <Room
+          key={room._id}
+          room={room}
+          onClick={handleRoomClick}
+          isSelected={selectedRooms.includes(room._id)}
+        />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor7cb.map((room) => (
-          <Room key={room._id} room={room} onClick={onClick} />
+          <Room
+          key={room._id}
+          room={room}
+          onClick={handleRoomClick}
+          isSelected={selectedRooms.includes(room._id)}
+        />
         ))}
       </div>
     </div>

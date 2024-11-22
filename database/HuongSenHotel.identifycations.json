@@ -1,120 +1,120 @@
 [{
   "_id": {
-    "$oid": "670be878e91d9d4f21e97ba6"
+    "$oid": "674080afb31ac53d2dda78c1"
   },
-  "name": "Căn cước công dân",
-  "code": "031204003386",
+  "name": "Căn Cước Công Dân",
+  "code": "1234567890",
   "dateStart": {
-    "$date": "2021-04-24T17:00:00.000Z"
+    "$date": "2015-11-22T00:00:00.000Z"
   },
   "dateEnd": {
-    "$date": "2029-03-27T17:00:00.000Z"
+    "$date": "2024-11-22T00:00:00.000Z"
   },
-  "location": "An Lão, Hải Phòng",
+  "location": "hp",
   "customerID": {
-    "$oid": "670735142250999dda285fe7"
+    "$oid": "674080afb31ac53d2dda78b0"
   },
   "createdAt": {
-    "$date": "2024-09-30T05:23:05.358Z"
+    "$date": "2024-11-22T13:01:35.227Z"
   },
   "updatedAt": {
-    "$date": "2024-09-30T14:28:43.831Z"
+    "$date": "2024-11-22T13:01:35.227Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "670beabfe91d9d4f21e97bac"
+    "$oid": "6740820730d1b5f11092edcc"
   },
-  "name": "Bằng lái xe máy",
-  "code": "310229019173",
+  "name": "Căn Cước Công Dân",
+  "code": "1234567890",
   "dateStart": {
-    "$date": "2022-08-08T17:00:00.000Z"
+    "$date": "2017-11-22T00:00:00.000Z"
   },
   "dateEnd": {
-    "$date": "2200-08-28T17:00:00.000Z"
+    "$date": "2024-11-22T00:00:00.000Z"
   },
-  "location": "An Lão, Hải Phòng",
+  "location": "hp",
   "customerID": {
-    "$oid": "670735142250999dda285fe7"
+    "$oid": "6740820730d1b5f11092edb1"
   },
   "createdAt": {
-    "$date": "2024-09-30T05:23:05.358Z"
+    "$date": "2024-11-22T13:07:19.552Z"
   },
   "updatedAt": {
-    "$date": "2024-09-30T14:28:43.831Z"
+    "$date": "2024-11-22T13:07:19.552Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "670beb3ee91d9d4f21e97bad"
+    "$oid": "6740850e796dc4fe9ce803e8"
   },
-  "name": "Căn cước công dân",
-  "code": "031202000850",
+  "name": "Bằng Lái Xe",
+  "code": "abcvvdsvsvfgr",
   "dateStart": {
-    "$date": "2021-06-24T17:00:00.000Z"
+    "$date": "2018-12-07T00:00:00.000Z"
   },
   "dateEnd": {
-    "$date": "2029-09-20T17:00:00.000Z"
+    "$date": "2030-11-22T00:00:00.000Z"
   },
-  "location": "Hải An, Hải Phòng",
+  "location": "hp",
   "customerID": {
-    "$oid": "670732b92250999dda285fe4"
+    "$oid": "6740850e796dc4fe9ce803cd"
   },
   "createdAt": {
-    "$date": "2024-09-30T05:23:05.358Z"
+    "$date": "2024-11-22T13:20:14.771Z"
   },
   "updatedAt": {
-    "$date": "2024-09-30T14:28:43.831Z"
+    "$date": "2024-11-22T13:20:14.771Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "670beb80e91d9d4f21e97bae"
+    "$oid": "67408611796dc4fe9ce804cf"
   },
-  "name": "Bằng lái xe máy",
-  "code": "3102000250728",
+  "name": "Căn Cước Công Dân",
+  "code": "1234567890",
   "dateStart": {
-    "$date": "2021-04-24T17:00:00.000Z"
+    "$date": "2015-11-30T00:00:00.000Z"
   },
   "dateEnd": {
-    "$date": "2029-03-27T17:00:00.000Z"
+    "$date": "2024-12-01T00:00:00.000Z"
   },
-  "location": "Hải An, Hải Phòng",
+  "location": "hp",
   "customerID": {
-    "$oid": "670732b92250999dda285fe4"
+    "$oid": "67408611796dc4fe9ce804be"
   },
   "createdAt": {
-    "$date": "2024-09-30T05:23:05.358Z"
+    "$date": "2024-11-22T13:24:33.421Z"
   },
   "updatedAt": {
-    "$date": "2024-09-30T14:28:43.831Z"
+    "$date": "2024-11-22T13:24:33.421Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "670bebd4e91d9d4f21e97bb5"
+    "$oid": "67408782796dc4fe9ce8062e"
   },
-  "name": "Căn cước công dân",
-  "code": "031201245867",
+  "name": "Bằng Lái Xe",
+  "code": "xdcfg12423",
   "dateStart": {
-    "$date": "2021-06-24T17:00:00.000Z"
+    "$date": "2015-11-22T00:00:00.000Z"
   },
   "dateEnd": {
-    "$date": "2029-09-20T17:00:00.000Z"
+    "$date": "2024-11-22T00:00:00.000Z"
   },
-  "location": "Nghệ An",
+  "location": "hp",
   "customerID": {
-    "$oid": "670735212250999dda285fe8"
+    "$oid": "67408781796dc4fe9ce80618"
   },
   "createdAt": {
-    "$date": "2024-09-30T05:23:05.358Z"
+    "$date": "2024-11-22T13:30:42.022Z"
   },
   "updatedAt": {
-    "$date": "2024-09-30T14:28:43.831Z"
+    "$date": "2024-11-22T13:30:42.022Z"
   },
   "__v": 0
 }]

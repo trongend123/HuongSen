@@ -1,0 +1,399 @@
+[{
+  "_id": {
+    "$oid": "674080afb31ac53d2dda78cb"
+  },
+  "bookingId": {
+    "$oid": "674080afb31ac53d2dda78b2"
+  },
+  "staffId": {
+    "$oid": "670693f27f84d57bd16fc241"
+  },
+  "old_info": {
+    "booking": {
+      "_id": "674080afb31ac53d2dda78b2",
+      "taxId": null,
+      "status": "Đã đặt",
+      "payment": "Chưa thanh toán",
+      "staffId": {
+        "_id": "670693f27f84d57bd16fc241",
+        "username": "staffds1",
+        "password": "123123",
+        "email": "staffds1@gmail.com",
+        "phone": "0123456789",
+        "role": "staff_ds",
+        "fullname": "Lê Văn Quang"
+      },
+      "price": 550000,
+      "checkin": "2024-11-22T00:00:00.000Z",
+      "note": "",
+      "checkout": "2024-11-23T00:00:00.000Z",
+      "contract": "",
+      "humans": 1,
+      "createdAt": "2024-11-22T13:01:35.197Z",
+      "updatedAt": "2024-11-22T13:01:35.197Z",
+      "__v": 0
+    },
+    "orderServices": []
+  },
+  "note": "staff_ds Lê Văn Quang đã tạo đặt phòng",
+  "createdAt": {
+    "$date": "2024-11-22T13:01:35.262Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:01:35.262Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6740820730d1b5f11092eddb"
+  },
+  "bookingId": {
+    "$oid": "6740820730d1b5f11092edb3"
+  },
+  "staffId": {
+    "$oid": "670693f27f84d57bd16fc241"
+  },
+  "old_info": {
+    "booking": {
+      "_id": "6740820730d1b5f11092edb3",
+      "taxId": null,
+      "status": "Đã đặt",
+      "payment": "Chưa thanh toán",
+      "staffId": {
+        "_id": "670693f27f84d57bd16fc241",
+        "username": "staffds1",
+        "password": "123123",
+        "email": "staffds1@gmail.com",
+        "phone": "0123456789",
+        "role": "staff_ds",
+        "fullname": "Lê Văn Quang"
+      },
+      "price": 7650000,
+      "checkin": "2024-11-22T00:00:00.000Z",
+      "note": "",
+      "checkout": "2024-11-23T00:00:00.000Z",
+      "contract": "",
+      "humans": 7,
+      "createdAt": "2024-11-22T13:07:19.515Z",
+      "updatedAt": "2024-11-22T13:07:19.515Z",
+      "__v": 0
+    },
+    "orderServices": [
+      {
+        "_id": "6740820730d1b5f11092edd0",
+        "otherServiceId": {
+          "isDeleted": false,
+          "_id": "67127eeecc979020534afd18",
+          "name": "Đặt đồ ăn xuất 500k",
+          "price": 500000,
+          "description": "Xuất ăn 500k cho 1 người"
+        },
+        "bookingId": {
+          "_id": "6740820730d1b5f11092edb3",
+          "taxId": null,
+          "status": "Đã đặt",
+          "payment": "Chưa thanh toán",
+          "staffId": "670693f27f84d57bd16fc241",
+          "price": 7650000,
+          "checkin": "2024-11-22T00:00:00.000Z",
+          "note": "",
+          "checkout": "2024-11-23T00:00:00.000Z",
+          "contract": "",
+          "humans": 7,
+          "createdAt": "2024-11-22T13:07:19.515Z",
+          "updatedAt": "2024-11-22T13:07:19.515Z",
+          "__v": 0
+        },
+        "quantity": 6,
+        "note": "",
+        "time": "2024-11-23T11:00:00.000Z",
+        "status": "Đã đặt",
+        "createdAt": "2024-11-22T13:07:19.560Z",
+        "updatedAt": "2024-11-22T13:07:19.560Z",
+        "__v": 0
+      },
+      {
+        "_id": "6740820730d1b5f11092edd2",
+        "otherServiceId": {
+          "isDeleted": false,
+          "_id": "67127ee0cc979020534afd17",
+          "name": "Đặt đồ ăn xuất 400k",
+          "price": 400000,
+          "description": "Xuất ăn 400k cho 1 người"
+        },
+        "bookingId": {
+          "_id": "6740820730d1b5f11092edb3",
+          "taxId": null,
+          "status": "Đã đặt",
+          "payment": "Chưa thanh toán",
+          "staffId": "670693f27f84d57bd16fc241",
+          "price": 7650000,
+          "checkin": "2024-11-22T00:00:00.000Z",
+          "note": "",
+          "checkout": "2024-11-23T00:00:00.000Z",
+          "contract": "",
+          "humans": 7,
+          "createdAt": "2024-11-22T13:07:19.515Z",
+          "updatedAt": "2024-11-22T13:07:19.515Z",
+          "__v": 0
+        },
+        "quantity": 7,
+        "note": "",
+        "time": "2024-11-23T18:00:00.000Z",
+        "status": "Đã đặt",
+        "createdAt": "2024-11-22T13:07:19.561Z",
+        "updatedAt": "2024-11-22T13:07:19.561Z",
+        "__v": 0
+      }
+    ]
+  },
+  "note": "staff_ds Lê Văn Quang đã tạo đặt phòng",
+  "createdAt": {
+    "$date": "2024-11-22T13:07:19.601Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:07:19.601Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6740850e796dc4fe9ce803f7"
+  },
+  "bookingId": {
+    "$oid": "6740850e796dc4fe9ce803cf"
+  },
+  "staffId": {
+    "$oid": "670693f27f84d57bd16fc241"
+  },
+  "old_info": {
+    "booking": {
+      "_id": "6740850e796dc4fe9ce803cf",
+      "taxId": null,
+      "status": "Đã đặt",
+      "payment": 0,
+      "staffId": {
+        "_id": "670693f27f84d57bd16fc241",
+        "username": "staffds1",
+        "password": "123123",
+        "email": "staffds1@gmail.com",
+        "phone": "0123456789",
+        "role": "staff_ds",
+        "fullname": "Lê Văn Quang"
+      },
+      "price": 11450000,
+      "checkin": "2024-11-30T00:00:00.000Z",
+      "note": "",
+      "checkout": "2024-12-01T00:00:00.000Z",
+      "contract": "",
+      "humans": 10,
+      "createdAt": "2024-11-22T13:20:14.736Z",
+      "updatedAt": "2024-11-22T13:20:14.736Z",
+      "__v": 0
+    },
+    "orderServices": [
+      {
+        "_id": "6740850e796dc4fe9ce803ec",
+        "otherServiceId": {
+          "isDeleted": false,
+          "_id": "67127eeecc979020534afd18",
+          "name": "Đặt đồ ăn xuất 500k",
+          "price": 500000,
+          "description": "Xuất ăn 500k cho 1 người"
+        },
+        "bookingId": {
+          "_id": "6740850e796dc4fe9ce803cf",
+          "taxId": null,
+          "status": "Đã đặt",
+          "payment": 0,
+          "staffId": "670693f27f84d57bd16fc241",
+          "price": 11450000,
+          "checkin": "2024-11-30T00:00:00.000Z",
+          "note": "",
+          "checkout": "2024-12-01T00:00:00.000Z",
+          "contract": "",
+          "humans": 10,
+          "createdAt": "2024-11-22T13:20:14.736Z",
+          "updatedAt": "2024-11-22T13:20:14.736Z",
+          "__v": 0
+        },
+        "quantity": 10,
+        "note": "",
+        "time": "2024-11-30T18:00:00.000Z",
+        "status": "Đã đặt",
+        "createdAt": "2024-11-22T13:20:14.777Z",
+        "updatedAt": "2024-11-22T13:20:14.777Z",
+        "__v": 0
+      },
+      {
+        "_id": "6740850e796dc4fe9ce803ee",
+        "otherServiceId": {
+          "isDeleted": false,
+          "_id": "67127ee0cc979020534afd17",
+          "name": "Đặt đồ ăn xuất 400k",
+          "price": 400000,
+          "description": "Xuất ăn 400k cho 1 người"
+        },
+        "bookingId": {
+          "_id": "6740850e796dc4fe9ce803cf",
+          "taxId": null,
+          "status": "Đã đặt",
+          "payment": 0,
+          "staffId": "670693f27f84d57bd16fc241",
+          "price": 11450000,
+          "checkin": "2024-11-30T00:00:00.000Z",
+          "note": "",
+          "checkout": "2024-12-01T00:00:00.000Z",
+          "contract": "",
+          "humans": 10,
+          "createdAt": "2024-11-22T13:20:14.736Z",
+          "updatedAt": "2024-11-22T13:20:14.736Z",
+          "__v": 0
+        },
+        "quantity": 10,
+        "note": "",
+        "time": "2024-12-01T11:00:00.000Z",
+        "status": "Đã đặt",
+        "createdAt": "2024-11-22T13:20:14.778Z",
+        "updatedAt": "2024-11-22T13:20:14.778Z",
+        "__v": 0
+      }
+    ]
+  },
+  "note": "staff_ds Lê Văn Quang đã tạo đặt phòng",
+  "createdAt": {
+    "$date": "2024-11-22T13:20:14.815Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:20:14.815Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67408611796dc4fe9ce804dc"
+  },
+  "bookingId": {
+    "$oid": "67408611796dc4fe9ce804c0"
+  },
+  "staffId": {
+    "$oid": "670693967f84d57bd16fc23f"
+  },
+  "old_info": {
+    "booking": {
+      "_id": "67408611796dc4fe9ce804c0",
+      "taxId": null,
+      "status": "Đã đặt",
+      "payment": 0,
+      "staffId": {
+        "_id": "670693967f84d57bd16fc23f",
+        "username": "staffmk1",
+        "password": "123123",
+        "email": "staffmk1@gmail.com",
+        "phone": "0123456789",
+        "role": "staff_mk",
+        "fullname": "Nguyễn Quang Hiếu"
+      },
+      "price": 720000,
+      "checkin": "2024-11-22T00:00:00.000Z",
+      "note": "",
+      "checkout": "2024-11-23T00:00:00.000Z",
+      "contract": "",
+      "humans": 1,
+      "createdAt": "2024-11-22T13:24:33.391Z",
+      "updatedAt": "2024-11-22T13:24:33.391Z",
+      "__v": 0
+    },
+    "orderServices": [
+      {
+        "_id": "67408611796dc4fe9ce804d2",
+        "otherServiceId": {
+          "isDeleted": false,
+          "_id": "67127d16cc979020534afd10",
+          "name": "Thuê xe máy",
+          "price": 120000,
+          "description": "Thuê 1 xe máy 1 ngày",
+          "updatedAt": "2024-11-11T16:11:04.024Z"
+        },
+        "bookingId": {
+          "_id": "67408611796dc4fe9ce804c0",
+          "taxId": null,
+          "status": "Đã đặt",
+          "payment": 0,
+          "staffId": "670693967f84d57bd16fc23f",
+          "price": 720000,
+          "checkin": "2024-11-22T00:00:00.000Z",
+          "note": "",
+          "checkout": "2024-11-23T00:00:00.000Z",
+          "contract": "",
+          "humans": 1,
+          "createdAt": "2024-11-22T13:24:33.391Z",
+          "updatedAt": "2024-11-22T13:24:33.391Z",
+          "__v": 0
+        },
+        "quantity": 1,
+        "note": "",
+        "time": "2024-11-30T11:00:00.000Z",
+        "status": "Đã đặt",
+        "createdAt": "2024-11-22T13:24:33.426Z",
+        "updatedAt": "2024-11-22T13:24:33.426Z",
+        "__v": 0
+      }
+    ]
+  },
+  "note": "staff_mk Nguyễn Quang Hiếu đã tạo đặt phòng",
+  "createdAt": {
+    "$date": "2024-11-22T13:24:33.464Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:24:33.464Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67408782796dc4fe9ce80637"
+  },
+  "bookingId": {
+    "$oid": "67408781796dc4fe9ce8061a"
+  },
+  "staffId": {
+    "$oid": "670694187f84d57bd16fc243"
+  },
+  "old_info": {
+    "booking": {
+      "_id": "67408781796dc4fe9ce8061a",
+      "taxId": null,
+      "status": "Đã đặt",
+      "payment": 0,
+      "staffId": {
+        "_id": "670694187f84d57bd16fc243",
+        "username": "staffcb1",
+        "password": "123123",
+        "email": "staffcb1@gmail.com",
+        "phone": "0123456789",
+        "role": "staff_cb",
+        "fullname": "Nguyễn Văn A"
+      },
+      "price": 1300000,
+      "checkin": "2024-11-22T00:00:00.000Z",
+      "note": "",
+      "checkout": "2024-11-23T00:00:00.000Z",
+      "contract": "",
+      "humans": 4,
+      "createdAt": "2024-11-22T13:30:41.987Z",
+      "updatedAt": "2024-11-22T13:30:41.987Z",
+      "__v": 0
+    },
+    "orderServices": []
+  },
+  "note": "staff_cb Nguyễn Văn A đã tạo đặt phòng",
+  "createdAt": {
+    "$date": "2024-11-22T13:30:42.051Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:30:42.051Z"
+  },
+  "__v": 0
+}]
