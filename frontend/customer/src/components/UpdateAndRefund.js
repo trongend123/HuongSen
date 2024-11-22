@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useImperativeHandle, forwardRef, useEffect, useRef } from 'react';
 import axios from 'axios';
-import "./bookingDetails.css";
-import { Button, Col, Row } from 'react-bootstrap';
+import AddServiceForm from './bookingRoom/addServiceForm'; // Import AddServiceForm
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Card, Button, Form, Alert, Table } from 'react-bootstrap'; // Import React Bootstrap components
 import { format } from 'date-fns';
-import AddServiceForm from './bookingRoom/addServiceForm';
+import './UpdateAndRefund.css';
 
-const BookingDetails = () => {
-    const { bookingId } = useParams();
+const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     const [orderRooms, setOrderRooms] = useState([]);
     const [orderServices, setOrderServices] = useState([]);
     const [location, setLocation] = useState({});
@@ -115,19 +114,19 @@ const BookingDetails = () => {
         }
     }
     // Xử lý check-out
-    const handleCheckout = async () => {
+    const handleRefund = async () => {
         setIsUpdating(true);
         try {
-            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { status: 'Confirmed', payment: 'Đã thanh toán' });
+            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { status: 'Cancelled', payment: 'Yêu cầu hoàn tiền' });
 
             // Cập nhật trạng thái booking
             setOrderRooms((prevOrderRooms) =>
                 prevOrderRooms.map((orderRoom) => ({
                     ...orderRoom,
-                    bookingId: { ...orderRoom.bookingId, status: 'Confirmed', payment: 'Đã thanh toán' },
+                    bookingId: { ...orderRoom.bookingId, status: 'Cancelled', payment: 'Yêu cầu hoàn tiền' },
                 }))
             );
-            alert('Trạng thái đã được cập nhật thành "Confirmed".');
+            alert('Trạng thái đã được cập nhật thành "Cancelled.');
         } catch (error) {
             console.error('Error updating booking status:', error);
             alert('Có lỗi xảy ra khi cập nhật trạng thái. Vui lòng thử lại.');
@@ -177,9 +176,6 @@ const BookingDetails = () => {
 
     return (
         <div className="booking-details">
-            <h2>Thông tin Đặt phòng</h2>
-            <h3>Mã Đặt phòng: {orderRooms[0].bookingId?._id || 'N/A'}</h3>
-
             <Row className="customer-info">
                 <Col>
                     <p><strong>Họ và tên:</strong> {orderRooms[0].customerId?.fullname || 'N/A'}</p>
@@ -289,21 +285,21 @@ const BookingDetails = () => {
             <div className="checkout-button">
                 {/* Button để cập nhật thông tin booking */}
                 <button onClick={handleUpdateBooking}
-                    disabled={isUpdating || orderRooms[0].bookingId?.status === 'Confirmed'}
-
+                    disabled={isUpdating || orderRooms[0].bookingId?.status === 'Cancelled' || orderRooms[0].bookingId?.status === 'Confirmed'}
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Cập nhật Dịch vụ và Giá'}
                 </button>
                 <button
-                    onClick={handleCheckout}
-                    disabled={isUpdating || orderRooms[0].bookingId?.status === 'Confirmed' || orderRooms[0].bookingId?.status !== 'Check-in'}
+                    onClick={handleRefund}
+                    disabled={isUpdating || orderRooms[0].bookingId?.status === 'Cancelled' || orderRooms[0].bookingId?.status === 'Confirmed'}
 
                 >
-                    {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Check-out'}
+                    {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Hủy Đơn'}
                 </button>
             </div>
         </div>
     );
-};
+});
 
-export default BookingDetails;
+
+export default UpdateAndRefund;
