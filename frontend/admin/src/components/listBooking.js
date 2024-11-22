@@ -36,7 +36,7 @@ const ListBooking = () => {
       } else if (storedUser.role === 'staff_cb') {
         setSelectedLocation('66f6c59f285571f28087c16d');
       } else if (storedUser.role === 'staff_mk') {
-        setSelectedLocation('66f6c5c9285571f28087c16a');
+        setSelectedLocation('66f6c42f285571f28087c16a');
       }
     }
     axios
@@ -249,7 +249,7 @@ const ListBooking = () => {
               <td>{formatDate(booking.bookingId.checkout)}</td>
               <td>{booking.bookingId.status}</td>
               <td>
-                {booking.bookingId.status !== 'Cancelled' && booking.bookingId.status !== 'Completed' && (
+                {booking.bookingId.status === "Đã đặt" && (
                   <>
                   {userRole !== "admin" && (
                     <Button

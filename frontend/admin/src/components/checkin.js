@@ -69,7 +69,7 @@ const ListRoom = () => {
 
       axios.put(`http://localhost:9999/bookings/${id}`,
         {
-          status: 'Check-in',
+          status: 'Đã check-in',
         }
       )
 

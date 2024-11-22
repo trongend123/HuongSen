@@ -41,8 +41,9 @@ const orderServiceSchema = new Schema(
         // Status of the service
         status: {
             type: String,
-            default: 'pending',
-            enum: ['action', 'pending', 'completed', 'cancel']
+            default: 'Đã đặt',
+            enum: ['Đã đặt','Đã hủy','Đã cung cấp','Đang sử dụng'],
+            required: true
         }
 
     },

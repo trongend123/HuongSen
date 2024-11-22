@@ -270,7 +270,6 @@ const ListOtherServices = () => {
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Mô tả</Form.Label>
-                            <Form.Label>Mô tả</Form.Label>
                             <Form.Control
                                 as="textarea"
                                 rows={3}

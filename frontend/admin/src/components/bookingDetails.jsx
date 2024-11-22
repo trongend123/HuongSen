@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./bookingDetails.css";
-import { Button, Col, Row } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import { format } from 'date-fns';
 import AddServiceForm from './bookingRoom/addServiceForm';
 
@@ -178,9 +178,9 @@ const BookingDetails = () => {
     return (
         <div className="booking-details">
             <h2>Thông tin Đặt phòng</h2>
-            <h3>Mã Đặt phòng: {orderRooms[0].bookingId?._id || 'N/A'}</h3>
-
+            <h3>Mã Đặt phòng: {orderRooms[0].bookingId?._id || 'N/A'} - Mã hợp đồng: {orderRooms[0].bookingId?.contract || 'N/A'}</h3>
             <Row className="customer-info">
+            <h4>Thông tin Khách hàng</h4>
                 <Col>
                     <p><strong>Họ và tên:</strong> {orderRooms[0].customerId?.fullname || 'N/A'}</p>
                     <p><strong>Email:</strong> {orderRooms[0].customerId?.email || 'N/A'}</p>
@@ -190,7 +190,6 @@ const BookingDetails = () => {
                 </Col>
                 <Col>
                     <p><strong>Ngày tạo đơn:</strong> {format(new Date(orderRooms[0].createdAt), 'dd-MM-yyyy')}</p>
-                    <p><strong>Hợp đồng:</strong> {orderRooms[0].bookingId?.contract || 'N/A'}</p>
                     <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p>
                     <p><strong>Trạng thái:</strong> {orderRooms[0].bookingId?.status || 'N/A'}</p>
                     <p><strong>Thanh toán:</strong> {orderRooms[0].bookingId?.payment || 'N/A'}</p>
@@ -198,10 +197,7 @@ const BookingDetails = () => {
 
             </Row>
 
-            <section className="booking-info">
-
-                <p><strong>Ghi chú:</strong> {renderNote(orderRooms[0].bookingId?.note) || 'N/A'}</p>
-            </section>
+           
 
             <section className="room-details">
                 <h3>Thông tin Phòng</h3>
@@ -226,7 +222,9 @@ const BookingDetails = () => {
                     </tbody>
                 </table>
             </section>
-
+            <section className="booking-info">
+                <p><strong>Ghi chú:</strong> {renderNote(orderRooms[0].bookingId?.note) || 'N/A'}</p>
+            </section>
             <section className="service-details">
                 <h3>Dịch vụ Đã đặt</h3>
                 {orderServices.length > 0 ? (
@@ -304,5 +302,4 @@ const BookingDetails = () => {
         </div>
     );
 };
-
 export default BookingDetails;

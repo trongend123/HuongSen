@@ -3,9 +3,12 @@
     "$oid": "66f9532405e80f00771ab545"
   },
   "code": "ĐS_301",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T18:17:46.955Z"
   }
 },
 {
@@ -13,9 +16,12 @@
     "$oid": "67053bbafabda7bfc6ba02fd"
   },
   "code": "ĐS_302",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T18:17:46.956Z"
   }
 },
 {
@@ -33,9 +39,12 @@
     "$oid": "67053c03fabda7bfc6ba02ff"
   },
   "code": "ĐS_304",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:55:09.573Z"
   }
 },
 {
@@ -43,9 +52,12 @@
     "$oid": "67053c12fabda7bfc6ba0300"
   },
   "code": "ĐS_305",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:55:09.575Z"
   }
 },
 {
@@ -53,9 +65,15 @@
     "$oid": "67053c24fabda7bfc6ba0301"
   },
   "code": "ĐS_306",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "updatedAt": {
+    "$date": "2024-11-18T13:50:11.499Z"
   }
 },
 {
@@ -63,9 +81,12 @@
     "$oid": "67053c69fabda7bfc6ba0302"
   },
   "code": "ĐS_308",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:51:32.583Z"
   }
 },
 {
@@ -73,9 +94,12 @@
     "$oid": "67053c94fabda7bfc6ba0303"
   },
   "code": "ĐS_309",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:51:32.586Z"
   }
 },
 {
@@ -83,9 +107,15 @@
     "$oid": "67053c9efabda7bfc6ba0304"
   },
   "code": "ĐS_310",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "updatedAt": {
+    "$date": "2024-11-18T13:50:11.500Z"
   }
 },
 {
@@ -93,9 +123,15 @@
     "$oid": "67053caafabda7bfc6ba0305"
   },
   "code": "ĐS_311",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "updatedAt": {
+    "$date": "2024-11-18T13:50:11.501Z"
   }
 },
 {
@@ -103,9 +139,12 @@
     "$oid": "67053ce6fabda7bfc6ba0306"
   },
   "code": "ĐS_312",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:52:51.045Z"
   }
 },
 {
@@ -113,9 +152,12 @@
     "$oid": "67053cf4fabda7bfc6ba0307"
   },
   "code": "ĐS_313",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:52:51.049Z"
   }
 },
 {
@@ -163,9 +205,12 @@
     "$oid": "67053da9fabda7bfc6ba030c"
   },
   "code": "ĐS_402",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:53:33.985Z"
   }
 },
 {
@@ -173,9 +218,12 @@
     "$oid": "67053dbffabda7bfc6ba030d"
   },
   "code": "ĐS_403",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:53:33.982Z"
   }
 },
 {
@@ -206,9 +254,15 @@
     "$oid": "67053e08fabda7bfc6ba0310"
   },
   "code": "ĐS_406",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "updatedAt": {
+    "$date": "2024-11-18T13:44:19.594Z"
   }
 },
 {
@@ -216,9 +270,12 @@
     "$oid": "67053e37fabda7bfc6ba0311"
   },
   "code": "ĐS_408",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T18:00:37.717Z"
   }
 },
 {
@@ -226,9 +283,12 @@
     "$oid": "67053f07fabda7bfc6ba0312"
   },
   "code": "ĐS_409",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T18:00:37.715Z"
   }
 },
 {
@@ -249,9 +309,15 @@
     "$oid": "67053f27fabda7bfc6ba0314"
   },
   "code": "ĐS_411",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "updatedAt": {
+    "$date": "2024-11-18T13:50:11.502Z"
   }
 },
 {
@@ -259,9 +325,12 @@
     "$oid": "67053f34fabda7bfc6ba0315"
   },
   "code": "ĐS_412",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T18:00:17.274Z"
   }
 },
 {
@@ -269,9 +338,12 @@
     "$oid": "67053f50fabda7bfc6ba0316"
   },
   "code": "ĐS_413",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T18:00:17.276Z"
   }
 },
 {
@@ -299,9 +371,15 @@
     "$oid": "67053fabfabda7bfc6ba0319"
   },
   "code": "ĐS_501",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T18:24:38.556Z"
   }
 },
 {
@@ -309,9 +387,15 @@
     "$oid": "67054006fabda7bfc6ba031a"
   },
   "code": "ĐS_502",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T18:24:38.558Z"
   }
 },
 {
@@ -319,9 +403,12 @@
     "$oid": "67054013fabda7bfc6ba031b"
   },
   "code": "ĐS_503",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:50:32.976Z"
   }
 },
 {
@@ -329,9 +416,12 @@
     "$oid": "67054027fabda7bfc6ba031c"
   },
   "code": "ĐS_504",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:50:32.979Z"
   }
 },
 {
@@ -339,9 +429,15 @@
     "$oid": "67054036fabda7bfc6ba031d"
   },
   "code": "ĐS_505",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
+  },
+  "updatedAt": {
+    "$date": "2024-11-18T14:00:26.317Z"
   }
 },
 {
@@ -349,9 +445,12 @@
     "$oid": "67054041fabda7bfc6ba031e"
   },
   "code": "ĐS_506",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:49:42.986Z"
   }
 },
 {
@@ -359,9 +458,12 @@
     "$oid": "67054066fabda7bfc6ba031f"
   },
   "code": "ĐS_508",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:49:42.990Z"
   }
 },
 {
@@ -399,9 +501,12 @@
     "$oid": "670540c1fabda7bfc6ba0323"
   },
   "code": "ĐS_512",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:58:55.422Z"
   }
 },
 {
@@ -409,9 +514,12 @@
     "$oid": "670540cbfabda7bfc6ba0324"
   },
   "code": "ĐS_513",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:58:55.423Z"
   }
 },
 {
@@ -445,6 +553,9 @@
   "status": "Trống",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T18:05:44.225Z"
   }
 },
 {
@@ -452,9 +563,15 @@
     "$oid": "670540f7fabda7bfc6ba0328"
   },
   "code": "ĐS_605",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-18T14:00:26.325Z"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
   }
 },
 {
@@ -462,12 +579,15 @@
     "$oid": "67054104fabda7bfc6ba0329"
   },
   "code": "ĐS_606",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670bd4bee91d9d4f21e97b62"
   },
   "updatedAt": {
-    "$date": "2024-10-14T15:36:54.320Z"
+    "$date": "2024-11-18T13:44:19.587Z"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
   }
 },
 {
@@ -508,9 +628,12 @@
     "$oid": "67054157fabda7bfc6ba032d"
   },
   "code": "ĐS_611",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:58:32.156Z"
   }
 },
 {
@@ -518,9 +641,12 @@
     "$oid": "6705417cfabda7bfc6ba032f"
   },
   "code": "ĐS_612",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-17T17:58:32.158Z"
   }
 },
 {
@@ -554,12 +680,15 @@
     "$oid": "670541abfabda7bfc6ba0332"
   },
   "code": "ĐS_706",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670bd4bee91d9d4f21e97b62"
   },
   "updatedAt": {
-    "$date": "2024-10-14T15:43:58.088Z"
+    "$date": "2024-11-18T13:50:11.497Z"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54d"
   }
 },
 {
@@ -760,9 +889,15 @@
     "$oid": "670dc2075c9f636934a39e76"
   },
   "code": "CB_403",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670dbe1c5c9f636934a39e5c"
+  },
+  "bookingId": {
+    "$oid": "67408781796dc4fe9ce8061a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T14:04:17.248Z"
   }
 },
 {
@@ -770,9 +905,15 @@
     "$oid": "670dc2115c9f636934a39e77"
   },
   "code": "CB_410",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670dbe2c5c9f636934a39e5d"
+  },
+  "bookingId": {
+    "$oid": "67408781796dc4fe9ce8061a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T14:01:55.089Z"
   }
 },
 {
@@ -823,6 +964,12 @@
   "status": "Trống",
   "roomCategoryId": {
     "$oid": "670dbe1c5c9f636934a39e5c"
+  },
+  "bookingId": {
+    "$oid": "67408781796dc4fe9ce8061a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T14:03:27.363Z"
   }
 },
 {
@@ -830,9 +977,15 @@
     "$oid": "670dc2be5c9f636934a39e7d"
   },
   "code": "CB_510",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
     "$oid": "670dbe2c5c9f636934a39e5d"
+  },
+  "bookingId": {
+    "$oid": "67408781796dc4fe9ce8061a"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T14:01:55.069Z"
   }
 },
 {
@@ -1012,7 +1165,10 @@
   "code": "MK_202",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:28:20.112Z"
   }
 },
 {
@@ -1022,7 +1178,10 @@
   "code": "MK_203",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:28:25.703Z"
   }
 },
 {
@@ -1032,7 +1191,10 @@
   "code": "MK_204",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:28:30.793Z"
   }
 },
 {
@@ -1042,7 +1204,10 @@
   "code": "MK_205",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:28:38.965Z"
   }
 },
 {
@@ -1052,7 +1217,10 @@
   "code": "MK_206",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:28:43.509Z"
   }
 },
 {
@@ -1062,7 +1230,10 @@
   "code": "MK_207",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9537210b684ed056cad"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:28:55.020Z"
   }
 },
 {
@@ -1072,7 +1243,10 @@
   "code": "MK_208",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:28:59.624Z"
   }
 },
 {
@@ -1082,7 +1256,10 @@
   "code": "MK_209",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:09.243Z"
   }
 },
 {
@@ -1092,7 +1269,10 @@
   "code": "MK_210",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:13.495Z"
   }
 },
 {
@@ -1102,7 +1282,10 @@
   "code": "MK_211",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:18.798Z"
   }
 },
 {
@@ -1122,7 +1305,10 @@
   "code": "MK_302",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:24.122Z"
   }
 },
 {
@@ -1132,7 +1318,10 @@
   "code": "MK_303",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:26.677Z"
   }
 },
 {
@@ -1142,7 +1331,10 @@
   "code": "MK_304",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:28.982Z"
   }
 },
 {
@@ -1152,7 +1344,10 @@
   "code": "MK_305",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:31.749Z"
   }
 },
 {
@@ -1162,7 +1357,10 @@
   "code": "MK_306",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:37.123Z"
   }
 },
 {
@@ -1172,7 +1370,10 @@
   "code": "MK_307",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9537210b684ed056cad"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:39.982Z"
   }
 },
 {
@@ -1182,7 +1383,10 @@
   "code": "MK_308",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:42.952Z"
   }
 },
 {
@@ -1192,7 +1396,10 @@
   "code": "MK_309",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:47.481Z"
   }
 },
 {
@@ -1202,7 +1409,10 @@
   "code": "MK_310",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:50.878Z"
   }
 },
 {
@@ -1212,7 +1422,10 @@
   "code": "MK_311",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:54.096Z"
   }
 },
 {
@@ -1232,7 +1445,10 @@
   "code": "MK_402",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:29:59.315Z"
   }
 },
 {
@@ -1242,7 +1458,10 @@
   "code": "MK_403",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:01.688Z"
   }
 },
 {
@@ -1252,7 +1471,10 @@
   "code": "MK_404",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:04.450Z"
   }
 },
 {
@@ -1262,7 +1484,10 @@
   "code": "MK_405",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:07.675Z"
   }
 },
 {
@@ -1272,7 +1497,10 @@
   "code": "MK_406",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:10.723Z"
   }
 },
 {
@@ -1282,7 +1510,10 @@
   "code": "MK_407",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9537210b684ed056cad"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:13.150Z"
   }
 },
 {
@@ -1292,7 +1523,10 @@
   "code": "MK_408",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:16.480Z"
   }
 },
 {
@@ -1302,7 +1536,10 @@
   "code": "MK_409",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:23.383Z"
   }
 },
 {
@@ -1312,7 +1549,10 @@
   "code": "MK_410",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:27.190Z"
   }
 },
 {
@@ -1322,7 +1562,10 @@
   "code": "MK_411",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:32.073Z"
   }
 },
 {
@@ -1342,7 +1585,10 @@
   "code": "MK_502",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:38.833Z"
   }
 },
 {
@@ -1352,7 +1598,10 @@
   "code": "MK_503",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:41.134Z"
   }
 },
 {
@@ -1362,7 +1611,10 @@
   "code": "MK_504",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9537210b684ed056cad"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:47.723Z"
   }
 },
 {
@@ -1372,7 +1624,10 @@
   "code": "MK_505",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:51.604Z"
   }
 },
 {
@@ -1382,7 +1637,10 @@
   "code": "MK_506",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:30:59.741Z"
   }
 },
 {
@@ -1392,7 +1650,10 @@
   "code": "MK_507",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:03.845Z"
   }
 },
 {
@@ -1402,7 +1663,10 @@
   "code": "MK_508",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:09.508Z"
   }
 },
 {
@@ -1412,7 +1676,10 @@
   "code": "MK_55/1",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:13.661Z"
   }
 },
 {
@@ -1422,7 +1689,10 @@
   "code": "MK_55/2",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:16.393Z"
   }
 },
 {
@@ -1442,7 +1712,10 @@
   "code": "MK_602",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:23.449Z"
   }
 },
 {
@@ -1452,7 +1725,10 @@
   "code": "MK_603",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:25.740Z"
   }
 },
 {
@@ -1462,7 +1738,10 @@
   "code": "MK_604",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9537210b684ed056cad"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:28.819Z"
   }
 },
 {
@@ -1472,7 +1751,10 @@
   "code": "MK_605",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:31.440Z"
   }
 },
 {
@@ -1482,7 +1764,10 @@
   "code": "MK_606",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:34.317Z"
   }
 },
 {
@@ -1492,7 +1777,10 @@
   "code": "MK_607",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:37.344Z"
   }
 },
 {
@@ -1502,7 +1790,10 @@
   "code": "MK_608",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:41.682Z"
   }
 },
 {
@@ -1512,7 +1803,10 @@
   "code": "MK_66/1",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:44.248Z"
   }
 },
 {
@@ -1522,7 +1816,10 @@
   "code": "MK_66/2",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:46.990Z"
   }
 },
 {
@@ -1542,7 +1839,10 @@
   "code": "MK_702",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:57.529Z"
   }
 },
 {
@@ -1552,7 +1852,10 @@
   "code": "MK_703",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:31:59.475Z"
   }
 },
 {
@@ -1562,7 +1865,10 @@
   "code": "MK_704",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9537210b684ed056cad"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:32:02.065Z"
   }
 },
 {
@@ -1570,9 +1876,12 @@
     "$oid": "67127be2cc979020534afcef"
   },
   "code": "MK_705",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "updatedAt": {
+    "$date": "2024-10-19T13:38:23.115Z"
   }
 },
 {
@@ -1580,9 +1889,12 @@
     "$oid": "67127bebcc979020534afcf0"
   },
   "code": "MK_706",
-  "status": "Trống",
+  "status": "Đang sửa chữa",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-19T13:38:27.050Z"
   }
 },
 {
@@ -1592,7 +1904,10 @@
   "code": "MK_707",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9307210b684ed046cd8"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:32:10.105Z"
   }
 },
 {
@@ -1600,9 +1915,15 @@
     "$oid": "67127c10cc979020534afcf2"
   },
   "code": "MK_708",
-  "status": "Trống",
+  "status": "Đang sử dụng",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-11-13T15:41:03.424Z"
+  },
+  "bookingId": {
+    "$oid": "670d33f1b209ba33cfb0c54c"
   }
 },
 {
@@ -1612,7 +1933,10 @@
   "code": "MK_77/1",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:32:18.285Z"
   }
 },
 {
@@ -1622,6 +1946,9 @@
   "code": "MK_77/2",
   "status": "Trống",
   "roomCategoryId": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
+    "$oid": "6711b9817210b684ed0698db"
+  },
+  "updatedAt": {
+    "$date": "2024-10-18T16:32:21.287Z"
   }
 }]

@@ -19,7 +19,7 @@ router.post('/create-payment-link', async (req, res) => {
 
     try {
         const order = {
-            amount: amount - 499000,
+            amount: amount,
             description: bookingId,
             orderCode: Math.floor(10000000 + Math.random() * 90000000),
             returnUrl: `${YOUR_DOMAIN}/success`,
