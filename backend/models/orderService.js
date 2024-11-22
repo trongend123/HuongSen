@@ -20,6 +20,7 @@ const orderServiceSchema = new Schema(
             required: [true, 'bookingId là bắt buộc']
         },
 
+
         // Quantity of the service
         quantity: {
             type: Number,
@@ -43,6 +44,7 @@ const orderServiceSchema = new Schema(
             default: 'pending',
             enum: ['action', 'pending', 'completed', 'cancel']
         }
+
     },
     {
         timestamps: true, // Automatically adds createdAt and updatedAt fields
