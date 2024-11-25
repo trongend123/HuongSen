@@ -114,6 +114,10 @@ const CatBaRooms = ({ rooms, onClick }) => {
 };
 
 const MinhKhaiRooms = ({ rooms, onClick }) => {
+
+  console.log(rooms);
+  
+
   const floor7cb = rooms.slice(0, 11);
   const floor6cb = rooms.slice(11,22);
   const floor5cb = rooms.slice(22, 33);

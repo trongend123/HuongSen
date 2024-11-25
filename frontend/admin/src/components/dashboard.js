@@ -37,7 +37,7 @@ const Dashboard = () => {
   }, []);
   const filteredOrderData = orderData.filter((order) => {
     const matchesLocation = selectedLocation ? order.roomCateId.locationId === selectedLocation : true;
-    const matchesStatus = order.bookingId.status ? order.bookingId.status === 'Completed' : true;
+    const matchesStatus = order.bookingId.status ? order.bookingId.status === 'Đã hoàn thành' : true;
     return matchesLocation && matchesStatus;
   });
 
