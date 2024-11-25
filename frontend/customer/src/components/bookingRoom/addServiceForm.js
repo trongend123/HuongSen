@@ -18,21 +18,24 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
     const [expandedNotes, setExpandedNotes] = useState([]);
 
     useEffect(() => {
-        const fetchOtherService = async () => {
+        const fetchOtherServices = async () => {
             try {
                 const response = await axios.get('http://localhost:9999/otherServices');
-                const services = response.data.map(service => ({
-                    otherServiceId: service._id,
-                    name: service.name,
-                    price: service.price,
-                    description: service.description,
-                }));
-                setOtherServices(services);
+                // Lọc và chỉ lấy các dịch vụ chưa bị xóa (isDeleted === false)
+                const filteredServices = response.data
+                    .filter(service => !service.isDeleted && service.price !== 1000) // Lọc các dịch vụ chưa bị xóa
+                    .map(service => ({
+                        otherServiceId: service._id,
+                        name: service.name,
+                        price: service.price,
+                        description: service.description,
+                    }));
+                setOtherServices(filteredServices);
             } catch (error) {
                 console.error('Lỗi khi lấy danh sách dịch vụ:', error);
             }
         };
-        fetchOtherService();
+        fetchOtherServices();
     }, []);
 
     const calculateTotalAmount = () => {
@@ -71,44 +74,64 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
             setFormError("Vui lòng chọn cả ngày và thời gian cho dịch vụ.");
             return;
         }
-        setFormError(""); // Clear error if validation passes
+
+        setFormError(""); // Clear error if the input is valid
+
+        // Parse the selected time slot into hours and minutes
         const [hours, minutes] = serviceTimeSlot.split(':').map(Number);
+
+        // Combine the selected date with the chosen time
         const combinedDateTime = new Date(serviceDate);
         combinedDateTime.setHours(hours, minutes, 0, 0);
 
-        const existingService = orderServicesData.find(service => service.otherServiceId === selectedService);
+        // Adjust the time to UTC+7 (Vietnam time)
+        const vietnamTime = new Date(combinedDateTime.getTime() - combinedDateTime.getTimezoneOffset() * 60000);
+
+        // Format the date and time to ISO string
+        const formattedTime = vietnamTime.toISOString();
+
+        // Find an existing service with the same ID and time
+        const existingService = orderServicesData.find(
+            service =>
+                service.otherServiceId === selectedService &&
+                new Date(service.time).getTime() === new Date(formattedTime).getTime()
+        );
 
         if (existingService) {
+            // If the service exists and the time is the same, update the quantity and note
             setOrderServicesData(prevData =>
                 prevData.map(service =>
-                    service.otherServiceId === selectedService
+                    service.otherServiceId === selectedService &&
+                        new Date(service.time).getTime() === new Date(formattedTime).getTime()
                         ? {
                             ...service,
-                            serviceQuantity: service.serviceQuantity + parseInt(serviceQuantity),
-                            note: serviceNote, // Cập nhật ghi chú
-                            time: combinedDateTime,
+                            serviceQuantity: service.serviceQuantity + parseInt(serviceQuantity, 10),
+                            note: service.note
+                                ? `${service.note} ${serviceNote}` // Concatenate the new note if it exists
+                                : serviceNote, // Add the new note if it's not present
                         }
                         : service
                 )
             );
         } else {
+            // If the service does not exist, create a new service entry
             setOrderServicesData(prevData => [
                 ...prevData,
                 {
                     otherServiceId: selectedService,
-                    serviceQuantity: parseInt(serviceQuantity),
-                    note: serviceNote, // Ghi chú mới
-                    time: combinedDateTime,
+                    serviceQuantity: parseInt(serviceQuantity, 10),
+                    note: serviceNote, // Add the note
+                    time: formattedTime, // Use the formatted time
                 },
             ]);
         }
 
+        // Reset the form fields
         setSelectedService("");
         setServiceQuantity(1);
         setSelectedServiceDescription("");
-        setServiceNote(""); // Reset ghi chú
+        setServiceNote(""); // Reset the note
     };
-
     const handleRemoveService = (index) => {
         setOrderServicesData(prevData => prevData.filter((_, i) => i !== index));
         calculateTotalAmount();
@@ -117,17 +140,17 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
     const addService = async (bookingId) => {
         try {
             const promises = orderServicesData.map(service => {
-                // Adjust time to UTC+7
-                const localTime = new Date(service.time); // Local time of the service
-                const vietnamTime = new Date(localTime.getTime() - localTime.getTimezoneOffset() * 60000); // Adjust by local offset
-                const formattedTime = vietnamTime.toISOString(); // Convert to ISO 8601
+                // // Adjust time to UTC+7
+                // const localTime = new Date(service.time); // Local time of the service
+                // const vietnamTime = new Date(localTime.getTime() - localTime.getTimezoneOffset() * 60000); // Adjust by local offset
+                // const formattedTime = vietnamTime.toISOString(); // Convert to ISO 8601
 
                 return axios.post('http://localhost:9999/orderServices', {
                     otherServiceId: service.otherServiceId,
                     bookingId,
                     note: service.note, // Ghi chú
                     quantity: service.serviceQuantity,
-                    time: formattedTime, // Post time in Vietnam timezone (UTC+7)
+                    time: service.time,// Post time in Vietnam timezone (UTC+7)
                 });
             });
 
@@ -262,57 +285,77 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                             </thead>
                             <tbody>
                                 {orderServicesData.map((service, index) => {
-                                    const serviceDetails = otherServices.find(
-                                        (s) => s.otherServiceId === service.otherServiceId
-                                    );
+                                    const serviceDetails = otherServices.find(s => s.otherServiceId === service.otherServiceId);
                                     return (
-                                        <React.Fragment key={service.otherServiceId}>
+                                        <React.Fragment key={`${service.otherServiceId}-${service.time}-${index}`}>
                                             {/* Main Row */}
                                             <tr>
                                                 <td>{serviceDetails?.name}</td>
                                                 <td>{service.serviceQuantity}</td>
                                                 <td>
-                                                    {new Intl.DateTimeFormat('vi-VN', {
-                                                        timeZone: 'Asia/Ho_Chi_Minh',
-                                                        dateStyle: 'short',
-                                                        timeStyle: 'short',
-                                                    }).format(new Date(service.time))}
+                                                    {(() => {
+                                                        const date = service.time;
+                                                        const formattedDate = date.replace('T', ',').split('.')[0]; // Remove milliseconds and replace T
+                                                        const [datePart, timePart] = formattedDate.split(',');
+                                                        const [year, month, day] = datePart.split('-');
+                                                        return `${day}-${month}-${year}, ${timePart.slice(0, 5)}`; // Format as DD-MM-YYYY, HH:mm
+                                                    })()}
                                                 </td>
                                                 <td>
-                                                    <button
-                                                        id="delete-button"
+                                                    <Button
+                                                        variant="danger"
                                                         onClick={() => handleRemoveService(index)}
                                                     >
                                                         Xóa
-                                                    </button>
+                                                    </Button>
                                                 </td>
                                             </tr>
 
                                             {/* Note Row */}
                                             <tr>
                                                 <td colSpan="4">
-                                                    <div id="note-container">
+                                                    <div
+                                                        style={{
+                                                            padding: '5px',
+                                                            border: '1px solid #ccc',
+                                                            borderRadius: '4px',
+                                                            textAlign: 'left',
+                                                            position: 'relative',
+                                                        }}
+                                                    >
                                                         {/* Display truncated or full note */}
                                                         <div
-                                                            id="note-content"
-                                                            className={expandedNotes.includes(index) ? 'expanded' : ''}
+                                                            style={{
+                                                                maxHeight: expandedNotes.includes(index) ? 'none' : '35px', // Toggle height
+                                                                overflowY: expandedNotes.includes(index) ? 'visible' : 'hidden', // Hide overflow unless expanded
+                                                                textOverflow: 'ellipsis', // Add ellipsis when collapsed
+                                                                display: expandedNotes.includes(index) ? 'block' : 'inline', // Adjust layout
+                                                            }}
                                                         >
                                                             {expandedNotes.includes(index)
-                                                                ? service.note || 'Không có ghi chú'
-                                                                : (service.note || 'Không có ghi chú').slice(0, 90) +
-                                                                (service.note && service.note.length > 100 ? '...' : '')}
+                                                                ? service.note || "Không có ghi chú"
+                                                                : (service.note || "Không có ghi chú").slice(0, 100) + (service.note && service.note.length > 100 ? "..." : "")}
                                                         </div>
 
-                                                        {/* Button for toggling notes */}
-                                                        {service.note && service.note.length > 70 && (
-                                                            <div id="note-button-container">
+                                                        {/* Button position based on state */}
+                                                        {service.note && service.note.length > 100 && (
+                                                            <div
+                                                                style={{
+                                                                    marginTop: expandedNotes.includes(index) ? '5px' : '0', // Add space for "See Less"
+                                                                    textAlign: expandedNotes.includes(index) ? 'right' : 'left', // Align for consistency
+                                                                    display: expandedNotes.includes(index) ? 'block' : 'inline', // Change line position
+                                                                }}
+                                                            >
                                                                 <button
-                                                                    id="note-button"
                                                                     onClick={() => toggleNoteExpansion(index)}
+                                                                    style={{
+                                                                        backgroundColor: 'transparent',
+                                                                        border: 'none',
+                                                                        color: '#007bff',
+                                                                        cursor: 'pointer',
+                                                                    }}
                                                                 >
-                                                                    {expandedNotes.includes(index)
-                                                                        ? 'Thu gọn'
-                                                                        : 'Xem thêm'}
+                                                                    {expandedNotes.includes(index) ? 'Thu gọn' : 'Xem thêm'}
                                                                 </button>
                                                             </div>
                                                         )}

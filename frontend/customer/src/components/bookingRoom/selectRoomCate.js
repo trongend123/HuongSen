@@ -91,7 +91,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         return groups;
     }, {});
 
-    const createOrderRoom = async (bookingId) => {
+    const createOrderRoom = async (bookingId, agencyID) => {
         try {
             const updatedRemainingRooms = await fetchRoomData(); // Fetch the latest data
 
@@ -102,7 +102,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
             });
 
             if (invalidSelections.length > 0) {
-                // alert('Some room selections exceed the available number of rooms. Please adjust your selections.');
+                alert('Some room selections exceed the available number of rooms. Please adjust your selections.');
                 return false; // Return false to indicate failure
             }
 
@@ -113,13 +113,28 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
             }
 
             // Create room orders
-            const orderRoomPromises = selectedRooms.map(room => {
-                return axios.post('http://localhost:9999/orderRooms', {
-                    roomCateId: room.roomCateId,
-                    customerId: customerID,
-                    bookingId: bookingId,
-                    quantity: room.quantity
-                });
+            const orderRoomPromises = selectedRooms.flatMap(room => {
+                // Nếu có agencyID và quantity > 1, chia nhỏ thành các đơn riêng lẻ
+                if (agencyID && room.quantity > 1) {
+                    return Array.from({ length: room.quantity }, () => ({
+                        roomCateId: room.roomCateId,
+                        customerId: customerID,
+                        bookingId: bookingId,
+                        quantity: 1 // Chia nhỏ thành đơn quantity = 1
+                    })).map(orderData =>
+                        axios.post('http://localhost:9999/orderRooms', orderData)
+                    );
+                } else {
+                    // Tạo đơn thông thường
+                    return [
+                        axios.post('http://localhost:9999/orderRooms', {
+                            roomCateId: room.roomCateId,
+                            customerId: customerID,
+                            bookingId: bookingId,
+                            quantity: room.quantity
+                        })
+                    ];
+                }
             });
 
             await Promise.all(orderRoomPromises);
@@ -128,9 +143,10 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         } catch (error) {
             console.error('Error creating order rooms:', error);
             alert('An error occurred while creating room orders. Please try again.');
-            // return false; // Return false to indicate failure
+            return false; // Return false to indicate failure
         }
     };
+
 
 
     useImperativeHandle(ref, () => ({

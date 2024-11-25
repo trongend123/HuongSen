@@ -31,7 +31,7 @@ import {
   OrderServiceRouter,
   paymentRoute,
   ServiceBookingRouter,
-  Email
+  Email,
 } from "./routes/index.js";
 //import { verifyAccessToken } from "./jwt_helper.js";
 import { changePassword, loginUser, registerUser, verifyAccessToken } from "./authens/auth.js";

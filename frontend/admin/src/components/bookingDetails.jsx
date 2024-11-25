@@ -2,15 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./bookingDetails.css";
-import { Button, Col, Row } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import { format } from 'date-fns';
 import AddServiceForm from './bookingRoom/addServiceForm';
 
 const BookingDetails = () => {
     const { bookingId } = useParams();
     const [orderRooms, setOrderRooms] = useState([]);
+    const [Rooms, setRooms] = useState([]);
     const [orderServices, setOrderServices] = useState([]);
     const [location, setLocation] = useState({});
+    const [Agency, setAgency] = useState({});
     const [isUpdating, setIsUpdating] = useState(false);
     const [expandedNotes, setExpandedNotes] = useState({}); // Trạng thái để lưu ghi chú được mở rộng
     const addServiceRef = useRef(null);
@@ -20,24 +22,28 @@ const BookingDetails = () => {
     // Lấy thông tin đặt phòng
     const fetchBookingDetails = async () => {
         try {
-            const [orderRoomsResponse, orderServiceResponse] = await Promise.all([
+            const [orderRoomsResponse, orderServiceResponse, roomsResponse] = await Promise.all([
                 axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`),
-                axios.get(`http://localhost:9999/orderServices/booking/${bookingId}`)
+                axios.get(`http://localhost:9999/orderServices/booking/${bookingId}`),
+                axios.get(`http://localhost:9999/rooms/booking/${bookingId}`)
             ]);
             setOrderRooms(orderRoomsResponse.data);
             setOrderServices(orderServiceResponse.data);
+            setRooms(roomsResponse.data.rooms);
         } catch (error) {
             console.error('Error fetching booking details:', error);
         }
     };
 
     // Lấy thông tin vị trí từ ID phòng
-    const fetchLocation = async (roomCateId) => {
+    const fetchLocationAndAgency = async (roomCateId, customerId) => {
         try {
             const locationsResponse = await axios.get(`http://localhost:9999/roomCategories/${roomCateId}`);
             setLocation(locationsResponse.data.locationId);
+            const AgencyResponse = await axios.get(`http://localhost:9999/agencies/customer/${customerId}`);
+            setAgency(AgencyResponse.data);
         } catch (error) {
-            console.error('Error fetching location details:', error);
+            console.error('Error fetching location or agencies details:', error);
         }
     };
 
@@ -49,9 +55,9 @@ const BookingDetails = () => {
     // Cập nhật vị trí khi có thay đổi về phòng
     useEffect(() => {
         if (orderRooms.length > 0) {
-            const { roomCateId } = orderRooms[0];
+            const { roomCateId, customerId } = orderRooms[0];
             if (roomCateId) {
-                fetchLocation(roomCateId._id);
+                fetchLocationAndAgency(roomCateId._id, customerId._id);
             }
         }
     }, [orderRooms]);
@@ -114,20 +120,21 @@ const BookingDetails = () => {
             setIsUpdating(false);
         }
     }
+
     // Xử lý check-out
     const handleCheckout = async () => {
         setIsUpdating(true);
         try {
-            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { status: 'Confirmed', payment: 'Đã thanh toán' });
+            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { status: 'Đã hoàn thành' });
 
             // Cập nhật trạng thái booking
             setOrderRooms((prevOrderRooms) =>
                 prevOrderRooms.map((orderRoom) => ({
                     ...orderRoom,
-                    bookingId: { ...orderRoom.bookingId, status: 'Confirmed', payment: 'Đã thanh toán' },
+                    bookingId: { ...orderRoom.bookingId, status: 'Đã hoàn thành' },
                 }))
             );
-            alert('Trạng thái đã được cập nhật thành "Confirmed".');
+            alert('Trạng thái đã được cập nhật thành "Đã hoàn thành".');
         } catch (error) {
             console.error('Error updating booking status:', error);
             alert('Có lỗi xảy ra khi cập nhật trạng thái. Vui lòng thử lại.');
@@ -140,15 +147,15 @@ const BookingDetails = () => {
         return <div>Loading...</div>;
     }
     // Xử lý hủy
-    const handleCancelService = async (serviceId, price) => {
-        const checkinDate = new Date(orderRooms[0].bookingId?.checkin);
+    const handleCancelService = async (deleteService, price) => {
+        const checkinDate = new Date(deleteService?.time);
         const currentDate = new Date();
         const daysBeforeCheckin = Math.floor((checkinDate - currentDate) / (1000 * 3600 * 24));
 
         // Kiểm tra nếu dịch vụ được hủy trước ngày check-in 2 ngày
         if (daysBeforeCheckin >= 2) {
             // Xóa dịch vụ khỏi danh sách
-            const updatedServices = orderServices.filter((service) => service._id !== serviceId);
+            const updatedServices = orderServices.filter((service) => service._id !== deleteService._id);
             setOrderServices(updatedServices); // Cập nhật lại danh sách dịch vụ đã đặt
 
             // Cập nhật lại giá booking sau khi xóa dịch vụ
@@ -156,7 +163,7 @@ const BookingDetails = () => {
 
             // Gửi yêu cầu xóa dịch vụ từ cơ sở dữ liệu
             try {
-                await axios.delete(`http://localhost:9999/orderServices/${serviceId}`);
+                await axios.delete(`http://localhost:9999/orderServices/${deleteService._id}`);
 
                 // Cập nhật lại booking với dịch vụ đã xóa
                 const updatedBookingData = {
@@ -164,23 +171,70 @@ const BookingDetails = () => {
                 };
                 await axios.put(`http://localhost:9999/bookings/${bookingId}`, updatedBookingData);
 
-                alert('Dịch vụ đã được xóa thành công và giá booking đã được cập nhật.');
+
                 fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
+                alert('Dịch vụ đã được xóa thành công và giá booking đã được cập nhật.');
             } catch (error) {
                 console.error('Error canceling service:', error);
                 alert('Có lỗi xảy ra khi xóa dịch vụ. Vui lòng thử lại.');
             }
         } else {
-            alert('Dịch vụ chỉ có thể hủy trước ngày check-in 2 ngày.');
+            alert('Dịch vụ chỉ có thể hủy trước ngày sử dụng dịch vụ 2 ngày.');
         }
     };
+    const handleCancelRoom = async (OrderRoom) => {
+
+        const checkinDate = new Date(OrderRoom.bookingId?.checkin);
+        const checkoutDate = new Date(OrderRoom.bookingId?.checkout);
+        const currentDate = new Date();
+        const daysBeforeCheckin = Math.floor((checkinDate - currentDate) / (1000 * 3600 * 24));
+        const night = Math.floor((checkoutDate - checkinDate) / (1000 * 3600 * 24));
+
+        const price = OrderRoom.roomCateId.price * OrderRoom.quantity * night;
+
+        // Kiểm tra nếu phòng được hủy trước ngày check-in 2 ngày
+        if (daysBeforeCheckin >= 2 && orderRooms.length > 1) {
+            if (window.confirm('Bạn có chắc muốn hủy phòng này không?')) {
+                // Xóa phòng khỏi danh sách
+                const updatedRooms = orderRooms.filter((room) => room._id !== OrderRoom._id);
+                setOrderRooms(updatedRooms); // Cập nhật lại danh sách phòng đã đặt
+
+                // Cập nhật lại giá booking sau khi xóa phòng
+                setNewBookingPrice((prevPrice) => prevPrice - price);
+
+                // Gửi yêu cầu xóa phòng từ cơ sở dữ liệu
+                try {
+                    // Gửi yêu cầu API để hủy phòng
+                    await axios.delete(`http://localhost:9999/orderRooms/${OrderRoom._id}`)
+
+                    // Cập nhật lại booking với Room đã xóa
+                    const updatedBookingData = {
+                        price: OrderRoom.bookingId.price - price || newBookingPrice,
+                    };
+                    await axios.put(`http://localhost:9999/bookings/${bookingId}`, updatedBookingData);
+
+                    fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
+                    alert('Phòng  đã được xóa thành công và giá booking đã được cập nhật.');
+                } catch (error) {
+                    console.error('Lỗi khi hủy phòng:', error);
+                    alert('Không thể hủy phòng. Vui lòng thử lại!');
+                }
+            };
+        } else {
+            if (orderRooms.length === 1) { alert('Phòng chỉ có thể hủy Khi còn trên 1 phòng.'); }
+            else { alert('Phòng chỉ có thể hủy trước ngày check in 2 ngày.') };
+        }
+    }
+    const handleReceiveAndReturnRoom = async (Room) => {
+
+    }
 
     return (
         <div className="booking-details">
             <h2>Thông tin Đặt phòng</h2>
-            <h3>Mã Đặt phòng: {orderRooms[0].bookingId?._id || 'N/A'}</h3>
-
+            <h3>Mã Đặt phòng: {orderRooms[0].bookingId?._id || 'N/A'} - Mã hợp đồng: {orderRooms[0].bookingId?.contract || 'N/A'}</h3>
             <Row className="customer-info">
+                <h4>Thông tin Khách hàng</h4>
                 <Col>
                     <p><strong>Họ và tên:</strong> {orderRooms[0].customerId?.fullname || 'N/A'}</p>
                     <p><strong>Email:</strong> {orderRooms[0].customerId?.email || 'N/A'}</p>
@@ -188,9 +242,18 @@ const BookingDetails = () => {
                     <p><strong>Check-in:</strong> {format(new Date(orderRooms[0].bookingId?.checkin), 'dd-MM-yyyy')}</p>
                     <p><strong>Check-out:</strong> {format(new Date(orderRooms[0].bookingId?.checkout), 'dd-MM-yyyy')}</p>
                 </Col>
+                {/* Hiển thị thông tin Agency */}
+                {Agency && (
+                    <Col className="agency-details">
+                        <p><strong>Mã quân nhân:</strong> {Agency.code}</p>
+                        <p><strong>Tên đơn vị:</strong> {Agency.name}</p>
+                        <p><strong>SĐT đơn vị:</strong> {Agency.phone}</p>
+                        <p><strong>Vị trí đơn vị:</strong> {Agency.address}</p>
+                        <p><strong>Bank + STK:</strong> {Agency.stk}</p>
+                    </Col>
+                )}
                 <Col>
                     <p><strong>Ngày tạo đơn:</strong> {format(new Date(orderRooms[0].createdAt), 'dd-MM-yyyy')}</p>
-                    <p><strong>Hợp đồng:</strong> {orderRooms[0].bookingId?.contract || 'N/A'}</p>
                     <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p>
                     <p><strong>Trạng thái:</strong> {orderRooms[0].bookingId?.status || 'N/A'}</p>
                     <p><strong>Thanh toán:</strong> {orderRooms[0].bookingId?.payment || 'N/A'}</p>
@@ -198,35 +261,77 @@ const BookingDetails = () => {
 
             </Row>
 
-            <section className="booking-info">
 
-                <p><strong>Ghi chú:</strong> {renderNote(orderRooms[0].bookingId?.note) || 'N/A'}</p>
-            </section>
 
             <section className="room-details">
                 <h3>Thông tin Phòng</h3>
                 <table>
                     <thead>
                         <tr>
+                            {(orderRooms[0]?.bookingId?.status === 'Đã check-in' || orderRooms[0]?.bookingId?.status === 'Đã hoàn thành') && <th>Số Phòng</th>}
                             <th>Tên phòng</th>
                             <th>Giá (VND)</th>
                             <th>Vị trí</th>
-                            <th>Số lượng</th>
+                            {(orderRooms[0]?.bookingId?.status !== 'Đã check-in' && orderRooms[0]?.bookingId?.status !== 'Đã hoàn thành') && <th>Số lượng</th>}
+                            {Agency && (orderRooms[0]?.bookingId?.status === 'Đã check-in' || orderRooms[0]?.bookingId?.status === 'Đã đặt') && <th>Thao tác</th>} {/* Chỉ hiển thị cột này nếu có Agency */}
                         </tr>
                     </thead>
-                    <tbody>
-                        {orderRooms.map((orderRoom) => (
-                            <tr key={orderRoom._id}>
-                                <td>{orderRoom.roomCateId?.name || 'N/A'}</td>
-                                <td>{orderRoom.roomCateId?.price ? `${orderRoom.roomCateId.price} VND` : 'N/A'}</td>
-                                <td>{location.name || 'N/A'}</td>
-                                <td>{orderRoom.quantity || 'N/A'}</td>
-                            </tr>
-                        ))}
-                    </tbody>
+                    {(orderRooms[0]?.bookingId?.status === 'Đã check-in' || orderRooms[0]?.bookingId?.status === 'Đã hoàn thành') ?
+                        (<tbody>
+                            {Rooms.map((room) => (
+                                <tr key={room._id}>
+                                    <td>{room?.code || 'N/A'}</td>
+                                    <td>{room.roomCategoryId?.name || 'N/A'}</td>
+                                    <td>{room.roomCategoryId?.price ? ` ${room.roomCategoryId.price} VND` : 'N/A'}</td>
+                                    <td>{location?.name || 'N/A'}</td>
+                                    {Agency && (
+                                        orderRooms[0]?.bookingId?.status === 'Đã check-in' &&
+                                        (<td>
+                                            <button
+                                                onClick={() => handleReceiveAndReturnRoom(room)}
+                                            >
+                                                Nhận phòng
+                                            </button>
+                                            <button
+                                                onClick={() => handleReceiveAndReturnRoom(room)}
+                                            >
+                                                Trả phòng
+                                            </button>
+                                        </td>)
+                                    )}
+
+                                </tr>
+                            ))}
+                        </tbody>
+                        ) : (
+                            <tbody>
+                                {orderRooms.map((orderRoom) => (
+                                    <tr key={orderRoom._id}>
+                                        <td>{orderRoom.roomCateId?.name || 'N/A'}</td>
+                                        <td>{orderRoom.roomCateId?.price ? `${orderRoom.roomCateId.price} VND ` : 'N/A'}</td>
+                                        <td>{location?.name || 'N/A'}</td>
+                                        <td>{orderRoom.quantity || 'N/A'}</td>
+                                        {Agency && (
+                                            <td>
+                                                <button
+                                                    className="cancel-room-btn"
+                                                    onClick={() => handleCancelRoom(orderRoom)}
+                                                >
+                                                    Hủy phòng
+                                                </button>
+                                            </td>
+                                        )}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        )
+                    }
                 </table>
             </section>
 
+            <section className="booking-info">
+                <p><strong>Ghi chú:</strong> {renderNote(orderRooms[0].bookingId?.note) || 'N/A'}</p>
+            </section>
             <section className="service-details">
                 <h3>Dịch vụ Đã đặt</h3>
                 {orderServices.length > 0 ? (
@@ -260,7 +365,7 @@ const BookingDetails = () => {
                                         <td>
                                             <Button
                                                 variant="danger"
-                                                onClick={() => handleCancelService(service._id, (service.otherServiceId.price * service.quantity))}
+                                                onClick={() => handleCancelService(service, (service.otherServiceId.price * service.quantity))}
                                             >
                                                 Hủy Dịch Vụ
                                             </Button>
@@ -281,7 +386,7 @@ const BookingDetails = () => {
             </section>
 
             {/* Service Form */}
-            {orderRooms[0].bookingId?.status !== 'Confirmed' && orderRooms[0].bookingId?.status !== 'Cancelled' && (
+            {(orderRooms[0].bookingId?.status === 'Đã check-in' || orderRooms[0].bookingId?.status === 'Đã đặt') && (
                 <AddServiceForm
                     ref={addServiceRef}
                     bookingId={bookingId} // Pass booking ID after it's created
@@ -289,18 +394,19 @@ const BookingDetails = () => {
                 />
             )}
 
+
             <h3>Tổng giá tiền thay đổi thành: {newBookingPrice}</h3>
             <div className="checkout-button">
                 {/* Button để cập nhật thông tin booking */}
                 <button onClick={handleUpdateBooking}
-                    disabled={isUpdating || orderRooms[0].bookingId?.status === 'Confirmed' || orderRooms[0].bookingId?.status === 'Cancelled'}
+                    disabled={isUpdating || (orderRooms[0].bookingId?.status !== 'Đã check-in' && orderRooms[0].bookingId?.status !== 'Đã đặt')}
 
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Cập nhật Dịch vụ và Giá'}
                 </button>
                 <button
                     onClick={handleCheckout}
-                    disabled={isUpdating || orderRooms[0].bookingId?.status === 'Confirmed' || orderRooms[0].bookingId?.status !== 'Check-in'}
+                    disabled={isUpdating || orderRooms[0].bookingId?.status !== 'Đã check-in'}
 
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Check-out'}
@@ -309,5 +415,4 @@ const BookingDetails = () => {
         </div>
     );
 };
-
 export default BookingDetails;

@@ -8,5 +8,6 @@ router.get('/', agencyController.getAllAgencies);
 router.get('/:id', agencyController.getAgency);
 router.put('/:id', agencyController.updateAgency);
 router.delete('/:id', agencyController.deleteAgency);
+router.get('/customer/:customerId', agencyController.getAgencyByCustomerId);
 
 export default router;

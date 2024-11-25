@@ -17,6 +17,7 @@ const Sidebar = () => {
           <NavLink className="nav-link" to="/dashboard"><MdDashboard /> Thống kê</NavLink>
           <NavLink className="nav-link" exact to="/rooms"><MdBedroomParent /> Danh sách Phòng</NavLink>
           <NavLink className="nav-link" to="/bookings"><RiBillFill /> Danh sách Đặt phòng</NavLink>
+          <NavLink className="nav-link" to="/servicesbooking"><MdRoomService /> Danh sách Đơn dịch vụ</NavLink>
           {/* <NavLink className="nav-link" to="/createBooking"><RiBillFill /> Đặt phòng</NavLink> */}
           <NavLink className="nav-link" to="/bookingPage"><RiBillFill /> Đặt phòng</NavLink>
           <NavLink className="nav-link" to="/"><MdLogout /> Đăng xuất</NavLink>
@@ -32,6 +33,7 @@ const Sidebar = () => {
           <NavLink className="nav-link" exact to="/rooms"><MdBedroomParent /> Danh sách Phòng</NavLink>
           <NavLink className="nav-link" to="/roomCate"><BiSolidCategoryAlt /> Danh sách Loại phòng</NavLink>
           <NavLink className="nav-link" to="/bookings"><RiBillFill /> Danh sách Đặt phòng</NavLink>
+          <NavLink className="nav-link" to="/servicesbooking"><MdRoomService /> Danh sách Đơn dịch vụ</NavLink>
           <NavLink className="nav-link" to="/services"><MdRoomService /> Danh sách Dịch vụ</NavLink>
           <NavLink className="nav-link" to="/staffs"><MdPeople></MdPeople> Danh sách Nhân viên</NavLink>
           <NavLink className="nav-link" to="/"><MdLogout /> Đăng xuất</NavLink>

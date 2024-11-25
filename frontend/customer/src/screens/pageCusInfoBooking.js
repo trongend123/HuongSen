@@ -12,6 +12,7 @@ import { BASE_URL } from '../utils/config';
 const CustomerBookingPage = () => {
     const [userId, setUserId] = useState(null); // To store the created user ID
     const [bookingId, setBookingId] = useState(null); // To store the created booking ID
+    const [AgencyId, setAgencyId] = useState(null);
     const [bookingPay, setBookingPpay] = useState(null);
     const userFormRef = useRef(null);           // Reference to the user form
     const identifyFormRef = useRef(null);       // Reference to the identification form
@@ -33,18 +34,19 @@ const CustomerBookingPage = () => {
     const handleCreateBoth = async () => {
         try {
             // 1. Tạo khách hàng
-            const createdUserId = await userFormRef.current.createUser();
-            if (createdUserId) {
-                setUserId(createdUserId); // Lưu ID khách hàng
+            const { customerID, agencyID } = await userFormRef.current.createUser();
+            console.log(customerID, agencyID);
+            if (customerID) {
+                setUserId(customerID); // Lưu ID khách hàng
                 console.log("Khách hàng đã được tạo với ID");
 
                 // 3. Tạo đặt phòng
-                const createdBookingId = await bookingFormRef.current.createBooking();
+                const createdBookingId = await bookingFormRef.current.createBooking(agencyID);
                 if (createdBookingId) {
                     setBookingId(createdBookingId); // Lưu ID đặt phòng
 
                     // 2. Tạo giấy tờ tùy thân sau khi khách hàng được tạo
-                    const identifyCreated = await identifyFormRef.current.createIdentify(createdUserId);
+                    const identifyCreated = await identifyFormRef.current.createIdentify(customerID);
                     if (!identifyCreated) {
                         console.log('Tạo giấy tờ tùy thân thất bại.');
                         alert('Có lỗi xảy ra khi tạo giấy tờ tùy thân. Vui lòng thử lại.');
@@ -76,7 +78,7 @@ const CustomerBookingPage = () => {
             // Assuming you have a method to get the booking details
             const bookingResponse = await axios.get(`${BASE_URL}/bookings/${createdBookingId}`);
             const booking = bookingResponse.data;
-            console.log(booking._id, booking.price);
+
             const response = await axios.post(
                 `${BASE_URL}/payment/create-payment-link`,
                 {
@@ -100,7 +102,10 @@ const CustomerBookingPage = () => {
             <Row>
                 <Col md="6">
                     {/* User Form */}
-                    <AddUserForm ref={userFormRef} />
+                    <AddUserForm
+                        ref={userFormRef}
+
+                    />
 
 
                     {/* Service Form */}
@@ -113,7 +118,9 @@ const CustomerBookingPage = () => {
 
                 <Col>
                     {/* Identification Form */}
-                    <AddIdentifyForm ref={identifyFormRef} />
+                    <AddIdentifyForm
+                        ref={identifyFormRef}
+                    />
                     {/* Booking Form */}
                     <AddBookingForm
                         ref={bookingFormRef}

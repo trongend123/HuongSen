@@ -128,8 +128,8 @@ const ServiceBookingList = () => {
                       onChange={(e) => handleStatusChange(booking.bookingId, e.target.value)}
                     >
                       <option value="Đã đặt">Đã đặt</option>
-                      <option value="Đã thanh toán">Đã thanh toán</option>
-                      <option value="Đã hoàn tất">Đã hoàn tất</option>
+                      <option value="Đang sử dụng">Đang sử dụng</option>
+                      <option value="Đã cung cấp">Đã cung cấp</option>
                       <option value="Đã hủy">Đã hủy</option>
                     </select>
                   </td>

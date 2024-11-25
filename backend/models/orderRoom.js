@@ -27,6 +27,8 @@ const orderRoomSchema = new Schema(
       required: [true, 'Quantity là bắt buộc'],
       min: [1, 'Quantity phải ít nhất là 1']
     },
+    receiveRoom: { type: Date },
+    returnRoom: { type: Date }
     // Bạn có thể thêm các trường khác nếu cần, ví dụ: totalPrice, status, etc.
   },
   {

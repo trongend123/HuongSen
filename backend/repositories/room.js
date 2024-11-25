@@ -130,6 +130,16 @@ const getTotalRoomsByCategory = async () => {
   return categoryTotals;
 }
 
+const getRoomsByBookingId = async (bookingId) => {
+  try {
+    // Tìm tất cả các phòng theo bookingId
+    const rooms = await Room.find({ bookingId }).populate('roomCategoryId');
+    return rooms;
+  } catch (error) {
+    throw new Error(`Error fetching rooms by bookingId: ${error.message}`);
+  }
+};
+
 export default {
   create,
   list,
@@ -137,5 +147,6 @@ export default {
   edit,
   deleteRoom,
   getRoomsByCategory,
-  getTotalRoomsByCategory
+  getTotalRoomsByCategory,
+  getRoomsByBookingId,
 };

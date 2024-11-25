@@ -16,8 +16,8 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     const [bookingData, setBookingData] = useState({
         taxId: null,
         staffId: null,
-        status: 'In Progress',
-        payment: 'Chưa Thanh Toán',
+        status: 'Đã đặt',
+        payment: 0,
         price: 0,
         checkin: today,
         checkout: tomorrow,

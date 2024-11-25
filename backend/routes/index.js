@@ -54,5 +54,5 @@ export {
     OrderServiceRouter,
     paymentRoute,
     ServiceBookingRouter,
-    Email
+    Email,
 };

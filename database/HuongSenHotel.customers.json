@@ -1,153 +1,100 @@
 [{
   "_id": {
-    "$oid": "670732b92250999dda285fe4"
+    "$oid": "674080afb31ac53d2dda78b0"
   },
-  "fullname": "Nguyễn Trọng",
-  "email": "trong200920021@gmail.com",
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
   "phone": "0904521821",
   "dob": {
-    "$date": "2002-09-19T17:00:00.000Z"
+    "$date": "2000-11-22T00:00:00.000Z"
   },
   "gender": "Male",
-  "address": "Hải Phòng",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-11-22T13:01:35.153Z"
+  },
   "updatedAt": {
-    "$date": "2024-10-10T02:23:00.239Z"
-  }
+    "$date": "2024-11-22T13:01:35.153Z"
+  },
+  "__v": 0
 },
 {
   "_id": {
-    "$oid": "670735142250999dda285fe7"
+    "$oid": "6740820730d1b5f11092edb1"
   },
-  "fullname": "Nguyễn Ngọc Thế",
-  "email": "the3chp@gmail.com",
-  "phone": "0904091497",
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
   "dob": {
-    "$date": "2002-09-19T17:00:00.000Z"
+    "$date": "2000-11-22T00:00:00.000Z"
   },
   "gender": "Male",
-  "address": "Hải Phòng",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-11-22T13:07:19.507Z"
+  },
   "updatedAt": {
-    "$date": "2024-10-10T07:51:46.798Z"
-  }
+    "$date": "2024-11-22T13:07:19.507Z"
+  },
+  "__v": 0
 },
 {
   "_id": {
-    "$oid": "670735212250999dda285fe8"
+    "$oid": "6740850e796dc4fe9ce803cd"
   },
-  "fullname": "Nguyễn Hiếu",
-  "email": "hieu20092002@gmail.com",
+  "fullname": "Phan Cong Hieu",
+  "email": "hieu123@gmail.com",
+  "phone": "0901234456",
+  "dob": {
+    "$date": "2000-11-27T00:00:00.000Z"
+  },
+  "gender": "Female",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-11-22T13:20:14.728Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:20:14.728Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67408611796dc4fe9ce804be"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
   "phone": "0904521821",
   "dob": {
-    "$date": "2002-09-19T17:00:00.000Z"
+    "$date": "2000-11-22T00:00:00.000Z"
   },
   "gender": "Male",
-  "deactive": false
-},
-{
-  "_id": {
-    "$oid": "67108281e104635266f0f33d"
-  },
-  "fullname": "Trong Nguyen",
-  "email": "trongnhhe161732@fpt.edu.vn",
-  "phone": "0904521821",
-  "dob": {
-    "$date": "2002-10-15T00:00:00.000Z"
-  },
+  "address": "hoa lac",
   "createdAt": {
-    "$date": "2024-10-17T03:20:33.255Z"
+    "$date": "2024-11-22T13:24:33.361Z"
   },
   "updatedAt": {
-    "$date": "2024-10-17T03:20:33.255Z"
+    "$date": "2024-11-22T13:24:33.361Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "671082833fcb2077b1ac01f8"
+    "$oid": "67408781796dc4fe9ce80618"
   },
-  "fullname": "Trong Nguyen",
-  "email": "trongnhhe161732@fpt.edu.vn",
+  "fullname": "Nguyen Quang Hieu",
+  "email": "hieu123@gmail.com",
   "phone": "0904521821",
   "dob": {
-    "$date": "2002-10-15T00:00:00.000Z"
+    "$date": "2000-11-22T00:00:00.000Z"
   },
+  "gender": "Male",
+  "address": "hoa lac",
   "createdAt": {
-    "$date": "2024-10-17T03:20:35.551Z"
+    "$date": "2024-11-22T13:30:41.981Z"
   },
   "updatedAt": {
-    "$date": "2024-10-17T03:20:35.551Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "671082863fcb2077b1ac01fb"
-  },
-  "fullname": "Trong Nguyen",
-  "email": "trongnhhe161732@fpt.edu.vn",
-  "phone": "0904521821",
-  "dob": {
-    "$date": "2002-10-15T00:00:00.000Z"
-  },
-  "createdAt": {
-    "$date": "2024-10-17T03:20:38.107Z"
-  },
-  "updatedAt": {
-    "$date": "2024-10-17T03:20:38.107Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67108625547e7b2d94f31997"
-  },
-  "fullname": "Trong Nguyen",
-  "email": "trongnhhe161732@fpt.edu.vn",
-  "phone": "0904521821",
-  "dob": {
-    "$date": "2002-07-25T00:00:00.000Z"
-  },
-  "createdAt": {
-    "$date": "2024-10-17T03:36:05.800Z"
-  },
-  "updatedAt": {
-    "$date": "2024-10-17T03:36:05.800Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6710c379547e7b2d94f46d56"
-  },
-  "fullname": "Trong Nguyen",
-  "email": "trongnhhe161732@fpt.edu.vn",
-  "phone": "0904521821",
-  "dob": {
-    "$date": "2002-07-11T00:00:00.000Z"
-  },
-  "createdAt": {
-    "$date": "2024-10-17T07:57:45.659Z"
-  },
-  "updatedAt": {
-    "$date": "2024-10-17T07:57:45.659Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6711b60ecd19e7c511a421a3"
-  },
-  "fullname": "Trong Nguyen",
-  "email": "trongnhhe161732@fpt.edu.vn",
-  "phone": "0904521821",
-  "dob": {
-    "$date": "2002-07-18T00:00:00.000Z"
-  },
-  "createdAt": {
-    "$date": "2024-10-18T01:12:46.977Z"
-  },
-  "updatedAt": {
-    "$date": "2024-10-18T01:12:46.977Z"
+    "$date": "2024-11-22T13:30:41.981Z"
   },
   "__v": 0
 }]

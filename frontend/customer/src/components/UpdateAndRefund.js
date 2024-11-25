@@ -11,6 +11,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     const [orderServices, setOrderServices] = useState([]);
     const [location, setLocation] = useState({});
     const [isUpdating, setIsUpdating] = useState(false);
+    const [Agency, setAgency] = useState({});
     const [expandedNotes, setExpandedNotes] = useState({}); // Trạng thái để lưu ghi chú được mở rộng
     const addServiceRef = useRef(null);
     const [newBookingPrice, setNewBookingPrice] = useState(0);
@@ -31,12 +32,14 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     };
 
     // Lấy thông tin vị trí từ ID phòng
-    const fetchLocation = async (roomCateId) => {
+    const fetchLocationAndAgency = async (roomCateId, customerId) => {
         try {
             const locationsResponse = await axios.get(`http://localhost:9999/roomCategories/${roomCateId}`);
             setLocation(locationsResponse.data.locationId);
+            const AgencyResponse = await axios.get(`http://localhost:9999/agencies/customer/${customerId}`);
+            setAgency(AgencyResponse.data);
         } catch (error) {
-            console.error('Error fetching location details:', error);
+            console.error('Error fetching location or agencies details:', error);
         }
     };
 
@@ -48,9 +51,9 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     // Cập nhật vị trí khi có thay đổi về phòng
     useEffect(() => {
         if (orderRooms.length > 0) {
-            const { roomCateId } = orderRooms[0];
+            const { roomCateId, customerId } = orderRooms[0];
             if (roomCateId) {
-                fetchLocation(roomCateId._id);
+                fetchLocationAndAgency(roomCateId._id, customerId._id);
             }
         }
     }, [orderRooms]);
@@ -184,6 +187,16 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                     <p><strong>Check-in:</strong> {format(new Date(orderRooms[0].bookingId?.checkin), 'dd-MM-yyyy')}</p>
                     <p><strong>Check-out:</strong> {format(new Date(orderRooms[0].bookingId?.checkout), 'dd-MM-yyyy')}</p>
                 </Col>
+                {/* Hiển thị thông tin Agency */}
+                {Agency && (
+                    <Col className="agency-details">
+                        <p><strong>Mã quân nhân:</strong> {Agency.code}</p>
+                        <p><strong>Tên đơn vị:</strong> {Agency.name}</p>
+                        <p><strong>SĐT đơn vị:</strong> {Agency.phone}</p>
+                        <p><strong>Vị trí đơn vị:</strong> {Agency.address}</p>
+                        <p><strong>Bank + STK:</strong> {Agency.stk}</p>
+                    </Col>
+                )}
                 <Col>
                     <p><strong>Ngày tạo đơn:</strong> {format(new Date(orderRooms[0].createdAt), 'dd-MM-yyyy')}</p>
                     <p><strong>Hợp đồng:</strong> {orderRooms[0].bookingId?.contract || 'N/A'}</p>
