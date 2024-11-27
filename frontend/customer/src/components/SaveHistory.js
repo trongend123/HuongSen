@@ -9,7 +9,7 @@ const SaveHistory = () => {
 
     // Get bookingId, note, and user from location state
     const location = useLocation();
-    const { bookingId, note } = location.state || {};
+    const { bookingId, note, path } = location.state || {};
 
     // Ref to track if saveToHistory has been called already
     const hasSaved = useRef(false);
@@ -47,8 +47,13 @@ const SaveHistory = () => {
             // Send the data to history
             await axios.post('http://localhost:9999/histories', historyData);
 
-            // On success, navigate back to bookings list
-            // navigate('/');
+
+            // Navigate to the provided path
+            if (path) {
+                navigate(path);
+            } else {
+                throw new Error('Path is not provided for navigation.');
+            }
         } catch (error) {
             console.error('Error saving history:', error);
             setError(error.message || 'Error saving history. Please try again.');

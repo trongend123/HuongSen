@@ -36,7 +36,7 @@ const PageAddServices = () => {
             const response = await axios.get(`http://localhost:9999/bookings/${bookingId}`);
             if (response.data) {
                 setIsValidBooking(true);
-                setSubmittedBookingId(bookingId);
+                setSubmittedBookingId(bookingId.trim());
                 setError(null);
                 await sendOtp(); // Gửi OTP khi Booking ID hợp lệ
             }

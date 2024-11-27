@@ -49,6 +49,8 @@ const SaveHistory = () => {
 
             // Send the data to history
             await axios.post('http://localhost:9999/histories', historyData);
+            // vd luu bang be
+            // await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: user._id, note: "test BE" });
 
             // Navigate to the provided path
             if (path) {

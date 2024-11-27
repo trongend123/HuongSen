@@ -1,6 +1,9 @@
 // repositories/historyRepository.js
 
 import History from '../models/history.js';
+import Booking from '../models/booking.js';
+import OrderService from '../models/orderService.js';
+
 
 class HistoryRepository {
     // Tạo lịch sử mới
@@ -44,6 +47,19 @@ class HistoryRepository {
             .populate('bookingId')
             .populate('staffId')
             .exec();
+    }
+
+
+    // Lấy thông tin booking và orderServices theo bookingId
+    async getDataByBookingId(bookingId) {
+        const booking = await Booking.findById(bookingId);
+        const orderServices = await OrderService.find({ bookingId });
+
+        if (!booking) {
+            throw new Error('Booking not found');
+        }
+
+        return { booking, orderServices };
     }
 }
 

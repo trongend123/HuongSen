@@ -166,8 +166,10 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
             console.log("Thêm dịch vụ và ghi chú thành công!");
             // Tính lại tổng giá dịch vụ sau khi clear
             calculateTotalAmount();
+            return true
         } catch (error) {
             console.error('Lỗi khi thêm dịch vụ:', error);
+            return false
         }
     };
 

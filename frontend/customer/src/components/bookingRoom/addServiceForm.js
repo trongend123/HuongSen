@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import axios from 'axios';
 import { Form, Row, Col, Button, Card } from 'react-bootstrap';
-import './addServiceForm.css';
-
 
 const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => {
     const [otherServices, setOtherServices] = useState([]);
@@ -10,6 +8,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
     const [selectedService, setSelectedService] = useState("");
     const [serviceQuantity, setServiceQuantity] = useState(1);
     const [selectedServiceDescription, setSelectedServiceDescription] = useState("");
+    const [selectedServicePrice, setSelectedServicePrice] = useState();
     const [serviceNote, setServiceNote] = useState(""); // Ghi chú cho dịch vụ đang chọn
     const [serviceDate, setServiceDate] = useState("");
     const [serviceTimeSlot, setServiceTimeSlot] = useState("");
@@ -23,7 +22,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                 const response = await axios.get('http://localhost:9999/otherServices');
                 // Lọc và chỉ lấy các dịch vụ chưa bị xóa (isDeleted === false)
                 const filteredServices = response.data
-                    .filter(service => !service.isDeleted && service.price !== 1000) // Lọc các dịch vụ chưa bị xóa
+                    .filter(service => !service.isDeleted) // Lọc các dịch vụ chưa bị xóa
                     .map(service => ({
                         otherServiceId: service._id,
                         name: service.name,
@@ -37,6 +36,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
         };
         fetchOtherServices();
     }, []);
+
 
     const calculateTotalAmount = () => {
         const total = orderServicesData.reduce((sum, service) => {
@@ -60,6 +60,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
         setSelectedService(serviceId);
         const serviceDetails = otherServices.find(service => service.otherServiceId === serviceId);
         setSelectedServiceDescription(serviceDetails?.description || "");
+        setSelectedServicePrice(serviceDetails?.price || "")
     };
     const toggleNoteExpansion = (index) => {
         setExpandedNotes((prev) =>
@@ -68,6 +69,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                 : [...prev, index] // Add index if not expanded
         );
     };
+
 
     const handleAddService = () => {
         if (!serviceDate || !serviceTimeSlot) {
@@ -132,6 +134,10 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
         setSelectedServiceDescription("");
         setServiceNote(""); // Reset the note
     };
+
+
+
+
     const handleRemoveService = (index) => {
         setOrderServicesData(prevData => prevData.filter((_, i) => i !== index));
         calculateTotalAmount();
@@ -150,7 +156,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                     bookingId,
                     note: service.note, // Ghi chú
                     quantity: service.serviceQuantity,
-                    time: service.time,// Post time in Vietnam timezone (UTC+7)
+                    time: service.time, // Post time in Vietnam timezone (UTC+7)
                 });
             });
 
@@ -160,8 +166,10 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
             console.log("Thêm dịch vụ và ghi chú thành công!");
             // Tính lại tổng giá dịch vụ sau khi clear
             calculateTotalAmount();
+            return true
         } catch (error) {
             console.error('Lỗi khi thêm dịch vụ:', error);
+            return false
         }
     };
 
@@ -172,7 +180,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
     return (
         <Card className="mb-4">
             <Card.Header className='text-bg-info'>
-                <h5 >Dịch Vụ & Số lần Sử Dụng</h5>
+                <h5 >Dịch Vụ & Số lần Sử Dụng - Phụ phí & Chi phí phát sinh</h5>
             </Card.Header>
             <Card.Body>
                 <Row className="mt-3 align-items-end">
@@ -202,9 +210,10 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                             </div>
                         </Form.Group>
                     </Col>
+
                     <Col md={2}>
                         <Form.Group>
-                            <Form.Label>Số lượng</Form.Label>
+                            {selectedServicePrice !== 1000 ? (<Form.Label>Số lượng</Form.Label>) : (<Form.Label>Chi phí x 1000 (VND)</Form.Label>)}
                             <Form.Control
                                 className="text-center"
                                 style={{ height: '50px' }}
@@ -216,47 +225,96 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                         </Form.Group>
                     </Col>
                 </Row>
-                <Row className="mt-3">
-                    <Col>
-                        <Form.Group>
-                            <Form.Label>Ghi chú dịch vụ</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows={2}
-                                placeholder="Ghi chú cho dịch vụ đang chọn"
-                                value={serviceNote}
-                                onChange={(e) => setServiceNote(e.target.value)}
-                            />
-                        </Form.Group>
-                    </Col>
-                </Row>
-                <Row className="mt-3">
-                    <Col md={6}>
-                        <Form.Group>
-                            <Form.Label>Ngày sử dụng</Form.Label>
-                            <Form.Control
-                                type="date"
-                                value={serviceDate}
-                                onChange={(e) => setServiceDate(e.target.value)}
-                            />
-                        </Form.Group>
-                    </Col>
-                    <Col md={6}>
-                        <Form.Group>
-                            <Form.Label>Thời gian</Form.Label>
-                            <Form.Select
-                                value={serviceTimeSlot}
-                                onChange={(e) => setServiceTimeSlot(e.target.value)}
-                            >
-                                <option value="">Chọn thời gian</option>
-                                <option value="7:00">Sáng (7:00)</option>
-                                <option value="11:00">Trưa (11:00)</option>
-                                <option value="14:00">Chiều (14:00)</option>
-                                <option value="18:00">Tối (18:00)</option>
-                            </Form.Select>
-                        </Form.Group>
-                    </Col>
-                </Row>
+                {selectedServicePrice === 1000 ? (<>
+                    <Row className="mt-3">
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Ghi chú Phụ phí</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={2}
+                                    placeholder="Mô tả phụ phí phát sinh"
+                                    value={serviceNote}
+                                    onChange={(e) => setServiceNote(e.target.value)}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row className="mt-3">
+                        <Col md={6}>
+                            <Form.Group>
+                                <Form.Label>Ngày phát sinh</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    value={serviceDate}
+                                    onChange={(e) => setServiceDate(e.target.value)}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group>
+                                <Form.Label>Thời gian</Form.Label>
+                                <Form.Select
+                                    value={serviceTimeSlot}
+                                    onChange={(e) => setServiceTimeSlot(e.target.value)}
+                                >
+                                    <option value="">Chọn thời gian</option>
+                                    <option value="7:00">Sáng (7:00)</option>
+                                    <option value="11:00">Trưa (11:00)</option>
+                                    <option value="14:00">Chiều (14:00)</option>
+                                    <option value="18:00">Tối (18:00)</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                </>
+                ) : (
+                    <>
+                        <Row className="mt-3">
+                            <Col>
+                                <Form.Group>
+                                    <Form.Label>Ghi chú dịch vụ</Form.Label>
+                                    <Form.Control
+                                        as="textarea"
+                                        rows={2}
+                                        placeholder="Ghi chú cho dịch vụ đang chọn"
+                                        value={serviceNote}
+                                        onChange={(e) => setServiceNote(e.target.value)} // Nối giá trị mới với giá trị hiện tại
+                                    />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+
+                        <Row className="mt-3">
+                            <Col md={6}>
+                                <Form.Group>
+                                    <Form.Label>Ngày sử dụng</Form.Label>
+                                    <Form.Control
+                                        type="date"
+                                        value={serviceDate}
+                                        onChange={(e) => setServiceDate(e.target.value)}
+                                    />
+                                </Form.Group>
+                            </Col>
+                            <Col md={6}>
+                                <Form.Group>
+                                    <Form.Label>Thời gian</Form.Label>
+                                    <Form.Select
+                                        value={serviceTimeSlot}
+                                        onChange={(e) => setServiceTimeSlot(e.target.value)}
+                                    >
+                                        <option value="">Chọn thời gian</option>
+                                        <option value="7:00">Sáng (7:00)</option>
+                                        <option value="11:00">Trưa (11:00)</option>
+                                        <option value="14:00">Chiều (14:00)</option>
+                                        <option value="18:00">Tối (18:00)</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                    </>)
+                }
+
                 {/* Display error message */}
                 {formError && (
                     <Row className="mt-2">
@@ -270,12 +328,12 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                     onClick={handleAddService}
                     disabled={!selectedService || serviceQuantity <= 0}
                 >
-                    Thêm dịch vụ
+                    {selectedServicePrice !== 1000 ? "Thêm dịch vụ" : "Thêm phụ phí"}
                 </Button>
                 {orderServicesData.length > 0 && (
                     <div className="mt-4">
-                        <table id="custom-table">
-                            <thead className='text-bg-info'>
+                        <table className="table table-striped text-center">
+                            <thead>
                                 <tr>
                                     <th>DV đã chọn</th>
                                     <th>Số lượng</th>
@@ -366,10 +424,13 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                                     );
                                 })}
                             </tbody>
+
+
+
                         </table>
                     </div>
                 )}
-                <h6 className="mt-4">Tổng giá dịch vụ: {totalAmount.toLocaleString()} VND</h6>
+                <h6 className="mt-4">{selectedServicePrice !== 1000 ? "Tổng giá dịch vụ:" : "Tổng phụ phí:"} {totalAmount.toLocaleString()} VND</h6>
             </Card.Body>
         </Card>
     );

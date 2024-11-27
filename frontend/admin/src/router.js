@@ -17,6 +17,7 @@ import BookingDetails from './components/bookingDetails';
 import ServiceBookingList from './components/servicebooking';
 
 import BookingPage from './screens/pageBookingByStaff';
+import UpdateAgencyOrder from './components/UpdateAgencyOrder';
 
 function router() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -54,6 +55,7 @@ function router() {
           <Route path='/checkin/:id' element={<Checkin />} />
           <Route path="/bookings/:bookingId" element={<BookingDetails />} />
           <Route path='/servicesbooking' element={<ServiceBookingList />} />
+          {/* <Route path='/updateAgencyOrder' element={<UpdateAgencyOrder />} /> */}
         </Routes>
       );
     } else {

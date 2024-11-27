@@ -33,7 +33,7 @@ const verifyOtp = (email, otp) => {
     const otpData = otpStore[email];
 
     // Nếu không tìm thấy OTP cho email hoặc OTP đã hết hạn
-    if (!otpData || Date.now() - otpData.sentAt > 2 * 60 * 1000) {
+    if (!otpData || Date.now() - otpData.sentAt > 5 * 60 * 1000) {
         return false; // OTP đã hết hạn hoặc không tồn tại
     }
 
@@ -71,7 +71,7 @@ const sendOtpEmailService = async (email, otp) => {
                 <h3>Mã OTP của bạn:</h3>
                 <p style="font-size: 20px; font-weight: bold; color: #d9534f;">${otp}</p>
 
-                <p>Vui lòng nhập mã này để hoàn tất quá trình xác minh. Mã OTP này có hiệu lực trong vòng 2 phút.</p>
+                <p>Vui lòng nhập mã này để hoàn tất quá trình xác minh. Mã OTP này có hiệu lực trong vòng 5 phút.</p>
 
                 <p>Nếu bạn không yêu cầu mã này, vui lòng bỏ qua email này hoặc liên hệ với chúng tôi để được hỗ trợ.</p>
 
