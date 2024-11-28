@@ -97,4 +97,662 @@
   "price": {
     "$numberDecimal": "100000"
   }
+},
+{
+  "_id": {
+    "$oid": "66fa1fe565d7a2d03bf195c6"
+  },
+  "foodName": "Khoai kén chiên, Tôm chiên muối (Tôm hấp), Nộm chân gà,  Cá vược hấp xì dầu, Mắm tép chưng thịt, Canh ngao chua, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa200a65d7a2d03bf195c7"
+  },
+  "foodName": "Nộm tai, Bề bề rang muối, Ngô chiên, Mực xào dứa, Gà rang, Canh cua cà, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa204a65d7a2d03bf195c8"
+  },
+  "foodName": "Ngao hấp, Móng tay xào húng, Chả ốc (hoặc chả cá), Mực chiên bơ, Trứng rán, Canh cải thịt, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa205565d7a2d03bf195c9"
+  },
+  "foodName": "Tôm tẩm, Cá sủ chiên hành, Nem cua thịt, Thịt kho tàu, Canh cua cà, Rau xào theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa205f65d7a2d03bf195ca"
+  },
+  "foodName": "Bê xào măng, Thịt chân giò + lưỡi luộc, Cá thu sốt cà, Thịt kho nhục, Ngao hấp, Canh ngót thịt, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa20b465d7a2d03bf195cb"
+  },
+  "foodName": "Khoai lang chiên, Nộm chân gà, Cá vược hấp + đồ cuốn, Bò xào cần, Canh hàu nấu chua, Cá mòi kho, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa20bf65d7a2d03bf195cc"
+  },
+  "foodName": "Nộm sứa, Hàu nướng mỡ hành, Cá Trạch chiên, Nạm bò, Đậu sốt thịt, Canh bầu tôm, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa20cd65d7a2d03bf195cd"
+  },
+  "foodName": "Tôm hấp, Vịt om sấu, Chả mực, Lòng xào dưa, Thịt kho tàu, Canh cải cá, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa20d965d7a2d03bf195ce"
+  },
+  "foodName": "Trâu xào khế, Tim + cật xào, Lòng thập cẩm luộc, Chả thìa, Tôm rang thịt, Canh mùng tơi nấu ngao, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa211b65d7a2d03bf195cf"
+  },
+  "foodName": "Nộm cùi dừa, Sò điệp hấp, Mực chiên bơ, Gà rang gừng, Canh cua cà, Rau xào theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa212d65d7a2d03bf195d1"
+  },
+  "foodName": "Lẩu thập cẩm, Vách, Tôm, Bò, Rau thập cẩm, Bánh đa + mỳ tôm, Đậu trắng + nấm kim châm, Tráng miệng, Phồng tôm",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195d2",
+  "foodName": "Lẩu cá, Cá vược, Rau thập cẩm, Đậu trắng + nấm kim châm, Bún + mỳ tôm, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195d3",
+  "foodName": "Tôm hấp bia, Mực chiên bơ, Ngan luộc, Chả chìa, Tim + cật xào, Canh măng ngan, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "150000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195d4",
+  "foodName": "Nem hải sản, Súp gà ngô non, Tôm chiên xù, Sò hấp sả, Mực sốt chua cay, Gà rang gừng, Canh cua + cà pháo, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195d5",
+  "foodName": "Súp tôm, Mực xào dứa, Cá vược hấp + đồ cuốn, Chả ốc, Mực sim hấp cần tỏi , Cá trắm kho, Canh chua cá, Củ quả + kho quẹt, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195d6",
+  "foodName": "Ngô chiên bơ , Móng tay xào húng, Tôm sú hấp bia, Sâng nướng ngũ vị, Cá chép om dưa, Mắm tép chưng thịt, Canh hà nấu chua, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195d7",
+  "foodName": "Khoai tây chiên, Hàu nướng mỡ hành, Bề bề rang me, Ốc om chuối đậu, Mực sim hấp, Chân giò luộc + lưỡi, Canh bí tôm, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195d8",
+  "foodName": "Lẩu cá, Cá vược, Rau thập cẩm, Đậu trắng + nấm kim châm, Bún + mỳ tôm, Tráng miệng, Phồng tôm chiên, Khoai chiên, Nộm chân gà",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195d9",
+  "foodName": "Lẩu cua đồng: trứng , Vách, Lòng, Tôm, Bò, Rau thập cẩm, Bánh đa + mỳ tôm, Đậu trắng + nấm kim châm, Tráng miệng, Nộm hoa chuối + phồng tôm",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195da",
+  "foodName": "Khoai lang chiên, Nộm chân gà, Cá vược hấp + đồ cuốn, Trâu xào khế, Mực chiên bơ, Tôm rang thịt, Canh hà nấu chua, Củ quả luộc + kho quẹt, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195db",
+  "foodName": "Nộm tai, Bò sốt vang + bánh mỳ, Ghẹ om rau muống, Mực sim hấp , Chả thìa rán, Trứng đúc thịt, Canh thập cẩm, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195dc",
+  "foodName": "Tôm ủ muối, Mực hấp, Trâu xào rau muống, Nộm hoa quả, Trứng rán, Cá thu 1 nắng, Canh rau ngót thịt, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195dd",
+  "foodName": "Lẩu gà: váng đậu, Lòng gà xào miến, Xôi gà, Đùi + cánh gà chiên, Rau thập cẩm, Bánh đa + mỳ tôm, Đậu trắng + nấm kim châm, Tráng miệng, Phồng tôm",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195de",
+  "foodName": "Tôm chiên tiêu, Nộm cuống dừa, Mực xé chiên bơ tỏi sữa, Ngao hoa hấp, Bê xào măng, Cá mòi kho, Canh cua cà, Rau xào theo mùa, Cơm, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "200000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195df",
+  "foodName": "Nem hải sản, Súp ghẹ hoa, Tôm sú chiên bơ tỏi, Ngao hoa hấp, Mực trứng hấp hành gừng, Thịt rang cháy cạnh, Chả cá sốt cà, Canh sườn khoai tây, Rau luộc theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195e0",
+  "foodName": "Khoai lang kén chiên, Sâng nướng mỡ hành, Tôm sú hấp , Chả ốc chiên, Mực sim chiên bơ, Nộm tai heo, Gà rang lá chanh, Canh hà nấu dứa, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": "66fa216465d7a2d03bf195e1",
+  "foodName": "Khoai tây chiên , Sâng hấp sả ớt, Bề bề rang muối, Móng tay xào chua ngọt, Chả mực Cát Bà, Tôm rim thịt, Cá sủ om dưa, Canh cá thuyền chài, Rau củ luộc chấm muối vừng, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa23b365d7a2d03bf195d4"
+  },
+  "foodName": "Súp hải sản, Mực trứng hấp, Tôm rang muối, Nộm hoa chuối tép, Ốc hấp mẻ, Hàu nướng mỡ hành, Thịt ba chỉ rang cháy cạnh, Canh hà nấu chua, Rau củ luộc chấm muối vừng, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa253565d7a2d03bf195d6"
+  },
+  "foodName": "Nộm chân gà, Bề bề rang me, Cá trạch chiên, Ngao hoa hấp, Tôm + cật xào cải thảo, Trâu hấp mẻ, Cá mòi kho, Canh cua cà pháo, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa254f65d7a2d03bf195d7"
+  },
+  "foodName": "Lẩu cua đồng:, Vách, Lòng, Trứng, Tôm, Bò, Rau thập cẩm, Bánh đa + mỳ tôm, Đậu trắng + nấm kim châm, Tráng miệng, Phồng tôm",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa256065d7a2d03bf195d8"
+  },
+  "foodName": "Lẩu cá vược, Rau thập cẩm, Bún + mỳ tôm, Đậu trắng + nấm kim châm, Tráng miệng, Phồng tôm, Nộm tai heo",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa256c65d7a2d03bf195d9"
+  },
+  "foodName": "Ngô chiên, Chả rươi rán lá gừng, Nộm hoa quả, Nem hải sản, Tu hài hấp, Mực ống xào cần tỏi, Cá thu 1 nắng rán, Canh sườn khoai sọ, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa257c65d7a2d03bf195da"
+  },
+  "foodName": "Khoai lang chiên , Nộm sứa Đồ Sơn, Tôm hấp bia, Tù và xào, Ếch và da chiên, Cá lăng nướng, Thịt kho trứng, Canh hà nấu chua, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa258b65d7a2d03bf195db"
+  },
+  "foodName": "Súp thập cẩm, Nộm cuống dừa, Bê xào măng, Gà hấp nấm (lọc xương), Tôm chiên tiêu, Cá vược chiên, Thịt chưng mắm tép, Canh móng giò bí xanh, Rau luộc theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "250000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa259865d7a2d03bf195dc"
+  },
+  "foodName": "Súp hải sản, Sâng nướng mỡ hành, Ốc nhồi thịt hấp lá gừng, Mực chiên bơ, Điệp xào cần tỏi, Trâu hấp mẻ, Gà sáo gừng, Ghẹ nấu canh rau muống, Củ quả luộc chấm kho quẹt, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25a365d7a2d03bf195dd"
+  },
+  "foodName": "Nem hải sản , Sò dương nướng, Bề bề rang me tỏi , Mực ống chiên, Đùi gà xào sả ớt, Cá vược hấp xì dầu, Mắm tép chưng thịt, Canh cua + Cà pháo, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25af65d7a2d03bf195de"
+  },
+  "foodName": "Khoai lang kén chiên, Hàu sữa mù tạp/ nướng , Tôm sú hấp bia, Bề bề rang muối, Móng tay xào húng, Mực sim chiên lá lốt, Cá chép om dưa , Canh cá vược thuyền chài, Rau củ luộc + muối vừng, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25ba65d7a2d03bf195df"
+  },
+  "foodName": "Nộm nõn dừa tôm, Gà chiên mắm, Cá tầm nướng, Phồng tôm chiên, Chả mực Hạ Long, Ghẹ hấp, Ốc hấp mẻ, Đậu nhồi thịt sốt cà chua, Canh cải thịt, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e0"
+  },
+  "foodName": "Ngô nõn chiên, Tôm hấp xả, Sò đỏ nướng, Mực sim xào dứa, Chân giò + lưỡi luộc, Ếch om chuối đậu, Gà rang lá chanh, Rau theo mùa, Canh cá qủa nấu thuyền chài, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e1"
+  },
+  "foodName": "Súp hải sản, Nộm chân gà, Tôm sú chiên trứng mặn, Chả mực Hạ Long, Cá vược phi lê chiên hành, Ngao hấp, Canh bầu nấu tôm, Mắm tép chưng thịt, Ngồng cải luộc + trứng, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e2"
+  },
+  "foodName": "Súp tôm, Salat rau trộm Đà lạt, Gà xào xả ớt, Tôm hấp, Cá hồi phô mai, Bề bề rang me, Chả mực Hạ Long, Rau xào theo mùa, Canh nấm thả thập cẩm, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e3"
+  },
+  "foodName": "Ngô chiên, Nộm đu đủ bò khô, Mực ống nhồi, Bề bề rang muối, Gà tần sen nấm, Cá diêu hồng chiên xù, Đậu sốt cà chua, Cải chíp xào nấm, Canh cua cà, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e4"
+  },
+  "foodName": "Lẩu cá vược (hoặc cá song), Rau thập cẩm nhúng, Bún + mỳ tôm, Đậu trắng + nấm kim châm, Tráng miệng, Phồng tôm, Nộm tai heo, Tôm ủ muối, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e5"
+  },
+  "foodName": "Lẩu cua đồng:, Vách, Lòng, Trứng, Tôm, Bò, Rau thập cẩm, Bánh đa + mỳ tôm, Đậu trắng + nấm kim châm, Tráng miệng, Phồng tôm",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e6"
+  },
+  "foodName": "Súp hải sản, Củ quả luộc - kho quẹt, Phồng tôm, Tôm chiên muối tiêu, Chả mực, Cá song hấp, Hàu nướng mỡ hành, Gà kho gừng, Cơm trắng, Canh ngao chua, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e7"
+  },
+  "foodName": "Súp thập cẩm, Nộm tép r.muống, Mực trứng hấp, Tôm chiên bơ tỏi, Chả ốc, Cá song hấp, Lợn sữa quay , Thịt 3 chỉ rang cháy cạnh, Cơm trắng, Canh cua cà, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e8"
+  },
+  "foodName": "Súp thập cẩm, Nộm chân gà, Cá song rán giòn, Ghẹ gỡ, Trâu xào r.muống, Củ quả luộc, Phồng tôm chiên giòn, Sườn kho, Cơm trắng, Canh riêu cua đồng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195e9"
+  },
+  "foodName": "Tôm chiên tiêu, Cá lăng nướng, Sò đỏ môi nướng, Mực hấp, Ốc om chuối đậu, Củ quả luộc, Thịt rang cháy cạnh, Cơm trắng, Canh cua cà, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "300000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195ea"
+  },
+  "foodName": "Súp tôm, Hàu sữa chiên mỡ hành, Ghẹ hấp bia sả, Sò dương hấp, Mực xào dứa, Điệp nữ nướng,  Cá vược hấp xì dầu , Gà rang gừng, Canh ngao chua, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "350000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195eb"
+  },
+  "foodName": "Nộm sứa, Nem hải sản, Ghẹ rang me, Sâng nướng, Mực sim hấp thì là, Ốc om chuối đậu, Cá lăng nướng, Thịt ba chỉ rang cháy cạnh, Canh bóng thập cẩm, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "350000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195ec"
+  },
+  "foodName": "Súp hải sản, Sa lát kiểu Nga, Bề bề rang me tỏi, Chả mực Hạ Long, Gà rang lá chanh, Ngao 2 vòi hấp, Trâu hấp mẻ, Sườn rim tiêu, Canh cua cà pháo, Rau củ quả + muối vừng, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "350000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195ed"
+  },
+  "foodName": "Salat ngũ quả trộn tôm, Cá quả chiên giòn, Mực chiên bơ, Bò xào măng, Tôm rang muối, Tràng trứng xào, Rau theo mùa, Thịt kho tàu, Ngọn su su xào, Canh hà chua, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "350000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195ee"
+  },
+  "foodName": "Nộm sứa, Súp gà, Ngao hấp xả, Gà luộc muối chanh, Tôm sú chiên, Ghẹ om rau muống, Bê xào măng, Cá mòi kho, Rau theo mùa, Canh sườn khoai tây, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "350000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195ef"
+  },
+  "foodName": "Cá bớp nấu lá lốt, Lươn xào xả ớt, Sâng nướng mỡ hành, Tôm rang muối, Chả nem, Mực hấp, Trâu xào khế, Thịt rang cháy canh, Canh hà nấu chua, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "350000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f0"
+  },
+  "foodName": "Súp gà thả nấm, Mực trứng hấp, Tôm chiên tỏi, Chả ốc, Cá vược lọc chiên bông cúc, Xào thập cẩm, Tôm bóc, thịt rim tiêu, Củ quả luộc, Canh riêu cua + hoa chuối, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "350000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f1"
+  },
+  "foodName": "Sâng nấu mùng tơi, Miến xào cua nấm, tôm, cà rốt, Ngao vàng to hấp, Gà rút xương hấp nấm, Nộm hoa chuối, Cá song chiên tiêu, Chả rươi, Thịt kho nhục + dưa, Củ quả luộc, Canh chua cá, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "350000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f2"
+  },
+  "foodName": "Nộm chân gà, Tôm chiên tiêu, Cá vược cắt miếng chiên, Chả tôm tươi bề bề, Mực trứng hấp, Miến xào chim câu nấm, Ngồng cải luộc + trứng, Canh riêu cua, Cá thu 1 nắng, Phồng tôm chiên, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "350000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f3"
+  },
+  "foodName": "Súp tôm nấm tuyết, Khoai lang chiên, Sâng nướng mỡ hành, Ghẹ xanh hấp bia, Ngao 2 vòi hấp, Mực xào cần tỏi ,  Cá giò hấp xì dầu , Gà đồi sáo gừng, Canh cá thuyền chài, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "400000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f4"
+  },
+  "foodName": "Cháo cá song hoa, Nem hải sản , Tu hài bãi nướng, Bề bề hấp bia, Chả mực Cát Hải, Ốc xào sả ớt,  Cá song hoa sốt , Thịt rang cháy cạnh, Canh ngao chua, Rau củ luộc + muối vừng, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "400000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f5"
+  },
+  "foodName": "Súp hải sản , Tu hài nướng mỡ hành, Chả Mực chiên bơ, LẨU HẢI SẢN, Ghẹ xanh, Cá Song, Mực thuyền, Tôm Sú biển, Đậu trắng, Rau thập cẩm + Nấm, Mỳ tôm + Bún, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "400000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f6"
+  },
+  "foodName": "Miến nấu cá rô, Sâng nướng, Ốc hấp lá gừng, Cá song hấp giấy bạc, Chim bồ câu quay, Mề xào dứa cần, Cá thu 1 nắng, R.lang luộc chấm măm cáy, Canh cua cà, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "400000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f7"
+  },
+  "foodName": "Súp ghẹ hoa, Nem cuốn hải sản , Cua  rang me, Tu hài nướng mỡ hành, Móng tay xào húng,  Cá năng nướng , Thịt rang cháy cạnh, Ngao vàng hấp bia, Canh cá thuyền chài, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "500000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f8"
+  },
+  "foodName": "Cháo cá song hoa, Khoai lang kén chiên, Cua phù long hấp bia sả, Phi phi nướng hành mỡ, Mực ống xào dứa,  Cá song hoa hấp, Tôm rim thịt cát bà, Sò dương trần sả, Canh cua + cà pháo, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "500000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195f9"
+  },
+  "foodName": "Súp ghẹ xanh nấm tuyết, Cua Phù Long hấp bia sả, Tu hài bãi nướng, Cơ chai Cô Tô xào cần, , Cá Song Hổ, Tôm He biển, Bề bề thuyền, Mực lá câu, Sò Dương, Đậu trắng, Rau thập cẩm + Nấm",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "500000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195fa"
+  },
+  "foodName": "Súp hải sản, Ghẹ gỡ, Tôm sú chiên, Salat rau, Mực trứng hấp, Cá song hấp, Bông thùa xào, Thịt rang cháy cạnh, Canh cua cà, Rau luộc theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "500000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195fb"
+  },
+  "foodName": "Súp hải sản, Ghẹ gỡ, Tôm chiên trứng mặn, Ngao hoa hấp, Mực trứng xào dứa, Cá song hấp xì dầu, Bông thùa xào cần, Thịt rang cháy cạnh, Canh cua cà, Củ quả luộc + Kho quẹt, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "500000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195fc"
+  },
+  "foodName": "Miến tu hài, Cua hấp nửa con, Mực chiên bơ, Chả ốc, Cá vược phi lê chiên, Tôm + cật xào thập cẩm, Gà rang gừng, Canh chua cá, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "500000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195fd"
+  },
+  "foodName": "Súp thập cẩm, Bào ngư nấm đông cô, Tôm sú chiên tỏi tiêu, Cá chim trắng rán, Mực trứng hấp, Điệp điệp xào cần tỏi, Ngồng cải luộc + trứng, Cơm trắng, Canh bầu tôm, Cá kho, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "500000"
+  }
+},
+{
+  "_id": {
+    "$oid": "66fa25cd65d7a2d03bf195fe"
+  },
+  "foodName": "Súp ghẹ hoa, Nem cuốn hải sản, Cua  rang me, Tu hài nướng mỡ hành, Móng tay xào húng,  Cá năng nướng , Thịt rang cháy cạnh, Ngao vàng hấp bia, Canh cá thuyền chài, Rau theo mùa, Cơm trắng, Tráng miệng",
+  "drinkName": "",
+  "price": {
+    "$numberDecimal": "500000"
+  }
 }]

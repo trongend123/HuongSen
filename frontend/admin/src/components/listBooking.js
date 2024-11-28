@@ -94,14 +94,14 @@ const ListBooking = () => {
   };
 
   const handleCancelClick = (booking) => {
-    booking.status = "Cancelled";
+    booking.status = "Đã hủy";
     const bookingId = booking._id;
     axios
       .put(`http://localhost:9999/bookings/${bookingId}`, booking)
       .then((response) => {
         setBookings((prevBookings) =>
           prevBookings.map((booking) =>
-            booking._id === bookingId ? { ...booking, bookingId: { ...booking.bookingId, status: 'Cancelled' } } : booking
+            booking._id === bookingId ? { ...booking, bookingId: { ...booking.bookingId, status: 'Đã hủy' } } : booking
           )
         );
       })
@@ -145,7 +145,9 @@ const ListBooking = () => {
   const totalPages = Math.ceil(filteredBookings.length / rowsPerPage);
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+  };
   return (
     <Container>
       <h2 className="text-center my-4">Danh sách Đặt phòng</h2>
@@ -244,7 +246,7 @@ const ListBooking = () => {
               <td>{booking.customerId.fullname}</td>
               <td>{booking.roomCateId.name}</td>
               <td className="text-center">{booking.quantity}</td>
-              <td>{booking.quantity * booking.roomCateId.price}</td>
+              <td>{formatCurrency(booking.quantity * booking.roomCateId.price)}</td>
               <td>{formatDate(booking.bookingId.checkin)}</td>
               <td>{formatDate(booking.bookingId.checkout)}</td>
               <td>{booking.bookingId.status}</td>
@@ -262,13 +264,18 @@ const ListBooking = () => {
                     >
                       Check-in
                     </Button>
+
                   )}
+                  </>
+                  )}
+                  {booking.bookingId.status === "Yêu cầu hoàn tiền" && (
+                    <>
                     {userRole === "admin" && (
                       <Button
                         variant="danger"
                         onClick={(e) => {
                           e.stopPropagation(); // Ngăn sự kiện onClick của hàng
-                          handleCancelClick(booking);
+                          handleCancelClick(booking.bookingId);
                         }}
                       >
                         Hủy

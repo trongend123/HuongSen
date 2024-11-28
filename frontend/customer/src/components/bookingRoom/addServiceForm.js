@@ -179,8 +179,8 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
 
     return (
         <Card className="mb-4">
-            <Card.Header className='text-bg-info'>
-                <h5 >Dịch Vụ & Số lần Sử Dụng - Phụ phí & Chi phí phát sinh</h5>
+            <Card.Header className='text-white' style={{ backgroundColor: '#81a969' }}>
+                <h5 >Dịch Vụ & Số lần Sử Dụng</h5>
             </Card.Header>
             <Card.Body>
                 <Row className="mt-3 align-items-end">
@@ -327,6 +327,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                     className="mt-3"
                     onClick={handleAddService}
                     disabled={!selectedService || serviceQuantity <= 0}
+                    style={{ backgroundColor: '#81a969', border: 'none', height: '40px', width: '130px' }}
                 >
                     {selectedServicePrice !== 1000 ? "Thêm dịch vụ" : "Thêm phụ phí"}
                 </Button>

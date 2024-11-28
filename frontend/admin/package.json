@@ -20,6 +20,8 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.6",
     "reactstrap": "^9.2.3",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

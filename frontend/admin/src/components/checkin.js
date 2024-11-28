@@ -72,9 +72,17 @@ const ListRoom = () => {
           status: 'Đã check-in',
         }
       )
+     
 
   });
-navigate('/rooms');
+  navigate(`/saveHistory`, {
+    state: {
+        bookingId: id,
+        note: `${user.role} ${user.fullname} đã check-in phòng`,
+        user: user, // Truyền cả đối tượng người dùng
+        path: "/rooms" // Thêm đường dẫn path
+    }
+});
     Promise.all(updates)
       .then(() => {
         // Refresh room data after updates

@@ -140,10 +140,10 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     }));
     if (!canInput) {
         return (
-            <Row style={{ width: "65%" }}>
-                <Card>
-                    <Card.Header className="text-bg-info">
-                        <h5 className="text-center">Chọn Loại Phòng & Số Lượng</h5>
+            
+                <Card id='card'>
+                    <Card.Header className="abc" style={{backgroundColor:"#81a969",color:"white"}}>
+                        <h5 className="text-white">Chọn Loại Phòng & Số Lượng</h5>
                     </Card.Header>
                     <Card.Body>
                         <Row className="mb-3">
@@ -202,13 +202,13 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
                     </Card.Body>
                 </Card>
-            </Row>
+           
 
         );
     }
     return (
         <Card className="mb-2">
-            <Card.Header className="text-bg-info"><h5>Chọn Loại Phòng & Số Lượng</h5></Card.Header>
+            <Card.Header className="text-white" style={{ backgroundColor: '#81a969' }}><h5>Chọn Loại Phòng & Số Lượng</h5></Card.Header>
             <Card.Body>
 
                 <Row className="mb-3">

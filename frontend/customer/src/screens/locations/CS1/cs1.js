@@ -383,7 +383,7 @@ const CS1 = () => {
                     <hr />
                 </Col>
                 <Col md={4}>
-                    <Card>
+                    <Card id="map">
                         <CardTitle>Rate: 8.5/10</CardTitle>
                         <p>Với hàng trăm đánh giá trên các trang thương mại điện tử.</p>
                         <iframe
@@ -456,7 +456,6 @@ const CS1 = () => {
             {/* /===============booking phòng======================== */}
             <BookingPage locationId={locationId} />
             <Review />
-            <button onClick={handleFeedback}>Leave Feedback</button>
         </div>
     );
 };

@@ -140,7 +140,7 @@ const AddUserForm = forwardRef(({ }, ref) => {
 
     return (
         <Card className="shadow-sm">
-            <Card.Header as="h5" className="bg-primary text-white">Thông tin khách hàng</Card.Header>
+            <Card.Header as="h5" className=" text-white" style={{ backgroundColor: '#81a969' }}>Thông tin khách hàng</Card.Header>
             <Card.Body>
                 <Form>
                     {/* Existing customer details form */}
