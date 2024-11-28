@@ -12,7 +12,37 @@ class HistoryController {
             res.status(500).json({ message: 'Internal Server Error' });
         }
     }
+    // Tạo lịch sử mới
+    async createHistoryBE(req, res) {
+        try {
+            const { bookingId, staffId, note } = req.body;
 
+            // Lấy dữ liệu booking và orderServices theo bookingId
+            const data = await historyRepository.getDataByBookingId(bookingId);
+
+            // Chuẩn bị thông tin để lưu vào old_info
+            const oldInfo = {
+                booking: data.booking,
+                orderServices: data.orderServices,
+            };
+
+            // Tạo lịch sử mới
+            const history = await historyRepository.createHistory({
+                bookingId,
+                staffId,
+                old_info: oldInfo,
+                note,
+            });
+
+            res.status(201).json(history);
+        } catch (error) {
+            console.error('Error creating history:', error);
+            if (error.message === 'Booking not found') {
+                return res.status(404).json({ message: 'Booking not found' });
+            }
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
     // Lấy tất cả lịch sử
     async getAllHistories(req, res) {
         try {

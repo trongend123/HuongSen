@@ -58,7 +58,7 @@ router.put('/:id', async (req, res) => {
 
 router.get('/payment-success/:id', async (req, res) => {
     const { id } = req.params;
-    
+
     try {
         // Fetch the booking and populate necessary details
         const orderRoom = await OrderRooms.findById(id)
@@ -72,7 +72,7 @@ router.get('/payment-success/:id', async (req, res) => {
                 }
             })
             .populate('bookingId', 'status payment checkin checkout note price humans');
-        
+
         // Check if all necessary data is present
         if (!orderRoom || !orderRoom.customerId || !orderRoom.roomCateId || !orderRoom.roomCateId.locationId) {
             console.error("Order room or necessary fields missing:", orderRoom);

@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
-import AddServiceForBookingId from '../components/addServiceForBookingId';
+
 import axios from 'axios';
+import UpdateAndRefund from '../components/UpdateAndRefund';
 
 const PageAddServices = () => {
     const [bookingId, setBookingId] = useState('');
@@ -35,7 +36,7 @@ const PageAddServices = () => {
             const response = await axios.get(`http://localhost:9999/bookings/${bookingId}`);
             if (response.data) {
                 setIsValidBooking(true);
-                setSubmittedBookingId(bookingId);
+                setSubmittedBookingId(bookingId.trim());
                 setError(null);
                 await sendOtp(); // Gửi OTP khi Booking ID hợp lệ
             }
@@ -74,12 +75,7 @@ const PageAddServices = () => {
         }
     };
 
-    // Gọi hàm updateBooking từ component AddServiceForBookingId
-    const handleUpdateBooking = async () => {
-        if (addServiceRef.current) {
-            await addServiceRef.current.updateBooking();
-        }
-    };
+
 
     return (
         <Container>
@@ -126,14 +122,8 @@ const PageAddServices = () => {
             {/* Render AddServiceForBookingId nếu Booking ID và OTP hợp lệ */}
             {isValidBooking && isOtpValid && submittedBookingId && (
                 <div className="mt-4">
-                    <AddServiceForBookingId ref={addServiceRef} bookingId={submittedBookingId} />
-                    <Button
-                        variant="success"
-                        onClick={handleUpdateBooking}
-                        className="mt-3"
-                    >
-                        Cập nhật đơn đặt
-                    </Button>
+                    <UpdateAndRefund ref={addServiceRef} bookingId={submittedBookingId} />
+
                 </div>
             )}
         </Container>

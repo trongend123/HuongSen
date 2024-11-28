@@ -118,7 +118,9 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                     roomCateId: room.roomCateId,
                     customerId: customerID,
                     bookingId: bookingId,
-                    quantity: room.quantity
+                    quantity: room.quantity,
+                    receiveRoom: checkin,
+                    returnRoom: checkout
                 });
             });
 
@@ -131,7 +133,6 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
             // return false; // Return false to indicate failure
         }
     };
-
 
     useImperativeHandle(ref, () => ({
         createOrderRoom,

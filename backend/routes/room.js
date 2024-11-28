@@ -21,5 +21,5 @@ roomRouter.put("/:id", RoomController.editRoom);
 
 // DELETE: /rooms/:id
 // roomRouter.delete("/:id", RoomController.deleteRoom);
-
+roomRouter.get('/booking/:bookingId', RoomController.getRoomsByBookingId);
 export default roomRouter;

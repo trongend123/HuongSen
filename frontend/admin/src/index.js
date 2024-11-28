@@ -13,7 +13,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation, NavLink } from 're
 import Sidebar from './components/sideBar'; // Import the Sidebar component
 import Login from './screens/Login/login';
 import ChangePassword from './screens/Change Password/changepass';
-import CreateBookingByStaff from './components/createBookingByStaff';
 import { RxAvatar } from "react-icons/rx";
 import UpdateBookingInfo from './components/updateBookingInfo';
 import HistoryBookingChange from './components/historyBookingChange';

@@ -11,7 +11,8 @@ import { fileURLToPath } from 'url';
 // Hàm tạo OrderRoom mới
 export const createOrderRoom = async (req, res) => {
   try {
-    const { roomCateId, customerId, bookingId, quantity } = req.body;
+    const { roomCateId, customerId, bookingId, quantity, receiveRoom,
+      returnRoom } = req.body;
 
     // Kiểm tra sự tồn tại của RoomCategory
     const roomCategory = await RoomCategory.findById(roomCateId);
@@ -36,7 +37,9 @@ export const createOrderRoom = async (req, res) => {
       roomCateId,
       customerId,
       bookingId,
-      quantity
+      quantity,
+      receiveRoom,
+      returnRoom
     });
 
     res.status(201).json(newOrderRoom);
@@ -125,18 +128,18 @@ export const generateExcel = async (req, res) => {
     // ====== Tạo sheet chi tiết từng ngày ======
     for (let day = 1; day <= daysInMonth; day++) {
       const sheet = workbook.addWorksheet(`Ngày ${day}.${month}`);
-    
+
       // ====== Tiêu đề ======
       sheet.mergeCells('A1:I1');
       sheet.getCell('A1').value = `BẢNG KÊ DOANH THU`;
       sheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle' };
       sheet.getCell('A1').font = { bold: true, size: 16 };
-    
+
       sheet.mergeCells('A2:I2');
       sheet.getCell('A2').value = `NGÀY ${day}/${month}/${year}`;
       sheet.getCell('A2').alignment = { horizontal: 'center', vertical: 'middle' };
       sheet.getCell('A2').font = { bold: true, size: 12 };
-    
+
       // ====== Header ======
       sheet.addRow([
         'STT',
@@ -153,7 +156,7 @@ export const generateExcel = async (req, res) => {
       headerRow.font = { bold: true, size: 12 };
       headerRow.alignment = { horizontal: 'center', vertical: 'middle' };
       applyBorderToRow(headerRow);
-    
+
       // ====== Dữ liệu ======
       const dayData = groupedByDay[day] || [];
       let totalRoomFee = 0;
@@ -161,20 +164,20 @@ export const generateExcel = async (req, res) => {
       let totalServiceFee = 0;
       let totalDebt = 0;
       let totalPaid = 0;
-    
+
       dayData.forEach((order, index) => {
         const roomFee = order.roomCateId?.price || 0;
         const extraFee = order.extraHoursFee || 0;
         const serviceFee = order.serviceFee || 0;
         const debt = order.debt || 0;
         const paidAmount = order.paidAmount || 0;
-    
+
         totalRoomFee += roomFee;
         totalExtraFee += extraFee;
         totalServiceFee += serviceFee;
         totalDebt += debt;
         totalPaid += paidAmount;
-    
+
         const dataRow = sheet.addRow([
           index + 1,
           order.roomCateId?.name || 'N/A',
@@ -188,7 +191,7 @@ export const generateExcel = async (req, res) => {
         ]);
         applyBorderToRow(dataRow);
       });
-    
+
       // ====== Dòng "Tổng" ======
       const totalRow = sheet.addRow([
         'Tổng:',
