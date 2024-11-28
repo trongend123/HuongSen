@@ -3,7 +3,7 @@
     "$oid": "674080afb31ac53d2dda78b2"
   },
   "taxId": null,
-  "status": "Đã đặt",
+  "status": "Đã hoàn thành",
   "payment": 0,
   "staffId": {
     "$oid": "670693f27f84d57bd16fc241"
@@ -31,7 +31,7 @@
     "$oid": "6740820730d1b5f11092edb3"
   },
   "taxId": null,
-  "status": "Đã đặt",
+  "status": "Đã check-in",
   "payment": "Chưa thanh toán",
   "staffId": {
     "$oid": "670693f27f84d57bd16fc241"
@@ -50,7 +50,7 @@
     "$date": "2024-11-22T13:07:19.515Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:07:19.515Z"
+    "$date": "2024-11-23T03:06:35.438Z"
   },
   "__v": 0
 },
@@ -59,7 +59,7 @@
     "$oid": "6740850e796dc4fe9ce803cf"
   },
   "taxId": null,
-  "status": "Đã đặt",
+  "status": "Đã hoàn thành",
   "payment": 0,
   "staffId": {
     "$oid": "670693f27f84d57bd16fc241"
@@ -135,6 +135,62 @@
   },
   "updatedAt": {
     "$date": "2024-11-22T14:04:17.250Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6741cb7753420b88eb1726dc"
+  },
+  "taxId": null,
+  "status": "Đã check-in",
+  "payment": 0,
+  "staffId": {
+    "$oid": "670693f27f84d57bd16fc241"
+  },
+  "price": 550000,
+  "checkin": {
+    "$date": "2024-11-23T00:00:00.000Z"
+  },
+  "note": "",
+  "checkout": {
+    "$date": "2024-11-24T00:00:00.000Z"
+  },
+  "contract": "",
+  "humans": 1,
+  "createdAt": {
+    "$date": "2024-11-23T12:32:55.649Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-23T12:33:07.778Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6745d6e8104506461fa710c2"
+  },
+  "taxId": null,
+  "status": "Đã check-in",
+  "payment": 0,
+  "staffId": {
+    "$oid": "670693f27f84d57bd16fc241"
+  },
+  "price": 400000,
+  "checkin": {
+    "$date": "2024-11-26T00:00:00.000Z"
+  },
+  "note": "",
+  "checkout": {
+    "$date": "2024-11-27T00:00:00.000Z"
+  },
+  "contract": "",
+  "humans": 1,
+  "createdAt": {
+    "$date": "2024-11-26T14:10:48.581Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-26T14:11:26.423Z"
   },
   "__v": 0
 }]

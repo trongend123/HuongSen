@@ -33,6 +33,7 @@ const getAllServiceBookings = async (req, res) => {
             customerName: customer ? customer.fullname : "N/A",
             serviceName: serviceName,
             unitPrice: servicePrice,
+            time: service.time,
             quantity: service.quantity || 1,
             status: service.status || "N/A",
             note: service.note || "N/A",

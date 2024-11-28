@@ -64,7 +64,7 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
                 <Card.Body>
                   <Card.Title>Nhà khách Hương Sen cơ sở Minh Khai</Card.Title>
                   <Card.Text>Địa chỉ: 16 Minh Khai, Hồng Bàng, TP Hải Phòng.</Card.Text>
-                  <Button variant="primary">Chi tiết</Button>
+                  <Button variant="primary" onClick={() => navigate('/cs1')}>Chi tiết</Button>
                 </Card.Body>
               </Card>
             </Col>
@@ -74,7 +74,7 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
                 <Card.Body>
                   <Card.Title>Trung tâm bồi dưỡng nghiệp vụ Hải Hà</Card.Title>
                   <Card.Text>Địa chỉ: 02 Lý Thánh Tông, phường Hải Sơn, Đồ Sơn, Hải Phòng</Card.Text>
-                  <Button variant="primary">Chi tiết</Button>
+                  <Button variant="primary" onClick={() => navigate('/cs2')}>Chi tiết</Button>
                 </Card.Body>
               </Card>
             </Col>
@@ -84,7 +84,7 @@ Một điểm đặc biệt dễ nhận thấy ở nhà khách Hương Sen là v
                 <Card.Body>
                   <Card.Title>Nhà khách Hương Sen cơ sở Cát Bà</Card.Title>
                   <Card.Text>Địa chỉ: đường Núi Ngọc, thị trấn Cát Bà, Cát Hải, Hải Phòng</Card.Text>
-                  <Button variant="primary">Chi tiết</Button>
+                  <Button variant="primary" onClick={() => navigate('/cs3')}>Chi tiết</Button>
                 </Card.Body>
               </Card>
             </Col>

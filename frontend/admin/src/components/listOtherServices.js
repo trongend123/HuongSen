@@ -157,6 +157,9 @@ const ListOtherServices = () => {
                 console.error(error);
             });
     };
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+      };
 
     return (
         <div className="container">
@@ -209,7 +212,7 @@ const ListOtherServices = () => {
                     {currentServices.map((service) => (
                         <tr key={service._id}>
                             <td>{service.name}</td>
-                            <td>{service.price}</td>
+                            <td className="text-center">{formatCurrency(service.price)}</td>
                             <td>{service.description}</td>
                             <td>
                                 <Button variant="warning" onClick={() => handleShowModal(service)}>

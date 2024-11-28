@@ -145,7 +145,9 @@ const ListBooking = () => {
   const totalPages = Math.ceil(filteredBookings.length / rowsPerPage);
 
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+  };
   return (
     <Container>
       <h2 className="text-center my-4">Danh sách Đặt phòng</h2>
@@ -244,7 +246,7 @@ const ListBooking = () => {
               <td>{booking.customerId.fullname}</td>
               <td>{booking.roomCateId.name}</td>
               <td className="text-center">{booking.quantity}</td>
-              <td>{booking.quantity * booking.roomCateId.price}</td>
+              <td>{formatCurrency(booking.quantity * booking.roomCateId.price)}</td>
               <td>{formatDate(booking.bookingId.checkin)}</td>
               <td>{formatDate(booking.bookingId.checkout)}</td>
               <td>{booking.bookingId.status}</td>

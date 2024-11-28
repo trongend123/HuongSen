@@ -37,6 +37,7 @@ const DoSonRooms = ({ rooms, onClick }) => {
 
   return (
     <div className="room-layout">
+      <br/>
       <h4>Cơ sở Đồ Sơn:</h4>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor3ds.map((room) => (
@@ -78,6 +79,7 @@ const CatBaRooms = ({ rooms, onClick }) => {
 
   return (
     <div className="room-layout">
+      <br/>
       <h4>Cơ sở Cát Bà:</h4>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor2cb.map((room) => (
@@ -127,6 +129,7 @@ const MinhKhaiRooms = ({ rooms, onClick }) => {
 
   return (
     <div className="room-layout">
+      <br/>
       <h4>Cơ sở 16 Minh Khai:</h4>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor2cb.map((room) => (
