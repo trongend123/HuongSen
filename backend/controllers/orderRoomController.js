@@ -57,18 +57,18 @@ export const getAllOrderRoomsbyPage = async (req, res) => {
   }
 };
 //lấy hết
-// export const getAllOrderRooms = async (req, res) => {
-//   try {
-//     const orderRoom = await OrderRoomRepository.findAll();
-//     if (!orderRoom) {
-//       return res.status(404).json({ message: 'OrderRoom không tồn tại' });
-//     }
-//     res.status(200).json(orderRoom);
-//   } catch (error) {
-//     console.error('Lỗi khi lấy OrderRoom:', error);
-//     res.status(500).json({ message: 'Server Error' });
-//   }
-// };
+export const getAllOrderRooms = async (req, res) => {
+  try {
+    const orderRoom = await OrderRoomRepository.findAll();
+    if (!orderRoom) {
+      return res.status(404).json({ message: 'OrderRoom không tồn tại' });
+    }
+    res.status(200).json(orderRoom);
+  } catch (error) {
+    console.error('Lỗi khi lấy OrderRoom:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
 
 
 //getAll xong thêm danh sách vào file excel
@@ -77,7 +77,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-export const getAllOrderRooms = async (req, res) => {
+export const generateExcel = async (req, res) => {
   try {
     console.log('Bắt đầu xuất file doanh thu');
 

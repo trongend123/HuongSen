@@ -28,7 +28,7 @@ const CustomerPage = ({ locationId }) => {
                         locationId={locationId}
                         canInput={false}
                     />
-                    <Button className="text-bg-success fs-3" onClick={handleCreateBoth}>
+                    <Button className="mt-3" style={{backgroundColor:'#81a969', border:'none', height:'50px', width:'150px'}} onClick={handleCreateBoth}>
                         Đặt Phòng Ngay
                     </Button>
                 </Col>

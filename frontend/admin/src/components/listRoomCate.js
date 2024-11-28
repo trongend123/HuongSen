@@ -282,7 +282,8 @@ const ListRoomCate = () => {
                             />
                             <Form.Control.Feedback type="invalid">{errors.price}</Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group className="mb-3">
+                        {isEditMode === false && (
+                            <Form.Group className="mb-3">
                             <Form.Label>Chi nhánh</Form.Label>
                             <Form.Select
                                 name="locationId"
@@ -297,6 +298,8 @@ const ListRoomCate = () => {
                             </Form.Select>
                             <Form.Control.Feedback type="invalid">{errors.locationId}</Form.Control.Feedback>
                         </Form.Group>
+                        )}
+                        
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

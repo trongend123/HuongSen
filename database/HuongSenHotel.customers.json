@@ -97,4 +97,44 @@
     "$date": "2024-11-22T13:30:41.981Z"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6741cb7753420b88eb1726da"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2000-11-23T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-11-23T12:32:55.639Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-23T12:32:55.639Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6745d6e8104506461fa710c0"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2000-11-26T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-11-26T14:10:48.573Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-26T14:10:48.573Z"
+  },
+  "__v": 0
 }]

@@ -96,13 +96,14 @@ const CustomerBookingPage = () => {
         }
     };
     return (
-        <div>
+        <div className="container"> 
+        <br/>
             <Row>
                 <Col md="6">
                     {/* User Form */}
                     <AddUserForm ref={userFormRef} />
 
-
+<br/>
                     {/* Service Form */}
                     <AddServiceForm
                         ref={addServiceRef}
@@ -114,6 +115,7 @@ const CustomerBookingPage = () => {
                 <Col>
                     {/* Identification Form */}
                     <AddIdentifyForm ref={identifyFormRef} />
+                    <br/>
                     {/* Booking Form */}
                     <AddBookingForm
                         ref={bookingFormRef}
@@ -123,11 +125,12 @@ const CustomerBookingPage = () => {
                         locationId={locationId} // Pass locationId here
                         canInput={true}
                     />
-                    <Button className='text-bg-success fs-3 ' onClick={handleCreateBoth} >
-                        Đặt Phòng Ngay
-                    </Button>
+                    
                 </Col>
             </Row>
+            <Button className='mt-3 'style={{backgroundColor:'#81a969', border:'none', height:'50px', width:'150px'}} onClick={handleCreateBoth} >
+                        Đặt Phòng Ngay
+                    </Button>
         </div>
     );
 };

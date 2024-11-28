@@ -3,14 +3,13 @@ import { saveMessage, getChatHistory } from '../repositories/chatRepository.js';
 import { io } from '../server.js';
 
 export const sendMessage = async (req, res) => {
-    const { sender, senderModel, receiver, receiverModel, message } = req.body;
   
     try {
-      const messageData = { sender, senderModel, receiver, receiverModel, message };
-      const newMessage = await saveMessage(messageData);
+      const newMessage = await saveMessage(req.body);
+      const { receiver } = req.body;
   
       // Emit message to the specified receiver
-      io.to(receiver.toString()).emit('newMessage', newMessage);
+      // io.to(receiver.toString()).emit('newMessage', newMessage);
   
       res.status(201).json(newMessage);
     } catch (error) {
@@ -20,10 +19,9 @@ export const sendMessage = async (req, res) => {
   };
 
 export const getMessages = async (req, res) => {
-  const { userId, otherUserId } = req.params;
 
   try {
-    const messages = await getChatHistory(userId, otherUserId);
+    const messages = await getChatHistory();
     res.status(200).json(messages);
   } catch (error) {
     res.status(500).json({ error: 'Error retrieving messages' });
