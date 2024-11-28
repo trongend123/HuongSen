@@ -94,14 +94,14 @@ const ListBooking = () => {
   };
 
   const handleCancelClick = (booking) => {
-    booking.status = "Cancelled";
+    booking.status = "Đã hủy";
     const bookingId = booking._id;
     axios
       .put(`http://localhost:9999/bookings/${bookingId}`, booking)
       .then((response) => {
         setBookings((prevBookings) =>
           prevBookings.map((booking) =>
-            booking._id === bookingId ? { ...booking, bookingId: { ...booking.bookingId, status: 'Cancelled' } } : booking
+            booking._id === bookingId ? { ...booking, bookingId: { ...booking.bookingId, status: 'Đã hủy' } } : booking
           )
         );
       })
@@ -264,13 +264,18 @@ const ListBooking = () => {
                     >
                       Check-in
                     </Button>
+
                   )}
+                  </>
+                  )}
+                  {booking.bookingId.status === "Yêu cầu hoàn tiền" && (
+                    <>
                     {userRole === "admin" && (
                       <Button
                         variant="danger"
                         onClick={(e) => {
                           e.stopPropagation(); // Ngăn sự kiện onClick của hàng
-                          handleCancelClick(booking);
+                          handleCancelClick(booking.bookingId);
                         }}
                       >
                         Hủy
