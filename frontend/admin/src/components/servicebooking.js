@@ -164,8 +164,8 @@ const ServiceBookingList = () => {
               </tr>
             </thead>
             <tbody>
-              {currentRows.map((booking) => (
-                <tr key={booking.bookingId}>
+              {currentRows.map((booking, index) => (
+                <tr key={index}>
                   <td>{booking.bookingId}</td>
                   <td>{booking.customerName}</td>
                   <td>{booking.serviceName}</td>
