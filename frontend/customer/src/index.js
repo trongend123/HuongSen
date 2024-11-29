@@ -52,7 +52,7 @@ root.render(
             <Route path="/policy" element={<Policy />} />
             <Route path='/services' element={<Services />} />
             <Route path="/success" component={PaymentSuccess} />
-            <Route path="/cancel" component={PaymentCancel} />
+            <Route path="/cancel/:bookingId" element={<PaymentCancel />} />
             <Route path="/feedback" element={<Feedback />} />
           </Routes></div>
         </Container>

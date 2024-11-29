@@ -19,6 +19,9 @@ const roomCategorySchema = new Schema(
       type: String,
       required: true,
     },
+    description: {
+      type: String
+    },
     locationId: {
       type: Schema.Types.ObjectId,
       ref: Location,

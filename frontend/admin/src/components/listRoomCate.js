@@ -35,6 +35,7 @@ const ListRoomCate = () => {
         numberOfBed: 1,
         numberOfHuman: 1,
         price: 1000,
+        description: '',
         locationId: '',
     });
     const [errors, setErrors] = useState({});
@@ -104,7 +105,7 @@ const ListRoomCate = () => {
         setIsEditMode(false);
         setSelectedRoomCategory(null);
         setErrors({});
-        setNewRoomCategory({ name: '', numberOfBed: 1, numberOfHuman: 1, price: 0, locationId: '' });
+        setNewRoomCategory({ name: '', numberOfBed: 1, numberOfHuman: 1, price: 0, description: '', locationId: '' });
     };
 
     // Handle change in input fields
@@ -147,6 +148,7 @@ const ListRoomCate = () => {
             numberOfBed: roomCategory.numberOfBed,
             numberOfHuman: roomCategory.numberOfHuman,
             price: roomCategory.price,
+            description: roomCategory.description,
             locationId: roomCategory.locationId._id,
         });
         handleShowModal();
@@ -282,24 +284,35 @@ const ListRoomCate = () => {
                             />
                             <Form.Control.Feedback type="invalid">{errors.price}</Form.Control.Feedback>
                         </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Mô tả phòng</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                name="description"
+                                value={newRoomCategory.description}
+                                onChange={handleChange}
+
+                            />
+
+                        </Form.Group>
                         {isEditMode === false && (
                             <Form.Group className="mb-3">
-                            <Form.Label>Chi nhánh</Form.Label>
-                            <Form.Select
-                                name="locationId"
-                                value={newRoomCategory.locationId}
-                                onChange={handleChange}
-                                isInvalid={!!errors.locationId}
-                            >
-                                <option value="">Chọn chi nhánh</option>
-                                {locations.map((location) => (
-                                    <option key={location._id} value={location._id}>{location.name}</option>
-                                ))}
-                            </Form.Select>
-                            <Form.Control.Feedback type="invalid">{errors.locationId}</Form.Control.Feedback>
-                        </Form.Group>
+                                <Form.Label>Chi nhánh</Form.Label>
+                                <Form.Select
+                                    name="locationId"
+                                    value={newRoomCategory.locationId}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.locationId}
+                                >
+                                    <option value="">Chọn chi nhánh</option>
+                                    {locations.map((location) => (
+                                        <option key={location._id} value={location._id}>{location.name}</option>
+                                    ))}
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid">{errors.locationId}</Form.Control.Feedback>
+                            </Form.Group>
                         )}
-                        
+
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

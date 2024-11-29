@@ -8,14 +8,22 @@ import sendConfirmationEmail from '../utils/sendEmail.js'; // Import the email f
 dotenv.config();
 
 const router = express.Router();
+
+
 const payos = new PayOS(
-    "bf5f0eaf-610c-44c0-b622-f77ccd209389",
-    "48038d7f-c9ec-44f5-9133-453065493a6a",
-    "668615efa053dfcafba201e6710972b9c98adf34776b52d25461eb67c6de352d");
+    process.env.PAYOS_CLIENT_ID,
+    process.env.PAYOS_CLIENT_SECRET,
+    process.env.PAYOS_PRIVATE_KEY
+);
 
 router.post('/create-payment-link', async (req, res) => {
     const { amount, bookingId } = req.body;
     const YOUR_DOMAIN = process.env.REACT_URL;
+    // console.log({
+    //     clientId: process.env.PAYOS_CLIENT_ID,
+    //     clientSecret: process.env.PAYOS_CLIENT_SECRET,
+    //     privateKey: process.env.PAYOS_PRIVATE_KEY,
+    // });
 
     try {
         const order = {
@@ -23,7 +31,7 @@ router.post('/create-payment-link', async (req, res) => {
             description: bookingId,
             orderCode: Math.floor(10000000 + Math.random() * 90000000),
             returnUrl: `${YOUR_DOMAIN}/success`,
-            cancelUrl: `${YOUR_DOMAIN}/cancel`,
+            cancelUrl: `${YOUR_DOMAIN}/cancel/${bookingId}`,
         };
 
         const paymentLink = await payos.createPaymentLink(order);

@@ -26,6 +26,17 @@ const BookingDetails = () => {
     const [note, setNote] = useState(orderRooms[0]?.bookingId?.note || '');
     const roomCategoriesRef = useRef(null);
     const [updatedQuantities, setUpdatedQuantities] = useState({});
+    const [staff, setStaff] = useState(null);
+    const [contractCode, setContractCode] = useState(""); // State lưu mã hợp đồng
+    const [price, setPrice] = useState(0); // State lưu giá cả
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const userResponse = JSON.parse(storedUser);
+            setStaff(userResponse);
+        }
+    }, [])
 
 
     useEffect(() => {
@@ -126,6 +137,9 @@ const BookingDetails = () => {
 
                 // Cập nhật giá booking và dịch vụ
                 await axios.put(`http://localhost:9999/bookings/${bookingId}`, updatedBookingData);
+
+                await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã thêm dịch vụ` });
+
                 toast.success('Thông tin dịch vụ và giá đơn đã được cập nhật.', {
                     position: "top-right",
                 });
@@ -165,6 +179,8 @@ const BookingDetails = () => {
                     bookingId: { ...orderRoom.bookingId, status: 'Đã hoàn thành' },
                 }))
             );
+            await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã check out cho khách` });
+
             toast.success('Check out thành Công', {
                 position: "top-right",
             });
@@ -206,6 +222,8 @@ const BookingDetails = () => {
                     };
                     await axios.put(`http://localhost:9999/bookings/${bookingId}`, updatedBookingData);
                     await axios.delete(`http://localhost:9999/orderServices/${deleteService._id}`);
+
+                    await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã xóa dịch vụ` });
 
                     fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
                     toast.success('Dịch vụ đã được xóa thành công và giá đơn đã được cập nhật.', {
@@ -257,7 +275,7 @@ const BookingDetails = () => {
                     // Gửi yêu cầu API để hủy phòng
                     await axios.delete(`http://localhost:9999/orderRooms/${OrderRoom._id}`)
 
-
+                    await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã xóa phòng` });
                     fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
                     toast.success('Phòng  đã được xóa thành công và giá booking đã được cập nhật.', {
                         position: "top-right",
@@ -311,6 +329,9 @@ const BookingDetails = () => {
             const bookingId = orderRooms[0]?.bookingId?._id;
             await axios.put(`http://localhost:9999/bookings/${bookingId}`, { price: orderRooms[0].bookingId.price + priceDifference + result.totalAmount, note: note });
 
+            await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã cập nhật thông tin phòng` });
+
+
             // Làm mới dữ liệu
             fetchBookingDetails();
 
@@ -361,11 +382,77 @@ const BookingDetails = () => {
         return priceDifference; // Trả về chênh lệch giá
     };
 
+    const handleContractChange = (e) => setContractCode(e.target.value); // Xử lý thay đổi mã hợp đồng
+    const handlePriceChange = (e) => setPrice(e.target.value); // Xử lý thay đổi giá cả
+
+
+    const handleSave = async () => {
+        try {
+            // Cập nhật giá tổng của booking
+            const bookingId = orderRooms[0]?.bookingId?._id;
+            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { price: price, contract: contractCode });
+            await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã cập nhật thông tin ` });
+            setContractCode(orderRooms[0]?.bookingId?.contract || '');
+            setPrice(orderRooms[0]?.bookingId?.price || 0)
+            fetchBookingDetails();
+            toast.success('Cập nhật số mã hợp đồng và giá thành công.', {
+                position: "top-right",
+            });
+        } catch (error) {
+            console.log('Lỗi khi cập nhật:', error);
+            toast.error('Có lỗi xảy ra. Vui lòng thử lại.', {
+                position: "top-right",
+            });
+        }
+
+    };
     return (
         <div className="booking-details">
             <ToastContainer />
             <h2>Thông tin Đặt phòng</h2>
-            <h3>Mã Đặt phòng: {orderRooms[0].bookingId?._id || 'N/A'} - Mã hợp đồng: {orderRooms[0].bookingId?.contract || 'N/A'}</h3>
+            <div>
+                <h3>
+                    Mã Đặt phòng: {orderRooms[0]?.bookingId?._id || "N/A"} - Mã hợp đồng:{" "}
+                    {orderRooms[0]?.bookingId?.contract || "N/A"}
+                </h3>
+
+                {staff.role === 'admin' && <Form>
+                    <Row className="mb-3">
+                        {/* Input mã hợp đồng */}
+                        <Form.Group as={Col} controlId="contractCode" className='d-flex justify-content-evenly align-content-center'>
+                            <Form.Label className='align-content-center'><strong>Mã Hợp Đồng :</strong></Form.Label>
+                            <Form.Control
+                                className='w-75'
+                                type="text"
+                                placeholder="Nhập mã hợp đồng"
+                                value={contractCode}
+                                onChange={handleContractChange}
+                            />
+                        </Form.Group>
+
+                        {/* Input giá cả */}
+                        <Form.Group as={Col} controlId="price" className='d-flex justify-content-evenly align-content-center'>
+                            <Form.Label className='align-content-center'><strong>Tổng giá :</strong></Form.Label>
+                            <Form.Control
+                                className='w-75'
+                                type="number"
+                                placeholder="Nhập giá cả"
+                                value={price}
+                                onChange={handlePriceChange}
+                            />
+                        </Form.Group>
+
+
+                        {/* Nút lưu */}
+                        <Col className=' align-content-center'>
+                            <Button variant="primary" onClick={handleSave}>
+                                Lưu
+                            </Button>
+                        </Col>
+
+                    </Row>
+                </Form>}
+            </div>
             <Row className="customer-info">
                 <h4>Thông tin Khách hàng</h4>
                 <Col>
