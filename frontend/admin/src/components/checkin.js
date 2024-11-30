@@ -72,7 +72,12 @@ const ListRoom = () => {
           status: 'Đã check-in',
         }
       )
-     
+      const newNotification = { content: "Lễ tân đã check-in phòng" };
+                axios
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                console.log(response.data);
+                })
 
   });
   navigate(`/saveHistory`, {

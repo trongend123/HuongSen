@@ -12,7 +12,7 @@ router.put('/confirm-and-send-email/:id', async (req, res) => {
         // Cập nhật trạng thái booking
         const booking = await Booking.findByIdAndUpdate(
             bookingId,
-            { status: 'confirmed' },
+            { status: 'Đã đặt' },
             { new: true }
         );
 
@@ -22,7 +22,7 @@ router.put('/confirm-and-send-email/:id', async (req, res) => {
 
         // Gửi email xác nhận
         await sendConfirmationEmail(booking);
-
+        
         res.json({ success: true, data: booking });
     } catch (error) {
         console.error('Error confirming booking and sending email:', error);

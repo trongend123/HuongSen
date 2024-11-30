@@ -67,6 +67,12 @@ const ServiceBookingList = () => {
       const updatedBookings = bookings.map((booking) =>
         booking.bookingId === bookingId ? { ...booking, status: newStatus } : booking
       );
+      const newNotification = { content: `Đơn đặt dịch vụ ${bookingId} đã chuyển trạng thái sang ${newStatus}.` };
+                axios
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                console.log(response.data);
+                })
       setBookings(updatedBookings);
       setFilteredBookings(updatedBookings); // Update the filtered list to reflect the changes
     } catch (err) {
