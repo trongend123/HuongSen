@@ -20,8 +20,8 @@ import Refund from './screens/Refund/refund';
 import Policy from './screens/Policy/policy';
 import Contact from './screens/Contact/contact';
 import Services from './screens/Services/services';
-import PaymentSuccess from './screens/Success/success';
-import PaymentCancel from './screens/CancelBooking/cancel';
+import PaymentSuccess from './components/Payment/Success';
+import PaymentCancel from './components/Payment/Cancel';
 import Feedback from "./screens/Feedback/feedback";
 
 import PageAddServices from './screens/pageAddServices';
@@ -51,7 +51,7 @@ root.render(
             <Route path="/refund" element={<Refund />} />
             <Route path="/policy" element={<Policy />} />
             <Route path='/services' element={<Services />} />
-            <Route path="/success" component={PaymentSuccess} />
+            <Route path="/success/:bookingId" element={<PaymentSuccess />} />
             <Route path="/cancel/:bookingId" element={<PaymentCancel />} />
             <Route path="/feedback" element={<Feedback />} />
           </Routes></div>

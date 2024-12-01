@@ -35,7 +35,7 @@ const CustomerBookingPage = () => {
         try {
             // 1. Tạo khách hàng
             const { customerID, agencyID } = await userFormRef.current.createUser();
-            console.log(customerID, agencyID);
+
             if (customerID) {
                 setUserId(customerID); // Lưu ID khách hàng
                 console.log("Khách hàng đã được tạo với ID");
@@ -57,7 +57,7 @@ const CustomerBookingPage = () => {
                     await addServiceRef.current.addService(createdBookingId);
                     console.log('Đặt phòng và dịch vụ đã được tạo thành công!');
                     //5. Xử ký payment
-                    handlePayment(createdBookingId);
+                    handlePayment(createdBookingId, agencyID);
                 } else {
                     alert('Có lỗi xảy ra khi tạo đặt phòng hoặc dịch vụ. Vui lòng thử lại.');
                     console.log('Đặt phòng và dịch vụ chưa được tạo.');
@@ -73,16 +73,19 @@ const CustomerBookingPage = () => {
     };
 
 
-    const handlePayment = async (createdBookingId) => {
+    const handlePayment = async (createdBookingId, agencyID) => {
         try {
             // Assuming you have a method to get the booking details
             const bookingResponse = await axios.get(`${BASE_URL}/bookings/${createdBookingId}`);
             const booking = bookingResponse.data;
-
+            let bookingPrice = booking.price
+            if (agencyID) {
+                bookingPrice = bookingPrice * 80 / 100
+            }
             const response = await axios.post(
                 `${BASE_URL}/payment/create-payment-link`,
                 {
-                    amount: booking.price,
+                    amount: bookingPrice,
                     bookingId: booking._id,
                 }
             );

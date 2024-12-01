@@ -393,10 +393,6 @@ export const getTotalRoomsByCategoryInDateRange = async (req, res) => {
   try {
     const { checkInDate, checkOutDate } = req.query;
 
-    // Kiểm tra nếu thiếu dữ liệu ngày
-    if (!checkInDate || !checkOutDate) {
-      return res.status(400).json({ message: 'Cần cung cấp checkInDate và checkOutDate' });
-    }
 
     // Gọi đến repository để lấy tổng số phòng theo loại trong khoảng thời gian
     const totalRoomsByCategory = await OrderRoomRepository.getTotalByCategoryInDateRange(checkInDate, checkOutDate);

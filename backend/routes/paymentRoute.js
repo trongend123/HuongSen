@@ -1,14 +1,15 @@
 import express from 'express';
 import PayOS from '@payos/node';
 import dotenv from 'dotenv';
-import Payment from '../models/Payment.js'; // Adjust the path according to your directory structure
+import Payment from '../models/Payment.js';
 import Booking from '../models/booking.js';
 import OrderRooms from '../models/orderRoom.js';
-import sendConfirmationEmail from '../utils/sendEmail.js'; // Import the email function
+import OrderServices from '../models/orderService.js';
+import sendConfirmationEmail from '../utils/sendEmail.js'; // Import hàm gửi email
+import axios from 'axios';
 dotenv.config();
 
 const router = express.Router();
-
 
 const payos = new PayOS(
     process.env.PAYOS_CLIENT_ID,
@@ -19,27 +20,60 @@ const payos = new PayOS(
 router.post('/create-payment-link', async (req, res) => {
     const { amount, bookingId } = req.body;
     const YOUR_DOMAIN = process.env.REACT_URL;
-    // console.log({
-    //     clientId: process.env.PAYOS_CLIENT_ID,
-    //     clientSecret: process.env.PAYOS_CLIENT_SECRET,
-    //     privateKey: process.env.PAYOS_PRIVATE_KEY,
-    // });
 
     try {
+
+        const expirationTime = Math.floor(Date.now() / 1000) + 600; // Tính toán thời gian hết hạn trong 10 phút (600 giây)
+
         const order = {
             amount: amount,
             description: bookingId,
             orderCode: Math.floor(10000000 + Math.random() * 90000000),
-            returnUrl: `${YOUR_DOMAIN}/success`,
+            expiredAt: expirationTime,
+            returnUrl: `${YOUR_DOMAIN}/success/${bookingId}`,
             cancelUrl: `${YOUR_DOMAIN}/cancel/${bookingId}`,
         };
+        const bookingIddel = bookingId
 
         const paymentLink = await payos.createPaymentLink(order);
 
+        // Set a timeout of 5 minutes to delete the booking if payment is not processed
+        setTimeout(async () => {
+            try {
+                await axios.delete(`http://localhost:9999/bookings/all/${bookingIddel}`);
+                console.log(`Booking ${bookingId} deleted due to timeout.`);
+            } catch (error) {
+                console.error(`Error delete link: ${bookingIddel}`, error.message);
+            }
+        }, 600000); // 10 minutes timeout
+
         res.json({ checkoutUrl: paymentLink.checkoutUrl });
     } catch (error) {
-        console.error("Error creating payment link:", error.message);
-        res.status(500).json({ error: error.message });
+        console.error(`Error creating payment link: ${bookingId}`, error.message);
+        res.status(500).json({ error: 'An error occurred while creating the payment link.' });
+    }
+});
+
+
+router.post('/create-payment', async (req, res) => {
+    const { amount, bookingId } = req.body;
+
+    try {
+        const newPayment = new Payment({
+            amount,
+            bookingId,
+            status: 'confirm',
+        });
+
+        const savedPayment = await newPayment.save();
+        res.status(201).json({
+            success: true,
+            message: '<h1>Quý khách đã thanh toán thành công</h1>',
+            data: savedPayment,
+        });
+    } catch (error) {
+        console.error('Lỗi tạo thanh toán:', error.message);
+        res.status(500).json({ success: false, error: 'Có lỗi xảy ra khi tạo thanh toán.' });
     }
 });
 
@@ -49,27 +83,26 @@ router.put('/:id', async (req, res) => {
     try {
         const updatedBooking = await Booking.findByIdAndUpdate(
             id,
-            { $set: { status: 'confirmed' } },
+            { $set: { status: 'Đã đặt' } },
             { new: true }
         );
 
         if (!updatedBooking) {
-            return res.status(404).json({ success: false, message: 'Booking not found' });
+            return res.status(404).json({ success: false, message: 'Không tìm thấy đặt phòng.' });
         }
 
-        res.status(200).json({ success: true, message: 'Booking updated successfully', data: updatedBooking });
+        res.status(200).json({ success: true, message: 'Cập nhật đặt phòng thành công.', data: updatedBooking });
     } catch (error) {
-        console.error("Error confirming booking:", error.message);
-        res.status(500).json({ error: error.message });
+        console.error("Lỗi xác nhận đặt phòng:", error.message);
+        res.status(500).json({ error: 'Có lỗi xảy ra khi xác nhận đặt phòng.' });
     }
 });
 
-router.get('/payment-success/:id', async (req, res) => {
-    const { id } = req.params;
+router.get('/payment-success/:bookingId', async (req, res) => {
+    const { bookingId } = req.params;
 
     try {
-        // Fetch the booking and populate necessary details
-        const orderRoom = await OrderRooms.findById(id)
+        const orderRooms = await OrderRooms.find({ bookingId })
             .populate('customerId', 'email fullname phone')
             .populate({
                 path: 'roomCateId',
@@ -81,26 +114,34 @@ router.get('/payment-success/:id', async (req, res) => {
             })
             .populate('bookingId', 'status payment checkin checkout note price humans');
 
-        // Check if all necessary data is present
-        if (!orderRoom || !orderRoom.customerId || !orderRoom.roomCateId || !orderRoom.roomCateId.locationId) {
-            console.error("Order room or necessary fields missing:", orderRoom);
-            return res.status(500).send('<h1>Required booking details are missing.</h1>');
+        const orderServices = await OrderServices.find({ bookingId }).populate('otherServiceId', 'name price');
+
+        if (!orderRooms || orderRooms.length === 0) {
+            console.error("Không tìm thấy phòng đặt nào cho mã đặt phòng:", bookingId);
+            return res.status(500).send('<h4>Không tìm thấy phòng đặt liên quan đến mã đặt phòng này.</h4>');
         }
 
-        // Send confirmation email
-        await sendConfirmationEmail(orderRoom);
+        const invalidOrderRooms = orderRooms.filter(orderRoom =>
+            !orderRoom.customerId || !orderRoom.roomCateId || !orderRoom.roomCateId.locationId
+        );
 
-        res.send('<h1>Payment successful!</h1><p>Your booking has been confirmed, and a confirmation email has been sent.</p>');
+        if (invalidOrderRooms.length > 0) {
+            console.error("Một số phòng đặt thiếu thông tin:", invalidOrderRooms);
+            return res.status(500).send('<h1>Một số thông tin phòng đặt bị thiếu.</h1>');
+        }
+
+        await sendConfirmationEmail(orderRooms, orderServices);
+
+        res.send('<p>Đơn đặt của bạn đã được xác nhận và thông tin đã được gửi qua email.</p>');
     } catch (error) {
-        console.error("Error confirming booking and sending email:", error.message);
-        res.status(500).send('<h1>An error occurred while confirming your booking and sending the confirmation email</h1>');
+        console.error("Lỗi xác nhận đặt phòng và gửi email:", error.message);
+        res.status(500).send('<h1>Có lỗi xảy ra khi xác nhận đặt phòng và gửi email xác nhận.</h1>');
     }
 });
 
-
-// Route to handle payment cancellation
+// Xử lý hủy thanh toán
 router.get('/payment-cancel/:id', (req, res) => {
-    res.send('<h1>Payment cancelled</h1><p>Your booking has not been confirmed.</p>');
+    res.send('<h1>Hủy thanh toán</h1><p>Đặt phòng của bạn chưa được xác nhận.</p>');
 });
 
 export default router;

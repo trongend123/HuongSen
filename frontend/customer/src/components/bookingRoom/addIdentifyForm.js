@@ -121,7 +121,6 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
                                     <option value="Căn Cước Công Dân">Căn Cước Công Dân</option>
                                     <option value="Hộ Chiếu">Hộ Chiếu</option>
                                     <option value="Bằng Lái Xe">Bằng Lái Xe</option>
-                                    <option value="Hộ khẩu">Hộ khẩu</option>
                                 </Form.Select>
                                 <Form.Control.Feedback type='invalid'>
                                     {errors.name}

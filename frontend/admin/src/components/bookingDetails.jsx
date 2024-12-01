@@ -8,6 +8,8 @@ import AddServiceForm from './bookingRoom/addServiceForm';
 import UpdateAgencyOrder from './UpdateAgencyOrder';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom'; // Nhập useNavigate từ react-router-dom
+
 // // Cấu hình react-toastify
 // toast.configure();
 
@@ -29,6 +31,7 @@ const BookingDetails = () => {
     const [staff, setStaff] = useState(null);
     const [contractCode, setContractCode] = useState(""); // State lưu mã hợp đồng
     const [price, setPrice] = useState(0); // State lưu giá cả
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -315,31 +318,36 @@ const BookingDetails = () => {
             // Gọi hàm để tạo order rooms và nhận về tổng giá từ result
             const result = await roomCategoriesRef.current.createAgencyOrderRoom(orderRooms[0]?.bookingId?.price);
 
-            // Cập nhật từng orderRoom với số lượng mới
-            for (const [orderRoomId, quantity] of Object.entries(updatedQuantities)) {
-                await axios.put(`http://localhost:9999/orderRooms/${orderRoomId}`, { quantity });
+            if (result.success) {  // Cập nhật từng orderRoom với số lượng mới
+                for (const [orderRoomId, quantity] of Object.entries(updatedQuantities)) {
+                    await axios.put(`http://localhost:9999/orderRooms/${orderRoomId}`, { quantity });
+                }
+                // // Chờ tất cả các update hoàn thành
+                // await Promise.all(updatePromises);
+
+                // Tính tổng giá chênh lệch
+                const priceDifference = calculateTotalPrice();
+
+                // Cập nhật giá tổng của booking
+                const bookingId = orderRooms[0]?.bookingId?._id;
+                await axios.put(`http://localhost:9999/bookings/${bookingId}`, { price: orderRooms[0].bookingId.price + priceDifference + result.totalAmount, note: note });
+
+                await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã cập nhật thông tin phòng` });
+
+
+                // Làm mới dữ liệu
+                fetchBookingDetails();
+
+                // Reset số lượng đã cập nhật
+                setUpdatedQuantities({});
+                toast.success('Cập nhật số lượng phòng , ghi chú và giá thành công.', {
+                    position: "top-right",
+                });
+            } else {
+                toast.error('Có lỗi xảy ra. Vui lòng thử lại.', {
+                    position: "top-right",
+                });
             }
-            // // Chờ tất cả các update hoàn thành
-            // await Promise.all(updatePromises);
-
-            // Tính tổng giá chênh lệch
-            const priceDifference = calculateTotalPrice();
-
-            // Cập nhật giá tổng của booking
-            const bookingId = orderRooms[0]?.bookingId?._id;
-            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { price: orderRooms[0].bookingId.price + priceDifference + result.totalAmount, note: note });
-
-            await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã cập nhật thông tin phòng` });
-
-
-            // Làm mới dữ liệu
-            fetchBookingDetails();
-
-            // Reset số lượng đã cập nhật
-            setUpdatedQuantities({});
-            toast.success('Cập nhật số lượng phòng , ghi chú và giá thành công.', {
-                position: "top-right",
-            });
         } catch (error) {
             console.error('Lỗi khi cập nhật:', error);
             toast.error('Có lỗi xảy ra. Vui lòng thử lại.', {
@@ -681,6 +689,17 @@ const BookingDetails = () => {
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Check-out'}
                 </button>
+                {staff.role === 'admin' && (
+                    <Button
+                        variant="info"
+                        style={{ margin: ' 0px 10px' }}
+                        onClick={() => {
+                            navigate('/historyBookingChange', { state: { bookingId: orderRooms[0].bookingId._id } }); // Chuyển hướng với bookingId
+                        }}
+                    >
+                        Lịch sử
+                    </Button>
+                )}
             </div>
         </div>
     );

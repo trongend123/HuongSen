@@ -253,23 +253,23 @@ const ListBooking = () => {
               <td>
                 {booking.bookingId.status === "Đã đặt" && (
                   <>
-                  {userRole !== "admin" && (
-                    <Button
-                      variant="warning"
-                      className="me-2"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Ngăn sự kiện onClick của hàng
-                        navigate(`/checkin/${booking.bookingId._id}`);
-                      }}
-                    >
-                      Check-in
-                    </Button>
+                    {userRole !== "admin" && (
+                      <Button
+                        variant="warning"
+                        className="me-2"
+                        onClick={(e) => {
+                          e.stopPropagation(); // Ngăn sự kiện onClick của hàng
+                          navigate(`/checkin/${booking.bookingId._id}`);
+                        }}
+                      >
+                        Check-in
+                      </Button>
 
-                  )}
+                    )}
                   </>
-                  )}
-                  {booking.bookingId.status === "Yêu cầu hoàn tiền" && (
-                    <>
+                )}
+                {booking.bookingId.status === "Yêu cầu hoàn tiền" && (
+                  <>
                     {userRole === "admin" && (
                       <Button
                         variant="danger"
@@ -302,7 +302,7 @@ const ListBooking = () => {
       </Pagination>
 
 
-      {/* Detail Modal */}
+      {/* Detail Modal
       {selectedBookingDetails && (
         <Modal show={showDetailModal} onHide={() => setShowDetailModal(false)}>
           <Modal.Header closeButton>
@@ -348,7 +348,7 @@ const ListBooking = () => {
 
           </Modal.Footer>
         </Modal>
-      )}
+      )} */}
 
     </Container>
   );

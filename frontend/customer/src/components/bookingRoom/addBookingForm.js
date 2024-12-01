@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } f
 import axios from 'axios';
 import { Form, Row, Col, Button, Card, Alert } from 'react-bootstrap';
 import SelectRoomCategories from './selectRoomCate';
+import { format } from 'date-fns';
 
 const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId, canInput }, ref) => {
     const roomCategoriesRef = useRef(null);
@@ -47,6 +48,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
     useEffect(() => {
         calculateTotalAmount();
+
     }, [roomPrices, bookingData.checkin, bookingData.checkout, serviceAmount]);
 
     const handleRoomQuantityChange = (roomId, qty, price) => {
@@ -54,6 +56,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             ...prevPrices,
             [roomId]: price
         }));
+
     };
 
     const handleTotalRoomsRemaining = (totalRoomsRemaining) => {
@@ -140,69 +143,69 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     }));
     if (!canInput) {
         return (
-            
-                <Card id='card'>
-                    <Card.Header className="abc" style={{backgroundColor:"#81a969",color:"white"}}>
-                        <h5 className="text-white">Chọn Loại Phòng & Số Lượng</h5>
-                    </Card.Header>
-                    <Card.Body>
-                        <Row className="mb-3">
-                            <Col md={6} className="mx-auto">
-                                <Form.Group controlId="checkin">
-                                    <Form.Label className="d-block text-center">
-                                        <strong>Check-in Ngày:</strong>
-                                    </Form.Label>
-                                    <Form.Control
-                                        type="date"
-                                        name="checkin"
-                                        value={bookingData.checkin}
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.checkin}
-                                        required
-                                    />
-                                    <Form.Control.Feedback type="invalid" className="text-center">
-                                        {errors.checkin}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Col>
 
-                            <Col md={6} className="mx-auto">
-                                <Form.Group controlId="checkout">
-                                    <Form.Label className="d-block text-center">
-                                        <strong>Check-out Ngày:</strong>
-                                    </Form.Label>
-                                    <Form.Control
-                                        type="date"
-                                        name="checkout"
-                                        value={bookingData.checkout}
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.checkout}
-                                        required
-                                    />
-                                    <Form.Control.Feedback type="invalid" className="text-center">
-                                        {errors.checkout}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="mb-3">
-                            <Col md={12}>
-                                <SelectRoomCategories
-                                    ref={roomCategoriesRef}
-                                    checkin={bookingData.checkin}
-                                    checkout={bookingData.checkout}
-                                    onQuantityChange={handleRoomQuantityChange}
-                                    onTotalRoomsRemaining={handleTotalRoomsRemaining}
-                                    customerID={customerID}
-                                    locationId={locationId}
-                                    canInput={canInput}
+            <Card id='card'>
+                <Card.Header className="abc" style={{ backgroundColor: "#81a969", color: "white" }}>
+                    <h5 className="text-white">Chọn Loại Phòng & Số Lượng</h5>
+                </Card.Header>
+                <Card.Body>
+                    <Row className="mb-3">
+                        <Col md={6} className="mx-auto">
+                            <Form.Group controlId="checkin">
+                                <Form.Label className="d-block text-center">
+                                    <strong>Check-in Ngày:</strong>
+                                </Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    name="checkin"
+                                    value={bookingData.checkin}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.checkin}
+                                    required
                                 />
-                            </Col>
-                        </Row>
+                                <Form.Control.Feedback type="invalid" className="text-center">
+                                    {errors.checkin}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
 
-                    </Card.Body>
-                </Card>
-           
+                        <Col md={6} className="mx-auto">
+                            <Form.Group controlId="checkout">
+                                <Form.Label className="d-block text-center">
+                                    <strong>Check-out Ngày:</strong>
+                                </Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    name="checkout"
+                                    value={bookingData.checkout}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.checkout}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid" className="text-center">
+                                    {errors.checkout}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row className="mb-3">
+                        <Col md={12}>
+                            <SelectRoomCategories
+                                ref={roomCategoriesRef}
+                                checkin={bookingData.checkin}
+                                checkout={bookingData.checkout}
+                                onQuantityChange={handleRoomQuantityChange}
+                                onTotalRoomsRemaining={handleTotalRoomsRemaining}
+                                customerID={customerID}
+                                locationId={locationId}
+                                canInput={canInput}
+                            />
+                        </Col>
+                    </Row>
+
+                </Card.Body>
+            </Card>
+
 
         );
     }
