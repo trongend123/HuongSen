@@ -3,7 +3,7 @@ import HistoryBookingChange from './components/historyBookingChange';
 import SaveHistory from './components/SaveHistory';
 import Login from './screens/Login/login';
 import ChangePassword from './screens/Change Password/changepass';
-import CreateBookingByStaff from './components/createBookingByStaff';
+import CreateBookingByStaff from './page/createBookingByStaff';
 import ListRoom from './components/listRoom';
 import ListStaff from './components/listStaff';
 import Dashboard from './components/dashboard';
@@ -17,6 +17,7 @@ import BookingDetails from './components/bookingDetails';
 import ServiceBookingList from './components/servicebooking';
 
 import BookingPage from './screens/pageBookingByStaff';
+import UpdateAgencyOrder from './components/UpdateAgencyOrder';
 
 function router() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -54,6 +55,7 @@ function router() {
           <Route path='/checkin/:id' element={<Checkin />} />
           <Route path="/bookings/:bookingId" element={<BookingDetails />} />
           <Route path='/servicesbooking' element={<ServiceBookingList />} />
+          {/* <Route path='/updateAgencyOrder' element={<UpdateAgencyOrder />} /> */}
         </Routes>
       );
     } else {

@@ -61,7 +61,7 @@ const createRoom = async (req, res) => {
       return res.status(400).json({ message: "Request body is required." });
     }
 
-    const { code, status, roomCategoryId,bookingId } = req.body; // Extract necessary fields
+    const { code, status, roomCategoryId, bookingId } = req.body; // Extract necessary fields
 
     // Validate that required fields are provided
     if (!code || !status || !roomCategoryId) {
@@ -143,6 +143,25 @@ const getTotalRoomsByCategory = async (req, res) => {
     });
   }
 };
+// GET: /rooms/booking/:bookingId
+const getRoomsByBookingId = async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+
+    // Gọi repository để lấy danh sách phòng theo bookingId
+    const rooms = await RoomRepo.getRoomsByBookingId(bookingId);
+
+
+    res.status(200).json({
+      message: `Found ${rooms.length} rooms for bookingId: ${bookingId}`,
+      rooms,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.toString(),
+    });
+  }
+};
 
 export default {
   getRooms,
@@ -151,5 +170,6 @@ export default {
   editRoom,
   deleteRoom,
   getRoomsInCategory,
-  getTotalRoomsByCategory
+  getTotalRoomsByCategory,
+  getRoomsByBookingId,
 };

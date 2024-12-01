@@ -44,3 +44,12 @@ export const getAllAgencies = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const getAgencyByCustomerId = async (req, res) => {
+  try {
+    const customerId = req.params.customerId;
+    const agency = await agencyRepository.findAgencyByCustomerId(customerId);
+    res.status(200).json(agency);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

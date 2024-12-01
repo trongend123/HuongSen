@@ -25,7 +25,7 @@ const Policy = () => {
       <h3>Chính Sách Hoàn Tiền</h3>
       <p>Chúng tôi sẽ xem xét hoàn tiền trong trường hợp hủy phòng hợp lệ theo các quy định trên. Nếu bạn muốn yêu cầu hoàn tiền, vui lòng xem hướng dẫn và gửi yêu cầu bên dưới.</p>
       
-      <Button onClick={handleRefundClick} variant="primary">Yêu Cầu Hoàn Tiền</Button>
+  
       
 
     </Container>

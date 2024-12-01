@@ -1,7 +1,7 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import { Form, Row, Col, Card, Button, Alert } from 'react-bootstrap';
 
-const AddUserForm = forwardRef(({}, ref) => {
+const AddUserForm = forwardRef(({ }, ref) => {
     const [customerData, setCustomerData] = useState({
         fullname: '',
         email: '',
@@ -12,8 +12,9 @@ const AddUserForm = forwardRef(({}, ref) => {
     });
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
-    const [bookingType, setBookingType] = useState(''); // To track if it's "khách lẻ" or "khách đoàn"
+    const [bookingType, setBookingType] = useState(''); // Track "khách lẻ" or "khách đoàn"
     const [agencyData, setAgencyData] = useState({
+        customerId: '',
         name: '',
         phone: '',
         address: '',
@@ -84,20 +85,46 @@ const AddUserForm = forwardRef(({}, ref) => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:9999/customers', {
+            // Create Customer
+            const userResponse = await fetch('http://localhost:9999/customers', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(customerData)
+                body: JSON.stringify(customerData),
             });
 
-            if (!response.ok) {
-                throw new Error('Có lỗi xảy ra khi tạo người dùng.');
+            if (!userResponse.ok) {
+                throw new Error('An error occurred while creating the customer.');
             }
 
-            const responseData = await response.json();
-            return responseData._id;
+            const userResponseData = await userResponse.json();
+            const customerID = userResponseData._id;
+
+            if (bookingType === 'Group') {
+                // Include customerID in the agencyData
+                const agencyPayload = { ...agencyData, customerId: customerID };
+
+                // Create Agency
+                const agencyResponse = await fetch('http://localhost:9999/agencies', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(agencyPayload),
+                });
+
+                if (!agencyResponse.ok) {
+                    throw new Error('An error occurred while creating the agency.');
+                }
+
+                const agencyResponseData = await agencyResponse.json();
+                const agencyID = agencyResponseData._id;
+
+                return { customerID, agencyID };
+            }
+
+            return { customerID, agencyID: null };
         } catch (error) {
             console.error('Error creating user:', error);
             return null;
@@ -106,18 +133,19 @@ const AddUserForm = forwardRef(({}, ref) => {
         }
     };
 
+    // Expose methods and data to parent component
     useImperativeHandle(ref, () => ({
         createUser
     }));
 
     return (
         <Card className="shadow-sm">
-            <Card.Header as="h5" className="bg-primary text-white">Thông tin khách hàng</Card.Header>
+            <Card.Header as="h5" className=" text-white" style={{ backgroundColor: '#81a969' }}>Thông tin khách hàng</Card.Header>
             <Card.Body>
                 <Form>
                     {/* Existing customer details form */}
                     <Row className="mb-3">
-                    <Col md={6}>
+                        <Col md={6}>
                             <Form.Group controlId="fullname">
                                 <Form.Label><strong>Họ và tên</strong></Form.Label>
                                 <Form.Control
@@ -228,11 +256,11 @@ const AddUserForm = forwardRef(({}, ref) => {
                             </Form.Group>
                         </Col>
                     </Row>
-                    
 
-                    <Button 
-                        variant="outline-primary" 
-                        className="mt-3" 
+
+                    <Button
+                        variant="outline-primary"
+                        className="mt-3"
                         onClick={() => setBookingType(bookingType === 'Group' ? '' : 'Group')}
                     >
                         {bookingType === 'Group' ? 'Khách đoàn' : 'Khách lẻ'}

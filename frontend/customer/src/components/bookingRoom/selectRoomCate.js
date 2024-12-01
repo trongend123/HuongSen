@@ -118,7 +118,9 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                     roomCateId: room.roomCateId,
                     customerId: customerID,
                     bookingId: bookingId,
-                    quantity: room.quantity
+                    quantity: room.quantity,
+                    receiveRoom: checkin,
+                    returnRoom: checkout
                 });
             });
 
@@ -131,7 +133,6 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
             // return false; // Return false to indicate failure
         }
     };
-
 
     useImperativeHandle(ref, () => ({
         createOrderRoom,
@@ -174,17 +175,24 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                             }
                             // Form for when `canInput` is false (static display)
                             return (
-                                <Row key={room._id} className="mb-3 text-center">
-                                    <Col>
-                                        <h6>
-                                            <strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)
-                                        </h6>
-                                        <p className="text-secondary mb-0">
-                                            Phòng còn trống: {remainingRoomCount}
-                                        </p>
-
-                                    </Col>
-                                </Row>
+                                <Card className="mb-3 shadow-sm border-0">
+                                    <Card.Body>
+                                        <Row className="align-items-center">
+                                            <Col md={6} className="d-flex flex-column">
+                                                <h5 className="text-primary fw-bold mb-2">{room.name}</h5>
+                                                <p className="text-secondary mb-0">
+                                                    Giá 1 đêm: <strong>{room.price.toLocaleString()} VND</strong>
+                                                </p>
+                                            </Col>
+                                            <Col md={6} className="text-end">
+                                                <p className="text-muted mb-1">
+                                                    <strong>Phòng còn trống:</strong> {remainingRoomCount}
+                                                </p>
+                                                <p className="text-muted">{room.description}</p>
+                                            </Col>
+                                        </Row>
+                                    </Card.Body>
+                                </Card>
                             );
                         })}
                     </Card.Body>

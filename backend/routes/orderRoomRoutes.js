@@ -10,6 +10,7 @@ import {
   getTotalRoomsByCategoryInDateRange,
   getAllOrderRoomsbyPage,
   getAllOrderRoomsByExcel
+
 } from '../controllers/orderRoomController.js';
 
 const router = express.Router();
@@ -26,5 +27,5 @@ router.get('/booking/:bookingId', getOrderRoomsByBookingId);     // Lấy OrderR
 
 router.put('/:id', updateOrderRoom);      // Cập nhật OrderRoom
 router.delete('/:id', deleteOrderRoom);   // Xóa OrderRoom
-
+router.get('/excel', generateExcel);   // Lấy tất cả OrderRooms
 export default router;

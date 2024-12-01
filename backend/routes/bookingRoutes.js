@@ -20,4 +20,7 @@ router.put('/:id', bookingController.updateBooking);
 // Xóa booking theo ID
 router.delete('/:id', bookingController.deleteBooking);
 
+//xóa all theo bookingId
+router.delete("/all/:bookingId", bookingController.deleteAllByBookingID);
+
 export default router;

@@ -6,9 +6,15 @@ const ServiceBookingList = () => {
   const [filteredBookings, setFilteredBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Filters
   const [searchBookingId, setSearchBookingId] = useState('');
   const [searchCustomerName, setSearchCustomerName] = useState('');
+  const [searchServiceName, setSearchServiceName] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+
   const rowsPerPage = 10;
 
   useEffect(() => {
@@ -31,25 +37,31 @@ const ServiceBookingList = () => {
 
   // Handle search
   useEffect(() => {
-    const filtered = bookings.filter(
-      (booking) =>
-        booking.bookingId.toString().includes(searchBookingId) &&
-        booking.customerName.toLowerCase().includes(searchCustomerName.toLowerCase())
-    );
+    const filtered = bookings.filter((booking) => {
+      const matchesBookingId = booking.bookingId.toString().includes(searchBookingId);
+      const matchesCustomerName = booking.customerName
+        .toLowerCase()
+        .includes(searchCustomerName.toLowerCase());
+      const matchesServiceName = booking.serviceName
+        .toLowerCase()
+        .includes(searchServiceName.toLowerCase());
+      const matchesStartTime =
+        !startTime || new Date(booking.time) >= new Date(startTime);
+
+      return (
+        matchesBookingId &&
+        matchesCustomerName &&
+        matchesServiceName &&
+        matchesStartTime 
+      );
+    });
+
     setFilteredBookings(filtered);
     setCurrentPage(1); // Reset to the first page when filtering
-  }, [searchBookingId, searchCustomerName, bookings]);
-
-  // Pagination
-  const indexOfLastRow = currentPage * rowsPerPage;
-  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = filteredBookings.slice(indexOfFirstRow, indexOfLastRow);
-  const totalPages = Math.ceil(filteredBookings.length / rowsPerPage);
-
-  // Update status in the database
+  }, [searchBookingId, searchCustomerName, searchServiceName, startTime, endTime, bookings]);
   const handleStatusChange = async (bookingId, newStatus) => {
     try {
-      await axios.put(`http://localhost:9999/service-bookings/${bookingId}`, {
+      await axios.put('http://localhost:9999/service-bookings/${bookingId}', {
         status: newStatus,
       });
       const updatedBookings = bookings.map((booking) =>
@@ -62,6 +74,23 @@ const ServiceBookingList = () => {
       alert('Failed to update status. Please try again.');
     }
   };
+  // Pagination
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = filteredBookings.slice(indexOfFirstRow, indexOfLastRow);
+  const totalPages = Math.ceil(filteredBookings.length / rowsPerPage);
+
+  // Format date
+  const formatDate = (date) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Intl.DateTimeFormat('vi-VN', options).format(new Date(date));
+  };
+
+  // Format currency
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+  };
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -73,11 +102,12 @@ const ServiceBookingList = () => {
 
   return (
     <div className="container">
-      <h2>Danh sách đặt dịch vụ khách hàng</h2>
+      <h2 className='text-center'>Danh sách đặt dịch vụ khách hàng</h2>
+      <br/>
 
       {/* Search Fields */}
       <div className="row mb-3">
-        <div className="col-md-6">
+        <div className="col-md-3">
           <input
             type="text"
             className="form-control"
@@ -86,7 +116,7 @@ const ServiceBookingList = () => {
             onChange={(e) => setSearchBookingId(e.target.value)}
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-3">
           <input
             type="text"
             className="form-control"
@@ -95,8 +125,26 @@ const ServiceBookingList = () => {
             onChange={(e) => setSearchCustomerName(e.target.value)}
           />
         </div>
+        <div className="col-md-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Tìm kiếm Tên Dịch Vụ"
+            value={searchServiceName}
+            onChange={(e) => setSearchServiceName(e.target.value)}
+          />
+          </div>
+          <div className="col-md-3">
+          <input
+            type="date"
+            className="form-control"
+            placeholder="Ngày sử dụng"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+          />
+          </div>
+        
       </div>
-
       {currentRows.length === 0 ? (
         <p>No service bookings found.</p>
       ) : (
@@ -104,23 +152,27 @@ const ServiceBookingList = () => {
           <table className="table table-striped">
             <thead>
               <tr>
-                <th>Booking ID</th>
-                <th>Customer Name</th>
-                <th>Service Name</th>
-                <th>Unit Price</th>
-                <th>Quantity</th>
-                <th>Status</th>
-                <th>Note</th>
+                <th>Mã đơn hàng</th>
+                <th>Tên khách hàng</th>
+                <th>Tên dịch vụ</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Tổng tiền</th>
+                <th>Thời gian</th>
+                <th>Trạng thái</th>
+                <th>Ghi chú</th>
               </tr>
             </thead>
             <tbody>
-              {currentRows.map((booking) => (
-                <tr key={booking.bookingId}>
+              {currentRows.map((booking, index) => (
+                <tr key={index}>
                   <td>{booking.bookingId}</td>
                   <td>{booking.customerName}</td>
                   <td>{booking.serviceName}</td>
-                  <td>{booking.unitPrice}</td>
-                  <td>{booking.quantity}</td>
+                  <td>{formatCurrency(booking.unitPrice)}</td>
+                  <td className="text-center">{booking.quantity}</td>
+                  <td>{formatCurrency(booking.unitPrice * booking.quantity)}</td>
+                  <td>{formatDate(booking.time)}</td>
                   <td>
                     <select
                       className="form-select"

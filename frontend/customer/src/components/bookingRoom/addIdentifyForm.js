@@ -104,7 +104,7 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
 
     return (
         <Card className="shadow-sm mb-3">
-            <Card.Header className="bg-primary text-white"><h5>Thêm Giấy Tờ Định Danh</h5></Card.Header>
+            <Card.Header className=" text-white" style={{ backgroundColor: '#81a969' }}><h5>Thêm Giấy Tờ Định Danh</h5></Card.Header>
             <Card.Body>
                 <Form>
                     <Row>

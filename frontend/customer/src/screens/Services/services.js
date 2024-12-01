@@ -66,17 +66,7 @@ const menuItems = [
     images: [menu10Images['vit-quay.jpg'], menu10Images['tom-rang-thit.jpg'], menu10Images['canh-mung-toi-nau-ngao.jpg'],menu10Images['rau-luoc.jpg'], menu10Images['com-trang.jpg']],  }
 ];
 
-const services = [
-  { _id: "67127d16cc979020534afd10", name: "Thuê xe máy", price: 120000, description: "Thuê 1 xe máy 1 ngày" },
-  { _id: "67127d5ccc979020534afd11", name: "Đưa đón tại sân bay Cát Bi", price: 150000, description: "Một xe đưa đón tại sân bay Cát Bi" },
-  { _id: "67127e6dcc979020534afd13", name: "Đặt đồ ăn xuất 100k", price: 100000, description: "Xuất ăn 100k cho 1 người" },
-  { _id: "67127eb2cc979020534afd14", name: "Đặt đồ ăn xuất 150k", price: 150000, description: "Xuất ăn 150k cho 1 người" },
-  { _id: "67127ec7cc979020534afd15", name: "Đặt đồ ăn xuất 200k", price: 200000, description: "Xuất ăn 200k cho 1 người" },
-  { _id: "67127ed5cc979020534afd16", name: "Đặt đồ ăn xuất 300k", price: 300000, description: "Xuất ăn 300k cho 1 người" },
-  { _id: "67127ee0cc979020534afd17", name: "Đặt đồ ăn xuất 400k", price: 400000, description: "Xuất ăn 400k cho 1 người" },
-  { _id: "67127eeecc979020534afd18", name: "Đặt đồ ăn xuất 500k", price: 500000, description: "Xuất ăn 500k cho 1 người" },
-  { _id: "67127faccc979020534afd1d", name: "Giặt đồ", price: 20000, description: "Giặt đồ tính theo kilogram, nhận đồ tại phòng" }
-];
+
 
 const Services = () => {
   return (
@@ -114,16 +104,50 @@ const Services = () => {
       <section className="services-section mt-4">
         <h3 className="text-center">Các dịch vụ khác</h3>
         <Row>
-          {services.map(service => (
-            <Col md={4} key={service._id} className="mb-4">
-              <Card className="h-100">
-                <Card.Body>
-                  <Card.Title>{service.name}</Card.Title>
-                  <Card.Text>{service.description}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
+          <Col md={4} className="mb-4">
+            <Card className="h-100">
+              <Card.Body>
+                <Card.Title>Kết nối tours</Card.Title>
+                <Card.Text>Hỗ trợ khách hàng kết nối các tour du lịch hấp dẫn quanh khu vực của nhà khách </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={4} className="mb-4">
+            <Card className="h-100">              
+              <Card.Body>
+                <Card.Title>Giặt là</Card.Title>
+                <Card.Text>Nhân viên nhà khách hỗ trợ dịch vụ giặt là theo nhu cầu của khách hàng</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={4} className="mb-4">
+            <Card className="h-100">
+              <Card.Body>
+                <Card.Title>Phòng hội nghị</Card.Title>
+                <Card.Text>Khách sạn cung cấp phòng hội nghị kèm trang trí, set-up theo nhu cầu của khách hàng. </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={4} className="mb-4">
+            <Card className="h-100">
+              <Card.Body>
+                <Card.Title>Thuê xe máy</Card.Title>
+                <Card.Text>Hỗ trợ khách hàng thuê xe máy theo yêu cầu với giá cả phải chăng, hợp lý. </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col md={4} className="mb-4">
+            <Card className="h-100">
+              <Card.Body>
+                <Card.Title>Đưa đón khách hàng</Card.Title>
+                <Card.Text>Đưa đón khách hàng tại sân bay, nhà ga và hỗ trợ di chuyển quanh thành phố </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
       </section>
     </Container>

@@ -8,6 +8,8 @@ const router = express.Router();
 // Tạo lịch sử mới
 router.post('/', historyController.createHistory);
 
+router.post('/BE', historyController.createHistoryBE);
+
 // Lấy tất cả lịch sử
 router.get('/', historyController.getAllHistories);
 

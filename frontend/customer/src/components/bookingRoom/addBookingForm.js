@@ -16,8 +16,8 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     const [bookingData, setBookingData] = useState({
         taxId: null,
         staffId: null,
-        status: 'In Progress',
-        payment: 'Chưa Thanh Toán',
+        status: 'Đã đặt',
+        payment: 0,
         price: 0,
         checkin: today,
         checkout: tomorrow,
@@ -90,7 +90,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
         return Object.keys(newErrors).length === 0;
     };
 
-    const createBooking = async () => {
+    const createBooking = async (agencyID) => {
         if (!validateForm()) {
             console.log("Form has errors, please fix them before submitting.");
             return;
@@ -113,7 +113,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             const bookingId = response.data._id; // Get the bookingId from the response
 
             // Call the function to create order rooms
-            const result = await roomCategoriesRef.current.createOrderRoom(bookingId);
+            const result = await roomCategoriesRef.current.createOrderRoom(bookingId, agencyID);
 
             if (result === undefined || result === false) {
                 // If result is falsy, indicate insufficient rooms
@@ -140,10 +140,10 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     }));
     if (!canInput) {
         return (
-            <Row style={{ width: "65%" }}>
-                <Card>
-                    <Card.Header className="text-bg-info">
-                        <h5 className="text-center">Chọn Loại Phòng & Số Lượng</h5>
+            
+                <Card id='card'>
+                    <Card.Header className="abc" style={{backgroundColor:"#81a969",color:"white"}}>
+                        <h5 className="text-white">Chọn Loại Phòng & Số Lượng</h5>
                     </Card.Header>
                     <Card.Body>
                         <Row className="mb-3">
@@ -202,13 +202,13 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
                     </Card.Body>
                 </Card>
-            </Row>
+           
 
         );
     }
     return (
         <Card className="mb-2">
-            <Card.Header className="text-bg-info"><h5>Chọn Loại Phòng & Số Lượng</h5></Card.Header>
+            <Card.Header className="text-white" style={{ backgroundColor: '#81a969' }}><h5>Chọn Loại Phòng & Số Lượng</h5></Card.Header>
             <Card.Body>
 
                 <Row className="mb-3">

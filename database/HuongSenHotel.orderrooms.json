@@ -217,4 +217,48 @@
     "$date": "2024-11-22T13:30:42.017Z"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6741cb7753420b88eb1726e9"
+  },
+  "roomCateId": {
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "customerId": {
+    "$oid": "6741cb7753420b88eb1726da"
+  },
+  "bookingId": {
+    "$oid": "6741cb7753420b88eb1726dc"
+  },
+  "quantity": 1,
+  "createdAt": {
+    "$date": "2024-11-23T12:32:55.672Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-23T12:32:55.672Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6745d6e8104506461fa710cf"
+  },
+  "roomCateId": {
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "customerId": {
+    "$oid": "6745d6e8104506461fa710c0"
+  },
+  "bookingId": {
+    "$oid": "6745d6e8104506461fa710c2"
+  },
+  "quantity": 1,
+  "createdAt": {
+    "$date": "2024-11-26T14:10:48.608Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-26T14:10:48.608Z"
+  },
+  "__v": 0
 }]

@@ -13,7 +13,8 @@ import { fileURLToPath } from 'url';
 // Hàm tạo OrderRoom mới
 export const createOrderRoom = async (req, res) => {
   try {
-    const { roomCateId, customerId, bookingId, quantity } = req.body;
+    const { roomCateId, customerId, bookingId, quantity, receiveRoom,
+      returnRoom } = req.body;
 
     // Kiểm tra sự tồn tại của RoomCategory
     const roomCategory = await RoomCategory.findById(roomCateId);
@@ -38,7 +39,9 @@ export const createOrderRoom = async (req, res) => {
       roomCateId,
       customerId,
       bookingId,
-      quantity
+      quantity,
+      receiveRoom,
+      returnRoom
     });
 
     res.status(201).json(newOrderRoom);
@@ -61,7 +64,7 @@ export const getAllOrderRoomsbyPage = async (req, res) => {
 //lấy hết
 export const getAllOrderRooms = async (req, res) => {
   try {
-    //const orderRoom = await OrderRoomRepository.findAll();
+    const orderRoom = await OrderRoomRepository.findAll();
     if (!orderRoom) {
       return res.status(404).json({ message: 'OrderRoom không tồn tại' });
     }
@@ -79,6 +82,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const getAllOrderRoomsByExcel = async (req, res) => {
+
   try {
     console.log('Bắt đầu xuất file doanh thu');
     // Lấy dữ liệu từ DB
@@ -167,6 +171,7 @@ export const getAllOrderRoomsByExcel = async (req, res) => {
       let totalServiceFee = 0;
       let totalDebt = 0;
       let totalPaid = 0;
+
       let totalQuantity = 0;
       let totalPrice = 0;
       let totalPriceString = 0;
@@ -202,15 +207,26 @@ export const getAllOrderRoomsByExcel = async (req, res) => {
         const debt = booking?.price - booking?.payment || 0; // Nợ từ booking
         //const paidAmount = booking?.payment || 0;
         const paidAmount = 0;
+
+
+      dayData.forEach((order, index) => {
+        const roomFee = order.roomCateId?.price || 0;
+        const extraFee = order.extraHoursFee || 0;
+        const serviceFee = order.serviceFee || 0;
+        const debt = order.debt || 0;
+        const paidAmount = order.paidAmount || 0;
+
         totalRoomFee += roomFee;
         totalExtraFee += extraFee;
         totalServiceFee += serviceFee;
         totalDebt += debt;
         totalPaid += paidAmount;
+
         totalPrice += itemTotal;
         totalQuantityString += quantity;
         const totalFee = totalQuantity * totalPrice;
         totalPriceString += totalFee;
+
         const dataRow = sheet.addRow([
           index + 1,
           roomCategory?.name || 'N/A', // Tên loại phòng
@@ -233,7 +249,11 @@ export const getAllOrderRoomsByExcel = async (req, res) => {
         ]);
         applyBorderToRow(dataRow);
       });
+
       //console.log('totalQuantityString: ', totalQuantityString);
+
+
+
       // ====== Dòng "Tổng" ======
       const totalRow = sheet.addRow([
         'Tổng:',

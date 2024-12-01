@@ -72,9 +72,11 @@ const BookingPage = () => {
                         state: {
                             bookingId: createdBookingId,
                             note: `${staff.role} ${staff.fullname} đã tạo đặt phòng`,
-                            user: staff // Truyền cả đối tượng người dùng
+                            user: staff, // Truyền cả đối tượng người dùng
+                            path: "/bookings" // Thêm đường dẫn path
                         }
                     });
+
                 } else {
                     alert('Có lỗi xảy ra khi tạo đặt phòng hoặc dịch vụ. Vui lòng thử lại.');
                     console.log('Đặt phòng và dịch vụ chưa được tạo.');

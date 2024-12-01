@@ -4,7 +4,10 @@
   },
   "name": "Thuê xe máy",
   "price": 120000,
-  "description": "Thuê 1 xe máy 1 ngày"
+  "description": "Thuê 1 xe máy 1 ngày",
+  "updatedAt": {
+    "$date": "2024-11-11T16:11:04.024Z"
+  }
 },
 {
   "_id": {
