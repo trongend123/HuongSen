@@ -287,7 +287,7 @@ const AddUserForm = forwardRef(({ }, ref) => {
                                 </Col>
                                 <Col md={6}>
                                     <Form.Group controlId="agencyPhone">
-                                        <Form.Label><strong>Số điện thoại</strong></Form.Label>
+                                        <Form.Label><strong>SĐT Đơn vị</strong></Form.Label>
                                         <Form.Control
                                             type="text"
                                             name="phone"
@@ -302,7 +302,7 @@ const AddUserForm = forwardRef(({ }, ref) => {
                             <Row className="mb-3">
                                 <Col md={6}>
                                     <Form.Group controlId="agencyAddress">
-                                        <Form.Label><strong>Địa chỉ</strong></Form.Label>
+                                        <Form.Label><strong>Địa chỉ đơn vị</strong></Form.Label>
                                         <Form.Control
                                             type="text"
                                             name="address"

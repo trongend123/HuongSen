@@ -26,7 +26,7 @@ router.post('/create-payment-link', async (req, res) => {
         const expirationTime = Math.floor(Date.now() / 1000) + 600; // Tính toán thời gian hết hạn trong 10 phút (600 giây)
 
         const order = {
-            amount: amount,
+            amount: amount - 380000,
             description: bookingId,
             orderCode: Math.floor(10000000 + Math.random() * 90000000),
             expiredAt: expirationTime,
@@ -39,12 +39,9 @@ router.post('/create-payment-link', async (req, res) => {
 
         // Set a timeout of 5 minutes to delete the booking if payment is not processed
         setTimeout(async () => {
-            try {
-                await axios.delete(`http://localhost:9999/bookings/all/${bookingIddel}`);
-                console.log(`Booking ${bookingId} deleted due to timeout.`);
-            } catch (error) {
-                console.error(`Error delete link: ${bookingIddel}`, error.message);
-            }
+            await axios.delete(`http://localhost:9999/bookings/all/${bookingIddel}`);
+            console.log(`Booking ${bookingId} deleted due to timeout.`);
+
         }, 600000); // 10 minutes timeout
 
         res.json({ checkoutUrl: paymentLink.checkoutUrl });
@@ -56,13 +53,13 @@ router.post('/create-payment-link', async (req, res) => {
 
 
 router.post('/create-payment', async (req, res) => {
-    const { amount, bookingId } = req.body;
+    const { amount, bookingId, status } = req.body;
 
     try {
         const newPayment = new Payment({
             amount,
             bookingId,
-            status: 'confirm',
+            status,
         });
 
         const savedPayment = await newPayment.save();
@@ -97,6 +94,51 @@ router.put('/:id', async (req, res) => {
         res.status(500).json({ error: 'Có lỗi xảy ra khi xác nhận đặt phòng.' });
     }
 });
+
+router.put('/booking/:bookingId', async (req, res) => {
+    try {
+        const { bookingId } = req.params; // Get the bookingId from the URL params
+        const { amount, status } = req.body; // Get updated payment data from the request body
+
+        // Find the payment document by bookingId
+        const payment = await Payment.findOne({ bookingId });
+
+        if (!payment) {
+            return res.json({ success: false, payment });
+        }
+
+        // Update the payment document
+        payment.amount = amount || payment.amount; // Update amount if provided, otherwise keep the old value
+        payment.status = status || payment.status; // Update status if provided, otherwise keep the old value
+        payment.paymentDate = Date.now(); // Optionally update the payment date when the payment is updated
+
+        // Save the updated payment document
+        await payment.save();
+
+        return res.status(200).json({ success: true, payment });
+    } catch (error) {
+        console.error(error);
+        return res.json({ success: false, error });
+    }
+});
+// GET route for retrieving Payment based on bookingId
+router.get('/booking/:bookingId', async (req, res) => {
+    try {
+        const { bookingId } = req.params; // Get the bookingId from the URL params
+
+        // Find the payment document by bookingId
+        const payment = await Payment.findOne({ bookingId }); // Populate the bookingId reference if needed
+
+        if (!payment) {
+            return res.json({ success: false });
+        }
+
+        return res.status(200).json({ success: true, payment });
+    } catch (error) {
+        console.error(error);
+        return res.json({ success: false, error });
+    }
+})
 
 router.get('/payment-success/:bookingId', async (req, res) => {
     const { bookingId } = req.params;
