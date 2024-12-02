@@ -28,11 +28,57 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     });
 
     const handleChange = (e) => {
-        setBookingData({
+        const { name, value } = e.target;
+        const today = new Date();
+        let newErrors = { ...errors };
+
+        // Cập nhật giá trị bookingData trước
+        const updatedBookingData = {
             ...bookingData,
-            [e.target.name]: e.target.value
-        });
-    };
+            [name]: value
+        };
+
+        if (name === "checkin") {
+            const checkinDate = new Date(value);
+            const checkoutDate = new Date(updatedBookingData.checkout);
+
+            if (checkoutDate <= checkinDate) {
+                newErrors.checkout = "Ngày check-out phải sau ngày check-in ít nhất 1 ngày";
+            } else {
+                delete newErrors.checkout;
+            }
+
+            if (checkinDate < today.setHours(0, 0, 0, 0)) {
+                newErrors.checkin = "Ngày check-in không thể là ngày trong quá khứ";
+            } else {
+                delete newErrors.checkin;
+            }
+
+
+        }
+
+        if (name === "checkout") {
+            const checkoutDate = new Date(value);
+            const checkinDate = new Date(updatedBookingData.checkin);
+
+            if (checkoutDate < today.setHours(0, 0, 0, 0)) {
+                newErrors.checkout = "Ngày check-out không thể là ngày trong quá khứ";
+            } else {
+                delete newErrors.checkout;
+            }
+
+            if (checkoutDate <= checkinDate) {
+                newErrors.checkout = "Ngày check-out phải sau ngày check-in ít nhất 1 ngày";
+            } else {
+                delete newErrors.checkout;
+            }
+
+        }
+
+        // Cập nhật lỗi và bookingData
+        setErrors(newErrors);
+        setBookingData(updatedBookingData);
+    }
 
     const calculateTotalAmount = () => {
         let totalRoomAmount = Object.values(roomPrices).reduce((sum, price) => sum + price, 0);
@@ -86,7 +132,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
         // Add validation for note field
         if (bookingData.note.length > 700) {
-            newErrors.note = "Ghi chú không được vượt quá 200 ký tự";
+            newErrors.note = "Ghi chú không được vượt quá 700 ký tự";
         }
 
         setErrors(newErrors);
@@ -131,6 +177,22 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
             // Trigger callback to notify booking creation
             onBookingCreated(bookingId);
+            setBookingData({
+                taxId: null,
+                staffId: null,
+                status: 'Đã đặt',
+                payment: 0,
+                price: 0,
+                checkin: today,
+                checkout: tomorrow,
+                note: '',
+                humans: 1,
+                contract: ''
+            });
+            setErrors({});
+            setErrorMessage('');
+            setRoomPrices({});
+            setTotalAmount(0);
             return bookingId;
         } catch (error) {
             console.error('Error creating booking:', error);
@@ -289,6 +351,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                                         value={bookingData.note}
                                         onChange={handleChange}
                                         isInvalid={!!errors.note}
+                                        disabled={Object.keys(errors).length > 0}
                                     />
                                     <Form.Control.Feedback type="invalid">{errors.note}</Form.Control.Feedback>
                                 </Form.Group>

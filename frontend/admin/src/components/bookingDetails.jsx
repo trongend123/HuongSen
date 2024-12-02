@@ -171,14 +171,14 @@ const BookingDetails = () => {
     const handleCheckout = async () => {
         setIsUpdating(true);
         try {
-            const updatePay = await axios.put(`http://localhost:9999/payment/booking/${bookingId}`, { amount: orderRooms[0].bookingId.price, status: 'confirm' });
-            if (!updatePay.data.success) {
-                const paymentResponse = await axios.post(`http://localhost:9999/payment/create-payment`, {
-                    amount: orderRooms[0].bookingId.price,
-                    bookingId: bookingId,
-                    status: 'confirm'
-                });
-            }
+            // const updatePay = await axios.put(`http://localhost:9999/payment/booking/${bookingId}`, { amount: orderRooms[0].bookingId.price, status: 'confirm' });
+            // if (!updatePay.data.success) {
+            //     const paymentResponse = await axios.post(`http://localhost:9999/payment/create-payment`, {
+            //         amount: orderRooms[0].bookingId.price,
+            //         bookingId: bookingId,
+            //         status: 'confirm'
+            //     });
+            // }
             await axios.put(`http://localhost:9999/bookings/${bookingId}`, { status: 'Đã hoàn thành', payment: orderRooms[0].bookingId.price });
 
             for (const room of Rooms) {
@@ -517,9 +517,9 @@ const BookingDetails = () => {
                 )}
                 <Col>
                     <p><strong>Ngày tạo đơn:</strong> {format(new Date(orderRooms[0].createdAt), 'dd-MM-yyyy')}</p>
-                    <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p>
+                    <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 0}</p>
                     <p><strong>Trạng thái:</strong> {orderRooms[0].bookingId?.status || 'N/A'}</p>
-                    <p><strong>Đã thanh toán:</strong> {orderRooms[0].bookingId?.payment || 'N/A'}</p>
+                    <p><strong>Đã thanh toán:</strong> {orderRooms[0].bookingId?.payment || 0}</p>
                     <p><strong>Còn nợ:</strong> {orderRooms[0].bookingId?.price - orderRooms[0].bookingId?.payment}</p>
                 </Col>
 

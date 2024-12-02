@@ -66,35 +66,6 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
     }, [nights]); // Chạy lại khi nights 
 
 
-    // const handleQuantityChange = (e, roomId) => {
-    //     const value = Math.max(0, Math.min(e.target.value, remainingRooms[roomId] || 0));
-    //     setQuantity({
-    //         ...quantity,
-    //         [roomId]: value
-    //     });
-
-    //     const room = roomCategories.find(room => room._id === roomId);
-    //     const price = room.price * value * nights;
-
-    //     setSelectedRooms(prevSelectedRooms => {
-    //         const updatedRooms = [...prevSelectedRooms];
-    //         const roomIndex = updatedRooms.findIndex(room => room.roomCateId === roomId);
-
-    //         if (roomIndex >= 0) {
-    //             if (value === 0) {
-    //                 updatedRooms.splice(roomIndex, 1);
-    //             } else {
-    //                 updatedRooms[roomIndex].quantity = value;
-    //             }
-    //         } else if (value > 0) {
-    //             updatedRooms.push({ roomCateId: roomId, quantity: value });
-    //         }
-
-    //         return updatedRooms;
-    //     });
-
-    //     onQuantityChange(roomId, value, price);
-    // };
     const handleQuantityChange = (e, roomId) => {
         const value = Math.max(0, Math.min(Number(e.target.value), remainingRooms[roomId] || 0));
         const room = roomCategories.find(r => r._id === roomId);
@@ -203,7 +174,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                                 <Row key={room._id} className="mb-3">
                                     <Col className="col-8">
                                         <Form.Label><strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)</Form.Label>
-                                        <h6 className='text-secondary'>Phòng còn trống: {remainingRoomCount} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
+                                        <h6 className='text-secondary'> Phòng còn trống: {Math.max(0, remainingRoomCount)} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
                                     </Col>
                                     <Col className="col-2 d-flex align-items-center">
                                         <Form.Control

@@ -75,12 +75,12 @@ class HistoryController {
             const { bookingId } = req.params;
             const histories = await historyRepository.getHistoriesByBookingId(bookingId);
             if (!histories || histories.length === 0) {
-                return res.status(404).json({ message: 'No histories found for this booking' });
+                return res.json({ success: false });
             }
             res.status(200).json(histories);
         } catch (error) {
             console.error('Error fetching histories by bookingId:', error);
-            res.status(500).json({ message: 'Internal Server Error' });
+            es.json({ success: false });
         }
     }
 

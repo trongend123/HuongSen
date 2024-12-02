@@ -32,17 +32,23 @@ const PaymentSuccess = () => {
 
       try {
         // Tạo thanh toán
-        const PayResponse = await axios.get(`http://localhost:9999/payment/booking/${bookingId}`);
-        console.log(PayResponse.data.success);
-        if (!PayResponse.data.success) {
-          const paymentResponse = await axios.post(`http://localhost:9999/payment/create-payment`, {
-            amount: booking.price,
-            bookingId: booking._id,
-            pending: 'pending'
-          });
+        // const PayResponse = await axios.get(`http://localhost:9999/payment/booking/${bookingId}`);
+        // console.log(PayResponse.data.success);
+        // if (!PayResponse.data.success) {
+        //   const paymentResponse = await axios.post(`http://localhost:9999/payment/create-payment`, {
+        //     amount: booking.price,
+        //     bookingId: booking._id,
+        //     pending: 'pending'
+        //   });
+        //   await axios.put(`http://localhost:9999/bookings/${bookingId}`, { payment: booking.price });
+        //   setMessage(paymentResponse.data.message || 'Thanh toán được tạo thành công.');
+        // } else { setMessage('<h1>Thanh toán được tạo thành công.</h1>'); }
+        const History = await axios.get(`http://localhost:9999/histories/booking/${bookingId}`);
+        if (!History.data.success && History.data.success !== undefined) {
           await axios.put(`http://localhost:9999/bookings/${bookingId}`, { payment: booking.price });
-          setMessage(paymentResponse.data.message || 'Thanh toán được tạo thành công.');
-        } else { setMessage('<h1>Thanh toán được tạo thành công.</h1>'); }
+          await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, note: 'khách hàng đã đặt phòng ' });
+        }
+        setMessage('<h1>Thanh toán được tạo thành công.</h1>')
 
         // Xác nhận đặt phòng
         const response = await axios.get(`http://localhost:9999/payment/payment-success/${booking._id}`);

@@ -24,38 +24,78 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
         const newErrors = {};
         const today = new Date();
 
+        // Kiểm tra loại giấy tờ và mã định danh
         if (!identifycationData.name) {
-            newErrors.name = "Loại giấy tờ định danh là bắt buộc";
-        }
-
-        const codePattern = /^[A-Za-z0-9]+$/;
-        if (!identifycationData.code.trim() || !codePattern.test(identifycationData.code)) {
-            newErrors.code = "Mã định danh chỉ được chứa chữ cái và số";
-        }
-
-        const identifycationStartDate = new Date(identifycationData.dateStart);
-        const identifycationEndDate = new Date(identifycationData.dateEnd);
-        if (!identifycationData.dateStart) {
-            newErrors.dateStart = "Ngày cấp là bắt buộc";
-        } else if (identifycationStartDate > today) {
-            newErrors.dateStart = "Ngày cấp không thể sau ngày hôm nay";
-        }
-
-        if (!identifycationData.dateEnd) {
-            newErrors.dateEnd = "Ngày hết hạn là bắt buộc";
+            newErrors.name = "Loại giấy tờ là bắt buộc.";
         } else {
-            const fiveYearsLater = new Date(identifycationStartDate);
-            fiveYearsLater.setFullYear(fiveYearsLater.getFullYear() + 5);
-            if (identifycationEndDate <= identifycationStartDate) {
-                newErrors.dateEnd = "Ngày hết hạn phải sau ngày cấp";
-            } else if (identifycationEndDate < fiveYearsLater) {
-                newErrors.dateEnd = "Ngày hết hạn phải cách ngày cấp ít nhất 5 năm";
+            const identifycationStartDate = new Date(identifycationData.dateStart);
+            const identifycationEndDate = new Date(identifycationData.dateEnd);
+
+            switch (identifycationData.name) {
+                case "Căn Cước Công Dân":
+                    if (!identifycationData.code || !/^[0-9]{12}$/.test(identifycationData.code)) {
+                        newErrors.code = "Mã Căn Cước Công Dân phải gồm 12 chữ số.";
+                    }
+
+                    // Kiểm tra ngày hết hạn cho Căn Cước Công Dân
+                    if (!identifycationData.dateEnd) {
+                        newErrors.dateEnd = "Ngày hết hạn là bắt buộc.";
+                    } else {
+                        const fiveYearsLater = new Date(identifycationStartDate);
+                        fiveYearsLater.setFullYear(fiveYearsLater.getFullYear() + 5);
+
+                        if (identifycationEndDate <= identifycationStartDate) {
+                            newErrors.dateEnd = "Ngày hết hạn phải sau ngày cấp.";
+                        } else if (identifycationEndDate.getTime() !== fiveYearsLater.getTime()) {
+                            newErrors.dateEnd = "Ngày hết hạn phải cách ngày cấp đúng 5 năm.";
+                        }
+                    }
+                    break;
+
+                case "Giấy Phép Lái Xe":
+                case "Hộ Chiếu":
+                    if (!identifycationData.code) {
+                        if (identifycationData.name === "Giấy Phép Lái Xe" && !/^[0-9]{12}$/.test(identifycationData.code)) {
+                            newErrors.code = "Mã Giấy Phép Lái Xe phải gồm 12 chữ số.";
+                        } else if (identifycationData.name === "Hộ Chiếu" && !/^[A-Z][0-9]{7}$/.test(identifycationData.code)) {
+                            newErrors.code = "Mã Hộ Chiếu phải gồm 8 ký tự, bắt đầu bằng chữ cái in hoa, tiếp theo là 7 số.";
+                        }
+                    }
+
+                    // Kiểm tra ngày hết hạn cho Giấy Phép Lái Xe và Hộ Chiếu
+                    if (!identifycationData.dateEnd) {
+                        newErrors.dateEnd = "Ngày hết hạn là bắt buộc.";
+                    } else {
+                        const fiveYearsLater = new Date(identifycationStartDate);
+                        const tenYearsLater = new Date(identifycationStartDate);
+                        fiveYearsLater.setFullYear(fiveYearsLater.getFullYear() + 5);
+                        tenYearsLater.setFullYear(tenYearsLater.getFullYear() + 10);
+
+                        if (identifycationEndDate <= identifycationStartDate) {
+                            newErrors.dateEnd = "Ngày hết hạn phải sau ngày cấp.";
+                        } else if (identifycationEndDate !== fiveYearsLater && identifycationEndDate !== tenYearsLater) {
+                            newErrors.dateEnd = "Ngày hết hạn phải cách ngày cấp 5 năm hoặc 10 năm. (Vô hạn = 10 năm)";
+                        }
+                    }
+                    break;
+
+                default:
+                    newErrors.name = "Loại giấy tờ không hợp lệ.";
             }
         }
 
+        // Kiểm tra ngày cấp
+        const identifycationStartDate = new Date(identifycationData.dateStart);
+        if (!identifycationData.dateStart) {
+            newErrors.dateStart = "Ngày cấp là bắt buộc.";
+        } else if (identifycationStartDate > today) {
+            newErrors.dateStart = "Ngày cấp không thể sau ngày hôm nay.";
+        }
+
+        // Kiểm tra nơi cấp
         const locationPattern = /^[A-Za-zÀ-ÿ0-9\s,.-]+$/;
         if (!identifycationData.location.trim() || !locationPattern.test(identifycationData.location)) {
-            newErrors.location = "Địa chỉ chỉ được chứa chữ cái, số và các ký tự như ',', '.', và '-'";
+            newErrors.location = "Địa chỉ chỉ được chứa chữ cái, số và các ký tự như ',', '.', và '-'.";
         }
 
         setErrors(newErrors);
@@ -120,7 +160,7 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
                                     <option value="">Chọn loại giấy tờ</option>
                                     <option value="Căn Cước Công Dân">Căn Cước Công Dân</option>
                                     <option value="Hộ Chiếu">Hộ Chiếu</option>
-                                    <option value="Bằng Lái Xe">Bằng Lái Xe</option>
+                                    <option value="Giấy Phép Lái Xe">Giấy Phép Lái Xe</option>
                                     <option value="Hộ khẩu">Hộ khẩu</option>
                                 </Form.Select>
                                 <Form.Control.Feedback type='invalid'>

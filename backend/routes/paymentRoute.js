@@ -39,8 +39,14 @@ router.post('/create-payment-link', async (req, res) => {
 
         // Set a timeout of 5 minutes to delete the booking if payment is not processed
         setTimeout(async () => {
-            await axios.delete(`http://localhost:9999/bookings/all/${bookingIddel}`);
-            console.log(`Booking ${bookingId} deleted due to timeout.`);
+            const response = await axios.get(`http://localhost:9999/bookings/${bookingId}`);
+            if (response.data.payment === 0 || response.data.payment === undefined) {
+                await axios.delete(`http://localhost:9999/bookings/all/${bookingIddel}`);
+                console.log(`Booking ${bookingId} deleted due to timeout.`);
+            }
+            else {
+                console.log(`Booking ${bookingId} not  deleted .`);
+            }
 
         }, 600000); // 10 minutes timeout
 
