@@ -143,6 +143,15 @@ const BookingDetails = () => {
                 toast.success('Thông tin dịch vụ và giá đơn đã được cập nhật.', {
                     position: "top-right",
                 });
+                const newNotification = { content: "Lễ tân đã cập nhật đơn đặt phòng." };
+                axios
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                console.log(response.data);
+                })
+      .catch((error) => {
+        console.error(error);
+      });
                 fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
             }
             else {
@@ -179,7 +188,16 @@ const BookingDetails = () => {
                     bookingId: { ...orderRoom.bookingId, status: 'Đã hoàn thành' },
                 }))
             );
+
+            const newNotification = { content: "Đơn phòng đã hoàn thành" };
+                axios
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                console.log(response.data);
+                })
+
             await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã check out cho khách` });
+
 
             toast.success('Check out thành Công', {
                 position: "top-right",
