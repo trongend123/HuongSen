@@ -85,10 +85,22 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
                 throw new Error(`Server error: ${response.status}`);
             }
 
+
             // Parse the response
             const responseData = await response.json();
             console.log("Identifycation created successfully!");
 
+            // Reset form state
+            setIdentifycationData({
+                name: '',
+                code: '',
+                dateStart: '',
+                dateEnd: '',
+                location: '',
+                customerID: null
+            });
+
+            setErrors({}); // Clear errors
             // Return the created identifycation ID
             return responseData._id;
         } catch (error) {
