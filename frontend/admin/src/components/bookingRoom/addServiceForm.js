@@ -164,6 +164,15 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
             // Sau khi thêm dịch vụ thành công, clear orderServicesData
             setOrderServicesData([]);
             console.log("Thêm dịch vụ và ghi chú thành công!");
+            const newNotification = { content: "Lễ tân đã cập nhật dịch vụ" };
+   axios
+      .post("http://localhost:9999/chats/send", newNotification)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
             // Tính lại tổng giá dịch vụ sau khi clear
             calculateTotalAmount();
             return true

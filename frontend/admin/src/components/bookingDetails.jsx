@@ -194,6 +194,14 @@ const BookingDetails = () => {
                     bookingId: { ...orderRoom.bookingId, status: 'Đã hoàn thành' },
                 }))
             );
+
+            const newNotification = { content: "Đơn phòng đã hoàn thành" };
+            axios
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                    console.log(response.data);
+                })
+
             await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã check out cho khách` });
             fetchBookingDetails()
             toast.success('Check out thành Công', {

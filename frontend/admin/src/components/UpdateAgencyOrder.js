@@ -164,7 +164,12 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
                     returnRoom: returnRoom,
                 });
             });
-
+            const newNotification = { content: "Đơn đặt phòng của khách đoàn đã được cập nhật." };
+            axios
+            .post("http://localhost:9999/chats/send", newNotification)
+            .then((response) => {
+            console.log(response.data);
+            })
             await Promise.all(orderRoomPromises);
             // Reset form to default state
             resetForm();
