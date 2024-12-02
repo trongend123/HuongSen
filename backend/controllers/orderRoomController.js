@@ -199,7 +199,7 @@ export const getAllOrderRoomsByExcel = async (req, res) => {
         'Tổng:',
         '',
         '',
-        totalQuantity,
+        '',
         totalRoomFee.toLocaleString(),
         '',
         '',
