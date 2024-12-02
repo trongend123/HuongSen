@@ -354,20 +354,23 @@ export const getAllOrderRoomsByExcel = async (req, res) => {
         try {
           fs.unlinkSync(filePath); // Xóa file cũ nếu tồn tại
         } catch (error) {
-          console.error('File đang được mở hoặc sử dụng bởi chương trình khác.');
+          console.log(`File đang được mở hoặc sử dụng bởi chương trình khác: ${filePath}`);
           return res.status(400).json({
-            message: `Không thể ghi đè file. Vui lòng đóng file: Báo-cáo-doanh-thu-Tháng-${month}-${year}.xlsx và thử lại.`,
+            message: `Không thể ghi đè file. Vui lòng đóng file: Bao-cao-doanh-thu-Thang-${month}-${year}.xlsx và thử lại.`,
           });
         }
       }
-
+  
       await workbook.xlsx.writeFile(filePath);
       console.log('File Excel đã được tạo:', filePath);
-      res.status(200).json({ message: 'Xuất file thành công', filePath });
+  
+      return res.status(200).json({ message: 'Xuất file thành công', filePath });
     }
   } catch (error) {
     console.error('Lỗi khi tạo file Excel:', error);
-    res.status(500).json({ message: 'Lỗi server' });
+    if (!res.headersSent) {
+      return res.status(500).json({ message: 'Lỗi server', error: error.message });
+    }
   }
 };
 
