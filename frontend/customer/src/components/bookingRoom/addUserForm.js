@@ -38,19 +38,20 @@ const AddUserForm = forwardRef(({ }, ref) => {
 
     const validateForm = () => {
         const newErrors = {};
-        const namePattern = /^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶèéêẽếềệỉĩìíòóôõơợụùúỷỹýỵ\s]+$/;
+        const namePattern = /^[A-Za-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+(\s[A-Za-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+)*$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phonePattern = /^(03|05|07|08|09)\d{8,9}$/;
         const today = new Date();
 
-        if (!customerData.fullname.trim() || !namePattern.test(customerData.fullname)) {
-            newErrors.fullname = "Họ và tên chỉ được chứa chữ cái";
+        // Customer validation
+        if (!customerData.fullname.trim() || !namePattern.test(customerData.fullname.toLowerCase())) {
+            newErrors.fullname = "Họ và tên chỉ được chứa chữ cái và chỉ có một dấu cách giữa các từ";
         }
 
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(customerData.email)) {
             newErrors.email = "Vui lòng nhập email hợp lệ";
         }
 
-        const phonePattern = /^(03|05|07|08|09)\d{8,9}$/;
         if (!phonePattern.test(customerData.phone)) {
             newErrors.phone = "Vui lòng nhập số điện thoại hợp lệ";
         }
@@ -73,9 +74,34 @@ const AddUserForm = forwardRef(({ }, ref) => {
             newErrors.address = "Vui lòng nhập địa chỉ";
         }
 
+        // Group booking validation (only if bookingType is 'Group')
+        if (bookingType === 'Group') {
+            // Agency validation
+            if (!agencyData.name.trim()) {
+                newErrors.agencyName = "Tên đơn vị là bắt buộc";
+            }
+
+            if (!phonePattern.test(agencyData.phone)) {
+                newErrors.agencyPhone = "Số điện thoại đơn vị không hợp lệ";
+            }
+
+            if (!agencyData.address.trim()) {
+                newErrors.agencyAddress = "Địa chỉ đơn vị là bắt buộc";
+            }
+
+            if (!agencyData.stk.trim()) {
+                newErrors.agencyStk = "Số tài khoản ngân hàng là bắt buộc";
+            }
+
+            if (!agencyData.code.trim()) {
+                newErrors.agencyCode = "Mã đơn vị là bắt buộc";
+            }
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+
 
     const createUser = async () => {
         if (!validateForm()) {
@@ -281,36 +307,45 @@ const AddUserForm = forwardRef(({ }, ref) => {
                                             value={agencyData.name}
                                             onChange={handleAgencyChange}
                                             placeholder="Nhập tên đơn vị"
-                                            required
+                                            isInvalid={!!errors.agencyName}
                                         />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.agencyName}
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                                 <Col md={6}>
                                     <Form.Group controlId="agencyPhone">
-                                        <Form.Label><strong>Số điện thoại</strong></Form.Label>
+                                        <Form.Label><strong>SĐT Đơn vị</strong></Form.Label>
                                         <Form.Control
                                             type="text"
                                             name="phone"
                                             value={agencyData.phone}
                                             onChange={handleAgencyChange}
                                             placeholder="Nhập số điện thoại"
-                                            required
+                                            isInvalid={!!errors.agencyPhone}
                                         />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.agencyPhone}
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                             </Row>
                             <Row className="mb-3">
                                 <Col md={6}>
                                     <Form.Group controlId="agencyAddress">
-                                        <Form.Label><strong>Địa chỉ</strong></Form.Label>
+                                        <Form.Label><strong>Địa chỉ đơn vị</strong></Form.Label>
                                         <Form.Control
                                             type="text"
                                             name="address"
                                             value={agencyData.address}
                                             onChange={handleAgencyChange}
                                             placeholder="Nhập địa chỉ"
-                                            required
+                                            isInvalid={!!errors.agencyAddress}
                                         />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.agencyAddress}
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                                 <Col md={6}>
@@ -322,8 +357,11 @@ const AddUserForm = forwardRef(({ }, ref) => {
                                             value={agencyData.stk}
                                             onChange={handleAgencyChange}
                                             placeholder="Nhập ngân hàng + STK"
-                                            required
+                                            isInvalid={!!errors.agencyStk}
                                         />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.agencyStk}
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -337,8 +375,11 @@ const AddUserForm = forwardRef(({ }, ref) => {
                                             value={agencyData.code}
                                             onChange={handleAgencyChange}
                                             placeholder="Nhập mã đơn vị"
-                                            required
+                                            isInvalid={!!errors.agencyCode}
                                         />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.agencyCode}
+                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                             </Row>

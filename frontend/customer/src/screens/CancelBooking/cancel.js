@@ -52,43 +52,37 @@ const PaymentCancel = () => {
     fetchBooking();
   }, [bookingId]);
 
-  // useEffect(() => {
-  //   const createCancel = async () => {
-  //     if (!booking) return;
+  useEffect(() => {
+    const createCancel = async () => {
+      if (!booking) return;
 
-  //     console.log("Current booking status before payment:", booking.status); // Log trạng thái hiện tại
+      console.log("Current booking status before payment:", booking.status); // Log trạng thái hiện tại
 
-  //     try {
+      try {
 
-  //       // if (booking.status === 'pending' || booking.status === 'confirmed') {
-  //       if (booking.status !== null) {
-  //         const updateBookingResponse = await axios.delete(`${BASE_URL}/bookings/${bookingId}`, {
-  //           // status: 'cancelled'
-  //         });
-  //         console.log(booking.status);
-  //         if (updateBookingResponse.data.success) {
-  //           setMessage('Payment Cancelled successfully. Your booking is now cancelled.');
 
-  //         } else {
-  //           setMessage('Failed to update booking status.');
-  //         }
-  //       } else {
-  //         setMessage('Booking status is not valid ');
-  //       }
+        const updateBookingResponse = await axios.delete(`${BASE_URL}/bookings/all/${booking._id}`);
+        if (updateBookingResponse.data) {
+          setMessage(`${booking._id} đã được hủy thành công`);
 
-  //     } catch (error) {
-  //       console.error("Error creating payment:", error.message);
-  //       console.error("API error:", error.response ? error.response.data : error.message);
-  //       setMessage('An error occurred while creating payment');
-  //     }
-  //   };
+        } else {
+          setMessage('có lỗi, đơn đặt không tồn tại');
+        }
 
-  //   createCancel();
-  // }, [booking]);
+
+      } catch (error) {
+        console.error("Error creating payment:", error.message);
+        console.error("API error:", error.response ? error.response.data : error.message);
+        setMessage('Có vấn đề xảy ra khi hủy đơn');
+      }
+    };
+
+    createCancel();
+  }, [booking]);
   return (
     <div style={containerStyle}>
       <h1 style={headingStyle}>{message}{ }</h1>
-      <p style={paragraphStyle}>Your booking has not been confirmed.</p>
+
     </div>
   );
 };

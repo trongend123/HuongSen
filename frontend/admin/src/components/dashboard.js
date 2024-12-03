@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
+import { Card, Container, Row, Col, Form, Button, Table, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
@@ -14,6 +14,7 @@ const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedMonth, setSelectedMonth] = useState(''); // Trạng thái để lưu tháng được chọn
+  const [message, setMessage] = useState("");
 
 
   useEffect(() => {
@@ -61,7 +62,7 @@ const Dashboard = () => {
         const updatedDate = new Date(order.updatedAt);
         if (updatedDate.getFullYear() === year) {
           const formattedMonth = format(updatedDate, 'MM/yyyy'); // Group by month
-  
+
           if (!acc[formattedMonth]) {
             acc[formattedMonth] = {
               month: formattedMonth,
@@ -70,7 +71,7 @@ const Dashboard = () => {
               humans: 0,
             };
           }
-  
+
           acc[formattedMonth].quantity += order.quantity || 0;
           acc[formattedMonth].price += order.price || 0;
           acc[formattedMonth].humans += order.humans || 0;
@@ -78,7 +79,7 @@ const Dashboard = () => {
       }
       return acc;
     }, {});
-  
+
     // Ensure all months are present
     for (let i = 0; i < 12; i++) {
       const month = format(new Date(year, i), 'MM/yyyy'); // Format as MM/yyyy
@@ -91,25 +92,25 @@ const Dashboard = () => {
         };
       }
     }
-  
+
     return Object.values(aggregated).sort((a, b) => {
       const dateA = new Date(a.month.split('/').reverse().join('-'));
       const dateB = new Date(b.month.split('/').reverse().join('-'));
       return dateA - dateB; // Ascending order
     });
   };
-  
+
   // Filter data and set the year
   const selectedYear = 2024; // Replace with dynamic year selection if needed
   const aggregatedOrderDataByMonth = aggregateDataByMonth(filteredOrderData, selectedYear);
   const aggregatedBookingsByMonth = aggregateDataByMonth(uniqueBookings, selectedYear);
-  
+
   // Chart labels and data
   const monthLabels = aggregatedOrderDataByMonth.map((item) => item.month);
   const monthlyBookingsData = aggregatedOrderDataByMonth.map((item) => item.quantity);
   const monthlyRevenueData = aggregatedBookingsByMonth.map((item) => item.price);
   const monthlyHumansData = aggregatedBookingsByMonth.map((item) => item.humans);
-  
+
   const bookingsChartData = {
     labels: monthLabels,
     datasets: [
@@ -121,7 +122,7 @@ const Dashboard = () => {
       },
     ],
   };
-  
+
   const revenueChartData = {
     labels: monthLabels,
     datasets: [
@@ -133,7 +134,7 @@ const Dashboard = () => {
       },
     ],
   };
-  
+
   const humansChartData = {
     labels: monthLabels,
     datasets: [
@@ -151,7 +152,7 @@ const Dashboard = () => {
         const updatedDate = new Date(order.updatedAt);
         if (updatedDate.getFullYear() === year) {
           const formattedDate = format(updatedDate, 'dd/MM/yyyy'); // Group by day
-  
+
           if (!acc[formattedDate]) {
             acc[formattedDate] = {
               date: formattedDate,
@@ -160,7 +161,7 @@ const Dashboard = () => {
               humans: 0,
             };
           }
-  
+
           acc[formattedDate].quantity += order.quantity || 0;
           acc[formattedDate].price += order.price || 0;
           acc[formattedDate].humans += order.humans || 0;
@@ -168,23 +169,23 @@ const Dashboard = () => {
       }
       return acc;
     }, {});
-  
+
     return Object.values(aggregated).sort((a, b) => {
       const dateA = new Date(a.date.split('/').reverse().join('-')); // Convert 'dd/MM/yyyy' to 'yyyy-MM-dd'
       const dateB = new Date(b.date.split('/').reverse().join('-'));
       return dateA - dateB; // Ascending order
     });
   };
-  
+
   const aggregatedOrderDataByDay = aggregateDataByDay(filteredOrderData, selectedYear);
   const aggregatedBookingsByDay = aggregateDataByDay(uniqueBookings, selectedYear);
-  
+
   const aggregatedOrderDataByMonthWithDays = aggregatedOrderDataByDay.filter(item => {
     if (!selectedMonth) return true; // Hiển thị tất cả nếu không chọn tháng
     const [day, month, year] = item.date.split('/');
     return `${month}/${year}` === selectedMonth; // Lọc theo định dạng MM/yyyy
   });
-  
+
   const aggregatedBookingsByMonthWithDays = aggregatedBookingsByDay.filter(item => {
     if (!selectedMonth) return true; // Hiển thị tất cả nếu không chọn tháng
     const [day, month, year] = item.date.split('/');
@@ -195,10 +196,23 @@ const Dashboard = () => {
   const dailyRevenueData = aggregatedBookingsByMonthWithDays.map((item) => item.price);
   const dailyHumansData = aggregatedBookingsByMonthWithDays.map((item) => item.humans);
   console.log(dayLabels, dailyBookingsData, dailyRevenueData, dailyHumansData);
-  
+
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const handleExport = async () => {
+    try {
+      const response = await axios.get("http://localhost:9999/orderRooms/excel");
+      if (response.data.message) {
+        console.log(response.data.message);
+        setMessage(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error exporting Excel:", error);
+      setMessage("Có lỗi xảy ra khi xuất file.");
+    }
   };
   return (
     <Container>
@@ -218,21 +232,7 @@ const Dashboard = () => {
           </Form.Control>
         </Form.Group>
       )}
-      <Form.Group controlId="monthSelect">
-  <Form.Label>Chọn tháng</Form.Label>
-  <Form.Control
-    as="select"
-    value={selectedMonth}
-    onChange={(e) => setSelectedMonth(e.target.value)}
-  >
-    <option value="">Tất cả các tháng</option>
-    {aggregatedOrderDataByMonth.map((item, index) => (
-      <option key={index} value={item.month}>
-        {item.month} {/* Định dạng MM/yyyy */}
-      </option>
-    ))}
-  </Form.Control>
-</Form.Group>
+
       <Row className="mt-4">
         <Col lg={4}>
           <Card className="chart">
@@ -253,32 +253,59 @@ const Dashboard = () => {
           </Card>
         </Col>
       </Row>
+
       <Row className="mt-4">
-  <Col>
-    <h4 className="text-center">Dữ liệu hàng ngày</h4>
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Ngày</th>
-          <th>Tổng số phòng</th>
-          <th>Tổng doanh thu</th>
-          <th>Tổng số khách hàng</th>
-        </tr>
-      </thead>
-      <tbody>
-      
-      {aggregatedOrderDataByMonthWithDays.map((item, index)  => (
-          <tr>
-            <td>{item.date}</td>
-            <td>{item.quantity}</td>
-            <td>{aggregatedBookingsByMonthWithDays[index].price}</td>
-            <td>{aggregatedBookingsByMonthWithDays[index].humans}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
-  </Col>
-</Row>
+        <Col>
+          <Row>
+
+            <h4 className="text-center">Dữ liệu hàng ngày<span>
+              <button className="btn btn-primary mx-3" onClick={handleExport}>
+                Xuất Excel
+              </button>
+            </span>
+            </h4>
+
+            {message && <Alert className="mt-2 text-success text-center">{message}</Alert>}
+          </Row>
+
+          <Form.Group controlId="monthSelect">
+            <Form.Label>Chọn tháng</Form.Label>
+            <Form.Control
+              as="select"
+              value={selectedMonth}
+              onChange={(e) => setSelectedMonth(e.target.value)}
+            >
+              <option value="">Tất cả các tháng</option>
+              {aggregatedOrderDataByMonth.map((item, index) => (
+                <option key={index} value={item.month}>
+                  {item.month} {/* Định dạng MM/yyyy */}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Ngày</th>
+                <th>Tổng số phòng</th>
+                <th>Tổng doanh thu</th>
+                <th>Tổng số khách hàng</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {aggregatedOrderDataByMonthWithDays.map((item, index) => (
+                <tr>
+                  <td>{item.date}</td>
+                  <td>{item.quantity}</td>
+                  <td>{aggregatedBookingsByMonthWithDays[index].price}</td>
+                  <td>{aggregatedBookingsByMonthWithDays[index].humans}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
 
     </Container>
   );

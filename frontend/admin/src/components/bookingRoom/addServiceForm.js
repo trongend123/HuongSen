@@ -186,6 +186,18 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
         addService,
     }));
 
+    const handleChange = (e) => {
+        const selectedDate = new Date(e.target.value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Đặt giờ phút giây về 0 để so sánh chính xác
+
+        if (selectedDate < today) {
+            setFormError("Không được chọn ngày trong quá khứ.");
+        } else {
+            setFormError('');
+        }
+        setServiceDate(e.target.value);
+    };
     return (
         <Card className="mb-4">
             <Card.Header className='text-bg-info'>
@@ -256,7 +268,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                                 <Form.Control
                                     type="date"
                                     value={serviceDate}
-                                    onChange={(e) => setServiceDate(e.target.value)}
+                                    onChange={handleChange} // Gọi handleChange khi thay đổi giá trị
                                 />
                             </Form.Group>
                         </Col>
@@ -301,7 +313,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                                     <Form.Control
                                         type="date"
                                         value={serviceDate}
-                                        onChange={(e) => setServiceDate(e.target.value)}
+                                        onChange={handleChange} // Gọi handleChange khi thay đổi giá trị
                                     />
                                 </Form.Group>
                             </Col>
@@ -335,7 +347,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                 <Button
                     className="mt-3"
                     onClick={handleAddService}
-                    disabled={!selectedService || serviceQuantity <= 0}
+                    disabled={!selectedService || serviceQuantity <= 0 || !!formError}
                 >
                     {selectedServicePrice !== 1000 ? "Thêm dịch vụ" : "Thêm phụ phí"}
                 </Button>

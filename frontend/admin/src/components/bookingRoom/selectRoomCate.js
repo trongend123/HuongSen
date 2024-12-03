@@ -52,15 +52,32 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
         fetchRoomData();
     }, [checkin, checkout, onTotalRoomsRemaining, locationId]);
 
-    const handleQuantityChange = (e, roomId) => {
-        const value = Math.max(0, Math.min(e.target.value, remainingRooms[roomId] || 0));
-        setQuantity({
-            ...quantity,
-            [roomId]: value
-        });
 
-        const room = roomCategories.find(room => room._id === roomId);
-        const price = room.price * value * nights;
+
+    useEffect(() => {
+        // Cập nhật giá trị price cho tất cả các phòng khi nights thay đổi
+        Object.keys(quantity).forEach(roomId => {
+            const room = roomCategories.find(r => r._id === roomId);
+            if (room) {
+                const newPrice = room.price * quantity[roomId] * nights;
+                onQuantityChange(roomId, quantity[roomId], newPrice);
+            }
+        });
+    }, [nights]); // Chạy lại khi nights 
+
+
+    const handleQuantityChange = (e, roomId) => {
+        const value = Math.max(0, Math.min(Number(e.target.value), remainingRooms[roomId] || 0));
+        const room = roomCategories.find(r => r._id === roomId);
+        const price = room ? room.price * value * nights : 0;
+
+        setQuantity(prevQuantity => {
+            if (prevQuantity[roomId] === value) return prevQuantity; // Không thay đổi gì
+            return {
+                ...prevQuantity,
+                [roomId]: value,
+            };
+        });
 
         setSelectedRooms(prevSelectedRooms => {
             const updatedRooms = [...prevSelectedRooms];
@@ -71,9 +88,10 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                     updatedRooms.splice(roomIndex, 1);
                 } else {
                     updatedRooms[roomIndex].quantity = value;
+                    updatedRooms[roomIndex].price = price; // Cập nhật giá trị mới
                 }
             } else if (value > 0) {
-                updatedRooms.push({ roomCateId: roomId, quantity: value });
+                updatedRooms.push({ roomCateId: roomId, quantity: value, price });
             }
 
             return updatedRooms;
@@ -156,7 +174,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
                                 <Row key={room._id} className="mb-3">
                                     <Col className="col-8">
                                         <Form.Label><strong>{room.name}</strong> - (giá 1 đêm: {room.price} VND)</Form.Label>
-                                        <h6 className='text-secondary'>Phòng còn trống: {remainingRoomCount} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
+                                        <h6 className='text-secondary'> Phòng còn trống: {Math.max(0, remainingRoomCount)} <br />Tổng chi phí {qty} phòng: {totalRoomPrice} VND</h6>
                                     </Col>
                                     <Col className="col-2 d-flex align-items-center">
                                         <Form.Control

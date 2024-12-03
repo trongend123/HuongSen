@@ -284,7 +284,7 @@ export const getAllOrderRoomsByExcel = async (req, res) => {
         fs.unlinkSync(filePath); // Xóa file cũ nếu tồn tại
       } catch (error) {
         console.log(`File đang được mở hoặc sử dụng bởi chương trình khác: ${filePath}`);
-        return res.status(400).json({
+        return res.json({
           message: `Không thể ghi đè file. Vui lòng đóng file: Bao-cao-doanh-thu-Thang-${month}-${year}.xlsx và thử lại.`,
         });
       }
@@ -397,10 +397,6 @@ export const getTotalRoomsByCategoryInDateRange = async (req, res) => {
   try {
     const { checkInDate, checkOutDate } = req.query;
 
-    // Kiểm tra nếu thiếu dữ liệu ngày
-    if (!checkInDate || !checkOutDate) {
-      return res.status(400).json({ message: 'Cần cung cấp checkInDate và checkOutDate' });
-    }
 
     // Gọi đến repository để lấy tổng số phòng theo loại trong khoảng thời gian
     const totalRoomsByCategory = await OrderRoomRepository.getTotalByCategoryInDateRange(checkInDate, checkOutDate);

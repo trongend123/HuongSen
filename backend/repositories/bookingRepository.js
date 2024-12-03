@@ -50,11 +50,7 @@ class BookingRepository {
     // Xóa booking và tất cả dữ liệu liên quan
     async deleteBookingWithRelatedData(bookingId) {
         try {
-            // Kiểm tra nếu không có bookingId
-            if (!bookingId) {
-                console.error("No bookingId provided.");
-                return null;
-            }
+
             // Lấy danh sách OrderRoom liên quan đến Booking
             const orderRooms = await OrderRoom.find({ bookingId });
 
@@ -73,15 +69,15 @@ class BookingRepository {
             await BookingHistory.deleteMany({ bookingId });
 
             // Xóa Booking
-            const booking = await Booking.findOneAndDelete({ bookingId });
+            const booking = await Booking.findByIdAndDelete(bookingId);
 
             if (!booking) return null; // Không tìm thấy booking
 
             // Xóa Customer, Agency và Identify nếu cần
             // Nếu có customerId, xóa tất cả dữ liệu liên quan đến customer
             await Agency.deleteMany({ customerId });
-            await Identify.deleteMany({ customerId });
-            await Customer.deleteOne({ customerId }); // Xóa chỉ 1 Customer
+            await Identify.deleteMany({ customerID: customerId });
+            await Customer.findByIdAndDelete(customerId); // Xóa chỉ 1 Customer
 
             return true; // Xóa thành công
         } catch (error) {

@@ -1,5 +1,6 @@
 import Customer from "../models/customer.js";
 import OrderRoom from "../models/orderRoom.js"; // Import mô hình orderRoom
+import Identify from '../models/identifycation.js';
 
 // GET: /customer-accounts
 const getCustomers = async (req, res) => {
@@ -35,10 +36,14 @@ const createCustomer = async (req, res) => {
         // Kiểm tra xem có đơn hàng nào với customerId vừa tạo không
         const ordersCount = await OrderRoom.countDocuments({ customerId: newCustomer._id }).exec();
 
-        // Nếu không có đơn hàng nào, xóa khách hàng
+        // Nếu không có đơn hàng nào, xóa khách hàng và giấy tờ định danh
         if (ordersCount === 0) {
+          // Xóa giấy tờ định danh liên quan đến khách hàng
+          await Identify.deleteMany({ customerID: newCustomer._id });
+          // Xóa khách hàng
           await Customer.deleteOne({ _id: newCustomer._id });
-          console.log(`Customer with ID ${newCustomer._id} has been deleted after 5 seconds.`);
+
+          console.log(`Customer with ID ${newCustomer._id} and related identifications have been deleted after 5 seconds.`);
         } else {
           console.log(`Customer with ID ${newCustomer._id} has existing orders and will not be deleted.`);
         }
@@ -89,10 +94,10 @@ const getCustomerByBookingId = async (req, res) => {
 
     // Step 2: Get the customerId from the first order room (assuming one customer per booking)
     const customerId = orderRooms[0].customerId;
-    
+
     // Step 3: Find the customer by customerId
     const customerAccount = await Customer.findById(customerId);
-    
+
     // If no customer is found
     if (!customerAccount) {
       return res.status(404).json({ message: "Customer not found" });
