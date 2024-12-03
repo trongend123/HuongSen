@@ -214,10 +214,11 @@ const ListBooking = () => {
             onChange={(e) => setStatusFilter(e.target.value)}
           >
             <option value="">Tất cả</option>
-            <option value="In Progress">Đang thực hiện</option>
-            <option value="Request refund">Yêu cầu hoàn tiền</option>
-            <option value="Cancelled">Đã Hủy</option>
-            <option value="Completed">Đã hoàn thành</option>
+            <option value="Đã đặt">Đã đặt</option>
+            <option value="Đã check-in">Đã check-in</option>
+            <option value="Yêu cầu hoàn tiền">Yêu cầu hoàn tiền</option>
+            <option value="Đã hủy">Đã Hủy</option>
+            <option value="Đã hoàn thành">Đã hoàn thành</option>
           </Form.Control>
         </Col>
       </Row>

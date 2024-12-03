@@ -207,7 +207,7 @@ const BookingDetails = () => {
             toast.success('Check out thành Công', {
                 position: "top-right",
             });
-
+            navigate('/bookings')
         } catch (error) {
             console.error('Error updating booking status:', error);
             toast.error('Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại.', {

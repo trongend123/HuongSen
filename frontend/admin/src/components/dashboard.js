@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
+import { Card, Container, Row, Col, Form, Button, Table, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
@@ -14,6 +14,7 @@ const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedMonth, setSelectedMonth] = useState(''); // Trạng thái để lưu tháng được chọn
+  const [message, setMessage] = useState("");
 
 
   useEffect(() => {
@@ -200,6 +201,19 @@ const Dashboard = () => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
+
+  const handleExport = async () => {
+    try {
+      const response = await axios.get("http://localhost:9999/orderRooms/excel");
+      if (response.data.message) {
+        console.log(response.data.message);
+        setMessage(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error exporting Excel:", error);
+      setMessage("Có lỗi xảy ra khi xuất file.");
+    }
+  };
   return (
     <Container>
       <h2 className="text-center my-4">Bảng thống kê</h2>
@@ -242,7 +256,18 @@ const Dashboard = () => {
 
       <Row className="mt-4">
         <Col>
-          <h4 className="text-center">Dữ liệu hàng ngày</h4>
+          <Row>
+
+            <h4 className="text-center">Dữ liệu hàng ngày<span>
+              <button className="btn btn-primary mx-3" onClick={handleExport}>
+                Xuất Excel
+              </button>
+            </span>
+            </h4>
+
+            {message && <Alert className="mt-2 text-success text-center">{message}</Alert>}
+          </Row>
+
           <Form.Group controlId="monthSelect">
             <Form.Label>Chọn tháng</Form.Label>
             <Form.Control
