@@ -119,6 +119,7 @@ const BookingPage = () => {
                         ref={addServiceRef}
                         bookingId={bookingId} // Pass booking ID after it's created
                         onServiceTotalChange={handleServiceTotalChange} // Callback for service total
+                        extrafee={false}
                     />
                 </Col>
 

@@ -62,6 +62,7 @@ const CustomerBookingPage = () => {
                     console.log('Đặt phòng và dịch vụ đã được tạo thành công!');
                     //5. Xử ký payment
                     handlePayment(createdBookingId, agencyID);
+                    navigate('/')
                 } else {
                     toast.error('Có lỗi xảy ra khi tạo đặt phòng hoặc dịch vụ. Vui lòng thử lại.', {
                         position: "top-right",

@@ -231,11 +231,18 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                                 style={{ height: '50px' }}
                                 type="number"
                                 min="1"
+                                max="200"  // Giới hạn số lượng không quá 200
                                 value={serviceQuantity}
                                 onChange={(e) => setServiceQuantity(e.target.value)}
                             />
                         </Form.Group>
                     </Col>
+                    {/* Hiển thị lỗi khi số lượng không hợp lệ */}
+                    {(serviceQuantity <= 0 || serviceQuantity > 200 || isNaN(serviceQuantity)) && (
+                        <div style={{ color: 'red', fontSize: '14px', textAlign: 'right' }}>
+                            Số lượng phải từ 1 đến 200
+                        </div>
+                    )}
                 </Row>
 
                 <Row className="mt-3">
@@ -245,10 +252,18 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                             <Form.Control
                                 as="textarea"
                                 rows={2}
-                                placeholder="Ghi chú cho dịch vụ đang chọn"
+                                placeholder="Ghi chú cho dịch vụ đang chọn (300 ký tự)"
                                 value={serviceNote}
-                                onChange={(e) => setServiceNote(e.target.value)} // Nối giá trị mới với giá trị hiện tại
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (value.length <= 300) {
+                                        setServiceNote(value); // Chỉ cập nhật khi <= 300 ký tự
+                                    }
+                                }}
                             />
+                            <Form.Text className="text-muted">
+                                {serviceNote.length}/300 ký tự
+                            </Form.Text>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -293,7 +308,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                 <Button
                     className="mt-3"
                     onClick={handleAddService}
-                    disabled={!selectedService || serviceQuantity <= 0 || !!formError}
+                    disabled={!selectedService || serviceQuantity <= 0 || serviceQuantity > 200 || !!formError}
                     style={{ backgroundColor: '#81a969', border: 'none', height: '40px', width: '130px' }}
                 >
                     Thêm dịch vụ
@@ -400,7 +415,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                 )}
                 <h6 className="mt-4">{selectedServicePrice !== 1000 ? "Tổng giá dịch vụ:" : "Tổng phụ phí:"} {totalAmount.toLocaleString()} VND</h6>
             </Card.Body>
-        </Card>
+        </Card >
     );
 });
 

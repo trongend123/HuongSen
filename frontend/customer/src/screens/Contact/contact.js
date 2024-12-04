@@ -24,21 +24,21 @@ const Contact = () => {
       <Row>
         {/* Left Column - Contact Information */}
         <Col md={6} className="contact-info mb-4">
-          
+
           <div>
-            <img src={logo} alt="Logo" />
-            <h5>Nhà khách Hương Sen</h5>
-            <p>Address: Số 16 Minh Khai, Hồng Bàng - TP Hải Phòng</p>
-            <p>Lễ tân cơ sở Minh Khai: 022 5374 5766</p>
-            <p>Lễ tân cơ sở Đồ Sơn: 022 5386 6386</p>
-            <p>Lễ tân cơ sở Cát Bà: 022 5388 7381</p>
-            <p>Email: <a href="mailto:huongsen.16minhkhai.hp@gmail.com">huongsen.16minhkhai.hp@gmail.com</a></p>
-            <p>Fanpage: <a href="https://www.facebook.com/huongsen.nhakhach" target="_blank" rel="noopener noreferrer">
+            <img src={logo} alt="Logo" style={{ width: '75%', height: 'auto', display: 'block' }} />
+            <br />
+            <p><strong>Address:</strong> Số 16 Minh Khai, Hồng Bàng - TP Hải Phòng</p>
+            <p><strong>Lễ tân cơ sở Minh Khai:</strong> 022 5374 5766</p>
+            <p><strong>Lễ tân cơ sở Đồ Sơn:</strong> 022 5386 6386</p>
+            <p><strong>Lễ tân cơ sở Cát Bà:</strong> 022 5388 7381</p>
+            <p><strong>Email:</strong> <a href="mailto:huongsen.16minhkhai.hp@gmail.com">huongsen.16minhkhai.hp@gmail.com</a></p>
+            <p><strong>Fanpage:</strong> <a href="https://www.facebook.com/huongsen.nhakhach" target="_blank" rel="noopener noreferrer">
               https://www.facebook.com/huongsen.nhakhach
             </a></p>
           </div>
         </Col>
-        
+
         {/* Right Column - Contact Form */}
         <Col md={6}>
           <p>Nếu bạn có thắc mắc hoặc vấn đề cần giúp đỡ, vui lòng điền vào form bên dưới, chúng tôi sẽ cố gắng giải đáp trong thời gian sớm nhất</p>

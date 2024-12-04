@@ -2,7 +2,7 @@ import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'rea
 import axios from 'axios';
 import { Form, Row, Col, Button, Card } from 'react-bootstrap';
 
-const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => {
+const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee }, ref) => {
     const [otherServices, setOtherServices] = useState([]);
     const [orderServicesData, setOrderServicesData] = useState([]);
     const [selectedService, setSelectedService] = useState("");
@@ -21,15 +21,28 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
             try {
                 const response = await axios.get('http://localhost:9999/otherServices');
                 // Lọc và chỉ lấy các dịch vụ chưa bị xóa (isDeleted === false)
-                const filteredServices = response.data
-                    .filter(service => !service.isDeleted) // Lọc các dịch vụ chưa bị xóa
-                    .map(service => ({
-                        otherServiceId: service._id,
-                        name: service.name,
-                        price: service.price,
-                        description: service.description,
-                    }));
-                setOtherServices(filteredServices);
+                if (!extrafee) {
+                    const filteredServices = response.data
+                        .filter(service => !service.isDeleted && service.price !== 1000) // Lọc các dịch vụ chưa bị xóa
+                        .map(service => ({
+                            otherServiceId: service._id,
+                            name: service.name,
+                            price: service.price,
+                            description: service.description,
+                        }));
+                    setOtherServices(filteredServices);
+                } else {
+                    const filteredServices = response.data
+                        .filter(service => !service.isDeleted) // Lọc các dịch vụ chưa bị xóa
+                        .map(service => ({
+                            otherServiceId: service._id,
+                            name: service.name,
+                            price: service.price,
+                            description: service.description,
+                        }));
+                    setOtherServices(filteredServices);
+                }
+
             } catch (error) {
                 console.error('Lỗi khi lấy danh sách dịch vụ:', error);
             }
@@ -165,14 +178,14 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
             setOrderServicesData([]);
             console.log("Thêm dịch vụ và ghi chú thành công!");
             const newNotification = { content: "Lễ tân đã cập nhật dịch vụ" };
-   axios
-      .post("http://localhost:9999/chats/send", newNotification)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+            axios
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
             // Tính lại tổng giá dịch vụ sau khi clear
             calculateTotalAmount();
             return true
@@ -234,17 +247,54 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
 
                     <Col md={2}>
                         <Form.Group>
-                            {selectedServicePrice !== 1000 ? (<Form.Label>Số lượng</Form.Label>) : (<Form.Label>Chi phí x 1000 (VND)</Form.Label>)}
-                            <Form.Control
-                                className="text-center"
-                                style={{ height: '50px' }}
-                                type="number"
-                                min="1"
-                                value={serviceQuantity}
-                                onChange={(e) => setServiceQuantity(e.target.value)}
-                            />
+                            {selectedServicePrice !== 1000 ? (
+                                <>
+                                    <Form.Label>Số lượng</Form.Label>
+                                    <Form.Control
+                                        className="text-center"
+                                        style={{ height: '50px' }}
+                                        type="number"
+                                        min="1"
+                                        max="200"  // Giới hạn số lượng không quá 200
+                                        value={serviceQuantity}
+                                        onChange={(e) => setServiceQuantity(e.target.value)}
+                                    />
+
+                                </>
+
+                            ) : (
+                                <>
+                                    <Form.Label>x1000(VND)</Form.Label>
+                                    <Form.Control
+                                        className="text-center"
+                                        style={{ height: '50px' }}
+                                        type="number"
+                                        min="1"
+                                        value={serviceQuantity}
+                                        onChange={(e) => setServiceQuantity(e.target.value)}
+                                    />
+
+                                </>
+
+                            )}
+
+
                         </Form.Group>
                     </Col>
+                    {selectedServicePrice !== 1000 ? (
+                        (serviceQuantity <= 0 || serviceQuantity > 200 || isNaN(serviceQuantity)) && (
+                            <div style={{ color: 'red', fontSize: '14px', textAlign: 'right' }}>
+                                Số lượng phải từ 1 đến 200
+                            </div>
+                        )
+                    ) : (
+                        (serviceQuantity <= 0 || isNaN(serviceQuantity)) && (
+                            <div style={{ color: 'red', fontSize: '14px', textAlign: 'right' }}>
+                                Chi phí phải từ 1
+                            </div>
+                        )
+                    )}
+
                 </Row>
                 {selectedServicePrice === 1000 ? (<>
                     <Row className="mt-3">
@@ -254,10 +304,18 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                                 <Form.Control
                                     as="textarea"
                                     rows={2}
-                                    placeholder="Mô tả phụ phí phát sinh"
+                                    placeholder="Mô tả phụ phí phát sinh (300 ký tự)"
                                     value={serviceNote}
-                                    onChange={(e) => setServiceNote(e.target.value)}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        if (value.length <= 300) {
+                                            setServiceNote(value); // Chỉ cập nhật khi <= 300 ký tự
+                                        }
+                                    }}
                                 />
+                                <Form.Text className="text-muted">
+                                    {serviceNote.length}/300 ký tự
+                                </Form.Text>
                             </Form.Group>
                         </Col>
                     </Row>
@@ -298,10 +356,18 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                                     <Form.Control
                                         as="textarea"
                                         rows={2}
-                                        placeholder="Ghi chú cho dịch vụ đang chọn"
+                                        placeholder="Ghi chú cho dịch vụ đang chọn (300 ký tự)"
                                         value={serviceNote}
-                                        onChange={(e) => setServiceNote(e.target.value)} // Nối giá trị mới với giá trị hiện tại
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            if (value.length <= 300) {
+                                                setServiceNote(value); // Chỉ cập nhật khi <= 300 ký tự
+                                            }
+                                        }}
                                     />
+                                    <Form.Text className="text-muted">
+                                        {serviceNote.length}/300 ký tự
+                                    </Form.Text>
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -344,13 +410,24 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                         </Col>
                     </Row>
                 )}
-                <Button
-                    className="mt-3"
-                    onClick={handleAddService}
-                    disabled={!selectedService || serviceQuantity <= 0 || !!formError}
-                >
-                    {selectedServicePrice !== 1000 ? "Thêm dịch vụ" : "Thêm phụ phí"}
-                </Button>
+                {selectedServicePrice !== 1000 ? (
+                    <Button
+                        className="mt-3"
+                        onClick={handleAddService}
+                        disabled={!selectedService || serviceQuantity <= 0 || serviceQuantity > 200 || !!formError}
+                    >
+                        Thêm dịch vụ
+                    </Button>
+                ) : (
+                    <Button
+                        className="mt-3"
+                        onClick={handleAddService}
+                        disabled={!selectedService || serviceQuantity <= 0 || !!formError}
+                    >
+                        Thêm phụ phí
+                    </Button>
+                )}
+
                 {orderServicesData.length > 0 && (
                     <div className="mt-4">
                         <table className="table table-striped text-center">

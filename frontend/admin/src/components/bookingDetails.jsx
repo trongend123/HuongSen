@@ -701,6 +701,7 @@ const BookingDetails = () => {
                         ref={addServiceRef}
                         bookingId={bookingId} // Pass booking ID after it's created
                         onServiceTotalChange={handleServiceTotalChange} // Callback for service total
+                        extrafee={true}
                     />
                     <Button onClick={handleUpdateBooking}
                         disabled={isUpdating || (orderRooms[0].bookingId?.status !== 'Đã check-in' && orderRooms[0].bookingId?.status !== 'Đã đặt')}
