@@ -120,6 +120,18 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
 
                 // Cập nhật giá booking và dịch vụ
                 await axios.put(`http://localhost:9999/bookings/${bookingId}`, updatedBookingData);
+
+                await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: null, note: 'khách đã thêm dịch vụ' });
+                const newNotification = { content: `${bookingId} khách đã thêm dịch vụ` };
+                axios
+                    .post("http://localhost:9999/chats/send", newNotification)
+                    .then((response) => {
+                        console.log(response.data);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+
                 toast.success('Thông tin dịch vụ và giá đơn đã được cập nhật.', {
                     position: "top-right",
                 });
@@ -152,10 +164,25 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                     bookingId: { ...orderRoom.bookingId, status: 'Yêu cầu hoàn tiền' },
                 }))
             );
-            alert('Trạng thái đã được cập nhật thành "Cancelled.');
+            await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: null, note: 'khách đã yêu cầu hủy phòng, hoàn tiền' });
+            const newNotification = { content: `${bookingId} khách đã yêu cầu hủy phòng, hoàn tiền` };
+            axios
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            toast.success('Yêu cầu hủy phòng , hoàn tiền thành công', {
+                position: "top-right",
+            });
         } catch (error) {
             console.error('Error updating booking status:', error);
-            alert('Có lỗi xảy ra khi cập nhật trạng thái. Vui lòng thử lại.');
+            toast.error('Có lỗi xảy ra khi hủy. Vui lòng thử lại.', {
+                position: "top-right",
+            });
+
         } finally {
             setIsUpdating(false);
         }
@@ -219,6 +246,17 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                     };
                     await axios.put(`http://localhost:9999/bookings/${bookingId}`, updatedBookingData);
                     await axios.delete(`http://localhost:9999/orderServices/${deleteService._id}`);
+                    await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: null, note: 'khách đã xóa dịch vụ' });
+
+                    const newNotification = { content: `${bookingId} khách đã xóa dịch vụ` };
+                    axios
+                        .post("http://localhost:9999/chats/send", newNotification)
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
 
                     fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
                     toast.success('Dịch vụ đã được xóa thành công và giá đơn đã được cập nhật.', {
@@ -270,8 +308,17 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
 
                     // Gửi yêu cầu API để hủy phòng
                     await axios.delete(`http://localhost:9999/orderRooms/${OrderRoom._id}`)
+                    await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: null, note: 'khách đã hủy loại phòng' });
 
-
+                    const newNotification = { content: `${bookingId} khách đã hủy loại phòng` };
+                    axios
+                        .post("http://localhost:9999/chats/send", newNotification)
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
                     fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
                     toast.success('Phòng  đã được xóa thành công và giá booking đã được cập nhật.', {
                         position: "top-right",
@@ -323,6 +370,18 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
             const bookingId = orderRooms[0]?.bookingId?._id;
             await axios.put(`http://localhost:9999/bookings/${bookingId}`, { price: orderRooms[0].bookingId.price + priceDifference, note: note });
 
+            await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: null, note: 'khách đã cập nhật thông tin phòng' });
+
+            const newNotification = { content: `${bookingId} khách đã cập nhật thông tin phòng` };
+            axios
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+
             // Làm mới dữ liệu
             fetchBookingDetails();
 
@@ -372,6 +431,18 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
 
         return priceDifference; // Trả về chênh lệch giá
     };
+    // const sendNotification = () => {
+    //     const newNotification = { content: "New notification from React!" };
+    //     axios
+    //         .post("http://localhost:9999/chats/send", newNotification)
+    //         .then((response) => {
+    //             console.log(response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+
+    // };
 
     return (
         <div >
@@ -576,7 +647,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
 
 
             )}
-            <h3>Tổng giá tiền thay đổi thành: {newBookingPrice}</h3>
+            {/* <h3>Tổng giá tiền thay đổi thành: {newBookingPrice}</h3> */}
             <div className="checkout-button">
 
                 <button

@@ -56,7 +56,6 @@ const Header = () => {
   }, [notifications]);
 
  const sendNotification = () => {
-    console.log('abc');
     const newNotification = { content: "New notification from React!" };
    axios
       .post("http://localhost:9999/chats/send", newNotification)
@@ -66,7 +65,7 @@ const Header = () => {
       .catch((error) => {
         console.error(error);
       });
-    // socket.emit("send_notification", newNotification);
+    socket.emit("send_notification", newNotification);
     
   };  
 

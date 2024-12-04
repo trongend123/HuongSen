@@ -97,6 +97,25 @@ class BookingController {
             res.status(500).json({ message: 'Internal Server Error' });
         }
     }
+    //xóa tất cả theo booking id
+    async deleteAllByBookingID(req, res) {
+        const { bookingId } = req.params;
+
+        try {
+            const result = await bookingRepository.deleteBookingWithRelatedData(bookingId);
+
+            if (!result) {
+                return res.status(404).json({ message: "Booking not found" });
+            }
+
+            res.status(200).json({
+                message: "Booking and all related data deleted successfully",
+            });
+        } catch (error) {
+            console.error("Error deleting booking:", error.message);
+            res.status(500).json({ message: "An error occurred", error: error.message });
+        }
+    };
 }
 
 export default new BookingController();
