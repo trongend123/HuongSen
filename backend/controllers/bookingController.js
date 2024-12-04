@@ -99,13 +99,14 @@ class BookingController {
     }
     //xóa tất cả theo booking id
     async deleteAllByBookingID(req, res) {
-        const { bookingId } = req.params;
+
 
         try {
+            const { bookingId } = req.params;
             const result = await bookingRepository.deleteBookingWithRelatedData(bookingId);
 
             if (!result) {
-                return res.status(404).json({ message: "Booking not found" });
+                return res.status(404).json({ message: `Booking not found  ${typeof (bookingId)}` });
             }
 
             res.status(200).json({

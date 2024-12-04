@@ -1,7 +1,9 @@
 import OrderRoomRepository from '../repositories/orderRoomRepository.js';
 import RoomCategory from '../models/roomCategory.js';
+import RoomRepository from '../repositories/room.js';
 import Customers from '../models/customer.js';
 import Booking from '../models/booking.js';
+import Room from '../models/room.js';
 import xlsx from 'xlsx';
 import fs from 'fs';
 import path from 'path';
@@ -79,39 +81,36 @@ export const getAllOrderRooms = async (req, res) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
-export const generateExcel = async (req, res) => {
+export const getAllOrderRoomsByExcel = async (req, res) => {
   try {
     console.log('Bắt đầu xuất file doanh thu');
-
     // Lấy dữ liệu từ DB
-    const orderRooms = await OrderRoomRepository.findAll();
+    const rooms = await Room.find()
+      .populate('roomCategoryId') // Lấy thông tin loại phòng (RoomCategories)
+      .populate('bookingId'); // Lấy thông tin booking (Bookings)
 
-    if (!orderRooms || orderRooms.length === 0) {
+    if (!rooms || rooms.length === 0) {
       return res.status(404).json({ message: 'Không tìm thấy dữ liệu' });
     }
 
     const currentDate = new Date();
     const month = currentDate.getMonth() + 1; // Tháng hiện tại (1-12)
     const year = currentDate.getFullYear(); // Năm hiện tại
-    const daysInMonth = new Date(year, month, 0).getDate();
-
+    const daysInMonth = new Date(year, month, 0).getDate(); // Số ngày trong tháng
     const workbook = new ExcelJS.Workbook();
 
     // ====== Nhóm dữ liệu theo ngày ======
     const groupedByDay = {};
-    orderRooms.forEach((order) => {
-      const orderDate = new Date(order.createdAt);
-      const day = orderDate.getDate();
+    rooms.forEach((room) => {
+      const booking = room.bookingId;
+      if (booking && booking.checkin) {
+        const orderDate = new Date(booking.checkin);
+        const day = orderDate.getDate();
 
-      if (!groupedByDay[day]) groupedByDay[day] = [];
-      groupedByDay[day].push(order);
+        if (!groupedByDay[day]) groupedByDay[day] = [];
+        groupedByDay[day].push(room);
+      }
     });
-
-    let grandTotalRooms = 0;
-    let grandTotalDebt = 0;
-    let grandTotalPaid = 0;
-    let grandTotalRevenue = 0;
 
     // ====== Hàm áp dụng đường viền ======
     const applyBorderToRow = (row) => {
@@ -144,6 +143,8 @@ export const generateExcel = async (req, res) => {
       sheet.addRow([
         'STT',
         'Phòng',
+        'Đơn giá',
+        'Số lượng',
         'Tiền phòng',
         'Thêm h+ Nghỉ h',
         'Dịch Vụ',
@@ -160,47 +161,48 @@ export const generateExcel = async (req, res) => {
       // ====== Dữ liệu ======
       const dayData = groupedByDay[day] || [];
       let totalRoomFee = 0;
-      let totalExtraFee = 0;
-      let totalServiceFee = 0;
-      let totalDebt = 0;
-      let totalPaid = 0;
+      let totalQuantity = 0;
+      let totalPrice = 0;
+      let totalQuantityString = 0;
 
-      dayData.forEach((order, index) => {
-        const roomFee = order.roomCateId?.price || 0;
-        const extraFee = order.extraHoursFee || 0;
-        const serviceFee = order.serviceFee || 0;
-        const debt = order.debt || 0;
-        const paidAmount = order.paidAmount || 0;
+      dayData.forEach((room, index) => {
+        const roomCategory = room.roomCategoryId;
+        const booking = room.bookingId;
 
-        totalRoomFee += roomFee;
-        totalExtraFee += extraFee;
-        totalServiceFee += serviceFee;
-        totalDebt += debt;
-        totalPaid += paidAmount;
+        const roomFee = roomCategory?.price || 0;
+        const quantity = 1; // Giả sử mỗi phòng là 1 đơn vị
+        const itemTotal = roomFee * quantity;
+
+        totalRoomFee += itemTotal;
+        totalQuantity += quantity;
 
         const dataRow = sheet.addRow([
           index + 1,
-          order.roomCateId?.name || 'N/A',
+          roomCategory?.name || 'N/A',
           roomFee.toLocaleString(),
-          extraFee.toLocaleString(),
-          serviceFee.toLocaleString(),
-          debt.toLocaleString(),
-          paidAmount.toLocaleString(),
-          order.receptionist || '',
-          order.note || '',
+          quantity,
+          itemTotal.toLocaleString(),
+          '',
+          '',
+          '',
+          '',
+          '',
+          '',
         ]);
         applyBorderToRow(dataRow);
       });
+
+      //console.log('totalQuantityString: ', totalQuantityString);
 
       // ====== Dòng "Tổng" ======
       const totalRow = sheet.addRow([
         'Tổng:',
         '',
+        '',
+        '',
         totalRoomFee.toLocaleString(),
-        totalExtraFee.toLocaleString(),
-        totalServiceFee.toLocaleString(),
-        totalDebt.toLocaleString(),
-        totalPaid.toLocaleString(),
+        '',
+        '',
         '',
         '',
       ]);
@@ -209,14 +211,16 @@ export const generateExcel = async (req, res) => {
       applyBorderToRow(totalRow);
 
       // ====== Dòng "Tổng doanh thu" ======
-      const totalRevenue = totalRoomFee + totalExtraFee + totalServiceFee;
-      const revenueRow = sheet.addRow([`Tổng doanh thu: ${totalRevenue.toLocaleString()}`]);
+      const revenueRow = sheet.addRow([
+        'Tổng doanh thu:',
+        { formula: 'SUM(E:E, F:F, G:G)' },
+      ]);
       revenueRow.font = { bold: true, size: 12 };
       applyBorderToRow(revenueRow);
 
       // ====== Dòng "Số phòng" và "Số đoàn" ======
-      const statsRow = sheet.addRow(['Số phòng:', dayData.length]);
-      const groupStatsRow = sheet.addRow(['Số đoàn:', 0]);
+      const statsRow = sheet.addRow(['Số phòng:', totalQuantity.toLocaleString()]);
+      const groupStatsRow = sheet.addRow(['Số đoàn:', '']);
       statsRow.font = groupStatsRow.font = { bold: true, size: 12 };
       applyBorderToRow(statsRow);
       applyBorderToRow(groupStatsRow);
@@ -248,14 +252,11 @@ export const generateExcel = async (req, res) => {
     applyBorderToRow(summaryHeaderRow);
 
     Object.keys(groupedByDay).forEach((day, index) => {
-      const dayData = groupedByDay[day];
+      const dayData = groupedByDay[day] || [];
       const dayRooms = dayData.length;
-      const dayDebt = dayData.reduce((sum, order) => sum + (order.debt || 0), 0);
-      const dayPaid = dayData.reduce((sum, order) => sum + (order.paidAmount || 0), 0);
-      const dayRevenue = dayData.reduce(
-        (sum, order) => sum + ((order.quantity || 0) * (order.roomCateId?.price || 0)),
-        0
-      );
+      const dayDebt = dayData.reduce((sum, room) => sum + (room.bookingId?.price - room.bookingId?.payment || 0), 0);
+      const dayPaid = dayData.reduce((sum, room) => sum + (room.bookingId?.payment || 0), 0);
+      const dayRevenue = dayData.reduce((sum, room) => sum + (room.roomCategoryId?.price || 0), 0);
 
       const summaryRow = summarySheet.addRow([
         index + 1,
@@ -276,28 +277,31 @@ export const generateExcel = async (req, res) => {
     });
 
     // ====== Lưu file ======
-    const filePath = path.join(__dirname, '../exports', `Báo-cáo-doanh-thu-Tháng-${month}-${year}.xlsx`);
+    const filePath = path.join(__dirname, '../exports', `Bao-cao-doanh-thu-Thang-${month}-${year}.xlsx`);
 
     if (fs.existsSync(filePath)) {
       try {
         fs.unlinkSync(filePath); // Xóa file cũ nếu tồn tại
       } catch (error) {
-        console.error('File đang được mở hoặc sử dụng bởi chương trình khác.');
-        return res.status(400).json({
-          message: `Không thể ghi đè file. Vui lòng đóng file: Báo-cáo-doanh-thu-Tháng-${month}-${year}.xlsx và thử lại.`,
+        console.log(`File đang được mở hoặc sử dụng bởi chương trình khác: ${filePath}`);
+        return res.json({
+          message: `Không thể ghi đè file. Vui lòng đóng file: Bao-cao-doanh-thu-Thang-${month}-${year}.xlsx và thử lại.`,
         });
       }
     }
 
     await workbook.xlsx.writeFile(filePath);
-
     console.log('File Excel đã được tạo:', filePath);
-    res.status(200).json({ message: 'Xuất file thành công', filePath });
+
+    return res.status(200).json({ message: 'Xuất file thành công', filePath });
   } catch (error) {
     console.error('Lỗi khi tạo file Excel:', error);
-    res.status(500).json({ message: 'Lỗi server' });
+    if (!res.headersSent) {
+      return res.status(500).json({ message: 'Lỗi server', error: error.message });
+    }
   }
 };
+
 
 
 // Hàm lấy OrderRoom theo ID
@@ -393,10 +397,6 @@ export const getTotalRoomsByCategoryInDateRange = async (req, res) => {
   try {
     const { checkInDate, checkOutDate } = req.query;
 
-    // Kiểm tra nếu thiếu dữ liệu ngày
-    if (!checkInDate || !checkOutDate) {
-      return res.status(400).json({ message: 'Cần cung cấp checkInDate và checkOutDate' });
-    }
 
     // Gọi đến repository để lấy tổng số phòng theo loại trong khoảng thời gian
     const totalRoomsByCategory = await OrderRoomRepository.getTotalByCategoryInDateRange(checkInDate, checkOutDate);

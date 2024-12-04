@@ -5,6 +5,8 @@ import { Col, Row, Button, Container } from 'react-bootstrap';
 import AddBookingForm from '../components/bookingRoom/addBookingForm';
 import AddServiceForm from '../components/bookingRoom/addServiceForm';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BookingPage = () => {
     const [userId, setUserId] = useState(null); // To store the created user ID
@@ -52,18 +54,21 @@ const BookingPage = () => {
                 setUserId(createdUserId); // Lưu ID khách hàng
                 console.log("Khách hàng đã được tạo với ID");
 
+                // 2. Tạo giấy tờ tùy thân sau khi khách hàng được tạo
+                const identifyCreated = await identifyFormRef.current.createIdentify(createdUserId);
+                if (!identifyCreated) {
+                    console.log('Tạo giấy tờ tùy thân thất bại.');
+                    toast.error('Có lỗi xảy ra khi tạo giấy tờ tùy thân. Vui lòng thử lại.', {
+                        position: "top-right",
+                    });
+
+                    return; // Dừng thực thi nếu tạo giấy tờ tùy thân thất bại
+                }
+
                 // 3. Tạo đặt phòng
                 const createdBookingId = await bookingFormRef.current.createBooking();
                 if (createdBookingId) {
                     setBookingId(createdBookingId); // Lưu ID đặt phòng
-
-                    // 2. Tạo giấy tờ tùy thân sau khi khách hàng được tạo
-                    const identifyCreated = await identifyFormRef.current.createIdentify(createdUserId);
-                    if (!identifyCreated) {
-                        console.log('Tạo giấy tờ tùy thân thất bại.');
-                        alert('Có lỗi xảy ra khi tạo giấy tờ tùy thân. Vui lòng thử lại.');
-                        return; // Dừng thực thi nếu tạo giấy tờ tùy thân thất bại
-                    }
 
                     // 4. Thêm dịch vụ đã chọn vào orderService sau khi đặt phòng được tạo
                     await addServiceRef.current.addService(createdBookingId);
@@ -78,16 +83,22 @@ const BookingPage = () => {
                     });
 
                 } else {
-                    alert('Có lỗi xảy ra khi tạo đặt phòng hoặc dịch vụ. Vui lòng thử lại.');
+                    toast.error('Có lỗi xảy ra khi tạo đặt phòng hoặc dịch vụ. Vui lòng thử lại.', {
+                        position: "top-right",
+                    });
                     console.log('Đặt phòng và dịch vụ chưa được tạo.');
                 }
             } else {
-                alert('Có lỗi xảy ra khi tạo khách hàng. Vui lòng thử lại.');
+                toast.error('Có lỗi xảy ra khi tạo khách hàng. Vui lòng thử lại.', {
+                    position: "top-right",
+                });
                 console.log('Tạo khách hàng thất bại.');
             }
         } catch (error) {
             console.error('Lỗi khi tạo khách hàng, giấy tờ tùy thân, hoặc đặt phòng:', error);
-            alert('Có lỗi xảy ra trong quá trình tạo. Vui lòng thử lại.');
+            toast.error('Có lỗi xảy ra trong quá trình tạo. Vui lòng thử lại.', {
+                position: "top-right",
+            });
         }
     };
 
@@ -95,6 +106,7 @@ const BookingPage = () => {
 
     return (
         <Container>
+            <ToastContainer />
             <h6 className="my-4 px-2 text-bg-success d-inline ">Đặt Phòng Từ Nhân Viên: {staff?.fullname || "chưa Login"}</h6>
             <Row>
                 <Col md="6">

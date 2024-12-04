@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./bookingDetails.css";
-import { Col, Container, Row, Button, Form, Card } from 'react-bootstrap';
+import { Col, Container, Row, Button, Form, Card, Modal } from 'react-bootstrap';
 import { format } from 'date-fns';
 import AddServiceForm from './bookingRoom/addServiceForm';
 import UpdateAgencyOrder from './UpdateAgencyOrder';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom'; // Nhập useNavigate từ react-router-dom
+
 // // Cấu hình react-toastify
 // toast.configure();
 
@@ -29,6 +31,10 @@ const BookingDetails = () => {
     const [staff, setStaff] = useState(null);
     const [contractCode, setContractCode] = useState(""); // State lưu mã hợp đồng
     const [price, setPrice] = useState(0); // State lưu giá cả
+    const [showModal, setShowModal] = useState(false);
+
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -143,15 +149,6 @@ const BookingDetails = () => {
                 toast.success('Thông tin dịch vụ và giá đơn đã được cập nhật.', {
                     position: "top-right",
                 });
-                const newNotification = { content: "Lễ tân đã cập nhật đơn đặt phòng." };
-                axios
-                .post("http://localhost:9999/chats/send", newNotification)
-                .then((response) => {
-                console.log(response.data);
-                })
-      .catch((error) => {
-        console.error(error);
-      });
                 fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
             }
             else {
@@ -174,7 +171,16 @@ const BookingDetails = () => {
     const handleCheckout = async () => {
         setIsUpdating(true);
         try {
-            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { status: 'Đã hoàn thành' });
+            // const updatePay = await axios.put(`http://localhost:9999/payment/booking/${bookingId}`, { amount: orderRooms[0].bookingId.price, status: 'confirm' });
+            // if (!updatePay.data.success) {
+            //     const paymentResponse = await axios.post(`http://localhost:9999/payment/create-payment`, {
+            //         amount: orderRooms[0].bookingId.price,
+            //         bookingId: bookingId,
+            //         status: 'confirm'
+            //     });
+            // }
+            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { status: 'Đã hoàn thành', payment: orderRooms[0].bookingId.price });
+
             for (const room of Rooms) {
                 // Gửi yêu cầu PUT để cập nhật trạng thái
                 await axios.put(`http://localhost:9999/rooms/${room._id}`, { status: 'Trống', bookingId: null });
@@ -190,18 +196,18 @@ const BookingDetails = () => {
             );
 
             const newNotification = { content: "Đơn phòng đã hoàn thành" };
-                axios
+            axios
                 .post("http://localhost:9999/chats/send", newNotification)
                 .then((response) => {
-                console.log(response.data);
+                    console.log(response.data);
                 })
 
             await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã check out cho khách` });
-
+            fetchBookingDetails()
             toast.success('Check out thành Công', {
                 position: "top-right",
             });
-
+            navigate('/bookings')
         } catch (error) {
             console.error('Error updating booking status:', error);
             toast.error('Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại.', {
@@ -332,31 +338,36 @@ const BookingDetails = () => {
             // Gọi hàm để tạo order rooms và nhận về tổng giá từ result
             const result = await roomCategoriesRef.current.createAgencyOrderRoom(orderRooms[0]?.bookingId?.price);
 
-            // Cập nhật từng orderRoom với số lượng mới
-            for (const [orderRoomId, quantity] of Object.entries(updatedQuantities)) {
-                await axios.put(`http://localhost:9999/orderRooms/${orderRoomId}`, { quantity });
+            if (result.success) {  // Cập nhật từng orderRoom với số lượng mới
+                for (const [orderRoomId, quantity] of Object.entries(updatedQuantities)) {
+                    await axios.put(`http://localhost:9999/orderRooms/${orderRoomId}`, { quantity });
+                }
+                // // Chờ tất cả các update hoàn thành
+                // await Promise.all(updatePromises);
+
+                // Tính tổng giá chênh lệch
+                const priceDifference = calculateTotalPrice();
+
+                // Cập nhật giá tổng của booking
+                const bookingId = orderRooms[0]?.bookingId?._id;
+                await axios.put(`http://localhost:9999/bookings/${bookingId}`, { price: orderRooms[0].bookingId.price + priceDifference + result.totalAmount, note: note });
+
+                await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã cập nhật thông tin phòng` });
+
+
+                // Làm mới dữ liệu
+                fetchBookingDetails();
+
+                // Reset số lượng đã cập nhật
+                setUpdatedQuantities({});
+                toast.success('Cập nhật số lượng phòng , ghi chú và giá thành công.', {
+                    position: "top-right",
+                });
+            } else {
+                toast.error('Có lỗi xảy ra. Vui lòng thử lại.', {
+                    position: "top-right",
+                });
             }
-            // // Chờ tất cả các update hoàn thành
-            // await Promise.all(updatePromises);
-
-            // Tính tổng giá chênh lệch
-            const priceDifference = calculateTotalPrice();
-
-            // Cập nhật giá tổng của booking
-            const bookingId = orderRooms[0]?.bookingId?._id;
-            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { price: orderRooms[0].bookingId.price + priceDifference + result.totalAmount, note: note });
-
-            await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã cập nhật thông tin phòng` });
-
-
-            // Làm mới dữ liệu
-            fetchBookingDetails();
-
-            // Reset số lượng đã cập nhật
-            setUpdatedQuantities({});
-            toast.success('Cập nhật số lượng phòng , ghi chú và giá thành công.', {
-                position: "top-right",
-            });
         } catch (error) {
             console.error('Lỗi khi cập nhật:', error);
             toast.error('Có lỗi xảy ra. Vui lòng thử lại.', {
@@ -423,6 +434,21 @@ const BookingDetails = () => {
         }
 
     };
+
+
+    const handleOpenModal = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+    const handleConfirmCheckout = () => {
+        setShowModal(false);
+        handleCheckout(); // Thực hiện hành động Check-out
+    };
+
     return (
         <div className="booking-details">
             <ToastContainer />
@@ -491,9 +517,10 @@ const BookingDetails = () => {
                 )}
                 <Col>
                     <p><strong>Ngày tạo đơn:</strong> {format(new Date(orderRooms[0].createdAt), 'dd-MM-yyyy')}</p>
-                    <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p>
+                    <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 0}</p>
                     <p><strong>Trạng thái:</strong> {orderRooms[0].bookingId?.status || 'N/A'}</p>
-                    <p><strong>Đã thanh toán:</strong> {orderRooms[0].bookingId?.payment || 'N/A'}</p>
+                    <p><strong>Đã thanh toán:</strong> {orderRooms[0].bookingId?.payment || 0}</p>
+                    <p><strong>Còn nợ:</strong> {orderRooms[0].bookingId?.price - orderRooms[0].bookingId?.payment}</p>
                 </Col>
 
             </Row>
@@ -691,13 +718,52 @@ const BookingDetails = () => {
             <div className="checkout-button mt-4">
 
 
-                <button
+                {/* <button
                     onClick={handleCheckout}
                     disabled={isUpdating || orderRooms[0].bookingId?.status !== 'Đã check-in'}
 
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Check-out'}
-                </button>
+                </button> */}
+                {/* Nút Check-out */}
+                <Button
+                    onClick={handleOpenModal}
+                    disabled={isUpdating || orderRooms[0].bookingId?.status !== 'Đã check-in'}
+                    variant="primary"
+                >
+                    {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Check-out'}
+                </Button>
+
+                {/* Modal */}
+                <Modal show={showModal} onHide={handleCloseModal} centered className="custom-modal">
+                    <Modal.Header closeButton className="text-center">
+                        <Modal.Title>Thông tin Check-out</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="text-center custom-modal-body">
+                        <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p>
+                        <p><strong>Đã thanh toán:</strong> {orderRooms[0].bookingId?.payment || 'N/A'} VND</p>
+                        <p><strong>Còn nợ:</strong> {orderRooms[0].bookingId?.price - orderRooms[0].bookingId?.payment} VND</p>
+                    </Modal.Body>
+                    <Modal.Footer className="justify-content-center">
+                        <Button variant="secondary" onClick={handleCloseModal}>
+                            Hủy bỏ
+                        </Button>
+                        <Button variant="primary" onClick={handleConfirmCheckout}>
+                            Xác nhận Check-out
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                {staff.role === 'admin' && (
+                    <Button
+                        variant="info"
+                        style={{ margin: ' 0px 10px' }}
+                        onClick={() => {
+                            navigate('/historyBookingChange', { state: { bookingId: orderRooms[0].bookingId._id } }); // Chuyển hướng với bookingId
+                        }}
+                    >
+                        Lịch sử
+                    </Button>
+                )}
             </div>
         </div>
     );

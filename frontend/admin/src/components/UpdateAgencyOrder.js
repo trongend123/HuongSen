@@ -14,6 +14,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
     const [returnRoom, setReturnRoom] = useState(
         new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0] // Default: Tomorrow
     );
+    const [error, setError] = useState("");
     const resetForm = () => {
         setQuantity({});
         setSelectedRooms([]);
@@ -56,6 +57,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
         fetchRoomData();
     }, [receiveRoom, returnRoom, locationId]);
 
+
     // Calculate nights between check-in and check-out
     useEffect(() => {
         const checkinDate = new Date(receiveRoom);
@@ -97,6 +99,20 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
         handleRoomQuantityChange(roomId, value, price); // Update price for the selected room
     };
 
+
+
+    useEffect(() => {
+        // Cập nhật giá trị price cho tất cả các phòng khi nights thay đổi
+        Object.keys(quantity).forEach(roomId => {
+            const room = roomCategories.find(r => r._id === roomId);
+            if (room) {
+                const newPrice = room.price * quantity[roomId] * nights;
+                handleRoomQuantityChange(roomId, quantity[roomId], newPrice);
+            }
+        });
+    }, [nights]); // Chạy lại khi nights 
+
+
     const calculateTotalAmount = () => {
         let totalRoomAmount = Object.values(roomPrices).reduce((sum, price) => sum + price, 0);
         let total = totalRoomAmount;
@@ -128,10 +144,15 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
 
             if (invalidSelections.length > 0) {
                 alert('Some room selections exceed the available number of rooms. Please adjust your selections.');
-                return false;
+                let totalAmount = 0
+                return { totalAmount, success: false };
             }
 
-
+            if (error !== '') {
+                setError("Vui lòng chọn lại ngày")
+                let totalAmount = 0
+                return { totalAmount, success: false };
+            }
             // Create room orders
             const orderRoomPromises = selectedRooms.map(room => {
                 return axios.post('http://localhost:9999/orderRooms', {
@@ -183,6 +204,44 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
         createAgencyOrderRoom,
     }));
 
+    const handleDateChange = (e, type) => {
+        const newDate = e.target.value;
+        const today = new Date().toISOString().split("T")[0];
+
+        // Kiểm tra ngày nhận phòng và trả phòng không được trong quá khứ
+        if (newDate < today) {
+            setError('Ngày không được chọn trong quá khứ!');
+            return;
+        }
+
+        if (type === "receiveRoom") {
+            // Kiểm tra ngày trả phòng phải sau ngày nhận phòng ít nhất 1 ngày
+            if (newDate >= returnRoom) {
+                setReceiveRoom(newDate);
+                setError('Ngày nhận phòng không được sau ngày trả phòng.');
+            } else {
+                setReceiveRoom(newDate);
+                setError('');
+            }
+        }
+
+        if (type === "returnRoom") {
+            const receiveDate = new Date(receiveRoom);
+            const returnDate = new Date(newDate);
+            const diffTime = returnDate - receiveDate;
+            const calculatedNights = diffTime / (1000 * 60 * 60 * 24);
+
+            if (calculatedNights < 1) {
+                setError('Ngày trả phòng phải sau ngày nhận phòng ít nhất 1 ngày.');
+                setReturnRoom(newDate);
+                return;
+            } else {
+                setReturnRoom(newDate);
+                setError('');
+            }
+        }
+    };
+
     return (
         <div>
 
@@ -195,7 +254,6 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
                     </Card.Header>
 
                     <Card.Body>
-                        {/* Receive Room and Return Room Date Pickers */}
                         <Row className="mb-3">
                             <Col md={6} className='d-flex align-items-center justify-content-center '>
                                 <Form.Label><strong>Trả phòng :</strong></Form.Label>
@@ -203,18 +261,20 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
                                     className='w-50 mx-2'
                                     type="date"
                                     value={receiveRoom}
-                                    onChange={(e) => setReceiveRoom(e.target.value)}
+                                    onChange={(e) => handleDateChange(e, "receiveRoom")}
                                 />
                             </Col>
+
                             <Col md={6} className='d-flex align-items-center justify-content-center'>
                                 <Form.Label ><strong>Nhận phòng :</strong></Form.Label>
                                 <Form.Control
                                     className='w-50 mx-2'
                                     type="date"
                                     value={returnRoom}
-                                    onChange={(e) => setReturnRoom(e.target.value)}
+                                    onChange={(e) => handleDateChange(e, "returnRoom")}
                                 />
                             </Col>
+                            {error && <div className="text-danger text-center mb-2">{error}</div>}
                         </Row>
                         {groupedRooms[location].map((room, index) => { // Add index as fallback for key
                             const remainingRoomCount = remainingRooms[room._id] || 0;

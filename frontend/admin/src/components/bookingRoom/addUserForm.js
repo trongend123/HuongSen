@@ -37,11 +37,11 @@ const AddUserForm = forwardRef(({ }, ref) => {
 
     const validateForm = () => {
         const newErrors = {};
-        const namePattern = /^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẰẮẲẴẶèéêẽếềệỉĩìíòóôõơợụùúỷỹýỵ\s]+$/;
+        const namePattern = /^[A-Za-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+(\s[A-Za-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+)*$/;
         const today = new Date();
 
-        if (!customerData.fullname.trim() || !namePattern.test(customerData.fullname)) {
-            newErrors.fullname = "Họ và tên chỉ được chứa chữ cái";
+        if (!customerData.fullname.trim() || !namePattern.test(customerData.fullname.toLowerCase())) {
+            newErrors.fullname = "Họ và tên chỉ được chứa chữ cái và chỉ có một dấu cách giữa các từ";
         }
 
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

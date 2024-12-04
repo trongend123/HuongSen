@@ -36,11 +36,57 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     }, [staff]);
 
     const handleChange = (e) => {
-        setBookingData({
+        const { name, value } = e.target;
+        const today = new Date();
+        let newErrors = { ...errors };
+
+        // Cập nhật giá trị bookingData trước
+        const updatedBookingData = {
             ...bookingData,
-            [e.target.name]: e.target.value
-        });
-    };
+            [name]: value
+        };
+
+        if (name === "checkin") {
+            const checkinDate = new Date(value);
+            const checkoutDate = new Date(updatedBookingData.checkout);
+
+            if (checkoutDate <= checkinDate) {
+                newErrors.checkout = "Ngày check-out phải sau ngày check-in ít nhất 1 ngày";
+            } else {
+                delete newErrors.checkout;
+            }
+
+            if (checkinDate < today.setHours(0, 0, 0, 0)) {
+                newErrors.checkin = "Ngày check-in không thể là ngày trong quá khứ";
+            } else {
+                delete newErrors.checkin;
+            }
+
+
+        }
+
+        if (name === "checkout") {
+            const checkoutDate = new Date(value);
+            const checkinDate = new Date(updatedBookingData.checkin);
+
+            if (checkoutDate < today.setHours(0, 0, 0, 0)) {
+                newErrors.checkout = "Ngày check-out không thể là ngày trong quá khứ";
+            } else {
+                delete newErrors.checkout;
+            }
+
+            if (checkoutDate <= checkinDate) {
+                newErrors.checkout = "Ngày check-out phải sau ngày check-in ít nhất 1 ngày";
+            } else {
+                delete newErrors.checkout;
+            }
+
+        }
+
+        // Cập nhật lỗi và bookingData
+        setErrors(newErrors);
+        setBookingData(updatedBookingData);
+    }
 
     const calculateTotalAmount = () => {
         // Tính tổng tiền phòng trước
@@ -145,14 +191,14 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             // Trigger callback to notify booking creation
             onBookingCreated(bookingId);
             const newNotification = { content: "Lễ tân đã tạo đơn đặt phòng." };
-   axios
-      .post("http://localhost:9999/chats/send", newNotification)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+            axios
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
             return bookingId;
         } catch (error) {
             console.error('Error creating booking:', error);
