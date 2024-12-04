@@ -2,7 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "frontend/package.json",
+      "src": "frontend/admin/package.json",
+      "use": "@vercel/react"
+    },
+    {
+      "src": "frontend/customer/package.json",
       "use": "@vercel/react"
     },
     {
@@ -16,8 +20,88 @@
       "dest": "/backend/server.js"
     },
     {
+      "src": "/rooms/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/otherservices/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/menus/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/locations/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/customers/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/staffs/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/histories/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/taxes/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/bookings/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/roomCategories/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/orderRooms/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/agencies/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/contracts/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/orderServices/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/service-bookings/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/payment/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/chats/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/email/(.*)",
+      "dest": "/backend/server.js"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "/frontend/admin/$1"
+    },
+    {
+      "src": "/customer/(.*)",
+      "dest": "/frontend/customer/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/frontend/$1"
+      "dest": "/frontend/customer/$1"
     }
   ]
 }
