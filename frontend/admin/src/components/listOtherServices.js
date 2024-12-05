@@ -25,13 +25,20 @@ const ListOtherServices = () => {
     const [errors, setErrors] = useState({ name: "", price: "" });
 
     // Fetch all services
-    useEffect(() => {
+
+
+    // Fetch data function
+    const fetchData = () => {
         axios.get("http://localhost:9999/otherServices")
             .then(response => {
                 setServices(response.data);
                 setFilteredServices(response.data);
             })
             .catch(error => console.error(error));
+    };
+
+    useEffect(() => {
+        fetchData();
     }, []);
 
     // Filter services by name and price
@@ -169,7 +176,7 @@ const ListOtherServices = () => {
     const handleInactiveAndActive = async (id) => {
         try {
             // Tìm dịch vụ theo id
-            const service = axios.get(`http://localhost:9999/otherServices/${id}`);
+            const service = await axios.get(`http://localhost:9999/otherServices/${id}`);
 
             // Kiểm tra xem dịch vụ có tồn tại không
             if (!service) {
@@ -181,20 +188,24 @@ const ListOtherServices = () => {
             }
 
             // Lật trạng thái isDeleted (nghĩa là chuyển từ true -> false hoặc ngược lại)
-            const updatedService = axios.delete(`http://localhost:9999/otherServices/${id}`,
-                id,
-                { isDeleted: !service.isDeleted },  // Đổi trạng thái isDeleted
-                { new: true, runValidators: true }  // Trả về tài liệu đã cập nhật
-            );
-            console.log(updatedService.data);
-            setMessage({
-                type: 'success',
-                text: updatedService.isDeleted
-                    ? 'Dịch vụ đã bị xóa!'
-                    : 'Dịch vụ đã được khôi phục!',
-            });
+            const updatedService = axios.delete(`http://localhost:9999/otherServices/${id}`)
+                .then(() => {
+                    fetchData()
+                    if (!service.data.isDeleted) {
+                        setMessage({
+                            type: 'success',
+                            text: 'Xóa dịch vụ thành công!'
+                        });
 
-            return updatedService;
+                    } else {
+                        setMessage({
+                            type: 'success',
+                            text: 'Khôi phục dịch vụ thành công!'
+                        });
+                    }
+
+                })
+
         } catch (error) {
             setMessage({
                 type: 'danger',

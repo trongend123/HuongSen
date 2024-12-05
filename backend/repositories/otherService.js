@@ -27,11 +27,19 @@ const list = async () => {
   }
 };
 
+// const getById = async (id) => {
+//   try {
+//     return await OtherService.findOne({ _id: id }).exec();
+//   } catch (error) {
+//     throw new Error(error.toString());
+//   }
+// };
 const getById = async (id) => {
   try {
-    return await OtherService.findOne({ _id: id }).exec();
+    const service = await OtherService.findById(id);  // Assuming you're using Mongoose for MongoDB
+    return service;
   } catch (error) {
-    throw new Error(error.toString());
+    throw new Error('Error fetching service by ID');
   }
 };
 

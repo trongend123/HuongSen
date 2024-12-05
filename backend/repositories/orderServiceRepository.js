@@ -1,5 +1,11 @@
 // repositories/orderServiceRepository.js
 import OrderServices from '../models/orderService.js';
+import Bookings from '../models/booking.js'
+import OrderRooms from '../models/orderRoom.js'
+import RoomCates from '../models/roomCategory.js'
+import Locations from '../models/location.js'
+
+
 
 const OrderServiceRepository = {
     // Tạo OrderService mới
