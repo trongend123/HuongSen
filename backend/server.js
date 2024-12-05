@@ -171,7 +171,7 @@ app.post('/send-feedback', async (req, res) => {
   if (!customerEmail || typeof customerEmail !== 'string' || !customerEmail.includes('@')) {
     return res.status(400).send({ error: 'customerEmail phải là một email hợp lệ.' });
   }
-  if (!feedback || typeof feedback !== 'string' || feedback.length < 10 || feedback.length > 500) {
+  if (!feedback || typeof feedback !== 'string' || feedback.length < 10 || feedback.length > 700) {
     return res.status(400).send({ error: 'Phản hồi phải từ 10 đến 500 ký tự.' });
   }
   if (!hotelEmail || !customerName || !customerEmail || !feedback) {
