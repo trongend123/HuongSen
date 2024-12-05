@@ -5,6 +5,7 @@ import connectDB from "./database/database.js";
 import cors from "cors";
 import http from 'http';
 import { Server } from 'socket.io';
+import nodemailer from 'nodemailer';
 import {
   ImageRouter,
   RoomRouter,
@@ -155,6 +156,61 @@ const port = process.env.PORT || 8080;
 //   io.emit('receiveNotification', { message, type });
 //   res.status(200).send({ status: 'Notification sent to all clients.' });
 // });
+
+//gửi feedback của khách hàng cho mail nhà khách
+app.post('/send-feedback', async (req, res) => {
+  const { hotelEmail, customerName, customerEmail, feedback } = req.body;
+
+  // Validate từng trường
+  if (!hotelEmail || typeof hotelEmail !== 'string' || !hotelEmail.includes('@')) {
+    return res.status(400).send({ error: 'hotelEmail phải là một email hợp lệ.' });
+  }
+  if (!customerName || typeof customerName !== 'string' || customerName.length < 3 || customerName.length > 50) {
+    return res.status(400).send({ error: 'Tên khách hàng phải từ 3 đến 50 ký tự.' });
+  }
+  if (!customerEmail || typeof customerEmail !== 'string' || !customerEmail.includes('@')) {
+    return res.status(400).send({ error: 'customerEmail phải là một email hợp lệ.' });
+  }
+  if (!feedback || typeof feedback !== 'string' || feedback.length < 10 || feedback.length > 500) {
+    return res.status(400).send({ error: 'Phản hồi phải từ 10 đến 500 ký tự.' });
+  }
+  if (!hotelEmail || !customerName || !customerEmail || !feedback) {
+    return res.status(400).send({ error: 'Thiếu thông tin cần thiết' });
+  }
+
+  // Cấu hình transporter
+  const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // Không dùng SSL
+      auth: {
+          user: process.env.EMAIL_USER, // Email của bạn
+          pass: process.env.EMAIL_PASS, // App Password
+      },
+  });
+
+  // Tạo nội dung email
+  const mailOptions = {
+      from: '"Customer Feedback" <nhakhachhuongsen.business@gmail.com>',
+      to: hotelEmail, // Email nhà khách nhận phản hồi
+      subject: `Feedback từ ${customerName}`,
+      html: `
+          <p><strong>Phản Hồi Từ Khách Hàng:</strong></p>
+          <p><strong>Tên:</strong> ${customerName}</p>
+          <p><strong>Email:</strong> ${customerEmail}</p>
+          <p><strong>Nội Dung Phản Hồi:</strong></p>
+          <p>${feedback}</p>
+      `,
+  };
+
+  try {
+      await transporter.sendMail(mailOptions);
+      res.status(200).send({ message: 'Phản hồi đã được gửi thành công!' });
+  } catch (error) {
+      console.error('Error sending email:', error);
+      res.status(500).send({ error: 'Gửi email thất bại' });
+  }
+});
 
 server.listen(port, async () => {
   connectDB();
