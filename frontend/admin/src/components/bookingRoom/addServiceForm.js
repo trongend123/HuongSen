@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import axios from 'axios';
 import { Form, Row, Col, Button, Card } from 'react-bootstrap';
+import { format } from 'date-fns';
 
-const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee }, ref) => {
+
+const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, canUpdate, bookingCheckIn, bookingCheckOut }, ref) => {
     const [otherServices, setOtherServices] = useState([]);
     const [orderServicesData, setOrderServicesData] = useState([]);
     const [selectedService, setSelectedService] = useState("");
@@ -199,17 +201,53 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee }
         addService,
     }));
 
+    // const handleChange = (e) => {
+    //     const selectedDate = new Date(e.target.value);
+    //     const today = new Date();
+    //     today.setHours(0, 0, 0, 0); // Đặt giờ phút giây về 0 để so sánh chính xác
+
+    //     if (selectedDate < today) {
+    //         setFormError("Không được chọn ngày trong quá khứ.");
+    //     } else {
+    //         setFormError('');
+    //     }
+    //     setServiceDate(e.target.value);
+    // };
+
     const handleChange = (e) => {
         const selectedDate = new Date(e.target.value);
         const today = new Date();
-        today.setHours(0, 0, 0, 0); // Đặt giờ phút giây về 0 để so sánh chính xác
+        today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
 
+        // Check if canUpdate is true
+        if (canUpdate) {
+            if (selectedDate < new Date(bookingCheckIn) || selectedDate > new Date(bookingCheckOut)) {
+                setFormError(
+
+                    `Ngày được chọn phải nằm trong khoảng từ ${format(new Date(bookingCheckIn), 'dd-MM-yyyy')} đến ${format(new Date(bookingCheckOut), 'dd-MM-yyyy')}.`
+
+                );
+                return;
+            }
+        }
+
+        // Validate past dates
         if (selectedDate < today) {
             setFormError("Không được chọn ngày trong quá khứ.");
         } else {
-            setFormError('');
+            setFormError(""); // Clear error if valid
         }
+
         setServiceDate(e.target.value);
+    };
+
+    const handleTimeChange = (e) => {
+        setServiceTimeSlot(e.target.value);
+
+        // Clear formError when a time is selected
+        if (e.target.value) {
+            setFormError("");
+        }
     };
     return (
         <Card className="mb-4">
@@ -335,7 +373,8 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee }
                                 <Form.Label>Thời gian</Form.Label>
                                 <Form.Select
                                     value={serviceTimeSlot}
-                                    onChange={(e) => setServiceTimeSlot(e.target.value)}
+                                    onChange={handleTimeChange} // Use new handler to clear formError
+                                    isInvalid={!serviceTimeSlot && formError} // Optional: Highlight error
                                 >
                                     <option value="">Chọn thời gian</option>
                                     <option value="7:00">Sáng (7:00)</option>
@@ -388,7 +427,8 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee }
                                     <Form.Label>Thời gian</Form.Label>
                                     <Form.Select
                                         value={serviceTimeSlot}
-                                        onChange={(e) => setServiceTimeSlot(e.target.value)}
+                                        onChange={handleTimeChange} // Use new handler to clear formError
+                                        isInvalid={!serviceTimeSlot && formError} // Optional: Highlight error
                                     >
                                         <option value="">Chọn thời gian</option>
                                         <option value="7:00">Sáng (7:00)</option>

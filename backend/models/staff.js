@@ -31,7 +31,7 @@ const staffSchema = new Schema(
     role: {
       type: String,
       enum: ['admin', 'staff_mk', 'staff_ds', 'staff_cb', 'chef'],
-      default: 'staff',
+      require: true,
     },
   },
   {

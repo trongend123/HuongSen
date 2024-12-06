@@ -364,11 +364,12 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
             // await Promise.all(updatePromises);
 
             // Tính tổng giá chênh lệch
-            const priceDifference = calculateTotalPrice();
+            // const priceDifference = calculateTotalPrice();
 
             // Cập nhật giá tổng của booking
             const bookingId = orderRooms[0]?.bookingId?._id;
-            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { price: orderRooms[0].bookingId.price + priceDifference, note: note });
+            // await axios.put(`http://localhost:9999/bookings/${bookingId}`, { price: orderRooms[0].bookingId.price + priceDifference, note: note });
+            await axios.put(`http://localhost:9999/bookings/${bookingId}`, { note: note });
 
             await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, staffId: null, note: 'khách đã cập nhật thông tin phòng' });
 
@@ -401,36 +402,36 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
 
 
 
-    const calculateTotalPrice = () => {
-        // Lấy giá cũ của tất cả orderRooms (tính theo từng phòng)
-        const oldPrice = orderRooms.reduce((total, orderRoom) => {
-            const roomPrice = orderRoom.roomCateId?.price || 0;
-            const quantity = orderRoom.quantity;
+    // const calculateTotalPrice = () => {
+    //     // Lấy giá cũ của tất cả orderRooms (tính theo từng phòng)
+    //     const oldPrice = orderRooms.reduce((total, orderRoom) => {
+    //         const roomPrice = orderRoom.roomCateId?.price || 0;
+    //         const quantity = orderRoom.quantity;
 
-            const receiveDate = new Date(orderRoom.receiveRoom);
-            const returnDate = new Date(orderRoom.returnRoom);
-            const numberOfNights = Math.max(1, Math.ceil((returnDate - receiveDate) / (1000 * 60 * 60 * 24)));
+    //         const receiveDate = new Date(orderRoom.receiveRoom);
+    //         const returnDate = new Date(orderRoom.returnRoom);
+    //         const numberOfNights = Math.max(1, Math.ceil((returnDate - receiveDate) / (1000 * 60 * 60 * 24)));
 
-            return total + roomPrice * quantity * numberOfNights;
-        }, 0);
+    //         return total + roomPrice * quantity * numberOfNights;
+    //     }, 0);
 
-        // Tính giá mới từ số lượng phòng đã được cập nhật
-        const newPrice = orderRooms.reduce((total, orderRoom) => {
-            const roomPrice = orderRoom.roomCateId?.price || 0;
-            const quantity = updatedQuantities[orderRoom._id] ?? orderRoom.quantity;
+    //     // Tính giá mới từ số lượng phòng đã được cập nhật
+    //     const newPrice = orderRooms.reduce((total, orderRoom) => {
+    //         const roomPrice = orderRoom.roomCateId?.price || 0;
+    //         const quantity = updatedQuantities[orderRoom._id] ?? orderRoom.quantity;
 
-            const receiveDate = new Date(orderRoom.receiveRoom);
-            const returnDate = new Date(orderRoom.returnRoom);
-            const numberOfNights = Math.max(1, Math.ceil((returnDate - receiveDate) / (1000 * 60 * 60 * 24)));
+    //         const receiveDate = new Date(orderRoom.receiveRoom);
+    //         const returnDate = new Date(orderRoom.returnRoom);
+    //         const numberOfNights = Math.max(1, Math.ceil((returnDate - receiveDate) / (1000 * 60 * 60 * 24)));
 
-            return total + roomPrice * quantity * numberOfNights;
-        }, 0);
+    //         return total + roomPrice * quantity * numberOfNights;
+    //     }, 0);
 
-        // Tính chênh lệch giữa giá cũ và giá mới
-        const priceDifference = newPrice - oldPrice;
+    //     // Tính chênh lệch giữa giá cũ và giá mới
+    //     const priceDifference = newPrice - oldPrice;
 
-        return priceDifference; // Trả về chênh lệch giá
-    };
+    //     return priceDifference; // Trả về chênh lệch giá
+    // };
     // const sendNotification = () => {
     //     const newNotification = { content: "New notification from React!" };
     //     axios
@@ -495,16 +496,16 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                                 <td>{orderRoom.roomCateId?.price ? `${orderRoom.roomCateId.price} VND` : 'N/A'}</td>
                                 <td>{location?.name || 'N/A'}</td>
                                 <td>
-                                    {Agency && orderRooms[0]?.bookingId?.status === 'Đã đặt' ? (
+                                    {/* {Agency && orderRooms[0]?.bookingId?.status === 'Đã đặt' ? (
                                         <input
                                             type="number"
                                             min="1"
                                             value={updatedQuantities[orderRoom._id] ?? orderRoom.quantity}
                                             onChange={(e) => handleQuantityChange(orderRoom._id, e.target.value)}
                                         />
-                                    ) : (
-                                        orderRoom.quantity || 'N/A'
-                                    )}
+                                    ) : ( */}
+                                    {orderRoom.quantity || 'N/A'}
+                                    {/* )} */}
                                 </td>
                                 <td>
                                     {orderRoom?.receiveRoom
@@ -529,8 +530,8 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
 
             </section>
 
-            <section className="booking-info">
-                <p><strong>Ghi chú:</strong> {renderNote(orderRooms[0].bookingId?.note) || 'N/A'}</p>
+            <section className="booking-info" >
+                <p className='border rounded p-2'><strong>Ghi chú:</strong> {renderNote(orderRooms[0].bookingId?.note) || 'N/A'}</p>
             </section>
 
             {orderRooms[0]?.bookingId?.status === 'Đã check-in' &&
@@ -552,28 +553,33 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
             {Agency && orderRooms[0]?.bookingId?.status === 'Đã đặt' &&
                 <section>
                     {/* Note Input Field */}
-                    <Row className="mb-3">
-                        <Col>
+                    <Row>
+                        <Col className='border rounded p-2'>
                             <Form.Group controlId="note">
-                                <Form.Label><strong>Ghi chú đặt phòng</strong></Form.Label>
+                                <Form.Label><strong>Cập nhật Ghi chú đặt phòng</strong></Form.Label>
                                 <Form.Control
                                     as="textarea"
                                     rows={3}
                                     placeholder="Nhập ghi chú (nếu có)"
                                     name="note"
-                                    value={note} // Liên kết với state
-                                    onChange={(e) => setNote(e.target.value)} // Cập nhật state
+                                    value={note}
+                                    onChange={(e) => setNote(e.target.value)} // Update state
+                                    maxLength={700} // Limit to 700 characters
                                 />
+                                <Form.Text className="text-muted">
+                                    {note.length}/700 ký tự
+                                </Form.Text>
                             </Form.Group>
                         </Col>
                     </Row>
+
                     {/* Create Order Button */}
                     <Button
-                        variant="primary"
+                        variant="success"
                         onClick={handleUpdateRoomAll}
                     // disabled={totalPrice <= 0}
                     >
-                        Thêm dữ liệu đặt phòng mới
+                        Cập nhật ghi chú
                     </Button>
                 </section>}
 
@@ -616,8 +622,8 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                                             </Button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colSpan="5">
+                                    <tr >
+                                        <td colSpan="5" >
                                             <strong>Ghi chú:</strong> {renderNote(service?.note, service._id)}
                                         </td>
                                     </tr>
@@ -636,8 +642,12 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                         ref={addServiceRef}
                         bookingId={bookingId} // Pass booking ID after it's created
                         onServiceTotalChange={handleServiceTotalChange} // Callback for service total
+                        canUpdate={true}
+                        bookingCheckIn={orderRooms[0].bookingId.checkin}
+                        bookingCheckOut={orderRooms[0].bookingId.checkout}
                     />
                     <Button onClick={handleUpdateBooking}
+                        variant="success"
                         disabled={isUpdating || (orderRooms[0].bookingId?.status !== 'Đã check-in' && orderRooms[0].bookingId?.status !== 'Đã đặt')}
 
                     >
@@ -651,6 +661,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
             <div className="checkout-button">
 
                 <button
+                    className='bg-danger'
                     onClick={handleRefund}
                     disabled={isUpdating || orderRooms[0].bookingId?.status === 'Cancelled' || orderRooms[0].bookingId?.status === 'Confirmed'}
 

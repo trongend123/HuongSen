@@ -232,10 +232,10 @@ const ServiceBookingList = () => {
                   </tr>
                   {/* Notes Row */}
                   {booking.note !== 'N/A' && (
-                    <tr>
+                    <tr >
                       <td colSpan="8">
                         {booking.note.length > 100 ? (
-                          <div>
+                          <div style={{ textAlign: 'left' }}>
                             {/* Kiểm tra nếu _id đang mở rộng */}
                             {expandedNotes.includes(booking._id)
                               ? booking.note
@@ -249,7 +249,7 @@ const ServiceBookingList = () => {
                             </button>
                           </div>
                         ) : (
-                          <div>{booking.note}</div>
+                          <div style={{ textAlign: 'left' }}>{booking.note}</div>
                         )}
 
                       </td>
