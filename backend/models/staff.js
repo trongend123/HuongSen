@@ -31,7 +31,7 @@ const staffSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ['admin', 'staff_mk', 'staff_ds', 'staff_cb','staff'],
+      enum: ['admin', 'staff_mk', 'staff_ds', 'staff_cb', 'staff'],
       required: true,
     },
   },

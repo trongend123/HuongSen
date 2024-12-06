@@ -2,7 +2,7 @@ import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'rea
 import axios from 'axios';
 import { Form, Row, Col, Card, Button } from 'react-bootstrap';
 
-const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, bookingPrice }, ref) => {
+const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, checkinDate, checkoutDate }, ref) => {
     const [roomCategories, setRoomCategories] = useState([]);
     const [quantity, setQuantity] = useState({});
     const [remainingRooms, setRemainingRooms] = useState({});
@@ -10,18 +10,9 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
     const [selectedRooms, setSelectedRooms] = useState([]);
     const [roomPrices, setRoomPrices] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [receiveRoom, setReceiveRoom] = useState(() => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0); // Đặt thời gian về 00:00:00
-        return today.toISOString().split('T')[0]; // Chuyển đổi về định dạng YYYY-MM-DD
-    });
+    const [receiveRoom, setReceiveRoom] = useState(new Date(checkinDate).toISOString().split('T')[0]);
 
-    const [returnRoom, setReturnRoom] = useState(() => {
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1); // Ngày mai
-        tomorrow.setHours(0, 0, 0, 0); // Đặt thời gian về 00:00:00
-        return tomorrow.toISOString().split('T')[0]; // Chuyển đổi về định dạng YYYY-MM-DD
-    });
+    const [returnRoom, setReturnRoom] = useState(new Date(checkoutDate).toISOString().split('T')[0]);
 
     const [receiveError, setReceiveError] = useState("");
     const [returnError, setReturnError] = useState("");
@@ -30,8 +21,8 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
         setSelectedRooms([]);
         setRoomPrices(0);
         setTotalAmount(0);
-        setReceiveRoom(new Date().toISOString().split('T')[0]); // Default: Today
-        setReturnRoom(new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0]); // Default: Tomorrow
+        setReceiveRoom(new Date(checkinDate).toISOString().split('T')[0]); // Default: Today
+        setReturnRoom(new Date(checkoutDate).toISOString().split('T')[0]); // Default: Tomorrow
     };
 
     // Fetch room data from backend
@@ -153,7 +144,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
             });
 
             if (invalidSelections.length > 0) {
-                alert('Some room selections exceed the available number of rooms. Please adjust your selections.');
+                alert('Một số lựa chọn phòng vượt quá số phòng có sẵn. Vui lòng điều chỉnh lựa chọn của bạn.');
                 let totalAmount = 0
                 return { totalAmount, success: false };
             }
@@ -212,11 +203,16 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
 
     useImperativeHandle(ref, () => ({
         createAgencyOrderRoom,
+        fetchRoomData
     }));
 
     const handleDateChange = (e, type) => {
         const newDate = new Date(e.target.value); // Create Date from input value
         newDate.setHours(0, 0, 0, 0); // Set time to 00:00:00
+        const bookingCheckin = new Date(checkinDate)
+        bookingCheckin.setHours(0, 0, 0, 0)
+        const bookingCheckout = new Date(checkoutDate)
+        bookingCheckout.setHours(0, 0, 0, 0)
 
         const today = new Date();
         today.setHours(0, 0, 0, 0); // Set time to 00:00:00
@@ -226,8 +222,13 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
             returnDate.setHours(0, 0, 0, 0); // Set time to 00:00:00
             const diffTime = returnDate - newDate;
             const calculatedNights = diffTime / (1000 * 60 * 60 * 24);
+            console.log(newDate);
+            console.log(bookingCheckin);
             if (!e.target.value) {
                 setReceiveError("Ngày không được để trống!");
+                setReceiveRoom(e.target.value);
+            } else if (newDate < bookingCheckin) {
+                setReceiveError("Ngày không được trước ngày check-in của hợp đồng!");
                 setReceiveRoom(e.target.value);
             } else if (newDate < today) {
                 setReceiveRoom(e.target.value);
@@ -254,7 +255,11 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
             if (!e.target.value) {
                 setReturnError("Ngày không được để trống!");
                 setReturnRoom(e.target.value);
-            } else if (newDate < today) {
+            } else if (newDate > bookingCheckout) {
+                setReturnError("Ngày không được sau ngày check-out của hợp đồng!");
+                setReturnRoom(e.target.value);
+            }
+            else if (newDate < today) {
                 setReturnRoom(e.target.value);
                 setReturnError('Ngày không được chọn trong quá khứ!');
             } else if (calculatedNights < 1) {
@@ -324,7 +329,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
                                             ( giá / 1đêm: {room.price} VND)
                                         </Col>
                                         <Col className="text-secondary d-flex align-items-center">
-                                            Phòng còn trống: {remainingRoomCount}<br />
+                                            Phòng còn trống:  {Math.max(0, remainingRoomCount)}<br />
                                         </Col>
                                         <Col className="d-flex align-items-center">
                                             <Form.Control
