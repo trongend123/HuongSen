@@ -18,5 +18,4 @@ const ChatScript = () => {
 
     return null; // Không cần render gì cả
 };
-
 export default ChatScript;

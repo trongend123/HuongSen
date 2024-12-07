@@ -358,7 +358,7 @@ const BookingDetails = () => {
                 }))
             );
 
-            const newNotification = { content: "Đơn phòng đã hoàn thành" };
+            const newNotification = { content: "Đơn phòng đã hoàn thành",locationId: location };
             axios
                 .post(`${BASE_URL}/chats/send`, newNotification)
                 .then((response) => {
@@ -926,6 +926,7 @@ const BookingDetails = () => {
                         canUpdate={true}
                         bookingCheckIn={orderRooms[0].bookingId.checkin}
                         bookingCheckOut={orderRooms[0].bookingId.checkout}
+                        locationId={location}
                     />
                     <Button onClick={handleUpdateBooking}
                         disabled={isUpdating || (orderRooms[0].bookingId?.status !== 'Đã check-in' && orderRooms[0].bookingId?.status !== 'Đã đặt')}

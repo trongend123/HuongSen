@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import './contact.css';
 import logo from '../../assets/logo.png';
+import { BASE_URL } from '../../utils/config';
+import axios from 'axios';
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -9,22 +12,47 @@ const Contact = () => {
     message: ''
   });
 
+  const [error, setError] = useState(null); // State để lưu lỗi
+  const [success, setSuccess] = useState(null); // State để lưu trạng thái thành công
+
+  // Xử lý thay đổi dữ liệu trong form
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  // Xử lý gửi form
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
+    setError(null); // Reset lỗi cũ
+    setSuccess(null); // Reset trạng thái thành công
+
+    const sendData = {
+      hotelEmail: 'nhakhachhuongsen.business@gmail.com',
+      customerName: formData.name,
+      customerEmail: formData.email,
+      feedback: formData.message
+    };
+
+    try {
+      const response = await axios.post(`${BASE_URL}/send-feedback`, sendData);
+      setSuccess('Phản hồi của bạn đã được gửi thành công!'); // Hiển thị thông báo thành công
+      setFormData({ name: '', email: '', message: '' }); // Reset form
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.error || // Lấy thông báo lỗi từ backend
+        error.message || // Lỗi do Axios
+        'Đã xảy ra lỗi, vui lòng thử lại sau.'; // Lỗi mặc định
+
+      setError(errorMessage); // Hiển thị lỗi
+    }
   };
 
   return (
     <Container className="contact-page-container mt-4">
       <h1>Liên hệ với chúng tôi</h1>
       <Row>
-        {/* Left Column - Contact Information */}
+        {/* Cột trái - Thông tin liên hệ */}
         <Col md={6} className="contact-info mb-4">
-
           <div>
             <img src={logo} alt="Logo" style={{ width: '75%', height: 'auto', display: 'block' }} />
             <br />
@@ -39,9 +67,11 @@ const Contact = () => {
           </div>
         </Col>
 
-        {/* Right Column - Contact Form */}
+        {/* Cột phải - Form liên hệ */}
         <Col md={6}>
           <p>Nếu bạn có thắc mắc hoặc vấn đề cần giúp đỡ, vui lòng điền vào form bên dưới, chúng tôi sẽ cố gắng giải đáp trong thời gian sớm nhất</p>
+          {error && <Alert variant="danger">{error}</Alert>} {/* Hiển thị lỗi */}
+          {success && <Alert variant="success">{success}</Alert>} {/* Hiển thị thành công */}
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="name">
               <Form.Label>Tên</Form.Label>
@@ -75,7 +105,7 @@ const Contact = () => {
               />
             </Form.Group>
             <Button type="submit" variant="primary" className="mt-4">
-              Submit
+              Gửi
             </Button>
           </Form>
         </Col>
