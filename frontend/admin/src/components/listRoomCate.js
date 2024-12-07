@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Form, Row, Col, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import { BASE_URL } from "../utils/config";
 
 // Component to display individual room category information
 const RoomCategoryItem = ({ roomCategory, onDelete, onEdit }) => {
@@ -46,10 +47,10 @@ const ListRoomCate = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const roomCategoryResponse = await axios.get('http://localhost:9999/roomCategories');
+                const roomCategoryResponse = await axios.get(`${BASE_URL}/roomCategories`);
                 setRoomCategories(roomCategoryResponse.data);
 
-                const locationResponse = await axios.get('http://localhost:9999/locations');
+                const locationResponse = await axios.get(`${BASE_URL}/locations`);
                 setLocations(locationResponse.data);
 
 
@@ -89,7 +90,7 @@ const ListRoomCate = () => {
     // Handle delete room category
     const handleDelete = (id) => {
         axios
-            .delete(`http://localhost:9999/roomCategories/${id}`)
+            .delete(`${BASE_URL}/roomCategories/${id}`)
             .then(() => {
                 setRoomCategories(roomCategories.filter(roomCategory => roomCategory._id !== id));
             })
@@ -112,24 +113,25 @@ const ListRoomCate = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Chuẩn hóa tên loại phòng nếu trường đang thay đổi là `name`
-        const formattedValue =
-            name === 'name'
-                ? value.trim().replace(/\s+/g, ' ').replace(/\b\w/g, (c) => c.toLowerCase())
-                : value;
+        // Kiểm tra giới hạn 300 ký tự nếu trường đang thay đổi là `description`
+        if (name === 'description' && value.length > 300) {
+            return; // Ngăn không cho cập nhật nếu vượt quá giới hạn
+        }
 
         setNewRoomCategory((prevState) => ({
             ...prevState,
-            [name]: formattedValue,
+            [name]: value, // Giữ nguyên giá trị mà không cần chuẩn hóa
         }));
     };
+
+
 
 
     // Handle room category creation
     const handleCreateRoomCategory = () => {
         if (validateInputs()) {
             axios
-                .post('http://localhost:9999/roomCategories', newRoomCategory)
+                .post(`${BASE_URL}/roomCategories`, newRoomCategory)
                 .then((response) => {
                     setRoomCategories([...roomCategories, response.data]);
                     handleCloseModal();
@@ -140,7 +142,6 @@ const ListRoomCate = () => {
 
     // Handle room category editing
     const handleEditRoomCategory = (roomCategory) => {
-        console.log(roomCategory);
         setIsEditMode(true);
         setSelectedRoomCategory(roomCategory);
         setNewRoomCategory({
@@ -158,7 +159,7 @@ const ListRoomCate = () => {
     const handleUpdateRoomCategory = () => {
         if (validateInputs()) {
             axios
-                .put(`http://localhost:9999/roomCategories/${selectedRoomCategory._id}`, newRoomCategory)
+                .put(`${BASE_URL}/roomCategories/${selectedRoomCategory._id}`, newRoomCategory)
                 .then((response) => {
                     setRoomCategories(
                         roomCategories.map(roomCategory => roomCategory._id === selectedRoomCategory._id ? response.data : roomCategory)
@@ -180,6 +181,7 @@ const ListRoomCate = () => {
         return matchesRoomName && matchesLocation;
 
     });
+
 
     return (
         <Container>
@@ -291,9 +293,9 @@ const ListRoomCate = () => {
                                 name="description"
                                 value={newRoomCategory.description}
                                 onChange={handleChange}
-
+                                maxLength={300} // Giới hạn 300 ký tự
                             />
-
+                            <small>{newRoomCategory.description.length}/300 ký tự</small>
                         </Form.Group>
                         {isEditMode === false && (
                             <Form.Group className="mb-3">

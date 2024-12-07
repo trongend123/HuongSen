@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { DoSonRooms, CatBaRooms, MinhKhaiRooms } from './checkin_rooms'; // Import child components
 import './listRoom.css';
-
+import { BASE_URL } from "../utils/config";
 const ListRoom = () => {
   const [roomData, setRoomData] = useState([]);
   const [locations, setLocation] = useState([]);
@@ -31,15 +31,15 @@ const ListRoom = () => {
     }
 
     // Fetch room, location, and category data
-    axios.get('http://localhost:9999/rooms')
+    axios.get(`${BASE_URL}/rooms`)
       .then((response) => setRoomData(response.data))
       .catch((error) => console.error('Error fetching room data:', error));
 
-    axios.get('http://localhost:9999/locations')
+    axios.get(`${BASE_URL}/locations`)
       .then((response) => setLocation(response.data))
       .catch((error) => console.error('Error fetching locations:', error));
 
-    axios.get('http://localhost:9999/roomCategories')
+    axios.get(`${BASE_URL}/roomCategories`)
       .then((response) => setCategories(response.data))
       .catch((error) => console.error('Error fetching room categories:', error));
   }, []);
@@ -63,18 +63,18 @@ const ListRoom = () => {
         bookingId: id,
         status: 'Đang sử dụng',
       };
-      axios.put(`http://localhost:9999/rooms/${room._id}`,
+      axios.put(`${BASE_URL}/rooms/${room._id}`,
         updatedRoom
       )
 
-      axios.put(`http://localhost:9999/bookings/${id}`,
+      axios.put(`${BASE_URL}/bookings/${id}`,
         {
           status: 'Đã check-in',
         }
       )
       const newNotification = { content: "Lễ tân đã check-in phòng" };
                 axios
-                .post("http://localhost:9999/chats/send", newNotification)
+                .post(`${BASE_URL}/chats/send`, newNotification)
                 .then((response) => {
                 console.log(response.data);
                 })
@@ -91,7 +91,7 @@ const ListRoom = () => {
     Promise.all(updates)
       .then(() => {
         // Refresh room data after updates
-        axios.get('http://localhost:9999/rooms')
+        axios.get(`${BASE_URL}/rooms`)
           .then((response) => setRoomData(response.data))
           .catch((error) => console.error('Error fetching updated room data:', error));
 

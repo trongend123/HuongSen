@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Table, Row, Col, Pagination, Alert } from "react-bootstrap";
 import axios from "axios";
+import { BASE_URL } from "../utils/config";
 
 const ListOtherServices = () => {
     const [services, setServices] = useState([]);
@@ -29,7 +30,7 @@ const ListOtherServices = () => {
 
     // Fetch data function
     const fetchData = () => {
-        axios.get("http://localhost:9999/otherServices")
+        axios.get(`${BASE_URL}/otherServices`)
             .then(response => {
                 setServices(response.data);
                 setFilteredServices(response.data);
@@ -128,8 +129,8 @@ const ListOtherServices = () => {
         if (!validateForm()) return; // Validate before proceeding
 
         const request = editingService
-            ? axios.put(`http://localhost:9999/otherServices/${editingService._id}`, newService)
-            : axios.post("http://localhost:9999/otherServices", newService);
+            ? axios.put(`${BASE_URL}/otherServices/${editingService._id}`, newService)
+            : axios.post(`${BASE_URL}/otherServices`, newService);
 
         request
             .then(response => {
@@ -154,7 +155,6 @@ const ListOtherServices = () => {
                 console.error(error);
             });
     };
-
     // Delete a service
     // const handleDelete = (id) => {
     //     axios.delete(`http://localhost:9999/otherServices/${id}`)
@@ -176,7 +176,7 @@ const ListOtherServices = () => {
     const handleInactiveAndActive = async (id) => {
         try {
             // Tìm dịch vụ theo id
-            const service = await axios.get(`http://localhost:9999/otherServices/${id}`);
+            const service = await axios.get(`${BASE_URL}/otherServices/${id}`);
 
             // Kiểm tra xem dịch vụ có tồn tại không
             if (!service) {
@@ -188,13 +188,13 @@ const ListOtherServices = () => {
             }
 
             // Lật trạng thái isDeleted (nghĩa là chuyển từ true -> false hoặc ngược lại)
-            const updatedService = axios.delete(`http://localhost:9999/otherServices/${id}`)
+            const updatedService = axios.delete(`${BASE_URL}/otherServices/${id}`)
                 .then(() => {
                     fetchData()
                     if (!service.data.isDeleted) {
                         setMessage({
                             type: 'success',
-                            text: 'Xóa dịch vụ thành công!'
+                            text: 'Đã dừng cung cấp dịch vụ thành công!'
                         });
 
                     } else {
@@ -276,6 +276,7 @@ const ListOtherServices = () => {
                                 <Button variant="warning" onClick={() => handleShowEditModal(service)}>
                                     Chỉnh sửa
                                 </Button>{" "}
+
                                 {/* <Button variant="success" onClick={() => handleDelete(service._id)}>
                                     Active
                                 </Button> */}
@@ -283,7 +284,7 @@ const ListOtherServices = () => {
                                     variant={service.isDeleted ? "primary" : "success"}
                                     onClick={() => handleInactiveAndActive(service._id)}
                                 >
-                                    {service.isDeleted ? "Khôi phục" : "Xóa"}
+                                    {service.isDeleted ? "Khôi phục" : "Dừng phục vụ"}
                                 </Button>
 
                             </td>

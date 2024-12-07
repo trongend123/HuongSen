@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import axios from 'axios';
 import { Form, Row, Col, Card, Container } from 'react-bootstrap';
+import { BASE_URL } from "../../utils/config";
 
 const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuantityChange, onTotalRoomsRemaining, locationId }, ref) => {
     const [roomCategories, setRoomCategories] = useState([]);
@@ -19,17 +20,17 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
 
     const fetchRoomData = async () => {
         try {
-            const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
+            const roomCategoriesResponse = await axios.get(`${BASE_URL}/roomCategories`);
             const filteredRoomCategories = roomCategoriesResponse.data.filter(room => room.locationId._id === locationId);
             setRoomCategories(filteredRoomCategories);
 
-            const bookedRoomsResponse = await axios.get(`http://localhost:9999/orderRooms/totalbycategory/?checkInDate=${checkin}&checkOutDate=${checkout}`);
+            const bookedRoomsResponse = await axios.get(`${BASE_URL}/orderRooms/totalbycategory/?checkInDate=${checkin}&checkOutDate=${checkout}`);
             const bookedRoomsMap = {};
             bookedRoomsResponse.data.forEach(item => {
                 bookedRoomsMap[item.roomCateId] = item.totalRooms;
             });
 
-            const totalRoomsResponse = await axios.get('http://localhost:9999/rooms/category/totals');
+            const totalRoomsResponse = await axios.get(`${BASE_URL}/rooms/category/totals`);
             const initialRemainingRooms = {};
             totalRoomsResponse.data.categoryTotals.forEach(room => {
                 const totalRooms = room.totalRooms;
@@ -132,7 +133,7 @@ const SelectRoomCategories = forwardRef(({ checkin, checkout, customerID, onQuan
 
             // Create room orders
             const orderRoomPromises = selectedRooms.map(room => {
-                return axios.post('http://localhost:9999/orderRooms', {
+                return axios.post(`${BASE_URL}/orderRooms`, {
                     roomCateId: room.roomCateId,
                     customerId: customerID,
                     bookingId: bookingId,

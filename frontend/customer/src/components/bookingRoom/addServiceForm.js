@@ -2,6 +2,7 @@ import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'rea
 import axios from 'axios';
 import { Form, Row, Col, Button, Card } from 'react-bootstrap';
 import { format } from 'date-fns';
+import { BASE_URL } from "../../utils/config";
 
 const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate, bookingCheckIn, bookingCheckOut }, ref) => {
     const [otherServices, setOtherServices] = useState([]);
@@ -20,7 +21,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate,
     useEffect(() => {
         const fetchOtherServices = async () => {
             try {
-                const response = await axios.get('http://localhost:9999/otherServices');
+                const response = await axios.get(`${BASE_URL}/otherServices`);
                 // Lọc và chỉ lấy các dịch vụ chưa bị xóa (isDeleted === false)
                 const filteredServices = response.data
                     .filter(service => !service.isDeleted && service.price !== 1000) // Lọc các dịch vụ chưa bị xóa
@@ -152,7 +153,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate,
                 // const vietnamTime = new Date(localTime.getTime() - localTime.getTimezoneOffset() * 60000); // Adjust by local offset
                 // const formattedTime = vietnamTime.toISOString(); // Convert to ISO 8601
 
-                return axios.post('http://localhost:9999/orderServices', {
+                return axios.post(`${BASE_URL}/orderServices`, {
                     otherServiceId: service.otherServiceId,
                     bookingId,
                     note: service.note, // Ghi chú

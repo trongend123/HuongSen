@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
+import { BASE_URL } from "../../utils/config";
 const PaymentSuccess = () => {
   const { id } = useParams();
   const [message, setMessage] = useState('Processing your payment...');
@@ -9,7 +9,7 @@ const PaymentSuccess = () => {
   useEffect(() => {
     const confirmBooking = async () => {
       try {
-        const response = await fetch(`http://localhost:9999/bookings/payment-success/${id}`);
+        const response = await fetch(`${BASE_URL}/bookings/payment-success/${id}`);
         const result = await response.text();
         setMessage(result);
       } catch (error) {

@@ -3,7 +3,8 @@ import { Container, Form, Button, Alert } from 'react-bootstrap';
 
 import axios from 'axios';
 import UpdateAndRefund from '../components/UpdateAndRefund';
-
+import { toast, ToastContainer } from 'react-toastify';
+import { BASE_URL } from '../utils/config';
 const PageAddServices = () => {
     const [bookingId, setBookingId] = useState('');
     const [submittedBookingId, setSubmittedBookingId] = useState(null);
@@ -45,7 +46,7 @@ const PageAddServices = () => {
         }
 
         try {
-            const response = await axios.get(`http://localhost:9999/bookings/${bookingId}`);
+            const response = await axios.get(`${BASE_URL}/bookings/${bookingId}`);
             if (response.data) {
                 setIsValidBooking(true);
                 setSubmittedBookingId(bookingId.trim());
@@ -71,7 +72,7 @@ const PageAddServices = () => {
         }
 
         try {
-            const response = await axios.post(`http://localhost:9999/email/verify-otp/${bookingId}`, { otp });
+            const response = await axios.post(`${BASE_URL}/email/verify-otp/${bookingId}`, { otp });
             if (response.data.success) {
                 setIsOtpValid(true);
                 setOtpError(null);
@@ -87,7 +88,7 @@ const PageAddServices = () => {
     const sendOtp = async () => {
         setIsOtpSending(true); // Start loading
         try {
-            await axios.post(`http://localhost:9999/email/send-otp/${bookingId}`);
+            await axios.post(`${BASE_URL}/email/send-otp/${bookingId}`);
             setIsOtpSent(true);  // Indicate OTP sent successfully
             setOtpError(null);   // Clear OTP errors
         } catch (error) {

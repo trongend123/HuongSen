@@ -1,5 +1,41 @@
 [{
   "_id": {
+    "$oid": "670691867f84d57bd16fc23a"
+  },
+  "username": "dungpn",
+  "password": "123123",
+  "email": "dungpn@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "admin",
+  "fullname": "Phạm Ngọc Dũng"
+},
+{
+  "_id": {
+    "$oid": "6706942a7f84d57bd16fc244"
+  },
+  "username": "staffcb2",
+  "password": "123123",
+  "email": "staffcb2@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "staff_cb",
+  "fullname": "Trần Thị B"
+},
+{
+  "_id": {
+    "$oid": "670693e77f84d57bd16fc240"
+  },
+  "username": "staffmk2",
+  "password": "123123",
+  "email": "staffmk2@gmail.com",
+  "phone": "0123456789",
+  "avatarId": "",
+  "role": "staff_mk",
+  "fullname": "Nguyễn Văn Vui"
+},
+{
+  "_id": {
     "$oid": "67068ef07f84d57bd16fc238"
   },
   "username": "tuannq",
@@ -8,7 +44,10 @@
   "phone": "0939293888",
   "avatarId": "",
   "role": "admin",
-  "fullname": "Nguyễn Quang Tuấn"
+  "fullname": "Nguyễn Quang Tuấn",
+  "updatedAt": {
+    "$date": "2024-12-05T14:39:33.812Z"
+  }
 },
 {
   "_id": {
@@ -24,15 +63,15 @@
 },
 {
   "_id": {
-    "$oid": "670691867f84d57bd16fc23a"
+    "$oid": "670694187f84d57bd16fc243"
   },
-  "username": "dungpn",
+  "username": "staffcb1",
   "password": "123123",
-  "email": "dungpn@gmail.com",
+  "email": "staffcb1@gmail.com",
   "phone": "0123456789",
   "avatarId": "",
-  "role": "admin",
-  "fullname": "Phạm Ngọc Dũng"
+  "role": "staff_cb",
+  "fullname": "Nguyễn Văn A"
 },
 {
   "_id": {
@@ -45,18 +84,6 @@
   "avatarId": "",
   "role": "staff_mk",
   "fullname": "Nguyễn Quang Hiếu"
-},
-{
-  "_id": {
-    "$oid": "670693e77f84d57bd16fc240"
-  },
-  "username": "staffmk2",
-  "password": "123123",
-  "email": "staffmk2@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "staff_mk",
-  "fullname": "Nguyễn Văn Vui"
 },
 {
   "_id": {
@@ -81,28 +108,4 @@
   "avatarId": "",
   "role": "staff_ds",
   "fullname": "Phan Công Hiếu"
-},
-{
-  "_id": {
-    "$oid": "670694187f84d57bd16fc243"
-  },
-  "username": "staffcb1",
-  "password": "123123",
-  "email": "staffcb1@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "staff_cb",
-  "fullname": "Nguyễn Văn A"
-},
-{
-  "_id": {
-    "$oid": "6706942a7f84d57bd16fc244"
-  },
-  "username": "staffcb2",
-  "password": "123123",
-  "email": "staffcb2@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "staff_cb",
-  "fullname": "Trần Thị B"
 }]

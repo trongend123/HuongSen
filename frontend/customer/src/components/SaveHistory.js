@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate and useLocation
-
+import { BASE_URL } from "../utils/config";
 const SaveHistory = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -27,11 +27,11 @@ const SaveHistory = () => {
 
 
             // Fetch booking details
-            const bookingResponse = await axios.get(`http://localhost:9999/bookings/${bookingId}`);
+            const bookingResponse = await axios.get(`${BASE_URL}/bookings/${bookingId}`);
             const bookingData = bookingResponse.data;
 
             // Fetch related orderServices for the booking
-            const orderServicesResponse = await axios.get(`http://localhost:9999/orderServices/booking/${bookingId}`);
+            const orderServicesResponse = await axios.get(`${BASE_URL}/orderServices/booking/${bookingId}`);
             const orderServicesData = orderServicesResponse.data;
 
             // Prepare data to save in history
@@ -45,7 +45,7 @@ const SaveHistory = () => {
             };
 
             // Send the data to history
-            await axios.post('http://localhost:9999/histories', historyData);
+            await axios.post(`${BASE_URL}/histories`, historyData);
 
 
             // Navigate to the provided path

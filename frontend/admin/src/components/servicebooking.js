@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from "../utils/config";
 
 const ServiceBookingList = () => {
   const [bookings, setBookings] = useState([]);
@@ -24,7 +25,7 @@ const ServiceBookingList = () => {
 
   const fetchServiceBookings = async () => {
     try {
-      const response = await axios.get('http://localhost:9999/service-bookings');
+      const response = await axios.get(`${BASE_URL}/service-bookings`);
       setBookings(response.data || []);
       setFilteredBookings(response.data || []);
       setLoading(false);
@@ -73,7 +74,7 @@ const ServiceBookingList = () => {
 
   const handleStatusChange = async (bookingId, newStatus) => {
     try {
-      await axios.put(`http://localhost:9999/orderServices/${bookingId}`, {
+      await axios.put(`${BASE_URL}/orderServices/${bookingId}`, {
         status: newStatus,
       });
       const updatedBookings = bookings.map((booking) =>

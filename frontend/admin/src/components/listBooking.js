@@ -3,6 +3,7 @@ import { Table, Container, Button, Modal, Form, InputGroup, FormControl, Paginat
 import { useNavigate } from 'react-router-dom'; // Nhập useNavigate từ react-router-dom
 import axios from 'axios';
 import "./listBooking.css";
+import { BASE_URL } from "../utils/config";
 
 const ListBooking = () => {
   const [bookings, setBookings] = useState([]);
@@ -40,12 +41,12 @@ const ListBooking = () => {
       }
     }
     axios
-      .get("http://localhost:9999/orderRooms")
+      .get(`${BASE_URL}/orderRooms`)
       .then((response) => setBookings(response.data))
       .catch((error) => console.error("Error fetching bookings:", error));
 
     axios
-      .get('http://localhost:9999/locations')
+      .get(`${BASE_URL}/locations`)
       .then((response) => setLocation(response.data))
       .catch((error) => console.error('Error fetching locations:', error));
   }, []);
@@ -81,7 +82,7 @@ const ListBooking = () => {
     };
 
     axios
-      .put(`http://localhost:9999/bookings/${selectedBooking.bookingId._id}`, updatedBooking.bookingId)
+      .put(`${BASE_URL}/bookings/${selectedBooking.bookingId._id}`, updatedBooking.bookingId)
       .then((response) => {
         setBookings((prevBookings) =>
           prevBookings.map((booking) =>
@@ -97,7 +98,7 @@ const ListBooking = () => {
     booking.status = "Đã hủy";
     const bookingId = booking._id;
     axios
-      .put(`http://localhost:9999/bookings/${bookingId}`, booking)
+      .put(`${BASE_URL}/bookings/${bookingId}`, booking)
       .then((response) => {
         setBookings((prevBookings) =>
           prevBookings.map((booking) =>
