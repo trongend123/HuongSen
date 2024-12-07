@@ -87,24 +87,26 @@ const ListRoom = () => {
 
   const handleUpdate = () => {
     var updatedRoom = {};
-    if(updatedStatus !== "Đang sử dụng" && updatedStatus !== "Đã book" ){
+
+    if (updatedStatus !== "Đang sử dụng" && updatedStatus !== "Đã book") {
       updatedRoom = {
         ...selectedRoom,
         bookingId: null, // Xác định bookingId
         roomCategoryId: updatedCategory,
         status: updatedStatus,
       };
-      
-    }else{
-     updatedRoom = {
-      ...selectedRoom,
-      bookingId: bookingId, // Xác định bookingId
-      roomCategoryId: updatedCategory,
-      status: updatedStatus,
-    };
-  }
+
+
+    } else {
+      updatedRoom = {
+        ...selectedRoom,
+        bookingId: bookingId, // Xác định bookingId
+        roomCategoryId: updatedCategory,
+        status: updatedStatus,
+      };
+    }
     console.log(updatedRoom);
-    
+
     axios
       .put(`http://localhost:9999/rooms/${selectedRoom._id}`, updatedRoom)
       .then((response) => {
@@ -112,14 +114,14 @@ const ListRoom = () => {
           .get('http://localhost:9999/rooms')
           .then((res) => setRoomData(res.data))
           .catch((error) => console.error('Error fetching updated room data:', error));
-       
+
         setShowModal(false);
         const newNotification = { content: `Phòng ${selectedRoom.code} đã chuyển trạng thái sang ${updatedStatus}.` };
-                axios
-                .post("http://localhost:9999/chats/send", newNotification)
-                .then((response) => {
-                console.log(response.data);
-                })
+        axios
+          .post("http://localhost:9999/chats/send", newNotification)
+          .then((response) => {
+            console.log(response.data);
+          })
       })
       .catch((error) => console.error('Error updating room:', error));
   };
@@ -234,7 +236,7 @@ const ListRoom = () => {
                   value={updatedStatus}
                   onChange={(e) => {
                     setUpdatedStatus(e.target.value);
-                    
+
                   }}
                 >
                   <option value="Trống">Trống</option>

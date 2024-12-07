@@ -24,12 +24,28 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
         const newErrors = {};
         const today = new Date();
 
+        const normalizeDate = (date) => {
+            const normalized = new Date(date);
+            normalized.setHours(0, 0, 0, 0);
+            return normalized;
+        };
+
+        // Kiểm tra mã định danh (ID code)
+        if (!identifycationData.code) {
+            newErrors.code = "Mã định danh là bắt buộc.";
+        }
+
+        // Kiểm tra ngày hết hạn (Expiry date)
+        if (!identifycationData.dateEnd) {
+            newErrors.dateEnd = "Ngày hết hạn là bắt buộc.";
+        }
+
         // Kiểm tra loại giấy tờ và mã định danh
         if (!identifycationData.name) {
             newErrors.name = "Loại giấy tờ là bắt buộc.";
         } else {
-            const identifycationStartDate = new Date(identifycationData.dateStart);
-            const identifycationEndDate = new Date(identifycationData.dateEnd);
+            const identifycationStartDate = normalizeDate(new Date(identifycationData.dateStart));
+            const identifycationEndDate = normalizeDate(new Date(identifycationData.dateEnd));
 
             switch (identifycationData.name) {
                 case "Căn Cước Công Dân":
@@ -48,33 +64,74 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
                             newErrors.dateEnd = "Ngày hết hạn phải sau ngày cấp.";
                         } else if (identifycationEndDate.getTime() !== fiveYearsLater.getTime()) {
                             newErrors.dateEnd = "Ngày hết hạn phải cách ngày cấp đúng 5 năm.";
+                        } else {
+                            const dateEnd = new Date(identifycationData.dateEnd);
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0); // Đặt thời gian của hôm nay là 0:00
+                            if (dateEnd < today) {
+                                newErrors.dateEnd = "Giấy tờ đã hết hạn.";
+                            }
                         }
                     }
                     break;
-
                 case "Giấy Phép Lái Xe":
-                case "Hộ Chiếu":
-                    if (!identifycationData.code) {
-                        if (identifycationData.name === "Giấy Phép Lái Xe" && !/^[0-9]{12}$/.test(identifycationData.code)) {
-                            newErrors.code = "Mã Giấy Phép Lái Xe phải gồm 12 chữ số.";
-                        } else if (identifycationData.name === "Hộ Chiếu" && !/^[A-Z][0-9]{7}$/.test(identifycationData.code)) {
-                            newErrors.code = "Mã Hộ Chiếu phải gồm 8 ký tự, bắt đầu bằng chữ cái in hoa, tiếp theo là 7 số.";
-                        }
+                    if (!identifycationData.code || !/^[0-9]{12}$/.test(identifycationData.code)) {
+                        newErrors.code = "Mã Giấy Phép Lái Xe phải gồm 12 chữ số.";
                     }
 
-                    // Kiểm tra ngày hết hạn cho Giấy Phép Lái Xe và Hộ Chiếu
                     if (!identifycationData.dateEnd) {
                         newErrors.dateEnd = "Ngày hết hạn là bắt buộc.";
                     } else {
                         const fiveYearsLater = new Date(identifycationStartDate);
-                        const tenYearsLater = new Date(identifycationStartDate);
                         fiveYearsLater.setFullYear(fiveYearsLater.getFullYear() + 5);
+                        const hunderYearsLater = new Date(identifycationStartDate);
+                        hunderYearsLater.setFullYear(hunderYearsLater.getFullYear() + 100);
+                        const tenYearsLater = new Date(identifycationStartDate);
                         tenYearsLater.setFullYear(tenYearsLater.getFullYear() + 10);
 
                         if (identifycationEndDate <= identifycationStartDate) {
                             newErrors.dateEnd = "Ngày hết hạn phải sau ngày cấp.";
-                        } else if (identifycationEndDate !== fiveYearsLater && identifycationEndDate !== tenYearsLater) {
-                            newErrors.dateEnd = "Ngày hết hạn phải cách ngày cấp 5 năm hoặc 10 năm. (Vô hạn = 10 năm)";
+                        } else if (
+                            identifycationEndDate.getTime() !== fiveYearsLater.getTime() &&
+                            identifycationEndDate.getTime() !== hunderYearsLater.getTime() &&
+                            identifycationEndDate.getTime() !== tenYearsLater.getTime()) {
+                            newErrors.dateEnd = "Phải cách ngày cấp đúng 5 năm hoặc 10 năm.(Vô hạn =100 năm)";
+                        }
+                        else {
+                            const dateEnd = new Date(identifycationData.dateEnd);
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0); // Đặt thời gian của hôm nay là 0:00
+                            if (dateEnd < today) {
+                                newErrors.dateEnd = "Giấy tờ đã hết hạn.";
+                            }
+                        }
+                    }
+                    break;
+
+                case "Hộ Chiếu":
+                    if (!identifycationData.code || !/^[A-Z][0-9]{7}$/.test(identifycationData.code)) {
+                        newErrors.code = "Mã Hộ Chiếu phải gồm 8 ký tự, bắt đầu bằng chữ cái in hoa, tiếp theo là 7 số.";
+                    }
+
+                    if (!identifycationData.dateEnd) {
+                        newErrors.dateEnd = "Ngày hết hạn là bắt buộc.";
+                    } else {
+                        const fiveYearsLater = new Date(identifycationStartDate);
+                        fiveYearsLater.setFullYear(fiveYearsLater.getFullYear() + 5);
+                        const tenYearsLater = new Date(identifycationStartDate);
+                        tenYearsLater.setFullYear(tenYearsLater.getFullYear() + 10);
+
+                        if (identifycationEndDate <= identifycationStartDate) {
+                            newErrors.dateEnd = "Ngày hết hạn phải sau ngày cấp.";
+                        } else if (identifycationEndDate.getTime() !== fiveYearsLater.getTime() && identifycationEndDate.getTime() !== tenYearsLater.getTime()) {
+                            newErrors.dateEnd = "Phải cách ngày cấp đúng 5 năm hoặc 10 năm.";
+                        } else {
+                            const dateEnd = new Date(identifycationData.dateEnd);
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0); // Đặt thời gian của hôm nay là 0:00
+                            if (dateEnd < today) {
+                                newErrors.dateEnd = "Giấy tờ đã hết hạn.";
+                            }
                         }
                     }
                     break;
@@ -84,23 +141,35 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
             }
         }
 
-        // Kiểm tra ngày cấp
-        const identifycationStartDate = new Date(identifycationData.dateStart);
+        // Kiểm tra ngày cấp (Start date)
         if (!identifycationData.dateStart) {
             newErrors.dateStart = "Ngày cấp là bắt buộc.";
-        } else if (identifycationStartDate > today) {
-            newErrors.dateStart = "Ngày cấp không thể sau ngày hôm nay.";
+        } else {
+            const identifycationStartDate = normalizeDate(new Date(identifycationData.dateStart));
+            if (identifycationStartDate > today) {
+                newErrors.dateStart = "Ngày cấp không thể sau ngày hôm nay.";
+            }
         }
 
-        // Kiểm tra nơi cấp
-        const locationPattern = /^[A-Za-zÀ-ÿ0-9\s,.-]+$/;
-        if (!identifycationData.location.trim() || !locationPattern.test(identifycationData.location)) {
-            newErrors.location = "Địa chỉ chỉ được chứa chữ cái, số và các ký tự như ',', '.', và '-'.";
+        // Kiểm tra nơi cấp (Issuing location)
+        // const locationPattern = /^[A-Za-zÀ-ÿ0-9]+([ ,.-][A-Za-zÀ-ÿ0-9]+)*$/;
+        const locationPattern = /^[A-Za-zÀ-ÿà-ỹ0-9]+([ ,.-][A-Za-zÀ-ÿà-ỹ0-9]+)*$/;
+
+
+        if (!identifycationData.location.trim()) {
+            newErrors.location = "Nơi cấp là bắt buộc.";
+        } else if (!locationPattern.test(identifycationData.location)) {
+            newErrors.location = "Nơi cấp chỉ được chứa chữ cái, số, và các ký tự như ',', '.', '-' với 1 dấu cách giữa các từ.(VD: 123 Main St, City-Name.)";
+        } else if (identifycationData.location.length > 200) {
+            newErrors.location = "Nơi cấp không được vượt quá 200 ký tự.";
         }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+
+
+
 
     const createIdentify = async (customerID) => {
         if (!validateForm()) {
@@ -125,10 +194,22 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
                 throw new Error(`Server error: ${response.status}`);
             }
 
+
             // Parse the response
             const responseData = await response.json();
             console.log("Identifycation created successfully!");
 
+            // // Reset form state
+            // setIdentifycationData({
+            //     name: '',
+            //     code: '',
+            //     dateStart: '',
+            //     dateEnd: '',
+            //     location: '',
+            //     customerID: null
+            // });
+
+            setErrors({}); // Clear errors
             // Return the created identifycation ID
             return responseData._id;
         } catch (error) {
@@ -144,7 +225,7 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
 
     return (
         <Card className="shadow-sm mb-3">
-            <Card.Header className="bg-primary text-white"><h5>Thêm Giấy Tờ Định Danh</h5></Card.Header>
+            <Card.Header className=" text-white bg-primary"><h5>Thêm Giấy Tờ Định Danh</h5></Card.Header>
             <Card.Body>
                 <Form>
                     <Row>
@@ -161,7 +242,6 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
                                     <option value="Căn Cước Công Dân">Căn Cước Công Dân</option>
                                     <option value="Hộ Chiếu">Hộ Chiếu</option>
                                     <option value="Giấy Phép Lái Xe">Giấy Phép Lái Xe</option>
-                                    <option value="Hộ khẩu">Hộ khẩu</option>
                                 </Form.Select>
                                 <Form.Control.Feedback type='invalid'>
                                     {errors.name}

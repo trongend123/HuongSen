@@ -28,6 +28,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     });
 
     const handleChange = (e) => {
+
         const { name, value } = e.target;
         const today = new Date();
         let newErrors = { ...errors };
@@ -38,47 +39,80 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             [name]: value
         };
 
-        if (name === "checkin") {
-            const checkinDate = new Date(value);
-            const checkoutDate = new Date(updatedBookingData.checkout);
+        // Validate "humans"
+        if (name === "humans") {
+            const humans = Math.max(1, Number(value) || 1); // Ensure minimum is 1
+            updatedBookingData.humans = humans;
 
-            if (checkoutDate <= checkinDate) {
-                newErrors.checkout = "Ngày check-out phải sau ngày check-in ít nhất 1 ngày";
+            // Validation rules
+            if (isNaN(humans) || humans < 1) {
+                newErrors.humans = "Số lượng người phải là số và không được bé hơn 1";
+            } else if (humans > 200) {
+                newErrors.humans = "Số lượng người không được vượt quá 200";
             } else {
-                delete newErrors.checkout;
+                delete newErrors.humans;
             }
+        }
 
-            if (checkinDate < today.setHours(0, 0, 0, 0)) {
-                newErrors.checkin = "Ngày check-in không thể là ngày trong quá khứ";
+        if (name === "checkin") {
+            const checkinDate = value ? new Date(value) : null; // Kiểm tra nếu ngày không được chọn
+            const checkoutDate = updatedBookingData.checkout ? new Date(updatedBookingData.checkout) : null;
+
+            if (!checkinDate) {
+                newErrors.checkin = "Vui lòng chọn ngày check-in";
             } else {
                 delete newErrors.checkin;
+
+                if (checkoutDate) {
+                    if (checkoutDate <= checkinDate) {
+                        newErrors.checkout = "Ngày check-out phải sau ngày check-in ít nhất 1 ngày";
+                    } else {
+                        delete newErrors.checkout;
+                    }
+                }
+
+                const today = new Date();
+                if (checkinDate < today.setHours(0, 0, 0, 0)) {
+                    newErrors.checkin = "Ngày check-in không thể là ngày trong quá khứ";
+                } else {
+                    delete newErrors.checkin;
+                }
             }
-
-
         }
+
 
         if (name === "checkout") {
-            const checkoutDate = new Date(value);
-            const checkinDate = new Date(updatedBookingData.checkin);
+            const checkoutDate = value ? new Date(value) : null; // Kiểm tra nếu ngày không được chọn
+            const checkinDate = updatedBookingData.checkin ? new Date(updatedBookingData.checkin) : null;
 
-            if (checkoutDate < today.setHours(0, 0, 0, 0)) {
-                newErrors.checkout = "Ngày check-out không thể là ngày trong quá khứ";
+            if (!checkoutDate) {
+                newErrors.checkout = "Vui lòng chọn ngày check-out";
             } else {
                 delete newErrors.checkout;
-            }
 
-            if (checkoutDate <= checkinDate) {
-                newErrors.checkout = "Ngày check-out phải sau ngày check-in ít nhất 1 ngày";
-            } else {
-                delete newErrors.checkout;
-            }
+                const today = new Date();
+                if (checkoutDate < today.setHours(0, 0, 0, 0)) {
+                    newErrors.checkout = "Ngày check-out không thể là ngày trong quá khứ";
+                } else {
+                    delete newErrors.checkout;
+                }
 
+                if (checkinDate) {
+                    if (checkoutDate <= checkinDate) {
+                        newErrors.checkout = "Ngày check-out phải sau ngày check-in ít nhất 1 ngày";
+                    } else {
+                        delete newErrors.checkout;
+                    }
+                }
+            }
         }
+
 
         // Cập nhật lỗi và bookingData
         setErrors(newErrors);
         setBookingData(updatedBookingData);
     }
+
 
     const calculateTotalAmount = () => {
         let totalRoomAmount = Object.values(roomPrices).reduce((sum, price) => sum + price, 0);
@@ -108,10 +142,24 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     const handleTotalRoomsRemaining = (totalRoomsRemaining) => {
         setTotalRoomsRemaining(totalRoomsRemaining);
     };
+
     const validateForm = () => {
         const newErrors = {};
         const today = new Date();
 
+        if (isNaN(bookingData.humans) || bookingData.humans < 1) {
+            newErrors.humans = "Số lượng người phải là số và không được bé hơn 1";
+        } else if (bookingData.humans > 200) {
+            newErrors.humans = "Số lượng người không được vượt quá 200";
+        }
+
+        if (!bookingData.checkin) {
+            newErrors.checkin = "Vui lòng chọn ngày check-in";
+        }
+
+        if (!bookingData.checkout) {
+            newErrors.checkout = "Vui lòng chọn ngày check-out";
+        }
         const checkinDate = new Date(bookingData.checkin);
         if (checkinDate < today.setHours(0, 0, 0, 0)) {
             newErrors.checkin = "Ngày check-in không thể là ngày trong quá khứ";
@@ -277,7 +325,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             <Card.Body>
 
                 <Row className="mb-3">
-                    <Col md={3}>
+                    <Col md={4}>
                         <Form.Group controlId="checkin">
                             <Form.Label><strong>Check-in Ngày: </strong></Form.Label>
                             <Form.Control
@@ -291,7 +339,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                             <Form.Control.Feedback type="invalid">{errors.checkin}</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
-                    <Col md={3}>
+                    <Col md={4}>
                         <Form.Group controlId="checkout">
                             <Form.Label><strong>Check-out Ngày:</strong></Form.Label>
                             <Form.Control
@@ -310,12 +358,13 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                             <Form.Label><strong>Số lượng người</strong></Form.Label>
                             <Form.Control
                                 type='number'
-                                placeholder='Enter number of people'
+                                min={1}
                                 name='humans'
                                 value={bookingData.humans}
                                 onChange={handleChange}
                                 isInvalid={!!errors.humans}
-                                min={1}
+
+
                             />
                             <Form.Control.Feedback type='invalid'>{errors.humans}</Form.Control.Feedback>
                         </Form.Group>

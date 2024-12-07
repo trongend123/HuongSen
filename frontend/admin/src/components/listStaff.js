@@ -16,7 +16,7 @@ const StaffAccount = ({ staff, onDelete, onEdit }) => {
     <tr>
       <td>{staff.username}</td>
       <td>{staff.fullname}</td>
-      <td>
+      {/* <td>
         {showPassword ? staff.password : '********'}
         <Button
           variant="link"
@@ -27,7 +27,7 @@ const StaffAccount = ({ staff, onDelete, onEdit }) => {
         >
           {showPassword ? <FaEyeSlash /> : <FaEye />}
         </Button>
-      </td>
+      </td> */}
       <td>{staff.email}</td>
       <td>{staff.phone}</td>
       <td>{staff.role}</td>
@@ -52,6 +52,7 @@ const ListStaffAccount = () => {
   const [selectedStaff, setSelectedStaff] = useState(null); // Staff data for editing
   const [newStaff, setNewStaff] = useState({
     username: '',
+    fullname: '',
     password: '',
     email: '',
     phone: '',
@@ -71,34 +72,34 @@ const ListStaffAccount = () => {
   const validateInputs = () => {
     const newErrors = {};
 
-// Fullname validation (letters and spaces only, accents are allowed)
-const fullnameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưƯỰỬỮỰỮỪỬáýỷỹỵÝỶỸ0-9 ]+$/;
-if (!fullnameRegex.test(newStaff.fullname)) {
-  newErrors.fullname = "Họ và tên chỉ chứa chữ cái và khoảng trống.";
-}
+    // Fullname validation (letters and spaces only, accents are allowed)
+    const fullnameRegex = /^([A-ZÀ-Ý][a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]*|[a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+)(\s([A-ZÀ-Ý][a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]*|[a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+))*$/;
+    if (!fullnameRegex.test(newStaff.fullname) || !newStaff.fullname) {
+      newErrors.fullname = "Họ và tên chỉ được chứa chữ cái và chỉ có một dấu cách giữa các từ, không được viết hoa giữa hoặc cuối từ";
+    }
 
-// Username validation (no spaces, no accents)
-const usernameRegex = /^[a-zA-Z0-9]+$/;
-if (!usernameRegex.test(newStaff.username)) {
-  newErrors.username = "Tên người dùng chỉ chứa ký tự không dấu và không có khoảng trống.";
-}
+    // Username validation (no spaces, no accents)
+    const usernameRegex = /^[a-zA-Z0-9]+$/;
+    if (!usernameRegex.test(newStaff.username)) {
+      newErrors.username = "Tên người dùng chỉ chứa ký tự không dấu và không có khoảng trống.";
+    }
 
-// Password validation (minimum 6 characters)
-if (newStaff.password.length < 6) {
-  newErrors.password = "Mật khẩu phải có ít nhất 6 ký tự.";
-}
+    // Password validation (minimum 6 characters)
+    if (newStaff.password.length < 6) {
+      newErrors.password = "Mật khẩu phải có ít nhất 6 ký tự.";
+    }
 
-// Email validation (proper email format)
-const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-if (!emailRegex.test(newStaff.email)) {
-  newErrors.email = "Email không hợp lệ.";
-}
+    // Email validation (proper email format)
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(newStaff.email)) {
+      newErrors.email = "Email không hợp lệ.";
+    }
 
-// Phone number validation (Vietnamese phone number format)
-const phoneRegex = /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/;
-if (!phoneRegex.test(newStaff.phone)) {
-  newErrors.phone = "Số điện thoại không hợp lệ.";
-}
+    // Phone number validation (Vietnamese phone number format)
+    const phoneRegex = /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/;
+    if (!phoneRegex.test(newStaff.phone)) {
+      newErrors.phone = "Số điện thoại không hợp lệ.";
+    }
 
 
     // Check for duplicate username
@@ -107,11 +108,7 @@ if (!phoneRegex.test(newStaff.phone)) {
       newErrors.username = "Tên người dùng đã tồn tại.";
     }
 
-    // Check for duplicate email
-    const emailExists = staffData.some(staff => staff.email === newStaff.email && staff._id !== selectedStaff?._id);
-    if (emailExists) {
-      newErrors.email = "Email đã tồn tại.";
-    }
+
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0; // Returns true if no errors
@@ -137,6 +134,7 @@ if (!phoneRegex.test(newStaff.phone)) {
     setSelectedStaff(null); // Clear selected staff after closing modal
     setNewStaff({
       username: '',
+      fullname: '',
       password: '',
       email: '',
       phone: '',
@@ -158,7 +156,7 @@ if (!phoneRegex.test(newStaff.phone)) {
   const handleCreateStaff = () => {
     if (validateInputs()) {
       axios
-        .post('http://localhost:9999/staffs', newStaff)
+        .post('http://localhost:9999/register', newStaff)
         .then((response) => {
           setStaffData([...staffData, response.data]);
           handleCloseModal();
@@ -173,6 +171,7 @@ if (!phoneRegex.test(newStaff.phone)) {
     setSelectedStaff(staff); // Set the staff to be edited
     setNewStaff({
       username: staff.username,
+      fullname: staff.fullname,
       password: staff.password,
       email: staff.email,
       phone: staff.phone,
@@ -198,15 +197,14 @@ if (!phoneRegex.test(newStaff.phone)) {
 
   // Filter staff data by username and role
   const filteredStaffData = staffData.filter(staff => {
-    const formattedValue = searchUsername
-        .trim()
-        .replace(/\s+/g, ' ')
+    const username = staff.username || ''; // Đảm bảo username luôn là một chuỗi
+    const formattedValue = searchUsername.trim().replace(/\s+/g, ' ') || ''; // Đảm bảo formattedValue luôn là một chuỗi
     return (
-      
-      staff.username.toLowerCase().includes(formattedValue.toLowerCase()) &&
+      username.toLowerCase().includes(formattedValue.toLowerCase()) &&
       (searchRole === '' || staff.role === searchRole)
     );
   });
+
 
   return (
     <Container>
@@ -229,7 +227,6 @@ if (!phoneRegex.test(newStaff.phone)) {
           >
             <option value="">Tất cả vai trò</option>
             <option value="admin">Admin</option>
-            <option value="chef">Bếp</option>
             <option value="staff_mk">Lễ tân Minh Khai</option>
             <option value="staff_ds">Lễ tân Đồ Sơn</option>
             <option value="staff_cb">Lễ tân Cát Bà</option>
@@ -247,7 +244,7 @@ if (!phoneRegex.test(newStaff.phone)) {
           <tr>
             <th>Tên người dùng</th>
             <th>Họ và tên</th>
-            <th>Mật khẩu</th>
+            {/* <th>Mật khẩu</th> */}
             <th>Email</th>
             <th>SĐT</th>
             <th>Vai trò</th>
@@ -344,6 +341,7 @@ if (!phoneRegex.test(newStaff.phone)) {
                 <option value="admin">Admin</option>
               </Form.Select>
             </Form.Group>
+
           </Form>
         </Modal.Body>
         <Modal.Footer>

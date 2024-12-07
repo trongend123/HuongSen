@@ -2,7 +2,7 @@ import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'rea
 import axios from 'axios';
 import { Form, Row, Col, Card, Button } from 'react-bootstrap';
 
-const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, bookingPrice }, ref) => {
+const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, checkinDate, checkoutDate }, ref) => {
     const [roomCategories, setRoomCategories] = useState([]);
     const [quantity, setQuantity] = useState({});
     const [remainingRooms, setRemainingRooms] = useState({});
@@ -10,18 +10,19 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
     const [selectedRooms, setSelectedRooms] = useState([]);
     const [roomPrices, setRoomPrices] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [receiveRoom, setReceiveRoom] = useState(new Date().toISOString().split('T')[0]); // Default: Today
-    const [returnRoom, setReturnRoom] = useState(
-        new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0] // Default: Tomorrow
-    );
-    const [error, setError] = useState("");
+    const [receiveRoom, setReceiveRoom] = useState(new Date(checkinDate).toISOString().split('T')[0]);
+
+    const [returnRoom, setReturnRoom] = useState(new Date(checkoutDate).toISOString().split('T')[0]);
+
+    const [receiveError, setReceiveError] = useState("");
+    const [returnError, setReturnError] = useState("");
     const resetForm = () => {
         setQuantity({});
         setSelectedRooms([]);
         setRoomPrices(0);
         setTotalAmount(0);
-        setReceiveRoom(new Date().toISOString().split('T')[0]); // Default: Today
-        setReturnRoom(new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0]); // Default: Tomorrow
+        setReceiveRoom(new Date(checkinDate).toISOString().split('T')[0]); // Default: Today
+        setReturnRoom(new Date(checkoutDate).toISOString().split('T')[0]); // Default: Tomorrow
     };
 
     // Fetch room data from backend
@@ -143,13 +144,13 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
             });
 
             if (invalidSelections.length > 0) {
-                alert('Some room selections exceed the available number of rooms. Please adjust your selections.');
+                alert('Một số lựa chọn phòng vượt quá số phòng có sẵn. Vui lòng điều chỉnh lựa chọn của bạn.');
                 let totalAmount = 0
                 return { totalAmount, success: false };
             }
 
-            if (error !== '') {
-                setError("Vui lòng chọn lại ngày")
+            if (receiveError !== '' || returnError) {
+
                 let totalAmount = 0
                 return { totalAmount, success: false };
             }
@@ -166,10 +167,10 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
             });
             const newNotification = { content: "Đơn đặt phòng của khách đoàn đã được cập nhật." };
             axios
-            .post("http://localhost:9999/chats/send", newNotification)
-            .then((response) => {
-            console.log(response.data);
-            })
+                .post("http://localhost:9999/chats/send", newNotification)
+                .then((response) => {
+                    console.log(response.data);
+                })
             await Promise.all(orderRoomPromises);
             // Reset form to default state
             resetForm();
@@ -202,45 +203,78 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
 
     useImperativeHandle(ref, () => ({
         createAgencyOrderRoom,
+        fetchRoomData
     }));
 
     const handleDateChange = (e, type) => {
-        const newDate = e.target.value;
-        const today = new Date().toISOString().split("T")[0];
+        const newDate = new Date(e.target.value); // Create Date from input value
+        newDate.setHours(0, 0, 0, 0); // Set time to 00:00:00
+        const bookingCheckin = new Date(checkinDate)
+        bookingCheckin.setHours(0, 0, 0, 0)
+        const bookingCheckout = new Date(checkoutDate)
+        bookingCheckout.setHours(0, 0, 0, 0)
 
-        // Kiểm tra ngày nhận phòng và trả phòng không được trong quá khứ
-        if (newDate < today) {
-            setError('Ngày không được chọn trong quá khứ!');
-            return;
-        }
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set time to 00:00:00
 
         if (type === "receiveRoom") {
-            // Kiểm tra ngày trả phòng phải sau ngày nhận phòng ít nhất 1 ngày
-            if (newDate >= returnRoom) {
-                setReceiveRoom(newDate);
-                setError('Ngày nhận phòng không được sau ngày trả phòng.');
+            const returnDate = new Date(receiveRoom);
+            returnDate.setHours(0, 0, 0, 0); // Set time to 00:00:00
+            const diffTime = returnDate - newDate;
+            const calculatedNights = diffTime / (1000 * 60 * 60 * 24);
+            console.log(newDate);
+            console.log(bookingCheckin);
+            if (!e.target.value) {
+                setReceiveError("Ngày không được để trống!");
+                setReceiveRoom(e.target.value);
+            } else if (newDate < bookingCheckin) {
+                setReceiveError("Ngày không được trước ngày check-in của hợp đồng!");
+                setReceiveRoom(e.target.value);
+            } else if (newDate < today) {
+                setReceiveRoom(e.target.value);
+                setReceiveError('Ngày không được chọn trong quá khứ!');
+            } else if (calculatedNights < 1) {
+                setReceiveRoom(e.target.value);
+                setReturnError(''); // Clear error when valid
+                setReceiveError('Ngày nhận phòng phải trước ngày trả phòng.');
             } else {
-                setReceiveRoom(newDate);
-                setError('');
+                setReceiveRoom(e.target.value);
+                setReceiveError(''); // Clear error when valid
+                setReturnError(''); // Clear error when valid
+
             }
         }
 
         if (type === "returnRoom") {
             const receiveDate = new Date(receiveRoom);
-            const returnDate = new Date(newDate);
-            const diffTime = returnDate - receiveDate;
+            receiveDate.setHours(0, 0, 0, 0); // Set time to 00:00:00
+
+            const diffTime = newDate - receiveDate;
             const calculatedNights = diffTime / (1000 * 60 * 60 * 24);
 
-            if (calculatedNights < 1) {
-                setError('Ngày trả phòng phải sau ngày nhận phòng ít nhất 1 ngày.');
-                setReturnRoom(newDate);
-                return;
+            if (!e.target.value) {
+                setReturnError("Ngày không được để trống!");
+                setReturnRoom(e.target.value);
+            } else if (newDate > bookingCheckout) {
+                setReturnError("Ngày không được sau ngày check-out của hợp đồng!");
+                setReturnRoom(e.target.value);
+            }
+            else if (newDate < today) {
+                setReturnRoom(e.target.value);
+                setReturnError('Ngày không được chọn trong quá khứ!');
+            } else if (calculatedNights < 1) {
+                setReturnError('Ngày trả phòng phải sau ngày nhận phòng ít nhất 1 ngày.');
+                setReturnRoom(e.target.value);
+                setReceiveError(''); // Clear error when valid
             } else {
-                setReturnRoom(newDate);
-                setError('');
+                setReturnRoom(e.target.value);
+                setReturnError(''); // Clear error when valid
+                setReceiveError(''); // Clear error when valid
             }
         }
     };
+
+
 
     return (
         <div>
@@ -255,26 +289,31 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
 
                     <Card.Body>
                         <Row className="mb-3">
-                            <Col md={6} className='d-flex align-items-center justify-content-center '>
-                                <Form.Label><strong>Trả phòng :</strong></Form.Label>
-                                <Form.Control
-                                    className='w-50 mx-2'
-                                    type="date"
-                                    value={receiveRoom}
-                                    onChange={(e) => handleDateChange(e, "receiveRoom")}
-                                />
+                            <Col md={6}>
+                                <Form.Group className='d-flex align-items-center justify-content-center '>
+                                    <Form.Label><strong>Trả phòng :</strong></Form.Label>
+                                    <Form.Control
+                                        className='w-50 mx-2'
+                                        type="date"
+                                        value={receiveRoom}
+                                        onChange={(e) => handleDateChange(e, "receiveRoom")}
+                                    />
+                                </Form.Group>
+                                {receiveError && <div className="text-danger text-center">{receiveError}</div>}
                             </Col>
 
-                            <Col md={6} className='d-flex align-items-center justify-content-center'>
-                                <Form.Label ><strong>Nhận phòng :</strong></Form.Label>
-                                <Form.Control
-                                    className='w-50 mx-2'
-                                    type="date"
-                                    value={returnRoom}
-                                    onChange={(e) => handleDateChange(e, "returnRoom")}
-                                />
+                            <Col md={6}>
+                                <Form.Group className='d-flex align-items-center justify-content-center'>
+                                    <Form.Label ><strong>Nhận phòng :</strong></Form.Label>
+                                    <Form.Control
+                                        className='w-50 mx-2'
+                                        type="date"
+                                        value={returnRoom}
+                                        onChange={(e) => handleDateChange(e, "returnRoom")}
+                                    />
+                                </Form.Group>
+                                {returnError && <div className="text-danger text-center mb-2">{returnError}</div>}
                             </Col>
-                            {error && <div className="text-danger text-center mb-2">{error}</div>}
                         </Row>
                         {groupedRooms[location].map((room, index) => { // Add index as fallback for key
                             const remainingRoomCount = remainingRooms[room._id] || 0;
@@ -290,7 +329,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, booki
                                             ( giá / 1đêm: {room.price} VND)
                                         </Col>
                                         <Col className="text-secondary d-flex align-items-center">
-                                            Phòng còn trống: {remainingRoomCount}<br />
+                                            Phòng còn trống:  {Math.max(0, remainingRoomCount)}<br />
                                         </Col>
                                         <Col className="d-flex align-items-center">
                                             <Form.Control

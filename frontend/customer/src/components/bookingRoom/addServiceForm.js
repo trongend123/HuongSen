@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import axios from 'axios';
 import { Form, Row, Col, Button, Card } from 'react-bootstrap';
+import { format } from 'date-fns';
 
-const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => {
+const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate, bookingCheckIn, bookingCheckOut }, ref) => {
     const [otherServices, setOtherServices] = useState([]);
     const [orderServicesData, setOrderServicesData] = useState([]);
     const [selectedService, setSelectedService] = useState("");
@@ -177,18 +178,44 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
         addService,
     }));
 
+    // const handleChange = (e) => {
+    //     const selectedDate = new Date(e.target.value);
+    //     const today = new Date();
+    //     today.setHours(0, 0, 0, 0); // Đặt giờ phút giây về 0 để so sánh chính xác
+
+    //     if (selectedDate < today) {
+    //         setFormError("Không được chọn ngày trong quá khứ.");
+    //     } else {
+    //         setFormError('');
+    //     }
+    //     setServiceDate(e.target.value);
+    // };
+
     const handleChange = (e) => {
         const selectedDate = new Date(e.target.value);
         const today = new Date();
-        today.setHours(0, 0, 0, 0); // Đặt giờ phút giây về 0 để so sánh chính xác
+        today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
 
+        // Check if canUpdate is true
+        // if (canUpdate) {
+        //     if (selectedDate < new Date(bookingCheckIn) || selectedDate > new Date(bookingCheckOut)) {
+        //         setFormError(
+        //             `Ngày được chọn phải nằm trong khoảng từ ${format(new Date(bookingCheckIn), 'dd-MM-yyyy')} đến ${format(new Date(bookingCheckOut), 'dd-MM-yyyy')}.`
+        //         );
+        //         return;
+        //     }
+        // }
+
+        // Validate past dates
         if (selectedDate < today) {
             setFormError("Không được chọn ngày trong quá khứ.");
         } else {
-            setFormError('');
+            setFormError(""); // Clear error if valid
         }
+
         setServiceDate(e.target.value);
     };
+
     return (
         <Card className="mb-4">
             <Card.Header className='text-white' style={{ backgroundColor: '#81a969' }}>
@@ -231,11 +258,18 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                                 style={{ height: '50px' }}
                                 type="number"
                                 min="1"
+                                max="200"  // Giới hạn số lượng không quá 200
                                 value={serviceQuantity}
                                 onChange={(e) => setServiceQuantity(e.target.value)}
                             />
                         </Form.Group>
                     </Col>
+                    {/* Hiển thị lỗi khi số lượng không hợp lệ */}
+                    {(serviceQuantity <= 0 || serviceQuantity > 200 || isNaN(serviceQuantity)) && (
+                        <div style={{ color: 'red', fontSize: '14px', textAlign: 'right' }}>
+                            Số lượng phải từ 1 đến 200
+                        </div>
+                    )}
                 </Row>
 
                 <Row className="mt-3">
@@ -245,10 +279,18 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                             <Form.Control
                                 as="textarea"
                                 rows={2}
-                                placeholder="Ghi chú cho dịch vụ đang chọn"
+                                placeholder="Ghi chú cho dịch vụ đang chọn (300 ký tự)"
                                 value={serviceNote}
-                                onChange={(e) => setServiceNote(e.target.value)} // Nối giá trị mới với giá trị hiện tại
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (value.length <= 300) {
+                                        setServiceNote(value); // Chỉ cập nhật khi <= 300 ký tự
+                                    }
+                                }}
                             />
+                            <Form.Text className="text-muted">
+                                {serviceNote.length}/300 ký tự
+                            </Form.Text>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -293,7 +335,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                 <Button
                     className="mt-3"
                     onClick={handleAddService}
-                    disabled={!selectedService || serviceQuantity <= 0 || !!formError}
+                    disabled={!selectedService || serviceQuantity <= 0 || serviceQuantity > 200 || !!formError}
                     style={{ backgroundColor: '#81a969', border: 'none', height: '40px', width: '130px' }}
                 >
                     Thêm dịch vụ
@@ -400,7 +442,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange }, ref) => 
                 )}
                 <h6 className="mt-4">{selectedServicePrice !== 1000 ? "Tổng giá dịch vụ:" : "Tổng phụ phí:"} {totalAmount.toLocaleString()} VND</h6>
             </Card.Body>
-        </Card>
+        </Card >
     );
 });
 

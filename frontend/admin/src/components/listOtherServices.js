@@ -7,7 +7,8 @@ const ListOtherServices = () => {
     const [filteredServices, setFilteredServices] = useState([]);
     const [searchName, setSearchName] = useState("");
     const [searchPrice, setSearchPrice] = useState("");
-    const [showModal, setShowModal] = useState(false);
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [newService, setNewService] = useState({ name: "", price: "", description: "" });
     const [editingService, setEditingService] = useState(null);
     const [sortOrder, setSortOrder] = useState("asc");
@@ -24,13 +25,20 @@ const ListOtherServices = () => {
     const [errors, setErrors] = useState({ name: "", price: "" });
 
     // Fetch all services
-    useEffect(() => {
+
+
+    // Fetch data function
+    const fetchData = () => {
         axios.get("http://localhost:9999/otherServices")
             .then(response => {
                 setServices(response.data);
                 setFilteredServices(response.data);
             })
             .catch(error => console.error(error));
+    };
+
+    useEffect(() => {
+        fetchData();
     }, []);
 
     // Filter services by name and price
@@ -60,12 +68,19 @@ const ListOtherServices = () => {
     const indexOfFirstService = indexOfLastService - servicesPerPage;
     const currentServices = filteredServices.slice(indexOfFirstService, indexOfLastService);
 
+
     // Open modal to create or edit a service
-    const handleShowModal = (service = null) => {
+    const handleShowCreateModal = () => {
+        setNewService({ name: "", price: "", description: "" });
+        setErrors({ name: "", price: "" }); // Reset errors when opening modal
+        setShowCreateModal(true);
+    };
+
+    const handleShowEditModal = (service) => {
         setEditingService(service);
         setNewService(service || { name: "", price: "", description: "" });
         setErrors({ name: "", price: "" }); // Reset errors when opening modal
-        setShowModal(true);
+        setShowEditModal(true);
     };
 
     // Handle input changes
@@ -127,7 +142,8 @@ const ListOtherServices = () => {
                     type: 'success',
                     text: editingService ? 'Chỉnh sửa dịch vụ thành công!' : 'Tạo dịch vụ mới thành công!'
                 });
-                setShowModal(false);
+                setShowCreateModal(false);
+                setShowEditModal(false);
                 setNewService({ name: "", price: "", description: "" }); // Clear form after saving
             })
             .catch(error => {
@@ -140,26 +156,68 @@ const ListOtherServices = () => {
     };
 
     // Delete a service
-    const handleDelete = (id) => {
-        axios.delete(`http://localhost:9999/otherServices/${id}`)
-            .then(() => {
-                setServices(services.filter(service => service._id !== id));
-                setMessage({
-                    type: 'success',
-                    text: 'Xóa dịch vụ thành công!'
-                });
-            })
-            .catch(error => {
+    // const handleDelete = (id) => {
+    //     axios.delete(`http://localhost:9999/otherServices/${id}`)
+    //         .then(() => {
+    //             setServices(services.filter(service => service._id !== id));
+    //             setMessage({
+    //                 type: 'success',
+    //                 text: 'Xóa dịch vụ thành công!'
+    //             });
+    //         })
+    //         .catch(error => {
+    //             setMessage({
+    //                 type: 'danger',
+    //                 text: 'Có lỗi xảy ra khi xóa dịch vụ!'
+    //             });
+    //             console.error(error);
+    //         });
+    // };
+    const handleInactiveAndActive = async (id) => {
+        try {
+            // Tìm dịch vụ theo id
+            const service = await axios.get(`http://localhost:9999/otherServices/${id}`);
+
+            // Kiểm tra xem dịch vụ có tồn tại không
+            if (!service) {
                 setMessage({
                     type: 'danger',
-                    text: 'Có lỗi xảy ra khi xóa dịch vụ!'
+                    text: 'Dịch vụ không tồn tại!',
                 });
-                console.error(error);
+                throw new Error("Service not found");
+            }
+
+            // Lật trạng thái isDeleted (nghĩa là chuyển từ true -> false hoặc ngược lại)
+            const updatedService = axios.delete(`http://localhost:9999/otherServices/${id}`)
+                .then(() => {
+                    fetchData()
+                    if (!service.data.isDeleted) {
+                        setMessage({
+                            type: 'success',
+                            text: 'Xóa dịch vụ thành công!'
+                        });
+
+                    } else {
+                        setMessage({
+                            type: 'success',
+                            text: 'Khôi phục dịch vụ thành công!'
+                        });
+                    }
+
+                })
+
+        } catch (error) {
+            setMessage({
+                type: 'danger',
+                text: 'Có lỗi xảy ra khi xử lý dịch vụ!',
             });
+            console.error(error);
+        }
     };
+
     const formatCurrency = (value) => {
         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
-      };
+    };
 
     return (
         <div className="container">
@@ -190,7 +248,7 @@ const ListOtherServices = () => {
                     />
                 </Col>
                 <Col md={3}>
-                    <Button variant="primary" onClick={() => setShowModal(true)} block>
+                    <Button variant="primary" onClick={handleShowCreateModal} block>
                         Tạo Dịch Vụ Mới
                     </Button>
                 </Col>
@@ -215,12 +273,20 @@ const ListOtherServices = () => {
                             <td className="text-center">{formatCurrency(service.price)}</td>
                             <td>{service.description}</td>
                             <td>
-                                <Button variant="warning" onClick={() => handleShowModal(service)}>
+                                <Button variant="warning" onClick={() => handleShowEditModal(service)}>
                                     Chỉnh sửa
                                 </Button>{" "}
-                                <Button variant="danger" onClick={() => handleDelete(service._id)}>
-                                    Dừng phục vụ
+
+                                {/* <Button variant="success" onClick={() => handleDelete(service._id)}>
+                                    Active
+                                </Button> */}
+                                <Button
+                                    variant={service.isDeleted ? "primary" : "success"}
+                                    onClick={() => handleInactiveAndActive(service._id)}
+                                >
+                                    {service.isDeleted ? "Khôi phục" : "Dừng phục vụ"}
                                 </Button>
+
                             </td>
                         </tr>
                     ))}
@@ -240,10 +306,10 @@ const ListOtherServices = () => {
                 ))}
             </Pagination>
 
-            {/* Modal for creating/editing service */}
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
+            {/* Create Service Modal */}
+            <Modal show={showCreateModal} onHide={() => setShowCreateModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{editingService ? "Chỉnh Sửa Dịch Vụ" : "Tạo Dịch Vụ Mới"}</Modal.Title>
+                    <Modal.Title>Tạo Dịch Vụ Mới</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -251,23 +317,21 @@ const ListOtherServices = () => {
                             <Form.Label>Tên dịch vụ</Form.Label>
                             <Form.Control
                                 type="text"
+                                placeholder="Nhập tên dịch vụ"
                                 name="name"
                                 value={newService.name}
                                 onChange={handleChange}
-                                isInvalid={!!errors.name}
-                                required
                             />
                             {errors.name && <Form.Text className="text-danger">{errors.name}</Form.Text>}
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Giá (VND)</Form.Label>
+                            <Form.Label>Giá</Form.Label>
                             <Form.Control
                                 type="number"
+                                placeholder="Nhập giá dịch vụ"
                                 name="price"
                                 value={newService.price}
                                 onChange={handleChange}
-                                isInvalid={!!errors.price}
-                                required
                             />
                             {errors.price && <Form.Text className="text-danger">{errors.price}</Form.Text>}
                         </Form.Group>
@@ -284,11 +348,62 @@ const ListOtherServices = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                    <Button variant="secondary" onClick={() => setShowCreateModal(false)}>
                         Đóng
                     </Button>
                     <Button variant="primary" onClick={handleSave}>
-                        {editingService ? "Cập Nhật" : "Lưu"}
+                        Lưu
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Edit Service Modal */}
+            <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Chỉnh Sửa Dịch Vụ</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>Tên dịch vụ</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Nhập tên dịch vụ"
+                                name="name"
+                                value={newService.name}
+                                onChange={handleChange}
+                            />
+                            {errors.name && <Form.Text className="text-danger">{errors.name}</Form.Text>}
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Giá</Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder="Nhập giá dịch vụ"
+                                name="price"
+                                value={newService.price}
+                                onChange={handleChange}
+                            />
+                            {errors.price && <Form.Text className="text-danger">{errors.price}</Form.Text>}
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Mô tả</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                name="description"
+                                value={newService.description}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+                        Đóng
+                    </Button>
+                    <Button variant="primary" onClick={handleSave}>
+                        Lưu
                     </Button>
                 </Modal.Footer>
             </Modal>

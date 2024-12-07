@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './footer.css';
+import ChatScript from '../ChatScript ';
 
 const Footer = () => {
   return (
@@ -38,22 +39,23 @@ const Footer = () => {
           {/* Fanpage Section */}
           <Col md={4} className="mb-4">
             <h5>Bản đồ</h5>
-            
+
             <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59659.71837244205!2d106.71243317900318!3d20.842509851568096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7af3d4b1503d%3A0x6d500a082648cd8a!2zTmjDoCBLaMOhY2ggSMawxqFuZyBTZW4!5e0!3m2!1svi!2s!4v1729608040022!5m2!1svi!2s"
-        width="500"
-        height="250"
-        style={{ border: 0 }}
-        allowFullScreen=""
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        title="Google Map"
-      ></iframe>
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59659.71837244205!2d106.71243317900318!3d20.842509851568096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7af3d4b1503d%3A0x6d500a082648cd8a!2zTmjDoCBLaMOhY2ggSMawxqFuZyBTZW4!5e0!3m2!1svi!2s!4v1729608040022!5m2!1svi!2s"
+              width="500"
+              height="250"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Google Map"
+            ></iframe>
           </Col>
         </Row>
         <div className="text-center pt-4">
           <p>&copy; {new Date().getFullYear()} Nha khach Hương Sen. All rights reserved.</p>
         </div>
+        <ChatScript />
       </Container>
     </footer>
   );

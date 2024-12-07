@@ -22,7 +22,8 @@ const staffSchema = new Schema(
     },
     phone: {
       type: String,
-      required: true, // This can be optional if needed
+      required: true,
+      unique: true // This can be optional if needed
     },
     avatarId: {
       type: Schema.Types.ObjectId,
@@ -30,8 +31,8 @@ const staffSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ['admin', 'staff_mk', 'staff_ds', 'staff_cb', 'chef'],
-      default: 'staff',
+      enum: ['admin', 'staff_mk', 'staff_ds', 'staff_cb', 'staff'],
+      required: true,
     },
   },
   {

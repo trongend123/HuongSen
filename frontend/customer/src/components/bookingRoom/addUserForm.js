@@ -38,18 +38,27 @@ const AddUserForm = forwardRef(({ }, ref) => {
 
     const validateForm = () => {
         const newErrors = {};
-        const namePattern = /^[A-Za-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+(\s[A-Za-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+)*$/;
+        // const namePattern = /^[A-Za-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+(\s[A-Za-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+)*$/;
+        const namePattern = /^([A-ZÀ-Ý][a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]*|[a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+)(\s([A-ZÀ-Ý][a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]*|[a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+))*$/;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phonePattern = /^(03|05|07|08|09)\d{8,9}$/;
+        // const locationPattern = /^[A-Za-zÀ-ÿ0-9]+([ ,.-][A-Za-zÀ-ÿ0-9]+)*$/;
+        const locationPattern = /^[A-Za-zÀ-ÿà-ỹ0-9]+([ ,.-][A-Za-zÀ-ÿà-ỹ0-9]+)*$/;
         const today = new Date();
 
         // Customer validation
-        if (!customerData.fullname.trim() || !namePattern.test(customerData.fullname.toLowerCase())) {
-            newErrors.fullname = "Họ và tên chỉ được chứa chữ cái và chỉ có một dấu cách giữa các từ";
+        if (!customerData.fullname.trim()) {
+            newErrors.fullname = "Họ và tên là bắt buộc.";
+        } else if (!namePattern.test(customerData.fullname)) {
+            newErrors.fullname = "Họ và tên chỉ được chứa chữ cái và chỉ có một dấu cách giữa các từ, không được viết hoa giữa hoặc cuối từ";
+        } else if (customerData.fullname.length > 100) {
+            newErrors.fullname = "Họ và tên không được vượt quá 100 ký tự.";
         }
 
         if (!emailPattern.test(customerData.email)) {
             newErrors.email = "Vui lòng nhập email hợp lệ";
+        } else if (customerData.email.length > 100) {
+            newErrors.email = "Email không được vượt quá 100 ký tự.";
         }
 
         if (!phonePattern.test(customerData.phone)) {
@@ -64,14 +73,22 @@ const AddUserForm = forwardRef(({ }, ref) => {
             if (age < 18 || (age === 18 && today < new Date(dob.setFullYear(today.getFullYear() - 18)))) {
                 newErrors.dob = "Khách hàng phải từ 18 tuổi trở lên";
             }
+            if (age > 100 || (age === 100 && today < new Date(dob.setFullYear(today.getFullYear() - 100)))) {
+                newErrors.dob = "Khách hàng phải dưới 100 tuổi";
+            }
         }
 
         if (!customerData.gender) {
             newErrors.gender = "Vui lòng chọn giới tính";
         }
 
+
         if (!customerData.address.trim()) {
             newErrors.address = "Vui lòng nhập địa chỉ";
+        } else if (!locationPattern.test(customerData.address)) {
+            newErrors.address = "Địa chỉ chứa chữ cái, số, và các ký tự như ',', '.', '-' với 1 dấu cách giữa các từ.(VD: 123 Main St, City-Name.)";
+        } else if (customerData.address.length > 200) {
+            newErrors.address = "Địa chỉ không được vượt quá 200 ký tự.";
         }
 
         // Group booking validation (only if bookingType is 'Group')
@@ -79,6 +96,10 @@ const AddUserForm = forwardRef(({ }, ref) => {
             // Agency validation
             if (!agencyData.name.trim()) {
                 newErrors.agencyName = "Tên đơn vị là bắt buộc";
+            } else if (!namePattern.test(agencyData.agencyName)) {
+                newErrors.agencyName = "Tên đơn vị chứa chữ cái và chỉ có một dấu cách giữa các từ, không được viết hoa giữa hoặc cuối từ";
+            } else if (agencyData.name.length > 100) {
+                newErrors.agencyName = "Tên đơn vị không được vượt quá 100 ký tự.";
             }
 
             if (!phonePattern.test(agencyData.phone)) {
@@ -87,14 +108,30 @@ const AddUserForm = forwardRef(({ }, ref) => {
 
             if (!agencyData.address.trim()) {
                 newErrors.agencyAddress = "Địa chỉ đơn vị là bắt buộc";
+            } else if (!locationPattern.test(agencyData.address)) {
+                newErrors.agencyAddress = "Địa chỉ đơn vị chứa chữ cái, số, và các ký tự như ',', '.', '-' với 1 dấu cách giữa các từ.(VD: 123 Main St, City-Name.)";
+            } else if (agencyData.address.length > 200) {
+                newErrors.agencyAddress = "Địa chỉ đơn vị không được vượt quá 200 ký tự.";
             }
 
             if (!agencyData.stk.trim()) {
                 newErrors.agencyStk = "Số tài khoản ngân hàng là bắt buộc";
+            } else {
+                const stkPattern = /^[^\s]+( [^\s]+)*: \d+$/; // Kiểm tra định dạng
+                if (!stkPattern.test(agencyData.stk)) {
+                    newErrors.agencyStk = "Định dạng số tài khoản không hợp lệ. Ví dụ hợp lệ: 'Tên Ngân Hàng: 123456789'";
+                }
             }
 
+            const agencyCodePattern = /^[A-Za-z0-9]+$/;
+
+            // Kiểm tra mã đơn vị
             if (!agencyData.code.trim()) {
-                newErrors.agencyCode = "Mã đơn vị là bắt buộc";
+                newErrors.agencyCode = "Mã đơn vị là bắt buộc.";
+            } else if (!agencyCodePattern.test(agencyData.code)) {
+                newErrors.agencyCode = "Mã đơn vị chỉ được chứa chữ cái và số, không có ký tự đặc biệt.";
+            } else if (agencyData.code.length > 50) {
+                newErrors.agencyCode = "Mã đơn vị không được vượt quá 50 ký tự.";
             }
         }
 

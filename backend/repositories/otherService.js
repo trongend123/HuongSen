@@ -8,9 +8,9 @@ const create = async ({
   try {
     // Create new otherService
     const newOtherService = await OtherService.create({
-        name,
-        price,
-        description,
+      name,
+      price,
+      description,
     });
     // Return newOtherService object
     return newOtherService._doc;
@@ -27,11 +27,19 @@ const list = async () => {
   }
 };
 
+// const getById = async (id) => {
+//   try {
+//     return await OtherService.findOne({ _id: id }).exec();
+//   } catch (error) {
+//     throw new Error(error.toString());
+//   }
+// };
 const getById = async (id) => {
   try {
-    return await OtherService.findOne({ _id: id }).exec();
+    const service = await OtherService.findById(id);  // Assuming you're using Mongoose for MongoDB
+    return service;
   } catch (error) {
-    throw new Error(error.toString());
+    throw new Error('Error fetching service by ID');
   }
 };
 
@@ -72,25 +80,47 @@ const deleteOtherService = async (id) => {
   }
 };
 
+// const softDelete = async (id) => {
+//   try {
+//     // Cập nhật trường isDeleted thành true thay vì xóa dịch vụ
+//     const updatedService = await OtherService.findByIdAndUpdate(
+//       id,
+//       { isDeleted: true },  // Đánh dấu dịch vụ là đã xóa mềm
+//       { new: true, runValidators: true }  // Trả về tài liệu đã cập nhật
+//     );
+
+//     // Kiểm tra xem dịch vụ có tồn tại không
+//     if (!updatedService) {
+//       throw new Error("Service not found");
+//     }
+
+//     return updatedService;
+//   } catch (error) {
+//     throw new Error(error.toString());
+//   }
+// };
 const softDelete = async (id) => {
   try {
-    // Cập nhật trường isDeleted thành true thay vì xóa dịch vụ
-    const updatedService = await OtherService.findByIdAndUpdate(
-      id,
-      { isDeleted: true },  // Đánh dấu dịch vụ là đã xóa mềm
-      { new: true, runValidators: true }  // Trả về tài liệu đã cập nhật
-    );
+    // Tìm dịch vụ theo id
+    const service = await OtherService.findById(id);
 
     // Kiểm tra xem dịch vụ có tồn tại không
-    if (!updatedService) {
+    if (!service) {
       throw new Error("Service not found");
     }
+
+    // Lật trạng thái isDeleted
+    const updatedService = await OtherService.findByIdAndUpdate(
+      id,
+      { isDeleted: !service.isDeleted } // Trả về tài liệu đã cập nhật
+    );
 
     return updatedService;
   } catch (error) {
     throw new Error(error.toString());
   }
 };
+
 
 // const OtherServiceRepo = {
 //   // Thêm phương thức xóa mềm
