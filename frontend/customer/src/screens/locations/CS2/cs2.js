@@ -232,9 +232,9 @@ const CS2 = () => {
             if (qty > 0) {
                 const existingOrderRoom = existingOrderRooms.find(orderRoom => orderRoom.roomCateId._id === roomCateId);
                 if (existingOrderRoom) {
-                    return axios.put(`http://localhost:9999/orderRooms/${existingOrderRoom._id}`, { quantity: qty });
+                    return axios.put(`${BASE_URL}/orderRooms/${existingOrderRoom._id}`, { quantity: qty });
                 } else {
-                    return axios.post('http://localhost:9999/orderRooms', {
+                    return axios.post(`${BASE_URL}/orderRooms`, {
                         roomCateId,
                         customerId: cusId,
                         bookingId: bookId,
@@ -244,7 +244,7 @@ const CS2 = () => {
             } else if (qty == 0) {
                 const existingOrderRoom = existingOrderRooms.find(orderRoom => orderRoom.roomCateId._id === roomCateId);
                 if (existingOrderRoom) {
-                    return axios.delete(`http://localhost:9999/orderRooms/${existingOrderRoom._id}`);
+                    return axios.delete(`${BASE_URL}/orderRooms/${existingOrderRoom._id}`);
                 }
             }
             return null;
