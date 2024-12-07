@@ -219,7 +219,7 @@ const ListOtherServices = () => {
                                     Chỉnh sửa
                                 </Button>{" "}
                                 <Button variant="danger" onClick={() => handleDelete(service._id)}>
-                                    Xóa
+                                    Dừng phục vụ
                                 </Button>
                             </td>
                         </tr>

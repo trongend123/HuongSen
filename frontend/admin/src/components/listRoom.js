@@ -19,6 +19,7 @@ const ListRoom = () => {
   const [userRole, setUserRole] = useState('');
   const user = JSON.parse(localStorage.getItem('user'));
   const [bookingId, setBookingId] = useState('');
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     const storedUser = user
@@ -48,6 +49,10 @@ const ListRoom = () => {
       .get('http://localhost:9999/roomCategories')
       .then((response) => setCategories(response.data))
       .catch((error) => console.error('Error fetching room categories:', error));
+    axios
+      .get('http://localhost:9999/bookings')
+      .then((response) => setBookings(response.data))
+      .catch((error) => console.error('Error fetching bookings:', error));
   }, []);
 
   const filteredRooms = selectedLocation
@@ -76,17 +81,30 @@ const ListRoom = () => {
     setSelectedRoom(room);
     setUpdatedCategory(room.roomCategoryId._id);
     setUpdatedStatus(room.status);
-    setBookingId(room.bookingId?._id);
+    setBookingId(room.bookingId?._id || '');
     setShowModal(true);
   };
 
   const handleUpdate = () => {
-    const updatedRoom = {
+    var updatedRoom = {};
+    if(updatedStatus !== "Đang sử dụng" && updatedStatus !== "Đã book" ){
+      updatedRoom = {
+        ...selectedRoom,
+        bookingId: null, // Xác định bookingId
+        roomCategoryId: updatedCategory,
+        status: updatedStatus,
+      };
+      
+    }else{
+     updatedRoom = {
       ...selectedRoom,
+      bookingId: bookingId, // Xác định bookingId
       roomCategoryId: updatedCategory,
       status: updatedStatus,
     };
-
+  }
+    console.log(updatedRoom);
+    
     axios
       .put(`http://localhost:9999/rooms/${selectedRoom._id}`, updatedRoom)
       .then((response) => {
@@ -216,9 +234,7 @@ const ListRoom = () => {
                   value={updatedStatus}
                   onChange={(e) => {
                     setUpdatedStatus(e.target.value);
-                    if (e.target.value !== "Đang sử dụng" && e.target.value !== "Đã book") {
-                      setBookingId(""); // Clear bookingId if status is not "Đang sử dụng"
-                    }
+                    
                   }}
                 >
                   <option value="Trống">Trống</option>

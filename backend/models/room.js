@@ -21,7 +21,7 @@ const roomSchema = new Schema(
     },
     bookingId: {
       type: Schema.Types.ObjectId,
-      ref: Booking,
+      ref: Booking, // Referencing Booking model
     },
   },
   {

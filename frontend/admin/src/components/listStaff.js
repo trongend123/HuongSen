@@ -335,6 +335,7 @@ if (!phoneRegex.test(newStaff.phone)) {
                 name="role"
                 value={newStaff.role}
                 onChange={handleChange}
+                disabled={isEditMode} 
               >
                 <option value="staff_cb">Lễ tân Cát Bà</option>
                 <option value="staff_ds">Lễ tân Đồ Sơn</option>

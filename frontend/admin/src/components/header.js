@@ -65,7 +65,7 @@ const Header = () => {
       .catch((error) => {
         console.error(error);
       });
-    socket.emit("send_notification", newNotification);
+    // socket.emit("send_notification", newNotification);
     
   };  
 
