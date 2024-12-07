@@ -613,7 +613,9 @@ const BookingDetails = () => {
         }
     };
 
-
+    const handleBackToList = () => {
+        navigate('/bookings')
+    };
     const handleOpenModal = () => {
         setShowModal(true);
     };
@@ -712,7 +714,7 @@ const BookingDetails = () => {
                 {/* Hiển thị thông tin Agency */}
                 {Agency && (
                     <Col className="agency-details">
-                        <p><strong>Mã quân nhân:</strong> {Agency.code}</p>
+                        <p><strong>Mã đơn vị:</strong> {Agency.code}</p>
                         <p><strong>Tên đơn vị:</strong> {Agency.name}</p>
                         <p><strong>SĐT đơn vị:</strong> {Agency.phone}</p>
                         <p><strong>Vị trí đơn vị:</strong> {Agency.address}</p>
@@ -891,7 +893,9 @@ const BookingDetails = () => {
                                         <td>
                                             <Button
                                                 variant="danger"
+                                                disabled={service.status !== "Đã đặt"}
                                                 onClick={() => handleCancelService(service, (service.otherServiceId.price * service.quantity))}
+
                                             >
                                                 Hủy Dịch Vụ
                                             </Button>
@@ -946,6 +950,14 @@ const BookingDetails = () => {
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Check-out'}
                 </button> */}
+                {/* Nút Back */}
+                <Button
+                    className='mx-2'
+                    onClick={handleBackToList}
+                    variant="warning"
+                >
+                    Về danh sách đặt phòng
+                </Button>
                 {/* Nút Check-out */}
                 <Button
                     onClick={handleOpenModal}
@@ -954,6 +966,7 @@ const BookingDetails = () => {
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Check-out'}
                 </Button>
+
 
                 {/* Modal */}
                 <Modal show={showModal} onHide={handleCloseModal} centered className="custom-modal">
@@ -985,6 +998,7 @@ const BookingDetails = () => {
                         Lịch sử
                     </Button>
                 )}
+
             </div>
         </div>
     );
