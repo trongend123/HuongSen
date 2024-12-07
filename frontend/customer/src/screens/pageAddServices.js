@@ -14,6 +14,7 @@ const PageAddServices = () => {
     const [isOtpSent, setIsOtpSent] = useState(false); // OTP sent status
     const [isOtpValid, setIsOtpValid] = useState(false); // OTP valid status
     const [otpError, setOtpError] = useState(null); // OTP error message
+    const [isOtpSending, setIsOtpSending] = useState(false)
 
     const addServiceRef = useRef(null);
 
@@ -31,14 +32,25 @@ const PageAddServices = () => {
     // Handle form submission to validate and set the bookingId
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validate Booking ID
+        const bookingIdRegex = /^[a-zA-Z0-9]+$/; // Alphanumeric only
+        if (!bookingId) {
+            setError("Booking ID không được để trống.");
+            return;
+        }
+        if (!bookingIdRegex.test(bookingId)) {
+            setError("Booking ID không hợp lệ. Vui lòng kiểm tra lại.");
+            return;
+        }
+
         try {
-            // Kiểm tra Booking ID hợp lệ
             const response = await axios.get(`http://localhost:9999/bookings/${bookingId}`);
             if (response.data) {
                 setIsValidBooking(true);
                 setSubmittedBookingId(bookingId.trim());
                 setError(null);
-                await sendOtp(); // Gửi OTP khi Booking ID hợp lệ
+                await sendOtp(); // Send OTP if Booking ID is valid
             }
         } catch (error) {
             setIsValidBooking(false);
@@ -46,27 +58,23 @@ const PageAddServices = () => {
         }
     };
 
-    // Gửi OTP ngay sau khi Booking ID hợp lệ
-    const sendOtp = async () => {
-        try {
-            await axios.post(`http://localhost:9999/email/send-otp/${bookingId}`);
-            setIsOtpSent(true);  // Thông báo đã gửi OTP thành công
-            setOtpError(null);   // Xóa thông báo lỗi OTP
-        } catch (error) {
-            setOtpError("Không thể gửi OTP. Vui lòng thử lại.");
-        }
-    };
-
-    // Xác nhận OTP
     const handleOtpVerification = async () => {
+        // Validate OTP
+        const otpRegex = /^[0-9]+$/; // Numeric only
+        if (!otp) {
+            setOtpError("Mã OTP không được để trống.");
+            return;
+        }
+        if (!otpRegex.test(otp)) {
+            setOtpError("OTP không hợp lệ. Vui lòng thử lại.");
+            return;
+        }
+
         try {
             const response = await axios.post(`http://localhost:9999/email/verify-otp/${bookingId}`, { otp });
-
             if (response.data.success) {
-                setIsOtpValid(true);  // OTP hợp lệ
-                setOtpError(null);    // Xóa thông báo lỗi OTP
-                // Sau khi xác thực OTP thành công, tải lại dữ liệu
-                // await handleSubmit(new Event('submit')); // Gọi lại hàm handleSubmit để tải lại dữ liệu
+                setIsOtpValid(true);
+                setOtpError(null);
             } else {
                 setOtpError("OTP không hợp lệ. Vui lòng thử lại.");
             }
@@ -74,6 +82,21 @@ const PageAddServices = () => {
             setOtpError("Không thể xác minh OTP. Vui lòng thử lại.");
         }
     };
+
+    // Gửi OTP ngay sau khi Booking ID hợp lệ
+    const sendOtp = async () => {
+        setIsOtpSending(true); // Start loading
+        try {
+            await axios.post(`http://localhost:9999/email/send-otp/${bookingId}`);
+            setIsOtpSent(true);  // Indicate OTP sent successfully
+            setOtpError(null);   // Clear OTP errors
+        } catch (error) {
+            setOtpError("Không thể gửi OTP. Vui lòng thử lại.");
+        } finally {
+            setIsOtpSending(false); // Stop loading
+        }
+    };
+
 
 
 
@@ -90,6 +113,7 @@ const PageAddServices = () => {
                         placeholder="Nhập Booking ID"
                         value={bookingId}
                         onChange={(e) => setBookingId(e.target.value)} // Theo dõi sự thay đổi của Booking ID
+                        maxLength={30}
                     />
                 </Form.Group>
                 <Button variant="primary" type="submit" className="mt-3">
@@ -100,24 +124,30 @@ const PageAddServices = () => {
             {/* Hiển thị thông báo lỗi nếu Booking ID không hợp lệ */}
             {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
 
-            {/* Hiển thị form nhập OTP nếu OTP đã được gửi nhưng chưa xác minh */}
-            {isOtpSent && !isOtpValid && (
-                <Form className="mt-4">
-                    <Form.Group controlId="otp">
-                        <Form.Label>Nhập OTP</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Nhập OTP"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)} // Thay đổi giá trị OTP
-                        />
-                    </Form.Group>
-                    <Button variant="primary" onClick={handleOtpVerification} className="mt-3">
-                        Xác minh OTP
-                    </Button>
-                    {otpError && <Alert variant="danger" className="mt-3">{otpError}</Alert>}
-                </Form>
+            {/* Display the OTP form only if OTP is sent */}
+            {isOtpSending ? (
+                <Alert variant="info" className="mt-3">Đang gửi OTP...</Alert>
+            ) : (
+                isOtpSent && !isOtpValid && (
+                    <Form className="mt-4">
+                        <Form.Group controlId="otp">
+                            <Form.Label>Nhập OTP</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Nhập OTP"
+                                value={otp}
+                                onChange={(e) => setOtp(e.target.value)} // Track OTP changes
+                                maxLength={10}
+                            />
+                        </Form.Group>
+                        <Button variant="primary" onClick={handleOtpVerification} className="mt-3">
+                            Xác minh OTP
+                        </Button>
+                        {otpError && <Alert variant="danger" className="mt-3">{otpError}</Alert>}
+                    </Form>
+                )
             )}
+
 
             {/* Render AddServiceForBookingId nếu Booking ID và OTP hợp lệ */}
             {isValidBooking && isOtpValid && submittedBookingId && (

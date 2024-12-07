@@ -219,17 +219,17 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, 
         const today = new Date();
         today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
 
-        // Check if canUpdate is true
-        if (canUpdate) {
-            if (selectedDate < new Date(bookingCheckIn) || selectedDate > new Date(bookingCheckOut)) {
-                setFormError(
+        // // Check if canUpdate is true
+        // if (canUpdate) {
+        //     if (selectedDate < new Date(bookingCheckIn) || selectedDate > new Date(bookingCheckOut)) {
+        //         setFormError(
 
-                    `Ngày được chọn phải nằm trong khoảng từ ${format(new Date(bookingCheckIn), 'dd-MM-yyyy')} đến ${format(new Date(bookingCheckOut), 'dd-MM-yyyy')}.`
+        //             `Ngày được chọn phải nằm trong khoảng từ ${format(new Date(bookingCheckIn), 'dd-MM-yyyy')} đến ${format(new Date(bookingCheckOut), 'dd-MM-yyyy')}.`
 
-                );
-                return;
-            }
-        }
+        //         );
+        //         return;
+        //     }
+        // }
 
         // Validate past dates
         if (selectedDate < today) {

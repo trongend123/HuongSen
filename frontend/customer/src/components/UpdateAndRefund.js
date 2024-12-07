@@ -21,7 +21,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     const [updatedQuantities, setUpdatedQuantities] = useState({});
     const [Rooms, setRooms] = useState([]);
 
-
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -401,6 +401,9 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     };
 
 
+    const handleBackToHome = () => {
+        navigate('/')
+    };
 
     // const calculateTotalPrice = () => {
     //     // Lấy giá cũ của tất cả orderRooms (tính theo từng phòng)
@@ -462,7 +465,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                     {/* Hiển thị thông tin Agency */}
                     {Agency && (
                         <Col className="agency-details">
-                            <p><strong>Mã quân nhân:</strong> {Agency.code}</p>
+                            <p><strong>Mã đơn vị:</strong> {Agency.code}</p>
                             <p><strong>Tên đơn vị:</strong> {Agency.name}</p>
                             <p><strong>SĐT đơn vị:</strong> {Agency.phone}</p>
                             <p><strong>Vị trí đơn vị:</strong> {Agency.address}</p>
@@ -473,7 +476,8 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                         <p><strong>Ngày tạo đơn:</strong> {format(new Date(orderRooms[0].createdAt), 'dd-MM-yyyy')}</p>
                         <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p>
                         <p><strong>Trạng thái:</strong> {orderRooms[0].bookingId?.status || 'N/A'}</p>
-                        <p><strong>Thanh toán:</strong> {orderRooms[0].bookingId?.payment || 'N/A'}</p>
+                        <p><strong>Đã thanh toán:</strong> {orderRooms[0].bookingId?.payment || 0}</p>
+                        <p><strong>Còn nợ:</strong> {orderRooms[0].bookingId?.price - orderRooms[0].bookingId?.payment || 0}</p>
                     </Col>
 
                 </Row>
@@ -616,6 +620,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                                         <td>
                                             <Button
                                                 variant="danger"
+                                                disabled={service.status !== "Đã đặt"}
                                                 onClick={() => handleCancelService(service, (service.otherServiceId.price * service.quantity))}
                                             >
                                                 Hủy Dịch Vụ
@@ -658,7 +663,13 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
 
             )}
             {/* <h3>Tổng giá tiền thay đổi thành: {newBookingPrice}</h3> */}
-            <div className="checkout-button">
+            <div className="checkout-button d-flex">
+                <button
+                    className='bg-warning'
+                    onClick={handleBackToHome}
+                >
+                    Về Trang Chủ
+                </button>
 
                 <button
                     className='bg-danger'
@@ -668,6 +679,8 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Hủy Đơn'}
                 </button>
+
+
             </div>
         </div>
     );

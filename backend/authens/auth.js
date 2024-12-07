@@ -20,44 +20,44 @@ const users = Staffs; // Dummy users array for testing purposes
 export async function registerUser(req, res, next) {
   const { username, password, fullname, email, phone, role } = req.body;
 
-  // Kiểm tra bắt buộc: username và password
-  if (!username || username.trim().length < 3 || username.trim().length > 30) {
-    return res.status(400).json({ message: 'Username must be between 3 and 30 characters' });
-  }
-  if (!password || password.length < 6) {
-    return res.status(400).json({ message: 'Password must be at least 6 characters' });
-  }
+  // // Kiểm tra bắt buộc: username và password
+  // if (!username || username.trim().length < 3 || username.trim().length > 30) {
+  //   return res.status(400).json({ message: 'Username must be between 3 and 30 characters' });
+  // }
+  // if (!password || password.length < 6) {
+  //   return res.status(400).json({ message: 'Password must be at least 6 characters' });
+  // }
 
-  // Kiểm tra các trường không bắt buộc
-  if (fullname && fullname.trim().length < 3) {
-    return res.status(400).json({ message: 'Fullname must be at least 3 characters' });
-  }
-  if (email && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-    return res.status(400).json({ message: 'Invalid email format' });
-  }
-  if (phone && !/^\d{10,15}$/.test(phone)) {
-    return res.status(400).json({ message: 'Phone must be a valid number with 10 to 15 digits' });
-  }
-  if (role && !['admin', 'staff_mk', 'staff_ds', 'staff_cb', 'staff'].includes(role)) {
-    return res.status(400).json({ message: 'Invalid role value. Allowed values are: admin, staff_mk, staff_ds, staff_cb, staff' });
-  }
+  // // Kiểm tra các trường không bắt buộc
+  // if (fullname && fullname.trim().length < 3) {
+  //   return res.status(400).json({ message: 'Fullname must be at least 3 characters' });
+  // }
+  // if (email && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+  //   return res.status(400).json({ message: 'Invalid email format' });
+  // }
+  // if (phone && !/^\d{10,15}$/.test(phone)) {
+  //   return res.status(400).json({ message: 'Phone must be a valid number with 10 to 15 digits' });
+  // }
+  // if (role && !['admin', 'staff_mk', 'staff_ds', 'staff_cb', 'staff'].includes(role)) {
+  //   return res.status(400).json({ message: 'Invalid role value. Allowed values are: admin, staff_mk, staff_ds, staff_cb, staff' });
+  // }
 
-  // Kiểm tra bắt buộc: username và password
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password are required' });
-  }
+  // // Kiểm tra bắt buộc: username và password
+  // if (!username || !password) {
+  //   return res.status(400).json({ message: 'Username and password are required' });
+  // }
 
   try {
-    // Kiểm tra username đã tồn tại
-    const existingUser = await users.findOne({ username });
-    if (existingUser) {
-      return res.status(409).json({ message: 'Username already exists' });
-    }
+    // // Kiểm tra username đã tồn tại
+    // const existingUser = await users.findOne({ username });
+    // if (existingUser) {
+    //   return res.status(409).json({ message: 'Username already exists' });
+    // }
 
-    // Validate email nếu được cung cấp
-    if (email && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      return res.status(400).json({ message: 'Invalid email format' });
-    }
+    // // Validate email nếu được cung cấp
+    // if (email && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+    //   return res.status(400).json({ message: 'Invalid email format' });
+    // }
 
     // Mã hóa mật khẩu
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -105,7 +105,7 @@ export async function registerUser(req, res, next) {
 //   try {
 //     const user = await users.findOne({ username });
 //     if (!user) return next(createError.Unauthorized("User not found"));
-  
+
 
 
 //     // const isValidPassword = await bcrypt.compare(password, user.password);
@@ -116,7 +116,7 @@ export async function registerUser(req, res, next) {
 //     }
 //     const accessToken = await signAccessToken(username);
 //     const refreshToken = await signRefreshToken(username);
-    
+
 //     res.json({ accessToken, refreshToken, user });
 
 //   } catch (error) {
@@ -131,7 +131,7 @@ export async function loginUser(req, res) {
   try {
     // Kiểm tra username và password có tồn tại
     if (!username || !password) {
-      return res.status(400).json({ message: 'Username and password are required' });
+      return res.status(400).json({ message: 'Username và password bắt buộc' });
     }
 
     // Loại bỏ khoảng trắng thừa
@@ -141,13 +141,13 @@ export async function loginUser(req, res) {
     // Tìm user trong cơ sở dữ liệu
     const user = await users.findOne({ username });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid username or password' });
+      return res.status(401).json({ message: 'Tên người dùng hoặc mật khẩu không hợp lệ' });
     }
 
     // So sánh mật khẩu
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid username or password' });
+      return res.status(401).json({ message: 'Tên người dùng hoặc mật khẩu không hợp lệ' });
     }
 
     // Tạo access token và refresh token
