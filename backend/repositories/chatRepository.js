@@ -31,5 +31,5 @@ export const saveMessage = async (messageData) => {
 // };
 
 export const getChatHistory = async (userId, otherUserId) => {
-  return await Message.find().sort({ createdAt: -1 });
+  return await Message.find().populate('locationId').sort({ createdAt: -1 });
 };

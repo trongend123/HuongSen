@@ -72,7 +72,7 @@ const ListRoom = () => {
           status: 'Đã check-in',
         }
       )
-      const newNotification = { content: "Lễ tân đã check-in phòng" };
+      const newNotification = { content: "Lễ tân đã check-in phòng",locationId: room.roomCategoryId.selectedLocation };
                 axios
                 .post(`${BASE_URL}/chats/send`, newNotification)
                 .then((response) => {

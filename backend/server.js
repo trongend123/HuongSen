@@ -49,7 +49,7 @@ const server = http.createServer(app);
 app.use(cors());
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.REACT_URL,
     methods: ["GET", "POST"],
   },
   transports: ["polling", "websocket"], // Allow both transports
