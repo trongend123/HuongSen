@@ -173,13 +173,13 @@ export async function loginUser(req, res) {
 }
 
 
-// Function to change user password
+// Function to change user password using ID
 export async function changePassword(req, res, next) {
   const { currentPassword, newPassword } = req.body;
-  const username = req.payload.username; // Get the username from the token payload
+  const userId = req.payload.id; // Get the user ID from the token payload
 
   try {
-    const user = await users.findOne({ username });
+    const user = await users.findById(userId); // Find the user by ID
     if (!user) return next(createError.Unauthorized("User not found"));
 
     const isValidPassword = await bcrypt.compare(currentPassword, user.password);
@@ -187,13 +187,17 @@ export async function changePassword(req, res, next) {
 
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedNewPassword; // Update the password
+
+    // Save the updated user object to the database
+    await user.save();
+
     res.json({ message: 'Password changed successfully' });
   } catch (error) {
     next(createError.InternalServerError(error.message));
   }
 }
 
-// Sign access token function
+
 // Sign access token function
 export async function signAccessToken(userId) {
   return new Promise((resolve, reject) => {

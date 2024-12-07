@@ -37,9 +37,10 @@ const ChangePassword = () => {
       return;
     }
 
+
     const password = JSON.parse(localStorage.getItem('user')).password;
     if (oldPassword !== password) {
-      setError('Mật khẩu không đúng, vui lòng nhập lại');
+      setError('Mật khẩu cũ không đúng, vui lòng nhập lại');
       return;
     }
 
