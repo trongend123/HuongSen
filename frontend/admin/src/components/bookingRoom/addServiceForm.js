@@ -4,7 +4,7 @@ import { Form, Row, Col, Button, Card } from 'react-bootstrap';
 import { format } from 'date-fns';
 import { BASE_URL } from "../../utils/config";
 
-const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, canUpdate, bookingCheckIn, bookingCheckOut }, ref) => {
+const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, canUpdate, bookingCheckIn, bookingCheckOut,locationId }, ref) => {
     const [otherServices, setOtherServices] = useState([]);
     const [orderServicesData, setOrderServicesData] = useState([]);
     const [selectedService, setSelectedService] = useState("");
@@ -179,7 +179,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, 
             // Sau khi thêm dịch vụ thành công, clear orderServicesData
             setOrderServicesData([]);
             console.log("Thêm dịch vụ và ghi chú thành công!");
-            const newNotification = { content: "Lễ tân đã cập nhật dịch vụ" };
+            const newNotification = { content: "Lễ tân đã cập nhật dịch vụ",locationId: locationId };
             axios
                 .post(`${BASE_URL}/chats/send`, newNotification)
                 .then((response) => {
