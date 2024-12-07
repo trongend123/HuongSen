@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Booking from "./bookingInfor.js";
+import { BASE_URL } from "../utils/config";
 
 const HistoryBookingChange = () => {
     const location = useLocation();
@@ -16,7 +17,7 @@ const HistoryBookingChange = () => {
     useEffect(() => {
         const fetchBookingHistory = async () => {
             try {
-                const response = await axios.get(`http://localhost:9999/histories/booking/${bookingId}`);
+                const response = await axios.get(`${BASE_URL}/histories/booking/${bookingId}`);
                 setHistory(response.data); // Giả sử API trả về một mảng lịch sử
             } catch (err) {
                 setError('Lỗi khi tải lịch sử đặt phòng');

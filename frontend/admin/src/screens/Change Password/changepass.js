@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './changepass.css';
+import { BASE_URL } from "../../utils/config";
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState('');
@@ -46,7 +47,7 @@ const ChangePassword = () => {
     try {
       const userId = JSON.parse(localStorage.getItem('user'))._id;
       await axios.put(
-        `http://localhost:9999/staffs/${userId}`,
+        `${BASE_URL}/staffs/${userId}`,
         { password: newPassword },
         {
           headers: {

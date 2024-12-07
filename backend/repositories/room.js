@@ -106,7 +106,7 @@ const deleteRoom = async (id) => {
 const getRoomsByCategory = async (roomCategoryId) => {
   try {
     // Find rooms by roomCategoryId
-    const rooms = await Room.find({ roomCategoryId }).populate("roomCategoryId").exec();
+    const rooms = await Room.find({ roomCategoryId }).populate("roomCategoryId").populate("bookingId").exec();
 
     // Calculate the total number of rooms in this category
     const totalRooms = rooms.length;
@@ -133,7 +133,7 @@ const getTotalRoomsByCategory = async () => {
 const getRoomsByBookingId = async (bookingId) => {
   try {
     // Tìm tất cả các phòng theo bookingId
-    const rooms = await Room.find({ bookingId }).populate('roomCategoryId');
+    const rooms = await Room.find({ bookingId }).populate('roomCategoryId').populate("bookingId");
     return rooms;
   } catch (error) {
     throw new Error(`Error fetching rooms by bookingId: ${error.message}`);

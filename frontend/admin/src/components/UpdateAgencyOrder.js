@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useImperativeHandle, forwardRef } from 'react';
 import axios from 'axios';
 import { Form, Row, Col, Card, Button } from 'react-bootstrap';
+import { BASE_URL } from "../utils/config";
 
 const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, checkinDate, checkoutDate }, ref) => {
     const [roomCategories, setRoomCategories] = useState([]);
@@ -28,17 +29,17 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, check
     // Fetch room data from backend
     const fetchRoomData = async () => {
         try {
-            const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
+            const roomCategoriesResponse = await axios.get(`${BASE_URL}/roomCategories`);
             const filteredRoomCategories = roomCategoriesResponse.data.filter(room => room.locationId._id === locationId);
             setRoomCategories(filteredRoomCategories);
 
-            const bookedRoomsResponse = await axios.get(`http://localhost:9999/orderRooms/totalbycategory/?checkInDate=${receiveRoom}&checkOutDate=${returnRoom}`);
+            const bookedRoomsResponse = await axios.get(`${BASE_URL}/orderRooms/totalbycategory/?checkInDate=${receiveRoom}&checkOutDate=${returnRoom}`);
             const bookedRoomsMap = {};
             bookedRoomsResponse.data.forEach(item => {
                 bookedRoomsMap[item.roomCateId] = item.totalRooms;
             });
 
-            const totalRoomsResponse = await axios.get('http://localhost:9999/rooms/category/totals');
+            const totalRoomsResponse = await axios.get(`${BASE_URL}/rooms/category/totals`);
             const initialRemainingRooms = {};
             totalRoomsResponse.data.categoryTotals.forEach(room => {
                 const totalRooms = room.totalRooms;
@@ -156,7 +157,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, check
             }
             // Create room orders
             const orderRoomPromises = selectedRooms.map(room => {
-                return axios.post('http://localhost:9999/orderRooms', {
+                return axios.post(`${BASE_URL}/orderRooms`, {
                     roomCateId: room.roomCateId,
                     customerId: customerID,
                     bookingId: bookingId,
@@ -167,7 +168,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, check
             });
             const newNotification = { content: "Đơn đặt phòng của khách đoàn đã được cập nhật." };
             axios
-                .post("http://localhost:9999/chats/send", newNotification)
+                .post(`${BASE_URL}/chats/send`, newNotification)
                 .then((response) => {
                     console.log(response.data);
                 })

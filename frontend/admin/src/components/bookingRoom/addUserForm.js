@@ -1,5 +1,6 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import { Form, Row, Col, Card, Button, Alert } from 'react-bootstrap';
+import { BASE_URL } from "../../utils/config";
 
 const AddUserForm = forwardRef(({ }, ref) => {
     const [customerData, setCustomerData] = useState({
@@ -102,7 +103,7 @@ const AddUserForm = forwardRef(({ }, ref) => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:9999/customers', {
+            const response = await fetch(`${BASE_URL}/customers`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

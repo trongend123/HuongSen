@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Form, Row, Col, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { BASE_URL } from "../utils/config";
 
 // Component StaffAccount to display individual staff information
 const StaffAccount = ({ staff, onDelete, onEdit }) => {
@@ -63,7 +64,7 @@ const ListStaffAccount = () => {
   // Fetch staff data from API
   useEffect(() => {
     axios
-      .get('http://localhost:9999/staffs')
+      .get(`${BASE_URL}/staffs`)
       .then((response) => setStaffData(response.data))
       .catch((error) => console.error("Error fetching staff data:", error));
   }, []);
@@ -117,7 +118,7 @@ const ListStaffAccount = () => {
   // Handle delete staff
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:9999/staffs/${id}`)
+      .delete(`${BASE_URL}/staffs/${id}`)
       .then(() => {
         setStaffData(staffData.filter(staff => staff._id !== id));
       })
@@ -156,7 +157,7 @@ const ListStaffAccount = () => {
   const handleCreateStaff = () => {
     if (validateInputs()) {
       axios
-        .post('http://localhost:9999/register', newStaff)
+        .post(`${BASE_URL}/register`, newStaff)
         .then((response) => {
           setStaffData([...staffData, response.data]);
           handleCloseModal();
@@ -184,7 +185,7 @@ const ListStaffAccount = () => {
   const handleUpdateStaff = () => {
     if (validateInputs()) {
       axios
-        .put(`http://localhost:9999/staffs/${selectedStaff._id}`, newStaff)
+        .put(`${BASE_URL}/staffs/${selectedStaff._id}`, newStaff)
         .then((response) => {
           setStaffData(
             staffData.map(staff => staff._id === selectedStaff._id ? response.data : staff)
@@ -326,21 +327,22 @@ const ListStaffAccount = () => {
               <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>
             </Form.Group>
 
-            {isEditMode === false &&
-              <Form.Group controlId="formRole">
-                <Form.Label>Vai trò</Form.Label>
-                <Form.Select
-                  name="role"
-                  value={newStaff.role}
-                  onChange={handleChange}
-                >
-                  <option value="staff_cb">Lễ tân Cát Bà</option>
-                  <option value="staff_ds">Lễ tân Đồ Sơn</option>
-                  <option value="staff_mk">Lễ tân Minh Khai</option>
-                  <option value="chef">Bếp</option>
-                  <option value="admin">Admin</option>
-                </Form.Select>
-              </Form.Group>}
+            <Form.Group controlId="formRole">
+              <Form.Label>Vai trò</Form.Label>
+              <Form.Select
+                name="role"
+                value={newStaff.role}
+                onChange={handleChange}
+                disabled={isEditMode} 
+              >
+                <option value="staff_cb">Lễ tân Cát Bà</option>
+                <option value="staff_ds">Lễ tân Đồ Sơn</option>
+                <option value="staff_mk">Lễ tân Minh Khai</option>
+                <option value="chef">Bếp</option>
+                <option value="admin">Admin</option>
+              </Form.Select>
+            </Form.Group>
+
           </Form>
         </Modal.Body>
         <Modal.Footer>

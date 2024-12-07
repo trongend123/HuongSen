@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from "axios";
 import logo from '../../assets/logo.png'; // Import ảnh từ thư mục src
 import { BiLoaderCircle } from 'react-icons/bi';
-
+import { BASE_URL } from "../../utils/config";
 
 const PaymentSuccess = () => {
   const { bookingId } = useParams();
@@ -14,7 +14,7 @@ const PaymentSuccess = () => {
   useEffect(() => {
     const fetchBooking = async () => {
       try {
-        const response = await axios.get(`http://localhost:9999/bookings/${bookingId}`);
+        const response = await axios.get(`${BASE_URL}/bookings/${bookingId}`);
         setBooking(response.data); // Giả sử response.data chứa thông tin đơn đặt
 
       } catch (error) {
@@ -43,15 +43,15 @@ const PaymentSuccess = () => {
         //   await axios.put(`http://localhost:9999/bookings/${bookingId}`, { payment: booking.price });
         //   setMessage(paymentResponse.data.message || 'Thanh toán được tạo thành công.');
         // } else { setMessage('<h1>Thanh toán được tạo thành công.</h1>'); }
-        const History = await axios.get(`http://localhost:9999/histories/booking/${bookingId}`);
+        const History = await axios.get(`${BASE_URL}/histories/booking/${bookingId}`);
         if (!History.data.success && History.data.success !== undefined) {
-          await axios.put(`http://localhost:9999/bookings/${bookingId}`, { payment: booking.price });
-          await axios.post('http://localhost:9999/histories/BE', { bookingId: bookingId, note: 'khách hàng đã đặt phòng ' });
+          await axios.put(`${BASE_URL}/bookings/${bookingId}`, { payment: booking.price });
+          await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, note: 'khách hàng đã đặt phòng ' });
         }
         setMessage('<h1>Thanh toán được tạo thành công.</h1>')
 
         // Xác nhận đặt phòng
-        const response = await axios.get(`http://localhost:9999/payment/payment-success/${booking._id}`);
+        const response = await axios.get(`${BASE_URL}/payment/payment-success/${booking._id}`);
         setMessageEmail(response.data || 'Thanh toán thành công! Email xác nhận đã được gửi.');
       } catch (error) {
         console.error("Lỗi khi xác nhận đặt phòng hoặc tạo thanh toán:", error.message);

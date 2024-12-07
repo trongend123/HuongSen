@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { BASE_URL } from "../utils/config";
 
 const CreateBookingByStaff = () => {
     const navigate = useNavigate();
@@ -70,9 +71,9 @@ const CreateBookingByStaff = () => {
     useEffect(() => {
         const fetchRoomCategoriesLocationsOtherService = async () => {
             try {
-                const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
+                const roomCategoriesResponse = await axios.get(`${BASE_URL}/roomCategories`);
                 let filteredRoomCategories = roomCategoriesResponse.data;
-                const response = await axios.get('http://localhost:9999/otherServices');
+                const response = await axios.get(`${BASE_URL}/otherServices`);
                 const services = response.data.map(service => ({
                     otherServiceId: service._id,
                     name: service.name,
@@ -115,10 +116,10 @@ const CreateBookingByStaff = () => {
     useEffect(() => {
         const fetchRoomData = async () => {
             try {
-                const totalRoomsResponse = await axios.get('http://localhost:9999/rooms/category/totals');
+                const totalRoomsResponse = await axios.get(`${BASE_URL}/rooms/category/totals`);
                 setTotalRoomsByCategory(totalRoomsResponse.data.categoryTotals);
 
-                const bookedRoomsResponse = await axios.get(`http://localhost:9999/orderRooms/totalbycategory/?checkInDate=${bookingData.checkin}&checkOutDate=${bookingData.checkout}`);
+                const bookedRoomsResponse = await axios.get(`${BASE_URL}/orderRooms/totalbycategory/?checkInDate=${bookingData.checkin}&checkOutDate=${bookingData.checkout}`);
                 const bookedRoomsMap = {};
 
                 bookedRoomsResponse.data.forEach(item => {
@@ -358,11 +359,11 @@ const CreateBookingByStaff = () => {
             .replace(/\s+/g, ' ')
             .replace(/\b\w/g, (c) => c.toUpperCase());
             customerData.fullname = formattedValue;
-            const customerResponse = await axios.post('http://localhost:9999/customers', customerData);
+            const customerResponse = await axios.post(`${BASE_URL}/customers`, customerData);
             const newCustomerId = customerResponse.data._id;
 
             // Create the updated booking after setting the price
-            const bookingResponse = await axios.post('http://localhost:9999/bookings', {
+            const bookingResponse = await axios.post(`${BASE_URL}/bookings`, {
                 ...bookingData,
                 price: finalPrice // Ensure the price is sent as part of the booking
             });
@@ -372,7 +373,7 @@ const CreateBookingByStaff = () => {
             // Send order rooms data to the server
             const orderRoomPromises = Object.entries(quantity).map(async ([roomCateId, qty]) => {
                 if (qty > 0) {
-                    return axios.post('http://localhost:9999/orderRooms', {
+                    return axios.post(`${BASE_URL}/orderRooms`, {
                         roomCateId,
                         customerId: newCustomerId,
                         bookingId: newBookingId,
@@ -384,7 +385,7 @@ const CreateBookingByStaff = () => {
             // Send order services data to the server
             const orderServicePromises = orderServicesData.map(service => {
                 if (service.serviceQuantity > 0) {
-                    return axios.post('http://localhost:9999/orderServices', {
+                    return axios.post(`${BASE_URL}/orderServices`, {
                         otherServiceId: service.otherServiceId,
                         bookingId: newBookingId,
                         quantity: service.serviceQuantity,
@@ -394,7 +395,7 @@ const CreateBookingByStaff = () => {
             });
 
             // Send identification data to the server
-            await axios.post('http://localhost:9999/identifycations', {
+            await axios.post(`${BASE_URL}/identifycations`, {
                 ...identifycationData,
                 customerID: newCustomerId
             });
