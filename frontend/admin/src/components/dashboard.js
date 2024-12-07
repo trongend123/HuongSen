@@ -6,6 +6,7 @@ import 'chart.js/auto';
 import 'react-datepicker/dist/react-datepicker.css';
 import './dashboard.css';
 import { format } from 'date-fns';
+import { BASE_URL } from "../utils/config";
 
 // Your existing component
 const Dashboard = () => {
@@ -15,7 +16,6 @@ const Dashboard = () => {
   const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedMonth, setSelectedMonth] = useState(''); // Trạng thái để lưu tháng được chọn
   const [message, setMessage] = useState("");
-
 
   useEffect(() => {
     const storedUser = user
@@ -32,7 +32,7 @@ const Dashboard = () => {
       }
     }
     axios
-      .get('http://localhost:9999/orderRooms')
+      .get(`${BASE_URL}/orderRooms`)
       .then((response) => setOrderData(response.data))
       .catch((error) => console.error('Error fetching order data:', error));
 
@@ -56,7 +56,7 @@ const Dashboard = () => {
     return !isNaN(parsedDate.getTime());
   };
 
-  const aggregateDataByMonth = (data, year) => {
+  const aggregateBookingByMonth = (data, year) => {
     const aggregated = data.reduce((acc, order) => {
       if (order.updatedAt && isValidDate(order.updatedAt)) {
         const updatedDate = new Date(order.updatedAt);
@@ -99,11 +99,53 @@ const Dashboard = () => {
       return dateA - dateB; // Ascending order
     });
   };
+  const aggregateOrderByMonth = (data, year) => {
+    const aggregated = data.reduce((acc, order) => {
+      if (order.bookingId.updatedAt && isValidDate(order.bookingId.updatedAt)) {
+        const updatedDate = new Date(order.bookingId.updatedAt);
+        if (updatedDate.getFullYear() === year) {
+          const formattedMonth = format(updatedDate, 'MM/yyyy'); // Group by month
 
+          if (!acc[formattedMonth]) {
+            acc[formattedMonth] = {
+              month: formattedMonth,
+              quantity: 0,
+              price: 0,
+              humans: 0,
+            };
+          }
+
+          acc[formattedMonth].quantity += order.quantity || 0;
+          acc[formattedMonth].price += order.price || 0;
+          acc[formattedMonth].humans += order.humans || 0;
+        }
+      }
+      return acc;
+    }, {});
+
+    // Ensure all months are present
+    for (let i = 0; i < 12; i++) {
+      const month = format(new Date(year, i), 'MM/yyyy'); // Format as MM/yyyy
+      if (!aggregated[month]) {
+        aggregated[month] = {
+          month,
+          quantity: 0,
+          price: 0,
+          humans: 0,
+        };
+      }
+    }
+
+    return Object.values(aggregated).sort((a, b) => {
+      const dateA = new Date(a.month.split('/').reverse().join('-'));
+      const dateB = new Date(b.month.split('/').reverse().join('-'));
+      return dateA - dateB; // Ascending order
+    });
+  };
   // Filter data and set the year
   const selectedYear = 2024; // Replace with dynamic year selection if needed
-  const aggregatedOrderDataByMonth = aggregateDataByMonth(filteredOrderData, selectedYear);
-  const aggregatedBookingsByMonth = aggregateDataByMonth(uniqueBookings, selectedYear);
+  const aggregatedOrderDataByMonth = aggregateOrderByMonth(filteredOrderData, selectedYear);
+  const aggregatedBookingsByMonth = aggregateBookingByMonth(uniqueBookings, selectedYear);
 
   // Chart labels and data
   const monthLabels = aggregatedOrderDataByMonth.map((item) => item.month);
@@ -146,7 +188,39 @@ const Dashboard = () => {
       },
     ],
   };
-  const aggregateDataByDay = (data, year) => {
+
+
+  const aggregateOrderByDay = (data, year) => {
+    const aggregated = data.reduce((acc, order) => {
+      if (order.bookingId.updatedAt && isValidDate(order.bookingId.updatedAt)) {
+        const updatedDate = new Date(order.bookingId.updatedAt);
+        if (updatedDate.getFullYear() === year) {
+          const formattedDate = format(updatedDate, 'dd/MM/yyyy'); // Group by day
+
+          if (!acc[formattedDate]) {
+            acc[formattedDate] = {
+              date: formattedDate,
+              quantity: 0,
+              price: 0,
+              humans: 0,
+            };
+          }
+
+          acc[formattedDate].quantity += order.quantity || 0;
+          acc[formattedDate].price += order.price || 0;
+          acc[formattedDate].humans += order.humans || 0;
+        }
+      }
+      return acc;
+    }, {});
+
+    return Object.values(aggregated).sort((a, b) => {
+      const dateA = new Date(a.date.split('/').reverse().join('-')); // Convert 'dd/MM/yyyy' to 'yyyy-MM-dd'
+      const dateB = new Date(b.date.split('/').reverse().join('-'));
+      return dateA - dateB; // Ascending order
+    });
+  };
+  const aggregateBookingByDay = (data, year) => {
     const aggregated = data.reduce((acc, order) => {
       if (order.updatedAt && isValidDate(order.updatedAt)) {
         const updatedDate = new Date(order.updatedAt);
@@ -176,9 +250,8 @@ const Dashboard = () => {
       return dateA - dateB; // Ascending order
     });
   };
-
-  const aggregatedOrderDataByDay = aggregateDataByDay(filteredOrderData, selectedYear);
-  const aggregatedBookingsByDay = aggregateDataByDay(uniqueBookings, selectedYear);
+  const aggregatedOrderDataByDay = aggregateOrderByDay(filteredOrderData, selectedYear);
+  const aggregatedBookingsByDay = aggregateBookingByDay(uniqueBookings, selectedYear);
 
   const aggregatedOrderDataByMonthWithDays = aggregatedOrderDataByDay.filter(item => {
     if (!selectedMonth) return true; // Hiển thị tất cả nếu không chọn tháng
@@ -204,7 +277,7 @@ const Dashboard = () => {
 
   const handleExport = async () => {
     try {
-      const response = await axios.get("http://localhost:9999/orderRooms/excel");
+      const response = await axios.get(`${BASE_URL}/orderRooms/excel`);
       if (response.data.message) {
         console.log(response.data.message);
         setMessage(response.data.message);

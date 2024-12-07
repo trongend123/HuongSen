@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useImperativeHandle, forwardRef } f
 import axios from 'axios';
 import { Form, Row, Col, Button, Card, Alert } from 'react-bootstrap'; // Import Alert
 import SelectRoomCategories from './selectRoomCate';  // Import SelectRoomCategories component
+import { BASE_URL } from "../../utils/config";
 
 const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount, locationId, staff }, ref) => {
     const roomCategoriesRef = useRef(null);  // Ref for SelectRoomCategories
@@ -12,7 +13,6 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
     const [totalAmount, setTotalAmount] = useState(0);
     const [roomPrices, setRoomPrices] = useState({});  // Store room prices per category
     const [totalRoomsRemaining, setTotalRoomsRemaining] = useState(0);  // Store total remaining rooms
-
     const [bookingData, setBookingData] = useState({
         taxId: null,
         staffId: null,
@@ -213,7 +213,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             }));
 
             // Create the booking
-            const response = await axios.post('http://localhost:9999/bookings', {
+            const response = await axios.post(`${BASE_URL}/bookings`, {
                 ...bookingData,
                 price: finalPrice
             });
@@ -228,7 +228,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                 setErrorMessage('Không đủ số lượng phòng');
 
                 // Optionally delete the booking if rooms couldn't be reserved
-                await axios.delete(`http://localhost:9999/bookings/${bookingId}`);
+                await axios.delete(`${BASE_URL}/bookings/${bookingId}`);
                 console.log(`Booking with ID ${bookingId} has been deleted due to insufficient room selection.`);
 
                 return; // Exit the function
@@ -238,7 +238,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
             onBookingCreated(bookingId);
             const newNotification = { content: "Lễ tân đã tạo đơn đặt phòng." };
             axios
-                .post("http://localhost:9999/chats/send", newNotification)
+                .post(`${BASE_URL}/chats/send`, newNotification)
                 .then((response) => {
                     console.log(response.data);
                 })

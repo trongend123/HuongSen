@@ -10,6 +10,7 @@ import Review from "../../../components/Reviews/review";
 import axios from 'axios';
 import BookingPage from "../../pageBookingByCustomer";
 import { Navigate } from "react-router-dom";
+import { BASE_URL } from "../../../utils/config";
 const CS1 = () => {
     const locationId = "66f6c42f285571f28087c16a";
     const today = new Date().toISOString().split('T')[0];
@@ -45,8 +46,8 @@ const CS1 = () => {
     useEffect(() => {
         const fetchTaxesAndRoomCategories = async () => {
             try {
-                const taxResponse = await axios.get('http://localhost:9999/taxes');
-                const roomCategoriesResponse = await axios.get('http://localhost:9999/roomCategories');
+                const taxResponse = await axios.get(`${BASE_URL}/taxes`);
+                const roomCategoriesResponse = await axios.get(`${BASE_URL}/roomCategories`);
 
                 const defaultTax = taxResponse.data.find(tax => tax.code === '000000');
 
@@ -205,8 +206,8 @@ const CS1 = () => {
             //     const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
             //     await handleRoomOrders(existingOrderRooms.data, customerId, bookingId);
             // } else {
-            const customerResponse = await axios.post('http://localhost:9999/customers', customerData);
-            const bookingResponse = await axios.post('http://localhost:9999/bookings', { ...bookingData, price: totalPrice });
+            const customerResponse = await axios.post(`${BASE_URL}/customers`, customerData);
+            const bookingResponse = await axios.post(`${BASE_URL}/bookings`, { ...bookingData, price: totalPrice });
 
             const newBookingId = bookingResponse.data._id;
             const newCustomerId = customerResponse.data._id;
@@ -233,9 +234,9 @@ const CS1 = () => {
             if (qty > 0) {
                 const existingOrderRoom = existingOrderRooms.find(orderRoom => orderRoom.roomCateId._id === roomCateId);
                 if (existingOrderRoom) {
-                    return axios.put(`http://localhost:9999/orderRooms/${existingOrderRoom._id}`, { quantity: qty });
+                    return axios.put(`${BASE_URL}/orderRooms/${existingOrderRoom._id}`, { quantity: qty });
                 } else {
-                    return axios.post('http://localhost:9999/orderRooms', {
+                    return axios.post(`${BASE_URL}/orderRooms`, {
                         roomCateId,
                         customerId: cusId,
                         bookingId: bookId,
@@ -245,7 +246,7 @@ const CS1 = () => {
             } else if (qty == 0) {
                 const existingOrderRoom = existingOrderRooms.find(orderRoom => orderRoom.roomCateId._id === roomCateId);
                 if (existingOrderRoom) {
-                    return axios.delete(`http://localhost:9999/orderRooms/${existingOrderRoom._id}`);
+                    return axios.delete(`${BASE_URL}/orderRooms/${existingOrderRoom._id}`);
                 }
             }
             return null;

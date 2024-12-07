@@ -20,6 +20,7 @@ const ListRoom = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   const [bookingId, setBookingId] = useState('');
   const [bookings, setBookings] = useState([]);
+  const [bookingError, setBookingError] = useState('');
 
   useEffect(() => {
     const storedUser = user
@@ -86,6 +87,22 @@ const ListRoom = () => {
   };
 
   const handleUpdate = () => {
+    if (updatedStatus === "Đã book" || updatedStatus === "Đang sử dụng") {
+      const booking = bookings.find((b) => b._id === bookingId);
+  
+      if (!booking) {
+        setBookingError("Booking ID không tồn tại. Vui lòng kiểm tra lại.");
+        return;
+      }
+  
+      if (booking.status !== "Đã đặt" && booking.status !== "Đã check-in") {
+        setBookingError("Booking phải ở trạng thái 'Đã đặt' hoặc 'Đã check-in'.");
+        return;
+      }
+    }
+  
+    setBookingError(''); // Xóa lỗi nếu hợp lệ
+  
     var updatedRoom = {};
 
     if (updatedStatus !== "Đang sử dụng" && updatedStatus !== "Đã book") {
@@ -248,27 +265,39 @@ const ListRoom = () => {
 
               {updatedStatus === "Đã book" && (
                 <Form.Group controlId="bookingIdInput" className="mt-3">
-                  <Form.Label>Booking ID:</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={bookingId}
-                    onChange={(e) => setBookingId(e.target.value)}
-                    required
-                  />
-                </Form.Group>
+                <Form.Label>Booking ID:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={bookingId}
+                  onChange={(e) => {
+                    setBookingId(e.target.value);
+                    setBookingError(''); // Xóa lỗi khi người dùng chỉnh sửa
+                  }}
+                  isInvalid={!!bookingError} // Hiển thị màu đỏ nếu có lỗi
+                />
+                <Form.Control.Feedback type="invalid">
+                  {bookingError}
+                </Form.Control.Feedback>
+              </Form.Group>
               )}
             </>
           )}
           {updatedStatus === "Đang sử dụng" && (
             <Form.Group controlId="bookingIdInput" className="mt-3">
-              <Form.Label>Booking ID:</Form.Label>
-              <Form.Control
-                type="text"
-                value={bookingId}
-                onChange={(e) => setBookingId(e.target.value)}
-                required
-              />
-            </Form.Group>
+            <Form.Label>Booking ID:</Form.Label>
+            <Form.Control
+              type="text"
+              value={bookingId}
+              onChange={(e) => {
+                setBookingId(e.target.value);
+                setBookingError(''); // Xóa lỗi khi người dùng chỉnh sửa
+              }}
+              isInvalid={!!bookingError} // Hiển thị màu đỏ nếu có lỗi
+            />
+            <Form.Control.Feedback type="invalid">
+              {bookingError}
+            </Form.Control.Feedback>
+          </Form.Group>
           )}
 
         </Modal.Body>

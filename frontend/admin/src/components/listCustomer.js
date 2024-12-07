@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Form, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import { BASE_URL } from "../utils/config";
 
 // Component Customer để hiển thị thông tin từng khách hàng
 const Customer = ({ customer, onDeactive }) => {
@@ -34,7 +35,7 @@ const ListCustomer = () => {
   // Lấy dữ liệu từ API
   useEffect(() => {
     axios
-      .get('http://localhost:9999/customers')
+      .get(`${BASE_URL}/customers`)
       .then((response) => setCustomerData(response.data))
       .catch((error) => console.error("Error fetching customer data:", error));
   }, []);
@@ -46,7 +47,7 @@ const ListCustomer = () => {
     console.log(customer);
     
     axios
-      .put(`http://localhost:9999/customers/${id}`,customer ) // Cập nhật trạng thái deactive thành true
+      .put(`${BASE_URL}/customers/${id}`,customer ) // Cập nhật trạng thái deactive thành true
       .then(() => {
         // Cập nhật lại trạng thái trong danh sách
         setCustomerData(

@@ -16,7 +16,7 @@ const Room = ({ room, onClick, isSelected }) => {
     <Card 
       style={roomCardStyle} 
       className="room-card" 
-      onClick={() => onClick(room)} // Trigger onClick event to toggle selection
+      onClick={() => room.status === 'Trống' && onClick(room)} // Trigger onClick event to toggle selection
     >
       <p>{room.code}</p>
       <p>{room.roomCategoryId.name}</p>

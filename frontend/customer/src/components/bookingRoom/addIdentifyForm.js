@@ -1,6 +1,7 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import axios from 'axios';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { BASE_URL } from "../../utils/config";
 
 const AddIdentifyForm = forwardRef(({ }, ref) => {
     const [identifycationData, setIdentifycationData] = useState({
@@ -180,7 +181,7 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
         }
         try {
             // Send data to the server with the provided `customerID`
-            const response = await fetch('http://localhost:9999/identifycations', {
+            const response = await fetch(`${BASE_URL}/identifycations`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

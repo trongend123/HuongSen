@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Form, Row, Col, Modal } from 'react-bootstrap';
 import axios from 'axios';
+import { BASE_URL } from "../utils/config";
 
 // Component to display individual room category information
 const RoomCategoryItem = ({ roomCategory, onDelete, onEdit }) => {
@@ -46,10 +47,10 @@ const ListRoomCate = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const roomCategoryResponse = await axios.get('http://localhost:9999/roomCategories');
+                const roomCategoryResponse = await axios.get(`${BASE_URL}/roomCategories`);
                 setRoomCategories(roomCategoryResponse.data);
 
-                const locationResponse = await axios.get('http://localhost:9999/locations');
+                const locationResponse = await axios.get(`${BASE_URL}/locations`);
                 setLocations(locationResponse.data);
 
 
@@ -89,7 +90,7 @@ const ListRoomCate = () => {
     // Handle delete room category
     const handleDelete = (id) => {
         axios
-            .delete(`http://localhost:9999/roomCategories/${id}`)
+            .delete(`${BASE_URL}/roomCategories/${id}`)
             .then(() => {
                 setRoomCategories(roomCategories.filter(roomCategory => roomCategory._id !== id));
             })
@@ -129,7 +130,7 @@ const ListRoomCate = () => {
     const handleCreateRoomCategory = () => {
         if (validateInputs()) {
             axios
-                .post('http://localhost:9999/roomCategories', newRoomCategory)
+                .post(`${BASE_URL}/roomCategories`, newRoomCategory)
                 .then((response) => {
                     setRoomCategories([...roomCategories, response.data]);
                     handleCloseModal();
@@ -158,7 +159,7 @@ const ListRoomCate = () => {
     const handleUpdateRoomCategory = () => {
         if (validateInputs()) {
             axios
-                .put(`http://localhost:9999/roomCategories/${selectedRoomCategory._id}`, newRoomCategory)
+                .put(`${BASE_URL}/roomCategories/${selectedRoomCategory._id}`, newRoomCategory)
                 .then((response) => {
                     setRoomCategories(
                         roomCategories.map(roomCategory => roomCategory._id === selectedRoomCategory._id ? response.data : roomCategory)

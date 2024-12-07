@@ -7,6 +7,7 @@ import { MdNotificationsActive, MdNotifications } from "react-icons/md";
 import './header.css';
 // import { io } from "socket.io-client";
 import axios from "axios";
+import { BASE_URL } from "../utils/config";
 
 // const socket = io("http://localhost:9999");
 const Header = () => {
@@ -16,7 +17,7 @@ const Header = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await fetch("http://localhost:9999/chats");
+        const response = await fetch(`${BASE_URL}/chats`);
         if (response.ok) {
           const data = await response.json();
           if (data.length > notifications.length) {
@@ -58,7 +59,7 @@ const Header = () => {
  const sendNotification = () => {
     const newNotification = { content: "New notification from React!" };
    axios
-      .post("http://localhost:9999/chats/send", newNotification)
+      .post(`${BASE_URL}/chats/send`, newNotification)
       .then((response) => {
         console.log(response.data);
       })

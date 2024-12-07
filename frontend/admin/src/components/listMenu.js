@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button, Form, Modal, Table } from 'react-bootstrap';
 import axios from 'axios';
+import { BASE_URL } from "../utils/config";
 
 // Component Menu để hiển thị thông tin mỗi thực đơn
 const Menu = ({ menu, onDelete, onEdit }) => {
@@ -57,7 +58,7 @@ const ListMenu = () => {
   // Hàm lấy dữ liệu thực đơn từ API
   const fetchMenuData = () => {
     axios
-      .get("http://localhost:9999/menus")
+      .get(`${BASE_URL}/menus`)
       .then((response) => setMenuData(response.data))
       .catch((error) => console.error("Error fetching data:", error));
   };
@@ -97,7 +98,7 @@ const ListMenu = () => {
   const handleDelete = (id) => {
     // Gửi yêu cầu xóa đến API
     axios
-      .delete(`http://localhost:9999/menus/${id}`)
+      .delete(`${BASE_URL}/menus/${id}`)
       .then(() => {
         // Cập nhật lại danh sách sau khi xóa
         fetchMenuData();
@@ -117,7 +118,7 @@ const ListMenu = () => {
   // Hàm để xử lý chỉnh sửa thực đơn
   const handleEdit = () => {
     axios
-      .put(`http://localhost:9999/menus/${editedMenu._id}`, editedMenu)
+      .put(`${BASE_URL}/menus/${editedMenu._id}`, editedMenu)
       .then(() => {
         fetchMenuData(); // Lấy lại danh sách sau khi chỉnh sửa
         setShowModal(false);

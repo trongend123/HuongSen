@@ -1,5 +1,6 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import { Form, Row, Col, Card, Button, Alert } from 'react-bootstrap';
+import { BASE_URL } from "../../utils/config";
 
 const AddUserForm = forwardRef(({ }, ref) => {
     const [customerData, setCustomerData] = useState({
@@ -149,7 +150,7 @@ const AddUserForm = forwardRef(({ }, ref) => {
 
         try {
             // Create Customer
-            const userResponse = await fetch('http://localhost:9999/customers', {
+            const userResponse = await fetch(`${BASE_URL}/customers`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -169,7 +170,7 @@ const AddUserForm = forwardRef(({ }, ref) => {
                 const agencyPayload = { ...agencyData, customerId: customerID };
 
                 // Create Agency
-                const agencyResponse = await fetch('http://localhost:9999/agencies', {
+                const agencyResponse = await fetch(`${BASE_URL}/agencies`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
