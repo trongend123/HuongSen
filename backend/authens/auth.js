@@ -160,6 +160,7 @@ export async function loginUser(req, res) {
       accessToken,
       refreshToken,
       user: {
+        _id: user._id,
         username: user.username,
         fullname: user.fullname,
         email: user.email,

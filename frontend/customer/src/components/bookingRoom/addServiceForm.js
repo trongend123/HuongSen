@@ -217,6 +217,15 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate,
         setServiceDate(e.target.value);
     };
 
+    const handleTimeChange = (e) => {
+        setServiceTimeSlot(e.target.value);
+
+        // Clear formError when a time is selected
+        if (e.target.value) {
+            setFormError("");
+        }
+    };
+
     return (
         <Card className="mb-4">
             <Card.Header className='text-white' style={{ backgroundColor: '#81a969' }}>
@@ -312,7 +321,8 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate,
                             <Form.Label>Thời gian</Form.Label>
                             <Form.Select
                                 value={serviceTimeSlot}
-                                onChange={(e) => setServiceTimeSlot(e.target.value)}
+                                onChange={handleTimeChange} // Use new handler to clear formError
+                                isInvalid={!serviceTimeSlot && formError} // Optional: Highlight error
                             >
                                 <option value="">Chọn thời gian</option>
                                 <option value="7:00">Sáng (7:00)</option>

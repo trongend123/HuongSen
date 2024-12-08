@@ -30,7 +30,7 @@ router.post('/create-payment-link', async (req, res) => {
             description: bookingId,
             orderCode: Math.floor(10000000 + Math.random() * 90000000),
             expiredAt: expirationTime,
-            returnUrl: `${YOUR_DOMAIN}/success/${bookingId}`,
+            returnUrl: `${YOUR_DOMAIN}/success/${bookingId}/${amount}`,
             cancelUrl: `${YOUR_DOMAIN}/cancel/${bookingId}`,
         };
         const bookingIddel = bookingId

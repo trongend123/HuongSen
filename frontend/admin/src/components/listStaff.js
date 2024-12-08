@@ -90,13 +90,13 @@ const ListStaffAccount = () => {
 
     // Username validation (no spaces, no accents)
     const usernameRegex = /^[a-zA-Z0-9]+$/;
-    if (!usernameRegex.test(newStaff.username)) {
-      newErrors.username = "Tên người dùng chỉ chứa ký tự không dấu và không có khoảng trống.";
+    if (!usernameRegex.test(newStaff.username) || newStaff.username.length > 12 || newStaff.username.length < 6) {
+      newErrors.username = "Tên người dùng chỉ chứa ký tự không dấu và không có khoảng trống, phải có từ 6-12 ký tự.";
     }
 
     // Password validation (minimum 6 characters)
-    if (newStaff.password.length < 6) {
-      newErrors.password = "Mật khẩu phải có ít nhất 6 ký tự.";
+    if (newStaff.password.length < 6 || newStaff.password.length > 20) {
+      newErrors.password = "Mật khẩu phải có ít nhất 6 ký tự và tối đa 20 ký tự.";
     }
 
     // Email validation (proper email format)
