@@ -66,10 +66,14 @@ const ListRoomCate = () => {
     // Validate input fields
     const validateInputs = () => {
         const newErrors = {};
+        const nameRegex = /^[a-zA-Z0-9\sÀ-ỹ]+$/; // Chỉ cho phép chữ cái, số, dấu cách, và ký tự có dấu tiếng Việt.
 
         if (!newRoomCategory.name) {
             newErrors.name = "Tên loại phòng là bắt buộc.";
+        } else if (newRoomCategory.name.length > 50 || !nameRegex.test(newRoomCategory.name)) {
+            newErrors.name = "Tên loại phòng không chứa ký tự đặc biệt, không quá 50 ký tự.";
         }
+
         if (newRoomCategory.numberOfBed < 1) {
             newErrors.numberOfBed = "Số giường phải lớn hơn 0.";
         }
@@ -123,9 +127,6 @@ const ListRoomCate = () => {
             [name]: value, // Giữ nguyên giá trị mà không cần chuẩn hóa
         }));
     };
-
-
-
 
     // Handle room category creation
     const handleCreateRoomCategory = () => {

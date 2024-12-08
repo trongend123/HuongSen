@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button, Form, Row, Col, Modal } from 'react-bootstrap';
+import { Container, Table, Button, Form, Row, Col, Modal, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { BASE_URL } from "../utils/config";
@@ -52,6 +52,8 @@ const ListStaffAccount = () => {
   const [showModal, setShowModal] = useState(false); // State to control modal visibility
   const [isEditMode, setIsEditMode] = useState(false); // State to determine if we're editing
   const [selectedStaff, setSelectedStaff] = useState(null); // Staff data for editing
+  const [success, setSuccess] = useState('');
+  const [fail, setFail] = useState('');
   const [newStaff, setNewStaff] = useState({
     username: '',
     fullname: '',
@@ -74,7 +76,7 @@ const ListStaffAccount = () => {
 
   useEffect(() => {
     fetchDataStaff(); // Call the fetch function inside useEffect
-  }, []);
+  }, [newStaff]);
 
   // Validate input fields
   const validateInputs = () => {
@@ -128,8 +130,14 @@ const ListStaffAccount = () => {
       .delete(`${BASE_URL}/staffs/${id}`)
       .then(() => {
         setStaffData(staffData.filter(staff => staff._id !== id));
+        setSuccess('Xóa thành công');
+        setFail('')
       })
-      .catch((error) => console.error("Error deleting staff:", error));
+      .catch((error) => {
+        console.error("Error deleting staff:", error);
+        setFail('Xóa thất bại')
+        setSuccess('')
+      });
     fetchDataStaff()
   };
 
@@ -169,11 +177,24 @@ const ListStaffAccount = () => {
         .then((response) => {
           setStaffData([...staffData, response.data]);
           handleCloseModal();
+          setSuccess('Tạo tài khoản mới thành công');
+          setFail('')
         })
-        .catch((error) => console.error("Error creating staff:", error));
-      fetchDataStaff()
+        .catch((error) => {
+          // Kiểm tra lỗi HTTP 409 và gán message vào newErrors.fullname
+          if (error.response && error.response.status === 409) {
+            setErrors({ username: error.response.data.message || 'Tên người dùng đã tồn tại' });
+
+          } else {
+            setFail("Lỗi kết nối tới máy chủ!");
+            setSuccess('')
+          }
+        });
+
     }
+    fetchDataStaff();
   };
+
 
   // Handle staff editing
   const handleEditStaff = (staff) => {
@@ -199,9 +220,15 @@ const ListStaffAccount = () => {
           setStaffData(
             staffData.map(staff => staff._id === selectedStaff._id ? response.data : staff)
           );
+          setSuccess('Cập nhật thông tin thành công');
+          setFail('');
           handleCloseModal(); // Close modal after update
         })
-        .catch((error) => console.error("Error updating staff:", error));
+        .catch((error) => {
+          console.error("Error updating staff:", error)
+          setFail('Cập nhật thông tin thất bại');
+          setSuccess('');
+        });
       fetchDataStaff()
     }
   };
@@ -249,7 +276,9 @@ const ListStaffAccount = () => {
           </Button>
         </Col>
       </Row>
-
+      {/* Hiển thị thông báo nếu có */}
+      {success && <Alert variant="success">{success}</Alert>}
+      {fail && <Alert variant="danger">{fail}</Alert>}
       <Table striped bordered hover>
         <thead>
           <tr>

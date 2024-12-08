@@ -87,10 +87,10 @@ export async function registerUser(req, res, next) {
       },
     });
   } catch (error) {
-    if (error.code === 11000) {
+    if (error.code === 11000 && error.keyValue.username) {
       // Xử lý lỗi unique key
-      const duplicatedField = Object.keys(error.keyValue)[0];
-      return res.status(409).json({ message: `${duplicatedField} already exists` });
+      // const duplicatedField = Object.keys(error.keyValue)[0];
+      return res.status(409).json({ message: 'Tên người dùng đã tồn tại' });
     }
 
     // Xử lý các lỗi khác
