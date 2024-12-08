@@ -26,11 +26,11 @@ router.post('/create-payment-link', async (req, res) => {
         const expirationTime = Math.floor(Date.now() / 1000) + 600; // Tính toán thời gian hết hạn trong 10 phút (600 giây)
 
         const order = {
-            amount: amount,
+            amount: amount - 300000,
             description: bookingId,
             orderCode: Math.floor(10000000 + Math.random() * 90000000),
             expiredAt: expirationTime,
-            returnUrl: `${YOUR_DOMAIN}/success/${bookingId}`,
+            returnUrl: `${YOUR_DOMAIN}/success/${bookingId}/${amount}`,
             cancelUrl: `${YOUR_DOMAIN}/cancel/${bookingId}`,
         };
         const bookingIddel = bookingId

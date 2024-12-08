@@ -34,6 +34,7 @@ const BookingDetails = () => {
     const [showModal, setShowModal] = useState(false);
     const [remainingRooms, setRemainingRooms] = useState({});
     const [quantityError, setQuantityError] = useState({});
+    const [refundTimeOut, setRefundTimeOut] = useState(true)
 
 
     const navigate = useNavigate();
@@ -51,6 +52,27 @@ const BookingDetails = () => {
         setNote(orderRooms[0]?.bookingId?.note || '');
     }, [orderRooms]);
 
+    useEffect(() => {
+        const checkRefundTimeOut = () => {
+            const checkinDate = new Date(orderRooms[0]?.bookingId?.checkin);
+            checkinDate.setHours(0, 0, 0, 0)
+            const currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0)
+            const daysBeforeCheckin = Math.floor((checkinDate - currentDate) / (1000 * 3600 * 24));
+
+            if (daysBeforeCheckin >= 2) {
+
+                setRefundTimeOut(true); // Được hoàn tiền nếu còn ít nhất 2 ngày trước ngày checkin
+            } else {
+
+                setRefundTimeOut(false); // Không được hoàn tiền nếu ít hơn 2 ngày trước ngày checkin
+            }
+        };
+
+        if (orderRooms.length > 0) { // Kiểm tra orderRooms không rỗng
+            checkRefundTimeOut();
+        }
+    }, [orderRooms]);
 
     // Fetch room data for all orderRooms
     const fetchRoomData = async (orderRooms) => {
@@ -644,14 +666,14 @@ const BookingDetails = () => {
     return (
         <div className="booking-details">
             <ToastContainer />
-            <h2>Thông tin Đặt phòng</h2>
+            <h2>Thông tin Đặt phòng {!refundTimeOut && <span className='text-danger'>Đã hết thời gian hủy đơn và cập nhật phòng</span>}</h2>
             <div>
                 <h3>
                     Mã Đặt phòng: {orderRooms[0]?.bookingId?._id || "N/A"} - Mã hợp đồng:{" "}
                     {orderRooms[0]?.bookingId?.contract || "N/A"}
                 </h3>
 
-                {staff.role === 'admin' && (
+                {(staff.role === 'admin' && (orderRooms[0].bookingId?.status === 'Đã check-in' || orderRooms[0].bookingId?.status === 'Đã đặt')) && (
                     <Form>
                         <Row className="mb-3">
                             {/* Input mã hợp đồng */}
@@ -811,7 +833,7 @@ const BookingDetails = () => {
                     ))}
                 </Row>}
 
-            {Agency && orderRooms[0]?.bookingId?.status === 'Đã đặt' &&
+            {(Agency && orderRooms[0]?.bookingId?.status === 'Đã đặt' && refundTimeOut) &&
                 <section>
 
 

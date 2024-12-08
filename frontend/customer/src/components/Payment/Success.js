@@ -6,7 +6,7 @@ import { BiLoaderCircle } from 'react-icons/bi';
 import { BASE_URL } from "../../utils/config";
 
 const PaymentSuccess = () => {
-  const { bookingId } = useParams();
+  const { bookingId, amount } = useParams();
   const [messageEmail, setMessageEmail] = useState('');
   const [message, setMessage] = useState('');
   const [booking, setBooking] = useState(null);
@@ -45,7 +45,7 @@ const PaymentSuccess = () => {
         // } else { setMessage('<h1>Thanh toán được tạo thành công.</h1>'); }
         const History = await axios.get(`${BASE_URL}/histories/booking/${bookingId}`);
         if (!History.data.success && History.data.success !== undefined) {
-          await axios.put(`${BASE_URL}/bookings/${bookingId}`, { payment: booking.price });
+          await axios.put(`${BASE_URL}/bookings/${bookingId}`, { payment: amount });
           await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, note: 'khách hàng đã đặt phòng ' });
         }
         setMessage('<h1>Thanh toán được tạo thành công.</h1>')

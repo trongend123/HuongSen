@@ -51,7 +51,8 @@ root.render(
             <Route path="/refund" element={<Refund />} />
             <Route path="/policy" element={<Policy />} />
             <Route path='/services' element={<Services />} />
-            <Route path="/success/:bookingId" element={<PaymentSuccess />} />
+            {/* <Route path="/success/:bookingId" element={<PaymentSuccess />} /> */}
+            <Route path="/success/:bookingId/:amount" element={<PaymentSuccess />} />
             <Route path="/cancel/:bookingId" element={<PaymentCancel />} />
             <Route path="/feedback" element={<Feedback />} />
           </Routes></div>

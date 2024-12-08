@@ -63,8 +63,8 @@ const AddIdentifyForm = forwardRef(({ }, ref) => {
 
                         if (identifycationEndDate <= identifycationStartDate) {
                             newErrors.dateEnd = "Ngày hết hạn phải sau ngày cấp.";
-                        } else if (identifycationEndDate.getTime() !== fiveYearsLater.getTime()) {
-                            newErrors.dateEnd = "Ngày hết hạn phải cách ngày cấp đúng 5 năm.";
+                        } else if (identifycationEndDate.getTime() < fiveYearsLater.getTime()) {
+                            newErrors.dateEnd = "Ngày hết hạn phải cách ngày cấp ít nhất 5 năm.";
                         } else {
                             const dateEnd = new Date(identifycationData.dateEnd);
                             const today = new Date();
