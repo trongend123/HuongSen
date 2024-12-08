@@ -7,6 +7,8 @@ import AddServiceForm from '../components/bookingRoom/addServiceForm';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from "../utils/config";
+import axios from 'axios';
 
 const BookingPage = () => {
     const [userId, setUserId] = useState(null); // To store the created user ID
@@ -26,6 +28,7 @@ const BookingPage = () => {
             const userResponse = JSON.parse(storedUser);
             setStaff(userResponse);
         }
+
     }, []);
 
     useEffect(() => {
@@ -73,15 +76,17 @@ const BookingPage = () => {
                     // 4. Thêm dịch vụ đã chọn vào orderService sau khi đặt phòng được tạo
                     await addServiceRef.current.addService(createdBookingId);
                     console.log('Đặt phòng và dịch vụ đã được tạo thành công!');
-                    navigate(`/saveHistory`, {
-                        state: {
-                            bookingId: createdBookingId,
-                            note: `${staff.role} ${staff.fullname} đã tạo đặt phòng`,
-                            user: staff, // Truyền cả đối tượng người dùng
-                            path: "/bookings" // Thêm đường dẫn path
-                        }
-                    });
-
+                    await axios.post(`${BASE_URL}/histories/BE`, { bookingId: createdBookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã tạo đơn` });
+                    const newNotification = { content: "Lễ tân đã tạo đơn đặt phòng.", locationId: locationId };
+                    axios
+                        .post(`${BASE_URL}/chats/send`, newNotification)
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+                    navigate('/bookings')
                 } else {
                     toast.error('Có lỗi xảy ra khi tạo đặt phòng hoặc dịch vụ. Vui lòng thử lại.', {
                         position: "top-right",

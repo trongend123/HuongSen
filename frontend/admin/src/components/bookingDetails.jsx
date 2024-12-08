@@ -35,6 +35,7 @@ const BookingDetails = () => {
     const [remainingRooms, setRemainingRooms] = useState({});
     const [quantityError, setQuantityError] = useState({});
     const [refundTimeOut, setRefundTimeOut] = useState(true)
+    const [locationId, setLocationId] = useState(null);
 
 
     const navigate = useNavigate();
@@ -47,6 +48,18 @@ const BookingDetails = () => {
         }
     }, [])
 
+    useEffect(() => {
+        if (staff) {
+            if (staff.role === 'staff_mk') {
+                setLocationId('66f6c42f285571f28087c16a');
+            } else if (staff.role === 'staff_ds') {
+                setLocationId('66f6c536285571f28087c16b');
+            } else if (staff.role === 'staff_cb') {
+                setLocationId('66f6c59f285571f28087c16d');
+            }
+        }
+
+    }, [staff]); // Only update locationId when staff changes
 
     useEffect(() => {
         setNote(orderRooms[0]?.bookingId?.note || '');
@@ -330,6 +343,15 @@ const BookingDetails = () => {
                     await axios.put(`${BASE_URL}/bookings/${bookingId}`, updatedBookingData);
 
                     await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã thêm dịch vụ` });
+                    const newNotification = { content: `${bookingId} ${staff.fullname} đã thêm dịch vụ`, locationId: locationId };
+                    axios
+                        .post(`${BASE_URL}/chats/send`, newNotification)
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
 
                     toast.success('Thông tin dịch vụ và giá đơn đã được cập nhật.', {
                         position: "top-right",
@@ -440,6 +462,15 @@ const BookingDetails = () => {
                     await axios.delete(`${BASE_URL}/orderServices/${deleteService._id}`);
 
                     await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã xóa dịch vụ` });
+                    const newNotification = { content: `${bookingId} ${staff.fullname} đã xóa dịch vụ`, locationId: locationId };
+                    axios
+                        .post(`${BASE_URL}/chats/send`, newNotification)
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
 
                     fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
                     toast.success('Dịch vụ đã được xóa thành công và giá đơn đã được cập nhật.', {
@@ -496,6 +527,15 @@ const BookingDetails = () => {
                     await axios.delete(`${BASE_URL}/orderRooms/${OrderRoom._id}`)
 
                     await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã xóa phòng` });
+                    const newNotification = { content: `${bookingId} ${staff.fullname} đã hủy loại phòng`, locationId: locationId };
+                    axios
+                        .post(`${BASE_URL}/chats/send`, newNotification)
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
                     fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
                     toast.success('Phòng  đã được xóa thành công và giá booking đã được cập nhật.', {
                         position: "top-right",
@@ -544,7 +584,15 @@ const BookingDetails = () => {
                 await axios.put(`${BASE_URL}/bookings/${bookingId}`, { price: orderRooms[0].bookingId.price + result.totalAmount, note: note });
 
                 await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã cập nhật thông tin phòng` });
-
+                const newNotification = { content: `${bookingId} ${staff.fullname} đã cập nhật thông tin phòng mới`, locationId: locationId };
+                axios
+                    .post(`${BASE_URL}/chats/send`, newNotification)
+                    .then((response) => {
+                        console.log(response.data);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
 
                 // Làm mới dữ liệu
                 fetchBookingDetails();

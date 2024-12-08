@@ -277,20 +277,33 @@ export const getAllOrderRoomsByExcel = async (req, res) => {
     });
 
     // ====== Lưu file ======
-    const filePath = path.join(__dirname, '../exports', `Bao-cao-doanh-thu-Thang-${month}-${year}.xlsx`);
+    // const filePath = path.join(__dirname, '../exports', `Bao-cao-doanh-thu-Thang-${month}-${year}.xlsx`);
 
-    if (fs.existsSync(filePath)) {
-      try {
-        fs.unlinkSync(filePath); // Xóa file cũ nếu tồn tại
-      } catch (error) {
-        console.log(`File đang được mở hoặc sử dụng bởi chương trình khác: ${filePath}`);
-        return res.json({
-          message: `Không thể ghi đè file. Vui lòng đóng file: Bao-cao-doanh-thu-Thang-${month}-${year}.xlsx và thử lại.`,
-        });
-      }
-    }
+    // if (fs.existsSync(filePath)) {
+    //   try {
+    //     fs.unlinkSync(filePath); // Xóa file cũ nếu tồn tại
+    //   } catch (error) {
+    //     console.log(`File đang được mở hoặc sử dụng bởi chương trình khác: ${filePath}`);
+    //     return res.json({
+    //       message: `Không thể ghi đè file. Vui lòng đóng file: Bao-cao-doanh-thu-Thang-${month}-${year}.xlsx và thử lại.`,
+    //     });
+    //   }
+    // }
 
-    await workbook.xlsx.writeFile(filePath);
+    // await workbook.xlsx.writeFile(filePath);
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    );
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename=Bao-cao-doanh-thu-Thang-${month}-${year}.xlsx`
+    );
+
+    await workbook.xlsx.write(res); // Ghi file trực tiếp vào response
+    res.end(); // Kết thúc response
+    console.log('File Excel đã được gửi tới client.');
+    console.log('File Excel đã được tạo:', filePath);
     console.log('File Excel đã được tạo:', filePath);
 
     return res.status(200).json({ message: 'Xuất file thành công', filePath });

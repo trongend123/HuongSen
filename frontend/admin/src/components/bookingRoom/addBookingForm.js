@@ -236,15 +236,15 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
 
             // Trigger callback to notify booking creation
             onBookingCreated(bookingId);
-            const newNotification = { content: "Lễ tân đã tạo đơn đặt phòng.",locationId: locationId };
-            axios
-                .post(`${BASE_URL}/chats/send`, newNotification)
-                .then((response) => {
-                    console.log(response.data);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
+            // const newNotification = { content: "Lễ tân đã tạo đơn đặt phòng.",locationId: locationId };
+            // axios
+            //     .post(`${BASE_URL}/chats/send`, newNotification)
+            //     .then((response) => {
+            //         console.log(response.data);
+            //     })
+            //     .catch((error) => {
+            //         console.error(error);
+            //     });
             return bookingId;
         } catch (error) {
             console.error('Error creating booking:', error);
