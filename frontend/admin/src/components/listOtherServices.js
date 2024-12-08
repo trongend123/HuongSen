@@ -194,7 +194,7 @@ const ListOtherServices = () => {
                     if (!service.data.isDeleted) {
                         setMessage({
                             type: 'success',
-                            text: 'Xóa dịch vụ thành công!'
+                            text: 'Đã dừng cung cấp dịch vụ thành công!'
                         });
 
                     } else {

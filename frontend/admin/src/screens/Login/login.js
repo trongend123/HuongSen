@@ -29,7 +29,7 @@ const Login = () => {
       window.location.href = '/dashboard';
     } catch (err) {
       setLoading(false);
-      setError(err.response ? err.response.data.message : 'Login failed');
+      setError(err.response ? err.response.data.message : 'Đăng nhập thất bại');
     }
   };
 

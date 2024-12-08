@@ -38,30 +38,33 @@ const ChangePassword = () => {
       return;
     }
 
-    const password = JSON.parse(localStorage.getItem('user')).password;
-    if (oldPassword !== password) {
-      setError('Mật khẩu không đúng, vui lòng nhập lại');
-      return;
-    }
-
     try {
-      const userId = JSON.parse(localStorage.getItem('user'))._id;
-      await axios.put(
-        `${BASE_URL}/staffs/${userId}`,
-        { password: newPassword },
+      // Gửi yêu cầu đổi mật khẩu tới backend
+      const userName = JSON.parse(localStorage.getItem('user')).username;
+      const token = localStorage.getItem('token');
+      const response = await axios.put(
+        'http://localhost:9999/change-password',
         {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        }
+          username: userName,
+          currentPassword: oldPassword,
+          newPassword: newPassword,
+        },
       );
 
-      setMessage('Password changed successfully');
-      navigate('/login');
+      // Xử lý phản hồi thành công
+      setMessage(response.data.message || 'Thay đổi mật khẩu thành công');
+      setTimeout(() => {
+        navigate('/'); // Điều hướng tới trang login
+      }, 2000);
     } catch (error) {
-      setError('Error changing password. Please try again.');
-    }
-  };
+      // Xử lý lỗi
+      if (error.response || error.response.data) {
+        setError(error.response.data.message || 'Đã xảy ra lỗi, vui lòng thử lại');
+      } else {
+        setError('Lỗi không xác định. Vui lòng thử lại.');
+      }
+    };
+  }
 
   return (
     <section>

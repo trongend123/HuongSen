@@ -87,10 +87,10 @@ export async function registerUser(req, res, next) {
       },
     });
   } catch (error) {
-    if (error.code === 11000) {
+    if (error.code === 11000 && error.keyValue.username) {
       // Xử lý lỗi unique key
-      const duplicatedField = Object.keys(error.keyValue)[0];
-      return res.status(409).json({ message: `${duplicatedField} already exists` });
+      // const duplicatedField = Object.keys(error.keyValue)[0];
+      return res.status(409).json({ message: 'Tên người dùng đã tồn tại' });
     }
 
     // Xử lý các lỗi khác
@@ -173,27 +173,72 @@ export async function loginUser(req, res) {
 }
 
 
-// Function to change user password
+// Function to change user password using ID
+// export async function changePassword(req, res, next) {
+//   const { currentPassword, newPassword } = req.body;
+//   const userId = req.payload.id; // Get the user ID from the token payload
+
+//   try {
+//     const user = await users.findById(userId); // Find the user by ID
+//     if (!user) return next(createError.Unauthorized("User not found"));
+
+//     const isValidPassword = await bcrypt.compare(currentPassword, user.password);
+//     if (!isValidPassword) return next(createError.Unauthorized("Current password is incorrect"));
+
+//     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+//     user.password = hashedNewPassword; // Update the password
+
+//     // Save the updated user object to the database
+//     await user.save();
+
+//     res.json({ message: 'Password changed successfully' });
+//   } catch (error) {
+//     next(createError.InternalServerError(error.message));
+//   }
+// }
 export async function changePassword(req, res, next) {
-  const { currentPassword, newPassword } = req.body;
-  const username = req.payload.username; // Get the username from the token payload
+  const { username, currentPassword, newPassword } = req.body; // Lấy username từ body
+
+  // Validate đầu vào
+  if (!username || typeof username !== 'string' || username.trim().length < 3) {
+    return res.status(400).json({ message: 'Invalid username. It must be at least 3 characters long.' });
+  }
+
+  if (!currentPassword || typeof currentPassword !== 'string' || currentPassword.length < 6) {
+    return res.status(400).json({ message: 'Invalid current password. It must be at least 6 characters long.' });
+  }
+
+  if (!newPassword || typeof newPassword !== 'string' || newPassword.length < 6) {
+    return res.status(400).json({ message: 'Invalid new password. It must be at least 6 characters long.' });
+  }
 
   try {
+    // Kiểm tra người dùng có tồn tại không
     const user = await users.findOne({ username });
-    if (!user) return next(createError.Unauthorized("User not found"));
+    if (!user) {
+      return next(createError.Unauthorized('User not found'));
+    }
 
+    // Kiểm tra mật khẩu hiện tại có đúng không
     const isValidPassword = await bcrypt.compare(currentPassword, user.password);
-    if (!isValidPassword) return next(createError.Unauthorized("Current password is incorrect"));
+    if (!isValidPassword) {
+      return res.status(400).json({ message: 'Mật khẩu cũ không đúng' });
+    }
 
+    // Hash mật khẩu mới
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedNewPassword; // Update the password
-    res.json({ message: 'Password changed successfully' });
+
+    // Cập nhật mật khẩu mới và lưu vào cơ sở dữ liệu
+    user.password = hashedNewPassword;
+    await user.save();
+
+    res.json({ message: 'Đổi mật khẩu thành công' });
   } catch (error) {
-    next(createError.InternalServerError(error.message));
+    console.error('Error in changePassword:', error);
+    next(createError.InternalServerError('Xẩy ra lỗi khi thay đổi mật khẩu.'));
   }
 }
 
-// Sign access token function
 // Sign access token function
 export async function signAccessToken(userId) {
   return new Promise((resolve, reject) => {

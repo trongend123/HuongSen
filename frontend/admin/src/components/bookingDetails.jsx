@@ -303,22 +303,28 @@ const BookingDetails = () => {
                 const updatedBookingData = {
                     price: newBookingPrice || orderRooms[0].bookingId.price, // Cập nhật giá nếu có thay đổi
                 };
+                if (updatedBookingData.price !== orderRooms[0].bookingId.price) {
+                    // Cập nhật giá booking và dịch vụ
+                    await axios.put(`${BASE_URL}/bookings/${bookingId}`, updatedBookingData);
 
-                // Cập nhật giá booking và dịch vụ
-                await axios.put(`${BASE_URL}/bookings/${bookingId}`, updatedBookingData);
+                    await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã thêm dịch vụ` });
 
-                await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: staff._id, note: `${staff.role} ${staff.fullname} đã thêm dịch vụ` });
-
-                toast.success('Thông tin dịch vụ và giá đơn đã được cập nhật.', {
-                    position: "top-right",
-                });
-                fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
+                    toast.success('Thông tin dịch vụ và giá đơn đã được cập nhật.', {
+                        position: "top-right",
+                    });
+                    fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
+                } else {
+                    toast.error('Vui lòng thêm dịch vụ.', {
+                        position: "top-right",
+                    });
+                }
             }
             else {
                 toast.error('Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại.', {
                     position: "top-right",
                 });
             }
+
         } catch (error) {
             console.error('Error updating booking data:', error);
             toast.error('Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại.', {
@@ -358,7 +364,7 @@ const BookingDetails = () => {
                 }))
             );
 
-            const newNotification = { content: "Đơn phòng đã hoàn thành",locationId: location };
+            const newNotification = { content: "Đơn phòng đã hoàn thành", locationId: location };
             axios
                 .post(`${BASE_URL}/chats/send`, newNotification)
                 .then((response) => {
@@ -389,6 +395,8 @@ const BookingDetails = () => {
         const checkinDate = new Date(deleteService?.time);
         const currentDate = new Date();
         const daysBeforeCheckin = Math.floor((checkinDate - currentDate) / (1000 * 3600 * 24));
+        currentDate.setHours(0, 0, 0, 0)
+        checkinDate.setHours(0, 0, 0, 0)
 
         // Kiểm tra nếu dịch vụ được hủy trước ngày check-in 2 ngày
         if (daysBeforeCheckin >= 2) {
@@ -435,6 +443,10 @@ const BookingDetails = () => {
         const checkinBooking = new Date(OrderRoom.bookingId?.checkin);
         const checkoutDate = new Date(OrderRoom.returnRoom);
         const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0)
+        checkinDate.setHours(0, 0, 0, 0)
+        checkoutDate.setHours(0, 0, 0, 0)
+        checkinBooking.setHours(0, 0, 0, 0)
         const daysBeforeCheckin = Math.floor((checkinBooking - currentDate) / (1000 * 3600 * 24));
         const night = Math.floor((checkoutDate - checkinDate) / (1000 * 3600 * 24));
 
@@ -649,7 +661,7 @@ const BookingDetails = () => {
                                 className="d-flex justify-content-evenly align-content-center"
                             >
                                 <Form.Label className="align-content-center">
-                                    <strong>Mã Hợp Đồng :</strong>
+                                    <strong>Mã Hợp Đồng : </strong>
                                 </Form.Label>
                                 <Form.Control
                                     className="w-75"
