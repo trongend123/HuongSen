@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { DoSonRooms, CatBaRooms, MinhKhaiRooms } from './rooms'; // Import child components
 import { Colors } from 'chart.js';
+import { BASE_URL } from '../utils/config';
 
 const ListRoom = () => {
   const [roomData, setRoomData] = useState([]);
@@ -21,7 +22,7 @@ const ListRoom = () => {
   const [bookingId, setBookingId] = useState('');
   const [bookings, setBookings] = useState([]);
   const [bookingError, setBookingError] = useState('');
-
+  const [orderRooms, setOrderRooms] = useState([]);
   useEffect(() => {
     const storedUser = user
     if (storedUser && storedUser.role) {
@@ -97,6 +98,16 @@ const ListRoom = () => {
   
       if (booking.status !== "Đã đặt" && booking.status !== "Đã check-in") {
         setBookingError("Booking phải ở trạng thái 'Đã đặt' hoặc 'Đã check-in'.");
+        return;
+      }
+  
+      axios
+      .get(`${BASE_URL}/orderRooms/booking/${bookingId}`)
+      .then((response) => setOrderRooms(response.data))
+      .catch((error) => console.error('Error fetching order rooms:', error));
+      console.log(orderRooms);
+      if (orderRooms[0].roomCateId.locationId !== selectedRoom.roomCategoryId.locationId) {
+        setBookingError("Booking này là của cơ sở khác. Vui lòng kiểm tra lại!");
         return;
       }
     }
