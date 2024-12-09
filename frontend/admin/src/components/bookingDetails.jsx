@@ -392,7 +392,7 @@ const BookingDetails = () => {
             //         status: 'confirm'
             //     });
             // }
-            await axios.put(`${BASE_URL}/bookings/${bookingId}`, { status: 'Đã hoàn thành', payment: orderRooms[0].bookingId.price });
+            await axios.put(`${BASE_URL}/bookings/${bookingId}`, { status: 'Đã hoàn thành', payment: newBookingPrice });
 
             for (const room of Rooms) {
                 // Gửi yêu cầu PUT để cập nhật trạng thái
@@ -654,7 +654,12 @@ const BookingDetails = () => {
 
 
 
-
+    const handleCheckoutAndUpService = () => {
+        if (newBookingPrice !== orderRooms[0].bookingId.price) {
+            handleUpdateBooking()
+        }
+        handleConfirmCheckout()
+    }
 
     const handleSave = async () => {
         try {
@@ -708,6 +713,9 @@ const BookingDetails = () => {
     };
 
     const handleConfirmCheckout = () => {
+        if (newBookingPrice !== orderRooms[0].bookingId.price) {
+            handleUpdateBooking()
+        }
         setShowModal(false);
         handleCheckout(); // Thực hiện hành động Check-out
     };
@@ -1058,15 +1066,18 @@ const BookingDetails = () => {
                         <Modal.Title>Thông tin Check-out</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="text-center custom-modal-body">
-                        <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p>
-                        <p><strong>Đã thanh toán:</strong> {orderRooms[0].bookingId?.payment || 'N/A'} VND</p>
-                        <p><strong>Còn nợ:</strong> {orderRooms[0].bookingId?.price - orderRooms[0].bookingId?.payment} VND</p>
+                        <p><strong>Tổng giá:</strong> {newBookingPrice || 0} VND</p>
+                        {/* <p><strong>Tổng giá:</strong> {orderRooms[0].bookingId?.price ? `${orderRooms[0].bookingId.price} VND` : 'N/A'}</p> */}
+                        <p><strong>Đã thanh toán:</strong> {orderRooms[0].bookingId?.payment || 0} VND</p>
+                        <p><strong>Còn nợ:</strong> {newBookingPrice - orderRooms[0].bookingId?.payment} VND</p>
                     </Modal.Body>
                     <Modal.Footer className="justify-content-center">
                         <Button variant="secondary" onClick={handleCloseModal}>
                             Hủy bỏ
                         </Button>
-                        <Button variant="primary" onClick={handleConfirmCheckout}>
+                        <Button variant="primary"
+                            //  onClick={handleConfirmCheckout}>
+                            onClick={handleCheckoutAndUpService}>
                             Xác nhận Check-out
                         </Button>
                     </Modal.Footer>

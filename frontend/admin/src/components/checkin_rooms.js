@@ -2,21 +2,27 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import './listRoom.css';
 
+
 // Room Component to display each room's basic info
-const Room = ({ room, onClick, isSelected }) => {
+const Room = ({ room, onClick, isSelected, bookingId }) => {
+
   const roomCardStyle = {
-    backgroundColor: 
-      room.status === 'Trống' ? '#d3d3d3' : '#a8a8a8',
-    width: 
+    backgroundColor:
+      room.status === 'Trống'
+        ? '#d3d3d3'
+        : (room.status === 'Đã book' && room.bookingId._id === bookingId)
+          ? 'yellow'
+          : '#a8a8a8', // Default color if none of the conditions match
+    width:
       room.roomCategoryId._id === '670dbe2c5c9f636934a39e5d' ? '150px' : '70px',
     border: isSelected ? '4px solid red' : 'none',
   };
 
   return (
-    <Card 
-      style={roomCardStyle} 
-      className="room-card" 
-      onClick={() => room.status === 'Trống' && onClick(room)} // Trigger onClick event to toggle selection
+    <Card
+      style={roomCardStyle}
+      className="room-card"
+      onClick={() => (room.status === 'Trống' || (room.status === "Đã book" && room.bookingId._id === bookingId)) && onClick(room)} // Trigger onClick event to toggle selection
     >
       <p>{room.code}</p>
       <p>{room.roomCategoryId.name}</p>
@@ -25,8 +31,9 @@ const Room = ({ room, onClick, isSelected }) => {
 };
 
 // Component for "Cơ sở Đồ Sơn" rooms
-const DoSonRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
+const DoSonRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms, bookingId }) => {
   const handleRoomClick = (room) => {
+
     setSelectedRooms((prevSelectedRooms) => {
       // Check if room is already selected
       if (prevSelectedRooms.includes(room._id)) {
@@ -56,6 +63,7 @@ const DoSonRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
             room={room}
             onClick={handleRoomClick}
             isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
           />
         ))}
       </div>
@@ -66,6 +74,7 @@ const DoSonRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
             room={room}
             onClick={handleRoomClick}
             isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
           />
         ))}
       </div>
@@ -76,6 +85,7 @@ const DoSonRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
             room={room}
             onClick={handleRoomClick}
             isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
           />
         ))}
       </div>
@@ -86,6 +96,7 @@ const DoSonRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
             room={room}
             onClick={handleRoomClick}
             isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
           />
         ))}
       </div>
@@ -96,6 +107,7 @@ const DoSonRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
             room={room}
             onClick={handleRoomClick}
             isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
           />
         ))}
       </div>
@@ -103,7 +115,7 @@ const DoSonRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
   );
 };
 
-const CatBaRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
+const CatBaRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms, bookingId }) => {
   const handleRoomClick = (room) => {
     setSelectedRooms((prevSelectedRooms) => {
       // Check if room is already selected
@@ -128,72 +140,78 @@ const CatBaRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
 
   return (
     <div className="room-layout">
-    <h4>Cơ sở Cát Bà:</h4>
-    <div className="room-row" style={{ marginLeft: '240px' }}>
-      {floor2cb.map((room) => (
-        <Room
-        key={room._id}
-        room={room}
-        onClick={handleRoomClick}
-        isSelected={selectedRooms.includes(room._id)}
-      />
-      ))}
+      <h4>Cơ sở Cát Bà:</h4>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor2cb.map((room) => (
+          <Room
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor3cb.map((room) => (
+          <Room
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor4cb.map((room) => (
+          <Room
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor5cb.map((room) => (
+          <Room
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor6cb.map((room) => (
+          <Room
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
+        ))}
+      </div>
+      <div className="room-row" style={{ marginLeft: '240px' }}>
+        {floor7cb.map((room) => (
+          <Room
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
+        ))}
+      </div>
     </div>
-    <div className="room-row" style={{ marginLeft: '240px' }}>
-      {floor3cb.map((room) => (
-        <Room
-        key={room._id}
-        room={room}
-        onClick={handleRoomClick}
-        isSelected={selectedRooms.includes(room._id)}
-      />
-      ))}
-    </div>
-    <div className="room-row" style={{ marginLeft: '240px' }}>
-      {floor4cb.map((room) => (
-        <Room
-        key={room._id}
-        room={room}
-        onClick={handleRoomClick}
-        isSelected={selectedRooms.includes(room._id)}
-      />
-      ))}
-    </div>
-    <div className="room-row" style={{ marginLeft: '240px' }}>
-      {floor5cb.map((room) => (
-        <Room
-        key={room._id}
-        room={room}
-        onClick={handleRoomClick}
-        isSelected={selectedRooms.includes(room._id)}
-      />
-      ))}
-    </div>
-    <div className="room-row" style={{ marginLeft: '240px' }}>
-      {floor6cb.map((room) => (
-        <Room
-        key={room._id}
-        room={room}
-        onClick={handleRoomClick}
-        isSelected={selectedRooms.includes(room._id)}
-      />
-      ))}
-    </div>
-    <div className="room-row" style={{ marginLeft: '240px' }}>
-      {floor7cb.map((room) => (
-        <Room
-        key={room._id}
-        room={room}
-        onClick={handleRoomClick}
-        isSelected={selectedRooms.includes(room._id)}
-      />
-      ))}
-    </div>
-  </div>
-);
+  );
 };
 
-const MinhKhaiRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
+const MinhKhaiRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms, bookingId }) => {
   const handleRoomClick = (room) => {
     setSelectedRooms((prevSelectedRooms) => {
       // Check if room is already selected
@@ -209,7 +227,7 @@ const MinhKhaiRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
   };
 
   const floor7cb = rooms.slice(0, 11);
-  const floor6cb = rooms.slice(11,22);
+  const floor6cb = rooms.slice(11, 22);
   const floor5cb = rooms.slice(22, 33);
   const floor4cb = rooms.slice(33, 43);
   const floor3cb = rooms.slice(43, 53);
@@ -221,61 +239,67 @@ const MinhKhaiRooms = ({ rooms, onClick, selectedRooms, setSelectedRooms }) => {
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor2cb.map((room) => (
           <Room
-        key={room._id}
-        room={room}
-        onClick={handleRoomClick}
-        isSelected={selectedRooms.includes(room._id)}
-      />
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor3cb.map((room) => (
           <Room
-          key={room._id}
-          room={room}
-          onClick={handleRoomClick}
-          isSelected={selectedRooms.includes(room._id)}
-        />
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor4cb.map((room) => (
           <Room
-          key={room._id}
-          room={room}
-          onClick={handleRoomClick}
-          isSelected={selectedRooms.includes(room._id)}
-        />
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor5cb.map((room) => (
           <Room
-          key={room._id}
-          room={room}
-          onClick={handleRoomClick}
-          isSelected={selectedRooms.includes(room._id)}
-        />
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor6cb.map((room) => (
           <Room
-          key={room._id}
-          room={room}
-          onClick={handleRoomClick}
-          isSelected={selectedRooms.includes(room._id)}
-        />
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
         ))}
       </div>
       <div className="room-row" style={{ marginLeft: '240px' }}>
         {floor7cb.map((room) => (
           <Room
-          key={room._id}
-          room={room}
-          onClick={handleRoomClick}
-          isSelected={selectedRooms.includes(room._id)}
-        />
+            key={room._id}
+            room={room}
+            onClick={handleRoomClick}
+            isSelected={selectedRooms.includes(room._id)}
+            bookingId={bookingId}
+          />
         ))}
       </div>
     </div>

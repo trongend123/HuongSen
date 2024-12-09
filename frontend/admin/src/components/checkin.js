@@ -114,6 +114,7 @@ const ListRoom = () => {
           onClick={handleRoomSelect}
           selectedRooms={selectedRooms}
           setSelectedRooms={setSelectedRooms}
+          bookingId={id}
         />
       )}
       {selectedLocation === '66f6c59f285571f28087c16d' && (
@@ -122,6 +123,7 @@ const ListRoom = () => {
           onClick={handleRoomSelect}
           selectedRooms={selectedRooms}
           setSelectedRooms={setSelectedRooms}
+          bookingId={id}
         />
       )}
       {selectedLocation === '66f6c5c9285571f28087c16a' && (
@@ -130,6 +132,7 @@ const ListRoom = () => {
           onClick={handleRoomSelect}
           selectedRooms={selectedRooms}
           setSelectedRooms={setSelectedRooms}
+          bookingId={id}
         />
       )}
 
@@ -140,6 +143,7 @@ const ListRoom = () => {
         <button className="btn" style={{ backgroundColor: '#a8a8a8', marginRight: '10px' }}>Đang sử dụng</button>
         <button className="btn" style={{ backgroundColor: '#d3d3d3', marginRight: '10px' }}>Trống</button>
         <button className="btn" style={{ backgroundColor: '#d3d3d3', marginRight: '10px', border: '4px solid red' }}>Đã chọn</button>
+        <button className="btn" style={{ backgroundColor: 'yellow', marginRight: '10px' }}>Đã Book</button>
       </div>
       <div className="mt-4">
         <Button

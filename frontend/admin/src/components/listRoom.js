@@ -100,13 +100,13 @@ const ListRoom = () => {
         setBookingError("Booking phải ở trạng thái 'Đã đặt' hoặc 'Đã check-in'.");
         return;
       }
-  
+
       axios
-      .get(`${BASE_URL}/orderRooms/booking/${bookingId}`)
-      .then((response) => setOrderRooms(response.data))
-      .catch((error) => console.error('Error fetching order rooms:', error));
+        .get(`${BASE_URL}/orderRooms/booking/${bookingId}`)
+        .then((response) => setOrderRooms(response.data))
+        .catch((error) => console.error('Error fetching order rooms:', error));
       console.log(orderRooms);
-      if (orderRooms[0].roomCateId.locationId !== selectedRoom.roomCategoryId.locationId) {
+      if (orderRooms[0].roomCateId?.locationId !== selectedRoom.roomCategoryId?.locationId) {
         setBookingError("Booking này là của cơ sở khác. Vui lòng kiểm tra lại!");
         return;
       }
