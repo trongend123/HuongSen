@@ -15,7 +15,7 @@ const ListRoom = () => {
   const [userRole, setUserRole] = useState('');
   const user = JSON.parse(localStorage.getItem('user'));
   const { id } = useParams();
-  
+
   useEffect(() => {
     if (user && user.role) {
       setUserRole(user.role);
@@ -55,9 +55,9 @@ const ListRoom = () => {
   };
 
   const handleUpdateSelectedRooms = () => {
-  
+
     const rooms = selectedRooms.filter((room) => typeof room !== 'string');
-    const updates = rooms.map((room) =>{
+    const updates = rooms.map((room) => {
       const updatedRoom = {
         ...room,
         bookingId: id,
@@ -72,22 +72,23 @@ const ListRoom = () => {
           status: 'Đã check-in',
         }
       )
-      const newNotification = { content: "Lễ tân đã check-in phòng",locationId: room.roomCategoryId.selectedLocation };
-                axios
-                .post(`${BASE_URL}/chats/send`, newNotification)
-                .then((response) => {
-                console.log(response.data);
-                })
+      console.log(room.roomCategoryId);
+      const newNotification = { content: "Lễ tân đã check-in phòng", locationId: room.roomCategoryId.locationId };
+      axios
+        .post(`${BASE_URL}/chats/send`, newNotification)
+        .then((response) => {
+          console.log(response.data);
+        })
 
-  });
-  navigate(`/saveHistory`, {
-    state: {
+    });
+    navigate(`/saveHistory`, {
+      state: {
         bookingId: id,
         note: `${user.role} ${user.fullname} đã check-in phòng`,
         user: user, // Truyền cả đối tượng người dùng
         path: "/rooms" // Thêm đường dẫn path
-    }
-});
+      }
+    });
     Promise.all(updates)
       .then(() => {
         // Refresh room data after updates
@@ -111,7 +112,7 @@ const ListRoom = () => {
           rooms={filteredRooms}
           onClick={handleRoomSelect}
           selectedRooms={selectedRooms}
-          setSelectedRooms = {setSelectedRooms}
+          setSelectedRooms={setSelectedRooms}
         />
       )}
       {selectedLocation === '66f6c59f285571f28087c16d' && (
@@ -119,7 +120,7 @@ const ListRoom = () => {
           rooms={filteredRooms}
           onClick={handleRoomSelect}
           selectedRooms={selectedRooms}
-          setSelectedRooms = {setSelectedRooms}
+          setSelectedRooms={setSelectedRooms}
         />
       )}
       {selectedLocation === '66f6c5c9285571f28087c16a' && (
@@ -127,17 +128,17 @@ const ListRoom = () => {
           rooms={filteredRooms}
           onClick={handleRoomSelect}
           selectedRooms={selectedRooms}
-          setSelectedRooms = {setSelectedRooms}
+          setSelectedRooms={setSelectedRooms}
         />
       )}
 
       {/* Action buttons */}
-      
+
 
       <div className="note mt-3">
-        <button className="btn" style={{ backgroundColor: '#a8a8a8',marginRight:'10px' }}>Đang sử dụng</button>
-        <button className="btn" style={{ backgroundColor: '#d3d3d3',marginRight:'10px' }}>Trống</button>
-        <button className="btn" style={{ backgroundColor: '#d3d3d3',marginRight:'10px',border: '4px solid red' }}>Đã chọn</button>
+        <button className="btn" style={{ backgroundColor: '#a8a8a8', marginRight: '10px' }}>Đang sử dụng</button>
+        <button className="btn" style={{ backgroundColor: '#d3d3d3', marginRight: '10px' }}>Trống</button>
+        <button className="btn" style={{ backgroundColor: '#d3d3d3', marginRight: '10px', border: '4px solid red' }}>Đã chọn</button>
       </div>
       <div className="mt-4">
         <Button

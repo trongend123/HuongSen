@@ -669,7 +669,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                                         <td>
                                             <Button
                                                 variant="danger"
-                                                disabled={service.status !== "Đã đặt"}
+                                                disabled={service.status !== "Đã đặt" || (orderRooms[0].bookingId?.status !== 'Đã check-in' && orderRooms[0].bookingId?.status !== 'Đã đặt')}
                                                 onClick={() => handleCancelService(service, (service.otherServiceId.price * service.quantity))}
                                             >
                                                 Hủy Dịch Vụ
@@ -724,7 +724,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                 <button
                     className='bg-danger'
                     onClick={handleRefund}
-                    disabled={isUpdating || !refundTimeOut || orderRooms[0].bookingId?.status === 'Cancelled' || orderRooms[0].bookingId?.status === 'Confirmed'}
+                    disabled={isUpdating || !refundTimeOut || orderRooms[0].bookingId?.status !== 'Đã đặt'}
 
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Hủy Đơn'}
