@@ -72,6 +72,7 @@ const ListRoom = () => {
           status: 'Đã check-in',
         }
       )
+
       console.log(room.roomCategoryId);
       const newNotification = { content: "Lễ tân đã check-in phòng", locationId: room.roomCategoryId.locationId };
       axios

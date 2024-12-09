@@ -23,7 +23,7 @@ const ListOtherServices = () => {
     const [message, setMessage] = useState(null);
 
     // Error state for form validation
-    const [errors, setErrors] = useState({ name: "", price: "" });
+    const [errors, setErrors] = useState({ name: "", price: "" , description: ""});
 
     // Fetch all services
 
@@ -73,7 +73,7 @@ const ListOtherServices = () => {
     // Open modal to create or edit a service
     const handleShowCreateModal = () => {
         setNewService({ name: "", price: "", description: "" });
-        setErrors({ name: "", price: "" }); // Reset errors when opening modal
+        setErrors({ name: "", price: "" , description: ""}); // Reset errors when opening modal
         setShowCreateModal(true);
     };
 
@@ -95,14 +95,19 @@ const ListOtherServices = () => {
     // Validate the form fields before saving
     const validateForm = () => {
         let valid = true;
-        const newErrors = { name: "", price: "" };
+        const newErrors = { name: "", price: "" , description: ""};
 
         // Check for empty name field
         if (!newService.name) {
             newErrors.name = "Tên dịch vụ là bắt buộc!";
             valid = false;
+        } else if (newService.name.length > 100) {
+            newErrors.name = "Tên dịch vụ không quá 100 ký tự!";
+            valid = false;
+        } else if (!/^[a-zA-Z0-9\s\u00C0-\u1EF9]+$/.test(newService.name)) {
+            newErrors.name = "Tên dịch vụ không được chứa ký tự đặc biệt!";
+            valid = false;
         }
-
         // Check if name is unique
         const isDuplicateName = services.some(
             (service) =>
@@ -119,7 +124,16 @@ const ListOtherServices = () => {
             newErrors.price = "Giá phải lớn hơn 1,000!";
             valid = false;
         }
-
+        if (!newService.name) {
+            newErrors.name = "Mô tả là bắt buộc!";
+            valid = false;
+        } else if (newService.description.length > 300) {
+            newErrors.name = "Mô tả không quá 300 ký tự!";
+            valid = false;
+        } else if (!/^[a-zA-Z0-9\s\u00C0-\u1EF9]+$/.test(newService.description)) {
+            newErrors.name = "Mô tả không được chứa ký tự đặc biệt!";
+            valid = false;
+        }
         setErrors(newErrors);
         return valid;
     };

@@ -166,6 +166,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, check
                     returnRoom: returnRoom,
                 });
             });
+
             // const newNotification = { content: "Đơn đặt phòng của khách đoàn đã được cập nhật.",locationId: locationId };
             // axios
             //     .post(`${BASE_URL}/chats/send`, newNotification)

@@ -408,6 +408,7 @@ const BookingDetails = () => {
                 }))
             );
 
+
             const newNotification = { content: "Đơn phòng đã hoàn thành", locationId: location };
             axios
                 .post(`${BASE_URL}/chats/send`, newNotification)
