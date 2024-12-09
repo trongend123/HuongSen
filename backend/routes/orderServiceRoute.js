@@ -7,6 +7,7 @@ import {
     updateOrderService,
     deleteOrderService,
     getOrderServicesByBookingId,
+    getOrderServicesByLocationId
 } from '../controllers/orderServiceController.js';
 
 const router = express.Router();
@@ -28,5 +29,8 @@ router.delete('/:id', deleteOrderService);
 
 // Lấy OrderServices theo bookingId
 router.get('/booking/:bookingId', getOrderServicesByBookingId);
+
+// Endpoint to get order services by locationId
+router.get('/location/:locationId', getOrderServicesByLocationId);
 
 export default router;
