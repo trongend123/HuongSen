@@ -117,6 +117,35 @@ class BookingController {
             res.status(500).json({ message: "An error occurred", error: error.message });
         }
     };
+
+    //update trạng thái phòng và service 1 lúc
+    async updateStatusesByBookingId(req, res) {
+        const { bookingId } = req.params;
+        const { orderServiceStatus, bookingStatus } = req.body;
+
+        try {
+            // Update booking status using the updateBooking method
+            const bookingUpdateResult = await bookingRepository.updateBooking(bookingId, { status: bookingStatus });
+
+            if (!bookingUpdateResult) {
+                return res.status(404).json({ message: 'Booking not found' });
+            }
+
+            // Update order service statuses
+            const orderServiceUpdateResult = await bookingRepository.updateOrderServiceStatusByBookingId(bookingId, orderServiceStatus);
+
+            res.status(200).json({
+                message: 'Booking and service statuses updated successfully',
+                bookingUpdateResult,
+                orderServiceUpdateResult,
+            });
+        } catch (error) {
+            res.status(500).json({
+                message: 'Failed to update statuses',
+                error: error.message,
+            });
+        }
+    }
 }
 
 export default new BookingController();

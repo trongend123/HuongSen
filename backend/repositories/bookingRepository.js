@@ -5,6 +5,7 @@ import BookingHistory from '../models/history.js';
 import Customer from '../models/customer.js';
 import Agency from '../models/agency.js';
 import Identify from '../models/identifycation.js';
+import Rooms from '../models/room.js';
 
 class BookingRepository {
     // Tạo booking mới
@@ -85,6 +86,20 @@ class BookingRepository {
             throw new Error("Error in deleting booking and related data");
         }
     }
+    //hàm phía dưới để update trạng thái  dịch vụ (đang phục vụ cho Hủy của admin)
+
+    async updateOrderServiceStatusByBookingId(bookingId, status) {
+        try {
+            const result = await OrderService.updateMany(
+                { bookingId: bookingId },
+                { $set: { status: status } }
+            );
+            return result;
+        } catch (error) {
+            throw new Error(`Error updating order service status: ${error.message}`);
+        }
+    };
+
 }
 
 export default new BookingRepository();

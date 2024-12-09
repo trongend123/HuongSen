@@ -975,7 +975,7 @@ const BookingDetails = () => {
                                         <td>
                                             <Button
                                                 variant="danger"
-                                                disabled={service.status !== "Đã đặt"}
+                                                disabled={service.status !== "Đã đặt" || (orderRooms[0].bookingId?.status !== 'Đã check-in' && orderRooms[0].bookingId?.status !== 'Đã đặt')}
                                                 onClick={() => handleCancelService(service, (service.otherServiceId.price * service.quantity))}
 
                                             >
