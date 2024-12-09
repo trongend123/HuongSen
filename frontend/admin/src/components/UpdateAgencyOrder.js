@@ -166,12 +166,13 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, check
                     returnRoom: returnRoom,
                 });
             });
-            const newNotification = { content: "Đơn đặt phòng của khách đoàn đã được cập nhật.",locationId: locationId };
-            axios
-                .post(`${BASE_URL}/chats/send`, newNotification)
-                .then((response) => {
-                    console.log(response.data);
-                })
+
+            // const newNotification = { content: "Đơn đặt phòng của khách đoàn đã được cập nhật.",locationId: locationId };
+            // axios
+            //     .post(`${BASE_URL}/chats/send`, newNotification)
+            //     .then((response) => {
+            //         console.log(response.data);
+            //     })
             await Promise.all(orderRoomPromises);
             // Reset form to default state
             resetForm();
@@ -215,21 +216,21 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, check
         const bookingCheckout = new Date(checkoutDate)
         bookingCheckout.setHours(0, 0, 0, 0)
 
+
         const today = new Date();
         today.setHours(0, 0, 0, 0); // Set time to 00:00:00
 
         if (type === "receiveRoom") {
-            const returnDate = new Date(receiveRoom);
+            const returnDate = new Date(returnRoom);
             returnDate.setHours(0, 0, 0, 0); // Set time to 00:00:00
             const diffTime = returnDate - newDate;
             const calculatedNights = diffTime / (1000 * 60 * 60 * 24);
-            console.log(newDate);
-            console.log(bookingCheckin);
+
             if (!e.target.value) {
                 setReceiveError("Ngày không được để trống!");
                 setReceiveRoom(e.target.value);
-            } else if (newDate < bookingCheckin) {
-                setReceiveError("Ngày không được trước ngày check-in của hợp đồng!");
+            } else if (newDate < bookingCheckin || newDate > bookingCheckout) {
+                setReceiveError("Ngày không được nằm ngoài khoảng check-in check-out của hợp đồng!");
                 setReceiveRoom(e.target.value);
             } else if (newDate < today) {
                 setReceiveRoom(e.target.value);
@@ -256,8 +257,8 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, check
             if (!e.target.value) {
                 setReturnError("Ngày không được để trống!");
                 setReturnRoom(e.target.value);
-            } else if (newDate > bookingCheckout) {
-                setReturnError("Ngày không được sau ngày check-out của hợp đồng!");
+            } else if (newDate > bookingCheckout || newDate < bookingCheckin) {
+                setReturnError("Ngày không được nằm ngoài khoảng check-in check-out của hợp đồng!");
                 setReturnRoom(e.target.value);
             }
             else if (newDate < today) {
@@ -292,7 +293,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, check
                         <Row className="mb-3">
                             <Col md={6}>
                                 <Form.Group className='d-flex align-items-center justify-content-center '>
-                                    <Form.Label><strong>Trả phòng :</strong></Form.Label>
+                                    <Form.Label><strong>Nhận phòng :</strong></Form.Label>
                                     <Form.Control
                                         className='w-50 mx-2'
                                         type="date"
@@ -305,7 +306,7 @@ const UpdateAgencyOrder = forwardRef(({ customerID, locationId, bookingId, check
 
                             <Col md={6}>
                                 <Form.Group className='d-flex align-items-center justify-content-center'>
-                                    <Form.Label ><strong>Nhận phòng :</strong></Form.Label>
+                                    <Form.Label ><strong>Trả phòng :</strong></Form.Label>
                                     <Form.Control
                                         className='w-50 mx-2'
                                         type="date"

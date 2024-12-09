@@ -17,6 +17,9 @@ router.get('/:id', bookingController.getBookingById);
 // Cập nhật booking theo ID
 router.put('/:id', bookingController.updateBooking);
 
+// Endpoint to update statuses
+router.put('/update-statuses/:bookingId', bookingController.updateStatusesByBookingId);
+
 // Xóa booking theo ID
 router.delete('/:id', bookingController.deleteBooking);
 

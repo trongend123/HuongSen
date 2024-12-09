@@ -401,7 +401,7 @@ const AddBookingForm = forwardRef(({ onBookingCreated, customerID, serviceAmount
                                         value={bookingData.note}
                                         onChange={handleChange}
                                         isInvalid={!!errors.note}
-                                        disabled={Object.keys(errors).length > 0}
+
                                     />
                                     <Form.Control.Feedback type="invalid">{errors.note}</Form.Control.Feedback>
                                 </Form.Group>

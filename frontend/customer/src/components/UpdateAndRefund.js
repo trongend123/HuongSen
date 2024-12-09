@@ -21,12 +21,33 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     const [note, setNote] = useState(orderRooms[0]?.bookingId?.note || '');
     const [updatedQuantities, setUpdatedQuantities] = useState({});
     const [Rooms, setRooms] = useState([]);
+    const [refundTimeOut, setRefundTimeOut] = useState(true)
 
     const navigate = useNavigate();
-
-
     useEffect(() => {
         setNote(orderRooms[0]?.bookingId?.note || '');
+    }, [orderRooms]);
+
+    useEffect(() => {
+        const checkRefundTimeOut = () => {
+            const checkinDate = new Date(orderRooms[0]?.bookingId?.checkin);
+            checkinDate.setHours(0, 0, 0, 0)
+            const currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0)
+            const daysBeforeCheckin = Math.floor((checkinDate - currentDate) / (1000 * 3600 * 24));
+
+            if (daysBeforeCheckin >= 2) {
+
+                setRefundTimeOut(true); // Được hoàn tiền nếu còn ít nhất 2 ngày trước ngày checkin
+            } else {
+
+                setRefundTimeOut(false); // Không được hoàn tiền nếu ít hơn 2 ngày trước ngày checkin
+            }
+        };
+
+        if (orderRooms.length > 0) { // Kiểm tra orderRooms không rỗng
+            checkRefundTimeOut();
+        }
     }, [orderRooms]);
     // Lấy thông tin đặt phòng
     const fetchBookingDetails = async () => {
@@ -118,27 +139,33 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                 const updatedBookingData = {
                     price: newBookingPrice || orderRooms[0].bookingId.price, // Cập nhật giá nếu có thay đổi
                 };
+                if (updatedBookingData.price !== orderRooms[0].bookingId.price) {
+                    // Cập nhật giá booking và dịch vụ
+                    await axios.put(`${BASE_URL}/bookings/${bookingId}`, updatedBookingData);
 
-                // Cập nhật giá booking và dịch vụ
-                await axios.put(`${BASE_URL}/bookings/${bookingId}`, updatedBookingData);
 
-                await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: null, note: 'khách đã thêm dịch vụ' });
-                const newNotification = { content: `${bookingId} khách đã thêm dịch vụ`,locationId:location };
-                axios
-                    .post(`${BASE_URL}/chats/send`, newNotification)
-                    .then((response) => {
-                        console.log(response.data);
-                    })
-                    .catch((error) => {
-                        console.error(error);
+                    await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: null, note: 'khách đã thêm dịch vụ' });
+                    const newNotification = { content: `${bookingId} khách đã thêm dịch vụ`, locationId: location };
+                    axios
+                        .post(`${BASE_URL}/chats/send`, newNotification)
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+
+                    toast.success('Thông tin dịch vụ và giá đơn đã được cập nhật.', {
+                        position: "top-right",
                     });
+                    fetchBookingDetails();
+                } else {
+                    toast.error('Vui lòng thêm dịch vụ.', {
+                        position: "top-right",
+                    });
+                }
 
-                toast.success('Thông tin dịch vụ và giá đơn đã được cập nhật.', {
-                    position: "top-right",
-                });
-                fetchBookingDetails(); // Tải lại thông tin booking sau khi cập nhật
-            }
-            else {
+            } else {
                 toast.error('Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại.', {
                     position: "top-right",
                 });
@@ -154,38 +181,53 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     };
     // Xử lý hoàn trả
     const handleRefund = async () => {
-        setIsUpdating(true);
-        try {
-            await axios.put(`${BASE_URL}/bookings/${bookingId}`, { status: 'Yêu cầu hoàn tiền' });
 
-            // Cập nhật trạng thái booking
-            setOrderRooms((prevOrderRooms) =>
-                prevOrderRooms.map((orderRoom) => ({
-                    ...orderRoom,
-                    bookingId: { ...orderRoom.bookingId, status: 'Yêu cầu hoàn tiền' },
-                }))
-            );
-            await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: null, note: 'khách đã yêu cầu hủy phòng, hoàn tiền' });
-            const newNotification = { content: `${bookingId} khách đã yêu cầu hủy phòng, hoàn tiền`,locationId:location };
-            axios
-                .post(`${BASE_URL}/chats/send`, newNotification)
-                .then((response) => {
-                    console.log(response.data);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-            toast.success('Yêu cầu hủy phòng , hoàn tiền thành công', {
+        const checkinDate = new Date(orderRooms[0].bookingId.checkin);
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0)
+        checkinDate.setHours(0, 0, 0, 0)
+
+        const daysBeforeCheckin = Math.floor((checkinDate - currentDate) / (1000 * 3600 * 24));
+        if (daysBeforeCheckin >= 2) {
+            if (window.confirm('Bạn có chắc muốn hủy dịch đơn này không?')) {
+                setIsUpdating(true);
+                try {
+                    await axios.put(`${BASE_URL}/bookings/${bookingId}`, { status: 'Yêu cầu hoàn tiền' });
+
+                    // Cập nhật trạng thái booking
+                    setOrderRooms((prevOrderRooms) =>
+                        prevOrderRooms.map((orderRoom) => ({
+                            ...orderRoom,
+                            bookingId: { ...orderRoom.bookingId, status: 'Yêu cầu hoàn tiền' },
+                        }))
+                    );
+                    await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: null, note: 'khách đã yêu cầu hủy phòng, hoàn tiền' });
+                    const newNotification = { content: `${bookingId} khách đã yêu cầu hủy phòng, hoàn tiền`, locationId: location };
+                    axios
+                        .post(`${BASE_URL}/chats/send`, newNotification)
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+                    toast.success('Yêu cầu hủy phòng , hoàn tiền thành công', {
+                        position: "top-right",
+                    });
+                } catch (error) {
+                    console.error('Error updating booking status:', error);
+                    toast.error('Có lỗi xảy ra khi hủy. Vui lòng thử lại.', {
+                        position: "top-right",
+                    });
+
+                } finally {
+                    setIsUpdating(false);
+                }
+            }
+        } else {
+            toast.error('Đơn chỉ có thể hủy trước 2 ngày.', {
                 position: "top-right",
             });
-        } catch (error) {
-            console.error('Error updating booking status:', error);
-            toast.error('Có lỗi xảy ra khi hủy. Vui lòng thử lại.', {
-                position: "top-right",
-            });
-
-        } finally {
-            setIsUpdating(false);
         }
     };
     // // Xử lý check-out
@@ -228,6 +270,9 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     const handleCancelService = async (deleteService, price) => {
         const checkinDate = new Date(deleteService?.time);
         const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0)
+        checkinDate.setHours(0, 0, 0, 0)
+
         const daysBeforeCheckin = Math.floor((checkinDate - currentDate) / (1000 * 3600 * 24));
         // Kiểm tra nếu dịch vụ được hủy trước ngày check-in 2 ngày
         if (daysBeforeCheckin >= 2) {
@@ -250,6 +295,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                     await axios.post(`${BASE_URL}/histories/BE`, { bookingId: bookingId, staffId: null, note: 'khách đã xóa dịch vụ' });
 
                     const newNotification = { content: `${bookingId} khách đã xóa dịch vụ`,locationId:location };
+
                     axios
                         .post(`${BASE_URL}/chats/send`, newNotification)
                         .then((response) => {
@@ -284,6 +330,10 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
         const checkinBooking = new Date(OrderRoom.bookingId?.checkin);
         const checkoutDate = new Date(OrderRoom.returnRoom);
         const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0)
+        checkinDate.setHours(0, 0, 0, 0)
+        checkoutDate.setHours(0, 0, 0, 0)
+        checkinBooking.setHours(0, 0, 0, 0)
         const daysBeforeCheckin = Math.floor((checkinBooking - currentDate) / (1000 * 3600 * 24));
         const night = Math.floor((checkoutDate - checkinDate) / (1000 * 3600 * 24));
 
@@ -453,7 +503,8 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
         <div >
             <ToastContainer />
             <section className="room-details">
-                <h3>Thông tin Phòng </h3>
+                <h3>Thông tin Phòng {!refundTimeOut && <span className='text-danger'>Đã hết thời gian hủy đơn và cập nhật phòng</span>} </h3>
+
                 <h3>Mã Đặt phòng: {orderRooms[0].bookingId?._id || 'N/A'} - Mã hợp đồng: {orderRooms[0].bookingId?.contract || 'N/A'}</h3>
                 <Row className="customer-info">
                     <Col>
@@ -555,13 +606,13 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                     ))}
                 </Row>}
 
-            {Agency && orderRooms[0]?.bookingId?.status === 'Đã đặt' &&
+            {(Agency && orderRooms[0]?.bookingId?.status === 'Đã đặt' && refundTimeOut) &&
                 <section>
                     {/* Note Input Field */}
                     <Row>
                         <Col className='border rounded p-2'>
                             <Form.Group controlId="note">
-                                <Form.Label><strong>Cập nhật Ghi chú đặt phòng</strong></Form.Label>
+                                <Form.Label><strong>Cập nhật ghi chú đặt phòng </strong></Form.Label>
                                 <Form.Control
                                     as="textarea"
                                     rows={3}
@@ -621,7 +672,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                                         <td>
                                             <Button
                                                 variant="danger"
-                                                disabled={service.status !== "Đã đặt"}
+                                                disabled={service.status !== "Đã đặt" || (orderRooms[0].bookingId?.status !== 'Đã check-in' && orderRooms[0].bookingId?.status !== 'Đã đặt')}
                                                 onClick={() => handleCancelService(service, (service.otherServiceId.price * service.quantity))}
                                             >
                                                 Hủy Dịch Vụ
@@ -668,6 +719,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                 <button
                     className='bg-warning'
                     onClick={handleBackToHome}
+                    disabled={isUpdating}
                 >
                     Về Trang Chủ
                 </button>
@@ -675,7 +727,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                 <button
                     className='bg-danger'
                     onClick={handleRefund}
-                    disabled={isUpdating || orderRooms[0].bookingId?.status === 'Cancelled' || orderRooms[0].bookingId?.status === 'Confirmed'}
+                    disabled={isUpdating || !refundTimeOut || orderRooms[0].bookingId?.status !== 'Đã đặt'}
 
                 >
                     {isUpdating ? 'Đang cập nhật...' : 'Xác nhận Hủy Đơn'}

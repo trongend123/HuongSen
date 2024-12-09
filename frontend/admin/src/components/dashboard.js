@@ -277,11 +277,28 @@ const Dashboard = () => {
 
   const handleExport = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/orderRooms/excel`);
-      if (response.data.message) {
-        console.log(response.data.message);
-        setMessage(response.data.message);
-      }
+      // Gửi yêu cầu GET đến API, nhận dữ liệu dạng blob
+      const response = await axios.get("http://localhost:9999/orderRooms/excel", {
+        responseType: 'blob', // Quan trọng: nhận dữ liệu dạng blob
+      });
+
+      // Tạo file từ dữ liệu nhận được
+      const blob = new Blob([response.data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+
+      // Lưu file sử dụng FileSaver.js hoặc cách thủ công
+      const fileName = `Bao-cao-doanh-thu.xlsx`;
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fileName); // Đặt tên file
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      // Thông báo thành công
+      setMessage("Xuất file thành công!");
     } catch (error) {
       console.error("Error exporting Excel:", error);
       setMessage("Có lỗi xảy ra khi xuất file.");

@@ -49,7 +49,7 @@ const ListBooking = () => {
       .get(`${BASE_URL}/locations`)
       .then((response) => setLocation(response.data))
       .catch((error) => console.error('Error fetching locations:', error));
-  }, []);
+  }, [bookings]);
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -95,19 +95,36 @@ const ListBooking = () => {
   };
 
   const handleCancelClick = (booking) => {
+    // Đặt trạng thái local thành 'Đã hủy' trước khi gửi yêu cầu
     booking.status = "Đã hủy";
     const bookingId = booking._id;
+
+    // Gửi yêu cầu API để cập nhật trạng thái của booking và dịch vụ
     axios
-      .put(`${BASE_URL}/bookings/${bookingId}`, booking)
+      .put(`${BASE_URL}/bookings/update-statuses/${bookingId}`, {
+        orderServiceStatus: "Đã hủy",
+        bookingStatus: "Đã hủy"
+      })
       .then((response) => {
+        // Giả sử phản hồi chứa thông tin booking đã được cập nhật
+        const updatedBooking = response.data.bookingUpdateResult; // Thay thế bằng trường hợp đúng trong response của bạn
+
+        // Cập nhật lại trạng thái booking trong state sau khi nhận được dữ liệu từ server
         setBookings((prevBookings) =>
-          prevBookings.map((booking) =>
-            booking._id === bookingId ? { ...booking, bookingId: { ...booking.bookingId, status: 'Đã hủy' } } : booking
+          prevBookings.map((prevBooking) =>
+            prevBooking._id === updatedBooking._id
+              ? { ...prevBooking, status: updatedBooking.status }
+              : prevBooking
           )
         );
       })
-      .catch((error) => console.error("Error cancelling booking:", error));
+      .catch((error) => {
+        console.error("Lỗi khi hủy booking:", error);
+        // Có thể khôi phục trạng thái nếu yêu cầu API thất bại
+        booking.status = "Trạng thái cũ";  // Khôi phục trạng thái cũ hoặc xử lý theo cách khác
+      });
   };
+
 
   const isDateInRange = (date, start, end) => {
     const targetDate = new Date(date);

@@ -1,6 +1,7 @@
 import Customer from "../models/customer.js";
 import OrderRoom from "../models/orderRoom.js"; // Import mô hình orderRoom
 import Identify from '../models/identifycation.js';
+import Agency from '../models/agency.js';
 
 // GET: /customer-accounts
 const getCustomers = async (req, res) => {
@@ -40,10 +41,11 @@ const createCustomer = async (req, res) => {
         if (ordersCount === 0) {
           // Xóa giấy tờ định danh liên quan đến khách hàng
           await Identify.deleteMany({ customerID: newCustomer._id });
+          await Agency.deleteMany({ customerId: newCustomer._id });
           // Xóa khách hàng
           await Customer.deleteOne({ _id: newCustomer._id });
 
-          console.log(`Customer with ID ${newCustomer._id} and related identifications have been deleted after 5 seconds.`);
+          console.log(`Customer with ID ${newCustomer._id} and related identifications, agencies have been deleted after 5 seconds.`);
         } else {
           console.log(`Customer with ID ${newCustomer._id} has existing orders and will not be deleted.`);
         }

@@ -66,10 +66,14 @@ const ListRoomCate = () => {
     // Validate input fields
     const validateInputs = () => {
         const newErrors = {};
+        const nameRegex = /^[a-zA-Z0-9\sÀ-ỹ]+$/; // Chỉ cho phép chữ cái, số, dấu cách, và ký tự có dấu tiếng Việt.
 
         if (!newRoomCategory.name) {
             newErrors.name = "Tên loại phòng là bắt buộc.";
+        } else if (newRoomCategory.name.length > 50 || !nameRegex.test(newRoomCategory.name)) {
+            newErrors.name = "Tên loại phòng không chứa ký tự đặc biệt, không quá 50 ký tự.";
         }
+
         if (newRoomCategory.numberOfBed < 1) {
             newErrors.numberOfBed = "Số giường phải lớn hơn 0.";
         }
@@ -113,18 +117,16 @@ const ListRoomCate = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Chuẩn hóa tên loại phòng nếu trường đang thay đổi là `name`
-        const formattedValue =
-            name === 'name'
-                ? value.trim().replace(/\s+/g, ' ').replace(/\b\w/g, (c) => c.toLowerCase())
-                : value;
+        // Kiểm tra giới hạn 300 ký tự nếu trường đang thay đổi là `description`
+        if (name === 'description' && value.length > 300) {
+            return; // Ngăn không cho cập nhật nếu vượt quá giới hạn
+        }
 
         setNewRoomCategory((prevState) => ({
             ...prevState,
-            [name]: formattedValue,
+            [name]: value, // Giữ nguyên giá trị mà không cần chuẩn hóa
         }));
     };
-
 
     // Handle room category creation
     const handleCreateRoomCategory = () => {
@@ -141,7 +143,6 @@ const ListRoomCate = () => {
 
     // Handle room category editing
     const handleEditRoomCategory = (roomCategory) => {
-        console.log(roomCategory);
         setIsEditMode(true);
         setSelectedRoomCategory(roomCategory);
         setNewRoomCategory({
@@ -181,6 +182,7 @@ const ListRoomCate = () => {
         return matchesRoomName && matchesLocation;
 
     });
+
 
     return (
         <Container>
@@ -292,9 +294,9 @@ const ListRoomCate = () => {
                                 name="description"
                                 value={newRoomCategory.description}
                                 onChange={handleChange}
-
+                                maxLength={300} // Giới hạn 300 ký tự
                             />
-
+                            <small>{newRoomCategory.description.length}/300 ký tự</small>
                         </Form.Group>
                         {isEditMode === false && (
                             <Form.Group className="mb-3">

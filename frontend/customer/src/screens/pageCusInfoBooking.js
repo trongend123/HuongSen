@@ -91,7 +91,7 @@ const CustomerBookingPage = () => {
             const booking = bookingResponse.data;
             let bookingPrice = booking.price
             if (agencyID) {
-                bookingPrice = bookingPrice * 80 / 100
+                bookingPrice = bookingPrice * 20 / 100
             }
             const response = await axios.post(
                 `${BASE_URL}/payment/create-payment-link`,
