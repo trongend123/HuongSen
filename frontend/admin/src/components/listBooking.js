@@ -26,7 +26,8 @@ const ListBooking = () => {
   const [userRole, setUserRole] = useState('');
   const [statusFilter, setStatusFilter] = useState(''); // New state for status filter
 
-  useEffect(() => {
+
+  const fetchData = async () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser && storedUser.role) {
       setUserRole(storedUser.role);
@@ -49,7 +50,53 @@ const ListBooking = () => {
       .get(`${BASE_URL}/locations`)
       .then((response) => setLocation(response.data))
       .catch((error) => console.error('Error fetching locations:', error));
-  }, [bookings]);
+  }
+  useEffect(() => {
+    fetchData()
+
+  }, []);
+
+  useEffect(() => {
+    fetchCheckBookingTime(bookings)
+
+  }, [bookings])
+
+  const fetchCheckBookingTime = async (bookings) => {
+    const today = new Date(); // Lấy ngày hiện tại
+    today.setHours(0, 0, 0, 0)
+    // Lặp qua tất cả các booking để kiểm tra điều kiện
+    bookings.forEach((booking) => {
+      // Chuyển checkout date thành đối tượng Date để so sánh
+      const checkoutDate = new Date(booking.bookingId.checkout);
+      checkoutDate.setHours(0, 0, 0, 0)
+      // Kiểm tra nếu ngày hiện tại >= ngày checkout của booking
+      if (today >= checkoutDate && booking.bookingId.status === 'Đã đặt') {
+        // Gửi yêu cầu API để cập nhật trạng thái của booking và dịch vụ
+        axios
+          .put(`${BASE_URL}/bookings/update-statuses/${booking.bookingId._id}`, {
+            orderServiceStatus: "Đã hủy",
+            bookingStatus: "Đã hủy"
+          })
+          .then((response) => {
+            // Giả sử phản hồi chứa thông tin booking đã được cập nhật
+            const updatedBooking = response.data.bookingUpdateResult; // Thay thế bằng trường hợp đúng trong response của bạn
+
+            // Cập nhật lại trạng thái booking trong state sau khi nhận được dữ liệu từ server
+            setBookings((prevBookings) =>
+              prevBookings.map((prevBooking) =>
+                prevBooking._id === updatedBooking._id
+                  ? { ...prevBooking, status: updatedBooking.status }
+                  : prevBooking
+              )
+            );
+          })
+          .catch((error) => {
+            console.error("Error updating booking status:", error);
+          });
+      }
+    });
+  };
+
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -112,11 +159,12 @@ const ListBooking = () => {
         // Cập nhật lại trạng thái booking trong state sau khi nhận được dữ liệu từ server
         setBookings((prevBookings) =>
           prevBookings.map((prevBooking) =>
-            prevBooking._id === updatedBooking._id
+            prevBooking.bookingId._id === updatedBooking._id
               ? { ...prevBooking, status: updatedBooking.status }
               : prevBooking
           )
         );
+        fetchData()
       })
       .catch((error) => {
         console.error("Lỗi khi hủy booking:", error);
