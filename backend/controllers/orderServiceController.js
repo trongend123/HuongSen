@@ -69,3 +69,22 @@ export const getOrderServicesByBookingId = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+//Lấy OrderServices theo locationId (nếu cần)
+export const getOrderServicesByLocationId = async (req, res) => {
+    const { locationId } = req.params; // Lấy locationId từ tham số URL
+
+    try {
+        console.log(`Request received for locationId: ${locationId}`);
+        const orderServices = await OrderServiceRepository.findByLocationIdAndRoomCategory(locationId);
+        
+        if (orderServices.length === 0) {
+            return res.status(404).json({ message: 'No order services found for this location.' });
+        }
+
+        return res.status(200).json(orderServices);  // Trả về các OrderServices tìm được
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({ message: 'Không thể lấy dịch vụ theo location', error: error.message });
+    }
+};
