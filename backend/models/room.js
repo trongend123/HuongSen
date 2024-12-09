@@ -11,7 +11,7 @@ const roomSchema = new Schema(
     status: {
       type: String,
       required: true,
-      enum: ["Trống", "Đã đặt", "Đang sử dụng", "Đang sửa chữa"],
+      enum: ["Trống", "Đã book", "Đang sử dụng", "Đang sửa chữa"],
       default: "Trống",
     },
     roomCategoryId: {
