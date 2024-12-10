@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "BookingRouter" as Router
 participant "BookingController" as Controller
 participant "BookingRepository" as Repository
@@ -8,30 +8,54 @@ participant "BookingModel" as BookingModel
 participant "Database" as DB
 
 Admin -> UI: Request to update the status of a booking
+activate UI
 UI -> Router: GET /admin/bookings/update-status/{bookingId}
+activate Router
 Router -> Controller: showUpdateStatusForm(bookingId)
+activate Controller
 Controller -> Repository: getBookingDetails(bookingId)
+activate Repository
 
 Repository -> BookingModel: fetchBookingById(bookingId)
+activate BookingModel
 BookingModel -> DB: query booking by ID
+activate DB
 DB --> BookingModel: booking data
+deactivate DB
 BookingModel --> Repository: booking data
+deactivate BookingModel
 Repository --> Controller: booking data
+deactivate Repository
 
 Controller -> UI: Display update status form
+deactivate Controller
+deactivate Router
+deactivate UI
 
 Admin -> UI: Select new status and confirm update
+activate UI
 UI -> Router: POST /admin/bookings/update-status/{bookingId}
+activate Router
 Router -> Controller: updateBookingStatus(bookingId, newStatus)
+activate Controller
 Controller -> Repository: updateBookingStatus(bookingId, newStatus)
+activate Repository
 
 Repository -> BookingModel: updateStatus(bookingId, newStatus)
+activate BookingModel
 BookingModel -> DB: update booking status in database
+activate DB
 DB --> BookingModel: status updated
+deactivate DB
 BookingModel --> Repository: status updated
+deactivate BookingModel
 Repository --> Controller: status updated successfully
+deactivate Repository
 
 Controller -> Router: 200 OK (status updated)
+deactivate Controller
 Router --> UI: 200 OK (status updated)
+deactivate Router
 UI -> Admin: Display success message (status updated)
+deactivate UI
 @enduml

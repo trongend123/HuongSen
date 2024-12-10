@@ -1,6 +1,6 @@
 @startuml
 actor Customer
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "PaymentRouter" as Router
 participant "PaymentController" as Controller
 participant "PaymentRepository" as Repository
@@ -9,44 +9,78 @@ participant "CustomerRepository" as CustomerRepo
 participant "Database" as DB
 participant "External Payment Service" as PaymentService
 
-User -> UI: Open payment page
-UI -> User: Display payment form
+Customer -> UI: Open payment page
+activate UI
+UI -> Customer: Display payment form
+deactivate UI
 
-User -> UI: Submit payment (customerId, amount, paymentDetails)
+Customer -> UI: Submit payment (customerId, amount, paymentDetails)
+activate UI
 UI -> Router: POST /payments (customerId, amount, paymentDetails)
+activate Router
 Router -> Controller: makePayment(customerId, amount, paymentDetails)
+activate Controller
+
 Controller -> CustomerRepo: findCustomerById(customerId)
+activate CustomerRepo
 CustomerRepo -> DB: fetch customer
+activate DB
 DB --> CustomerRepo: customer details
+deactivate DB
 CustomerRepo --> Controller: customer details
+deactivate CustomerRepo
 
 Controller -> PaymentModel: new Payment(customerId, amount, paymentDetails)
+activate PaymentModel
 PaymentModel -> DB: save payment record (status: pending)
+activate DB
 DB --> PaymentModel: saved payment record
+deactivate DB
 PaymentModel --> Repository: saved payment record
+deactivate PaymentModel
 
 Controller -> PaymentService: initiatePayment(amount, paymentDetails)
+activate PaymentService
 PaymentService --> Controller: payment confirmation (success/failure)
+deactivate PaymentService
 
 alt if payment is successful
     Controller -> Repository: updatePaymentStatus(paymentId, "completed")
+    activate Repository
     Repository -> PaymentModel: update status to "completed"
+    activate PaymentModel
     PaymentModel -> DB: save updated status
+    activate DB
     DB --> PaymentModel: updated status
+    deactivate DB
     PaymentModel --> Repository: updated payment record
+    deactivate PaymentModel
     Repository --> Controller: updated payment record
+    deactivate Repository
     Controller --> Router: 200 OK (Payment successful)
+    deactivate Controller
     Router --> UI: 200 OK (Payment successful)
-    UI --> User: Display success message
+    deactivate Router
+    UI --> Customer: Display success message
+    deactivate UI
 else if payment fails
     Controller -> Repository: updatePaymentStatus(paymentId, "failed")
+    activate Repository
     Repository -> PaymentModel: update status to "failed"
+    activate PaymentModel
     PaymentModel -> DB: save updated status
+    activate DB
     DB --> PaymentModel: updated status
+    deactivate DB
     PaymentModel --> Repository: updated payment record
+    deactivate PaymentModel
     Repository --> Controller: updated payment record
+    deactivate Repository
     Controller --> Router: 400 Bad Request (Payment failed)
+    deactivate Controller
     Router --> UI: 400 Bad Request (Payment failed)
-    UI --> User: Display error message
+    deactivate Router
+    UI --> Customer: Display error message
+    deactivate UI
 end
 @enduml

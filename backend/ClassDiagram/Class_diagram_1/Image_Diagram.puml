@@ -1,0 +1,63 @@
+@startuml
+class ImageRouter {
+    +createImage(data: Image): Image
+    +updateImage(id: String, data: Image): Image
+    +deleteImage(id: String): void
+    +getImageById(id: String): Image
+    +getAllImages(): List<Image>
+}
+
+class ImageController {
+    +createImage(data: Image): Image
+    +updateImage(id: String, data: Image): Image
+    +deleteImage(id: String): void
+    +getImageById(id: String): Image
+    +getAllImages(): List<Image>
+}
+
+class ImageRepository {
+    +createImage(data: Image): Image
+    +updateImage(id: String, data: Image): Image
+    +deleteImage(id: String): void
+    +getImageById(id: String): Image
+    +getAllImages(): List<Image>
+}
+
+class ImageModel {
+    +imageId: String
+    +caption: String
+    +url: String
+    +roomId: String
+    +locationId: String
+    +save(): Image
+    +update(): Image
+    +delete(): void
+    +findById(id: String): Image
+    +findAll(): List<Image>
+}
+
+ImageRouter --> ImageController : createImage(data)
+ImageController --> ImageRepository : createImage(data)
+ImageRepository --> ImageModel : new Image(data)
+ImageModel --> ImageRepository : saved Image
+
+ImageRouter --> ImageController : updateImage(id, data)
+ImageController --> ImageRepository : updateImage(id, data)
+ImageRepository --> ImageModel : update Image
+ImageModel --> ImageRepository : updated Image
+
+ImageRouter --> ImageController : deleteImage(id)
+ImageController --> ImageRepository : deleteImage(id)
+ImageRepository --> ImageModel : delete Image
+ImageModel --> ImageRepository : deleted Image
+
+ImageRouter --> ImageController : getImageById(id)
+ImageController --> ImageRepository : getImageById(id)
+ImageRepository --> ImageModel : findById()
+ImageModel --> ImageRepository : found Image
+
+ImageRouter --> ImageController : getAllImages()
+ImageController --> ImageRepository : getAllImages()
+ImageRepository --> ImageModel : findAll()
+ImageModel --> ImageRepository : list of Images
+@enduml

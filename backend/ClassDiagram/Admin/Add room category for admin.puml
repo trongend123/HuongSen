@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "RoomCategoryRouter" as Router
 participant "RoomCategoryController" as Controller
 participant "RoomCategoryRepository" as Repository
@@ -8,30 +8,54 @@ participant "RoomCategoryModel" as RoomCategoryModel
 participant "Database" as DB
 
 Admin -> UI: Request to add a new room category
+activate UI
 UI -> Router: GET /admin/room-categories/add
+activate Router
 Router -> Controller: showAddRoomCategoryForm()
+activate Controller
 Controller -> Repository: getRoomCategoryFormData()
+activate Repository
 
 Repository -> RoomCategoryModel: fetchRoomCategoryFormData()
+activate RoomCategoryModel
 RoomCategoryModel -> DB: query existing room categories
+activate DB
 DB --> RoomCategoryModel: existing room categories
+deactivate DB
 RoomCategoryModel --> Repository: existing room categories
+deactivate RoomCategoryModel
 Repository --> Controller: existing room categories
+deactivate Repository
 Controller --> Router: Display add room category form
+deactivate Controller
 Router --> UI: Display add room category form
+deactivate Router
+deactivate UI
 
 Admin -> UI: Submit new room category data
+activate UI
 UI -> Router: POST /admin/room-categories/add
+activate Router
 Router -> Controller: addRoomCategory(newCategoryData)
+activate Controller
 Controller -> Repository: saveRoomCategory(newCategoryData)
+activate Repository
 
 Repository -> RoomCategoryModel: createRoomCategory(newCategoryData)
+activate RoomCategoryModel
 RoomCategoryModel -> DB: insert new room category data
+activate DB
 DB --> RoomCategoryModel: room category created
+deactivate DB
 RoomCategoryModel --> Repository: room category created
+deactivate RoomCategoryModel
 Repository --> Controller: room category created successfully
+deactivate Repository
 
 Controller --> Router: 200 OK (room category added)
+deactivate Controller
 Router --> UI: 200 OK (room category added)
+deactivate Router
 UI -> Admin: Display success message (room category added)
+deactivate UI
 @enduml

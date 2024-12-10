@@ -1,6 +1,6 @@
 @startuml
 actor Customer
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "FeedbackRouter" as Router
 participant "FeedbackController" as Controller
 participant "FeedbackService" as Service
@@ -9,24 +9,42 @@ participant "Database" as DB
 participant "AdminInterface" as AdminUI
 
 Customer -> UI: Open feedback form
-UI -> Customer: Display feedback form
+activate UI
+UI --> Customer: Display feedback form
+deactivate UI
 
 Customer -> UI: Submit feedback (details)
+activate UI
 UI -> Router: POST /feedbacks (feedback details)
+activate Router
 Router -> Controller: submitFeedback(details)
+activate Controller
 Controller -> Service: processFeedback(details)
+activate Service
 
 Service -> FeedbackModel: new Feedback(details)
+activate FeedbackModel
 FeedbackModel -> DB: save feedback
+activate DB
 DB --> FeedbackModel: feedback saved
+deactivate DB
 FeedbackModel --> Service: feedback saved
+deactivate FeedbackModel
 Service --> Controller: feedback processed
+deactivate Service
 
-Controller -> Router: 201 Created (feedback submitted)
-Router -> UI: 201 Created (feedback submitted)
-UI -> Customer: Display success message
+Controller --> Router: 201 Created (feedback submitted)
+deactivate Controller
+Router --> UI: 201 Created (feedback submitted)
+deactivate Router
+UI --> Customer: Display success message
+deactivate UI
 
-AdminUI -> DB: Query all feedback
-DB --> AdminUI: List of feedback
-AdminUI -> Admin: Display feedback for review
+AdminUI --> DB: Query all feedback
+activate AdminUI
+activate DB
+DB -> AdminUI: List of feedback
+deactivate DB
+AdminUI --> Admin: Display feedback for review
+deactivate AdminUI
 @enduml

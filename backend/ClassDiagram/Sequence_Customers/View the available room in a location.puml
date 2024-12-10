@@ -1,0 +1,36 @@
+@startuml
+actor Customer
+participant "UI/Interface" as UI
+participant "RoomRouter" as Router
+participant "RoomController" as Controller
+participant "RoomRepository" as Repository
+participant "RoomModel" as RoomModel
+participant "Database" as DB
+
+Customer -> UI: Request to view available rooms in location
+activate UI
+UI -> Router: GET /rooms/location/{locationId}
+activate Router
+Router -> Controller: getAvailableRooms(locationId)
+activate Controller
+Controller -> Repository: getAvailableRooms(locationId)
+activate Repository
+
+Repository -> RoomModel: fetchAvailableRoomsByLocation(locationId)
+activate RoomModel
+RoomModel -> DB: query available rooms by location
+activate DB
+DB --> RoomModel: list of available rooms
+deactivate DB
+RoomModel --> Repository: list of available rooms
+deactivate RoomModel
+Repository --> Controller: list of available rooms
+deactivate Repository
+
+Controller -> Router: 200 OK (available rooms)
+deactivate Controller
+Router --> UI: 200 OK (available rooms)
+deactivate Router
+UI -> Customer: Display available rooms
+deactivate UI
+@enduml

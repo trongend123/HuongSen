@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "RoomRouter" as Router
 participant "RoomController" as Controller
 participant "RoomRepository" as Repository
@@ -8,16 +8,29 @@ participant "RoomModel" as RoomModel
 participant "Database" as DB
 
 Admin -> UI: Request to view room map
+activate UI
 UI -> Router: GET /admin/rooms/map
+activate Router
 Router -> Controller: showRoomMap()
+activate Controller
 Controller -> Repository: getRoomMapData()
+activate Repository
 
 Repository -> RoomModel: fetchRoomMapData()
+activate RoomModel
 RoomModel -> DB: query room map data
+activate DB
 DB --> RoomModel: room map data
+deactivate DB
 RoomModel --> Repository: room map data
+deactivate RoomModel
 Repository --> Controller: room map data
+deactivate Repository
+
 Controller --> Router: 200 OK (room map data)
+deactivate Controller
 Router --> UI: 200 OK (room map data)
+deactivate Router
 UI -> Admin: Display room map
+deactivate UI
 @enduml

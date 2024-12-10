@@ -1,0 +1,69 @@
+@startuml
+class BookingRouter {
+    +createBooking(data: Booking): Booking
+    +updateBooking(id: String, data: Booking): Booking
+    +deleteBooking(id: String): void
+    +getBookingById(id: String): Booking
+    +getAllBookings(): List<Booking>
+}
+
+class BookingController {
+    +createBooking(data: Booking): Booking
+    +updateBooking(id: String, data: Booking): Booking
+    +deleteBooking(id: String): void
+    +getBookingById(id: String): Booking
+    +getAllBookings(): List<Booking>
+}
+
+class BookingRepository {
+    +createBooking(data: Booking): Booking
+    +updateBooking(id: String, data: Booking): Booking
+    +deleteBooking(id: String): void
+    +getBookingById(id: String): Booking
+    +getAllBookings(): List<Booking>
+}
+
+class BookingModel {
+    +bookingId: String
+    +taxId: String
+    +status: String
+    +payment: String
+    +staffId: String
+    +price: Int
+    +checkin: Date
+    +note: String
+    +checkout: Date
+    +contract: String
+    +humans: Int
+    +save(): Booking
+    +update(): Booking
+    +delete(): void
+    +findById(id: String): Booking
+    +findAll(): List<Booking>
+}
+
+BookingRouter --> BookingController : createBooking(data)
+BookingController --> BookingRepository : createBooking(data)
+BookingRepository --> BookingModel : new Booking(data)
+BookingModel --> BookingRepository : saved Booking
+
+BookingRouter --> BookingController : updateBooking(id, data)
+BookingController --> BookingRepository : updateBooking(id, data)
+BookingRepository --> BookingModel : update Booking
+BookingModel --> BookingRepository : updated Booking
+
+BookingRouter --> BookingController : deleteBooking(id)
+BookingController --> BookingRepository : deleteBooking(id)
+BookingRepository --> BookingModel : delete Booking
+BookingModel --> BookingRepository : deleted Booking
+
+BookingRouter --> BookingController : getBookingById(id)
+BookingController --> BookingRepository : getBookingById(id)
+BookingRepository --> BookingModel : findById()
+BookingModel --> BookingRepository : found Booking
+
+BookingRouter --> BookingController : getAllBookings()
+BookingController --> BookingRepository : getAllBookings()
+BookingRepository --> BookingModel : findAll()
+BookingModel --> BookingRepository : list of Bookings
+@enduml

@@ -1,6 +1,6 @@
 @startuml
 actor Receptionist
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "AuthRouter" as Router
 participant "AuthController" as Controller
 participant "AuthRepository" as Repository
@@ -8,16 +8,31 @@ participant "SessionManager" as SessionManager
 participant "Database" as DB
 
 Receptionist -> UI: Click logout button
+activate UI
 UI -> Router: POST /logout
+activate Router
 Router -> Controller: logout()
+activate Controller
 Controller -> SessionManager: clearSession()
+activate SessionManager
 
 alt If session cleared successfully
     SessionManager -> Controller: session cleared
+    deactivate SessionManager
     Controller -> UI: 200 OK (logout success)
+    deactivate Controller
+    Router --> UI: 200 OK (logout success)
+    deactivate Router
     UI -> Receptionist: Display login page
+    deactivate UI
 else If session clear failed
+    SessionManager -> Controller: session clear failed
+    deactivate SessionManager
     Controller -> UI: 500 Internal Server Error (logout failed)
+    deactivate Controller
+    Router --> UI: 500 Internal Server Error (logout failed)
+    deactivate Router
     UI -> Receptionist: Display error message
+    deactivate UI
 end
 @enduml

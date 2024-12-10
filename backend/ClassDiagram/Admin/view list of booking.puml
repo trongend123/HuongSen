@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "BookingRouter" as Router
 participant "BookingController" as Controller
 participant "BookingRepository" as Repository
@@ -8,16 +8,29 @@ participant "BookingModel" as BookingModel
 participant "Database" as DB
 
 Admin -> UI: Request to view list of bookings
+activate UI
 UI -> Router: GET /admin/bookings
+activate Router
 Router -> Controller: getBookings()
+activate Controller
 Controller -> Repository: retrieveBookings()
+activate Repository
 
 Repository -> BookingModel: fetchAllBookings()
+activate BookingModel
 BookingModel -> DB: query all bookings
+activate DB
 DB --> BookingModel: list of bookings
+deactivate DB
 BookingModel --> Repository: list of bookings
+deactivate BookingModel
 Repository --> Controller: list of bookings
+deactivate Repository
+
 Controller --> Router: 200 OK (list of bookings)
+deactivate Controller
 Router --> UI: 200 OK (list of bookings)
+deactivate Router
 UI -> Admin: Display list of bookings
+deactivate UI
 @enduml

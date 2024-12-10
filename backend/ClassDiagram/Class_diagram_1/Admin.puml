@@ -1,0 +1,156 @@
+@startuml
+class AdminRouter {
+    +login(username: String, password: String): boolean
+    +logout(): void
+    +changePassword(newPassword: String): void
+    +viewDashboard(): Dashboard
+    +viewNotification(): Notification
+    +viewOtherServices(): List<OtherService>
+    +addOtherService(data: OtherService): OtherService
+    +updateOtherService(id: String, data: OtherService): OtherService
+    +deleteOtherService(id: String): void
+    +viewBookings(): List<Booking>
+    +cancelBooking(id: String): void
+    +viewBookingDetail(id: String): Booking
+    +updateBookingStatus(id: String, status: String): void
+    +updateBookingDetail(id: String, data: Booking): Booking
+    +viewUpdatedBookingHistory(): List<BookingHistory>
+    +viewReceptionists(): List<Receptionist>
+    +createReceptionist(data: Receptionist): Receptionist
+    +updateReceptionist(id: String, data: Receptionist): Receptionist
+    +deleteReceptionist(id: String): void
+    +viewRoomMap(): RoomMap
+    +viewRoomCategories(): List<RoomCategory>
+    +addRoomCategory(data: RoomCategory): RoomCategory
+    +updateRoomCategory(id: String, data: RoomCategory): RoomCategory
+}
+
+class AdminController {
+    +login(username: String, password: String): boolean
+    +logout(): void
+    +changePassword(newPassword: String): void
+    +viewDashboard(): Dashboard
+    +viewNotification(): Notification
+    +viewOtherServices(): List<OtherService>
+    +addOtherService(data: OtherService): OtherService
+    +updateOtherService(id: String, data: OtherService): OtherService
+    +deleteOtherService(id: String): void
+    +viewBookings(): List<Booking>
+    +cancelBooking(id: String): void
+    +viewBookingDetail(id: String): Booking
+    +updateBookingStatus(id: String, status: String): void
+    +updateBookingDetail(id: String, data: Booking): Booking
+    +viewUpdatedBookingHistory(): List<BookingHistory>
+    +viewReceptionists(): List<Receptionist>
+    +createReceptionist(data: Receptionist): Receptionist
+    +updateReceptionist(id: String, data: Receptionist): Receptionist
+    +deleteReceptionist(id: String): void
+    +viewRoomMap(): RoomMap
+    +viewRoomCategories(): List<RoomCategory>
+    +addRoomCategory(data: RoomCategory): RoomCategory
+    +updateRoomCategory(id: String, data: RoomCategory): RoomCategory
+}
+
+class AdminRepository {
+    +login(username: String, password: String): boolean
+    +changePassword(newPassword: String): void
+    +viewDashboard(): Dashboard
+    +viewNotification(): Notification
+    +viewOtherServices(): List<OtherService>
+    +addOtherService(data: OtherService): OtherService
+    +updateOtherService(id: String, data: OtherService): OtherService
+    +deleteOtherService(id: String): void
+    +viewBookings(): List<Booking>
+    +cancelBooking(id: String): void
+    +viewBookingDetail(id: String): Booking
+    +updateBookingStatus(id: String, status: String): void
+    +updateBookingDetail(id: String, data: Booking): Booking
+    +viewUpdatedBookingHistory(): List<BookingHistory>
+    +viewReceptionists(): List<Receptionist>
+    +createReceptionist(data: Receptionist): Receptionist
+    +updateReceptionist(id: String, data: Receptionist): Receptionist
+    +deleteReceptionist(id: String): void
+    +viewRoomMap(): RoomMap
+    +viewRoomCategories(): List<RoomCategory>
+    +addRoomCategory(data: RoomCategory): RoomCategory
+    +updateRoomCategory(id: String, data: RoomCategory): RoomCategory
+}
+
+class AdminModel {
+    +adminId: String
+    +username: String
+    +password: String
+    +role: String
+    +save(): Admin
+    +update(): Admin
+    +delete(): void
+    +findById(id: String): Admin
+    +findAll(): List<Admin>
+}
+
+class OtherService {
+    +serviceId: String
+    +serviceName: String
+    +serviceDescription: String
+    +price: Float
+    +save(): OtherService
+    +update(): OtherService
+    +delete(): void
+    +findById(id: String): OtherService
+    +findAll(): List<OtherService>
+}
+
+class Booking {
+    +bookingId: String
+    +customerId: String
+    +bookingStatus: String
+    +price: Float
+    +checkIn: Date
+    +checkOut: Date
+    +save(): Booking
+    +update(): Booking
+    +delete(): void
+    +findById(id: String): Booking
+    +findAll(): List<Booking>
+}
+
+class Receptionist {
+    +receptionistId: String
+    +fullname: String
+    +email: String
+    +phone: String
+    +save(): Receptionist
+    +update(): Receptionist
+    +delete(): void
+    +findById(id: String): Receptionist
+    +findAll(): List<Receptionist>
+}
+
+class RoomMap {
+    +roomMapId: String
+    +floor: String
+    +rooms: List<Room>
+}
+
+class RoomCategory {
+    +categoryId: String
+    +categoryName: String
+    +description: String
+    +price: Float
+    +save(): RoomCategory
+    +update(): RoomCategory
+    +delete(): void
+    +findById(id: String): RoomCategory
+    +findAll(): List<RoomCategory>
+}
+
+AdminRouter --> AdminController : login(), logout(), changePassword()
+AdminController --> AdminRepository : login(), logout(), changePassword()
+AdminRepository --> AdminModel : save(), update(), delete()
+AdminRepository --> OtherService : viewOtherServices(), addOtherService(), updateOtherService(), deleteOtherService()
+AdminRepository --> Booking : viewBookings(), cancelBooking(), updateBookingStatus(), updateBookingDetail()
+AdminRepository --> Receptionist : viewReceptionists(), createReceptionist(), updateReceptionist(), deleteReceptionist()
+AdminRepository --> RoomMap : viewRoomMap()
+AdminRepository --> RoomCategory : viewRoomCategories(), addRoomCategory(), updateRoomCategory()
+
+@enduml

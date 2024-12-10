@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "OtherServiceRouter" as Router
 participant "OtherServiceController" as Controller
 participant "OtherServiceRepository" as Repository
@@ -8,17 +8,29 @@ participant "OtherServiceModel" as OtherServiceModel
 participant "Database" as DB
 
 Admin -> UI: Request to view list of other services
+activate UI
 UI -> Router: GET /admin/other-services
+activate Router
 Router -> Controller: getOtherServices()
+activate Controller
 Controller -> Repository: retrieveOtherServices()
+activate Repository
 
 Repository -> OtherServiceModel: fetchOtherServices()
+activate OtherServiceModel
 OtherServiceModel -> DB: query other services
+activate DB
 DB --> OtherServiceModel: list of other services
+deactivate DB
 OtherServiceModel --> Repository: list of other services
+deactivate OtherServiceModel
 Repository --> Controller: list of other services
+deactivate Repository
 
 Controller -> Router: 200 OK (other services data)
+deactivate Controller
 Router --> UI: 200 OK (other services data)
+deactivate Router
 UI -> Admin: Display list of other services
+deactivate UI
 @enduml

@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "NotificationRouter" as Router
 participant "NotificationController" as Controller
 participant "NotificationRepository" as Repository
@@ -8,17 +8,29 @@ participant "NotificationModel" as NotificationModel
 participant "Database" as DB
 
 Admin -> UI: Request to view notifications
+activate UI
 UI -> Router: GET /admin/notifications
+activate Router
 Router -> Controller: getNotifications()
+activate Controller
 Controller -> Repository: retrieveNotifications()
+activate Repository
 
 Repository -> NotificationModel: fetchNotifications(adminId)
+activate NotificationModel
 NotificationModel -> DB: query notifications for admin
+activate DB
 DB --> NotificationModel: notifications data
+deactivate DB
 NotificationModel --> Repository: notifications data
+deactivate NotificationModel
 Repository --> Controller: notifications data
+deactivate Repository
 
 Controller -> Router: 200 OK (notifications data)
+deactivate Controller
 Router --> UI: 200 OK (notifications data)
+deactivate Router
 UI -> Admin: Display notifications
+deactivate UI
 @enduml

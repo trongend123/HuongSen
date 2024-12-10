@@ -1,0 +1,64 @@
+@startuml
+class RoomCategoryRouter {
+    +createRoomCategory(data: RoomCategory): RoomCategory
+    +updateRoomCategory(id: String, data: RoomCategory): RoomCategory
+    +deleteRoomCategory(id: String): void
+    +getRoomCategoryById(id: String): RoomCategory
+    +getAllRoomCategories(): List<RoomCategory>
+}
+
+class RoomCategoryController {
+    +createRoomCategory(data: RoomCategory): RoomCategory
+    +updateRoomCategory(id: String, data: RoomCategory): RoomCategory
+    +deleteRoomCategory(id: String): void
+    +getRoomCategoryById(id: String): RoomCategory
+    +getAllRoomCategories(): List<RoomCategory>
+}
+
+class RoomCategoryRepository {
+    +createRoomCategory(data: RoomCategory): RoomCategory
+    +updateRoomCategory(id: String, data: RoomCategory): RoomCategory
+    +deleteRoomCategory(id: String): void
+    +getRoomCategoryById(id: String): RoomCategory
+    +getAllRoomCategories(): List<RoomCategory>
+}
+
+class RoomCategoryModel {
+    +roomCateId: String
+    +locationId: String
+    +numOfBed: Int
+    +numOfHuman: Int
+    +price: Int
+    +name: String
+    +save(): RoomCategory
+    +update(): RoomCategory
+    +delete(): void
+    +findById(id: String): RoomCategory
+    +findAll(): List<RoomCategory>
+}
+
+RoomCategoryRouter --> RoomCategoryController : createRoomCategory(data)
+RoomCategoryController --> RoomCategoryRepository : createRoomCategory(data)
+RoomCategoryRepository --> RoomCategoryModel : new RoomCategory(data)
+RoomCategoryModel --> RoomCategoryRepository : saved RoomCategory
+
+RoomCategoryRouter --> RoomCategoryController : updateRoomCategory(id, data)
+RoomCategoryController --> RoomCategoryRepository : updateRoomCategory(id, data)
+RoomCategoryRepository --> RoomCategoryModel : update RoomCategory
+RoomCategoryModel --> RoomCategoryRepository : updated RoomCategory
+
+RoomCategoryRouter --> RoomCategoryController : deleteRoomCategory(id)
+RoomCategoryController --> RoomCategoryRepository : deleteRoomCategory(id)
+RoomCategoryRepository --> RoomCategoryModel : delete RoomCategory
+RoomCategoryModel --> RoomCategoryRepository : deleted RoomCategory
+
+RoomCategoryRouter --> RoomCategoryController : getRoomCategoryById(id)
+RoomCategoryController --> RoomCategoryRepository : getRoomCategoryById(id)
+RoomCategoryRepository --> RoomCategoryModel : findById()
+RoomCategoryModel --> RoomCategoryRepository : found RoomCategory
+
+RoomCategoryRouter --> RoomCategoryController : getAllRoomCategories()
+RoomCategoryController --> RoomCategoryRepository : getAllRoomCategories()
+RoomCategoryRepository --> RoomCategoryModel : findAll()
+RoomCategoryModel --> RoomCategoryRepository : list of RoomCategories
+@enduml
