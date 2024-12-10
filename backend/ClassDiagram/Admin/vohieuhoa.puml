@@ -1,11 +1,58 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+actor Admin
+participant "UI/Interface" as UI
+participant "ServiceRouter" as Router
+participant "ServiceController" as Controller
+participant "ServiceRepository" as Repository
+participant "ServiceModel" as ServiceModel
+participant "Database" as DB
 
-autonumber
+Admin -> UI: Request to deactivate a service
+activate UI
+UI -> Router: GET /service/{serviceId}/deactivate
+activate Router
+Router -> Controller: deactivateService(serviceId)
+activate Controller
+Controller -> Repository: deactivateService(serviceId)
+activate Repository
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+Repository -> ServiceModel: fetchServiceById(serviceId)
+activate ServiceModel
+ServiceModel -> DB: query service by ID
+activate DB
+DB --> ServiceModel: service data
+deactivate DB
+ServiceModel --> Repository: service data
+deactivate ServiceModel
+Repository --> Controller: service data
+deactivate Repository
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+Controller -> Controller: validate if service can be deactivated
+alt If service can be deactivated
+    Controller -> Repository: saveDeactivatedService()
+    activate Repository
+    Repository -> ServiceModel: updateServiceStatus(serviceId, "deactivated")
+    activate ServiceModel
+    ServiceModel -> DB: update service status to deactivated
+    activate DB
+    DB --> ServiceModel: service status updated
+    deactivate DB
+    ServiceModel --> Repository: service deactivated
+    deactivate ServiceModel
+    Repository --> Controller: service deactivated successfully
+    deactivate Repository
+    Controller -> Router: 200 OK (service deactivated)
+    deactivate Controller
+    Router --> UI: 200 OK (service deactivated)
+    deactivate Router
+    UI -> Admin: Display success message (service deactivated)
+    deactivate UI
+else If service cannot be deactivated
+    Controller -> UI: 400 Bad Request (service cannot be deactivated)
+    deactivate Controller
+    Router --> UI: 400 Bad Request (service cannot be deactivated)
+    deactivate Router
+    UI -> Admin: Display error message (cannot deactivate service)
+    deactivate UI
+end
 @enduml

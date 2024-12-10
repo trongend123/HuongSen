@@ -1,0 +1,64 @@
+@startuml
+class ContractRouter {
+    +createContract(data: Contract): Contract
+    +updateContract(id: String, data: Contract): Contract
+    +deleteContract(id: String): void
+    +getContractById(id: String): Contract
+    +getAllContracts(): List<Contract>
+}
+
+class ContractController {
+    +createContract(data: Contract): Contract
+    +updateContract(id: String, data: Contract): Contract
+    +deleteContract(id: String): void
+    +getContractById(id: String): Contract
+    +getAllContracts(): List<Contract>
+}
+
+class ContractRepository {
+    +createContract(data: Contract): Contract
+    +updateContract(id: String, data: Contract): Contract
+    +deleteContract(id: String): void
+    +getContractById(id: String): Contract
+    +getAllContracts(): List<Contract>
+}
+
+class ContractModel {
+    +contractId: String
+    +customerId: String
+    +agencyId: String
+    +bookingId: String
+    +deposit: Int
+    +note: String
+    +save(): Contract
+    +update(): Contract
+    +delete(): void
+    +findById(id: String): Contract
+    +findAll(): List<Contract>
+}
+
+ContractRouter --> ContractController : createContract(data)
+ContractController --> ContractRepository : createContract(data)
+ContractRepository --> ContractModel : new Contract(data)
+ContractModel --> ContractRepository : saved Contract
+
+ContractRouter --> ContractController : updateContract(id, data)
+ContractController --> ContractRepository : updateContract(id, data)
+ContractRepository --> ContractModel : update Contract
+ContractModel --> ContractRepository : updated Contract
+
+ContractRouter --> ContractController : deleteContract(id)
+ContractController --> ContractRepository : deleteContract(id)
+ContractRepository --> ContractModel : delete Contract
+ContractModel --> ContractRepository : deleted Contract
+
+ContractRouter --> ContractController : getContractById(id)
+ContractController --> ContractRepository : getContractById(id)
+ContractRepository --> ContractModel : findById()
+ContractModel --> ContractRepository : found Contract
+
+ContractRouter --> ContractController : getAllContracts()
+ContractController --> ContractRepository : getAllContracts()
+ContractRepository --> ContractModel : findAll()
+ContractModel --> ContractRepository : list of Contracts
+@enduml

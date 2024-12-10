@@ -1,0 +1,65 @@
+@startuml
+actor Customer
+participant "UI/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "OTPService" as OTPService
+participant "Database" as DB
+
+Customer -> UI: Request to verify booking by OTP
+activate UI
+UI -> Router: GET /bookings/{bookingId}/verify-otp
+activate Router
+Router -> Controller: verifyBookingOTP(bookingId, otp)
+activate Controller
+Controller -> Repository: getBookingDetails(bookingId)
+activate Repository
+
+Repository -> BookingModel: fetchBookingById(bookingId)
+activate BookingModel
+BookingModel -> DB: query booking by ID
+activate DB
+DB --> BookingModel: booking data
+deactivate DB
+BookingModel --> Repository: booking data
+deactivate BookingModel
+Repository --> Controller: booking data
+deactivate Repository
+
+Controller -> OTPService: verifyOTP(otp)
+activate OTPService
+OTPService -> OTPService: validate OTP
+alt If OTP is valid
+    OTPService --> Controller: OTP valid
+    deactivate OTPService
+    Controller -> Repository: updateBookingStatus(bookingId, "verified")
+    activate Repository
+    Repository -> BookingModel: update status to "verified"
+    activate BookingModel
+    BookingModel -> DB: update booking status
+    activate DB
+    DB --> BookingModel: status updated
+    deactivate DB
+    BookingModel --> Repository: update success
+    deactivate BookingModel
+    Repository --> Controller: update success
+    deactivate Repository
+    Controller -> Router: 200 OK (Booking verified)
+    deactivate Controller
+    Router --> UI: 200 OK (Booking verified)
+    deactivate Router
+    UI -> Customer: Display success message (Booking verified)
+    deactivate UI
+else If OTP is invalid
+    OTPService --> Controller: OTP invalid
+    deactivate OTPService
+    Controller -> UI: 400 Bad Request (Invalid OTP)
+    deactivate Controller
+    Router --> UI: 400 Bad Request (Invalid OTP)
+    deactivate Router
+    UI -> Customer: Display error message (Invalid OTP)
+    deactivate UI
+end
+@enduml

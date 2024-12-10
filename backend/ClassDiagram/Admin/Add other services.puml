@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "OtherServiceRouter" as Router
 participant "OtherServiceController" as Controller
 participant "OtherServiceRepository" as Repository
@@ -8,22 +8,39 @@ participant "OtherServiceModel" as OtherServiceModel
 participant "Database" as DB
 
 Admin -> UI: Request to add a new other service
+activate UI
 UI -> Router: GET /admin/other-services/add
+activate Router
 Router -> Controller: showAddOtherServiceForm()
+activate Controller
 Controller -> UI: Display add service form
+deactivate Controller
+deactivate Router
 
 Admin -> UI: Submit new service data
+activate UI
 UI -> Router: POST /admin/other-services/add (service details)
+activate Router
 Router -> Controller: addOtherService(serviceData)
+activate Controller
 Controller -> Repository: saveNewService(serviceData)
+activate Repository
 
 Repository -> OtherServiceModel: createNewService(serviceData)
+activate OtherServiceModel
 OtherServiceModel -> DB: insert new service into database
+activate DB
 DB --> OtherServiceModel: new service inserted
+deactivate DB
 OtherServiceModel --> Repository: new service added
+deactivate OtherServiceModel
 Repository --> Controller: service added successfully
+deactivate Repository
 
 Controller -> Router: 200 OK (service added)
+deactivate Controller
 Router --> UI: 200 OK (service added)
+deactivate Router
 UI -> Admin: Display success message (service added)
+deactivate UI
 @enduml

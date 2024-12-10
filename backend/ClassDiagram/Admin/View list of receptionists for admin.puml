@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "ReceptionistRouter" as Router
 participant "ReceptionistController" as Controller
 participant "ReceptionistRepository" as Repository
@@ -8,17 +8,29 @@ participant "ReceptionistModel" as ReceptionistModel
 participant "Database" as DB
 
 Admin -> UI: Request to view list of receptionists
+activate UI
 UI -> Router: GET /admin/receptionists
+activate Router
 Router -> Controller: getReceptionistList()
+activate Controller
 Controller -> Repository: retrieveReceptionistList()
+activate Repository
 
 Repository -> ReceptionistModel: fetchAllReceptionists()
+activate ReceptionistModel
 ReceptionistModel -> DB: query all receptionists
+activate DB
 DB --> ReceptionistModel: list of receptionists
+deactivate DB
 ReceptionistModel --> Repository: list of receptionists
+deactivate ReceptionistModel
 Repository --> Controller: list of receptionists
+deactivate Repository
 
 Controller --> Router: 200 OK (list of receptionists)
+deactivate Controller
 Router --> UI: 200 OK (list of receptionists)
+deactivate Router
 UI -> Admin: Display list of receptionists
+deactivate UI
 @enduml

@@ -1,6 +1,6 @@
 @startuml
 actor Receptionist
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "BookingRouter" as Router
 participant "BookingController" as Controller
 participant "BookingRepository" as Repository
@@ -9,31 +9,57 @@ participant "RoomModel" as RoomModel
 participant "Database" as DB
 
 Receptionist -> UI: Request to create booking
+activate UI
 UI -> Router: GET /booking/create
+activate Router
 Router -> Controller: showCreateBookingForm()
+activate Controller
 Controller -> UI: Display booking form
+deactivate Controller
+deactivate Router
 
 Receptionist -> UI: Fill booking details (customer, room, dates, etc.)
+activate UI
 UI -> Router: POST /booking/create
+activate Router
 Router -> Controller: createBooking(bookingData)
+activate Controller
 Controller -> Repository: createBooking(bookingData)
+activate Repository
 
 Repository -> RoomModel: checkRoomAvailability(roomId, startDate, endDate)
+activate RoomModel
 RoomModel -> DB: query room availability
+activate DB
 DB --> RoomModel: room availability status
+deactivate DB
 RoomModel --> Repository: availability status
+deactivate RoomModel
 
 alt If room is available
     Repository -> BookingModel: createNewBooking(bookingData)
+    activate BookingModel
     BookingModel -> DB: insert new booking
+    activate DB
     DB --> BookingModel: booking created
+    deactivate DB
     BookingModel --> Repository: booking creation success
+    deactivate BookingModel
     Repository --> Controller: booking creation success
-    Controller -> Router: 200 OK (booking created)
+    deactivate Repository
+    Controller --> Router: 200 OK (booking created)
+    deactivate Controller
     Router --> UI: 200 OK (booking created)
-    UI -> Receptionist: Display booking success message
+    deactivate Router
+    UI --> Receptionist: Display booking success message
+    deactivate UI
 else If room is not available
-    Controller -> UI: 400 Bad Request (room not available)
-    UI -> Receptionist: Display error message (room not available)
+    deactivate Repository
+    Controller --> UI: 400 Bad Request (room not available)
+    deactivate Controller
+    Router --> UI: 400 Bad Request (room not available)
+    deactivate Router
+    UI --> Receptionist: Display error message (room not available)
+    deactivate UI
 end
 @enduml

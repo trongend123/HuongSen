@@ -1,0 +1,61 @@
+@startuml
+actor Admin
+participant "UI/Interface" as UI
+participant "RoomCategoryRouter" as Router
+participant "RoomCategoryController" as Controller
+participant "RoomCategoryRepository" as Repository
+participant "RoomCategoryModel" as RoomCategoryModel
+participant "Database" as DB
+
+Admin -> UI: Request to update room category
+activate UI
+UI -> Router: GET /room-categories/{categoryId}/update
+activate Router
+Router -> Controller: showUpdateRoomCategoryForm(categoryId)
+activate Controller
+Controller -> Repository: getRoomCategoryDetails(categoryId)
+activate Repository
+
+Repository -> RoomCategoryModel: fetchRoomCategoryById(categoryId)
+activate RoomCategoryModel
+RoomCategoryModel -> DB: query room category by ID
+activate DB
+DB --> RoomCategoryModel: room category data
+deactivate DB
+RoomCategoryModel --> Repository: room category data
+deactivate RoomCategoryModel
+Repository --> Controller: room category data
+deactivate Repository
+
+Controller -> UI: Display room category details form
+deactivate Controller
+UI -> Admin: Display form to update room category
+deactivate UI
+
+Admin -> UI: Submit updated category details
+activate UI
+UI -> Router: PUT /room-categories/{categoryId}/update
+activate Router
+Router -> Controller: updateRoomCategory(categoryId, updatedCategoryData)
+activate Controller
+Controller -> Repository: updateRoomCategoryDetails(categoryId, updatedCategoryData)
+activate Repository
+
+Repository -> RoomCategoryModel: updateRoomCategory(categoryId, updatedCategoryData)
+activate RoomCategoryModel
+RoomCategoryModel -> DB: update room category data
+activate DB
+DB --> RoomCategoryModel: room category updated
+deactivate DB
+RoomCategoryModel --> Repository: room category updated successfully
+deactivate RoomCategoryModel
+Repository --> Controller: update success
+deactivate Repository
+
+Controller -> Router: 200 OK (Room category updated)
+deactivate Controller
+Router --> UI: 200 OK (Room category updated)
+deactivate Router
+UI -> Admin: Display success message (Room category updated)
+deactivate UI
+@enduml

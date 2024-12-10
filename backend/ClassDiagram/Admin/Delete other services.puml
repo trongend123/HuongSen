@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "OtherServiceRouter" as Router
 participant "OtherServiceController" as Controller
 participant "OtherServiceRepository" as Repository
@@ -8,30 +8,54 @@ participant "OtherServiceModel" as OtherServiceModel
 participant "Database" as DB
 
 Admin -> UI: Request to delete an existing other service
+activate UI
 UI -> Router: GET /admin/other-services/delete/{serviceId}
+activate Router
 Router -> Controller: showDeleteConfirmation(serviceId)
+activate Controller
 Controller -> Repository: getServiceDetails(serviceId)
+activate Repository
 
 Repository -> OtherServiceModel: fetchServiceById(serviceId)
+activate OtherServiceModel
 OtherServiceModel -> DB: query service by ID
+activate DB
 DB --> OtherServiceModel: service data
+deactivate DB
 OtherServiceModel --> Repository: service data
+deactivate OtherServiceModel
 Repository --> Controller: service data
+deactivate Repository
 
 Controller -> UI: Display delete confirmation form
+deactivate Controller
+deactivate Router
+deactivate UI
 
 Admin -> UI: Confirm delete request
+activate UI
 UI -> Router: POST /admin/other-services/delete/{serviceId}
+activate Router
 Router -> Controller: deleteOtherService(serviceId)
+activate Controller
 Controller -> Repository: deleteService(serviceId)
+activate Repository
 
 Repository -> OtherServiceModel: deleteService(serviceId)
+activate OtherServiceModel
 OtherServiceModel -> DB: delete service from database
+activate DB
 DB --> OtherServiceModel: service deleted
+deactivate DB
 OtherServiceModel --> Repository: service deleted
+deactivate OtherServiceModel
 Repository --> Controller: service deleted successfully
+deactivate Repository
 
 Controller -> Router: 200 OK (service deleted)
+deactivate Controller
 Router --> UI: 200 OK (service deleted)
+deactivate Router
 UI -> Admin: Display success message (service deleted)
+deactivate UI
 @enduml

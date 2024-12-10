@@ -1,0 +1,63 @@
+@startuml
+class OrderServiceRouter {
+    +createOrderService(data: OrderService): OrderService
+    +updateOrderService(id: String, data: OrderService): OrderService
+    +deleteOrderService(id: String): void
+    +getOrderServiceById(id: String): OrderService
+    +getAllOrderServices(): List<OrderService>
+}
+
+class OrderServiceController {
+    +createOrderService(data: OrderService): OrderService
+    +updateOrderService(id: String, data: OrderService): OrderService
+    +deleteOrderService(id: String): void
+    +getOrderServiceById(id: String): OrderService
+    +getAllOrderServices(): List<OrderService>
+}
+
+class OrderServiceRepository {
+    +createOrderService(data: OrderService): OrderService
+    +updateOrderService(id: String, data: OrderService): OrderService
+    +deleteOrderService(id: String): void
+    +getOrderServiceById(id: String): OrderService
+    +getAllOrderServices(): List<OrderService>
+}
+
+class OrderServiceModel {
+    +orderServicesId: String
+    +services: String
+    +bookingId: String
+    +quantity: Int
+    +note: String
+    +save(): OrderService
+    +update(): OrderService
+    +delete(): void
+    +findById(id: String): OrderService
+    +findAll(): List<OrderService>
+}
+
+OrderServiceRouter --> OrderServiceController : createOrderService(data)
+OrderServiceController --> OrderServiceRepository : createOrderService(data)
+OrderServiceRepository --> OrderServiceModel : new OrderService(data)
+OrderServiceModel --> OrderServiceRepository : saved OrderService
+
+OrderServiceRouter --> OrderServiceController : updateOrderService(id, data)
+OrderServiceController --> OrderServiceRepository : updateOrderService(id, data)
+OrderServiceRepository --> OrderServiceModel : update OrderService
+OrderServiceModel --> OrderServiceRepository : updated OrderService
+
+OrderServiceRouter --> OrderServiceController : deleteOrderService(id)
+OrderServiceController --> OrderServiceRepository : deleteOrderService(id)
+OrderServiceRepository --> OrderServiceModel : delete OrderService
+OrderServiceModel --> OrderServiceRepository : deleted OrderService
+
+OrderServiceRouter --> OrderServiceController : getOrderServiceById(id)
+OrderServiceController --> OrderServiceRepository : getOrderServiceById(id)
+OrderServiceRepository --> OrderServiceModel : findById()
+OrderServiceModel --> OrderServiceRepository : found OrderService
+
+OrderServiceRouter --> OrderServiceController : getAllOrderServices()
+OrderServiceController --> OrderServiceRepository : getAllOrderServices()
+OrderServiceRepository --> OrderServiceModel : findAll()
+OrderServiceModel --> OrderServiceRepository : list of OrderServices
+@enduml

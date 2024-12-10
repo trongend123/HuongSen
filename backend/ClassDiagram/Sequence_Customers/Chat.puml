@@ -1,6 +1,6 @@
 @startuml
 actor Customer
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "ChatRouter" as Router
 participant "ChatController" as Controller
 participant "ChatService" as Service
@@ -9,33 +9,56 @@ participant "Database" as DB
 participant "CustomerSupportAgent" as Agent
 
 Customer -> UI: Open chat interface
+activate UI
 UI -> Customer: Display chat interface
+deactivate UI
 
 Customer -> UI: Send message (text)
+activate UI
 UI -> Router: POST /chats (text)
+activate Router
 Router -> Controller: initiateChat(text, customerId)
+activate Controller
 Controller -> Service: initiateChatSession(customerId)
+activate Service
 
 Service -> ChatModel: new ChatMessage(text, customerId, timestamp)
+activate ChatModel
 ChatModel -> DB: save message
+activate DB
 DB --> ChatModel: message saved
+deactivate DB
 ChatModel --> Service: message saved
+deactivate ChatModel
 Service --> Controller: message sent
+deactivate Service
 
-Controller -> Router: 200 OK (message sent)
-Router -> UI: 200 OK (message sent)
-UI -> Customer: Display sent message
+Controller --> Router: 200 OK (message sent)
+deactivate Controller
+Router --> UI: 200 OK (message sent)
+deactivate Router
+UI --> Customer: Display sent message
+deactivate UI
 
-Agent -> Service: Receive message notification
-Agent -> Service: Respond to chat (text)
+Agent --> Service: Receive message notification
+activate Service
+Agent --> Service: Respond to chat (text)
 
 Service -> ChatModel: new ChatMessage(text, agentId, timestamp)
+activate ChatModel
 ChatModel -> DB: save message
+activate DB
 DB --> ChatModel: message saved
+deactivate DB
 ChatModel --> Service: message saved
+deactivate ChatModel
 
-Service -> Controller: forwardMessageToCustomer(message)
-Controller -> Router: 200 OK (agent response)
-Router -> UI: 200 OK (agent response)
-UI -> Customer: Display agent response
+Service --> Controller: forwardMessageToCustomer(message)
+deactivate Service
+Controller --> Router: 200 OK (agent response)
+activate Controller
+Router --> UI: 200 OK (agent response)
+deactivate Controller
+UI --> Customer: Display agent response
+deactivate UI
 @enduml

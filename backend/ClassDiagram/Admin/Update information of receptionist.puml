@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "ReceptionistRouter" as Router
 participant "ReceptionistController" as Controller
 participant "ReceptionistRepository" as Repository
@@ -8,29 +8,55 @@ participant "ReceptionistModel" as ReceptionistModel
 participant "Database" as DB
 
 Admin -> UI: Request to update receptionist information
+activate UI
 UI -> Router: GET /admin/receptionists/update/{receptionistId}
+activate Router
 Router -> Controller: showUpdateReceptionistForm(receptionistId)
+activate Controller
 Controller -> Repository: getReceptionistById(receptionistId)
+activate Repository
+
 Repository -> ReceptionistModel: findReceptionistById(receptionistId)
+activate ReceptionistModel
 ReceptionistModel -> DB: query receptionist by receptionistId
+activate DB
 DB --> ReceptionistModel: receptionist data
+deactivate DB
 ReceptionistModel --> Repository: receptionist data
+deactivate ReceptionistModel
 Repository --> Controller: receptionist data
+deactivate Repository
+
 Controller --> Router: Display update form with current data
+deactivate Controller
 Router --> UI: Display update form with current data
+deactivate Router
+deactivate UI
 
 Admin -> UI: Fill in updated receptionist details and submit
+activate UI
 UI -> Router: POST /admin/receptionists/update/{receptionistId}
+activate Router
 Router -> Controller: updateReceptionist(receptionistId, updatedData)
+activate Controller
 Controller -> Repository: saveUpdatedReceptionist(receptionistId, updatedData)
+activate Repository
 
 Repository -> ReceptionistModel: updateReceptionist(receptionistId, updatedData)
+activate ReceptionistModel
 ReceptionistModel -> DB: update receptionist data
+activate DB
 DB --> ReceptionistModel: updated receptionist data
+deactivate DB
 ReceptionistModel --> Repository: updated receptionist data
+deactivate ReceptionistModel
 Repository --> Controller: receptionist updated successfully
+deactivate Repository
 
 Controller --> Router: 200 OK (receptionist updated)
+deactivate Controller
 Router --> UI: 200 OK (receptionist updated)
+deactivate Router
 UI -> Admin: Display success message (receptionist updated)
+deactivate UI
 @enduml

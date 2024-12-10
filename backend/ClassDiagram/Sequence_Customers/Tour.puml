@@ -1,6 +1,6 @@
 @startuml
 actor Customer
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "TourRouter" as Router
 participant "TourController" as Controller
 participant "TourRepository" as Repository
@@ -8,16 +8,29 @@ participant "TourModel" as TourModel
 participant "Database" as DB
 
 Customer -> UI: Request to view tours
+activate UI
 UI -> Router: GET /tours
+activate Router
 Router -> Controller: getTours()
+activate Controller
 Controller -> Repository: retrieveTours()
+activate Repository
 
 Repository -> TourModel: fetchAllTours()
+activate TourModel
 TourModel -> DB: query all tours
+activate DB
 DB --> TourModel: list of tours
+deactivate DB
 TourModel --> Repository: list of tours
+deactivate TourModel
 Repository --> Controller: list of tours
+deactivate Repository
+
 Controller --> Router: 200 OK (list of tours)
+deactivate Controller
 Router --> UI: 200 OK (list of tours)
-UI -> Customer: Display list of tours
+deactivate Router
+UI --> Customer: Display list of tours
+deactivate UI
 @enduml

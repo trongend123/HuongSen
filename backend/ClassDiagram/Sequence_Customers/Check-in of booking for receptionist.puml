@@ -1,0 +1,58 @@
+@startuml
+actor Customer
+participant "UI/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "Database" as DB
+
+Customer -> UI: Request to check-in booking
+activate UI
+UI -> Router: GET /bookings/{bookingId}/check-in
+activate Router
+Router -> Controller: checkInBooking(bookingId)
+activate Controller
+Controller -> Repository: getBookingDetails(bookingId)
+activate Repository
+
+Repository -> BookingModel: fetchBookingById(bookingId)
+activate BookingModel
+BookingModel -> DB: query booking by ID
+activate DB
+DB --> BookingModel: booking data
+deactivate DB
+BookingModel --> Repository: booking data
+deactivate BookingModel
+Repository --> Controller: booking data
+deactivate Repository
+
+Controller -> Controller: validate booking status for check-in
+alt If booking is valid for check-in
+    Controller -> Repository: updateBookingStatus(bookingId, "checked-in")
+    activate Repository
+    Repository -> BookingModel: update status to "checked-in"
+    activate BookingModel
+    BookingModel -> DB: update booking status
+    activate DB
+    DB --> BookingModel: status updated
+    deactivate DB
+    BookingModel --> Repository: update success
+    deactivate BookingModel
+    Repository --> Controller: update success
+    deactivate Repository
+    Controller -> Router: 200 OK (Booking checked-in successfully)
+    deactivate Controller
+    Router --> UI: 200 OK (Booking checked-in successfully)
+    deactivate Router
+    UI -> Customer: Display success message (Booking checked-in)
+    deactivate UI
+else If booking is not valid for check-in
+    Controller -> UI: 400 Bad Request (Booking cannot be checked-in)
+    deactivate Controller
+    Router --> UI: 400 Bad Request (Booking cannot be checked-in)
+    deactivate Router
+    UI -> Customer: Display error message (Booking cannot be checked-in)
+    deactivate UI
+end
+@enduml

@@ -1,6 +1,6 @@
 @startuml
 actor Customer
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "BookingRouter" as Router
 participant "BookingController" as Controller
 participant "BookingRepository" as Repository
@@ -10,45 +10,85 @@ participant "PaymentGateway" as PaymentGateway
 participant "Database" as DB
 
 Customer -> UI: Request to book a room
+activate UI
 UI -> Router: POST /booking
+activate Router
 Router -> Controller: createBooking()
+activate Controller
 Controller -> Repository: saveBooking()
+activate Repository
 
 Repository -> RoomModel: check room availability
+activate RoomModel
 RoomModel -> DB: query available rooms
+activate DB
 DB --> RoomModel: list of available rooms
+deactivate DB
 RoomModel --> Repository: available rooms
+deactivate RoomModel
 Repository --> Controller: available rooms
-Controller -> UI: 200 OK (available rooms)
-UI -> Customer: Display list of available rooms
+deactivate Repository
+
+Controller --> UI: 200 OK (available rooms)
+deactivate Controller
+UI --> Customer: Display list of available rooms
+deactivate UI
 
 Customer -> UI: Choose a room and provide details
+activate UI
 UI -> Router: POST /confirm-booking
+activate Router
 Router -> Controller: confirmBooking()
+activate Controller
 Controller -> Repository: confirmBookingDetails()
+activate Repository
 
 Repository -> BookingModel: createBooking()
+activate BookingModel
 BookingModel -> DB: insert booking data
+activate DB
 DB --> BookingModel: booking created
+deactivate DB
 BookingModel --> Repository: booking data
+deactivate BookingModel
 Repository --> Controller: booking details
-Controller -> UI: 200 OK (booking confirmation)
-UI -> Customer: Display booking confirmation
+deactivate Repository
+
+Controller --> UI: 200 OK (booking confirmation)
+deactivate Controller
+UI --> Customer: Display booking confirmation
+deactivate UI
 
 Customer -> UI: Request to pay deposit
+activate UI
 UI -> Router: POST /payment
+activate Router
 Router -> Controller: processDeposit()
+activate Controller
 Controller -> PaymentGateway: initiatePayment()
+activate PaymentGateway
 
 PaymentGateway -> PaymentGateway: process payment
 PaymentGateway --> Controller: payment result (Success/Fail)
+deactivate PaymentGateway
 Controller -> Repository: update booking status
+activate Repository
+
 Repository -> BookingModel: update deposit status
+activate BookingModel
 BookingModel -> DB: update booking data
+activate DB
 DB --> BookingModel: booking updated
+deactivate DB
 BookingModel --> Repository: updated booking data
+deactivate BookingModel
 Repository --> Controller: updated booking status
+deactivate Repository
+
 Controller --> Router: 200 OK (payment status)
+deactivate Controller
 Router --> UI: 200 OK (payment result)
-UI -> Customer: Display payment result
+deactivate Router
+UI --> Customer: Display payment result
+deactivate UI
 @enduml

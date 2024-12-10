@@ -1,6 +1,6 @@
 @startuml
 actor Receptionist
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "DashboardRouter" as Router
 participant "DashboardController" as Controller
 participant "DashboardRepository" as Repository
@@ -8,17 +8,29 @@ participant "DashboardModel" as DashboardModel
 participant "Database" as DB
 
 Receptionist -> UI: Request to view dashboard
+activate UI
 UI -> Router: GET /dashboard
+activate Router
 Router -> Controller: getDashboardData()
+activate Controller
 Controller -> Repository: retrieveDashboardData()
+activate Repository
 
 Repository -> DashboardModel: fetchDashboardData()
+activate DashboardModel
 DashboardModel -> DB: query dashboard data (bookings, rooms, services, etc.)
+activate DB
 DB --> DashboardModel: dashboard data
+deactivate DB
 DashboardModel --> Repository: dashboard data
+deactivate DashboardModel
 Repository --> Controller: dashboard data
+deactivate Repository
 
 Controller -> Router: 200 OK (dashboard data)
+deactivate Controller
 Router --> UI: 200 OK (dashboard data)
+deactivate Router
 UI -> Receptionist: Display dashboard data
+deactivate UI
 @enduml

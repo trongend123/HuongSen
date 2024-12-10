@@ -1,0 +1,203 @@
+@startuml
+class CustomerRouter {
+    +viewRoomList(): List<Room>
+    +viewMenu(): List<MenuItem>
+    +viewTour(): List<Tour>
+    +bookRoom(data: Booking): Booking
+    +bookRoomForGroup(data: GroupBooking): GroupBooking
+    +depositBooking(bookingId: String, amount: Float): Deposit
+    +addOtherServicesToBooking(bookingId: String, services: List<OtherService>): Booking
+    +makePayment(bookingId: String, paymentDetails: Payment): Payment
+    +sendRefundRequest(bookingId: String, reason: String): RefundRequest
+    +chatWithCustomerService(message: String): Chat
+    +submitFeedback(feedback: Feedback): Feedback
+}
+
+class CustomerController {
+    +viewRoomList(): List<Room>
+    +viewMenu(): List<MenuItem>
+    +viewTour(): List<Tour>
+    +bookRoom(data: Booking): Booking
+    +bookRoomForGroup(data: GroupBooking): GroupBooking
+    +depositBooking(bookingId: String, amount: Float): Deposit
+    +addOtherServicesToBooking(bookingId: String, services: List<OtherService>): Booking
+    +makePayment(bookingId: String, paymentDetails: Payment): Payment
+    +sendRefundRequest(bookingId: String, reason: String): RefundRequest
+    +chatWithCustomerService(message: String): Chat
+    +submitFeedback(feedback: Feedback): Feedback
+}
+
+class CustomerRepository {
+    +viewRoomList(): List<Room>
+    +viewMenu(): List<MenuItem>
+    +viewTour(): List<Tour>
+    +bookRoom(data: Booking): Booking
+    +bookRoomForGroup(data: GroupBooking): GroupBooking
+    +depositBooking(bookingId: String, amount: Float): Deposit
+    +addOtherServicesToBooking(bookingId: String, services: List<OtherService>): Booking
+    +makePayment(bookingId: String, paymentDetails: Payment): Payment
+    +sendRefundRequest(bookingId: String, reason: String): RefundRequest
+    +chatWithCustomerService(message: String): Chat
+    +submitFeedback(feedback: Feedback): Feedback
+}
+
+class CustomerModel {
+    +customerId: String
+    +fullname: String
+    +email: String
+    +phone: String
+    +dob: Date
+    +gender: Boolean
+    +address: String
+    +save(): Customer
+    +update(): Customer
+    +delete(): void
+    +findById(id: String): Customer
+    +findAll(): List<Customer>
+    +findBookings(): List<Booking>
+    +findGroupBookings(): List<GroupBooking>
+}
+
+class Room {
+    +roomId: String
+    +roomNumber: String
+    +roomType: String
+    +price: Float
+    +availability: Boolean
+    +save(): Room
+    +update(): Room
+    +delete(): void
+    +findById(id: String): Room
+    +findAll(): List<Room>
+}
+
+class MenuItem {
+    +menuItemId: String
+    +name: String
+    +description: String
+    +price: Float
+    +save(): MenuItem
+    +update(): MenuItem
+    +delete(): void
+    +findById(id: String): MenuItem
+    +findAll(): List<MenuItem>
+}
+
+class Tour {
+    +tourId: String
+    +tourName: String
+    +tourDescription: String
+    +tourPrice: Float
+    +save(): Tour
+    +update(): Tour
+    +delete(): void
+    +findById(id: String): Tour
+    +findAll(): List<Tour>
+}
+
+class Booking {
+    +bookingId: String
+    +customerId: String
+    +roomId: String
+    +checkInDate: Date
+    +checkOutDate: Date
+    +totalPrice: Float
+    +bookingStatus: String
+    +save(): Booking
+    +update(): Booking
+    +delete(): void
+    +findById(id: String): Booking
+    +findAll(): List<Booking>
+}
+
+class GroupBooking {
+    +groupBookingId: String
+    +customerId: String
+    +rooms: List<Room>
+    +checkInDate: Date
+    +checkOutDate: Date
+    +totalPrice: Float
+    +save(): GroupBooking
+    +update(): GroupBooking
+    +delete(): void
+}
+
+class Deposit {
+    +depositId: String
+    +bookingId: String
+    +amount: Float
+    +date: Date
+    +save(): Deposit
+    +update(): Deposit
+    +delete(): void
+}
+
+class OtherService {
+    +serviceId: String
+    +serviceName: String
+    +serviceDescription: String
+    +price: Float
+    +save(): OtherService
+    +update(): OtherService
+    +delete(): void
+}
+
+class Payment {
+    +paymentId: String
+    +bookingId: String
+    +amount: Float
+    +paymentDate: Date
+    +paymentStatus: String
+    +save(): Payment
+    +update(): Payment
+    +delete(): void
+}
+
+class RefundRequest {
+    +refundId: String
+    +bookingId: String
+    +reason: String
+    +status: String
+    +save(): RefundRequest
+    +update(): RefundRequest
+    +delete(): void
+}
+
+class Chat {
+    +chatId: String
+    +customerId: String
+    +message: String
+    +date: Date
+    +save(): Chat
+    +update(): Chat
+    +delete(): void
+}
+
+class Feedback {
+    +feedbackId: String
+    +customerId: String
+    +rating: Int
+    +comment: String
+    +save(): Feedback
+    +update(): Feedback
+    +delete(): void
+}
+
+CustomerRouter --> CustomerController : viewRoomList(), viewMenu(), viewTour(), bookRoom(), bookRoomForGroup(), depositBooking(), addOtherServicesToBooking(), makePayment(), sendRefundRequest(), chatWithCustomerService(), submitFeedback()
+CustomerController --> CustomerRepository : viewRoomList(), viewMenu(), viewTour(), bookRoom(), bookRoomForGroup(), depositBooking(), addOtherServicesToBooking(), makePayment(), sendRefundRequest(), chatWithCustomerService(), submitFeedback()
+CustomerRepository --> Room : viewRoomList()
+CustomerRepository --> MenuItem : viewMenu()
+CustomerRepository --> Tour : viewTour()
+CustomerRepository --> Booking : bookRoom(), bookRoomForGroup(), depositBooking(), updateBookingStatus()
+CustomerRepository --> GroupBooking : bookRoomForGroup()
+CustomerRepository --> Deposit : depositBooking()
+CustomerRepository --> OtherService : addOtherServicesToBooking()
+CustomerRepository --> Payment : makePayment()
+CustomerRepository --> RefundRequest : sendRefundRequest()
+CustomerRepository --> Chat : chatWithCustomerService()
+CustomerRepository --> Feedback : submitFeedback()
+
+CustomerModel --> Booking : findBookings()
+CustomerModel --> GroupBooking : findGroupBookings()
+
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+class StaffLocationRouter {
+    +createStaffLocation(data: StaffLocation): StaffLocation
+    +updateStaffLocation(id: String, data: StaffLocation): StaffLocation
+    +deleteStaffLocation(id: String): void
+    +getStaffLocationById(id: String): StaffLocation
+}
+
+class StaffLocationController {
+    +createStaffLocation(data: StaffLocation): StaffLocation
+    +updateStaffLocation(id: String, data: StaffLocation): StaffLocation
+    +deleteStaffLocation(id: String): void
+    +getStaffLocationById(id: String): StaffLocation
+}
+
+class StaffLocationRepository {
+    +createStaffLocation(data: StaffLocation): StaffLocation
+    +updateStaffLocation(id: String, data: StaffLocation): StaffLocation
+    +deleteStaffLocation(id: String): void
+    +getStaffLocationById(id: String): StaffLocation
+}
+
+class StaffLocationModel {
+    +staffLocationId: String
+    +staffId: String
+    +locationId: String
+    +save(): StaffLocation
+    +update(): StaffLocation
+    +delete(): void
+    +findById(id: String): StaffLocation
+}
+
+StaffLocationRouter --> StaffLocationController : createStaffLocation(data)
+StaffLocationController --> StaffLocationRepository : createStaffLocation(data)
+StaffLocationRepository --> StaffLocationModel : new StaffLocation(data)
+StaffLocationModel --> StaffLocationRepository : saved StaffLocation
+
+StaffLocationRouter --> StaffLocationController : updateStaffLocation(id, data)
+StaffLocationController --> StaffLocationRepository : updateStaffLocation(id, data)
+StaffLocationRepository --> StaffLocationModel : update StaffLocation
+StaffLocationModel --> StaffLocationRepository : updated StaffLocation
+
+StaffLocationRouter --> StaffLocationController : deleteStaffLocation(id)
+StaffLocationController --> StaffLocationRepository : deleteStaffLocation(id)
+StaffLocationRepository --> StaffLocationModel : delete StaffLocation
+StaffLocationModel --> StaffLocationRepository : deleted StaffLocation
+
+StaffLocationRouter --> StaffLocationController : getStaffLocationById(id)
+StaffLocationController --> StaffLocationRepository : getStaffLocationById(id)
+StaffLocationRepository --> StaffLocationModel : findById()
+StaffLocationModel --> StaffLocationRepository : found StaffLocation
+@enduml

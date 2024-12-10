@@ -1,0 +1,63 @@
+@startuml
+class OrderRoomRouter {
+    +createOrderRoom(data: OrderRoom): OrderRoom
+    +updateOrderRoom(id: String, data: OrderRoom): OrderRoom
+    +deleteOrderRoom(id: String): void
+    +getOrderRoomById(id: String): OrderRoom
+    +getAllOrderRooms(): List<OrderRoom>
+}
+
+class OrderRoomController {
+    +createOrderRoom(data: OrderRoom): OrderRoom
+    +updateOrderRoom(id: String, data: OrderRoom): OrderRoom
+    +deleteOrderRoom(id: String): void
+    +getOrderRoomById(id: String): OrderRoom
+    +getAllOrderRooms(): List<OrderRoom>
+}
+
+class OrderRoomRepository {
+    +createOrderRoom(data: OrderRoom): OrderRoom
+    +updateOrderRoom(id: String, data: OrderRoom): OrderRoom
+    +deleteOrderRoom(id: String): void
+    +getOrderRoomById(id: String): OrderRoom
+    +getAllOrderRooms(): List<OrderRoom>
+}
+
+class OrderRoomModel {
+    +orderId: String
+    +roomCateId: String
+    +customerId: String
+    +bookingId: String
+    +quantity: Int
+    +save(): OrderRoom
+    +update(): OrderRoom
+    +delete(): void
+    +findById(id: String): OrderRoom
+    +findAll(): List<OrderRoom>
+}
+
+OrderRoomRouter --> OrderRoomController : createOrderRoom(data)
+OrderRoomController --> OrderRoomRepository : createOrderRoom(data)
+OrderRoomRepository --> OrderRoomModel : new OrderRoom(data)
+OrderRoomModel --> OrderRoomRepository : saved OrderRoom
+
+OrderRoomRouter --> OrderRoomController : updateOrderRoom(id, data)
+OrderRoomController --> OrderRoomRepository : updateOrderRoom(id, data)
+OrderRoomRepository --> OrderRoomModel : update OrderRoom
+OrderRoomModel --> OrderRoomRepository : updated OrderRoom
+
+OrderRoomRouter --> OrderRoomController : deleteOrderRoom(id)
+OrderRoomController --> OrderRoomRepository : deleteOrderRoom(id)
+OrderRoomRepository --> OrderRoomModel : delete OrderRoom
+OrderRoomModel --> OrderRoomRepository : deleted OrderRoom
+
+OrderRoomRouter --> OrderRoomController : getOrderRoomById(id)
+OrderRoomController --> OrderRoomRepository : getOrderRoomById(id)
+OrderRoomRepository --> OrderRoomModel : findById()
+OrderRoomModel --> OrderRoomRepository : found OrderRoom
+
+OrderRoomRouter --> OrderRoomController : getAllOrderRooms()
+OrderRoomController --> OrderRoomRepository : getAllOrderRooms()
+OrderRoomRepository --> OrderRoomModel : findAll()
+OrderRoomModel --> OrderRoomRepository : list of OrderRooms
+@enduml

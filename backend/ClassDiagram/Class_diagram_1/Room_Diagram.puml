@@ -1,0 +1,62 @@
+@startuml
+class RoomRouter {
+    +createRoom(data: Room): Room
+    +updateRoom(id: String, data: Room): Room
+    +deleteRoom(id: String): void
+    +getRoomById(id: String): Room
+    +getAllRooms(): List<Room>
+}
+
+class RoomController {
+    +createRoom(data: Room): Room
+    +updateRoom(id: String, data: Room): Room
+    +deleteRoom(id: String): void
+    +getRoomById(id: String): Room
+    +getAllRooms(): List<Room>
+}
+
+class RoomRepository {
+    +createRoom(data: Room): Room
+    +updateRoom(id: String, data: Room): Room
+    +deleteRoom(id: String): void
+    +getRoomById(id: String): Room
+    +getAllRooms(): List<Room>
+}
+
+class RoomModel {
+    +roomId: String
+    +roomCateId: String
+    +code: String
+    +status: String
+    +save(): Room
+    +update(): Room
+    +delete(): void
+    +findById(id: String): Room
+    +findAll(): List<Room>
+}
+
+RoomRouter --> RoomController : createRoom(data)
+RoomController --> RoomRepository : createRoom(data)
+RoomRepository --> RoomModel : new Room(data)
+RoomModel --> RoomRepository : saved Room
+
+RoomRouter --> RoomController : updateRoom(id, data)
+RoomController --> RoomRepository : updateRoom(id, data)
+RoomRepository --> RoomModel : update Room
+RoomModel --> RoomRepository : updated Room
+
+RoomRouter --> RoomController : deleteRoom(id)
+RoomController --> RoomRepository : deleteRoom(id)
+RoomRepository --> RoomModel : delete Room
+RoomModel --> RoomRepository : deleted Room
+
+RoomRouter --> RoomController : getRoomById(id)
+RoomController --> RoomRepository : getRoomById(id)
+RoomRepository --> RoomModel : findById()
+RoomModel --> RoomRepository : found Room
+
+RoomRouter --> RoomController : getAllRooms()
+RoomController --> RoomRepository : getAllRooms()
+RoomRepository --> RoomModel : findAll()
+RoomModel --> RoomRepository : list of Rooms
+@enduml

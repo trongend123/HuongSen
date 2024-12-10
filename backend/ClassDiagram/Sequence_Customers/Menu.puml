@@ -1,6 +1,6 @@
 @startuml
 actor Customer
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "MenuRouter" as Router
 participant "MenuController" as Controller
 participant "MenuRepository" as Repository
@@ -8,16 +8,29 @@ participant "MenuModel" as MenuModel
 participant "Database" as DB
 
 Customer -> UI: Request to view menu
+activate UI
 UI -> Router: GET /menu
+activate Router
 Router -> Controller: getMenu()
+activate Controller
 Controller -> Repository: retrieveMenu()
+activate Repository
 
 Repository -> MenuModel: fetchAllMeals()
+activate MenuModel
 MenuModel -> DB: query all meals
+activate DB
 DB --> MenuModel: list of meals
+deactivate DB
 MenuModel --> Repository: list of meals
+deactivate MenuModel
 Repository --> Controller: list of meals
+deactivate Repository
+
 Controller --> Router: 200 OK (list of meals)
+deactivate Controller
 Router --> UI: 200 OK (list of meals)
-UI -> Customer: Display list of meals
+deactivate Router
+UI --> Customer: Display list of meals
+deactivate UI
 @enduml
