@@ -6,6 +6,8 @@ import { BASE_URL } from "../utils/config";
 
 const ServiceBookingList = () => {
   const [bookings, setBookings] = useState([]);
+  const [bookingsLocation, setBookingsLocation] = useState([]);
+  const [bookingsAll, setBookingAll] = useState([]);
   const [filteredBookings, setFilteredBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,28 +21,64 @@ const ServiceBookingList = () => {
   const [searchStatus, setSearchStatus] = useState(''); // Add status filter
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedNotes, setExpandedNotes] = useState([]);
-
+  const [staff, setStaff] = useState(null);
+  const [locationId, setLocationId] = useState(null);
 
   const rowsPerPage = 7;
 
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const userResponse = JSON.parse(storedUser);
+      setStaff(userResponse);
+    }
+
+  }, []);
+
+
   const fetchServiceBookings = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/service-bookings`);
-      setBookings(response.data || []);
-      setFilteredBookings(response.data || []);
-      setLoading(false);
-    } catch (err) {
-      setError('Error fetching service bookings');
-      setBookings([]);
-      setFilteredBookings([]);
-      setLoading(false);
+    if (staff) {
+      let location = '';
+      if (staff.role === 'staff_mk') {
+        location = '66f6c42f285571f28087c16a';
+      } else if (staff.role === 'staff_ds') {
+        location = '66f6c536285571f28087c16b';
+      } else if (staff.role === 'staff_cb') {
+        location = '66f6c59f285571f28087c16d';
+      }
+
+      if (location) {
+        setLocationId(location);
+        console.log(location); // Logs the correct location ID
+
+
+        const responseBL = await axios.get(`${BASE_URL}/orderServices/location/${location}`);
+
+        const response = await axios.get(`${BASE_URL}/service-bookings`);
+
+        setBookingsLocation(responseBL.data || []);
+        setBookingAll(response.data || []);
+
+        const filteredResponseBL = response.data.filter(item =>
+          responseBL.data.some(order => order._id === item._id)
+        );
+        setBookings(filteredResponseBL);
+        setFilteredBookings(filteredResponseBL || []);
+
+      }
+      else {
+        const response = await axios.get(`${BASE_URL}/service-bookings`);
+        setBookings(response.data);
+        setFilteredBookings(response.data || []);
+      }
     }
   };
 
+
   useEffect(() => {
     fetchServiceBookings();
-  }, []);
-
+  }, [staff]);
 
   // Handle search with status filter
   useEffect(() => {
@@ -120,14 +158,6 @@ const ServiceBookingList = () => {
     });
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   return (
     <div className="container">
       <h2 className="text-center">Danh sách đặt dịch vụ khách hàng</h2>
@@ -190,7 +220,7 @@ const ServiceBookingList = () => {
         </div>
       </div>
 
-      {currentRows.length === 0 ? (
+      {bookings.length === 0 ? (
         <p>No service bookings found.</p>
       ) : (
         <div>
