@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "RoomCategoryRouter" as Router
 participant "RoomCategoryController" as Controller
 participant "RoomCategoryRepository" as Repository
@@ -8,16 +8,29 @@ participant "RoomCategoryModel" as RoomCategoryModel
 participant "Database" as DB
 
 Admin -> UI: Request to view list of room categories
+activate UI
 UI -> Router: GET /admin/room-categories
+activate Router
 Router -> Controller: getRoomCategories()
+activate Controller
 Controller -> Repository: retrieveRoomCategories()
+activate Repository
 
 Repository -> RoomCategoryModel: fetchAllRoomCategories()
+activate RoomCategoryModel
 RoomCategoryModel -> DB: query all room categories
+activate DB
 DB --> RoomCategoryModel: list of room categories
+deactivate DB
 RoomCategoryModel --> Repository: list of room categories
+deactivate RoomCategoryModel
 Repository --> Controller: list of room categories
+deactivate Repository
+
 Controller --> Router: 200 OK (list of room categories)
+deactivate Controller
 Router --> UI: 200 OK (list of room categories)
+deactivate Router
 UI -> Admin: Display list of room categories
+deactivate UI
 @enduml

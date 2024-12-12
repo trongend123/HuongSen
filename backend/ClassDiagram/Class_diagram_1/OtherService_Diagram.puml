@@ -1,0 +1,63 @@
+@startuml
+class OtherServiceRouter {
+    +createOtherService(data: OtherService): OtherService
+    +updateOtherService(id: String, data: OtherService): OtherService
+    +deleteOtherService(id: String): void
+    +getOtherServiceById(id: String): OtherService
+    +getAllOtherServices(): List<OtherService>
+}
+
+class OtherServiceController {
+    +createOtherService(data: OtherService): OtherService
+    +updateOtherService(id: String, data: OtherService): OtherService
+    +deleteOtherService(id: String): void
+    +getOtherServiceById(id: String): OtherService
+    +getAllOtherServices(): List<OtherService>
+}
+
+class OtherServiceRepository {
+    +createOtherService(data: OtherService): OtherService
+    +updateOtherService(id: String, data: OtherService): OtherService
+    +deleteOtherService(id: String): void
+    +getOtherServiceById(id: String): OtherService
+    +getAllOtherServices(): List<OtherService>
+}
+
+class OtherServiceModel {
+    +servicesId: String
+    +name: String
+    +price: Int
+    +description: String
+    +bookingId: String
+    +save(): OtherService
+    +update(): OtherService
+    +delete(): void
+    +findById(id: String): OtherService
+    +findAll(): List<OtherService>
+}
+
+OtherServiceRouter --> OtherServiceController : createOtherService(data)
+OtherServiceController --> OtherServiceRepository : createOtherService(data)
+OtherServiceRepository --> OtherServiceModel : new OtherService(data)
+OtherServiceModel --> OtherServiceRepository : saved OtherService
+
+OtherServiceRouter --> OtherServiceController : updateOtherService(id, data)
+OtherServiceController --> OtherServiceRepository : updateOtherService(id, data)
+OtherServiceRepository --> OtherServiceModel : update OtherService
+OtherServiceModel --> OtherServiceRepository : updated OtherService
+
+OtherServiceRouter --> OtherServiceController : deleteOtherService(id)
+OtherServiceController --> OtherServiceRepository : deleteOtherService(id)
+OtherServiceRepository --> OtherServiceModel : delete OtherService
+OtherServiceModel --> OtherServiceRepository : deleted OtherService
+
+OtherServiceRouter --> OtherServiceController : getOtherServiceById(id)
+OtherServiceController --> OtherServiceRepository : getOtherServiceById(id)
+OtherServiceRepository --> OtherServiceModel : findById()
+OtherServiceModel --> OtherServiceRepository : found OtherService
+
+OtherServiceRouter --> OtherServiceController : getAllOtherServices()
+OtherServiceController --> OtherServiceRepository : getAllOtherServices()
+OtherServiceRepository --> OtherServiceModel : findAll()
+OtherServiceModel --> OtherServiceRepository : list of OtherServices
+@enduml

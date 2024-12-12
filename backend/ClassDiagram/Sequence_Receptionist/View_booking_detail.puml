@@ -1,6 +1,6 @@
 @startuml
 actor Receptionist
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "BookingRouter" as Router
 participant "BookingController" as Controller
 participant "BookingRepository" as Repository
@@ -8,17 +8,29 @@ participant "BookingModel" as BookingModel
 participant "Database" as DB
 
 Receptionist -> UI: Request to view booking details
+activate UI
 UI -> Router: GET /booking/{bookingId}/details
+activate Router
 Router -> Controller: getBookingDetails(bookingId)
+activate Controller
 Controller -> Repository: retrieveBookingDetails(bookingId)
+activate Repository
 
 Repository -> BookingModel: fetchBookingById(bookingId)
+activate BookingModel
 BookingModel -> DB: query booking by ID
+activate DB
 DB --> BookingModel: booking data
+deactivate DB
 BookingModel --> Repository: booking data
+deactivate BookingModel
 Repository --> Controller: booking data
+deactivate Repository
 
 Controller --> Router: 200 OK (booking details)
+deactivate Controller
 Router --> UI: 200 OK (booking details)
+deactivate Router
 UI -> Receptionist: Display booking details
+deactivate UI
 @enduml

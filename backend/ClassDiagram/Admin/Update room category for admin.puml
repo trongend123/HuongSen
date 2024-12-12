@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "RoomCategoryRouter" as Router
 participant "RoomCategoryController" as Controller
 participant "RoomCategoryRepository" as Repository
@@ -8,30 +8,55 @@ participant "RoomCategoryModel" as RoomCategoryModel
 participant "Database" as DB
 
 Admin -> UI: Request to update a room category
+activate UI
 UI -> Router: GET /admin/room-categories/{categoryId}/edit
+activate Router
 Router -> Controller: showEditRoomCategoryForm(categoryId)
+activate Controller
 Controller -> Repository: getRoomCategoryData(categoryId)
+activate Repository
 
 Repository -> RoomCategoryModel: fetchRoomCategoryById(categoryId)
+activate RoomCategoryModel
 RoomCategoryModel -> DB: query room category by categoryId
+activate DB
 DB --> RoomCategoryModel: room category data
+deactivate DB
 RoomCategoryModel --> Repository: room category data
+deactivate RoomCategoryModel
 Repository --> Controller: room category data
+deactivate Repository
+
 Controller --> Router: Display edit room category form
+deactivate Controller
 Router --> UI: Display edit room category form
+deactivate Router
+deactivate UI
 
 Admin -> UI: Submit updated room category data
+activate UI
 UI -> Router: PUT /admin/room-categories/{categoryId}/edit
+activate Router
 Router -> Controller: updateRoomCategory(categoryId, updatedCategoryData)
+activate Controller
 Controller -> Repository: saveUpdatedRoomCategory(categoryId, updatedCategoryData)
+activate Repository
 
 Repository -> RoomCategoryModel: updateRoomCategory(categoryId, updatedCategoryData)
+activate RoomCategoryModel
 RoomCategoryModel -> DB: update room category data
+activate DB
 DB --> RoomCategoryModel: room category updated
+deactivate DB
 RoomCategoryModel --> Repository: room category updated
+deactivate RoomCategoryModel
 Repository --> Controller: room category updated successfully
+deactivate Repository
 
 Controller --> Router: 200 OK (room category updated)
+deactivate Controller
 Router --> UI: 200 OK (room category updated)
+deactivate Router
 UI -> Admin: Display success message (room category updated)
+deactivate UI
 @enduml

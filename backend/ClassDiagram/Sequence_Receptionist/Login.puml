@@ -1,6 +1,6 @@
 @startuml
 actor Receptionist
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "AuthRouter" as Router
 participant "AuthController" as Controller
 participant "AuthRepository" as Repository
@@ -8,30 +8,53 @@ participant "UserModel" as UserModel
 participant "Database" as DB
 
 Receptionist -> UI: Enter login credentials (username, password)
+activate UI
 UI -> Router: POST /login
+activate Router
 Router -> Controller: login()
+activate Controller
 Controller -> Repository: validateCredentials()
+activate Repository
 
 Repository -> UserModel: fetchUserByUsername()
+activate UserModel
 UserModel -> DB: query user by username
+activate DB
 DB --> UserModel: user data
+deactivate DB
 UserModel --> Repository: user data
-Repository -> Controller: user data
+deactivate UserModel
+Repository --> Controller: user data
+deactivate Repository
 Controller -> Controller: check if password matches
-Controller -> UI: 200 OK (login success) or 401 Unauthorized (invalid credentials)
-UI -> Receptionist: Display login result
 
 alt If login successful
+    Controller --> UI: 200 OK (login success)
+    deactivate Controller
+    UI -> Receptionist: Display login result
+    activate UI
     UI -> Router: GET /dashboard
+    activate Router
     Router -> Controller: getDashboard()
+    activate Controller
     Controller -> Repository: fetchDashboardData()
+    activate Repository
     Repository -> DB: query dashboard data
+    activate DB
     DB --> Repository: dashboard data
+    deactivate DB
     Repository --> Controller: dashboard data
+    deactivate Repository
     Controller --> Router: 200 OK (dashboard data)
+    deactivate Controller
     Router --> UI: 200 OK (dashboard data)
-    UI -> Receptionist: Display dashboard
+    deactivate Router
+    UI --> Receptionist: Display dashboard
+    deactivate UI
 else If login failed
-    UI -> Receptionist: Display error message
+    Controller --> UI: 401 Unauthorized (invalid credentials)
+    deactivate Controller
+    UI --> Receptionist: Display error message
+    deactivate UI
 end
 @enduml

@@ -1,0 +1,36 @@
+@startuml
+actor Receptionist
+participant "UI/Interface" as UI
+participant "NotificationRouter" as Router
+participant "NotificationController" as Controller
+participant "NotificationRepository" as Repository
+participant "NotificationModel" as NotificationModel
+participant "Database" as DB
+
+Receptionist -> UI: Request to view notifications
+activate UI
+UI -> Router: GET /notifications
+activate Router
+Router -> Controller: getNotifications()
+activate Controller
+Controller -> Repository: retrieveNotifications()
+activate Repository
+
+Repository -> NotificationModel: fetchNotificationsByUserId(receptionistId)
+activate NotificationModel
+NotificationModel -> DB: query notifications for receptionistId
+activate DB
+DB --> NotificationModel: list of notifications
+deactivate DB
+NotificationModel --> Repository: list of notifications
+deactivate NotificationModel
+Repository --> Controller: list of notifications
+deactivate Repository
+
+Controller --> Router: 200 OK (list of notifications)
+deactivate Controller
+Router --> UI: 200 OK (list of notifications)
+deactivate Router
+UI -> Receptionist: Display notifications
+deactivate UI
+@enduml

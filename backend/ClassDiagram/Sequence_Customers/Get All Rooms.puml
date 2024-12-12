@@ -8,15 +8,27 @@ participant "RoomsModel" as Model
 participant "Database" as DB
 
 Customers -> UI: Open rooms list page
+activate UI
 UI -> Router: GET /rooms
+activate Router
 Router -> Controller: getAllRooms()
+activate Controller
 Controller -> Repository: findAll()
+activate Repository
 Repository -> Model: find()
+activate Model
 Model -> DB: fetch all
+activate DB
 DB --> Model: all rooms
+deactivate DB
 Model --> Repository: all rooms
+deactivate Model
 Repository --> Controller: all rooms
+deactivate Repository
 Controller --> Router: 200 OK (all rooms)
+deactivate Controller
 Router --> UI: 200 OK (all rooms)
+deactivate Router
 UI --> Customers: Display all rooms
+deactivate UI
 @enduml

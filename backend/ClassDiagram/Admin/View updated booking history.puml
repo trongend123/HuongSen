@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "BookingRouter" as Router
 participant "BookingController" as Controller
 participant "BookingHistoryRepository" as HistoryRepository
@@ -8,17 +8,29 @@ participant "BookingHistoryModel" as HistoryModel
 participant "Database" as DB
 
 Admin -> UI: Request to view booking update history
+activate UI
 UI -> Router: GET /admin/bookings/history/{bookingId}
+activate Router
 Router -> Controller: getBookingHistory(bookingId)
+activate Controller
 Controller -> HistoryRepository: retrieveBookingHistory(bookingId)
+activate HistoryRepository
 
 HistoryRepository -> HistoryModel: fetchHistoryByBookingId(bookingId)
+activate HistoryModel
 HistoryModel -> DB: query booking history by bookingId
+activate DB
 DB --> HistoryModel: booking history data
+deactivate DB
 HistoryModel --> HistoryRepository: booking history data
+deactivate HistoryModel
 HistoryRepository --> Controller: booking history data
+deactivate HistoryRepository
 
 Controller --> Router: 200 OK (booking history)
+deactivate Controller
 Router --> UI: 200 OK (booking history)
+deactivate Router
 UI -> Admin: Display booking update history
+deactivate UI
 @enduml

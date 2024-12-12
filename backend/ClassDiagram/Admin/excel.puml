@@ -1,0 +1,43 @@
+@startuml
+actor Admin
+participant "UI/Interface" as UI
+participant "OrderRouter" as Router
+participant "OrderController" as Controller
+participant "OrderRepository" as Repository
+participant "OrderModel" as OrderModel
+participant "Database" as DB
+participant "ExcelExportService" as ExcelService
+
+Admin -> UI: Request to export revenue for the day
+activate UI
+UI -> Router: GET /orderRooms/excel/{date}
+activate Router
+Router -> Controller: getAllOrderRoomsByExcel(date)
+activate Controller
+Controller -> Repository: getOrderRoomsByDate(date)
+activate Repository
+
+Repository -> OrderModel: fetchOrderRoomsByDate(date)
+activate OrderModel
+OrderModel -> DB: query order rooms data for the day
+activate DB
+DB --> OrderModel: order rooms data
+deactivate DB
+OrderModel --> Repository: order rooms data
+deactivate OrderModel
+Repository --> Controller: order rooms data
+deactivate Repository
+
+Controller -> ExcelService: exportToExcel(orderRoomsData)
+activate ExcelService
+ExcelService -> ExcelService: generateExcelFile(orderRoomsData)
+ExcelService -> UI: Excel file ready for download
+deactivate ExcelService
+
+Controller -> Router: 200 OK (Excel file generated)
+deactivate Controller
+Router --> UI: 200 OK (Excel file generated)
+deactivate Router
+UI -> Admin: Provide download link for Excel file
+deactivate UI
+@enduml

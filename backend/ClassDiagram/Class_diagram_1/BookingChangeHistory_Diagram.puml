@@ -1,0 +1,61 @@
+@startuml
+class BookingChangeHistoryRouter {
+    +createBookingChangeHistory(data: BookingChangeHistory): BookingChangeHistory
+    +updateBookingChangeHistory(id: String, data: BookingChangeHistory): BookingChangeHistory
+    +deleteBookingChangeHistory(id: String): void
+    +getBookingChangeHistoryById(id: String): BookingChangeHistory
+    +getAllBookingChangeHistories(): List<BookingChangeHistory>
+}
+
+class BookingChangeHistoryController {
+    +createBookingChangeHistory(data: BookingChangeHistory): BookingChangeHistory
+    +updateBookingChangeHistory(id: String, data: BookingChangeHistory): BookingChangeHistory
+    +deleteBookingChangeHistory(id: String): void
+    +getBookingChangeHistoryById(id: String): BookingChangeHistory
+    +getAllBookingChangeHistories(): List<BookingChangeHistory>
+}
+
+class BookingChangeHistoryRepository {
+    +createBookingChangeHistory(data: BookingChangeHistory): BookingChangeHistory
+    +updateBookingChangeHistory(id: String, data: BookingChangeHistory): BookingChangeHistory
+    +deleteBookingChangeHistory(id: String): void
+    +getBookingChangeHistoryById(id: String): BookingChangeHistory
+    +getAllBookingChangeHistories(): List<BookingChangeHistory>
+}
+
+class BookingChangeHistoryModel {
+    +bookingHistoryId: String
+    +staffId: String
+    +oldInfo: String
+    +save(): BookingChangeHistory
+    +update(): BookingChangeHistory
+    +delete(): void
+    +findById(id: String): BookingChangeHistory
+    +findAll(): List<BookingChangeHistory>
+}
+
+BookingChangeHistoryRouter --> BookingChangeHistoryController : createBookingChangeHistory(data)
+BookingChangeHistoryController --> BookingChangeHistoryRepository : createBookingChangeHistory(data)
+BookingChangeHistoryRepository --> BookingChangeHistoryModel : new BookingChangeHistory(data)
+BookingChangeHistoryModel --> BookingChangeHistoryRepository : saved BookingChangeHistory
+
+BookingChangeHistoryRouter --> BookingChangeHistoryController : updateBookingChangeHistory(id, data)
+BookingChangeHistoryController --> BookingChangeHistoryRepository : updateBookingChangeHistory(id, data)
+BookingChangeHistoryRepository --> BookingChangeHistoryModel : update BookingChangeHistory
+BookingChangeHistoryModel --> BookingChangeHistoryRepository : updated BookingChangeHistory
+
+BookingChangeHistoryRouter --> BookingChangeHistoryController : deleteBookingChangeHistory(id)
+BookingChangeHistoryController --> BookingChangeHistoryRepository : deleteBookingChangeHistory(id)
+BookingChangeHistoryRepository --> BookingChangeHistoryModel : delete BookingChangeHistory
+BookingChangeHistoryModel --> BookingChangeHistoryRepository : deleted BookingChangeHistory
+
+BookingChangeHistoryRouter --> BookingChangeHistoryController : getBookingChangeHistoryById(id)
+BookingChangeHistoryController --> BookingChangeHistoryRepository : getBookingChangeHistoryById(id)
+BookingChangeHistoryRepository --> BookingChangeHistoryModel : findById()
+BookingChangeHistoryModel --> BookingChangeHistoryRepository : found BookingChangeHistory
+
+BookingChangeHistoryRouter --> BookingChangeHistoryController : getAllBookingChangeHistories()
+BookingChangeHistoryController --> BookingChangeHistoryRepository : getAllBookingChangeHistories()
+BookingChangeHistoryRepository --> BookingChangeHistoryModel : findAll()
+BookingChangeHistoryModel --> BookingChangeHistoryRepository : list of BookingChangeHistories
+@enduml

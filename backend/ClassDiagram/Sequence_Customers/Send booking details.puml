@@ -1,0 +1,45 @@
+@startuml
+actor Customer
+participant "UI/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "EmailService" as EmailService
+participant "Database" as DB
+
+Customer -> UI: Request to send booking details via email
+activate UI
+UI -> Router: GET /bookings/{bookingId}/send-email
+activate Router
+Router -> Controller: sendBookingDetailsToEmail(bookingId)
+activate Controller
+Controller -> Repository: getBookingDetails(bookingId)
+activate Repository
+
+Repository -> BookingModel: fetchBookingById(bookingId)
+activate BookingModel
+BookingModel -> DB: query booking by ID
+activate DB
+DB --> BookingModel: booking data
+deactivate DB
+BookingModel --> Repository: booking data
+deactivate BookingModel
+Repository --> Controller: booking data
+deactivate Repository
+
+Controller -> EmailService: sendEmailWithBookingDetails(bookingDetails)
+activate EmailService
+EmailService -> EmailService: formatBookingDetailsForEmail(bookingDetails)
+EmailService -> EmailService: sendEmail(recipientEmail, bookingDetails)
+activate EmailService
+EmailService --> Controller: email sent successfully
+deactivate EmailService
+
+Controller -> Router: 200 OK (Email sent)
+deactivate Controller
+Router --> UI: 200 OK (Email sent)
+deactivate Router
+UI -> Customer: Display success message (Booking details sent via email)
+deactivate UI
+@enduml

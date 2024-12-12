@@ -1,0 +1,65 @@
+@startuml
+class CustomerRouter {
+    +createCustomer(data: Customer): Customer
+    +updateCustomer(id: String, data: Customer): Customer
+    +deleteCustomer(id: String): void
+    +getCustomerById(id: String): Customer
+    +getAllCustomers(): List<Customer>
+}
+
+class CustomerController {
+    +createCustomer(data: Customer): Customer
+    +updateCustomer(id: String, data: Customer): Customer
+    +deleteCustomer(id: String): void
+    +getCustomerById(id: String): Customer
+    +getAllCustomers(): List<Customer>
+}
+
+class CustomerRepository {
+    +createCustomer(data: Customer): Customer
+    +updateCustomer(id: String, data: Customer): Customer
+    +deleteCustomer(id: String): void
+    +getCustomerById(id: String): Customer
+    +getAllCustomers(): List<Customer>
+}
+
+class CustomerModel {
+    +customerId: String
+    +fullname: String
+    +email: String
+    +phone: String
+    +dob: Date
+    +gender: Boolean
+    +address: String
+    +save(): Customer
+    +update(): Customer
+    +delete(): void
+    +findById(id: String): Customer
+    +findAll(): List<Customer>
+}
+
+CustomerRouter --> CustomerController : createCustomer(data)
+CustomerController --> CustomerRepository : createCustomer(data)
+CustomerRepository --> CustomerModel : new Customer(data)
+CustomerModel --> CustomerRepository : saved Customer
+
+CustomerRouter --> CustomerController : updateCustomer(id, data)
+CustomerController --> CustomerRepository : updateCustomer(id, data)
+CustomerRepository --> CustomerModel : update Customer
+CustomerModel --> CustomerRepository : updated Customer
+
+CustomerRouter --> CustomerController : deleteCustomer(id)
+CustomerController --> CustomerRepository : deleteCustomer(id)
+CustomerRepository --> CustomerModel : delete Customer
+CustomerModel --> CustomerRepository : deleted Customer
+
+CustomerRouter --> CustomerController : getCustomerById(id)
+CustomerController --> CustomerRepository : getCustomerById(id)
+CustomerRepository --> CustomerModel : findById()
+CustomerModel --> CustomerRepository : found Customer
+
+CustomerRouter --> CustomerController : getAllCustomers()
+CustomerController --> CustomerRepository : getAllCustomers()
+CustomerRepository --> CustomerModel : findAll()
+CustomerModel --> CustomerRepository : list of Customers
+@enduml

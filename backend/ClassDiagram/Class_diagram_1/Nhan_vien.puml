@@ -1,0 +1,66 @@
+@startuml
+class Receptionist {
+    +login(username: String, password: String): Boolean
+    +logout(): Boolean
+    +changePassword(oldPassword: String, newPassword: String): Boolean
+    +viewRoomMap(): Map
+    +updateRoomStatus(roomId: String, status: String): Boolean
+    +createBooking(data: Booking): Booking
+    +viewBookings(location: String): List<Booking>
+    +updateBookingStatus(bookingId: String, status: String): Boolean
+    +viewBookingDetail(bookingId: String): Booking
+    +addServiceToBooking(bookingId: String, service: Service): Boolean
+    +viewDashboard(): Dashboard
+}
+
+class Booking {
+    +bookingId: String
+    +customerId: String
+    +roomId: String
+    +checkInDate: Date
+    +checkOutDate: Date
+    +totalPrice: Float
+    +status: String
+    +save(): Booking
+    +update(): Booking
+    +findById(id: String): Booking
+    +findAll(): List<Booking>
+}
+
+class Room {
+    +roomId: String
+    +roomNumber: String
+    +roomType: String
+    +status: String
+    +updateStatus(status: String): Boolean
+    +findById(id: String): Room
+    +findAll(): List<Room>
+}
+
+class Service {
+    +serviceId: String
+    +serviceName: String
+    +serviceDescription: String
+    +price: Float
+    +save(): Service
+    +update(): Service
+    +delete(): void
+}
+
+class Dashboard {
+    +totalBookings: Int
+    +totalRevenue: Float
+    +totalAvailableRooms: Int
+    +totalOccupiedRooms: Int
+}
+
+Receptionist --> Booking : createBooking(), viewBookings(), updateBookingStatus(), viewBookingDetail(), addServiceToBooking()
+Receptionist --> Room : viewRoomMap(), updateRoomStatus()
+Receptionist --> Service : addServiceToBooking()
+Receptionist --> Dashboard : viewDashboard()
+
+Booking --> Room : bookRoom()
+Booking --> Customer : belongsTo()
+
+Room --> Booking : assignedTo()
+@enduml

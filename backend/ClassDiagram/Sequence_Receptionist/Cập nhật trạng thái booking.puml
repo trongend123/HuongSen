@@ -1,6 +1,6 @@
 @startuml
 actor Receptionist
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "BookingRouter" as Router
 participant "BookingController" as Controller
 participant "BookingRepository" as Repository
@@ -8,29 +8,50 @@ participant "BookingModel" as BookingModel
 participant "Database" as DB
 
 Receptionist -> UI: Request to update booking status
+activate UI
 UI -> Router: GET /booking/{bookingId}/update-status
+activate Router
 Router -> Controller: updateBookingStatus(bookingId, status)
+activate Controller
 Controller -> Repository: updateBookingStatus(bookingId, status)
+activate Repository
 
 Repository -> BookingModel: fetchBookingById(bookingId)
+activate BookingModel
 BookingModel -> DB: query booking by ID
+activate DB
 DB --> BookingModel: booking data
+deactivate DB
 BookingModel --> Repository: booking data
+deactivate BookingModel
 Repository --> Controller: booking data
+deactivate Repository
 
 Controller -> Controller: validate status change
 alt If status change is valid
     Controller -> Repository: saveUpdatedBookingStatus()
+    activate Repository
     Repository -> BookingModel: update booking status
+    activate BookingModel
     BookingModel -> DB: update booking status
+    activate DB
     DB --> BookingModel: booking status updated
+    deactivate DB
     BookingModel --> Repository: update success
+    deactivate BookingModel
     Repository --> Controller: update success
-    Controller -> Router: 200 OK (booking status updated)
+    deactivate Repository
+    Controller --> Router: 200 OK (booking status updated)
+    deactivate Controller
     Router --> UI: 200 OK (booking status updated)
-    UI -> Receptionist: Display success message
+    deactivate Router
+    UI --> Receptionist: Display success message
+    deactivate UI
 else If status change is invalid
-    Controller -> UI: 400 Bad Request (invalid status)
-    UI -> Receptionist: Display error message (invalid status)
+    deactivate Controller
+    Router --> UI: 400 Bad Request (invalid status)
+    deactivate Router
+    UI --> Receptionist: Display error message (invalid status)
+    deactivate UI
 end
 @enduml

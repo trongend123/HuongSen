@@ -1,0 +1,62 @@
+@startuml
+class LocationRouter {
+    +createLocation(data: Location): Location
+    +updateLocation(id: String, data: Location): Location
+    +deleteLocation(id: String): void
+    +getLocationById(id: String): Location
+    +getAllLocations(): List<Location>
+}
+
+class LocationController {
+    +createLocation(data: Location): Location
+    +updateLocation(id: String, data: Location): Location
+    +deleteLocation(id: String): void
+    +getLocationById(id: String): Location
+    +getAllLocations(): List<Location>
+}
+
+class LocationRepository {
+    +createLocation(data: Location): Location
+    +updateLocation(id: String, data: Location): Location
+    +deleteLocation(id: String): void
+    +getLocationById(id: String): Location
+    +getAllLocations(): List<Location>
+}
+
+class LocationModel {
+    +locationId: String
+    +address: String
+    +phone: String
+    +name: String
+    +save(): Location
+    +update(): Location
+    +delete(): void
+    +findById(id: String): Location
+    +findAll(): List<Location>
+}
+
+LocationRouter --> LocationController : createLocation(data)
+LocationController --> LocationRepository : createLocation(data)
+LocationRepository --> LocationModel : new Location(data)
+LocationModel --> LocationRepository : saved Location
+
+LocationRouter --> LocationController : updateLocation(id, data)
+LocationController --> LocationRepository : updateLocation(id, data)
+LocationRepository --> LocationModel : update Location
+LocationModel --> LocationRepository : updated Location
+
+LocationRouter --> LocationController : deleteLocation(id)
+LocationController --> LocationRepository : deleteLocation(id)
+LocationRepository --> LocationModel : delete Location
+LocationModel --> LocationRepository : deleted Location
+
+LocationRouter --> LocationController : getLocationById(id)
+LocationController --> LocationRepository : getLocationById(id)
+LocationRepository --> LocationModel : findById()
+LocationModel --> LocationRepository : found Location
+
+LocationRouter --> LocationController : getAllLocations()
+LocationController --> LocationRepository : getAllLocations()
+LocationRepository --> LocationModel : findAll()
+LocationModel --> LocationRepository : list of Locations
+@enduml

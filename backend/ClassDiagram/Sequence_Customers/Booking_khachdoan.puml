@@ -1,6 +1,6 @@
 @startuml
 actor Customer
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "BookingRouter" as Router
 participant "BookingController" as Controller
 participant "BookingRepository" as Repository
@@ -10,45 +10,85 @@ participant "PaymentGateway" as PaymentGateway
 participant "Database" as DB
 
 Customer -> UI: Request to book rooms for a group
+activate UI
 UI -> Router: POST /group-booking
+activate Router
 Router -> Controller: createGroupBooking()
+activate Controller
 Controller -> Repository: saveGroupBooking()
+activate Repository
 
 Repository -> RoomModel: check room availability for group
+activate RoomModel
 RoomModel -> DB: query available rooms for group size
+activate DB
 DB --> RoomModel: list of available rooms
+deactivate DB
 RoomModel --> Repository: available rooms for group
+deactivate RoomModel
 Repository --> Controller: available rooms for group
+deactivate Repository
+
 Controller -> UI: 200 OK (available rooms for group)
+deactivate Controller
 UI -> Customer: Display list of available rooms for group
+deactivate UI
 
 Customer -> UI: Choose rooms and provide guest details
+activate UI
 UI -> Router: POST /confirm-group-booking
+activate Router
 Router -> Controller: confirmGroupBooking()
+activate Controller
 Controller -> Repository: confirmGroupBookingDetails()
+activate Repository
 
 Repository -> BookingModel: createGroupBooking()
+activate BookingModel
 BookingModel -> DB: insert group booking data
+activate DB
 DB --> BookingModel: group booking created
+deactivate DB
 BookingModel --> Repository: group booking details
+deactivate BookingModel
 Repository --> Controller: group booking details
-Controller -> UI: 200 OK (group booking confirmation)
-UI -> Customer: Display group booking confirmation
+deactivate Repository
+
+Controller --> UI: 200 OK (group booking confirmation)
+deactivate Controller
+UI --> Customer: Display group booking confirmation
+deactivate UI
 
 Customer -> UI: Request to pay deposit for group
+activate UI
 UI -> Router: POST /group-payment
+activate Router
 Router -> Controller: processGroupDeposit()
+activate Controller
 Controller -> PaymentGateway: initiateGroupPayment()
+activate PaymentGateway
 
 PaymentGateway -> PaymentGateway: process payment for group
 PaymentGateway --> Controller: group payment result (Success/Fail)
+deactivate PaymentGateway
 Controller -> Repository: update group booking status
+activate Repository
+
 Repository -> BookingModel: update deposit status for group
+activate BookingModel
 BookingModel -> DB: update group booking data
+activate DB
 DB --> BookingModel: group booking updated
+deactivate DB
 BookingModel --> Repository: updated group booking data
+deactivate BookingModel
 Repository --> Controller: updated group booking status
+deactivate Repository
+
 Controller --> Router: 200 OK (group payment status)
+deactivate Controller
 Router --> UI: 200 OK (group payment result)
-UI -> Customer: Display group payment result
+deactivate Router
+UI --> Customer: Display group payment result
+deactivate UI
 @enduml

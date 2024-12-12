@@ -1,6 +1,6 @@
 @startuml
 actor Customer
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "RefundRouter" as Router
 participant "RefundController" as Controller
 participant "RefundRepository" as Repository
@@ -9,28 +9,47 @@ participant "CustomerRepository" as CustomerRepo
 participant "Database" as DB
 participant "AdminNotificationService" as AdminService
 
-User -> UI: Open refund request page
-UI -> User: Display refund request form
+Customer -> UI: Open refund request page
+activate UI
+UI -> Customer: Display refund request form
+deactivate UI
 
-User -> UI: Submit refund request (customerId, orderId, reason, amount)
+Customer -> UI: Submit refund request (customerId, orderId, reason, amount)
+activate UI
 UI -> Router: POST /refunds (customerId, orderId, reason, amount)
+activate Router
 Router -> Controller: createRefundRequest(customerId, orderId, reason, amount)
+activate Controller
 
 Controller -> CustomerRepo: findCustomerById(customerId)
+activate CustomerRepo
 CustomerRepo -> DB: fetch customer
+activate DB
 DB --> CustomerRepo: customer details
+deactivate DB
 CustomerRepo --> Controller: customer details
+deactivate CustomerRepo
 
 Controller -> RefundModel: new Refund(customerId, orderId, reason, amount, status: pending)
+activate RefundModel
 RefundModel -> DB: save refund request
+activate DB
 DB --> RefundModel: saved refund request
+deactivate DB
 RefundModel --> Repository: saved refund request
+deactivate RefundModel
 Repository --> Controller: saved refund request
+deactivate Repository
 
 Controller -> AdminService: notifyAdminOfRefundRequest(refundId, customerId, orderId, reason, amount)
+activate AdminService
 AdminService --> Controller: admin notified
+deactivate AdminService
 
 Controller --> Router: 201 Created (refund request submitted)
+deactivate Controller
 Router --> UI: 201 Created (refund request submitted)
-UI --> User: Display success message
+deactivate Router
+UI --> Customer: Display success message
+deactivate UI
 @enduml

@@ -1,0 +1,68 @@
+@startuml
+actor Admin
+participant "UI/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "ServiceModel" as ServiceModel
+participant "Database" as DB
+
+Admin -> UI: Request to update booking service status
+activate UI
+UI -> Router: GET /booking/{bookingId}/update-service-status
+activate Router
+Router -> Controller: updateBookingServiceStatus(bookingId, serviceId, newStatus)
+activate Controller
+Controller -> Repository: updateBookingServiceStatus(bookingId, serviceId, newStatus)
+activate Repository
+
+Repository -> BookingModel: fetchBookingById(bookingId)
+activate BookingModel
+BookingModel -> DB: query booking by ID
+activate DB
+DB --> BookingModel: booking data
+deactivate DB
+BookingModel --> Repository: booking data
+deactivate BookingModel
+Repository --> Controller: booking data
+deactivate Repository
+
+Controller -> ServiceModel: fetchServiceById(serviceId)
+activate ServiceModel
+ServiceModel -> DB: query service by ID
+activate DB
+DB --> ServiceModel: service data
+deactivate DB
+ServiceModel --> Controller: service data
+deactivate ServiceModel
+
+Controller -> Controller: validate new service status
+alt If new status is valid
+    Controller -> Repository: saveUpdatedBookingServiceStatus()
+    activate Repository
+    Repository -> BookingModel: updateBookingServiceStatus(bookingId, serviceId, newStatus)
+    activate BookingModel
+    BookingModel -> DB: update booking service status
+    activate DB
+    DB --> BookingModel: booking service status updated
+    deactivate DB
+    BookingModel --> Repository: update success
+    deactivate BookingModel
+    Repository --> Controller: update success
+    deactivate Repository
+    Controller -> Router: 200 OK (booking service status updated)
+    deactivate Controller
+    Router --> UI: 200 OK (booking service status updated)
+    deactivate Router
+    UI -> Admin: Display success message (status updated)
+    deactivate UI
+else If new status is invalid
+    Controller -> UI: 400 Bad Request (invalid status)
+    deactivate Controller
+    Router --> UI: 400 Bad Request (invalid status)
+    deactivate Router
+    UI -> Admin: Display error message (invalid status)
+    deactivate UI
+end
+@enduml

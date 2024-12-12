@@ -1,20 +1,31 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "AuthRouter" as Router
 participant "AuthController" as Controller
 participant "AuthRepository" as Repository
 participant "SessionManager" as SessionManager
 
 Admin -> UI: Request to log out
+activate UI
 UI -> Router: POST /logout
+activate Router
 Router -> Controller: logout()
+activate Controller
 Controller -> SessionManager: terminateSession()
+activate SessionManager
 
 SessionManager -> Repository: invalidateSession(adminId)
+activate Repository
 Repository -> SessionManager: session invalidated
+deactivate Repository
+
 SessionManager --> Controller: session terminated
+deactivate SessionManager
 Controller -> Router: 200 OK (logged out)
+deactivate Controller
 Router --> UI: 200 OK (logged out)
+deactivate Router
 UI -> Admin: Redirect to login page
+deactivate UI
 @enduml

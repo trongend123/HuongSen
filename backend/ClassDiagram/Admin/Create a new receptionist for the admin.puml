@@ -1,6 +1,6 @@
 @startuml
 actor Admin
-participant "User/Interface" as UI
+participant "UI/Interface" as UI
 participant "ReceptionistRouter" as Router
 participant "ReceptionistController" as Controller
 participant "ReceptionistRepository" as Repository
@@ -8,22 +8,40 @@ participant "ReceptionistModel" as ReceptionistModel
 participant "Database" as DB
 
 Admin -> UI: Request to create new receptionist
+activate UI
 UI -> Router: GET /admin/receptionists/create
+activate Router
 Router -> Controller: showCreateReceptionistForm()
+activate Controller
 Controller -> UI: Display create receptionist form
+deactivate Controller
+deactivate Router
+deactivate UI
 
 Admin -> UI: Fill in new receptionist details and submit
+activate UI
 UI -> Router: POST /admin/receptionists/create
+activate Router
 Router -> Controller: createReceptionist(newReceptionistData)
+activate Controller
 Controller -> Repository: saveNewReceptionist(newReceptionistData)
+activate Repository
 
 Repository -> ReceptionistModel: createReceptionist(newReceptionistData)
+activate ReceptionistModel
 ReceptionistModel -> DB: insert new receptionist data
+activate DB
 DB --> ReceptionistModel: new receptionist data inserted
+deactivate DB
 ReceptionistModel --> Repository: new receptionist created
+deactivate ReceptionistModel
 Repository --> Controller: new receptionist created successfully
+deactivate Repository
 
 Controller --> Router: 200 OK (new receptionist created)
+deactivate Controller
 Router --> UI: 200 OK (new receptionist created)
+deactivate Router
 UI -> Admin: Display success message (new receptionist created)
+deactivate UI
 @enduml

@@ -1,0 +1,63 @@
+@startuml
+class StaffRouter {
+    +createStaff(data: Staff): Staff
+    +updateStaff(id: String, data: Staff): Staff
+    +deleteStaff(id: String): void
+    +getStaffById(id: String): Staff
+    +getAllStaff(): List<Staff>
+}
+
+class StaffController {
+    +createStaff(data: Staff): Staff
+    +updateStaff(id: String, data: Staff): Staff
+    +deleteStaff(id: String): void
+    +getStaffById(id: String): Staff
+    +getAllStaff(): List<Staff>
+}
+
+class StaffRepository {
+    +createStaff(data: Staff): Staff
+    +updateStaff(id: String, data: Staff): Staff
+    +deleteStaff(id: String): void
+    +getStaffById(id: String): Staff
+    +getAllStaff(): List<Staff>
+}
+
+class StaffModel {
+    +staffId: String
+    +fullName: String
+    +email: String
+    +phone: String
+    +role: String
+    +save(): Staff
+    +update(): Staff
+    +delete(): void
+    +findById(id: String): Staff
+    +findAll(): List<Staff>
+}
+
+StaffRouter --> StaffController : createStaff(data)
+StaffController --> StaffRepository : createStaff(data)
+StaffRepository --> StaffModel : new Staff(data)
+StaffModel --> StaffRepository : saved Staff
+
+StaffRouter --> StaffController : updateStaff(id, data)
+StaffController --> StaffRepository : updateStaff(id, data)
+StaffRepository --> StaffModel : update Staff
+StaffModel --> StaffRepository : updated Staff
+
+StaffRouter --> StaffController : deleteStaff(id)
+StaffController --> StaffRepository : deleteStaff(id)
+StaffRepository --> StaffModel : delete Staff
+StaffModel --> StaffRepository : deleted Staff
+
+StaffRouter --> StaffController : getStaffById(id)
+StaffController --> StaffRepository : getStaffById(id)
+StaffRepository --> StaffModel : findById()
+StaffModel --> StaffRepository : found Staff
+
+StaffRouter --> StaffController : getAllStaff()
+StaffController --> StaffRepository : getAllStaff()
+StaffRepository --> StaffModel : findAll()
+StaffModel --> StaffRepository : list of Staff
+@enduml

@@ -1,0 +1,67 @@
+@startuml
+actor Customers
+participant "UI/Interface" as UI
+participant "BookingRouter" as Router
+participant "BookingController" as Controller
+participant "BookingRepository" as Repository
+participant "BookingModel" as BookingModel
+participant "RoomModel" as RoomModel
+participant "Database" as DB
+
+Customers -> UI: Request to update order rooms in contract for a group
+activate UI
+UI -> Router: GET /group-booking/{groupId}/update-order
+activate Router
+Router -> Controller: updateGroupBookingOrder(groupId, updatedOrderDetails)
+activate Controller
+Controller -> Repository: updateGroupBookingOrder(groupId, updatedOrderDetails)
+activate Repository
+
+Repository -> BookingModel: fetchGroupBookingById(groupId)
+activate BookingModel
+BookingModel -> DB: query group booking by groupId
+activate DB
+DB --> BookingModel: group booking data
+deactivate DB
+BookingModel --> Repository: group booking data
+deactivate BookingModel
+Repository --> Controller: group booking data
+deactivate Repository
+
+Controller -> RoomModel: checkRoomAvailabilityForGroup(updatedOrderDetails)
+activate RoomModel
+RoomModel -> DB: query available rooms for group
+activate DB
+DB --> RoomModel: list of available rooms
+deactivate DB
+RoomModel --> Controller: available rooms data
+deactivate RoomModel
+
+alt If rooms are available for group
+    Controller -> Repository: saveUpdatedGroupBookingOrder()
+    activate Repository
+    Repository -> BookingModel: updateBookingOrder(groupId, updatedOrderDetails)
+    activate BookingModel
+    BookingModel -> DB: update booking order with new rooms
+    activate DB
+    DB --> BookingModel: booking order updated
+    deactivate DB
+    BookingModel --> Repository: update success
+    deactivate BookingModel
+    Repository --> Controller: order update success
+    deactivate Repository
+    Controller -> Router: 200 OK (group booking order updated)
+    deactivate Controller
+    Router --> UI: 200 OK (group booking order updated)
+    deactivate Router
+    UI -> Customers: Display success message (order updated)
+    deactivate UI
+else If rooms are not available
+    Controller -> UI: 400 Bad Request (rooms not available)
+    deactivate Controller
+    Router --> UI: 400 Bad Request (rooms not available)
+    deactivate Router
+    UI -> Customers: Display error message (rooms not available)
+    deactivate UI
+end
+@enduml
