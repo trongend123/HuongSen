@@ -11,23 +11,43 @@ const Policy = () => {
 
   return (
     <Container className="mt-4">
-      <h1>Chính Sách Của Chúng Tôi</h1>
-      
-      <h3>Chính Sách Đặt Phòng</h3>
-      <p>Khách cần đặt phòng trước và cung cấp thông tin đầy đủ. Mọi thay đổi hoặc hủy phòng cần thực hiện ít nhất 24 giờ trước giờ nhận phòng để tránh phí hủy phòng.</p>
-      
-      <h3>Chính Sách Hủy Phòng</h3>
-      <p>Hủy phòng  24 giờ trước ngày giờ nhận phòng sẽ được hoàn tiền tổng giá trị đặt phòng. Hủy phòng trong vòng 24h trước ngày nhận phòng sẽ bị tính phí 100%.</p>
+      <h1 className="text-center">Chính Sách Của Chúng Tôi</h1>
 
-      <h3>Chính Sách Thanh Toán</h3>
-      <p>Khách sạn yêu cầu thanh toán đầy đủ tại thời điểm nhận phòng. Chúng tôi chấp nhận thanh toán qua tiền mặt, thẻ tín dụng và chuyển khoản ngân hàng.</p>
+      <div>
+        <h4>Chính Sách Đặt Phòng</h4>
+        <h5>Đối với khách lẻ:</h5>
+        <ul>
+          <li> Khách hàng cần nhập đầy đủ và chính xác thông tin của mình.</li>
+          <li> Khách hàng có thể kiểm tra thông tin đặt phòng của mình tại trang web của nhà khách thông qua trang "Tra cứu đơn" hoặc thông tin được gửi qua email khi đặt phòng</li>
+          <li> Khách hàng cần thanh toán toàn bộ số tiền để có thể đặt phòng thành công với nhà khách.</li>
+          <li> Khách hàng chỉ có thể đặt phòng tại một cơ sở trong một đơn đặt phòng. Nếu có nhu cầu đặt phòng nhiều cơ sở, khách hàng vui lòng tạo nhiều đơn đặt phòng hoặc liên hệ lễ tân để hỗ trợ đặt phòng hộ.</li>
+          <li> Với trường hợp nhờ lễ tân đặt phòng hộ, thông tin đặt phòng của bạn sẽ không được gửi qua email. Thay vào đó, lễ tân sẽ trực tiếp gửi thông tin qua phương thức liên hệ cho khách hàng.</li>
+        </ul>
+        <h5>Đối với khách đoàn:</h5>
+        <ul>
+          <li> Khách đoàn cần nhập đầy đủ và chính xác thông tin của mình.</li>
+          <li> Khách đoàn cần cọc 20% số tiền đặt phòng tại nhà khách để tiến hành làm hợp đồng.</li>
+          <li> Hợp đồng sẽ được tạo dựa trên thông tin đặt phòng với khách hàng và gửi tới khách hàng để xác nhận chữ ký.</li>
+          <li> Trong trường hợp muốn thay đổi các đơn đặt phòng, khách đoàn cần gửi thông tin chi tiết cho nhà khách tối thiểu 2 ngày trước khi check-in</li>
+          <li> Nếu quá thời hạn chỉnh sửa, khách hàng chỉ có thể đặt thêm phòng theo nhu cầu của mình.</li>
+        </ul>
+      </div>
 
-      <h3>Chính Sách Hoàn Tiền</h3>
-      <p>Chúng tôi sẽ xem xét hoàn tiền trong trường hợp hủy phòng hợp lệ theo các quy định trên. Nếu bạn muốn yêu cầu hoàn tiền, vui lòng xem hướng dẫn và gửi yêu cầu bên dưới.</p>
-      
-  
-      
-
+      <div>
+        <h4>Chính Sách Hủy Phòng</h4>
+        <h5>Đối với khách lẻ:</h5>
+        <ul>
+          <li> Khách hàng có thể hủy phòng của mình tối thiểu 2 ngày trước khi check-in</li>
+          <li> Trong trường hợp đã quá hạn hủy phòng, khách hàng sẽ mất toàn bộ số tiền đặt phòng.</li>
+          <li> Khách hàng cũng có thể hủy các đơn dịch vụ của mình tối thiểu 2 ngày trước khi check-in.</li>
+          <li> Khi khách hàng hủy phòng, sẽ đồng thời hủy tất cả các đơn dịch vụ của mình.</li>
+        </ul>
+        <h5>Đối với khách đoàn:</h5>
+        <ul>
+          <li> Khách đoàn không thể hủy đơn sau khi đã cọc với nhà khách.</li>
+          <li> Khách đoàn có thể hủy lẻ các phòng đặt của mình trong đơn hàng.</li>
+        </ul>
+      </div>
     </Container>
   );
 };

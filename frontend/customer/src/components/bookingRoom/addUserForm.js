@@ -1,6 +1,7 @@
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import { Form, Row, Col, Card, Button, Alert } from 'react-bootstrap';
 import { BASE_URL } from "../../utils/config";
+import "./addUserForm.css"
 
 const AddUserForm = forwardRef(({ }, ref) => {
     const [customerData, setCustomerData] = useState({
@@ -321,14 +322,24 @@ const AddUserForm = forwardRef(({ }, ref) => {
                         </Col>
                     </Row>
 
-
-                    <Button
-                        variant="outline-primary"
-                        className="mt-3"
-                        onClick={() => setBookingType(bookingType === 'Group' ? '' : 'Group')}
-                    >
-                        {bookingType === 'Group' ? 'Khách đoàn' : 'Khách lẻ'}
-                    </Button>
+                    <Form.Group controlId="bookingTypeToggle" className="d-flex align-items-center justify-content-start">
+                        <strong className="me-3">Bạn là tệp khách:</strong>
+                        <div className="toggle-container">
+                            <button
+                                type="button"
+                                className={` toggle-button left ${bookingType === '' ? 'active' : ''}`}
+                                onClick={() => setBookingType('')}
+                            >{"Khách lẻ"}
+                            </button>
+                            <button
+                                type="button"
+                                className={`toggle-button right ${bookingType === 'Group' ? 'active' : ''}`}
+                                onClick={() => setBookingType('Group')}
+                            >
+                                Khách đoàn
+                            </button>
+                        </div>
+                    </Form.Group>
 
                     {bookingType === 'Group' && (
                         <>
