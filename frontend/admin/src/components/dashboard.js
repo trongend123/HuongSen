@@ -278,10 +278,10 @@ const Dashboard = () => {
   const handleExport = async () => {
     try {
       // Gửi yêu cầu GET đến API, nhận dữ liệu dạng blob
-      const response = await axios.get("https://server-ver1.onrender.com/orderRooms/excel", {
+      const response = await axios.get(`${BASE_URL}/orderRooms/excel`, {
         responseType: 'blob', // Quan trọng: nhận dữ liệu dạng blob
       });
-
+      console.log(response.data);
       // Tạo file từ dữ liệu nhận được
       const blob = new Blob([response.data], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -385,7 +385,7 @@ const Dashboard = () => {
             <tbody>
 
               {aggregatedOrderDataByMonthWithDays.map((item, index) => (
-                <tr>
+                <tr key={index}>
                   <td>{item.date}</td>
                   <td>{item.quantity}</td>
                   <td>{aggregatedBookingsByMonthWithDays[index].price}</td>

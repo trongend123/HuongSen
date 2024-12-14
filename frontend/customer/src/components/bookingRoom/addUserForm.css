@@ -1,0 +1,38 @@
+.toggle-container {
+    display: flex;
+    overflow: hidden;
+    
+    
+}
+
+.toggle-button {
+    border-radius: 0px;
+    font-weight: bold;
+    color: #6e7074; 
+    background-color: #e0e0e0; 
+    transition: all 0.2s ease;
+    cursor: pointer;
+    padding: 5px 5px; /* Reduced padding on both sides */
+    width: 130px;
+    
+}
+.left{
+    border-radius: 5px 0px 0px 5px;
+}
+.right{
+    border-radius: 0px 5px 5px 0px;
+}
+
+.toggle-button.active {
+    background-color: #81a969;
+    color: rgb(255, 255, 255);
+}
+
+.toggle-button.active:hover {
+    background-color: #6f8d59; /* Slightly darker green */
+}
+
+.toggle-button:not(.active):hover {
+    background-color: #d6e3d1; /* Lighter green */
+    color: #6e7074;
+}
