@@ -44,8 +44,9 @@ const AddUserForm = forwardRef(({ }, ref) => {
         const namePattern = /^([A-ZÀ-Ý][a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]*|[a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+)(\s([A-ZÀ-Ý][a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]*|[a-zàáảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+))*$/;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phonePattern = /^(03|05|07|08|09)\d{8,9}$/;
-        // const locationPattern = /^[A-Za-zÀ-ÿ0-9]+([ ,.-][A-Za-zÀ-ÿ0-9]+)*$/;
-        const locationPattern = /^[A-Za-zÀ-ÿà-ỹ0-9]+([ ,.-][A-Za-zÀ-ÿà-ỹ0-9]+)*$/;
+        const locationPattern = /^[A-Za-zÀ-ÿà-ỹ0-9]+([ ]?[,. -][ ]?[A-Za-zÀ-ÿà-ỹ0-9]+)*$/;
+
+        // const locationPattern = /^[A-Za-zÀ-ÿà-ỹ0-9]+([ ,.-][A-Za-zÀ-ÿà-ỹ0-9]+)*$/;
         const today = new Date();
 
         // Customer validation
@@ -399,13 +400,13 @@ const AddUserForm = forwardRef(({ }, ref) => {
                                 </Col>
                                 <Col md={6}>
                                     <Form.Group controlId="agencyStk">
-                                        <Form.Label><strong>Ngân hàng + Số tài khoản (STK)</strong></Form.Label>
+                                        <Form.Label><strong>Ngân hàng: Số tài khoản</strong><br></br><small>VD: Ngân Hàng A: 12345678</small></Form.Label>
                                         <Form.Control
                                             type="text"
                                             name="stk"
                                             value={agencyData.stk}
                                             onChange={handleAgencyChange}
-                                            placeholder="Nhập ngân hàng + STK"
+                                            placeholder="Nhập ngân hàng: STK"
                                             isInvalid={!!errors.agencyStk}
                                         />
                                         <Form.Control.Feedback type="invalid">

@@ -25,6 +25,7 @@ const ListBooking = () => {
   const rowsPerPage = 7;
   const [userRole, setUserRole] = useState('');
   const [statusFilter, setStatusFilter] = useState(''); // New state for status filter
+  const [filteredBookings, setFilteredBookings] = useState([]);
 
 
   const fetchData = async () => {
@@ -189,21 +190,27 @@ const ListBooking = () => {
     return true;
   };
 
-  const filteredBookings = bookings?.filter((booking) => {
-    const formattedValue = searchQuery.trim().replace(/\s+/g, ' ');
-    const bookingId = booking.bookingId?._id.toLowerCase();
-    const customerName = booking.customerId?.fullname.toLowerCase();
-    const isMatchingLocation = selectedLocation ? booking.roomCateId?.locationId === selectedLocation : true;
-    const isMatchingCheckin = isDateInRange(booking.bookingId?.checkin, checkinFilter, checkoutFilter);
-    const isMatchingStatus = statusFilter ? booking.bookingId?.status === statusFilter : true;
+  useEffect(() => {
+    const filtered = bookings?.filter((booking) => {
+      const formattedValue = searchQuery.trim().replace(/\s+/g, ' ');
+      const bookingId = booking.bookingId?._id.toLowerCase();
+      const customerName = booking.customerId?.fullname.toLowerCase();
+      const isMatchingLocation = selectedLocation ? booking.roomCateId?.locationId === selectedLocation : true;
+      const isMatchingCheckin = isDateInRange(booking.bookingId?.checkin, checkinFilter, checkoutFilter);
+      const isMatchingStatus = statusFilter ? booking.bookingId?.status === statusFilter : true;
 
-    return (
-      isMatchingLocation &&
-      isMatchingCheckin &&
-      isMatchingStatus &&
-      (bookingId?.includes(formattedValue.toLowerCase()) || customerName?.includes(formattedValue.toLowerCase()))
-    );
-  });
+      return (
+        isMatchingLocation &&
+        isMatchingCheckin &&
+        isMatchingStatus &&
+        (bookingId?.includes(formattedValue.toLowerCase()) || customerName?.includes(formattedValue.toLowerCase()))
+      );
+    });
+
+    setFilteredBookings(filtered);
+    setCurrentPage(1);
+
+  }, [searchQuery, selectedLocation, statusFilter, checkinFilter, checkoutFilter, bookings])
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;

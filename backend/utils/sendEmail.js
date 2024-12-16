@@ -1,6 +1,8 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import { format } from 'date-fns';
+import { BASE_URL } from "./config.js";
+import axios from 'axios';
 
 dotenv.config();
 
@@ -12,6 +14,7 @@ const sendConfirmationEmail = async (orderRooms, orderServices) => {
             pass: process.env.EMAIL_PASS
         }
     });
+
 
     // Kiểm tra và xử lý giá trị ngày tháng
     const formatDate = (dateValue) => {
@@ -107,6 +110,15 @@ const sendConfirmationEmail = async (orderRooms, orderServices) => {
     };
 
     await transporter.sendMail(mailOptions);
+    const newNotification = { content: "Khách hàng đã tạo đơn.", locationId: orderRooms[0]?.roomCateId?.locationId };
+    axios
+        .post(`${BASE_URL}/chats/send`, newNotification)
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 };
 
 export default sendConfirmationEmail;
