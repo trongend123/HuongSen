@@ -86,13 +86,23 @@ const __dirname = path.dirname(__filename);
 
 export const getAllOrderRoomsByExcel = async (req, res) => {
   try {
+    const { locationId } = req.params;
+
+    if (!locationId) {
+      return res.status(400).json({ message: 'Vui lòng cung cấp locationId' });
+    }
     console.log('Bắt đầu xuất file doanh thu');
     const orderRooms = await OrderRoom.find()
       .populate('roomCateId')   // Thông tin loại phòng
       .populate('customerId')   // Thông tin khách hàng
       .populate('bookingId');   // Thông tin booking
 
-    if (!orderRooms || orderRooms.length === 0) {
+    const orderRoomFilter = orderRooms.filter((orderRoom) => {
+
+      return orderRoom.roomCateId?.locationId.toString() === locationId
+    })
+
+    if (!orderRoomFilter || orderRoomFilter.length === 0) {
       return res.status(404).json({ message: 'Không tìm thấy dữ liệu' });
     }
 
@@ -106,7 +116,7 @@ export const getAllOrderRoomsByExcel = async (req, res) => {
     const uniqueOrders = [];
     const seenOrderIds = new Set();
 
-    orderRooms.forEach((order) => {
+    orderRoomFilter.forEach((order) => {
       if (!seenOrderIds.has(order._id.toString())) {
         uniqueOrders.push(order);
         seenOrderIds.add(order._id.toString());

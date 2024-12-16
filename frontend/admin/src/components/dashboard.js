@@ -277,8 +277,13 @@ const Dashboard = () => {
 
   const handleExport = async () => {
     try {
+
+      if (!selectedLocation) {
+        setMessage("Vui lòng chọn cơ sở trước khi xuất file!");
+        return;
+      }
       // Gửi yêu cầu GET đến API, nhận dữ liệu dạng blob
-      const response = await axios.get(`${BASE_URL}/orderRooms/excel`, {
+      const response = await axios.get(`${BASE_URL}/orderRooms/excel/${selectedLocation}`, {
         responseType: 'blob', // Quan trọng: nhận dữ liệu dạng blob
       });
       console.log(response.data);
