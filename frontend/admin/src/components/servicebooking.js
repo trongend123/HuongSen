@@ -162,6 +162,8 @@ const ServiceBookingList = () => {
   const currentRows = filteredBookings.slice(indexOfFirstRow, indexOfLastRow);
   const totalPages = Math.ceil(filteredBookings.length / rowsPerPage);
 
+
+
   // Format date with 7-hour adjustment
   const formatDate = (date) => {
     if (!date) return 'N/A'; // Handle null or undefined dates
@@ -357,9 +359,15 @@ const ServiceBookingList = () => {
 
               {/* Hiển thị danh sách các trang, chỉ lấy các trang trong phạm vi xung quanh trang hiện tại */}
               {Array.from(
-                { length: Math.min(totalPages, 5) },
+                { length: Math.min(5, totalPages) },
                 (_, i) => {
-                  const pageNumber = Math.max(1, currentPage - 2) + i;
+                  // Tính toán số trang hiển thị, đảm bảo nằm trong phạm vi hợp lệ từ 1 đến totalPages
+                  const startPage = Math.max(1, currentPage - 2); // Trang bắt đầu
+                  const pageNumber = startPage + i;
+
+                  // Đảm bảo không vượt quá totalPages
+                  if (pageNumber > totalPages) return null;
+
                   return (
                     <li
                       key={pageNumber}
@@ -386,6 +394,8 @@ const ServiceBookingList = () => {
               )}
             </ul>
           </nav>
+
+
 
         </div>
       )}
