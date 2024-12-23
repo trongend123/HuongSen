@@ -180,21 +180,21 @@ app.post('/send-feedback', async (req, res) => {
 
   // Cấu hình transporter
   const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false, // Không dùng SSL
-      auth: {
-          user: process.env.EMAIL_USER, // Email của bạn
-          pass: process.env.EMAIL_PASS, // App Password
-      },
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // Không dùng SSL
+    auth: {
+      user: process.env.EMAIL_USER, // Email của bạn
+      pass: process.env.EMAIL_PASS, // App Password
+    },
   });
 
   // Tạo nội dung email
   const mailOptions = {
-      from: '"Customer Feedback" <nhakhachhuongsen.business@gmail.com>',
-      to: hotelEmail, // Email nhà khách nhận phản hồi
-      subject: `Feedback từ ${customerName}`,
-      html: `
+    from: '"Customer Feedback" <nhakhachhuongsen.business@gmail.com>',
+    to: hotelEmail, // Email nhà khách nhận phản hồi
+    subject: `Feedback từ ${customerName}`,
+    html: `
           <p><strong>Phản Hồi Từ Khách Hàng:</strong></p>
           <p><strong>Tên:</strong> ${customerName}</p>
           <p><strong>Email:</strong> ${customerEmail}</p>
@@ -204,11 +204,11 @@ app.post('/send-feedback', async (req, res) => {
   };
 
   try {
-      await transporter.sendMail(mailOptions);
-      res.status(200).send({ message: 'Phản hồi đã được gửi thành công!' });
+    await transporter.sendMail(mailOptions);
+    res.status(200).send({ message: 'Phản hồi đã được gửi thành công!' });
   } catch (error) {
-      console.error('Error sending email:', error);
-      res.status(500).send({ error: 'Gửi email thất bại' });
+    console.error('Error sending email:', error);
+    res.status(500).send({ error: 'Gửi email thất bại' });
   }
 });
 

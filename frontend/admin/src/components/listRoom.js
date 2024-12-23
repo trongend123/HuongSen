@@ -34,29 +34,29 @@ const ListRoom = () => {
       } else if (storedUser.role === 'staff_cb') {
         setSelectedLocation('66f6c59f285571f28087c16d');
       } else if (storedUser.role === 'staff_mk') {
-        setSelectedLocation('66f6c5c9285571f28087c16a');
+        setSelectedLocation('66f6c42f285571f28087c16a');
       }
     }
     axios
-      .get('https://server-ver1.onrender.com/rooms')
+      .get(`${BASE_URL}/rooms`)
       .then((response) => setRoomData(response.data))
       .catch((error) => console.error('Error fetching room data:', error));
 
     axios
-      .get('https://server-ver1.onrender.com/locations')
+      .get(`${BASE_URL}/locations`)
       .then((response) => setLocation(response.data))
       .catch((error) => console.error('Error fetching locations:', error));
 
     axios
-      .get('https://server-ver1.onrender.com/roomCategories')
+      .get(`${BASE_URL}/roomCategories`)
       .then((response) => setCategories(response.data))
       .catch((error) => console.error('Error fetching room categories:', error));
     axios
-      .get('https://server-ver1.onrender.com/bookings')
+      .get(`${BASE_URL}/bookings`)
       .then((response) => setBookings(response.data))
       .catch((error) => console.error('Error fetching bookings:', error));
     axios
-      .get('https://server-ver1.onrender.com/orderRooms')
+      .get(`${BASE_URL}/orderRooms`)
       .then((response) => setOrderRooms(response.data))
       .catch((error) => console.error('Error fetching bookings:', error));
   }, []);
@@ -144,10 +144,10 @@ const ListRoom = () => {
     console.log(updatedRoom);
 
     axios
-      .put(`https://server-ver1.onrender.com/rooms/${selectedRoom._id}`, updatedRoom)
+      .put(`${BASE_URL}/rooms/${selectedRoom._id}`, updatedRoom)
       .then((response) => {
         axios
-          .get('https://server-ver1.onrender.com/rooms')
+          .get(`${BASE_URL}/rooms`)
           .then((res) => setRoomData(res.data))
           .catch((error) => console.error('Error fetching updated room data:', error));
 
@@ -155,7 +155,7 @@ const ListRoom = () => {
 
         const newNotification = { content: `Phòng ${selectedRoom.code} đã chuyển trạng thái sang ${updatedStatus}.`, locationId: selectedLocation };
         axios
-          .post("https://server-ver1.onrender.com/chats/send", newNotification)
+          .post(`${BASE_URL}/chats/send`, newNotification)
           .then((response) => {
             console.log(response.data);
           })

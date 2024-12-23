@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import './navbar.css';
 import logo from "../../assets/logo.png";
 
@@ -7,12 +7,16 @@ const NavigationBar = () => {
   return (
     <Navbar expand="lg" className="navbar-custom">
       <Container>
-
+        {/* Logo */}
         <Navbar.Brand href="/">
           <img src={logo} alt="Logo" className="logo" />
         </Navbar.Brand>
 
-        <Navbar.Collapse id="basic-navbar-nav">
+        {/* Toggle Button for Collapsed Navbar */}
+        <Navbar.Toggle aria-controls="navbarResponsive" />
+
+        {/* Collapsible Navbar Links */}
+        <Navbar.Collapse id="navbarResponsive">
           <Nav className="ms-auto">
             <Nav.Link href="/cs1">Cơ sở Minh Khai</Nav.Link>
             <Nav.Link href="/cs2">Cơ sở Đồ Sơn</Nav.Link>
@@ -22,7 +26,6 @@ const NavigationBar = () => {
             <Nav.Link href="/addsevices">Tra cứu đơn</Nav.Link>
             <Nav.Link href="/policy">Chính sách</Nav.Link>
             <Nav.Link href="/contact">Liên hệ</Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
       </Container>

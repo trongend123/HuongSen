@@ -22,6 +22,7 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
     const [updatedQuantities, setUpdatedQuantities] = useState({});
     const [Rooms, setRooms] = useState([]);
     const [refundTimeOut, setRefundTimeOut] = useState(true)
+    const [Indentify, setIndentify] = useState({});
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -72,6 +73,8 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
             setLocation(locationsResponse.data.locationId);
             const AgencyResponse = await axios.get(`${BASE_URL}/agencies/customer/${customerId}`);
             setAgency(AgencyResponse.data);
+            const identification = await axios.get(`${BASE_URL}/identifycations/customer/${customerId}`);
+            setIndentify(identification.data);
         } catch (error) {
             console.error('Error fetching location or agencies details:', error);
         }
@@ -543,7 +546,23 @@ const UpdateAndRefund = forwardRef(({ bookingId }, ref) => {
                         <p><strong>Đã thanh toán:</strong> {orderRooms[0].bookingId?.payment || 0}</p>
                         <p><strong>Còn nợ:</strong> {orderRooms[0].bookingId?.price - orderRooms[0].bookingId?.payment || 0}</p>
                     </Col>
-
+                    <Col >
+                        <p><strong>Tên định danh:</strong> {Indentify.name || 'N/A'}</p>
+                        <p><strong>Mã định danh:</strong> {Indentify.code || 'N/A'}</p>
+                        <p>
+                            <strong>Ngày đăng ký:</strong>{' '}
+                            {Indentify.dateStart
+                                ? format(new Date(Indentify.dateStart["$date"] || Indentify.dateStart), 'dd-MM-yyyy')
+                                : 'N/A'}
+                        </p>
+                        <p>
+                            <strong>Ngày hết hạn:</strong>{' '}
+                            {Indentify.dateEnd
+                                ? format(new Date(Indentify.dateEnd["$date"] || Indentify.dateEnd), 'dd-MM-yyyy')
+                                : 'N/A'}
+                        </p>
+                        <p><strong>Đăng ký tại:</strong> {Indentify.location}</p>
+                    </Col>
                 </Row>
                 <table>
                     <thead>

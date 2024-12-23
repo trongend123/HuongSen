@@ -26,7 +26,7 @@ const ListRoom = () => {
       } else if (user.role === 'staff_cb') {
         setSelectedLocation('66f6c59f285571f28087c16d');
       } else if (user.role === 'staff_mk') {
-        setSelectedLocation('66f6c5c9285571f28087c16a');
+        setSelectedLocation('66f6c42f285571f28087c16a');
       }
     }
 
@@ -45,7 +45,7 @@ const ListRoom = () => {
   }, []);
 
   const filteredRooms = selectedLocation
-    ? roomData.filter((room) => room.roomCategoryId.locationId === selectedLocation)
+    ? roomData.filter((room) => room.roomCategoryId?.locationId === selectedLocation)
     : roomData;
 
   const handleRoomSelect = (roomId) => {
@@ -74,7 +74,7 @@ const ListRoom = () => {
       )
 
       console.log(room.roomCategoryId);
-      const newNotification = { content: "Lễ tân đã check-in phòng", locationId: room.roomCategoryId.locationId };
+      const newNotification = { content: "Lễ tân đã check-in phòng", locationId: room.roomCategoryId?.locationId };
       axios
         .post(`${BASE_URL}/chats/send`, newNotification)
         .then((response) => {
@@ -126,7 +126,7 @@ const ListRoom = () => {
           bookingId={id}
         />
       )}
-      {selectedLocation === '66f6c5c9285571f28087c16a' && (
+      {selectedLocation === '66f6c42f285571f28087c16a' && (
         <MinhKhaiRooms
           rooms={filteredRooms}
           onClick={handleRoomSelect}

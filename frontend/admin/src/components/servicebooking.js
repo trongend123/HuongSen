@@ -22,7 +22,7 @@ const ServiceBookingList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedNotes, setExpandedNotes] = useState([]);
   const [staff, setStaff] = useState(null);
-  const [locationId, setLocationId] = useState(null);
+  const [locationFilter, setLocationFilter] = useState('');
 
   const rowsPerPage = 7;
 
@@ -40,62 +40,86 @@ const ServiceBookingList = () => {
   const fetchServiceBookings = async () => {
     if (staff) {
       let location = '';
-      if (staff.role === 'staff_mk') {
-        location = '66f6c42f285571f28087c16a';
-      } else if (staff.role === 'staff_ds') {
+      if (staff.role === 'staff_ds') {
         location = '66f6c536285571f28087c16b';
+        setLocationFilter(location);
+      } else if (staff.role === 'staff_mk') {
+        location = '66f6c42f285571f28087c16a';
+        setLocationFilter(location);
       } else if (staff.role === 'staff_cb') {
         location = '66f6c59f285571f28087c16d';
+        setLocationFilter(location);
       }
 
-      if (location) {
-        setLocationId(location);
-        console.log(location); // Logs the correct location ID
+      if (location || locationFilter) {
+        let locationid = location || locationFilter;
 
+        let responseBLData = [];
+        try {
+          const responseBL = await axios.get(`${BASE_URL}/orderServices/location/${locationid}`);
+          responseBLData = responseBL.data || [];
+        } catch (error) {
+          console.warn(`Error fetching orderServices for location ${locationid}:`, error.message);
+          responseBLData = []; // Set to empty array on error
+        }
 
-        const responseBL = await axios.get(`${BASE_URL}/orderServices/location/${location}`);
+        try {
+          const response = await axios.get(`${BASE_URL}/service-bookings`);
+          setBookingsLocation(responseBLData);
+          setBookingAll(response.data || []);
 
-        const response = await axios.get(`${BASE_URL}/service-bookings`);
+          const filteredResponseBL = response.data.filter(item =>
+            responseBLData.some(order => order._id === item._id)
+          );
 
-        setBookingsLocation(responseBL.data || []);
-        setBookingAll(response.data || []);
-
-        const filteredResponseBL = response.data.filter(item =>
-          responseBL.data.some(order => order._id === item._id)
-        );
-        setBookings(filteredResponseBL);
-        setFilteredBookings(filteredResponseBL || []);
-
-      }
-      else {
-        const response = await axios.get(`${BASE_URL}/service-bookings`);
-        setBookings(response.data);
-        setFilteredBookings(response.data || []);
+          setBookings(filteredResponseBL);
+          setFilteredBookings(filteredResponseBL || []);
+        } catch (error) {
+          console.error('Error fetching service bookings:', error.message);
+          setBookings([]);
+          setFilteredBookings([]);
+        }
+      } else {
+        try {
+          const response = await axios.get(`${BASE_URL}/service-bookings`);
+          setBookings(response.data || []);
+          setFilteredBookings(response.data || []);
+        } catch (error) {
+          console.error('Error fetching all service bookings:', error.message);
+          setBookings([]);
+          setFilteredBookings([]);
+        }
       }
     }
   };
 
 
+
   useEffect(() => {
     fetchServiceBookings();
-  }, [staff]);
+  }, [staff, locationFilter]);
 
-  // Handle search with status filter
   useEffect(() => {
     const filtered = bookings.filter((booking) => {
-      const matchesBookingId = booking.bookingId.toString().includes(searchBookingId.trim().replace(/\s+/g, ' '));
-      const matchesCustomerName = booking.customerName
-        .toLowerCase()
-        .includes(searchCustomerName.toLowerCase().trim().replace(/\s+/g, ' '));
-      const matchesServiceName = booking.serviceName
-        .toLowerCase()
-        .includes(searchServiceName.toLowerCase().trim().replace(/\s+/g, ' '));
+      const matchesBookingId = booking.bookingId
+        ?.toString()
+        .includes(searchBookingId.trim().replace(/\s+/g, ' '));
+
+      const matchesCustomerName = booking?.customerName
+        ?.toLowerCase()
+        .includes(searchCustomerName?.toLowerCase().trim().replace(/\s+/g, ' '));
+
+      const matchesServiceName = booking?.serviceName
+        ? booking.serviceName
+          .toLowerCase()
+          .includes(searchServiceName?.toLowerCase().trim().replace(/\s+/g, ' '))
+        : true; // Allow matches if serviceName is undefined
+
       const matchesStartTime =
         !startTime ||
         new Date(booking.time).toISOString().slice(0, 10) === new Date(startTime).toISOString().slice(0, 10);
 
-      const matchesStatus =
-        !searchStatus || booking.status === searchStatus; // Apply status filter
+      const matchesStatus = !searchStatus || booking.status === searchStatus; // Apply status filter
 
       return (
         matchesBookingId &&
@@ -138,11 +162,24 @@ const ServiceBookingList = () => {
   const currentRows = filteredBookings.slice(indexOfFirstRow, indexOfLastRow);
   const totalPages = Math.ceil(filteredBookings.length / rowsPerPage);
 
-  // Format date
+
+
+  // Format date with 7-hour adjustment
   const formatDate = (date) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    return new Intl.DateTimeFormat('vi-VN', options).format(new Date(date));
+    if (!date) return 'N/A'; // Handle null or undefined dates
+
+    const adjustedDate = new Date(new Date(date).getTime() - 7 * 60 * 60 * 1000); // Subtract 7 hours
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+
+    return new Intl.DateTimeFormat('vi-VN', options).format(adjustedDate);
   };
+
 
   // Format currency
   const formatCurrency = (value) => {
@@ -196,7 +233,23 @@ const ServiceBookingList = () => {
 
       </div>
       <div className="row mb-3 d-flex justify-content-evenly">
-        <div className="col-md-6">
+        {staff?.role === "admin" && (
+          <div className="col-md-4">
+
+            <select
+              className="form-select"
+              value={locationFilter}
+              onChange={(e) => setLocationFilter(e.target.value)}
+            >
+              <option value="">Chọn cơ sở</option>
+              <option value="66f6c42f285571f28087c16a">cơ sở 16 Minh Khai</option>
+              <option value="66f6c536285571f28087c16b">cơ sở Đồ Sơn</option>
+              <option value="66f6c59f285571f28087c16d">cơ sở Cát Bà</option>
+            </select>
+
+          </div>
+        )}
+        <div className="col-md-4">
           <input
             type="text"
             className="form-control"
@@ -295,15 +348,55 @@ const ServiceBookingList = () => {
           {/* Pagination */}
           <nav>
             <ul className="pagination justify-content-center">
-              {Array.from({ length: totalPages }, (_, i) => (
-                <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
-                  <button className="page-link" onClick={() => setCurrentPage(i + 1)}>
-                    {i + 1}
+              {/* Nút "Previous" hiển thị nếu không phải là trang đầu tiên */}
+              {currentPage > 1 && (
+                <li className="page-item">
+                  <button className="page-link" onClick={() => setCurrentPage(currentPage - 1)}>
+                    &laquo;
                   </button>
                 </li>
-              ))}
+              )}
+
+              {/* Hiển thị danh sách các trang, chỉ lấy các trang trong phạm vi xung quanh trang hiện tại */}
+              {Array.from(
+                { length: Math.min(5, totalPages) },
+                (_, i) => {
+                  // Tính toán số trang hiển thị, đảm bảo nằm trong phạm vi hợp lệ từ 1 đến totalPages
+                  const startPage = Math.max(1, currentPage - 2); // Trang bắt đầu
+                  const pageNumber = startPage + i;
+
+                  // Đảm bảo không vượt quá totalPages
+                  if (pageNumber > totalPages) return null;
+
+                  return (
+                    <li
+                      key={pageNumber}
+                      className={`page-item ${currentPage === pageNumber ? 'active' : ''}`}
+                    >
+                      <button
+                        className="page-link"
+                        onClick={() => setCurrentPage(pageNumber)}
+                      >
+                        {pageNumber}
+                      </button>
+                    </li>
+                  );
+                }
+              )}
+
+              {/* Nút "Next" hiển thị nếu không phải là trang cuối cùng */}
+              {currentPage < totalPages && (
+                <li className="page-item">
+                  <button className="page-link" onClick={() => setCurrentPage(currentPage + 1)}>
+                    &raquo;
+                  </button>
+                </li>
+              )}
             </ul>
           </nav>
+
+
+
         </div>
       )}
     </div>

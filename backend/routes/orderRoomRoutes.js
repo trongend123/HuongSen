@@ -18,7 +18,7 @@ const router = express.Router();
 // Routes
 router.post('/', createOrderRoom);         // Tạo OrderRoom 
 router.get('/', getAllOrderRooms);
-router.get('/excel', getAllOrderRoomsByExcel);
+router.get('/excel/:locationId', getAllOrderRoomsByExcel);
 router.get('/page', getAllOrderRoomsbyPage);         // Lấy tất cả OrderRooms
 router.get('/totalbycategory', getTotalRoomsByCategoryInDateRange);     //GET /orderrooms/total-by-category?checkInDate=2024-10-01&checkOutDate=2024-10-15
 

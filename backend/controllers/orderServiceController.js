@@ -77,7 +77,7 @@ export const getOrderServicesByLocationId = async (req, res) => {
     try {
         console.log(`Request received for locationId: ${locationId}`);
         const orderServices = await OrderServiceRepository.findByLocationIdAndRoomCategory(locationId);
-        
+
         if (orderServices.length === 0) {
             return res.status(404).json({ message: 'No order services found for this location.' });
         }

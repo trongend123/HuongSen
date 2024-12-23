@@ -7,49 +7,83 @@ import OrderRoom from "../models/orderRoom.js";
 
 const getAllServiceBookings = async (req, res) => {
   try {
-    // Step 1: Fetch all service bookings (OrderService)
-    const orderServices = await OrderService.find()
-      .populate("otherServiceId", "name price") // Assuming you have a `Service` collection
-      .lean();
+    // Step 1: Aggregate data using MongoDB's aggregation pipeline
+    const orderServices = await OrderService.aggregate([
+      {
+        $lookup: {
+          from: "otherservices", // Collection name for `otherServiceId`
+          localField: "otherServiceId",
+          foreignField: "_id",
+          as: "otherServiceDetails",
+        },
+      },
+      {
+        $lookup: {
+          from: "orderrooms", // Collection name for `OrderRoom`
+          localField: "bookingId",
+          foreignField: "bookingId",
+          as: "orderRoomDetails",
+        },
+      },
+      {
+        $unwind: {
+          path: "$otherServiceDetails",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $unwind: {
+          path: "$orderRoomDetails",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
+          from: "customers", // Collection name for `customerId`
+          localField: "orderRoomDetails.customerId",
+          foreignField: "_id",
+          as: "customerDetails",
+        },
+      },
+      {
+        $unwind: {
+          path: "$customerDetails",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          bookingId: 1,
+          "customerName": "$customerDetails.fullname",
+          "serviceName": "$otherServiceDetails.name",
+          "unitPrice": "$otherServiceDetails.price",
+          "time": 1,
+          "quantity": { $ifNull: ["$quantity", 1] },
+          "status": { $ifNull: ["$status", "N/A"] },
+          "note": { $ifNull: ["$note", "N/A"] },
+        },
+      },
+    ]);
 
-    // Step 2: Loop through orderServices to fetch customer details via OrderRoom and bookingId
-    const formattedBookings = [];
+    // Step 2: Remove duplicates based on `_id`
+    const uniqueServices = [];
+    const seenIds = new Set();
 
-    for (let service of orderServices) {
-      // Step 3: Fetch the related customer using the bookingId
-      const orderRoom = await OrderRoom.findOne({ bookingId: service.bookingId })
-        .populate("customerId", "fullname") // Assuming customerId is a reference to Customer
-        .lean();
-
-      if (orderRoom) {
-        const customer = orderRoom.customerId;
-
-        // Check if serviceId exists and has the necessary properties
-        const serviceName = service.otherServiceId ? service.otherServiceId.name : "N/A";
-        const servicePrice = service.otherServiceId ? service.otherServiceId.price : 0;
-
-        const booking = {
-          _id: service._id,
-          bookingId: service.bookingId,
-          customerName: customer ? customer.fullname : "N/A",
-          serviceName: serviceName,
-          unitPrice: servicePrice,
-          time: service.time,
-          quantity: service.quantity || 1,
-          status: service.status || "N/A",
-          note: service.note || "N/A",
-        };
-        formattedBookings.push(booking);
+    for (const service of orderServices) {
+      if (!seenIds.has(service._id.toString())) {
+        seenIds.add(service._id.toString());
+        uniqueServices.push(service);
       }
     }
 
     // If no service bookings are found
-    if (!formattedBookings.length) {
+    if (!uniqueServices.length) {
       return res.status(404).json({ message: "No service bookings found." });
     }
 
-    // Return the formatted bookings list
-    res.status(200).json(formattedBookings);
+    // Step 3: Return the unique service bookings
+    res.status(200).json(uniqueServices);
   } catch (error) {
     console.error("Error fetching all service bookings:", error);
     res.status(500).json({ message: "Internal server error." });
