@@ -7,11 +7,15 @@ const { Schema, model } = mongoose;
 const orderServiceSchema = new Schema(
     {
         // Reference to the other service
-        otherServiceId: {
-            type: Schema.Types.ObjectId,
-            ref: 'OtherServices',
-            required: [true, 'otherServiceId là bắt buộc']
-        },
+        // otherServiceId: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'OtherServices',
+        //     required: [true, 'otherServiceId là bắt buộc']
+        // },
+        service: {
+            type: Object, // Lưu trữ toàn bộ dữ liệu của OtherServices
+            required: [true, "service là bắt buộc"],
+          },
 
         // Reference to the booking
         bookingId: {
