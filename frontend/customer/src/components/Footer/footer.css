@@ -39,3 +39,20 @@
 .text-center p {
   margin: 0;
 }
+/* Responsive iframe container for Google Maps */
+.map-container {
+  position: relative;
+  width: 100%; /* Full width of the container */
+  padding-bottom: 56.25%; /* Aspect ratio of 16:9 (height relative to width) */
+  height: 0; /* Set to 0, will expand based on padding-bottom */
+  overflow: hidden;
+}
+
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height of the container */
+  border: 0; /* Remove iframe border */
+}

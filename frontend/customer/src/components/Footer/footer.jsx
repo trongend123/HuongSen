@@ -16,9 +16,9 @@ const Footer = () => {
             <p>Lễ tân cơ sở Đồ Sơn: 022 5386 6386</p>
             <p>Lễ tân cơ sở Cát Bà: 022 5388 7381</p>
             <p>Email: <a href="mailto:huongsen.16minhkhai.hp@gmail.com">huongsen.16minhkhai.hp@gmail.com</a></p>
-            <p>Fanpage:
+            <p>Fanpage:  
               <a href="https://www.facebook.com/huongsen.nhakhach" target="_blank" rel="noopener noreferrer">
-                https://www.facebook.com/huongsen.nhakhach
+                 facebook.com/huongsen.nhakhach
               </a>
             </p>
           </Col>
@@ -36,21 +36,20 @@ const Footer = () => {
             </ul>
           </Col>
 
-          {/* Fanpage Section */}
-          <Col md={4} className="mb-4">
-            <h5>Bản đồ</h5>
+         {/* Fanpage Section */}
+<Col md={4} className="mb-4">
+  <h5>Bản đồ</h5>
+  <div className="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59659.71837244205!2d106.71243317900318!3d20.842509851568096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7af3d4b1503d%3A0x6d500a082648cd8a!2zTmjDoCBLaMOhY2ggSMawxqFuZyBTZW4!5e0!3m2!1svi!2s!4v1729608040022!5m2!1svi!2s"
+      allowFullScreen=""
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      title="Google Map"
+    ></iframe>
+  </div>
+</Col>
 
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59659.71837244205!2d106.71243317900318!3d20.842509851568096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7af3d4b1503d%3A0x6d500a082648cd8a!2zTmjDoCBLaMOhY2ggSMawxqFuZyBTZW4!5e0!3m2!1svi!2s!4v1729608040022!5m2!1svi!2s"
-              width="500"
-              height="250"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Google Map"
-            ></iframe>
-          </Col>
         </Row>
         <div className="text-center pt-4">
           <p>&copy; {new Date().getFullYear()} Nha khach Hương Sen. All rights reserved.</p>

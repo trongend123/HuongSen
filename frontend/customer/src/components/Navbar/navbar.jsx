@@ -6,7 +6,7 @@ import logo from "../../assets/logo.png";
 const NavigationBar = () => {
   return (
     <Navbar expand="lg" className="navbar-custom">
-      <Container>
+      <Container >
         {/* Logo */}
         <Navbar.Brand href="/">
           <img src={logo} alt="Logo" className="logo" />

@@ -20,18 +20,26 @@
 .social-icon:hover {
   color: #da1884; /* Hover effect in the primary color */
 }
-
 @media (max-width: 768px) {
   .contact-info {
-    flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-between; /* Ensure space between text and icons */
+    align-items: center; /* Vertically center items */
+    width: 100%; /* Ensure the container takes full width */
   }
 
-  .social-icons {
-    margin-top: 10px;
+  .contact-info h6 {
+    font-size: 12px; /* Optional: Adjust font size for smaller screens */
+    margin: 0; /* Remove margin */
   }
-}
 
-.py-3 {
-  padding: 0px !important;
+  .text-md-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px; /* Add space between icons */
+  }
+
+  .social-icon {
+    font-size: 13px; /* Slightly smaller icons for phones */
+  }
 }

@@ -21,7 +21,7 @@ button:hover {
 /* Media query for responsiveness */
 @media (max-width: 768px) {
   .container {
-    padding: 1rem;
+    padding: 10px;
   }
 
   h1 {
