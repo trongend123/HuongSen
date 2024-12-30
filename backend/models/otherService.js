@@ -13,7 +13,11 @@ const otherServiceSchema = new Schema(
       type: String,
       required: true,
     },
-    
+    serviceCate: {
+      type: Schema.Types.ObjectId,
+      ref: "ServiceCates",
+      required: true,
+    },
     isDeleted: {
       type: Boolean,
       default: false, // Mặc định chưa xóa

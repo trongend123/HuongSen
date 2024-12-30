@@ -2,12 +2,16 @@
   "_id": {
     "$oid": "67127d16cc979020534afd10"
   },
-  "name": "Thuê xe máy",
-  "price": 120000,
-  "description": "Thuê 1 xe máy 1 ngày",
+  "name": "Đưa đón tại ga Hải Phòng",
+  "price": 100000,
+  "description": "Cung cấp 1 xe đưa đón tại ga Hải Phòng",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
   "updatedAt": {
-    "$date": "2024-11-11T16:11:04.024Z"
-  }
+    "$date": "2024-12-15T05:16:49.269Z"
+  },
+  "isDeleted": false
 },
 {
   "_id": {
@@ -15,47 +19,10 @@
   },
   "name": "Đưa đón tại sân bay Cát Bi",
   "price": 150000,
-  "description": "Một xe đưa đón tại sân bay Cát Bi"
-},
-{
-  "_id": {
-    "$oid": "67127e6dcc979020534afd13"
-  },
-  "name": "Đặt đồ ăn xuất 100k",
-  "price": 100000,
-  "description": "Xuất ăn 100k cho 1 người"
-},
-{
-  "_id": {
-    "$oid": "67127eb2cc979020534afd14"
-  },
-  "name": "Đặt đồ ăn xuất 150k",
-  "price": 150000,
-  "description": "Xuất ăn 150k cho 1 người"
-},
-{
-  "_id": {
-    "$oid": "67127ec7cc979020534afd15"
-  },
-  "name": "Đặt đồ ăn xuất 200k",
-  "price": 200000,
-  "description": "Xuất ăn 200k cho 1 người"
-},
-{
-  "_id": {
-    "$oid": "67127ed5cc979020534afd16"
-  },
-  "name": "Đặt đồ ăn xuất 300k",
-  "price": 300000,
-  "description": "Xuất ăn 300k cho 1 người"
-},
-{
-  "_id": {
-    "$oid": "67127ee0cc979020534afd17"
-  },
-  "name": "Đặt đồ ăn xuất 400k",
-  "price": 400000,
-  "description": "Xuất ăn 400k cho 1 người"
+  "description": "Một xe đưa đón tại sân bay Cát Bi",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
 },
 {
   "_id": {
@@ -63,7 +30,10 @@
   },
   "name": "Đặt đồ ăn xuất 500k",
   "price": 500000,
-  "description": "Xuất ăn 500k cho 1 người"
+  "description": "Xuất ăn 500k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
 },
 {
   "_id": {
@@ -71,5 +41,507 @@
   },
   "name": "Giặt đồ",
   "price": 20000,
-  "description": "Giặt đồ tính theo kilogram, nhận đồ tại phòng"
+  "description": "Giặt đồ tính theo kilogram, nhận đồ tại phòng",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ec7cc979020534afd15"
+  },
+  "name": "Đặt đồ ăn xuất 200k",
+  "price": 200000,
+  "description": "Xuất ăn 200k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127e6dcc979020534afd13"
+  },
+  "name": "Đặt đồ ăn xuất 100k",
+  "price": 100000,
+  "description": "Xuất ăn 100k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127eb2cc979020534afd14"
+  },
+  "name": "Đặt đồ ăn xuất 150k",
+  "price": 150000,
+  "description": "Xuất ăn 150k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ed5cc979020534afd16"
+  },
+  "name": "Đặt đồ ăn xuất 300k",
+  "price": 300000,
+  "description": "Xuất ăn 300k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ee0cc979020534afd17"
+  },
+  "name": "Đặt đồ ăn xuất 400k",
+  "price": 400000,
+  "description": "Xuất ăn 400k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "updatedAt": {
+    "$date": "2024-12-08T17:27:01.845Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67556069db9a7ce198cc5d74"
+  },
+  "name": "Sử dụng đồ trong mini bar",
+  "price": 10000,
+  "description": "Sử dụng 1 đồ trong mini bar",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-08T09:01:29.096Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:20:02.987Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e635dc1e431c73516b76e"
+  },
+  "name": "Nghỉ thêm giờ",
+  "price": 100000,
+  "description": "Thêm 100k cho việc checkout muộn mỗi phòng và mỗi giờ",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-15T05:04:29.063Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:15:59.730Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e65f8c1e431c735170db2"
+  },
+  "name": "Nghỉ thêm ngày",
+  "price": 50000,
+  "description": "Số lượng bằng giá phòng chia 50 nhân với số ngày",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-15T05:15:36.803Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:15:36.803Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e67b1c1e431c73517464f"
+  },
+  "name": "Dịch vụ thêm",
+  "price": 1000,
+  "description": "Những dịch vụ thêm khác theo nhu cầu của khách hàng",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-15T05:22:57.268Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:22:57.268Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "67127d16cc979020534afd20"
+  },
+  "name": "Đưa đón tại ga Hải Phòng",
+  "price": 100000,
+  "description": "Cung cấp 1 xe đưa đón tại ga Hải Phòng",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:16:49.269Z"
+  },
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "67127d5ccc979020534afd21"
+  },
+  "name": "Đưa đón tại sân bay Cát Bi",
+  "price": 150000,
+  "description": "Một xe đưa đón tại sân bay Cát Bi",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127eeecc979020534afd28"
+  },
+  "name": "Đặt đồ ăn xuất 500k",
+  "price": 500000,
+  "description": "Xuất ăn 500k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127faccc979020534afd2d"
+  },
+  "name": "Giặt đồ",
+  "price": 20000,
+  "description": "Giặt đồ tính theo kilogram, nhận đồ tại phòng",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ec7cc979020534afd25"
+  },
+  "name": "Đặt đồ ăn xuất 200k",
+  "price": 200000,
+  "description": "Xuất ăn 200k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127e6dcc979020534afd23"
+  },
+  "name": "Đặt đồ ăn xuất 100k",
+  "price": 100000,
+  "description": "Xuất ăn 100k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127eb2cc979020534afd24"
+  },
+  "name": "Đặt đồ ăn xuất 150k",
+  "price": 150000,
+  "description": "Xuất ăn 150k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ed5cc979020534afd26"
+  },
+  "name": "Đặt đồ ăn xuất 300k",
+  "price": 300000,
+  "description": "Xuất ăn 300k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ee0cc979020534afd27"
+  },
+  "name": "Đặt đồ ăn xuất 400k",
+  "price": 400000,
+  "description": "Xuất ăn 400k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "updatedAt": {
+    "$date": "2024-12-08T17:27:01.845Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67556069db9a7ce198cc5d84"
+  },
+  "name": "Sử dụng đồ trong mini bar",
+  "price": 10000,
+  "description": "Sử dụng 1 đồ trong mini bar",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-08T09:01:29.096Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:20:02.987Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e635dc1e431c73516b77e"
+  },
+  "name": "Nghỉ thêm giờ",
+  "price": 100000,
+  "description": "Thêm 100k cho việc checkout muộn mỗi phòng và mỗi giờ",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-15T05:04:29.063Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:15:59.730Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e65f8c1e431c735170dc2"
+  },
+  "name": "Nghỉ thêm ngày",
+  "price": 50000,
+  "description": "Số lượng bằng giá phòng chia 50 nhân với số ngày",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-15T05:15:36.803Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:15:36.803Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e67b1c1e431c73517465f"
+  },
+  "name": "Dịch vụ thêm",
+  "price": 1000,
+  "description": "Những dịch vụ thêm khác theo nhu cầu của khách hàng",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-15T05:22:57.268Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:22:57.268Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "67127d16cc979020534afd30"
+  },
+  "name": "Đưa đón tại ga Hải Phòng",
+  "price": 100000,
+  "description": "Cung cấp 1 xe đưa đón tại ga Hải Phòng",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:16:49.269Z"
+  },
+  "isDeleted": false
+},
+{
+  "_id": {
+    "$oid": "67127d5ccc979020534afd31"
+  },
+  "name": "Đưa đón tại sân bay Cát Bi",
+  "price": 150000,
+  "description": "Một xe đưa đón tại sân bay Cát Bi",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127eeecc979020534afd38"
+  },
+  "name": "Đặt đồ ăn xuất 500k",
+  "price": 500000,
+  "description": "Xuất ăn 500k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127faccc979020534afd3d"
+  },
+  "name": "Giặt đồ",
+  "price": 20000,
+  "description": "Giặt đồ tính theo kilogram, nhận đồ tại phòng",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ec7cc979020534afd35"
+  },
+  "name": "Đặt đồ ăn xuất 200k",
+  "price": 200000,
+  "description": "Xuất ăn 200k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127e6dcc979020534afd33"
+  },
+  "name": "Đặt đồ ăn xuất 100k",
+  "price": 100000,
+  "description": "Xuất ăn 100k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127eb2cc979020534afd34"
+  },
+  "name": "Đặt đồ ăn xuất 150k",
+  "price": 150000,
+  "description": "Xuất ăn 150k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ed5cc979020534afd36"
+  },
+  "name": "Đặt đồ ăn xuất 300k",
+  "price": 300000,
+  "description": "Xuất ăn 300k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  }
+},
+{
+  "_id": {
+    "$oid": "67127ee0cc979020534afd37"
+  },
+  "name": "Đặt đồ ăn xuất 400k",
+  "price": 400000,
+  "description": "Xuất ăn 400k cho 1 người",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "updatedAt": {
+    "$date": "2024-12-08T17:27:01.845Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67556069db9a7ce198cc5da4"
+  },
+  "name": "Sử dụng đồ trong mini bar",
+  "price": 10000,
+  "description": "Sử dụng 1 đồ trong mini bar",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-08T09:01:29.096Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:20:02.987Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e635dc1e431c73516b79e"
+  },
+  "name": "Nghỉ thêm giờ",
+  "price": 100000,
+  "description": "Thêm 100k cho việc checkout muộn mỗi phòng và mỗi giờ",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-15T05:04:29.063Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:15:59.730Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e65f8c1e431c735170de2"
+  },
+  "name": "Nghỉ thêm ngày",
+  "price": 50000,
+  "description": "Số lượng bằng giá phòng chia 50 nhân với số ngày",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-15T05:15:36.803Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:15:36.803Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e67b1c1e431c73517467f"
+  },
+  "name": "Dịch vụ thêm",
+  "price": 1000,
+  "description": "Những dịch vụ thêm khác theo nhu cầu của khách hàng",
+  "serviceCate":{
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-12-15T05:22:57.268Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:22:57.268Z"
+  },
+  "__v": 0
 }]

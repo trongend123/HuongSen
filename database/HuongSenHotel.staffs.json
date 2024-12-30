@@ -1,111 +1,72 @@
 [{
   "_id": {
-    "$oid": "670691867f84d57bd16fc23a"
+    "$oid": "675e59cffc89f6645c4e83cd"
   },
-  "username": "dungpn",
-  "password": "123123",
-  "email": "dungpn@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "admin",
-  "fullname": "Phạm Ngọc Dũng"
-},
-{
-  "_id": {
-    "$oid": "6706942a7f84d57bd16fc244"
-  },
-  "username": "staffcb2",
-  "password": "123123",
-  "email": "staffcb2@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "staff_cb",
-  "fullname": "Trần Thị B"
-},
-{
-  "_id": {
-    "$oid": "670693e77f84d57bd16fc240"
-  },
-  "username": "staffmk2",
-  "password": "123123",
-  "email": "staffmk2@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "staff_mk",
-  "fullname": "Nguyễn Văn Vui"
-},
-{
-  "_id": {
-    "$oid": "67068ef07f84d57bd16fc238"
-  },
-  "username": "tuannq",
-  "password": "123123",
+  "username": "admin123",
+  "fullname": "Nguyễn Quang Tuấn",
+  "password": "$2a$10$5amUGsQHqm9HyjYemeDanuHD5kkR6vAteppbDaC8i/PFicRvqcd5.",
   "email": "tuanph41@gmail.com",
   "phone": "0939293888",
-  "avatarId": "",
   "role": "admin",
-  "fullname": "Nguyễn Quang Tuấn",
+  "createdAt": {
+    "$date": "2024-12-15T04:23:43.739Z"
+  },
   "updatedAt": {
-    "$date": "2024-12-05T14:39:33.812Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "670690f97f84d57bd16fc239"
+    "$date": "2024-12-15T04:23:43.739Z"
   },
-  "username": "anhdtl",
-  "password": "123123",
-  "email": "anhdtl@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "admin",
-  "fullname": "Đoàn Thị Lan Anh"
+  "__v": 0
 },
 {
   "_id": {
-    "$oid": "670694187f84d57bd16fc243"
-  },
-  "username": "staffcb1",
-  "password": "123123",
-  "email": "staffcb1@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "staff_cb",
-  "fullname": "Nguyễn Văn A"
-},
-{
-  "_id": {
-    "$oid": "670693967f84d57bd16fc23f"
-  },
-  "username": "staffmk1",
-  "password": "123123",
-  "email": "staffmk1@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "staff_mk",
-  "fullname": "Nguyễn Quang Hiếu"
-},
-{
-  "_id": {
-    "$oid": "670693f27f84d57bd16fc241"
+    "$oid": "675e5a0dfc89f6645c4e8c12"
   },
   "username": "staffds1",
-  "password": "123123",
-  "email": "staffds1@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
+  "fullname": "Nguyễn Quang Hiếu",
+  "password": "$2a$10$RyYVF/6Q0fT.iaqEQ6gua.yyHOf95M3SLfP1UcnpKtbp9JLlSFgxK",
+  "email": "hieu123@gmail.com",
+  "phone": "0934545656",
   "role": "staff_ds",
-  "fullname": "Lê Văn Quang"
+  "createdAt": {
+    "$date": "2024-12-15T04:24:45.187Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T04:24:45.187Z"
+  },
+  "__v": 0
 },
 {
   "_id": {
-    "$oid": "670694067f84d57bd16fc242"
+    "$oid": "675e62c9c1e431c73516a3ed"
   },
-  "username": "staffds2",
-  "password": "123123",
-  "email": "staffds2@gmail.com",
-  "phone": "0123456789",
-  "avatarId": "",
-  "role": "staff_ds",
-  "fullname": "Phan Công Hiếu"
+  "username": "staffcb1",
+  "fullname": "Lê Văn Quang",
+  "password": "$2a$10$rvgCt6PWLncapSH0mfHtWuulqqzNoIo92RHcXS19ptgHMwbpwPF7a",
+  "email": "quanglv@gmail.com",
+  "phone": "0942578914",
+  "role": "staff_cb",
+  "createdAt": {
+    "$date": "2024-12-15T05:02:01.087Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:02:01.087Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e62f8c1e431c73516aa12"
+  },
+  "username": "staffmk1",
+  "fullname": "Phan Công Hiếu",
+  "password": "$2b$10$zdVH3YF2YQE2czj9zB9G7OONZ/Dv8LVLE8UNDhulKfCEA6Z6SOhWy",
+  "email": "hieupc@gmail.com",
+  "phone": "0356675824",
+  "role": "staff_mk",
+  "createdAt": {
+    "$date": "2024-12-15T05:02:48.554Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:33:52.393Z"
+  },
+  "__v": 0
 }]

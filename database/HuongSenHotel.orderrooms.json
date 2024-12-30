@@ -1,264 +1,1285 @@
 [{
   "_id": {
-    "$oid": "674080afb31ac53d2dda78bf"
+    "$oid": "675ee252b793b3ef6eaf1581"
   },
-  "roomCateId": {
-    "$oid": "670b9896e91d9d4f21e97b5a"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4dfe91d9d4f21e97b63"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 1,
+    "price": 300000,
+    "name": "phòng đơn",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường nhỏ dành cho 1 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:59.880Z"
+    }
   },
   "customerId": {
-    "$oid": "674080afb31ac53d2dda78b0"
+    "$oid": "675ee24cb793b3ef6eaf1503"
   },
   "bookingId": {
-    "$oid": "674080afb31ac53d2dda78b2"
+    "$oid": "675ee24db793b3ef6eaf1524"
   },
   "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-16T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-22T13:01:35.223Z"
+    "$date": "2024-12-15T14:06:10.085Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:01:35.223Z"
+    "$date": "2024-12-15T14:06:10.085Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "6740820730d1b5f11092edc5"
+    "$oid": "675ee9f2f0a505cfc4c50cb6"
   },
-  "roomCateId": {
-    "$oid": "670b9896e91d9d4f21e97b5a"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670b9896e91d9d4f21e97b5a"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:51.174Z"
+    }
   },
   "customerId": {
-    "$oid": "6740820730d1b5f11092edb1"
+    "$oid": "675ee9eef0a505cfc4c50c31"
   },
   "bookingId": {
-    "$oid": "6740820730d1b5f11092edb3"
+    "$oid": "675ee9eff0a505cfc4c50c61"
   },
   "quantity": 2,
+  "receiveRoom": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-16T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-22T13:07:19.544Z"
+    "$date": "2024-12-15T14:38:42.568Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:07:19.544Z"
+    "$date": "2024-12-15T14:38:42.568Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "6740820730d1b5f11092edc8"
+    "$oid": "675ee9f2f0a505cfc4c50cc2"
   },
-  "roomCateId": {
-    "$oid": "670bd4bee91d9d4f21e97b62"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4dfe91d9d4f21e97b63"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 1,
+    "price": 300000,
+    "name": "phòng đơn",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường nhỏ dành cho 1 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:59.880Z"
+    }
   },
   "customerId": {
-    "$oid": "6740820730d1b5f11092edb1"
+    "$oid": "675ee9eef0a505cfc4c50c31"
   },
   "bookingId": {
-    "$oid": "6740820730d1b5f11092edb3"
+    "$oid": "675ee9eff0a505cfc4c50c61"
   },
   "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-16T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-22T13:07:19.546Z"
+    "$date": "2024-12-15T14:38:42.915Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:07:19.546Z"
+    "$date": "2024-12-15T14:38:42.915Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "6740820730d1b5f11092edca"
+    "$oid": "675eed88d22d1144af8ce248"
   },
-  "roomCateId": {
-    "$oid": "670bd4dfe91d9d4f21e97b63"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4dfe91d9d4f21e97b63"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 1,
+    "price": 300000,
+    "name": "phòng đơn",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường nhỏ dành cho 1 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:59.880Z"
+    }
   },
   "customerId": {
-    "$oid": "6740820730d1b5f11092edb1"
+    "$oid": "675eed84d22d1144af8ce1d0"
   },
   "bookingId": {
-    "$oid": "6740820730d1b5f11092edb3"
+    "$oid": "675eed86d22d1144af8ce1f2"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-30T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-31T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T14:54:00.986Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:54:00.986Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eefa3810b13e415218681"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670dbe2c5c9f636934a39e5d"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 2,
+    "price": 450000,
+    "name": "phòng VIP",
+    "locationId": {
+      "$oid": "66f6c59f285571f28087c16d"
+    },
+    "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:33.890Z"
+    }
+  },
+  "customerId": {
+    "$oid": "675eefa2810b13e41521864d"
+  },
+  "bookingId": {
+    "$oid": "675eefa2810b13e41521865a"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:02:59.948Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:02:59.948Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef24ad22d1144af8d718b"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670b9896e91d9d4f21e97b5a"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:51.174Z"
+    }
+  },
+  "customerId": {
+    "$oid": "675ef244d22d1144af8d70df"
+  },
+  "bookingId": {
+    "$oid": "675ef246d22d1144af8d710b"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-17T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-18T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:14:18.449Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:14:18.449Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef497d22d1144af8db500"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4dfe91d9d4f21e97b63"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 1,
+    "price": 300000,
+    "name": "phòng đơn",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường nhỏ dành cho 1 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:59.880Z"
+    }
+  },
+  "customerId": {
+    "$oid": "675ef491d22d1144af8db440"
+  },
+  "bookingId": {
+    "$oid": "675ef493d22d1144af8db477"
+  },
+  "quantity": 3,
+  "receiveRoom": {
+    "$date": "2024-11-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-11-18T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-11-15T15:24:07.483Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-15T15:24:07.483Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef497d22d1144af8db502"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670b9896e91d9d4f21e97b5a"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:51.174Z"
+    }
+  },
+  "customerId": {
+    "$oid": "675ef491d22d1144af8db440"
+  },
+  "bookingId": {
+    "$oid": "675ef493d22d1144af8db477"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-11-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-11-18T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-11-15T15:24:07.484Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-15T15:24:07.484Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef5d6d22d1144af8dd82c"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670b9896e91d9d4f21e97b5a"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:51.174Z"
+    }
+  },
+  "customerId": {
+    "$oid": "675ef5d2d22d1144af8dd7a9"
+  },
+  "bookingId": {
+    "$oid": "675ef5d4d22d1144af8dd7d2"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-25T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:29:26.817Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:29:26.817Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef5d6d22d1144af8dd82a"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4bee91d9d4f21e97b62"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 2,
+    "price": 450000,
+    "name": "phòng VIP",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:27.352Z"
+    }
+  },
+  "customerId": {
+    "$oid": "675ef5d2d22d1144af8dd7a9"
+  },
+  "bookingId": {
+    "$oid": "675ef5d4d22d1144af8dd7d2"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-25T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:29:26.816Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:29:26.816Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef601d22d1144af8ddd4d"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "6711b9537210b684ed056cad"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 2,
+    "price": 600000,
+    "name": "phòng VIP ",
+    "locationId": {
+      "$oid": "66f6c42f285571f28087c16a"
+    },
+    "createdAt": {
+      "$date": "2024-10-18T01:26:43.747Z"
+    },
+    "updatedAt": {
+      "$date": "2024-12-15T05:30:13.925Z"
+    },
+    "__v": 0,
+    "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách"
+  },
+  "customerId": {
+    "$oid": "675ef5fcd22d1144af8ddca6"
+  },
+  "bookingId": {
+    "$oid": "675ef5fed22d1144af8ddcea"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-16T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:30:09.456Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:30:09.456Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef751d22d1144af8dfc8c"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4bee91d9d4f21e97b62"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 2,
+    "price": 450000,
+    "name": "phòng VIP",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:27.352Z"
+    }
+  },
+  "customerId": {
+    "$oid": "675ef74dd22d1144af8dfc50"
+  },
+  "bookingId": {
+    "$oid": "675ef74ed22d1144af8dfc68"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-18T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:35:45.587Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:35:45.587Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675efc77a5e7d15f4c7c56c1"
+  },
+  "roomCategory": {
+    
+      "_id": {
+        "$oid": "670dbe1c5c9f636934a39e5c"
+      },
+      "numberOfBed": 2,
+      "numberOfHuman": 2,
+      "price": 400000,
+      "name": "phòng đôi",
+      "locationId": {
+        "$oid": "66f6c59f285571f28087c16d"
+      },
+      "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+      "updatedAt": {
+        "$date": "2024-12-15T05:31:44.206Z"
+      }
+    
+  },
+  "customerId": {
+    "$oid": "675efc76a5e7d15f4c7c5694"
+  },
+  "bookingId": {
+    "$oid": "675efc76a5e7d15f4c7c569b"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-16T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:57:43.297Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:57:43.297Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eff34d22d1144af8e409c"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4dfe91d9d4f21e97b63"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 1,
+    "price": 300000,
+    "name": "phòng đơn",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường nhỏ dành cho 1 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:59.880Z"
+    }
+  },
+  "customerId": {
+    "$oid": "675eff30d22d1144af8e406a"
+  },
+  "bookingId": {
+    "$oid": "675eff31d22d1144af8e407d"
   },
   "quantity": 2,
+  "receiveRoom": {
+    "$date": "2024-12-05T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-06T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-22T13:07:19.547Z"
+    "$date": "2024-12-06T16:09:24.518Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:07:19.547Z"
+    "$date": "2024-12-05T16:09:24.518Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "6740850e796dc4fe9ce803e1"
+    "$oid": "675eff34d22d1144af8e40a4"
   },
-  "roomCateId": {
-    "$oid": "670bd4dfe91d9d4f21e97b63"
-  },
-  "customerId": {
-    "$oid": "6740850e796dc4fe9ce803cd"
-  },
-  "bookingId": {
-    "$oid": "6740850e796dc4fe9ce803cf"
-  },
-  "quantity": 4,
-  "createdAt": {
-    "$date": "2024-11-22T13:20:14.764Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-22T13:20:14.764Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6740850e796dc4fe9ce803e4"
-  },
-  "roomCateId": {
-    "$oid": "670bd4bee91d9d4f21e97b62"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670b9896e91d9d4f21e97b5a"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:51.174Z"
+    }
   },
   "customerId": {
-    "$oid": "6740850e796dc4fe9ce803cd"
+    "$oid": "675eff30d22d1144af8e406a"
   },
   "bookingId": {
-    "$oid": "6740850e796dc4fe9ce803cf"
-  },
-  "quantity": 1,
-  "createdAt": {
-    "$date": "2024-11-22T13:20:14.765Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-22T13:20:14.765Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6740850e796dc4fe9ce803e6"
-  },
-  "roomCateId": {
-    "$oid": "670b9896e91d9d4f21e97b5a"
-  },
-  "customerId": {
-    "$oid": "6740850e796dc4fe9ce803cd"
-  },
-  "bookingId": {
-    "$oid": "6740850e796dc4fe9ce803cf"
+    "$oid": "675eff31d22d1144af8e407d"
   },
   "quantity": 2,
+  "receiveRoom": {
+    "$date": "2024-12-05T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-06T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-22T13:20:14.767Z"
+    "$date": "2024-12-05T16:09:24.560Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:20:14.767Z"
+    "$date": "2024-12-05T16:09:24.560Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "67408611796dc4fe9ce804cd"
+    "$oid": "675f0871d22d1144af8ed77d"
   },
-  "roomCateId": {
-    "$oid": "6711b9537210b684ed056cad"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670b9896e91d9d4f21e97b5a"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:51.174Z"
+    }
   },
   "customerId": {
-    "$oid": "67408611796dc4fe9ce804be"
+    "$oid": "675f086dd22d1144af8ed728"
   },
   "bookingId": {
-    "$oid": "67408611796dc4fe9ce804c0"
+    "$oid": "675f086ed22d1144af8ed73b"
   },
   "quantity": 1,
+  "receiveRoom": {
+    "$date": "2025-02-21T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2025-02-25T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-22T13:24:33.416Z"
+    "$date": "2024-12-15T16:48:49.863Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:24:33.416Z"
+    "$date": "2024-12-15T16:48:49.863Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "67408782796dc4fe9ce8062a"
+    "$oid": "675f0a07d5b8c9e08bd61559"
   },
-  "roomCateId": {
-    "$oid": "670dbe1c5c9f636934a39e5c"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670dbe1c5c9f636934a39e5c"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c59f285571f28087c16d"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:44.206Z"
+    }
   },
   "customerId": {
-    "$oid": "67408781796dc4fe9ce80618"
+    "$oid": "675f0a06d5b8c9e08bd6152b"
   },
   "bookingId": {
-    "$oid": "67408781796dc4fe9ce8061a"
+    "$oid": "675f0a06d5b8c9e08bd61539"
   },
   "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-16T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-22T13:30:42.016Z"
+    "$date": "2024-12-15T16:55:35.371Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:30:42.016Z"
+    "$date": "2024-12-15T16:55:35.371Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "67408782796dc4fe9ce8062c"
+    "$oid": "675f0a52d22d1144af8ef9cd"
   },
-  "roomCateId": {
-    "$oid": "670dbe2c5c9f636934a39e5d"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4dfe91d9d4f21e97b63"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 1,
+    "price": 300000,
+    "name": "phòng đơn",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường nhỏ dành cho 1 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:59.880Z"
+    }
   },
   "customerId": {
-    "$oid": "67408781796dc4fe9ce80618"
+    "$oid": "675f0a4ed22d1144af8ef985"
   },
   "bookingId": {
-    "$oid": "67408781796dc4fe9ce8061a"
+    "$oid": "675f0a4fd22d1144af8ef99d"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-16T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T16:56:50.319Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:56:50.319Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0c8cd5b8c9e08bd66b54"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "6711b8083ec99c24fb9ea0b1"
+    },
+    "numberOfBed": 3,
+    "numberOfHuman": 3,
+    "price": 500000,
+    "name": "phòng 3 giường",
+    "locationId": {
+      "$oid": "66f6c42f285571f28087c16a"
+    },
+    "updatedAt": {
+      "$date": "2024-12-15T05:29:04.720Z"
+    },
+    "description": "Phòng có 3 giường nhỏ dành cho 3 người"
+  },
+  "customerId": {
+    "$oid": "675f0b33d5b8c9e08bd63ff9"
+  },
+  "bookingId": {
+    "$oid": "675f0b33d5b8c9e08bd64010"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:06:20.004Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:06:20.004Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0c9dd5b8c9e08bd66dd0"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "6711b9537210b684ed056cad"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 2,
+    "price": 600000,
+    "name": "phòng VIP ",
+    "locationId": {
+      "$oid": "66f6c42f285571f28087c16a"
+    },
+    "createdAt": {
+      "$date": "2024-10-18T01:26:43.747Z"
+    },
+    "updatedAt": {
+      "$date": "2024-12-15T05:30:13.925Z"
+    },
+    "__v": 0,
+    "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách"
+  },
+  "customerId": {
+    "$oid": "675f0b33d5b8c9e08bd63ff9"
+  },
+  "bookingId": {
+    "$oid": "675f0b33d5b8c9e08bd64010"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:06:37.326Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:06:37.326Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f139fd5b8c9e08bd75e97"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "6711b9537210b684ed056cad"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 2,
+    "price": 600000,
+    "name": "phòng VIP ",
+    "locationId": {
+      "$oid": "66f6c42f285571f28087c16a"
+    },
+    "createdAt": {
+      "$date": "2024-10-18T01:26:43.747Z"
+    },
+    "updatedAt": {
+      "$date": "2024-12-15T05:30:13.925Z"
+    },
+    "__v": 0,
+    "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách"
+  },
+  "customerId": {
+    "$oid": "675f139ed5b8c9e08bd75e6b"
+  },
+  "bookingId": {
+    "$oid": "675f139ed5b8c9e08bd75e78"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-16T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-17T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:36:31.676Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:36:31.676Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f17c7d22d1144af903200"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670dbe2c5c9f636934a39e5d"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 2,
+    "price": 450000,
+    "name": "phòng VIP",
+    "locationId": {
+      "$oid": "66f6c59f285571f28087c16d"
+    },
+    "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:33.890Z"
+    }
+  },
+  "customerId": {
+    "$oid": "675f17c3d22d1144af90317a"
+  },
+  "bookingId": {
+    "$oid": "675f17c4d22d1144af9031b1"
   },
   "quantity": 2,
+  "receiveRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-27T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-22T13:30:42.017Z"
+    "$date": "2024-12-15T17:54:15.469Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:30:42.017Z"
+    "$date": "2024-12-15T17:54:15.469Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "6741cb7753420b88eb1726e9"
+    "$oid": "675f17c7d22d1144af903202"
   },
-  "roomCateId": {
-    "$oid": "670b9896e91d9d4f21e97b5a"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670dbe1c5c9f636934a39e5c"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c59f285571f28087c16d"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:44.206Z"
+    }
   },
   "customerId": {
-    "$oid": "6741cb7753420b88eb1726da"
+    "$oid": "675f17c3d22d1144af90317a"
   },
   "bookingId": {
-    "$oid": "6741cb7753420b88eb1726dc"
+    "$oid": "675f17c4d22d1144af9031b1"
   },
   "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-27T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-23T12:32:55.672Z"
+    "$date": "2024-12-15T17:54:15.490Z"
   },
   "updatedAt": {
-    "$date": "2024-11-23T12:32:55.672Z"
+    "$date": "2024-12-15T17:54:15.490Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "6745d6e8104506461fa710cf"
+    "$oid": "67603d63a947f4672cdd10b7"
   },
-  "roomCateId": {
-    "$oid": "670b9896e91d9d4f21e97b5a"
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4bee91d9d4f21e97b62"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 2,
+    "price": 450000,
+    "name": "phòng VIP",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:27.352Z"
+    }
   },
   "customerId": {
-    "$oid": "6745d6e8104506461fa710c0"
+    "$oid": "67603bd0a947f4672cdcfe61"
   },
   "bookingId": {
-    "$oid": "6745d6e8104506461fa710c2"
+    "$oid": "67603bd2a947f4672cdcfe81"
   },
   "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-22T00:00:00.000Z"
+  },
   "createdAt": {
-    "$date": "2024-11-26T14:10:48.608Z"
+    "$date": "2024-12-16T14:46:59.218Z"
   },
   "updatedAt": {
-    "$date": "2024-11-26T14:10:48.608Z"
+    "$date": "2024-12-16T14:46:59.218Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760484da947f4672cdded9b"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4dfe91d9d4f21e97b63"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 1,
+    "price": 300000,
+    "name": "phòng đơn",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường nhỏ dành cho 1 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:59.880Z"
+    }
+  },
+  "customerId": {
+    "$oid": "67604849a947f4672cdded3f"
+  },
+  "bookingId": {
+    "$oid": "6760484aa947f4672cdded65"
+  },
+  "quantity": 2,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-22T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:33:33.410Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:33:33.410Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676049c4a947f4672cde083e"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670b9896e91d9d4f21e97b5a"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:51.174Z"
+    }
+  },
+  "customerId": {
+    "$oid": "676049bfa947f4672cde07cf"
+  },
+  "bookingId": {
+    "$oid": "676049c1a947f4672cde07fe"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-17T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-18T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:39:48.043Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:39:48.043Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760ed24cd83e912201f3755"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670bd4dfe91d9d4f21e97b63"
+    },
+    "numberOfBed": 1,
+    "numberOfHuman": 1,
+    "price": 300000,
+    "name": "phòng đơn",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 1 giường nhỏ dành cho 1 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:59.880Z"
+    }
+  },
+  "customerId": {
+    "$oid": "6760ed1fcd83e912201f3714"
+  },
+  "bookingId": {
+    "$oid": "6760ed21cd83e912201f3730"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T03:16:52.081Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T03:16:52.081Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760ed24cd83e912201f3757"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670b9896e91d9d4f21e97b5a"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c536285571f28087c16b"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:51.174Z"
+    }
+  },
+  "customerId": {
+    "$oid": "6760ed1fcd83e912201f3714"
+  },
+  "bookingId": {
+    "$oid": "6760ed21cd83e912201f3730"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T03:16:52.095Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T03:16:52.095Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613445cd83e91220200509"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670dbe1c5c9f636934a39e5c"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c59f285571f28087c16d"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:44.206Z"
+    }
+  },
+  "customerId": {
+    "$oid": "67613441cd83e912202004dc"
+  },
+  "bookingId": {
+    "$oid": "67613442cd83e912202004ee"
+  },
+  "quantity": 2,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:20:21.318Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:20:21.318Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613cc5cd83e91220208829"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670dbe1c5c9f636934a39e5c"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c59f285571f28087c16d"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:44.206Z"
+    }
+  },
+  "customerId": {
+    "$oid": "67613cc0cd83e912202087c1"
+  },
+  "bookingId": {
+    "$oid": "67613cc2cd83e912202087ec"
+  },
+  "quantity": 2,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:56:37.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:56:37.695Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613e3acd83e9122020a272"
+  },
+  "roomCategory": {
+    "_id": {
+      "$oid": "670dbe1c5c9f636934a39e5c"
+    },
+    "numberOfBed": 2,
+    "numberOfHuman": 2,
+    "price": 400000,
+    "name": "phòng đôi",
+    "locationId": {
+      "$oid": "66f6c59f285571f28087c16d"
+    },
+    "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+    "updatedAt": {
+      "$date": "2024-12-15T05:31:44.206Z"
+    }
+  },
+  "customerId": {
+    "$oid": "67613cc0cd83e912202087c1"
+  },
+  "bookingId": {
+    "$oid": "67613cc2cd83e912202087ec"
+  },
+  "quantity": 1,
+  "receiveRoom": {
+    "$date": "2024-12-20T00:00:00.000Z"
+  },
+  "returnRoom": {
+    "$date": "2024-12-21T00:00:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T09:02:50.039Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T09:02:50.039Z"
   },
   "__v": 0
 }]

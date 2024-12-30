@@ -1,0 +1,360 @@
+[{
+  "_id": {
+    "$oid": "675064ff10a68d9a2db905d6"
+  },
+  "name": "Huong Sen",
+  "phone": "0984378235",
+  "address": "abcxyz",
+  "stk": "Agribank - 3530205071993",
+  "code": "abc1234",
+  "customerId": {
+    "$oid": "675064ff10a68d9a2db905d3"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6750650510a68d9a2db90636"
+  },
+  "name": "Huong Sen",
+  "phone": "0984378235",
+  "address": "abcxyz",
+  "stk": "Agribank - 3530205071993",
+  "code": "abc1234",
+  "customerId": {
+    "$oid": "6750650410a68d9a2db90633"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:19:49.036Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:49.036Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6750650e10a68d9a2db906c3"
+  },
+  "name": "Huong Sen",
+  "phone": "0984378235",
+  "address": "abcxyz",
+  "stk": "Agribank - 3530205071993",
+  "code": "abc1234",
+  "customerId": {
+    "$oid": "6750650e10a68d9a2db906c0"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:19:58.262Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:58.262Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6750650f10a68d9a2db90701"
+  },
+  "name": "Huong Sen",
+  "phone": "0984378235",
+  "address": "abcxyz",
+  "stk": "Agribank - 3530205071993",
+  "code": "abc1234",
+  "customerId": {
+    "$oid": "6750650f10a68d9a2db906ff"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:19:59.938Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:59.938Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6750651b10a68d9a2db9077f"
+  },
+  "name": "Huong Sen",
+  "phone": "0984378235",
+  "address": "abcxyz",
+  "stk": "Agribank - 3530205071993",
+  "code": "abc1234",
+  "customerId": {
+    "$oid": "6750651b10a68d9a2db9077d"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:20:11.794Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:20:11.794Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675067b610a68d9a2db927f7"
+  },
+  "name": "abc",
+  "phone": "0984378235",
+  "address": "abcxyz",
+  "stk": "3530205071993",
+  "code": "abc12345",
+  "customerId": {
+    "$oid": "675067b610a68d9a2db927f4"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:31:18.078Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:31:18.078Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e15995556842c7ff2cb3"
+  },
+  "name": "CSDPHDDDkLLLLLLL",
+  "phone": "0869098854",
+  "address": "Hà Tĩnh",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "1111111111111111",
+  "customerId": {
+    "$oid": "6755e15995556842c7ff2cac"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:11:37.224Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:11:37.224Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675870477f863c390a95b192"
+  },
+  "name": "phan công hiếu 0869098854",
+  "phone": "0869098854",
+  "address": "Hà Tĩnh",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "483756",
+  "customerId": {
+    "$oid": "675870467f863c390a95b190"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T16:45:59.015Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T16:45:59.015Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675888d835ee8905d9077a9b"
+  },
+  "name": "hugo phan",
+  "phone": "0869098854",
+  "address": "yery",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "483756",
+  "customerId": {
+    "$oid": "675888d835ee8905d9077a98"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:30:48.450Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:30:48.450Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67588def31caf5f0f9473249"
+  },
+  "name": "hugo phan",
+  "phone": "0869098854",
+  "address": "yery",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "48375687465",
+  "customerId": {
+    "$oid": "67588dee31caf5f0f9473247"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:52:31.097Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:52:31.097Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67589cea3ce19a5f1010f1f0"
+  },
+  "name": "hugo phan",
+  "phone": "0869098854",
+  "address": "yery",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "48375687465",
+  "customerId": {
+    "$oid": "67589cea3ce19a5f1010f1ed"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T19:56:26.769Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T19:56:26.769Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675904fcd3ba4bd49ebd2bb2"
+  },
+  "name": "Bộ chính trị",
+  "phone": "0869098854",
+  "address": "Hà Nội",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "48375687465",
+  "customerId": {
+    "$oid": "675904fbd3ba4bd49ebd2bb0"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:20:28.441Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:20:28.441Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef5fcd22d1144af8ddcbf"
+  },
+  "name": "113 ",
+  "phone": "0964283968",
+  "address": "LK15 Số 61 Nguyễn Trường Tộ",
+  "stk": "VCB: 0101001223736",
+  "code": "010101010101",
+  "customerId": {
+    "$oid": "675ef5fcd22d1144af8ddca6"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:30:04.853Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:30:04.853Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0b33d5b8c9e08bd64002"
+  },
+  "name": "Pháo binh",
+  "phone": "0869098854",
+  "address": "Hà nội, Sơn tây",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "PB07",
+  "customerId": {
+    "$oid": "675f0b33d5b8c9e08bd63ff9"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:00:35.400Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:00:35.400Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603bd0a947f4672cdcfe6e"
+  },
+  "name": "Đại biểu quốc hội",
+  "phone": "0869098854",
+  "address": "Hà nội",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "DH1",
+  "customerId": {
+    "$oid": "67603bd0a947f4672cdcfe61"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:40:16.735Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:40:16.735Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676049bfa947f4672cde07e1"
+  },
+  "name": "Đại biểu quốc hội",
+  "phone": "0869098854",
+  "address": "Hà nội",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "DH12",
+  "customerId": {
+    "$oid": "676049bfa947f4672cde07cf"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:39:43.882Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:39:43.882Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760ed20cd83e912201f371e"
+  },
+  "name": "Đại biểu Công Hiếu",
+  "phone": "0869098854",
+  "address": "Hà nội",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "DHPC1",
+  "customerId": {
+    "$oid": "6760ed1fcd83e912201f3714"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T03:16:48.131Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T03:16:48.131Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613cc1cd83e912202087d2"
+  },
+  "name": "Đại biểu Công Hiếu",
+  "phone": "0869098854",
+  "address": "Hà nội",
+  "stk": "Ngân Hàng A: 12345678",
+  "code": "DHPC1",
+  "customerId": {
+    "$oid": "67613cc0cd83e912202087c1"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:56:33.314Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:56:33.314Z"
+  },
+  "__v": 0
+}]
