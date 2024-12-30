@@ -123,7 +123,7 @@ app.get('/profile', verifyAccessToken, (req, res) => {
   res.json({ message: `Hello, ${req.payload.aud}` });
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 9999;
 
 // app.use(function (req, res, next) {
 //   req.io = io;

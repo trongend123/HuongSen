@@ -37,7 +37,7 @@ export const createOrderRoom = async (req, res) => {
 
     // Tạo OrderRoom mới
     const newOrderRoom = await OrderRoomRepository.create({
-      roomCateId,
+      roomCategory: roomCategory.toObject(),
       customerId,
       bookingId,
       quantity,
@@ -347,6 +347,7 @@ export const getOrderRoomsByBookingId = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
 
 // Hàm cập nhật OrderRoom
 export const updateOrderRoom = async (req, res) => {
