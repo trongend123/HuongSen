@@ -1,18 +1,5 @@
 [{
   "_id": {
-    "$oid": "674080afb31ac53d2dda78b2"
-  },
-  "content": "Đã hoàn thành",
-  "createdAt": {
-    "$date": "2024-11-22T13:01:35.197Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-22T13:01:35.197Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "674732c5b6fa7f1b217b59a4"
   },
   "content": "abc",
@@ -21,71 +8,6 @@
   },
   "updatedAt": {
     "$date": "2024-11-27T14:55:01.303Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "674732c7b6fa7f1b217b5d2e"
-  },
-  "content": "abc",
-  "createdAt": {
-    "$date": "2024-11-27T14:55:03.299Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T14:55:03.299Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "674732d156eaaa24b5d28938"
-  },
-  "content": "abc",
-  "createdAt": {
-    "$date": "2024-11-27T14:55:13.572Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T14:55:13.572Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "674732eb56eaaa24b5d2bd49"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T14:55:39.113Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T14:55:39.113Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "674732ec56eaaa24b5d2bfa9"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T14:55:40.190Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T14:55:40.190Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6747330156eaaa24b5d2f029"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T14:56:01.403Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T14:56:01.403Z"
   },
   "__v": 0
 },
@@ -104,19 +26,6 @@
 },
 {
   "_id": {
-    "$oid": "67473500a45007c1619d955f"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:04:32.744Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:04:32.744Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "67473507012f50e064ecfcb1"
   },
   "content": "New notification from React!",
@@ -130,14 +39,40 @@
 },
 {
   "_id": {
-    "$oid": "6747351b012f50e064ecfcd6"
+    "$oid": "67473977012f50e064f322a2"
   },
   "content": "New notification from React!",
   "createdAt": {
-    "$date": "2024-11-27T15:04:59.843Z"
+    "$date": "2024-11-27T15:23:35.620Z"
   },
   "updatedAt": {
-    "$date": "2024-11-27T15:04:59.843Z"
+    "$date": "2024-11-27T15:23:35.620Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67474326412b33e74bda6814"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T16:04:54.345Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T16:04:54.345Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674732d156eaaa24b5d28938"
+  },
+  "content": "abc",
+  "createdAt": {
+    "$date": "2024-11-27T14:55:13.572Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T14:55:13.572Z"
   },
   "__v": 0
 },
@@ -151,6 +86,45 @@
   },
   "updatedAt": {
     "$date": "2024-11-27T15:21:51.371Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67473976012f50e064f3229a"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T15:23:34.390Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T15:23:34.390Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6747402f012f50e064ff5d82"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T15:52:15.294Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T15:52:15.294Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6747432a412b33e74bda6c47"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T16:04:58.496Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T16:04:58.496Z"
   },
   "__v": 0
 },
@@ -208,32 +182,6 @@
 },
 {
   "_id": {
-    "$oid": "67473976012f50e064f3229a"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:23:34.390Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:23:34.390Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67473977012f50e064f3229c"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:23:35.004Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:23:35.004Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "67473977012f50e064f3229e"
   },
   "content": "New notification from React!",
@@ -242,45 +190,6 @@
   },
   "updatedAt": {
     "$date": "2024-11-27T15:23:35.208Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67473977012f50e064f322a0"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:23:35.396Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:23:35.396Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67473977012f50e064f322a2"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:23:35.620Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:23:35.620Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "674739c2012f50e064f33b62"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:24:50.647Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:24:50.647Z"
   },
   "__v": 0
 },
@@ -299,45 +208,6 @@
 },
 {
   "_id": {
-    "$oid": "67473e51012f50e064fbf47d"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:44:17.750Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:44:17.750Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67473f36012f50e064fd95bb"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:48:06.772Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:48:06.772Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6747402f012f50e064ff5d82"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:52:15.294Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:52:15.294Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "67474086412b33e74bd7cf67"
   },
   "content": "New notification from React!",
@@ -346,19 +216,6 @@
   },
   "updatedAt": {
     "$date": "2024-11-27T15:53:42.505Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67474089412b33e74bd7d4af"
-  },
-  "content": "New notification from React!",
-  "createdAt": {
-    "$date": "2024-11-27T15:53:45.475Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-27T15:53:45.475Z"
   },
   "__v": 0
 },
@@ -377,27 +234,5771 @@
 },
 {
   "_id": {
-    "$oid": "67474326412b33e74bda6814"
+    "$oid": "674080afb31ac53d2dda78b2"
   },
-  "content": "New notification from React!",
+  "content": "Đã hoàn thành",
   "createdAt": {
-    "$date": "2024-11-27T16:04:54.345Z"
+    "$date": "2024-11-22T13:01:35.197Z"
   },
   "updatedAt": {
-    "$date": "2024-11-27T16:04:54.345Z"
+    "$date": "2024-11-22T13:01:35.197Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "6747432a412b33e74bda6c47"
+    "$oid": "674732c7b6fa7f1b217b5d2e"
+  },
+  "content": "abc",
+  "createdAt": {
+    "$date": "2024-11-27T14:55:03.299Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T14:55:03.299Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6747351b012f50e064ecfcd6"
   },
   "content": "New notification from React!",
   "createdAt": {
-    "$date": "2024-11-27T16:04:58.496Z"
+    "$date": "2024-11-27T15:04:59.843Z"
   },
   "updatedAt": {
-    "$date": "2024-11-27T16:04:58.496Z"
+    "$date": "2024-11-27T15:04:59.843Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674739c2012f50e064f33b62"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T15:24:50.647Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T15:24:50.647Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674732eb56eaaa24b5d2bd49"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T14:55:39.113Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T14:55:39.113Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67473e51012f50e064fbf47d"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T15:44:17.750Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T15:44:17.750Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67474089412b33e74bd7d4af"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T15:53:45.475Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T15:53:45.475Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6747330156eaaa24b5d2f029"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T14:56:01.403Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T14:56:01.403Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67473500a45007c1619d955f"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T15:04:32.744Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T15:04:32.744Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67473977012f50e064f3229c"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T15:23:35.004Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T15:23:35.004Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674732ec56eaaa24b5d2bfa9"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T14:55:40.190Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T14:55:40.190Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67473977012f50e064f322a0"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T15:23:35.396Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T15:23:35.396Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67473f36012f50e064fd95bb"
+  },
+  "content": "New notification from React!",
+  "createdAt": {
+    "$date": "2024-11-27T15:48:06.772Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-27T15:48:06.772Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674f3cbb2a1dbffe3bcefd7b"
+  },
+  "content": "Lễ tân đã cập nhật dịch vụ",
+  "createdAt": {
+    "$date": "2024-12-03T17:15:39.825Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-03T17:15:39.825Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674f3cc62a1dbffe3bcefde8"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "createdAt": {
+    "$date": "2024-12-03T17:15:50.047Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-03T17:15:50.047Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674f3d912a1dbffe3bcf05a0"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "createdAt": {
+    "$date": "2024-12-03T17:19:13.880Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-03T17:19:13.880Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674f3d912a1dbffe3bcf05a4"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "createdAt": {
+    "$date": "2024-12-03T17:19:13.918Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-03T17:19:13.918Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674f3dc12a1dbffe3bcf07c0"
+  },
+  "content": "Lễ tân đã cập nhật dịch vụ",
+  "createdAt": {
+    "$date": "2024-12-03T17:20:01.028Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-03T17:20:01.028Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67512e274cd3d0145dda2a75"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã cập nhật thông tin phòng",
+  "createdAt": {
+    "$date": "2024-12-05T04:37:59.716Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T04:37:59.716Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67512e654cd3d0145dda2ec5"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã cập nhật thông tin phòng",
+  "createdAt": {
+    "$date": "2024-12-05T04:39:01.526Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T04:39:01.526Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67512e9a4cd3d0145dda323b"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã yêu cầu hủy phòng, hoàn tiền",
+  "createdAt": {
+    "$date": "2024-12-05T04:39:54.875Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T04:39:54.875Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675157ae4cd3d0145ddb1908"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã cập nhật thông tin phòng",
+  "createdAt": {
+    "$date": "2024-12-05T07:35:10.686Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T07:35:10.686Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675157c74cd3d0145ddb1aba"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã cập nhật thông tin phòng",
+  "createdAt": {
+    "$date": "2024-12-05T07:35:35.458Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T07:35:35.458Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675158244cd3d0145ddb214b"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã cập nhật thông tin phòng",
+  "createdAt": {
+    "$date": "2024-12-05T07:37:08.892Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T07:37:08.892Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675158584cd3d0145ddb24d1"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã cập nhật thông tin phòng",
+  "createdAt": {
+    "$date": "2024-12-05T07:38:00.356Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T07:38:00.356Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675158af4cd3d0145ddb2a9b"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã cập nhật thông tin phòng",
+  "createdAt": {
+    "$date": "2024-12-05T07:39:27.006Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T07:39:27.006Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675158bc4cd3d0145ddb2b90"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã cập nhật thông tin phòng",
+  "createdAt": {
+    "$date": "2024-12-05T07:39:40.251Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T07:39:40.251Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67517fbf4cd3d0145ddba9ec"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã thêm dịch vụ",
+  "createdAt": {
+    "$date": "2024-12-05T10:26:07.761Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T10:26:07.761Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6751833c4cd3d0145ddbaa3e"
+  },
+  "content": "Đơn đặt phòng của khách đoàn đã được cập nhật.",
+  "createdAt": {
+    "$date": "2024-12-05T10:41:00.773Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T10:41:00.773Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675183404cd3d0145ddbaa56"
+  },
+  "content": "Lễ tân đã cập nhật dịch vụ",
+  "createdAt": {
+    "$date": "2024-12-05T10:41:04.995Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T10:41:04.995Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675184e64cd3d0145ddbaaf6"
+  },
+  "content": "6740820730d1b5f11092edb3 khách đã thêm dịch vụ",
+  "createdAt": {
+    "$date": "2024-12-05T10:48:06.528Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T10:48:06.528Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6751b4964cd3d0145ddbab0b"
+  },
+  "content": "6740820730d1b5f11092edb3 khách đã yêu cầu hủy phòng, hoàn tiền",
+  "createdAt": {
+    "$date": "2024-12-05T14:11:34.630Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T14:11:34.630Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6751b49e4cd3d0145ddbab1c"
+  },
+  "content": "6740820730d1b5f11092edb3 khách đã yêu cầu hủy phòng, hoàn tiền",
+  "createdAt": {
+    "$date": "2024-12-05T14:11:42.437Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T14:11:42.437Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6751b4b84cd3d0145ddbab25"
+  },
+  "content": "6740820730d1b5f11092edb3 khách đã xóa dịch vụ",
+  "createdAt": {
+    "$date": "2024-12-05T14:12:08.120Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T14:12:08.120Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6751b4e94cd3d0145ddbab40"
+  },
+  "content": "6740820730d1b5f11092edb3 khách đã yêu cầu hủy phòng, hoàn tiền",
+  "createdAt": {
+    "$date": "2024-12-05T14:12:57.163Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T14:12:57.163Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6751b7fe4cd3d0145ddc5055"
+  },
+  "content": "67408611796dc4fe9ce804c0 khách đã yêu cầu hủy phòng, hoàn tiền",
+  "createdAt": {
+    "$date": "2024-12-05T14:26:06.070Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-05T14:26:06.070Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752aeecdab615866452abcb"
+  },
+  "content": "Phòng ĐS_315 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T07:59:40.596Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T07:59:40.596Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752aef4dab615866452ac56"
+  },
+  "content": "Phòng ĐS_315 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T07:59:48.502Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T07:59:48.502Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752b003dab615866452be3b"
+  },
+  "content": "Phòng ĐS_609 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T08:04:19.708Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T08:04:19.708Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752c814dab6158664545092"
+  },
+  "content": "Phòng ĐS_610 đã chuyển trạng thái sang Đã book.",
+  "createdAt": {
+    "$date": "2024-12-06T09:47:00.827Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T09:47:00.827Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752c81adab61586645450fc"
+  },
+  "content": "Phòng ĐS_610 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T09:47:06.833Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T09:47:06.833Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752c81ddab6158664545137"
+  },
+  "content": "Phòng ĐS_610 đã chuyển trạng thái sang Đang sửa chữa.",
+  "createdAt": {
+    "$date": "2024-12-06T09:47:09.937Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T09:47:09.937Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752c820dab615866454516c"
+  },
+  "content": "Phòng ĐS_610 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T09:47:12.651Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T09:47:12.651Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752cab0dab6158664547b01"
+  },
+  "content": "Phòng ĐS_303 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T09:58:08.649Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T09:58:08.649Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752cab3dab6158664547b3c"
+  },
+  "content": "Phòng ĐS_303 đã chuyển trạng thái sang Đã book.",
+  "createdAt": {
+    "$date": "2024-12-06T09:58:11.811Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T09:58:11.811Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752cb4fdab6158664548560"
+  },
+  "content": "Phòng ĐS_610 đã chuyển trạng thái sang Đã book.",
+  "createdAt": {
+    "$date": "2024-12-06T10:00:47.623Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T10:00:47.623Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752cb5adab615866454861d"
+  },
+  "content": "Phòng ĐS_606 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T10:00:58.804Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T10:00:58.804Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752d4ff8db6eda29471279b"
+  },
+  "content": "Phòng ĐS_609 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T10:42:07.506Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T10:42:07.506Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752d7167ea03fd135b2a47d"
+  },
+  "content": "Phòng ĐS_609 đã chuyển trạng thái sang Đã book.",
+  "createdAt": {
+    "$date": "2024-12-06T10:51:02.897Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T10:51:02.897Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752d71d7ea03fd135b2a482"
+  },
+  "content": "Phòng ĐS_609 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T10:51:09.153Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T10:51:09.153Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752d8a77ea03fd135b2a6d5"
+  },
+  "content": "Phòng ĐS_310 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T10:57:43.793Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T10:57:43.793Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752da165ffe8aab8adb533f"
+  },
+  "content": "Phòng ĐS_310 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T11:03:50.922Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:03:50.922Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752da285ffe8aab8adb544e"
+  },
+  "content": "Phòng ĐS_311 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T11:04:08.134Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:04:08.134Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752dae35ffe8aab8adb5f1c"
+  },
+  "content": "Phòng ĐS_311 đã chuyển trạng thái sang Đã book.",
+  "createdAt": {
+    "$date": "2024-12-06T11:07:15.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:07:15.691Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752daed5ffe8aab8adb5fc0"
+  },
+  "content": "Phòng ĐS_311 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T11:07:25.731Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:07:25.731Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752dc175ffe8aab8adb761b"
+  },
+  "content": "Phòng ĐS_311 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T11:12:23.354Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:12:23.354Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752dd255ffe8aab8adb9604"
+  },
+  "content": "Phòng ĐS_306 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T11:16:53.527Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:16:53.527Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752df65dab6158664559cf6"
+  },
+  "content": "Phòng ĐS_706 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T11:26:29.329Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:26:29.329Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752df225ffe8aab8adbd184"
+  },
+  "content": "Phòng ĐS_311 đã chuyển trạng thái sang Đã book.",
+  "createdAt": {
+    "$date": "2024-12-06T11:25:22.525Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:25:22.525Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752df2e5ffe8aab8adbd2d7"
+  },
+  "content": "Phòng ĐS_311 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T11:25:34.019Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:25:34.019Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e044683f089413e04890"
+  },
+  "content": "Phòng ĐS_603 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T11:30:12.914Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:30:12.914Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e0485b3e86356c71f987"
+  },
+  "content": "Phòng ĐS_603 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T11:30:16.940Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:30:16.940Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e0515b3e86356c71f9fb"
+  },
+  "content": "Phòng ĐS_603 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T11:30:25.529Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:30:25.529Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e0c05b3e86356c720006"
+  },
+  "content": "Phòng ĐS_603 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T11:32:16.888Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:32:16.888Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e2bd5b3e86356c721cde"
+  },
+  "content": "Phòng ĐS_604 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T11:40:45.539Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:40:45.539Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e3455b3e86356c722446"
+  },
+  "content": "Phòng ĐS_604 đã chuyển trạng thái sang Đã book.",
+  "createdAt": {
+    "$date": "2024-12-06T11:43:01.024Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:43:01.024Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e3bd5b3e86356c722b39"
+  },
+  "content": "Phòng ĐS_604 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T11:45:01.925Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:45:01.925Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e3c45b3e86356c722b9f"
+  },
+  "content": "Phòng ĐS_604 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T11:45:08.497Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:45:08.497Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e3d05b3e86356c722c4a"
+  },
+  "content": "Phòng ĐS_604 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T11:45:20.016Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T11:45:20.016Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6752e752dab61586645620b6"
+  },
+  "content": "Phòng ĐS_509 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-06T12:00:18.890Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T12:00:18.890Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675323c7dab6158664585393"
+  },
+  "content": "Phòng ĐS_511 đã chuyển trạng thái sang Đã book.",
+  "createdAt": {
+    "$date": "2024-12-06T16:18:15.581Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T16:18:15.581Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753256fdab61586645854b1"
+  },
+  "content": "Phòng ĐS_511 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-06T16:25:19.034Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T16:25:19.034Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753301cdab615866458586b"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "createdAt": {
+    "$date": "2024-12-06T17:10:52.362Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T17:10:52.362Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6753301cdab6158664585868"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "createdAt": {
+    "$date": "2024-12-06T17:10:52.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T17:10:52.358Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67533040dab6158664585953"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "createdAt": {
+    "$date": "2024-12-06T17:11:28.483Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T17:11:28.483Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67536569dab6158664585c16"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "createdAt": {
+    "$date": "2024-12-06T20:58:17.657Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T20:58:17.657Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675366f3dab6158664585d7f"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "createdAt": {
+    "$date": "2024-12-06T21:04:51.024Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T21:04:51.024Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675366f3dab6158664585d7b"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "createdAt": {
+    "$date": "2024-12-06T21:04:51.017Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-06T21:04:51.017Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675404d1f16941de78c1ebd2"
+  },
+  "content": "Đơn đặt phòng của khách đoàn đã được cập nhật.",
+  "createdAt": {
+    "$date": "2024-12-07T08:18:25.122Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T08:18:25.122Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67540543f16941de78c1f34c"
+  },
+  "content": "Đơn đặt phòng của khách đoàn đã được cập nhật.",
+  "createdAt": {
+    "$date": "2024-12-07T08:20:19.015Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T08:20:19.015Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67540576f16941de78c1f70f"
+  },
+  "content": "Đơn đặt phòng của khách đoàn đã được cập nhật.",
+  "createdAt": {
+    "$date": "2024-12-07T08:21:10.181Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T08:21:10.181Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675409eff16941de78c244a6"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "createdAt": {
+    "$date": "2024-12-07T08:40:15.138Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T08:40:15.138Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675409eff16941de78c244ad"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "createdAt": {
+    "$date": "2024-12-07T08:40:15.208Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T08:40:15.208Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675409eff16941de78c244b1"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "createdAt": {
+    "$date": "2024-12-07T08:40:15.224Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T08:40:15.224Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67540a16f16941de78c24616"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "createdAt": {
+    "$date": "2024-12-07T08:40:54.014Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T08:40:54.014Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67540cb6f16941de78c265a1"
+  },
+  "content": "Lễ tân đã cập nhật dịch vụ",
+  "createdAt": {
+    "$date": "2024-12-07T08:52:06.684Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T08:52:06.684Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67540eeff16941de78c27b55"
+  },
+  "content": "Lễ tân đã cập nhật dịch vụ",
+  "createdAt": {
+    "$date": "2024-12-07T09:01:35.477Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T09:01:35.477Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67540f02f16941de78c27c15"
+  },
+  "content": "Lễ tân đã cập nhật dịch vụ",
+  "createdAt": {
+    "$date": "2024-12-07T09:01:54.116Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T09:01:54.116Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67541e5ef16941de78c2cb60"
+  },
+  "content": "Đơn đặt phòng của khách đoàn đã được cập nhật.",
+  "createdAt": {
+    "$date": "2024-12-07T10:07:26.856Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T10:07:26.856Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67543419f16941de78c31c00"
+  },
+  "content": "Đơn đặt phòng của khách đoàn đã được cập nhật.",
+  "createdAt": {
+    "$date": "2024-12-07T11:40:09.968Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T11:40:09.968Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67547d96a076f2bbe3805154"
+  },
+  "content": "Hieu ngu",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-07T16:53:42.521Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T16:53:42.521Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675485004bda1247df85c5d9"
+  },
+  "content": "Hieu ngu",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-07T17:25:20.496Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T17:25:20.496Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67548f17eb3dca9b7bf44ed5"
+  },
+  "content": "Phòng ĐS_602 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-07T18:08:23.389Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T18:08:23.389Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67548f39eb3dca9b7bf450c6"
+  },
+  "content": "Phòng MK_705 đã chuyển trạng thái sang Đang sử dụng.",
+  "createdAt": {
+    "$date": "2024-12-07T18:08:57.747Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T18:08:57.747Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67548f41eb3dca9b7bf450e8"
+  },
+  "content": "Phòng MK_705 đã chuyển trạng thái sang Đang sửa chữa.",
+  "createdAt": {
+    "$date": "2024-12-07T18:09:05.640Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T18:09:05.640Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67548f62eb3dca9b7bf45205"
+  },
+  "content": "Phòng MK_705 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-07T18:09:38.751Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T18:09:38.751Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67549717eb3dca9b7bf46d4c"
+  },
+  "content": "Phòng ĐS_712 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-07T18:42:31.349Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T18:42:31.349Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6754971aeb3dca9b7bf46d5b"
+  },
+  "content": "Phòng ĐS_712 đã chuyển trạng thái sang Trống.",
+  "createdAt": {
+    "$date": "2024-12-07T18:42:34.239Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T18:42:34.239Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6754d00a27257ff3dcac8815"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã yêu cầu hủy phòng, hoàn tiền",
+  "createdAt": {
+    "$date": "2024-12-07T22:45:30.031Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T22:45:30.031Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6754d0a886e02fdbd803e05b"
+  },
+  "content": "675067b610a68d9a2db927ff khách đã yêu cầu hủy phòng, hoàn tiền",
+  "createdAt": {
+    "$date": "2024-12-07T22:48:08.145Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-07T22:48:08.145Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c8ff5b2d09731bdb205b"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:27:43.536Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:27:43.536Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c9225b2d09731bdb22ac"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:28:18.823Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:28:18.823Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c9595b2d09731bdb263f"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:29:13.671Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:29:13.671Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c99a5b2d09731bdb2a55"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:30:18.178Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:30:18.178Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755ca205b2d09731bdb32a7"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:32:32.957Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:32:32.957Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d20e5b2d09731bdbac9e"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:06:22.061Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:06:22.061Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d36f5b2d09731bdbc225"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:12:15.427Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:12:15.427Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d4135b2d09731bdbcd1e"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:14:59.336Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:14:59.336Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d4c45b2d09731bdbd822"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:17:56.919Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:17:56.919Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d52b5b2d09731bdbdea2"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:19:39.494Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:19:39.494Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d6355b2d09731bdbee90"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:24:05.490Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:24:05.490Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755de7f5f9d1b24e56bfbff"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:59:27.643Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:59:27.643Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dfc595556842c7fefbbf"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:04:53.692Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:04:53.692Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e03595556842c7ff0971"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:06:45.936Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:06:45.936Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e08295556842c7ff12aa"
+  },
+  "content": "6755e03495556842c7ff092c phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:08:02.084Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:08:02.084Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e0ba95556842c7ff199d"
+  },
+  "content": "6755e03495556842c7ff092c phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:08:58.378Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:08:58.378Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e0cf95556842c7ff1c15"
+  },
+  "content": "6755e03495556842c7ff092c phan công hiếu đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:09:19.194Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:09:19.194Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e19f95556842c7ff3590"
+  },
+  "content": "6755e15995556842c7ff2cbe phan công hiếu đã hủy loại phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:12:47.171Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:12:47.171Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e1cc95556842c7ff3ac6"
+  },
+  "content": "6755e15995556842c7ff2cbe phan công hiếu đã cập nhật thông tin phòng mới",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:13:32.501Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:13:32.501Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e1ef95556842c7ff3eef"
+  },
+  "content": "6755e15995556842c7ff2cbe phan công hiếu đã cập nhật thông tin phòng mới",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:14:07.529Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:14:07.529Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675636d5184f95f2301ecf29"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:16:21.392Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:16:21.392Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675636d5184f95f2301ecf2d"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:16:21.487Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:16:21.487Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675637ae184f95f2301ee4be"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:19:58.634Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:19:58.634Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675637ae184f95f2301ee4c2"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:19:58.707Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:19:58.707Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675637db184f95f2301eea64"
+  },
+  "content": "6755d6345b2d09731bdbee61 khách đã yêu cầu hủy phòng, hoàn tiền",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:20:43.530Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:20:43.530Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67563ddf184f95f2301f99bb"
+  },
+  "content": "Phòng ĐS_315 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:46:23.960Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:46:23.960Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67563e3c184f95f2301fa4a8"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:47:56.448Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:47:56.448Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67563e99184f95f2301fafcc"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:49:29.211Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:49:29.211Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67565475d09b4f4b4db5d68d"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T02:22:45.952Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T02:22:45.952Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675654fcd09b4f4b4db5d934"
+  },
+  "content": "6755e15995556842c7ff2cbe khách đã yêu cầu hủy phòng, hoàn tiền",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T02:25:00.605Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T02:25:00.605Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67565590d09b4f4b4db5e460"
+  },
+  "content": "6755e15995556842c7ff2cbe khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T02:27:28.445Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T02:27:28.445Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675655dfd09b4f4b4db5ed16"
+  },
+  "content": "6755e15995556842c7ff2cbe khách đã yêu cầu hủy phòng, hoàn tiền",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T02:28:47.092Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T02:28:47.092Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67568a99ded62b2eac20500e"
+  },
+  "content": "6755e15995556842c7ff2cbe khách đã yêu cầu hủy phòng, hoàn tiền",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T06:13:45.819Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T06:13:45.819Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675695cb834316c7f95451e5"
+  },
+  "content": "6755e15995556842c7ff2cbe khách đã yêu cầu hủy phòng, hoàn tiền",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T07:01:31.181Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T07:01:31.181Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675701b315eb9bfafbef20b6"
+  },
+  "content": "Phòng ĐS_405 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T14:41:55.018Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T14:41:55.018Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675701c415eb9bfafbef2192"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T14:42:12.657Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T14:42:12.657Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67570cd41b4535144961ae6b"
+  },
+  "content": "Phòng ĐS_405 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T15:29:24.014Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T15:29:24.014Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67570cdb1b4535144961af11"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T15:29:31.797Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T15:29:31.797Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675725221b45351449641205"
+  },
+  "content": "6755d4c35b2d09731bdbd7f2 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T17:13:06.568Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T17:13:06.568Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757252a1b453514496412a8"
+  },
+  "content": "6755d4c35b2d09731bdbd7f2 phan công hiếu đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T17:13:14.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T17:13:14.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67575638dd4a728b9ec10034"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T20:42:32.418Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T20:42:32.418Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67575f4051029e129bbcd524"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:21:04.353Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:21:04.353Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67575f4051029e129bbcd52b"
+  },
+  "content": "6755d1c65b2d09731bdba7f7 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:21:04.421Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:21:04.421Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67575f4051029e129bbcd535"
+  },
+  "content": "6755d1c65b2d09731bdba7f7 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:21:04.498Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:21:04.498Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757605b51029e129bbce45b"
+  },
+  "content": "6755d1c65b2d09731bdba7f7 phan công hiếu đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:25:47.058Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:25:47.058Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757606d51029e129bbce598"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:26:05.956Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:26:05.956Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757606e51029e129bbce59b"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:26:06.028Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:26:06.028Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757609d51029e129bbce885"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:26:53.696Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:26:53.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757609d51029e129bbce893"
+  },
+  "content": "6755d1c65b2d09731bdba7f7 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:26:53.841Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:26:53.841Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757609d51029e129bbce89b"
+  },
+  "content": "6755d1c65b2d09731bdba7f7 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:26:53.911Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:26:53.911Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675760f951029e129bbceddc"
+  },
+  "content": "6755d4c35b2d09731bdbd7f2 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:28:25.216Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:28:25.216Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757610651029e129bbcee91"
+  },
+  "content": "6755d4c35b2d09731bdbd7f2 phan công hiếu đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:28:38.091Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:28:38.091Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757611151029e129bbcef4a"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:28:49.443Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:28:49.443Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757611151029e129bbcef54"
+  },
+  "content": "6755d4c35b2d09731bdbd7f2 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:28:49.538Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:28:49.538Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757611151029e129bbcef60"
+  },
+  "content": "6755d4c35b2d09731bdbd7f2 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T21:28:49.611Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T21:28:49.611Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757aa25d49b5d9e274d7b54"
+  },
+  "content": "Phòng CB_605 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T02:40:37.174Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T02:40:37.174Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6757aa2fd49b5d9e274d7be4"
+  },
+  "content": "Phòng CB_605 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T02:40:47.370Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T02:40:47.370Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675871b87f863c390a95b2c7"
+  },
+  "content": "675870477f863c390a95b197 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T16:52:08.226Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T16:52:08.226Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675871c37f863c390a95b2dc"
+  },
+  "content": "675870477f863c390a95b197 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T16:52:19.437Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T16:52:19.437Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758740e35ee8905d9063b98"
+  },
+  "content": "675870477f863c390a95b197 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:02:06.613Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:02:06.613Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675875bd35ee8905d9065a86"
+  },
+  "content": "Phòng ĐS_404 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:09:17.935Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:09:17.935Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675876b935ee8905d906673e"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:13:29.658Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:13:29.658Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675876c635ee8905d90667eb"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:13:42.881Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:13:42.881Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675876cd35ee8905d9066849"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:13:49.662Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:13:49.662Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675876d435ee8905d90668a3"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:13:56.977Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:13:56.977Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675879a235ee8905d9068650"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:25:54.077Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:25:54.077Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675879a835ee8905d90686a9"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:26:00.756Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:26:00.756Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67587aa835ee8905d90693b3"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:30:16.540Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:30:16.540Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67587aaf35ee8905d906940d"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:30:23.294Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:30:23.294Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67587abb35ee8905d90694d1"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:30:35.994Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:30:35.994Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67587cf335ee8905d906afdd"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:40:03.847Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:40:03.847Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67587cfc35ee8905d906b085"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:40:12.771Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:40:12.771Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67587d0835ee8905d906b115"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:40:24.210Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:40:24.210Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67587dab35ee8905d906b933"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:43:07.069Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:43:07.069Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758803135ee8905d906d7bc"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:53:53.636Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:53:53.636Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758804535ee8905d906d8e7"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:54:13.750Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:54:13.750Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758808a35ee8905d906dc35"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:55:22.499Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:55:22.499Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758809235ee8905d906dca5"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:55:30.995Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:55:30.995Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675880a135ee8905d906dd53"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:55:45.193Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:55:45.193Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675880b835ee8905d906de73"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:56:08.006Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:56:08.006Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758810e35ee8905d906e285"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:57:34.256Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:57:34.256Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758811735ee8905d906e2fb"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T17:57:43.814Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T17:57:43.814Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675881d635ee8905d906eb9e"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:00:54.585Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:00:54.585Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675881e135ee8905d906ec57"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:01:05.514Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:01:05.514Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758821735ee8905d906eecf"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:01:59.313Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:01:59.313Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758822635ee8905d906ef81"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:02:14.456Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:02:14.456Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758836435ee8905d906fe02"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:07:32.988Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:07:32.988Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675883ab35ee8905d907015b"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:08:43.543Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:08:43.543Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675883c335ee8905d907029b"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:09:07.493Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:09:07.493Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675885ef35ee8905d9071f2d"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:18:23.657Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:18:23.657Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675885f435ee8905d9071fd3"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:18:28.651Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:18:28.651Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675886a535ee8905d9073553"
+  },
+  "content": "Phòng ĐS_410 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:21:25.264Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:21:25.264Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675886c735ee8905d90739a1"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:21:59.894Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:21:59.894Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675886c735ee8905d90739a4"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:21:59.966Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:21:59.966Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675886c735ee8905d90739a7"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:21:59.967Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:21:59.967Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675886e935ee8905d9073e21"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:22:33.405Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:22:33.405Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758897035ee8905d9078ca9"
+  },
+  "content": "675888d835ee8905d9077aa7 khách đã cập nhật thông tin phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:33:20.093Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:33:20.093Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758898235ee8905d9078ede"
+  },
+  "content": "675888d835ee8905d9077aa7 khách đã cập nhật thông tin phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:33:38.440Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:33:38.440Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675889a335ee8905d90792c1"
+  },
+  "content": "675888d835ee8905d9077aa7 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:34:11.999Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:34:11.999Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675889ab35ee8905d90793c0"
+  },
+  "content": "675888d835ee8905d9077aa7 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:34:19.964Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:34:19.964Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675889d035ee8905d9079864"
+  },
+  "content": "Phòng ĐS_404 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:34:56.656Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:34:56.656Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675889dd35ee8905d9079a2a"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:35:09.805Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:35:09.805Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67588a0d35ee8905d907a034"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:35:57.102Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:35:57.102Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67588a0d35ee8905d907a050"
+  },
+  "content": "675888d835ee8905d9077aa7 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:35:57.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:35:57.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67588a0d35ee8905d907a059"
+  },
+  "content": "675888d835ee8905d9077aa7 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:35:57.394Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:35:57.394Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a5ffaf3a66292157c809"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:35:11.418Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:35:11.418Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a633af3a66292157c9d4"
+  },
+  "content": "6758a5faaf3a66292157c7be phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:36:03.061Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:36:03.061Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a6e4af3a66292157cf29"
+  },
+  "content": "Phòng ĐS_310 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:39:00.874Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:39:00.874Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a6f2af3a66292157cfa8"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:39:14.404Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:39:14.404Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a6f2af3a66292157cfb4"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:39:14.784Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:39:14.784Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a708af3a66292157d08b"
+  },
+  "content": "6758a5faaf3a66292157c7be phan công hiếu đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:39:36.224Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:39:36.224Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a73aaf3a66292157d225"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:40:26.506Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:40:26.506Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a73aaf3a66292157d22f"
+  },
+  "content": "6758a5faaf3a66292157c7be phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:40:26.591Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:40:26.591Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a73aaf3a66292157d22d"
+  },
+  "content": "6758a5faaf3a66292157c7be phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:40:26.567Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:40:26.567Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a9e7af3a66292157ddf0"
+  },
+  "content": "6758a980af3a66292157dacc khách đã yêu cầu hủy phòng, hoàn tiền",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:51:51.899Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:51:51.899Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758aab4af3a66292157e479"
+  },
+  "content": "6758a980af3a66292157dacc khách đã yêu cầu hủy phòng, hoàn tiền",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:55:16.109Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:55:16.109Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675905ead3ba4bd49ebd2de0"
+  },
+  "content": "675904fed3ba4bd49ebd2bbb khách đã cập nhật thông tin phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:24:26.309Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:24:26.309Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6759071dd3ba4bd49ebd355a"
+  },
+  "content": "675904fed3ba4bd49ebd2bbb khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:29:33.270Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:29:33.270Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6759074ed3ba4bd49ebd368a"
+  },
+  "content": "Phòng ĐS_310 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:30:22.538Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:30:22.538Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6759078fd3ba4bd49ebd3815"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:31:27.431Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:31:27.431Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6759078fd3ba4bd49ebd3818"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:31:27.469Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:31:27.469Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67590823d3ba4bd49ebd3a9d"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:33:55.660Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:33:55.660Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67590824d3ba4bd49ebd3aaa"
+  },
+  "content": "675904fed3ba4bd49ebd2bbb phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:33:56.207Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:33:56.207Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67590824d3ba4bd49ebd3aae"
+  },
+  "content": "675904fed3ba4bd49ebd2bbb phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:33:56.348Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:33:56.348Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67590930d3ba4bd49ebd3b5b"
+  },
+  "content": "675904fed3ba4bd49ebd2bbb khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:38:24.952Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:38:24.952Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aed22b846aa4abf415164"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:03:14.694Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:03:14.694Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aed37b846aa4abf41520e"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:03:35.717Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:03:35.717Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aed56b846aa4abf4152f1"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:04:06.091Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:04:06.091Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aed8bb846aa4abf415475"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:04:59.266Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:04:59.266Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aedabb846aa4abf415564"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:05:31.661Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:05:31.661Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aedb4b846aa4abf4155b0"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:05:40.008Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:05:40.008Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aedb4b846aa4abf4155c0"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:05:40.856Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:05:40.856Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675af2b3ab811073553a55b9"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:26:59.121Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:26:59.121Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675af2f3ab811073553a55cd"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:28:03.116Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:28:03.116Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675af303ab811073553a55e5"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:28:19.492Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:28:19.492Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675af309ab811073553a55fa"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:28:25.602Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:28:25.602Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675af30dab811073553a560c"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:28:29.799Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:28:29.799Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675af4b9b846aa4abf41879b"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:35:37.530Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:35:37.530Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675af4c1b846aa4abf4187e4"
+  },
+  "content": "675aeb91b846aa4abf414600 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:35:45.507Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:35:45.507Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675af8eaab811073553a57e4"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:53:30.099Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:53:30.099Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675af928ab811073553a5bf5"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T14:54:32.318Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T14:54:32.318Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675afc60a3b45166ff1f8773"
+  },
+  "content": "6741cb7753420b88eb1726dc phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:08:16.886Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:08:16.886Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675afc6ea3b45166ff1f8796"
+  },
+  "content": "6741cb7753420b88eb1726dc phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:08:30.951Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:08:30.951Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675afe0ca3b45166ff1f87b6"
+  },
+  "content": "6741cb7753420b88eb1726dc phan công hiếu đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:15:24.511Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:15:24.511Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675afe24a3b45166ff1f891d"
+  },
+  "content": "6741cb7753420b88eb1726dc phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:15:48.185Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:15:48.185Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675afe29a3b45166ff1f8970"
+  },
+  "content": "6741cb7753420b88eb1726dc phan công hiếu đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:15:53.032Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:15:53.032Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675afe7ca3b45166ff1f8ec3"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:17:16.349Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:17:16.349Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675b00d3b846aa4abf420c0d"
+  },
+  "content": "675aeb91b846aa4abf414600 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:27:15.467Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:27:15.467Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675b00ecb846aa4abf420d65"
+  },
+  "content": "675aeb91b846aa4abf414600 phan công hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:27:40.836Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:27:40.836Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675b00f5b846aa4abf420dda"
+  },
+  "content": "675aeb91b846aa4abf414600 phan công hiếu đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:27:49.554Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:27:49.554Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675b0112b846aa4abf420f61"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:28:18.869Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:28:18.869Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675b012eb846aa4abf421102"
+  },
+  "content": "675aeb91b846aa4abf414600 phan công hiếu đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:28:46.804Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:28:46.804Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675b0135b846aa4abf42116b"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:28:53.712Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:28:53.712Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675b01dbb846aa4abf4219c8"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:31:39.561Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:31:39.561Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675b027eb846aa4abf422213"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T15:34:22.660Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T15:34:22.660Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675da59347604ac8503c0d82"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-14T15:34:43.693Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-14T15:34:43.693Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675da59947604ac8503c0dad"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-14T15:34:49.012Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-14T15:34:49.012Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e681714b5929e3e0b8828"
+  },
+  "content": "Phòng MK_706 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:24:39.267Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:24:39.267Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e681b7b073fcfa7943583"
+  },
+  "content": "Phòng MK_706 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:24:43.892Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:24:43.892Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68217b073fcfa794358a"
+  },
+  "content": "Phòng MK_708 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:24:49.661Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:24:49.661Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e682b7b073fcfa7943590"
+  },
+  "content": "Phòng ĐS_702 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:24:59.535Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:24:59.535Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e682e7b073fcfa7943595"
+  },
+  "content": "Phòng ĐS_706 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:02.025Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:02.025Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68307b073fcfa794359c"
+  },
+  "content": "Phòng ĐS_708 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:04.609Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:04.609Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68347b073fcfa79435a1"
+  },
+  "content": "Phòng ĐS_603 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:08.073Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:08.073Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e683c7b073fcfa79435a7"
+  },
+  "content": "Phòng ĐS_605 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:16.080Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:16.080Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e683f7b073fcfa79435ad"
+  },
+  "content": "Phòng ĐS_606 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:19.644Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:19.644Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68447b073fcfa79435b4"
+  },
+  "content": "Phòng ĐS_608 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:24.443Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:24.443Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68477b073fcfa79435b9"
+  },
+  "content": "Phòng ĐS_611 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:27.463Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:27.463Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e684a7b073fcfa79435c0"
+  },
+  "content": "Phòng ĐS_612 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:30.411Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:30.411Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e684d7b073fcfa79435c5"
+  },
+  "content": "Phòng ĐS_501 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:33.276Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:33.276Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68527b073fcfa79435cb"
+  },
+  "content": "Phòng ĐS_502 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:38.800Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:38.800Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e685c7b073fcfa79435d2"
+  },
+  "content": "Phòng ĐS_503 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:48.938Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:48.938Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e685f7b073fcfa79435d7"
+  },
+  "content": "Phòng ĐS_504 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:51.247Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:51.247Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68617b073fcfa79435dd"
+  },
+  "content": "Phòng ĐS_505 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:53.451Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:53.451Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68637b073fcfa79435e4"
+  },
+  "content": "Phòng ĐS_506 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:55.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:55.736Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68657b073fcfa79435e9"
+  },
+  "content": "Phòng ĐS_508 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:57.668Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:57.668Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68677b073fcfa79435ef"
+  },
+  "content": "Phòng ĐS_509 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:25:59.954Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:25:59.954Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68697b073fcfa79435f6"
+  },
+  "content": "Phòng ĐS_510 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:01.958Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:01.958Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e686c7b073fcfa79435fb"
+  },
+  "content": "Phòng ĐS_511 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:04.070Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:04.070Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e686e7b073fcfa7943601"
+  },
+  "content": "Phòng ĐS_512 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:06.459Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:06.459Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68717b073fcfa7943608"
+  },
+  "content": "Phòng ĐS_513 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:09.004Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:09.004Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68757b073fcfa794360d"
+  },
+  "content": "Phòng ĐS_402 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:13.078Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:13.078Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68787b073fcfa7943614"
+  },
+  "content": "Phòng ĐS_403 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:16.423Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:16.423Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e687a7b073fcfa7943619"
+  },
+  "content": "Phòng ĐS_406 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:18.666Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:18.666Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e687d7b073fcfa794361f"
+  },
+  "content": "Phòng ĐS_408 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:21.367Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:21.367Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e687f7b073fcfa7943626"
+  },
+  "content": "Phòng ĐS_409 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:23.574Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:23.574Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68817b073fcfa794362b"
+  },
+  "content": "Phòng ĐS_411 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:25.711Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:25.711Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68837b073fcfa7943631"
+  },
+  "content": "Phòng ĐS_412 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:27.957Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:27.957Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68867b073fcfa7943638"
+  },
+  "content": "Phòng ĐS_413 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:30.189Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:30.189Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e688a7b073fcfa794363d"
+  },
+  "content": "Phòng ĐS_301 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:34.067Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:34.067Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e688c7b073fcfa7943644"
+  },
+  "content": "Phòng ĐS_302 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:36.710Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:36.710Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e688f7b073fcfa7943649"
+  },
+  "content": "Phòng ĐS_304 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:39.281Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:39.281Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68927b073fcfa7943650"
+  },
+  "content": "Phòng ĐS_305 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:42.263Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:42.263Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68947b073fcfa7943655"
+  },
+  "content": "Phòng ĐS_306 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:44.440Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:44.440Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68967b073fcfa794365b"
+  },
+  "content": "Phòng ĐS_308 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:46.868Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:46.868Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e68997b073fcfa7943662"
+  },
+  "content": "Phòng ĐS_309 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:49.142Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:49.142Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e689b7b073fcfa7943667"
+  },
+  "content": "Phòng ĐS_312 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:51.629Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:51.629Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e689e7b073fcfa794366d"
+  },
+  "content": "Phòng ĐS_313 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T05:26:54.088Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:26:54.088Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e7b38e775e06f34f39720"
+  },
+  "content": "Phòng CB_510 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T06:46:16.210Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T06:46:16.210Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e7b3ce775e06f34f39795"
+  },
+  "content": "Phòng CB_410 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T06:46:20.106Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T06:46:20.106Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675e7b3fe775e06f34f397dc"
+  },
+  "content": "Phòng CB_403 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T06:46:23.689Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T06:46:23.689Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ee253b793b3ef6eaf15b6"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T14:06:11.723Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:06:11.723Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ee9f4f0a505cfc4c50cfe"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T14:38:44.508Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:38:44.508Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eeab9f0a505cfc4c52296"
+  },
+  "content": "675ee9eff0a505cfc4c50c61 Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T14:42:01.490Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:42:01.490Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eed8bd22d1144af8ce2a5"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T14:54:03.258Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:54:03.258Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eefa4810b13e4152186a2"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:03:00.406Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:03:00.406Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef24cd22d1144af8d71d5"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:14:20.278Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:14:20.278Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef49ad22d1144af8db566"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:24:10.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:24:10.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef5d9d22d1144af8dd894"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:29:29.508Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:29:29.508Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef62bd22d1144af8de21d"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:30:51.912Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:30:51.912Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef754d22d1144af8dfcb5"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:35:48.321Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:35:48.321Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef97be6d99a80c15dcb55"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:44:59.106Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:44:59.106Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef9ba04aa9df0eafa9b12"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:46:02.550Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:46:02.550Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675efc77a5e7d15f4c7c56dd"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:57:43.704Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:57:43.704Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675efc90a5e7d15f4c7c5a2e"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:58:08.270Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:58:08.270Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eff36d22d1144af8e40d4"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T16:09:26.863Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:09:26.863Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0874d22d1144af8ed7be"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T16:48:52.026Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:48:52.026Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0a07d5b8c9e08bd6157a"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T16:55:35.793Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:55:35.793Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0a53d22d1144af8ef9f7"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T16:56:51.811Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:56:51.811Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0b71d5b8c9e08bd64906"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:01:37.539Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:01:37.539Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0b75d5b8c9e08bd649ac"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:01:41.905Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:01:41.905Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0c8cd5b8c9e08bd66b69"
+  },
+  "content": "675f0b33d5b8c9e08bd64010 Phan Công Hiếu đã cập nhật thông tin phòng mới",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:06:20.394Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:06:20.394Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0c95d5b8c9e08bd66cc8"
+  },
+  "content": "675f0b33d5b8c9e08bd64010 Phan Công Hiếu đã hủy loại phòng",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:06:29.826Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:06:29.826Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0c9dd5b8c9e08bd66deb"
+  },
+  "content": "675f0b33d5b8c9e08bd64010 Phan Công Hiếu đã cập nhật thông tin phòng mới",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:06:37.701Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:06:37.701Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0cc7d5b8c9e08bd67384"
+  },
+  "content": "675f0b33d5b8c9e08bd64010 Phan Công Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:07:19.585Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:07:19.585Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0d8fd5b8c9e08bd69030"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:10:39.249Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:10:39.249Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f120ed22d1144af8f9cfd"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:29:50.461Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:29:50.461Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f122dd5b8c9e08bd72f84"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:30:21.517Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:30:21.517Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f1270d5b8c9e08bd7385b"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:31:28.299Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:31:28.299Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f13a0d5b8c9e08bd75eba"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:36:32.327Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:36:32.327Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f17c9d22d1144af903250"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:54:17.651Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:54:17.651Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603c0ca947f4672cdd008e"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:41:16.523Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:41:16.523Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603c8ba947f4672cdd0498"
+  },
+  "content": "67603bd2a947f4672cdcfe81 khách đã cập nhật thông tin phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:43:23.332Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:43:23.332Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603cb6a947f4672cdd05fe"
+  },
+  "content": "67603bd2a947f4672cdcfe81 khách đã xóa dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:44:06.815Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:44:06.815Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603ccca947f4672cdd06bf"
+  },
+  "content": "67603bd2a947f4672cdcfe81 khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:44:28.152Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:44:28.152Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603d65a947f4672cdd10f0"
+  },
+  "content": "67603bd2a947f4672cdcfe81 Nguyễn Quang Hiếu đã cập nhật thông tin phòng mới",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:47:01.541Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:47:01.541Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603d89a947f4672cdd1367"
+  },
+  "content": "67603bd2a947f4672cdcfe81 Nguyễn Quang Hiếu đã hủy loại phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:47:37.122Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:47:37.122Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603dc9a947f4672cdd18cd"
+  },
+  "content": "Phòng ĐS_712 đã chuyển trạng thái sang Đã book.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:48:41.009Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:48:41.009Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603e14a947f4672cdd21e9"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:49:56.209Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:49:56.209Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603e14a947f4672cdd21f5"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:49:56.545Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:49:56.545Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604082a947f4672cdd626e"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:00:18.170Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:00:18.170Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604082a947f4672cdd627a"
+  },
+  "content": "67603bd2a947f4672cdcfe81 Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:00:18.344Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:00:18.344Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604082a947f4672cdd627c"
+  },
+  "content": "67603bd2a947f4672cdcfe81 Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:00:18.352Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:00:18.352Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676040f1a947f4672cdd6a6f"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:02:09.904Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:02:09.904Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760411ea947f4672cdd6d9f"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:02:54.423Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:02:54.423Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760411ea947f4672cdd6db5"
+  },
+  "content": "675eed86d22d1144af8ce1f2 Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:02:55.000Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:02:55.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760411fa947f4672cdd6db8"
+  },
+  "content": "675eed86d22d1144af8ce1f2 Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:02:55.014Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:02:55.014Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760428ca947f4672cdd878b"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:09:00.887Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:09:00.887Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760428ca947f4672cdd878f"
+  },
+  "content": "675ef246d22d1144af8d710b Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:09:00.982Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:09:00.982Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760428da947f4672cdd879e"
+  },
+  "content": "675ef246d22d1144af8d710b Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:09:01.285Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:09:01.285Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604347a947f4672cdd942f"
+  },
+  "content": "675ef5d4d22d1144af8dd7d2 Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:12:07.411Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:12:07.411Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676044df0071f480db6379ea"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:18:55.143Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:18:55.143Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760452e0071f480db6383cc"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:20:14.127Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:20:14.127Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760452e0071f480db6383f4"
+  },
+  "content": "675f086ed22d1144af8ed73b Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:20:14.494Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:20:14.494Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604676a947f4672cddcbf6"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:25:42.318Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:25:42.318Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760469ea947f4672cddcef4"
+  },
+  "content": "Phòng ĐS_409 đã chuyển trạng thái sang Trống.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:26:22.053Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:26:22.053Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676046a6a947f4672cddcf84"
+  },
+  "content": "Phòng ĐS_712 đã chuyển trạng thái sang Đang sử dụng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:26:30.070Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:26:30.070Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676046e4a947f4672cddd3ce"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:27:32.894Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:27:32.894Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676046e5a947f4672cddd3d7"
+  },
+  "content": "675ef74ed22d1144af8dfc68 Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:27:33.451Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:27:33.451Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676046e5a947f4672cddd3da"
+  },
+  "content": "675ef74ed22d1144af8dfc68 Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:27:33.465Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:27:33.465Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604743a947f4672cdddae5"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:29:07.724Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:29:07.724Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604743a947f4672cdddae7"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:29:07.730Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:29:07.730Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604793a947f4672cdde080"
+  },
+  "content": "675ef5d4d22d1144af8dd7d2 Nguyễn Quang Hiếu đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:30:27.626Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:30:27.626Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604793a947f4672cdde08b"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:30:27.735Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:30:27.735Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760484fa947f4672cddede3"
+  },
+  "content": "Lễ tân đã tạo đơn đặt phòng.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:33:35.701Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:33:35.701Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676048a9a947f4672cddf43a"
+  },
+  "content": "6760484aa947f4672cdded65 khách đã yêu cầu hủy phòng, hoàn tiền",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:35:05.959Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:35:05.959Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676049e4a947f4672cde0a9b"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:40:20.300Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:40:20.300Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760ee3acd83e912201f401e"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T03:21:30.897Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T03:21:30.897Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6761293bcd83e912201fb62a"
+  },
+  "content": "Phòng CB_503 đã chuyển trạng thái sang Đang sử dụng.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T07:33:15.172Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T07:33:15.172Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613462cd83e912202005fb"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:20:50.641Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:20:50.641Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676137becd83e91220202af5"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:35:10.744Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:35:10.744Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676137bfcd83e91220202b07"
+  },
+  "content": "Lễ tân đã check-in phòng",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:35:11.223Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:35:11.223Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613aa7cd83e91220206128"
+  },
+  "content": "Đơn phòng đã hoàn thành",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:47:35.207Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:47:35.207Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613aa7cd83e9122020612a"
+  },
+  "content": "67613442cd83e912202004ee Lê Văn Quang đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:47:35.209Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:47:35.209Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613d2ccd83e91220208f05"
+  },
+  "content": "Khách hàng đã tạo đơn.",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:58:20.764Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:58:20.764Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613dc5cd83e912202099d2"
+  },
+  "content": "67613cc2cd83e912202087ec khách đã cập nhật thông tin phòng",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T09:00:53.184Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T09:00:53.184Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613de7cd83e91220209c73"
+  },
+  "content": "67613cc2cd83e912202087ec khách đã thêm dịch vụ",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T09:01:27.656Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T09:01:27.656Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613e3ccd83e9122020a2ab"
+  },
+  "content": "67613cc2cd83e912202087ec Lê Văn Quang đã cập nhật thông tin phòng mới",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T09:02:52.497Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T09:02:52.497Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613edecd83e9122020ade5"
+  },
+  "content": "675f17c4d22d1144af9031b1 khách đã yêu cầu hủy phòng, hoàn tiền",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T09:05:34.250Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T09:05:34.250Z"
   },
   "__v": 0
 }]

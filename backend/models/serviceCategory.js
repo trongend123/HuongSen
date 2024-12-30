@@ -20,6 +20,6 @@ const serviceCategorySchema = new Schema(
   }
 );
 
-const ServiceCategories = model('ServiceCategories', serviceCategorySchema);
+const ServiceCategories = new mongoose.model('ServiceCategories', serviceCategorySchema);
 
 export default ServiceCategories;

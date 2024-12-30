@@ -1,9 +1,9 @@
 [{
   "_id": {
-    "$oid": "674080afb31ac53d2dda78b0"
+    "$oid": "67408781796dc4fe9ce80618"
   },
-  "fullname": "Trong Nguyen",
-  "email": "trongnhhe161732@fpt.edu.vn",
+  "fullname": "Nguyen Quang Hieu",
+  "email": "hieu123@gmail.com",
   "phone": "0904521821",
   "dob": {
     "$date": "2000-11-22T00:00:00.000Z"
@@ -11,30 +11,10 @@
   "gender": "Male",
   "address": "hoa lac",
   "createdAt": {
-    "$date": "2024-11-22T13:01:35.153Z"
+    "$date": "2024-11-22T13:30:41.981Z"
   },
   "updatedAt": {
-    "$date": "2024-11-22T13:01:35.153Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6740820730d1b5f11092edb1"
-  },
-  "fullname": "Trong Nguyen",
-  "email": "trongnhhe161732@fpt.edu.vn",
-  "phone": "0904521821",
-  "dob": {
-    "$date": "2000-11-22T00:00:00.000Z"
-  },
-  "gender": "Male",
-  "address": "hoa lac",
-  "createdAt": {
-    "$date": "2024-11-22T13:07:19.507Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-22T13:07:19.507Z"
+    "$date": "2024-11-22T13:30:41.981Z"
   },
   "__v": 0
 },
@@ -60,6 +40,26 @@
 },
 {
   "_id": {
+    "$oid": "674080afb31ac53d2dda78b0"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2000-11-22T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-11-22T13:01:35.153Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:01:35.153Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
     "$oid": "67408611796dc4fe9ce804be"
   },
   "fullname": "Trong Nguyen",
@@ -75,26 +75,6 @@
   },
   "updatedAt": {
     "$date": "2024-11-22T13:24:33.361Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "67408781796dc4fe9ce80618"
-  },
-  "fullname": "Nguyen Quang Hieu",
-  "email": "hieu123@gmail.com",
-  "phone": "0904521821",
-  "dob": {
-    "$date": "2000-11-22T00:00:00.000Z"
-  },
-  "gender": "Male",
-  "address": "hoa lac",
-  "createdAt": {
-    "$date": "2024-11-22T13:30:41.981Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-22T13:30:41.981Z"
   },
   "__v": 0
 },
@@ -120,6 +100,26 @@
 },
 {
   "_id": {
+    "$oid": "6740820730d1b5f11092edb1"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2000-11-22T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-11-22T13:07:19.507Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:07:19.507Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
     "$oid": "6745d6e8104506461fa710c0"
   },
   "fullname": "Trong Nguyen",
@@ -135,6 +135,1266 @@
   },
   "updatedAt": {
     "$date": "2024-11-26T14:10:48.573Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675064ff10a68d9a2db905d3"
+  },
+  "fullname": "Nguyễn Văn Vui",
+  "email": "nvui1323@gmail.com",
+  "phone": "0984378235",
+  "dob": {
+    "$date": "2003-04-13T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "abcxyz",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.236Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.236Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6750650e10a68d9a2db906c0"
+  },
+  "fullname": "Nguyễn Văn Vui",
+  "email": "nvui1323@gmail.com",
+  "phone": "0984378235",
+  "dob": {
+    "$date": "2003-04-13T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "abcxyz",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:58.203Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:58.203Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6750651b10a68d9a2db9077d"
+  },
+  "fullname": "Nguyễn Văn Vui",
+  "email": "nvui1323@gmail.com",
+  "phone": "0984378235",
+  "dob": {
+    "$date": "2003-04-13T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "abcxyz",
+  "createdAt": {
+    "$date": "2024-12-04T14:20:11.721Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:20:11.721Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675067b610a68d9a2db927f4"
+  },
+  "fullname": "Nguyễn Văn Vui",
+  "email": "nvui1323@gmail.com",
+  "phone": "0984378235",
+  "dob": {
+    "$date": "2003-04-13T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "abcxyz",
+  "createdAt": {
+    "$date": "2024-12-04T14:31:18.014Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:31:18.014Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c8fe5b2d09731bdb2038"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-08T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T16:27:42.503Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:27:42.503Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c9215b2d09731bdb2288"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-08T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T16:28:17.793Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:28:17.793Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c9585b2d09731bdb2617"
+  },
+  "fullname": "phan công hiếu ba",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-08T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T16:29:12.656Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:29:12.656Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c9995b2d09731bdb2a2d"
+  },
+  "fullname": "phan công hiếu ba",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-08T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T16:30:17.132Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:30:17.132Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755ca1f5b2d09731bdb3283"
+  },
+  "fullname": "phan công hiếu ba",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-08T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T16:32:31.905Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:32:31.905Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d1c65b2d09731bdba7f2"
+  },
+  "fullname": "phan công hiếu bốn",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:05:10.207Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:05:10.207Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d1e35b2d09731bdba9d5"
+  },
+  "fullname": "phan công hiếu bốn",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:05:39.658Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:05:39.658Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d20c5b2d09731bdbac6e"
+  },
+  "fullname": "phan công hiếu bốn",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:06:20.796Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:06:20.796Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d3095b2d09731bdbbbb7"
+  },
+  "fullname": "phan công hiếu bốn ba",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-01-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:10:33.691Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:10:33.691Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d36e5b2d09731bdbc1f0"
+  },
+  "fullname": "phan công hiếu bốn ba",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-01-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:12:14.170Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:12:14.170Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d4125b2d09731bdbcce4"
+  },
+  "fullname": "phan công hiếu bốn ba năm",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-01-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:14:58.070Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:14:58.070Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d4c35b2d09731bdbd7ed"
+  },
+  "fullname": "phan công hiếu bốn ba nă",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-01-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:17:55.596Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:17:55.596Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d52a5b2d09731bdbde6d"
+  },
+  "fullname": "phan công hiếu bốn ba năhg",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-01-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:19:38.231Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:19:38.231Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d6345b2d09731bdbee5b"
+  },
+  "fullname": "phan công hiếu bốn ba năhg",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-01-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:24:04.239Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:24:04.239Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d7c3621c7b6bfe49b139"
+  },
+  "fullname": "phan công hiếu bốn ba năhg",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-01-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:30:43.927Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:30:43.927Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755daf15f9d1b24e56bc5d8"
+  },
+  "fullname": "phan công hiếu bốn ba gf",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:44:17.247Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:44:17.247Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755db2b5f9d1b24e56bc9a2"
+  },
+  "fullname": "phan công hiếu bốn ba gfggg",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:45:15.628Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:45:15.628Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755de7e5f9d1b24e56bfbce"
+  },
+  "fullname": "phan công hiếu bốn ba gfggg",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T17:59:26.389Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:59:26.389Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dfc495556842c7fefb7d"
+  },
+  "fullname": "phan công hiếu bốn ba fb",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T18:04:52.387Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:04:52.387Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e03495556842c7ff0926"
+  },
+  "fullname": "phan công hiếu bốn ba jh",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T18:06:44.511Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:06:44.511Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e15995556842c7ff2cac"
+  },
+  "fullname": "phan công hiếu b",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-08T18:11:37.137Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:11:37.137Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67563e3b184f95f2301fa464"
+  },
+  "fullname": "phan công hiếu b",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-09T00:47:55.177Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:47:55.177Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67563e97184f95f2301faf7f"
+  },
+  "fullname": "phan công hiếu test",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-09T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-09T00:49:27.831Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:49:27.831Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675870467f863c390a95b190"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-10T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-10T16:45:58.922Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T16:45:58.922Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675888d835ee8905d9077a98"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-10T18:30:48.367Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:30:48.367Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67588dee31caf5f0f9473247"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-10T18:52:30.483Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:52:30.483Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67589717758f2ade252581a7"
+  },
+  "fullname": "phan công hiếu okok",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-10T19:31:35.965Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T19:31:35.965Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758988095c8939dc7303ca7"
+  },
+  "fullname": "phan công hiếu okokh",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-10T19:37:36.701Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T19:37:36.701Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67589cea3ce19a5f1010f1ed"
+  },
+  "fullname": "phan công hiếu okokh",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-10T19:56:26.164Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T19:56:26.164Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a5f9af3a66292157c7ae"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-10T20:35:05.031Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:35:05.031Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a97faf3a66292157dabc"
+  },
+  "fullname": "phan công hiếu okokh",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-10T20:50:07.654Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:50:07.654Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675904fbd3ba4bd49ebd2bb0"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-11T03:20:27.606Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:20:27.606Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aea05b846aa4abf413900"
+  },
+  "fullname": "Quang Hieu",
+  "email": "hieunqhe171865@fpt.edu.vn",
+  "phone": "0964283968",
+  "dob": {
+    "$date": "2003-03-12T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "LK15 Số 61",
+  "createdAt": {
+    "$date": "2024-12-12T13:49:57.129Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T13:49:57.129Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aeb8fb846aa4abf4145ea"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-12T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-12T13:56:31.794Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T13:56:31.794Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675d982750eb908cd7c61faa"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-14T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-14T14:37:27.473Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-14T14:37:27.473Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675da0c207c0fe2811ef44e7"
+  },
+  "fullname": "phan công hiếu hn",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-14T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-14T15:14:10.697Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-14T15:14:10.697Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ee24cb793b3ef6eaf1503"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2002-12-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-12-15T14:06:04.238Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:06:04.238Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ee9eef0a505cfc4c50c31"
+  },
+  "fullname": "Hiếu Nguyễn",
+  "email": "hieu123@gmail.com",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2000-12-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-12-15T14:38:38.732Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:38:38.732Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eed84d22d1144af8ce1d0"
+  },
+  "fullname": "Quang Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2000-01-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "sài gòn",
+  "createdAt": {
+    "$date": "2024-12-15T14:53:56.893Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:53:56.893Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eefa2810b13e41521864d"
+  },
+  "fullname": "Phan ông hiếu",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "1998-12-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "yery",
+  "createdAt": {
+    "$date": "2024-12-15T15:02:58.406Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:02:58.406Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef244d22d1144af8d70df"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh,phường nam hồng",
+  "createdAt": {
+    "$date": "2024-12-15T15:14:12.689Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:14:12.689Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef491d22d1144af8db440"
+  },
+  "fullname": "Nguyễn Văn Vui",
+  "email": "vuinvhe176325@fpt.edu.vn",
+  "phone": "0984378235",
+  "dob": {
+    "$date": "2003-04-13T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Thành phố Thanh Hóa,tỉnh Thanh Hóa",
+  "createdAt": {
+    "$date": "2024-12-15T15:24:01.266Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:24:01.266Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef5d2d22d1144af8dd7a9"
+  },
+  "fullname": "Vui Nguyễn",
+  "email": "nvui1323@gmail.com",
+  "phone": "0987654321",
+  "dob": {
+    "$date": "2004-04-14T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Thành phố Thanh Hóa,tỉnh Thanh Hóa",
+  "createdAt": {
+    "$date": "2024-12-15T15:29:22.752Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:29:22.752Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef5fcd22d1144af8ddca6"
+  },
+  "fullname": "Nguyen Quang Hieu",
+  "email": "hieunqhe171865@fpt.edu.vn",
+  "phone": "0964283968",
+  "dob": {
+    "$date": "2003-03-24T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "LK15 Số 61 Nguyễn Trường Tộ",
+  "createdAt": {
+    "$date": "2024-12-15T15:30:04.088Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:30:04.088Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef74dd22d1144af8dfc50"
+  },
+  "fullname": "Nguyễn Linh",
+  "email": "vui19183@gmail.com",
+  "phone": "0904123456",
+  "dob": {
+    "$date": "2000-10-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Thành phố Thanh Hóa,tỉnh Thanh Hóa",
+  "createdAt": {
+    "$date": "2024-12-15T15:35:41.232Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:35:41.232Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675efc76a5e7d15f4c7c5694"
+  },
+  "fullname": "Phan hiếu test",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà tĩnh, nam hồng",
+  "createdAt": {
+    "$date": "2024-12-15T15:57:42.519Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:57:42.519Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eff30d22d1144af8e406a"
+  },
+  "fullname": "Lê Khôi",
+  "email": "vuinvhe176325@fpt.edu.vn",
+  "phone": "0984378235",
+  "dob": {
+    "$date": "2003-04-13T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hòa Lạc,Hà Nội",
+  "createdAt": {
+    "$date": "2024-12-15T16:09:20.356Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:09:20.356Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f086dd22d1144af8ed728"
+  },
+  "fullname": "Thái Linh",
+  "email": "trongnhhe161732@gmail.com",
+  "phone": "0904123456",
+  "dob": {
+    "$date": "2001-08-25T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hòa Lạc,Hà Nội",
+  "createdAt": {
+    "$date": "2024-12-15T16:48:45.337Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:48:45.337Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0a06d5b8c9e08bd6152b"
+  },
+  "fullname": "Phan hiếu test một",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà tĩnh, nam hồng",
+  "createdAt": {
+    "$date": "2024-12-15T16:55:34.373Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:55:34.373Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0a4ed22d1144af8ef985"
+  },
+  "fullname": "Trong Nguyen",
+  "email": "trongnhhe161732@fpt.edu.vn",
+  "phone": "0904521821",
+  "dob": {
+    "$date": "2000-12-15T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "hoa lac",
+  "createdAt": {
+    "$date": "2024-12-15T16:56:46.638Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:56:46.638Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0b33d5b8c9e08bd63ff9"
+  },
+  "fullname": "Phan hiếu test đoàn",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-16T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà tĩnh, nam hồng",
+  "createdAt": {
+    "$date": "2024-12-15T17:00:35.292Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:00:35.292Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f139ed5b8c9e08bd75e6b"
+  },
+  "fullname": "Phan hiếu test mk",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-16T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà tĩnh, nam hồng",
+  "createdAt": {
+    "$date": "2024-12-15T17:36:30.599Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:36:30.599Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f17c3d22d1144af90317a"
+  },
+  "fullname": "Nguyễn Hoàng Quân",
+  "email": "vuinvhe176325@fpt.edu.vn",
+  "phone": "0983828283",
+  "dob": {
+    "$date": "2003-04-13T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Thành phố Thanh Hóa,tỉnh Thanh Hóa",
+  "createdAt": {
+    "$date": "2024-12-15T17:54:11.388Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:54:11.388Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603bd0a947f4672cdcfe61"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-16T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-16T14:40:16.108Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:40:16.108Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604849a947f4672cdded3f"
+  },
+  "fullname": "phan công hiếu",
+  "email": "hieupche163923@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-16T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh,phường nam hồng",
+  "createdAt": {
+    "$date": "2024-12-16T15:33:29.314Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:33:29.314Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676049bfa947f4672cde07cf"
+  },
+  "fullname": "phan công kim",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-12-16T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-16T15:39:43.225Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:39:43.225Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760ed1fcd83e912201f3714"
+  },
+  "fullname": "phan công kim",
+  "email": "hieuphancong3@gmail.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2002-01-11T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-17T03:16:47.512Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T03:16:47.512Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613441cd83e912202004dc"
+  },
+  "fullname": "Phan Trường Lâm",
+  "email": "lampt@fpt.edu.com",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2000-12-17T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-17T08:20:17.200Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:20:17.200Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613cc0cd83e912202087c1"
+  },
+  "fullname": "Phan Trường Lâm",
+  "email": "lampt@fpt.edu.vn",
+  "phone": "0869098854",
+  "dob": {
+    "$date": "2001-12-17T00:00:00.000Z"
+  },
+  "gender": "Male",
+  "address": "Hà Tĩnh",
+  "createdAt": {
+    "$date": "2024-12-17T08:56:32.644Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:56:32.644Z"
   },
   "__v": 0
 }]

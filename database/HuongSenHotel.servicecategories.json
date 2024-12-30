@@ -1,0 +1,144 @@
+[{
+  "_id": {
+    "$oid": "675064ff10a68d9a2db905d6"
+  },
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "name": "Các dịch vụ đặt trước khi check-in",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6772c6f246c2735e049f4554"
+  },
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "name": "Các dịch vụ đặt khi đang sử dụng",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6772c74446c2735e049f4555"
+  },
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "name": "Các dịch vụ thêm khi check-out",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675064ff10a68d9a2db90556"
+  },
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "name": "Các dịch vụ đặt trước khi check-in",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6772c6f246c2735e049f4557"
+  },
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "name": "Các dịch vụ đặt khi đang sử dụng",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6772c74446c2735e049f4558"
+  },
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "name": "Các dịch vụ thêm khi check-out",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675064ff10a68d9a2db90559"
+  },
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "name": "Các dịch vụ đặt trước khi check-in",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6772c6f246c2735e049f4560"
+  },
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "name": "Các dịch vụ đặt khi đang sử dụng",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6772c74446c2735e049f4561"
+  },
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "name": "Các dịch vụ thêm khi check-out",
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.325Z"
+  },
+  "__v": 0
+}]

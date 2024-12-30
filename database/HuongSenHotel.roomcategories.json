@@ -1,96 +1,38 @@
 [{
   "_id": {
-    "$oid": "670b9896e91d9d4f21e97b5a"
-  },
-  "numberOfBed": "2",
-  "numberOfHuman": "2",
-  "price": 400000,
-  "name": "phòng đôi",
-  "locationId": {
-    "$oid": "66f6c536285571f28087c16b"
-  }
-},
-{
-  "_id": {
-    "$oid": "670bd4bee91d9d4f21e97b62"
-  },
-  "numberOfBed": "1",
-  "numberOfHuman": "2",
-  "price": 450000,
-  "name": "phòng VIP",
-  "locationId": {
-    "$oid": "66f6c536285571f28087c16b"
-  }
-},
-{
-  "_id": {
-    "$oid": "670bd4dfe91d9d4f21e97b63"
-  },
-  "numberOfBed": "1",
-  "numberOfHuman": "1",
-  "price": 300000,
-  "name": "phòng đơn",
-  "locationId": {
-    "$oid": "66f6c536285571f28087c16b"
-  }
-},
-{
-  "_id": {
     "$oid": "670dbe1c5c9f636934a39e5c"
-  },
-  "numberOfBed": "2",
-  "numberOfHuman": "2",
-  "price": 400000,
-  "name": "phòng đôi",
-  "locationId": {
-    "$oid": "66f6c59f285571f28087c16d"
-  }
-},
-{
-  "_id": {
-    "$oid": "670dbe2c5c9f636934a39e5d"
-  },
-  "numberOfBed": "1",
-  "numberOfHuman": "2",
-  "price": 450000,
-  "name": "phòng VIP",
-  "locationId": {
-    "$oid": "66f6c59f285571f28087c16d"
-  }
-},
-{
-  "_id": {
-    "$oid": "6711b8083ec99c24fb9ea0b1"
-  },
-  "numberOfBed": 3,
-  "numberOfHuman": 3,
-  "price": 500000,
-  "name": "phòng 3 giường",
-  "locationId": {
-    "$oid": "66f6c42f285571f28087c16a"
-  },
-  "updatedAt": {
-    "$date": "2024-11-23T12:39:11.834Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "6711b8bc7210b684ed014423"
   },
   "numberOfBed": 2,
   "numberOfHuman": 2,
-  "price": 500000,
+  "price": 400000,
   "name": "phòng đôi",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+  "updatedAt": {
+    "$date": "2024-12-15T05:31:44.206Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6711b9537210b684ed056cad"
+  },
+  "numberOfBed": 1,
+  "numberOfHuman": 2,
+  "price": 600000,
+  "name": "phòng VIP ",
   "locationId": {
     "$oid": "66f6c42f285571f28087c16a"
   },
   "createdAt": {
-    "$date": "2024-10-18T01:24:12.982Z"
+    "$date": "2024-10-18T01:26:43.747Z"
   },
   "updatedAt": {
-    "$date": "2024-11-23T12:39:44.890Z"
+    "$date": "2024-12-15T05:30:13.925Z"
   },
-  "__v": 0
+  "__v": 0,
+  "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách"
 },
 {
   "_id": {
@@ -107,28 +49,10 @@
     "$date": "2024-10-18T01:26:08.126Z"
   },
   "updatedAt": {
-    "$date": "2024-11-23T12:39:16.914Z"
+    "$date": "2024-12-15T05:30:35.288Z"
   },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6711b9537210b684ed056cad"
-  },
-  "numberOfBed": 1,
-  "numberOfHuman": 2,
-  "price": 600000,
-  "name": "phòng VIP",
-  "locationId": {
-    "$oid": "66f6c42f285571f28087c16a"
-  },
-  "createdAt": {
-    "$date": "2024-10-18T01:26:43.747Z"
-  },
-  "updatedAt": {
-    "$date": "2024-10-18T01:26:43.747Z"
-  },
-  "__v": 0
+  "__v": 0,
+  "description": "Phòng có 1 giường lớn và 1 giường nhỏ cho gia đình 3 người"
 },
 {
   "_id": {
@@ -145,7 +69,108 @@
     "$date": "2024-10-18T01:27:29.442Z"
   },
   "updatedAt": {
-    "$date": "2024-10-18T01:27:29.442Z"
+    "$date": "2024-12-15T05:31:07.767Z"
   },
-  "__v": 0
+  "__v": 0,
+  "description": "Phòng đơn có 1 giường nhỏ dành cho 1 người"
+},
+{
+  "_id": {
+    "$oid": "670bd4dfe91d9d4f21e97b63"
+  },
+  "numberOfBed": 1,
+  "numberOfHuman": 1,
+  "price": 300000,
+  "name": "phòng đơn",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "description": "Phòng có 1 giường nhỏ dành cho 1 người",
+  "updatedAt": {
+    "$date": "2024-12-15T05:31:59.880Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670dbe2c5c9f636934a39e5d"
+  },
+  "numberOfBed": 1,
+  "numberOfHuman": 2,
+  "price": 450000,
+  "name": "phòng VIP",
+  "locationId": {
+    "$oid": "66f6c59f285571f28087c16d"
+  },
+  "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách",
+  "updatedAt": {
+    "$date": "2024-12-15T05:31:33.890Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670b9896e91d9d4f21e97b5a"
+  },
+  "numberOfBed": 2,
+  "numberOfHuman": 2,
+  "price": 400000,
+  "name": "phòng đôi",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "description": "Phòng có 2 giường nhỏ dành cho 2 người",
+  "updatedAt": {
+    "$date": "2024-12-15T05:31:51.174Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "670bd4bee91d9d4f21e97b62"
+  },
+  "numberOfBed": 1,
+  "numberOfHuman": 2,
+  "price": 450000,
+  "name": "phòng VIP",
+  "locationId": {
+    "$oid": "66f6c536285571f28087c16b"
+  },
+  "description": "Phòng có 1 giường đôi lớn cho 2 người và bàn uống nước tiếp khách",
+  "updatedAt": {
+    "$date": "2024-12-15T05:31:27.352Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6711b8083ec99c24fb9ea0b1"
+  },
+  "numberOfBed": 3,
+  "numberOfHuman": 3,
+  "price": 500000,
+  "name": "phòng 3 giường",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:29:04.720Z"
+  },
+  "description": "Phòng có 3 giường nhỏ dành cho 3 người"
+},
+{
+  "_id": {
+    "$oid": "6711b8bc7210b684ed014423"
+  },
+  "numberOfBed": 2,
+  "numberOfHuman": 2,
+  "price": 500000,
+  "name": "phòng đôi",
+  "locationId": {
+    "$oid": "66f6c42f285571f28087c16a"
+  },
+  "createdAt": {
+    "$date": "2024-10-18T01:24:12.982Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T05:29:30.863Z"
+  },
+  "__v": 0,
+  "description": "Phòng có 2 giường nhỏ dành cho 2 người"
 }]

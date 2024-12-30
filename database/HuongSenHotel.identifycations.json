@@ -1,77 +1,5 @@
 [{
   "_id": {
-    "$oid": "674080afb31ac53d2dda78c1"
-  },
-  "name": "Căn Cước Công Dân",
-  "code": "1234567890",
-  "dateStart": {
-    "$date": "2015-11-22T00:00:00.000Z"
-  },
-  "dateEnd": {
-    "$date": "2024-11-22T00:00:00.000Z"
-  },
-  "location": "hp",
-  "customerID": {
-    "$oid": "674080afb31ac53d2dda78b0"
-  },
-  "createdAt": {
-    "$date": "2024-11-22T13:01:35.227Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-22T13:01:35.227Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6740820730d1b5f11092edcc"
-  },
-  "name": "Căn Cước Công Dân",
-  "code": "1234567890",
-  "dateStart": {
-    "$date": "2017-11-22T00:00:00.000Z"
-  },
-  "dateEnd": {
-    "$date": "2024-11-22T00:00:00.000Z"
-  },
-  "location": "hp",
-  "customerID": {
-    "$oid": "6740820730d1b5f11092edb1"
-  },
-  "createdAt": {
-    "$date": "2024-11-22T13:07:19.552Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-22T13:07:19.552Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6740850e796dc4fe9ce803e8"
-  },
-  "name": "Bằng Lái Xe",
-  "code": "abcvvdsvsvfgr",
-  "dateStart": {
-    "$date": "2018-12-07T00:00:00.000Z"
-  },
-  "dateEnd": {
-    "$date": "2030-11-22T00:00:00.000Z"
-  },
-  "location": "hp",
-  "customerID": {
-    "$oid": "6740850e796dc4fe9ce803cd"
-  },
-  "createdAt": {
-    "$date": "2024-11-22T13:20:14.771Z"
-  },
-  "updatedAt": {
-    "$date": "2024-11-22T13:20:14.771Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "67408611796dc4fe9ce804cf"
   },
   "name": "Căn Cước Công Dân",
@@ -144,6 +72,78 @@
 },
 {
   "_id": {
+    "$oid": "6740850e796dc4fe9ce803e8"
+  },
+  "name": "Bằng Lái Xe",
+  "code": "abcvvdsvsvfgr",
+  "dateStart": {
+    "$date": "2018-12-07T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2030-11-22T00:00:00.000Z"
+  },
+  "location": "hp",
+  "customerID": {
+    "$oid": "6740850e796dc4fe9ce803cd"
+  },
+  "createdAt": {
+    "$date": "2024-11-22T13:20:14.771Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:20:14.771Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "674080afb31ac53d2dda78c1"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "1234567890",
+  "dateStart": {
+    "$date": "2015-11-22T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2024-11-22T00:00:00.000Z"
+  },
+  "location": "hp",
+  "customerID": {
+    "$oid": "674080afb31ac53d2dda78b0"
+  },
+  "createdAt": {
+    "$date": "2024-11-22T13:01:35.227Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:01:35.227Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6740820730d1b5f11092edcc"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "1234567890",
+  "dateStart": {
+    "$date": "2017-11-22T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2024-11-22T00:00:00.000Z"
+  },
+  "location": "hp",
+  "customerID": {
+    "$oid": "6740820730d1b5f11092edb1"
+  },
+  "createdAt": {
+    "$date": "2024-11-22T13:07:19.552Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-22T13:07:19.552Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
     "$oid": "6745d6e8104506461fa710d1"
   },
   "name": "Căn Cước Công Dân",
@@ -163,6 +163,1518 @@
   },
   "updatedAt": {
     "$date": "2024-11-26T14:10:48.613Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675064ff10a68d9a2db905d8"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "038203002371",
+  "dateStart": {
+    "$date": "2020-11-21T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2025-11-21T00:00:00.000Z"
+  },
+  "location": "abcxyz",
+  "customerID": {
+    "$oid": "675064ff10a68d9a2db905d3"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:19:43.391Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:43.391Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6750650e10a68d9a2db906c6"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "038203002371",
+  "dateStart": {
+    "$date": "2020-11-21T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2025-11-21T00:00:00.000Z"
+  },
+  "location": "abcxyz",
+  "customerID": {
+    "$oid": "6750650e10a68d9a2db906c0"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:19:58.322Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:19:58.322Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6750651b10a68d9a2db90782"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "038203002371",
+  "dateStart": {
+    "$date": "2020-11-21T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2025-11-21T00:00:00.000Z"
+  },
+  "location": "abcxyz",
+  "customerID": {
+    "$oid": "6750651b10a68d9a2db9077d"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:20:11.893Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:20:11.893Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675067b610a68d9a2db927fa"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "038203002371",
+  "dateStart": {
+    "$date": "2020-11-21T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2025-11-21T00:00:00.000Z"
+  },
+  "location": "abcxyz",
+  "customerID": {
+    "$oid": "675067b610a68d9a2db927f4"
+  },
+  "createdAt": {
+    "$date": "2024-12-04T14:31:18.141Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-04T14:31:18.141Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c8fe5b2d09731bdb203a"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-08T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-08T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755c8fe5b2d09731bdb2038"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:27:42.593Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:27:42.593Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c9215b2d09731bdb228a"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-08T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-08T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755c9215b2d09731bdb2288"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:28:17.874Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:28:17.874Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c9585b2d09731bdb261e"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-08T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-08T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755c9585b2d09731bdb2617"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:29:12.735Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:29:12.735Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755c9995b2d09731bdb2a34"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-08T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-08T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755c9995b2d09731bdb2a2d"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:30:17.222Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:30:17.222Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755ca1f5b2d09731bdb3285"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-08T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-08T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755ca1f5b2d09731bdb3283"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T16:32:31.995Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T16:32:31.995Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d1c65b2d09731bdba7f4"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d1c65b2d09731bdba7f2"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:05:10.287Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:05:10.287Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d1e35b2d09731bdba9d7"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d1e35b2d09731bdba9d5"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:05:39.736Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:05:39.736Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d20c5b2d09731bdbac70"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d20c5b2d09731bdbac6e"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:06:20.875Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:06:20.875Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d3095b2d09731bdbbbbe"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d3095b2d09731bdbbbb7"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:10:33.773Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:10:33.773Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d36e5b2d09731bdbc1f2"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d36e5b2d09731bdbc1f0"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:12:14.250Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:12:14.250Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d4125b2d09731bdbcce6"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d4125b2d09731bdbcce4"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:14:58.155Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:14:58.155Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d4c35b2d09731bdbd7ef"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d4c35b2d09731bdbd7ed"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:17:55.683Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:17:55.683Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d52a5b2d09731bdbde6f"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d52a5b2d09731bdbde6d"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:19:38.309Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:19:38.309Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d6345b2d09731bdbee5d"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d6345b2d09731bdbee5b"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:24:04.324Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:24:04.324Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755d7c4621c7b6bfe49b13b"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755d7c3621c7b6bfe49b139"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:30:44.023Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:30:44.023Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755daf15f9d1b24e56bc5da"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755daf15f9d1b24e56bc5d8"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:44:17.341Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:44:17.341Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755db2b5f9d1b24e56bc9a5"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755db2b5f9d1b24e56bc9a2"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:45:15.710Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:45:15.710Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755de7e5f9d1b24e56bfbd1"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755de7e5f9d1b24e56bfbce"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T17:59:26.472Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T17:59:26.472Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755dfc495556842c7fefb7f"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755dfc495556842c7fefb7d"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:04:52.492Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:04:52.492Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e03495556842c7ff0928"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755e03495556842c7ff0926"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:06:44.590Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:06:44.590Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6755e15995556842c7ff2cb6"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6755e15995556842c7ff2cac"
+  },
+  "createdAt": {
+    "$date": "2024-12-08T18:11:37.302Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-08T18:11:37.302Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67563e3b184f95f2301fa467"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "67563e3b184f95f2301fa464"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:47:55.256Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:47:55.256Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67563e97184f95f2301faf82"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-09T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-09T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "67563e97184f95f2301faf7f"
+  },
+  "createdAt": {
+    "$date": "2024-12-09T00:49:27.916Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-09T00:49:27.916Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675870477f863c390a95b194"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-10T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-10T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh",
+  "customerID": {
+    "$oid": "675870467f863c390a95b190"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T16:45:59.095Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T16:45:59.095Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675888d835ee8905d9077aa2"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-11T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-11T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh",
+  "customerID": {
+    "$oid": "675888d835ee8905d9077a98"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:30:48.532Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:30:48.532Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67588def31caf5f0f947324c"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-11T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-11T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "67588dee31caf5f0f9473247"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T18:52:31.746Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T18:52:31.746Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67589718758f2ade252581ae"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-11T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-11T00:00:00.000Z"
+  },
+  "location": "Hlomg",
+  "customerID": {
+    "$oid": "67589717758f2ade252581a7"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T19:31:36.563Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T19:31:36.563Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758988195c8939dc7303cac"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-11T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-11T00:00:00.000Z"
+  },
+  "location": "Hlomg",
+  "customerID": {
+    "$oid": "6758988095c8939dc7303ca7"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T19:37:37.333Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T19:37:37.333Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67589ceb3ce19a5f1010f1f4"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-11T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-11T00:00:00.000Z"
+  },
+  "location": "Hlog",
+  "customerID": {
+    "$oid": "67589cea3ce19a5f1010f1ed"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T19:56:27.383Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T19:56:27.383Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a5f9af3a66292157c7b8"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874656",
+  "dateStart": {
+    "$date": "2020-12-11T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-11T00:00:00.000Z"
+  },
+  "location": "Ha tinh",
+  "customerID": {
+    "$oid": "6758a5f9af3a66292157c7ae"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:35:05.652Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:35:05.652Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6758a980af3a66292157dac6"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-11T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-11T00:00:00.000Z"
+  },
+  "location": "Hlog",
+  "customerID": {
+    "$oid": "6758a97faf3a66292157dabc"
+  },
+  "createdAt": {
+    "$date": "2024-12-10T20:50:08.266Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-10T20:50:08.266Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675904fdd3ba4bd49ebd2bb6"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-11T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-11T00:00:00.000Z"
+  },
+  "location": "Ha long",
+  "customerID": {
+    "$oid": "675904fbd3ba4bd49ebd2bb0"
+  },
+  "createdAt": {
+    "$date": "2024-12-11T03:20:29.235Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-11T03:20:29.235Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aea05b846aa4abf413904"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "010101010101",
+  "dateStart": {
+    "$date": "2022-06-12T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2029-11-12T00:00:00.000Z"
+  },
+  "location": "Công",
+  "customerID": {
+    "$oid": "675aea05b846aa4abf413900"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T13:49:57.536Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T13:49:57.536Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675aeb90b846aa4abf4145f0"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-12T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-12T00:00:00.000Z"
+  },
+  "location": "Ha long",
+  "customerID": {
+    "$oid": "675aeb8fb846aa4abf4145ea"
+  },
+  "createdAt": {
+    "$date": "2024-12-12T13:56:32.634Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-12T13:56:32.634Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675d982750eb908cd7c61fb1"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-14T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2025-12-14T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh",
+  "customerID": {
+    "$oid": "675d982750eb908cd7c61faa"
+  },
+  "createdAt": {
+    "$date": "2024-12-14T14:37:27.597Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-14T14:37:27.597Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675da0c207c0fe2811ef44ea"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2016-12-14T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2025-12-14T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh",
+  "customerID": {
+    "$oid": "675da0c207c0fe2811ef44e7"
+  },
+  "createdAt": {
+    "$date": "2024-12-14T15:14:10.895Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-14T15:14:10.895Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ee24cb793b3ef6eaf1510"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "031202000850",
+  "dateStart": {
+    "$date": "2021-12-28T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2030-12-15T00:00:00.000Z"
+  },
+  "location": "Hải Phòng",
+  "customerID": {
+    "$oid": "675ee24cb793b3ef6eaf1503"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T14:06:04.848Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:06:04.848Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ee9eff0a505cfc4c50c4b"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "031202000850",
+  "dateStart": {
+    "$date": "2015-12-15T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "location": "Hải Phòng",
+  "customerID": {
+    "$oid": "675ee9eef0a505cfc4c50c31"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T14:38:39.358Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:38:39.358Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eed85d22d1144af8ce1de"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "031202000850",
+  "dateStart": {
+    "$date": "2015-01-11T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2025-01-11T00:00:00.000Z"
+  },
+  "location": "Hải Phòng",
+  "customerID": {
+    "$oid": "675eed84d22d1144af8ce1d0"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T14:53:57.536Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T14:53:57.536Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eefa2810b13e415218656"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-15T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2027-12-15T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh",
+  "customerID": {
+    "$oid": "675eefa2810b13e41521864d"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:02:58.560Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:02:58.560Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef245d22d1144af8d70f5"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2019-12-15T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-15T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh",
+  "customerID": {
+    "$oid": "675ef244d22d1144af8d70df"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:14:13.329Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:14:13.329Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef492d22d1144af8db45d"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "038203002371",
+  "dateStart": {
+    "$date": "2021-06-29T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2028-04-13T00:00:00.000Z"
+  },
+  "location": "Công an tỉnh Thanh Hóa",
+  "customerID": {
+    "$oid": "675ef491d22d1144af8db440"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:24:02.273Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:24:02.273Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef5d3d22d1144af8dd7bc"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "038535002581",
+  "dateStart": {
+    "$date": "2021-04-13T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2028-01-25T00:00:00.000Z"
+  },
+  "location": "Công an tỉnh Thanh Hóa",
+  "customerID": {
+    "$oid": "675ef5d2d22d1144af8dd7a9"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:29:23.378Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:29:23.378Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef5fdd22d1144af8ddcd4"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "010100100101",
+  "dateStart": {
+    "$date": "2022-02-15T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2029-12-04T00:00:00.000Z"
+  },
+  "location": "Công An NA",
+  "customerID": {
+    "$oid": "675ef5fcd22d1144af8ddca6"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:30:05.545Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:30:05.545Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675ef74dd22d1144af8dfc62"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "038357002561",
+  "dateStart": {
+    "$date": "2021-10-30T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2028-10-11T00:00:00.000Z"
+  },
+  "location": "Công an tỉnh Thanh Hóa",
+  "customerID": {
+    "$oid": "675ef74dd22d1144af8dfc50"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:35:41.864Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:35:41.864Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675efc76a5e7d15f4c7c5696"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-01-01T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-15T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh",
+  "customerID": {
+    "$oid": "675efc76a5e7d15f4c7c5694"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T15:57:42.598Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T15:57:42.598Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675eff31d22d1144af8e406f"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "088657856874",
+  "dateStart": {
+    "$date": "2021-05-13T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2028-05-13T00:00:00.000Z"
+  },
+  "location": "Hà Nội",
+  "customerID": {
+    "$oid": "675eff30d22d1144af8e406a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T16:09:21.034Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:09:21.034Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f086dd22d1144af8ed734"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "088657856099",
+  "dateStart": {
+    "$date": "2021-02-08T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2028-02-08T00:00:00.000Z"
+  },
+  "location": "Hà Nội",
+  "customerID": {
+    "$oid": "675f086dd22d1144af8ed728"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T16:48:45.967Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:48:45.967Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0a06d5b8c9e08bd6152e"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-15T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-15T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh, nam hồng",
+  "customerID": {
+    "$oid": "675f0a06d5b8c9e08bd6152b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T16:55:34.461Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:55:34.461Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0a4fd22d1144af8ef98b"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "031202000850",
+  "dateStart": {
+    "$date": "2000-12-15T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2024-12-15T00:00:00.000Z"
+  },
+  "location": "Hải, Phòng",
+  "customerID": {
+    "$oid": "675f0a4ed22d1144af8ef985"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T16:56:47.215Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T16:56:47.215Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f0b33d5b8c9e08bd64005"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2018-12-15T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-15T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh, nam hồng",
+  "customerID": {
+    "$oid": "675f0b33d5b8c9e08bd63ff9"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:00:35.480Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:00:35.480Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f139ed5b8c9e08bd75e74"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-16T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-16T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh, nam hồng",
+  "customerID": {
+    "$oid": "675f139ed5b8c9e08bd75e6b"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:36:30.704Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:36:30.704Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675f17c4d22d1144af903199"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "088657856873",
+  "dateStart": {
+    "$date": "2021-11-21T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2028-11-21T00:00:00.000Z"
+  },
+  "location": "Thanh Hóa",
+  "customerID": {
+    "$oid": "675f17c3d22d1144af90317a"
+  },
+  "createdAt": {
+    "$date": "2024-12-15T17:54:12.355Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-15T17:54:12.355Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67603bd1a947f4672cdcfe7a"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-16T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-16T00:00:00.000Z"
+  },
+  "location": "Hạ Long",
+  "customerID": {
+    "$oid": "67603bd0a947f4672cdcfe61"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T14:40:17.381Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T14:40:17.381Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67604849a947f4672cdded52"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2018-12-16T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-16T00:00:00.000Z"
+  },
+  "location": "Hà Tĩnh, nam hồng",
+  "customerID": {
+    "$oid": "67604849a947f4672cdded3f"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:33:29.997Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:33:29.997Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676049c0a947f4672cde07f2"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-16T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-16T00:00:00.000Z"
+  },
+  "location": "Hạ Long",
+  "customerID": {
+    "$oid": "676049bfa947f4672cde07cf"
+  },
+  "createdAt": {
+    "$date": "2024-12-16T15:39:44.509Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-16T15:39:44.509Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6760ed20cd83e912201f3729"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-17T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-17T00:00:00.000Z"
+  },
+  "location": "Hạ Long",
+  "customerID": {
+    "$oid": "6760ed1fcd83e912201f3714"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T03:16:48.848Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T03:16:48.848Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613441cd83e912202004e8"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-17T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-17T00:00:00.000Z"
+  },
+  "location": "Hạ Long",
+  "customerID": {
+    "$oid": "67613441cd83e912202004dc"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:20:17.886Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:20:17.886Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67613cc2cd83e912202087df"
+  },
+  "name": "Căn Cước Công Dân",
+  "code": "483756874658",
+  "dateStart": {
+    "$date": "2020-12-17T00:00:00.000Z"
+  },
+  "dateEnd": {
+    "$date": "2026-12-17T00:00:00.000Z"
+  },
+  "location": "Hạ Long",
+  "customerID": {
+    "$oid": "67613cc0cd83e912202087c1"
+  },
+  "createdAt": {
+    "$date": "2024-12-17T08:56:34.008Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-17T08:56:34.008Z"
   },
   "__v": 0
 }]
