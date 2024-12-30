@@ -7,10 +7,14 @@ const { Schema, model } = mongoose;
 
 const orderRoomSchema = new Schema(
   {
-    roomCateId: {
-      type: Schema.Types.ObjectId,
-      ref: RoomCategory,
-      required: [true, 'roomCateId là bắt buộc']
+    // roomCateId: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: RoomCategory,
+    //   required: [true, 'roomCateId là bắt buộc']
+    // },
+    roomCategory: {
+      type: Object, // Lưu trữ toàn bộ dữ liệu của RoomCategory
+      required: [true, "roomCategory là bắt buộc"],
     },
     customerId: {
       type: Schema.Types.ObjectId,
