@@ -1,47 +1,166 @@
+p a {
+  color: var(--primary-color, #da1884); /* Your primary color */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0 5px;
+  transition: all 0.3s ease;
+}
+
+
+p {
+  font-size: 1rem; /* Adjust text size */
+  color: var(--text-color, #6e7074); /* Default breadcrumb color */
+}
+
+
 .gallery-wrapper {
-    display: flex;
-    margin-top: 20px;
+  padding: 5px;
+  max-width: 100%; /* Ensures it fits the screen */
+  margin: auto;
+  box-sizing: border-box; /* Includes padding in the total width */
+}
+
+.gallery {
+  display: grid;
+  gap: 5px;
+}
+
+.big-photo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.big-photo img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.small-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 5px;
+}
+
+.small-photos img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map {
+  margin: auto;
+  max-width: 100%;
+  padding: 5px 5px;
+  box-sizing: border-box;
+}
+
+#map {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+span {
+  margin: 10px;
+}
+
+#card {
+  padding: 0;
+}
+.description a {
+  color: var(--primary-color, #da1884); /* Use your primary color */
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-size: 1rem; /* Adjust size as needed */
+}
+.description a:active {
+  transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+.description a:focus {
+  outline: 2px solid var(--primary-color, #da1884); /* Accessibility focus */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .big-photo {
+    grid-template-columns: 1fr; /* Switch to a single column */
   }
-  
-  .gallery {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .big-photo img {
-    height: 300px;
-    margin-right: 10px;
-    object-fit: cover;
-    width: auto;
-  }
-  .big-photo  {
-    height: 300px;
-    margin-bottom: 5px;
-    display: flex
-  }
-  
-  
-  
+
   .small-photos {
-    display: flex;
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjust grid for smaller screens */
   }
-  
+
   .small-photos img {
-    width: 106px;
-    height: 100px;
-    object-fit: cover;
-  }
-  
-  span{
-    margin:10px;
+    height: 90px; /* Slightly smaller for tablets */
   }
 
   #map {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px 5px;
+    padding: 10px 3px;
   }
 
-  #card{
-    padding: none;
+  span {
+    margin: 5px;
   }
+}
+
+@media (max-width: 480px) {
+  .gallery-wrapper {
+    padding: 3px;
+  }
+
+  .big-photo img,
+  .small-photos img {
+    border-radius: 1px; /* Slightly smaller radius for compact screens */
+  }
+
+  .small-photos img {
+    height: 60px; /* Further reduction for phones */
+  }
+
+  #map {
+    padding: 8px 2px;
+  }
+
+  span {
+    margin: 2px;
+    font-size: 12px; /* Adjust text size for smaller screens */
+  }
+}
+.amenities-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.amenities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between items */
+  margin-top: 10px;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--text-color, #6e7074); /* Default text color */
+}
+
+.amenity-icon {
+  font-size: 1.5rem; /* Adjust icon size */
+  margin-right: 8px; /* Space between icon and text */
+  color: var(--primary-color, #ff7e01); /* Primary color for icons */
+}
+
+.amenity-item:hover {
+  color: var(--primary-color, #ff7e01); /* Change text color on hover */
+  transform: scale(1.02); /* Subtle hover effect */
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}

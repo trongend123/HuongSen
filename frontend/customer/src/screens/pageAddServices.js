@@ -120,8 +120,9 @@ const PageAddServices = () => {
                 <Button variant="primary" type="submit" className="mt-3">
                     Tải lại thông tin đơn đặt
                 </Button>
+                
             </Form>
-
+<br/>
             {/* Hiển thị thông báo lỗi nếu Booking ID không hợp lệ */}
             {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
 

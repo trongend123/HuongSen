@@ -251,31 +251,9 @@ const CS3 = () => {
 
         await Promise.all(orderRoomPromises);
     };
-
-    // const handleDeleteAll = async () => {
-    //     try {
-    //         if (bookingId) {
-    //             const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
-    //             const deleteOrderRoomPromises = existingOrderRooms.data.map(orderRoom => {
-    //                 return axios.delete(`http://localhost:9999/orderRooms/${orderRoom._id}`);
-    //             });
-    //             await Promise.all(deleteOrderRoomPromises);
-
-    //             await axios.delete(`http://localhost:9999/bookings/${bookingId}`);
-    //             await axios.delete(`http://localhost:9999/customers/${customerId}`);
-
-    //             setBookingId(null);
-    //             setCustomerId(null);
-    //             setIsUpdating(false);
-
-    //             console.log('Booking, customer, and related order rooms deleted successfully');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting booking, customer, or order rooms:', error);
-    //     }
-    // };
     return (
         <div className="container">
+            <br/>
             <p><a href="/">Trang chủ</a> / <a href="/cs3">Nhà khách Hương Sen cơ sở Cát Bà</a></p>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -346,38 +324,48 @@ const CS3 = () => {
                                 {isExpanded
                                     ? (
                                         <>
-                                            Nhà Khách Hương Sen nằm tại trung tâm Thành phố Hải Phòng, chỉ cách Vincom Ngô Quyền 12 phút đi bộ, mang đến một không gian nghỉ dưỡng thoải mái với nhiều tiện nghi hiện đại. Chỗ nghỉ cung cấp xe đạp miễn phí, bãi đỗ xe riêng, khu vườn và một phòng chờ chung để thư giãn.<br />
-                                            Khách sạn có nhà hàng và bếp chung, đồng thời cung cấp dịch vụ phòng và Wi-Fi miễn phí khắp khuôn viên. Đội ngũ lễ tân hoạt động 24 giờ luôn sẵn sàng hỗ trợ, cung cấp dịch vụ thu đổi ngoại tệ và hỗ trợ khách trong suốt thời gian lưu trú.<br />
-                                            Mỗi phòng nghỉ tại Nhà Khách Hương Sen đều được trang bị đầy đủ tiện nghi như điều hòa, bàn làm việc, TV màn hình phẳng và tủ lạnh. Khách cũng có thể thư giãn trên ban công riêng của mình với tầm nhìn ra thành phố.<br />
-                                            Phòng tắm riêng trong mỗi phòng có sẵn khăn tắm và ga trải giường sạch sẽ, đảm bảo mang lại sự thoải mái cho khách hàng.<br />
-                                            Khách sạn còn có một sân hiên ngoài trời, nơi khách có thể thư giãn và tận hưởng không gian thoáng đãng của khu vực.<br />
-                                            Đặc biệt, Nhà Khách Hương Sen nằm gần các điểm tham quan nổi tiếng của Hải Phòng như Nhà hát lớn Hải Phòng (chỉ 1 km) và cách Cảng Tuần Châu 43 km.<br />
-                                            Các cặp đôi đánh giá địa điểm này 9,2 điểm, phản ánh sự hài lòng với không gian và dịch vụ tại đây.
+                                            Nhà khách Hương Sen - cơ sở Cát Bà tọa lạc tại đường Núi Ngọc, nằm đối diện quảng trường và là trung tâm của đảo Cát Bà. Quý khách không chỉ có thể tận hưởng những dịch vụ du lịch mà còn được trải nghiệm những văn hóa truyền thống của con người nơi đây. Đây cùng là cơ sở được đặt phòng nhiều nhất mỗi đợt hè hàng năm và nhận được rất nhiều đánh giá tích cực của du khách trong và ngoài nước
                                         </>
                                     )
                                     : (
                                         <>
-                                            Nhà Khách Hương Sen nằm tại trung tâm Thành phố Hải Phòng, chỉ cách Vincom Ngô Quyền 12 phút đi bộ, mang đến một không gian nghỉ dưỡng thoải mái với nhiều tiện nghi hiện đại...<br />
-                                            Các cặp đôi đánh giá địa điểm này 9,2 điểm, phản ánh sự hài lòng với không gian và dịch vụ tại đây.
+                                            Nhà khách Hương Sen - cơ sở Cát Bà tọa lạc tại đường Núi Ngọc, nằm đối diện quảng trường và là trung tâm của đảo Cát Bà. 
                                         </>
                                     )}
                             </span>
-                            <a onClick={handleToggle}>
+                            <a className="toggle-link" onClick={handleToggle}>
                                 {isExpanded ? 'Thu gọn' : 'Xem thêm'}
                             </a>
                         </div>
 
                     </div>
                     <br />
-                    <b>Các tiện nghi được ưa chuộng nhất</b><br />
-                    <span><IoLogoNoSmoking /> Phòng không hút thuốc</span>
-                    <span><MdCleaningServices /> Dịch vụ phòng</span>
-                    <span><LuParkingCircle /> Chỗ để xe miễn phí</span>
-                    <span><IoIosRestaurant /> Nhà hàng</span>
-                    <br></br>
-                    <span><IoWifi /> Wifi miễn phí</span>
-                    <span><TbDisabled /> Tiện nghi cho người khuyết tật</span>
-                    <span><MdFamilyRestroom /> Phòng gia đình</span>
+                    <b className="amenities-title">Các tiện nghi được ưa chuộng nhất</b>
+                    <br />
+                    <div className="amenities-list">
+                      <span className="amenity-item">
+                        <IoLogoNoSmoking className="amenity-icon" /> Phòng không hút thuốc
+                      </span>
+                      <span className="amenity-item">
+                        <MdCleaningServices className="amenity-icon" /> Dịch vụ phòng
+                      </span>
+                      <span className="amenity-item">
+                        <LuParkingCircle className="amenity-icon" /> Chỗ để xe miễn phí
+                      </span>
+                      <span className="amenity-item">
+                        <IoIosRestaurant className="amenity-icon" /> Nhà hàng
+                      </span>
+                      <br />
+                      <span className="amenity-item">
+                        <IoWifi className="amenity-icon" /> Wifi miễn phí
+                      </span>
+                      <span className="amenity-item">
+                        <TbDisabled className="amenity-icon" /> Tiện nghi cho người khuyết tật
+                      </span>
+                      <span className="amenity-item">
+                        <MdFamilyRestroom className="amenity-icon" /> Phòng gia đình
+                      </span>
+                    </div>
                     <hr />
                 </Col>
                 <Col md={4}>
@@ -393,63 +381,9 @@ const CS3 = () => {
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
                             title="Google Map"
-                        ></iframe></Card>
+                        ></iframe></Card>  <br/> 
                 </Col>
             </Row>
-            {/* <Row className="mb-3">
-
-                <Col>
-                    <Form.Group controlId="checkin">
-                        <Form.Label>Ngày check-in:</Form.Label>
-                        <Form.Control
-                            type="date"
-                            name="checkin"
-                            value={bookingData.checkin}
-                            onChange={handleChange}
-                            isInvalid={!!errors.checkin}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.checkin}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                </Col>
-                <Col>
-                    <Form.Group controlId="checkout">
-                        <Form.Label>Ngày check-out:</Form.Label>
-                        <Form.Control
-                            type="date"
-                            name="checkout"
-                            value={bookingData.checkout}
-                            onChange={handleChange}
-                            isInvalid={!!errors.checkout}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.checkout}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                </Col>
-            </Row>
-            <h4>Chọn loại phòng</h4>
-            {roomCategories.map((room) => (
-                <Row key={room._id} className="mb-3">
-                    <Col className='col-6'>
-                        <Form.Label>{room.name} - {room.price} VND - {room.locationId.name}</Form.Label>
-                    </Col>
-                    <Col className='col-2'>
-                        <Form.Control
-                            type="number"
-                            min="0"
-                            value={quantity[room._id] || 0}
-                            onChange={(e) => handleQuantityChange(e, room._id)}
-                        />
-                    </Col>
-                </Row>
-            ))}
-            {/* Display room selection error */}
-            {/* {errors.roomSelection && (
-                <div className="text-danger mb-3">{errors.roomSelection}</div>
-            )} */}
-            {/* /===============booking phòng======================== */}
             <BookingPage locationId={locationId} />
             <Review />
         </div>

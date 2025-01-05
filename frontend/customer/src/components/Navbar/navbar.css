@@ -65,9 +65,8 @@
   }
 
   .navbar-custom .navbar-brand {
-    display: flex;
-    justify-content: center; /* Center the logo horizontally */
-    width: 100%; /* Ensure it spans the full width of the navbar */
+    padding-left: 10px;
+    justify-content: left; /* Center the logo horizontally */
   }
 
   .navbar-custom .logo {
@@ -77,9 +76,8 @@
   }
 }
 @media (max-width: 576px) { /* Target phone-size screens */
-  .navbar-custom .navbar-brand {
-    justify-content: center; /* Center the logo horizontally */
-    width: 100%; /* Ensure it spans the full width of the navbar */
+  .navbar-custom .navbar-brand { /* Center the logo horizontally */
+    width: 70%; /* Ensure it spans the full width of the navbar */
   }
 
   .navbar-custom .logo {

@@ -11,7 +11,7 @@ import cs2 from '../../assets/cs2.jpg';
 import cs3 from '../../assets/cs3.jpg';
 import serviceImg1 from '../../assets/ngu1.jpg';
 import serviceImg2 from '../../assets/ngu2.jpg';
-import serviceImg3 from '../../assets/ngu3.jpg';
+import serviceImg3 from '../../assets/tiec3.jpg';
 import serviceImg4 from '../../assets/tiec.jpg';
 import newsImg1 from '../../assets/ngu1.jpg'; 
 import newsImg2 from '../../assets/ngu2.jpg';

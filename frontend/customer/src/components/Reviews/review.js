@@ -15,15 +15,15 @@ const ReviewCard = ({ name, country, comment, rating }) => {
 
 const ServiceReviews = () => {
   const reviews = [
-    { name: 'Lê Văn Quang', comment: 'Vị trí gần trung tâm, nhân viên thân thiện.', rating: 8.2 },
-    { name: 'Nguyễn Quang Hiếu', comment: 'Phòng rẻ, gần các quán ăn.', rating: 8.0 },
-    { name: 'Phan Công Hiếu', comment: 'Rất gần cảng biển và sân bay, nhân viên nhiệt tình.', rating: 9.0 },
-    { name: 'Nguyễn Văn Vui', comment: 'Phòng rộng, đầy đủ tiện nghi.', rating: 8.5 },
+    { name: 'Minh', comment: 'Vị trí ngay gần trung tâm, gần ga tàu. Sân đỗ xe rộng rãi, sảnh tầng 1 rộng rãi thoáng mát, nhân viên cực kì thân thiện. Phòng có cửa sổ nhìn view toàn thành phố.', rating: 10 },
+    { name: 'Phung', comment: 'Rộng thoáng mát, có chỗ để xe oto. Sạch sẽ, giá cả tốt. Gần trung tâm thành phố, đi lại dễ dàng thuận tiện. Nhân viên nhiệt tình, khách sạn lớn có 2 cầu thang máy', rating: 10 },
+    { name: 'Anthony', comment: 'Location, close to the sea port (60k Grab ride away), not to far from the airport. Though it is dated, it is clean. The staff were very helpful and polite.', rating: 8.0 },
+    { name: 'Yasuo', comment: '“部屋は広くバスタブ有りお湯もたっぷり、近くにGoogleマップに表示されて無いスーパーマーケット有り、とても満足、値段以上”', rating: 10 },
   ];
 
   return (
     <div className="service-reviews">
-      <h4>Nhận xét của những vị khách từng sử dụng dịch vụ tại nhà khách Hương Sen</h4>
+      <h4>Nhận xét từ khách hàng của nhà khách Hương Sen (Booking.com)</h4>
       <div className="reviews-list">
         {reviews.map((review, index) => (
           <ReviewCard

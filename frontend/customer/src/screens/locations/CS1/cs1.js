@@ -254,31 +254,9 @@ const CS1 = () => {
 
         await Promise.all(orderRoomPromises);
     };
-
-    // const handleDeleteAll = async () => {
-    //     try {
-    //         if (bookingId) {
-    //             const existingOrderRooms = await axios.get(`http://localhost:9999/orderRooms/booking/${bookingId}`);
-    //             const deleteOrderRoomPromises = existingOrderRooms.data.map(orderRoom => {
-    //                 return axios.delete(`http://localhost:9999/orderRooms/${orderRoom._id}`);
-    //             });
-    //             await Promise.all(deleteOrderRoomPromises);
-
-    //             await axios.delete(`http://localhost:9999/bookings/${bookingId}`);
-    //             await axios.delete(`http://localhost:9999/customers/${customerId}`);
-
-    //             setBookingId(null);
-    //             setCustomerId(null);
-    //             setIsUpdating(false);
-
-    //             console.log('Booking, customer, and related order rooms deleted successfully');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting booking, customer, or order rooms:', error);
-    //     }
-    // };
     return (
         <div className="container">
+            <br/>
             <p><a href="/">Trang chủ</a> / <a href="/cs1">Nhà khách Hương Sen cơ sở Minh Khai</a></p>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -325,7 +303,7 @@ const CS1 = () => {
             <h2>Nhà Khách Hương Sen cơ sở Minh Khai</h2>
             <div><IoLocationSharp /> 16 Minh Khai, Hồng Bàng - TP Hải Phòng </div>
             <Row>
-                <Col md={8}>
+                <Col md={8  }>
                     <div className="gallery-wrapper">
                         <div className="gallery">
                             <div className="big-photo">
@@ -365,96 +343,63 @@ const CS1 = () => {
                                         </>
                                     )}
                             </span>
-                            <a onClick={handleToggle}>
+                            <a className="toggle-link" onClick={handleToggle}>
                                 {isExpanded ? 'Thu gọn' : 'Xem thêm'}
                             </a>
                         </div>
 
                     </div>
                     <br />
-                    <b>Các tiện nghi được ưa chuộng nhất</b><br />
-                    <span><IoLogoNoSmoking /> Phòng không hút thuốc</span>
-                    <span><MdCleaningServices /> Dịch vụ phòng</span>
-                    <span><LuParkingCircle /> Chỗ để xe miễn phí</span>
-                    <span><IoIosRestaurant /> Nhà hàng</span>
-                    <br></br>
-                    <span><IoWifi /> Wifi miễn phí</span>
-                    <span><TbDisabled /> Tiện nghi cho người khuyết tật</span>
-                    <span><MdFamilyRestroom /> Phòng gia đình</span>
-                    <hr />
+<b className="amenities-title">Các tiện nghi được ưa chuộng nhất</b>
+<br />
+<div className="amenities-list">
+  <span className="amenity-item">
+    <IoLogoNoSmoking className="amenity-icon" /> Phòng không hút thuốc
+  </span>
+  <span className="amenity-item">
+    <MdCleaningServices className="amenity-icon" /> Dịch vụ phòng
+  </span>
+  <span className="amenity-item">
+    <LuParkingCircle className="amenity-icon" /> Chỗ để xe miễn phí
+  </span>
+  <span className="amenity-item">
+    <IoIosRestaurant className="amenity-icon" /> Nhà hàng
+  </span>
+  <br />
+  <span className="amenity-item">
+    <IoWifi className="amenity-icon" /> Wifi miễn phí
+  </span>
+  <span className="amenity-item">
+    <TbDisabled className="amenity-icon" /> Tiện nghi cho người khuyết tật
+  </span>
+  <span className="amenity-item">
+    <MdFamilyRestroom className="amenity-icon" /> Phòng gia đình
+  </span>
+</div>
+<hr />
+
                 </Col>
                 <Col md={4}>
-                    <Card id="map">
-                        <CardTitle>Rate: 8.5/10</CardTitle>
-                        <p>Với hàng trăm đánh giá trên các trang thương mại điện tử.</p>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59659.71837244205!2d106.71243317900318!3d20.842509851568096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7af3d4b1503d%3A0x6d500a082648cd8a!2zTmjDoCBLaMOhY2ggSMawxqFuZyBTZW4!5e0!3m2!1svi!2s!4v1729608040022!5m2!1svi!2s"
-                            width="400"
-                            height="250"
-                            style={{ border: 0, margin: 'auto' }}
-                            allowFullScreen=""
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                            title="Google Map"
-                        ></iframe></Card>
-                </Col>
+    <Card id="map" className="p-3">
+        <CardTitle className="text-center">Rate: 8.5/10</CardTitle>
+        <p className="text-center">Với hàng trăm đánh giá trên các trang thương mại điện tử.</p>
+        <div style={{ position: 'relative',  paddingBottom: '90.25%', height: 0, overflow: 'hidden', borderRadius: '5px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59659.71837244205!2d106.71243317900318!3d20.842509851568096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7af3d4b1503d%3A0x6d500a082648cd8a!2zTmjDoCBLaMOhY2ggSMawxqFuZyBTZW4!5e0!3m2!1svi!2s!4v1729608040022!5m2!1svi!2s"
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Map"
+            ></iframe>
+              
+        </div>
+        
+    </Card>
+    <br/> 
+</Col>
+
             </Row>
-
-            {/* <Row className="mb-3">
-
-                <Col>
-                    <Form.Group controlId="checkin">
-                        <Form.Label>Ngày check-in:</Form.Label>
-                        <Form.Control
-                            type="date"
-                            name="checkin"
-                            value={bookingData.checkin}
-                            onChange={handleChange}
-                            isInvalid={!!errors.checkin}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.checkin}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                </Col>
-                <Col>
-                    <Form.Group controlId="checkout">
-                        <Form.Label>Ngày check-out:</Form.Label>
-                        <Form.Control
-                            type="date"
-                            name="checkout"
-                            value={bookingData.checkout}
-                            onChange={handleChange}
-                            isInvalid={!!errors.checkout}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.checkout}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                </Col>
-            </Row> */}
-            {/* <h4>Chọn loại phòng</h4>
-            {roomCategories.map((room) => (
-                <Row key={room._id} className="mb-3">
-                    <Col className='col-6'>
-                        <Form.Label>{room.name} - {room.price} VND - {room.locationId.name}</Form.Label>
-                    </Col>
-                    <Col className='col-2'>
-                        <Form.Control
-                            type="number"
-                            min="0"
-                            value={quantity[room._id] || 0}
-                            onChange={(e) => handleQuantityChange(e, room._id)}
-                        />
-                    </Col>
-                </Row>
-            ))} */}
-            {/* Display room selection error */}
-            {/* {errors.roomSelection && (
-                <div className="text-danger mb-3">{errors.roomSelection}</div>
-            )} */}
-
-            {/* /===============booking phòng======================== */}
             <BookingPage locationId={locationId} />
             <Review />
         </div>
