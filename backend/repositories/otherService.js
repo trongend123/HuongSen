@@ -1,138 +1,90 @@
 import OtherService from "../models/otherService.js";
-// Create
-const create = async ({
-  name,
-  price,
-  description,
-}) => {
+
+// Tạo mới OtherService
+const create = async ({ name, price, description, serviceCate }) => {
   try {
-    // Create new otherService
     const newOtherService = await OtherService.create({
       name,
       price,
       description,
+      serviceCate,
     });
-    // Return newOtherService object
-    return newOtherService._doc;
+    return newOtherService; // Trả về tài liệu mới tạo
   } catch (error) {
-    throw new Error(error.toString());
+    throw new Error(`Error creating other service: ${error.message}`);
   }
 };
-// Get all otherServices
+
+// Lấy danh sách tất cả OtherServices
 const list = async () => {
   try {
-    return await OtherService.find({}).exec();
+    return await OtherService.find({ isDeleted: false }).populate("serviceCate").exec(); // Chỉ lấy những dịch vụ chưa bị xóa
   } catch (error) {
-    throw new Error(error.toString());
+    throw new Error(`Error fetching list of other services: ${error.message}`);
   }
 };
 
-// const getById = async (id) => {
-//   try {
-//     return await OtherService.findOne({ _id: id }).exec();
-//   } catch (error) {
-//     throw new Error(error.toString());
-//   }
-// };
+// Lấy OtherService theo ID
 const getById = async (id) => {
   try {
-    const service = await OtherService.findById(id);  // Assuming you're using Mongoose for MongoDB
+    const service = await OtherService.findById(id).populate("serviceCate").exec();
+    if (!service || service.isDeleted) {
+      throw new Error("Service not found or has been deleted");
+    }
     return service;
   } catch (error) {
-    throw new Error('Error fetching service by ID');
+    throw new Error(`Error fetching service by ID: ${error.message}`);
   }
 };
 
-const edit = async (
-  id,
-  {
-    name,
-    price,
-    description,
-  }
-) => {
+// Chỉnh sửa OtherService
+const edit = async (id, { name, price, description, serviceCate }) => {
   try {
     const updatedOtherService = await OtherService.findByIdAndUpdate(
-      { _id: id },
-      {
-        name,
-        price,
-        description,
-      },
-      { new: true }
+      id,
+      { name, price, description, serviceCate },
+      { new: true, runValidators: true }
     );
 
-    if (!updatedOtherService) {
-      throw new Error("OtherService not found");
+    if (!updatedOtherService || updatedOtherService.isDeleted) {
+      throw new Error("Service not found or has been deleted");
     }
 
     return updatedOtherService;
   } catch (error) {
-    throw new Error(error.toString());
+    throw new Error(`Error updating other service: ${error.message}`);
   }
 };
 
+// Xóa OtherService (hard delete)
 const deleteOtherService = async (id) => {
   try {
-    return await OtherService.findByIdAndDelete({ _id: id });
+    const deletedService = await OtherService.findByIdAndDelete(id);
+    if (!deletedService) {
+      throw new Error("Service not found");
+    }
+    return deletedService;
   } catch (error) {
-    throw new Error(error.toString());
+    throw new Error(`Error deleting other service: ${error.message}`);
   }
 };
 
-// const softDelete = async (id) => {
-//   try {
-//     // Cập nhật trường isDeleted thành true thay vì xóa dịch vụ
-//     const updatedService = await OtherService.findByIdAndUpdate(
-//       id,
-//       { isDeleted: true },  // Đánh dấu dịch vụ là đã xóa mềm
-//       { new: true, runValidators: true }  // Trả về tài liệu đã cập nhật
-//     );
-
-//     // Kiểm tra xem dịch vụ có tồn tại không
-//     if (!updatedService) {
-//       throw new Error("Service not found");
-//     }
-
-//     return updatedService;
-//   } catch (error) {
-//     throw new Error(error.toString());
-//   }
-// };
+// Xóa mềm OtherService
 const softDelete = async (id) => {
   try {
-    // Tìm dịch vụ theo id
     const service = await OtherService.findById(id);
-
-    // Kiểm tra xem dịch vụ có tồn tại không
     if (!service) {
       throw new Error("Service not found");
     }
 
-    // Lật trạng thái isDeleted
-    const updatedService = await OtherService.findByIdAndUpdate(
-      id,
-      { isDeleted: !service.isDeleted } // Trả về tài liệu đã cập nhật
-    );
+    service.isDeleted = !service.isDeleted; // Lật trạng thái `isDeleted`
+    await service.save();
 
-    return updatedService;
+    return service;
   } catch (error) {
-    throw new Error(error.toString());
+    throw new Error(`Error soft deleting other service: ${error.message}`);
   }
 };
-
-
-// const OtherServiceRepo = {
-//   // Thêm phương thức xóa mềm
-//   softDelete: async (id) => {
-//     return await OtherServices.findByIdAndUpdate(
-//       id,
-//       { isDeleted: true },  // Đánh dấu là đã xóa mềm
-//       { new: true, runValidators: true }
-//     );
-//   },
-
-// };
 
 export default {
   create,
@@ -140,5 +92,5 @@ export default {
   getById,
   edit,
   deleteOtherService,
-  softDelete
+  softDelete,
 };

@@ -15,7 +15,7 @@ const otherServiceSchema = new Schema(
     },
     serviceCate: {
       type: Schema.Types.ObjectId,
-      ref: "ServiceCates",
+      ref: "ServiceCategories",
       required: true,
     },
     isDeleted: {

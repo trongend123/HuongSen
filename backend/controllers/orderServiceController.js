@@ -1,4 +1,3 @@
-// controllers/OrderServiceController.js
 import OrderServiceRepository from '../repositories/orderServiceRepository.js';
 
 // Tạo OrderService mới
@@ -7,7 +6,8 @@ export const createOrderService = async (req, res) => {
         const newOrderService = await OrderServiceRepository.create(req.body);
         res.status(201).json(newOrderService);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error('Error creating OrderService:', error);
+        res.status(400).json({ message: 'Không thể tạo OrderService', error: error.message });
     }
 };
 
@@ -17,7 +17,8 @@ export const getAllOrderServices = async (req, res) => {
         const orderServices = await OrderServiceRepository.findAll();
         res.status(200).json(orderServices);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error('Error fetching OrderServices:', error);
+        res.status(500).json({ message: 'Không thể lấy danh sách OrderServices', error: error.message });
     }
 };
 
@@ -30,7 +31,8 @@ export const getOrderServiceById = async (req, res) => {
         }
         res.status(200).json(orderService);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error(`Error fetching OrderService with ID ${req.params.id}:`, error);
+        res.status(400).json({ message: 'Không thể lấy Order Service theo ID', error: error.message });
     }
 };
 
@@ -43,7 +45,8 @@ export const updateOrderService = async (req, res) => {
         }
         res.status(200).json(updatedOrderService);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error(`Error updating OrderService with ID ${req.params.id}:`, error);
+        res.status(400).json({ message: 'Không thể cập nhật Order Service', error: error.message });
     }
 };
 
@@ -56,35 +59,40 @@ export const deleteOrderService = async (req, res) => {
         }
         res.status(204).send(); // Trả về trạng thái 204 No Content
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error(`Error deleting OrderService with ID ${req.params.id}:`, error);
+        res.status(400).json({ message: 'Không thể xóa Order Service', error: error.message });
     }
 };
 
-// Lấy OrderServices theo bookingId (nếu cần)
+// Lấy OrderServices theo bookingId
 export const getOrderServicesByBookingId = async (req, res) => {
     try {
         const orderServices = await OrderServiceRepository.findByBookingId(req.params.bookingId);
+        if (!orderServices.length) {
+            return res.status(404).json({ message: 'Không tìm thấy OrderServices theo bookingId' });
+        }
         res.status(200).json(orderServices);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        console.error(`Error fetching OrderServices by bookingId ${req.params.bookingId}:`, error);
+        res.status(500).json({ message: 'Không thể lấy OrderServices theo bookingId', error: error.message });
     }
 };
 
-//Lấy OrderServices theo locationId (nếu cần)
+// Lấy OrderServices theo locationId
 export const getOrderServicesByLocationId = async (req, res) => {
-    const { locationId } = req.params; // Lấy locationId từ tham số URL
+    const { locationId } = req.params;
 
     try {
         console.log(`Request received for locationId: ${locationId}`);
         const orderServices = await OrderServiceRepository.findByLocationIdAndRoomCategory(locationId);
 
-        if (orderServices.length === 0) {
-            return res.status(404).json({ message: 'No order services found for this location.' });
+        if (!orderServices.length) {
+            return res.status(404).json({ message: 'Không tìm thấy OrderServices cho location này.' });
         }
 
-        return res.status(200).json(orderServices);  // Trả về các OrderServices tìm được
+        res.status(200).json(orderServices);
     } catch (error) {
-        console.error(error.message);
-        return res.status(500).json({ message: 'Không thể lấy dịch vụ theo location', error: error.message });
+        console.error(`Error fetching OrderServices for locationId ${locationId}:`, error);
+        res.status(500).json({ message: 'Không thể lấy dịch vụ theo location', error: error.message });
     }
 };
