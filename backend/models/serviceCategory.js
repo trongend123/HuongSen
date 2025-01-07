@@ -1,6 +1,4 @@
-import mongoose from 'mongoose';
-
-const { Schema, model } = mongoose;
+import mongoose, { Schema } from "mongoose";
 
 const serviceCategorySchema = new Schema(
   {
@@ -20,6 +18,6 @@ const serviceCategorySchema = new Schema(
   }
 );
 
-const ServiceCategories = new mongoose.model('ServiceCategories', serviceCategorySchema);
+const ServiceCategories = mongoose.model('ServiceCategories', serviceCategorySchema);
 
 export default ServiceCategories;
