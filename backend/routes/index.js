@@ -27,6 +27,7 @@ import paymentRoute from "./paymentRoute.js";
 import ServiceBookingRouter from "./servicebooking.js";
 import Email from "./email.js";
 import ChatRouter from "./chatRoutes.js";
+import serviceCategoryRouter from "./serviceCategory.js";
 
 
 export {
@@ -56,5 +57,6 @@ export {
     paymentRoute,
     ServiceBookingRouter,
     Email,
-    ChatRouter
+    ChatRouter,
+    serviceCategoryRouter
 };
