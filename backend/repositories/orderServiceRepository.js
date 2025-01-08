@@ -106,7 +106,9 @@ const OrderServiceRepository = {
       console.error('Error fetching services by locationId and room categories:', error);
       throw new Error('Không thể lấy dịch vụ theo location');
     }
-  }
+  },
+
+
 };
 
 export default OrderServiceRepository;

@@ -125,6 +125,8 @@ const BookingPage = () => {
                         bookingId={bookingId} // Pass booking ID after it's created
                         onServiceTotalChange={handleServiceTotalChange} // Callback for service total
                         extrafee={false}
+                        locationId={locationId}
+                        type={"Các dịch vụ đặt trước khi check-in"}
                     />
                 </Col>
 

@@ -19,5 +19,6 @@ otherServiceRouter.put("/:id", OtherServiceController.editOtherService);
 //otherServiceRouter.delete("/:id", OtherServiceController.deleteOtherService);
 
 otherServiceRouter.delete("/:id", OtherServiceController.softDeleteOtherService);
+otherServiceRouter.get("/location/:locationId", OtherServiceController.getOtherServicesByLocation);
 
 export default otherServiceRouter;

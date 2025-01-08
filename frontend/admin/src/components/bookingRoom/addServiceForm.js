@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { BASE_URL } from "../../utils/config";
 
 
-const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, canUpdate, bookingCheckIn, bookingCheckOut, locationId }, ref) => {
+const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, canUpdate, bookingCheckIn, bookingCheckOut, locationId, type }, ref) => {
     const [otherServices, setOtherServices] = useState([]);
     const [orderServicesData, setOrderServicesData] = useState([]);
     const [selectedService, setSelectedService] = useState("");
@@ -22,28 +22,33 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, 
     useEffect(() => {
         const fetchOtherServices = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/otherServices`);
-                // Lọc và chỉ lấy các dịch vụ chưa bị xóa (isDeleted === false)
-                if (!extrafee) {
-                    const filteredServices = response.data
-                        .filter(service => !service.isDeleted && service.price !== 1000) // Lọc các dịch vụ chưa bị xóa
-                        .map(service => ({
-                            otherServiceId: service._id,
-                            name: service.name,
-                            price: service.price,
-                            description: service.description,
-                        }));
-                    setOtherServices(filteredServices);
-                } else {
-                    const filteredServices = response.data
-                        .filter(service => !service.isDeleted) // Lọc các dịch vụ chưa bị xóa
-                        .map(service => ({
-                            otherServiceId: service._id,
-                            name: service.name,
-                            price: service.price,
-                            description: service.description,
-                        }));
-                    setOtherServices(filteredServices);
+                if (locationId && type) {
+                    const response = await axios.get(`${BASE_URL}/otherServices/location/${locationId}`);
+                    // Lọc và chỉ lấy các dịch vụ chưa bị xóa (isDeleted === false)
+                    if (!extrafee) {
+                        console.log(response.data[0].serviceCate.name);
+                        console.log(type);
+                        const filteredServices = response.data
+                            .filter(service => !service.isDeleted && service.price !== 1000 && service.serviceCate.name.toLowerCase() === type.toLowerCase()
+                            ) // Lọc các dịch vụ chưa bị xóa
+                            .map(service => ({
+                                otherServiceId: service._id,
+                                name: service.name,
+                                price: service.price,
+                                description: service.description,
+                            }));
+                        setOtherServices(filteredServices);
+                    } else {
+                        const filteredServices = response.data
+                            .filter(service => !service.isDeleted) // Lọc các dịch vụ chưa bị xóa
+                            .map(service => ({
+                                otherServiceId: service._id,
+                                name: service.name,
+                                price: service.price,
+                                description: service.description,
+                            }));
+                        setOtherServices(filteredServices);
+                    }
                 }
 
             } catch (error) {
@@ -51,7 +56,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, 
             }
         };
         fetchOtherServices();
-    }, []);
+    }, [locationId, extrafee, type]);
 
 
     const calculateTotalAmount = () => {
@@ -168,7 +173,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, extrafee, 
                 // const formattedTime = vietnamTime.toISOString(); // Convert to ISO 8601
 
                 return axios.post(`${BASE_URL}/orderServices`, {
-                    otherServiceId: service.otherServiceId,
+                    service: service,
                     bookingId,
                     note: service.note, // Ghi chú
                     quantity: service.serviceQuantity,

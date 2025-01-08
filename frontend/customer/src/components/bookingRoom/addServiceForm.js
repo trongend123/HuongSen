@@ -4,7 +4,7 @@ import { Form, Row, Col, Button, Card } from 'react-bootstrap';
 import { format } from 'date-fns';
 import { BASE_URL } from "../../utils/config";
 
-const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate, bookingCheckIn, bookingCheckOut }, ref) => {
+const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate, bookingCheckIn, bookingCheckOut, locationId, type }, ref) => {
     const [otherServices, setOtherServices] = useState([]);
     const [orderServicesData, setOrderServicesData] = useState([]);
     const [selectedService, setSelectedService] = useState("");
@@ -21,23 +21,25 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate,
     useEffect(() => {
         const fetchOtherServices = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/otherServices`);
-                // Lọc và chỉ lấy các dịch vụ chưa bị xóa (isDeleted === false)
-                const filteredServices = response.data
-                    .filter(service => !service.isDeleted && service.price !== 1000) // Lọc các dịch vụ chưa bị xóa
-                    .map(service => ({
-                        otherServiceId: service._id,
-                        name: service.name,
-                        price: service.price,
-                        description: service.description,
-                    }));
-                setOtherServices(filteredServices);
+                if (locationId && type) {
+                    const response = await axios.get(`${BASE_URL}/otherServices/location/${locationId}`);
+                    // Lọc và chỉ lấy các dịch vụ chưa bị xóa (isDeleted === false)
+                    const filteredServices = response.data
+                        .filter(service => !service.isDeleted && service.price !== 1000 && service.serviceCate.name.toLowerCase() === type.toLowerCase()) // Lọc các dịch vụ chưa bị xóa
+                        .map(service => ({
+                            otherServiceId: service._id,
+                            name: service.name,
+                            price: service.price,
+                            description: service.description,
+                        }));
+                    setOtherServices(filteredServices);
+                }
             } catch (error) {
                 console.error('Lỗi khi lấy danh sách dịch vụ:', error);
             }
         };
         fetchOtherServices();
-    }, []);
+    }, [locationId, type]);
 
 
     const calculateTotalAmount = () => {
@@ -154,7 +156,7 @@ const AddServiceForm = forwardRef(({ bookingId, onServiceTotalChange, canUpdate,
                 // const formattedTime = vietnamTime.toISOString(); // Convert to ISO 8601
 
                 return axios.post(`${BASE_URL}/orderServices`, {
-                    otherServiceId: service.otherServiceId,
+                    service: service,
                     bookingId,
                     note: service.note, // Ghi chú
                     quantity: service.serviceQuantity,
