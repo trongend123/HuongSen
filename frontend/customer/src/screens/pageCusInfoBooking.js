@@ -126,6 +126,8 @@ const CustomerBookingPage = () => {
                         ref={addServiceRef}
                         bookingId={bookingId} // Pass booking ID after it's created
                         onServiceTotalChange={handleServiceTotalChange} // Callback for service total
+                        locationId={locationId}
+                        type={"Các dịch vụ đặt trước khi check-in"}
                     />
                 </Col>
 

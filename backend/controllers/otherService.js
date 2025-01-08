@@ -142,6 +142,17 @@ const softDeleteOtherService = async (req, res) => {
   }
 };
 
+const getOtherServicesByLocation = async (req, res) => {
+  try {
+    const locationId = req.params.locationId;
+    const services = await OtherServiceRepo.listByLocation(locationId);
+    res.status(200).json(services);
+  } catch (error) {
+    res.status(500).json({ message: error.toString() });
+  }
+};
+
+
 export default {
   getOtherServices,
   getOtherServiceById,
@@ -149,4 +160,5 @@ export default {
   editOtherService,
   deleteOtherService,
   softDeleteOtherService,
+  getOtherServicesByLocation
 };

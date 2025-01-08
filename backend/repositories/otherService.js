@@ -85,6 +85,24 @@ const softDelete = async (id) => {
     throw new Error(`Error soft deleting other service: ${error.message}`);
   }
 };
+const listByLocation = async (locationId) => {
+  try {
+    // Lọc OtherService dựa trên locationId
+    const services = await OtherService.find({ isDeleted: false })
+      .populate({
+        path: "serviceCate",
+        match: { locationId }, // Lọc theo locationId trong ServiceCate
+        select: "locationId name", // Chọn các trường cần thiết từ ServiceCate
+      })
+      .exec();
+
+    // Loại bỏ các dịch vụ không có serviceCate khớp với locationId
+    return services.filter(service => service.serviceCate !== null);
+  } catch (error) {
+    throw new Error(`Error fetching services by location: ${error.message}`);
+  }
+};
+
 
 export default {
   create,
@@ -93,4 +111,5 @@ export default {
   edit,
   deleteOtherService,
   softDelete,
+  listByLocation
 };
